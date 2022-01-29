@@ -1,0 +1,6 @@
+/@src
+.vs
+bin
+obj
+/packages
+/DllExport.bat
