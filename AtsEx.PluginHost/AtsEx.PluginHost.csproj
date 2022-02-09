@@ -73,4 +73,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /y "$(TargetDir)" "$(SolutionDir)_DummyTrain\Ats\"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

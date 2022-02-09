@@ -2,5 +2,9 @@
 .vs
 bin
 obj
-/packages
 /DllExport.bat
+/packages
+/_DummyTrain/Ats/*.dll
+/_DummyTrain/Ats/*.pdb
+/_DummyTrain/Ats/AtsEXPlugins/*.dll
+/_DummyTrain/Ats/AtsEXPlugins/*.pdb

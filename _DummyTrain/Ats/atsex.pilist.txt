@@ -1,0 +1,4 @@
+;このファイルで使用するAtsEX車両プラグインを設定します。
+;ファイル名は「atsex.pilist.txt」固定です。変更すると読み込めなくなりますので注意してください。
+
+AtsEXPlugins\stateviewer.dll
