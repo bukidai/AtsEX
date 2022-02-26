@@ -70,6 +70,7 @@
     <Compile Include="BveHacker\CoreHackServiceCollectionBuilder.cs" />
     <Compile Include="BveHacker\CoreHackService.cs" />
     <Compile Include="BveHacker\CoreHackServices\ContextMenuHacker.cs" />
+    <Compile Include="BveHacker\CoreHackServices\LoadErrorHacker.cs" />
     <Compile Include="VersionForm\VersionFormProvider.cs" />
     <Compile Include="VersionForm\VersionForm.gui.cs">
       <SubType>Form</SubType>
@@ -116,6 +117,7 @@
     <ProjectReference Include="..\AtsEx.PluginHost\AtsEx.PluginHost.csproj">
       <Project>{ac6ebf16-d22b-4da8-a0be-5afb729ea2e4}</Project>
       <Name>AtsEx.PluginHost</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

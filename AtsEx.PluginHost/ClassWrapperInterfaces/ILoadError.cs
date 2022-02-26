@@ -9,7 +9,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 	public interface ILoadError : IClassWrapper
 	{
 		string Text { get; }
-		string SenderPath { get; }
+		string SenderFileName { get; }
 		int LineIndex { get; }
 		int CharIndex { get; }
 	}

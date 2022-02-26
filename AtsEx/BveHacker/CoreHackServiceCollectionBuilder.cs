@@ -20,7 +20,10 @@ namespace Automatic9045.AtsEx
             services.Register<IMainFormHacker>(() => new MainFormHacker(targetProcess, targetAssembly, services));
             services.Register<IContextMenuHacker>(() => new ContextMenuHacker(targetProcess, targetAssembly, services));
             services.Register<ISubFormHacker>(() => new SubFormHacker(targetProcess, targetAssembly, services));
+            services.Register<ILoadErrorHacker>(() => new LoadErrorHacker(targetProcess, targetAssembly, services));
             services.Register<IScenarioHacker>(() => new ScenarioHacker(targetProcess, targetAssembly, services));
+
+            services.Lock();
 
             return services;
         }

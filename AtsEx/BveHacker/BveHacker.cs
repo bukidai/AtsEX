@@ -30,18 +30,6 @@ namespace Automatic9045.AtsEx
             Services = CoreHackServiceCollectionBuilder.Build(targetProcess, targetAssembly);
         }
 
-        [UnderConstruction]
-        public void ThrowError(string text, string senderFileName = null, int lineIndex = 0, int charIndex = 0)
-        {
-            MessageBox.Show($"{text}\n\n場所：{senderFileName}\n行：{lineIndex}\n列：{charIndex}", $"エラー - {App.ProductShortName}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        [UnderConstruction]
-        public void ThrowWarning(string text, string senderFileName = null, int lineIndex = 0, int charIndex = 0)
-        {
-            MessageBox.Show($"{text}\n\n場所：{senderFileName}\n行：{lineIndex}\n列：{charIndex}", $"エラー - {App.ProductShortName}", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
         public Process Process { get; }
         public Assembly Assembly { get; }
         public Form MainForm => Services.GetService<IMainFormHacker>().TargetForm;
@@ -62,6 +50,11 @@ namespace Automatic9045.AtsEx
 
         public Form TimePosForm => Services.GetService<ISubFormHacker>().TimePosForm;
         public Form ChartForm => Services.GetService<ISubFormHacker>().ChartForm;
+
+
+        public void ThrowError(string text, string senderFileName, int lineIndex, int charIndex) => Services.GetService<ILoadErrorHacker>().ThrowError(text, senderFileName, lineIndex, charIndex);
+        public void ThrowError(LoadError error) => Services.GetService<ILoadErrorHacker>().ThrowError(error);
+        public void ThrowError(IEnumerable<LoadError> errors) => Services.GetService<ILoadErrorHacker>().ThrowError(errors);
 
 
         public IScenarioInfo CurrentScenarioInfo
