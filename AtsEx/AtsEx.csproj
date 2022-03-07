@@ -151,10 +151,10 @@
     <MSBuild BuildInParallel="true" UseResultsCache="true" Projects="$(MSBuildProjectFullPath)" Properties="DllExportRPkgDyn=true" Targets="Build" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(TargetDir)\x64\$(TargetName).dll" "$(SolutionDir)_DummyTrain\Ats\$(TargetName).x64.dll"
-copy /y "$(TargetDir)\x64\$(TargetName).pdb" "$(SolutionDir)_DummyTrain\Ats\$(TargetName).x64.pdb"
+    <PostBuildEvent>copy /y "$(TargetDir)x64\$(TargetName).dll" "$(SolutionDir)_DummyTrain\Ats\$(TargetName).x64.dll"
+if exist "$(TargetDir)x64\$(TargetName).pdb" copy /y "$(TargetDir)x64\$(TargetName).pdb" "$(SolutionDir)_DummyTrain\Ats\$(TargetName).x64.pdb"
 
-copy /y "$(TargetDir)\x86\$(TargetName).dll" "$(SolutionDir)_DummyTrain\Ats\$(TargetName).x86.dll"
-copy /y "$(TargetDir)\x86\$(TargetName).pdb" "$(SolutionDir)_DummyTrain\Ats\$(TargetName).x86.pdb"</PostBuildEvent>
+copy /y "$(TargetDir)x86\$(TargetName).dll" "$(SolutionDir)_DummyTrain\Ats\$(TargetName).x86.dll"
+if exist "$(TargetDir)x86\$(TargetName).pdb" copy /y "$(TargetDir)x86\$(TargetName).pdb" "$(SolutionDir)_DummyTrain\Ats\$(TargetName).x86.pdb"</PostBuildEvent>
   </PropertyGroup>
 </Project>
