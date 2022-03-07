@@ -71,6 +71,17 @@
     <Compile Include="BveHacker\CoreHackService.cs" />
     <Compile Include="BveHacker\CoreHackServices\ContextMenuHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\LoadErrorHacker.cs" />
+    <Compile Include="ClassWrappers\Internal\ChartForm.cs" />
+    <Compile Include="ClassWrappers\Internal\LoadingProgressForm.cs" />
+    <Compile Include="ClassWrappers\Internal\MainForm.cs" />
+    <Compile Include="ClassWrappers\Internal\ScenarioSelectionForm.cs" />
+    <Compile Include="ClassWrappers\Internal\TimePosForm.cs" />
+    <Compile Include="ClassWrappers\Public\BveFile.cs" />
+    <Compile Include="ClassWrappers\Public\LoadError.cs" />
+    <Compile Include="ClassWrappers\Public\RandomFileList.cs" />
+    <Compile Include="ClassWrappers\Public\ScenarioInfo.cs" />
+    <Compile Include="ClassWrappers\Public\ScenarioInfoGenerator.cs" />
+    <Compile Include="ClassWrappers\Public\ScenarioProvider.cs" />
     <Compile Include="VersionForm\VersionFormProvider.cs" />
     <Compile Include="VersionForm\VersionForm.gui.cs">
       <SubType>Form</SubType>
@@ -84,7 +95,6 @@
     <Compile Include="PluginLoader\AtsExPluginLoader.cs" />
     <Compile Include="AssemblyResolver.cs" />
     <Compile Include="Ats\AtsCore.cs" />
-    <Compile Include="BveClassProvider.cs" />
     <Compile Include="BveHackServices\BveHackService.cs" />
     <Compile Include="BveHacker\CoreHackServices\MainFormHacker.cs" />
     <Compile Include="BveHackServices\Services\LocationHacker.cs" />
@@ -99,12 +109,6 @@
     <Compile Include="Ats\AtsMain.cs" />
     <Compile Include="Ats\PILoad.cs" />
     <Compile Include="ClassWrappers\ClassWrapper.cs" />
-    <Compile Include="ClassWrappers\Wrappers\ScenarioInfo.cs" />
-    <Compile Include="ClassWrappers\Wrappers\RandomFileList.cs" />
-    <Compile Include="ClassWrappers\Wrappers\BveFile.cs" />
-    <Compile Include="ClassWrappers\Wrappers\LoadError.cs" />
-    <Compile Include="ClassWrappers\Wrappers\ScenarioInfoGenerator.cs" />
-    <Compile Include="ClassWrappers\Wrappers\ScenarioProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -112,8 +116,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MemberNames\6.0\" />
+    <Folder Include="Updater\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AtsEx.BveTypeCollection\AtsEx.BveTypeCollection.csproj">
+      <Project>{2f0061cc-c22a-4a33-b70f-77a01c264c6e}</Project>
+      <Name>AtsEx.BveTypeCollection</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AtsEx.PluginHost\AtsEx.PluginHost.csproj">
       <Project>{ac6ebf16-d22b-4da8-a0be-5afb729ea2e4}</Project>
       <Name>AtsEx.PluginHost</Name>

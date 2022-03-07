@@ -13,19 +13,19 @@ namespace Automatic9045.AtsEx
 {
     internal class App : IApp
     {
-        public App(Assembly atsExAssembly, Assembly bveAssembly)
+        public App(Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
         {
-            AtsExInfo = atsExAssembly.GetName();
-            BveInfo = bveAssembly.GetName();
-            AtsExPluginHostInfo = Assembly.GetExecutingAssembly().GetName();
+            AtsExAssembly = Assembly.GetExecutingAssembly();
+            BveAssembly = bveAssembly;
+            AtsExPluginHostAssembly = atsExPluginHostAssembly;
         }
 
         public string ProductName { get; } = "AtsEX ATSプラグイン拡張キット for BVE 5 & 6";
         public string ProductShortName { get; } = "AtsEX";
 
-        public AssemblyName AtsExInfo { get; }
-        public AssemblyName AtsExPluginHostInfo { get; }
-        public AssemblyName BveInfo { get; }
+        public Assembly AtsExAssembly { get; }
+        public Assembly AtsExPluginHostAssembly { get; }
+        public Assembly BveAssembly { get; }
 
         protected List<AtsExPluginInfo> _VehiclePlugins = null;
         public List<AtsExPluginInfo> VehiclePlugins

@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.ClassWrappers
@@ -13,17 +15,19 @@ namespace Automatic9045.AtsEx.ClassWrappers
     {
         public LoadError(object src) : base(src)
         {
-			TextGetMethod = GetMethod("b");
-			TextSetMethod = GetMethod("b", typeof(string));
+			IBveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<ILoadError>();
 
-			SenderFileNameGetMethod = GetMethod("c");
-			SenderFileNameSetMethod = GetMethod("a", typeof(string));
+			TextGetMethod = members.GetSourcePropertyGetterOf(nameof(Text));
+			TextSetMethod = members.GetSourcePropertySetterOf(nameof(Text));
 
-			LineIndexGetMethod = GetMethod("d");
-			LineIndexSetMethod = GetMethod("b", typeof(int));
+			SenderFileNameGetMethod = members.GetSourcePropertyGetterOf(nameof(SenderFileName));
+			SenderFileNameSetMethod = members.GetSourcePropertySetterOf(nameof(SenderFileName));
 
-			CharIndexGetMethod = GetMethod("a");
-			CharIndexSetMethod = GetMethod("a", typeof(int));
+			LineIndexGetMethod = members.GetSourcePropertyGetterOf(nameof(LineIndex));
+			LineIndexSetMethod = members.GetSourcePropertySetterOf(nameof(LineIndex));
+
+			CharIndexGetMethod = members.GetSourcePropertyGetterOf(nameof(CharIndex));
+			CharIndexSetMethod = members.GetSourcePropertySetterOf(nameof(CharIndex));
 		}
 
 		public LoadError(Assembly assembly, string text, string senderFileName, int lineIndex, int charIndex) : this(CreateSource(assembly, text, senderFileName, lineIndex, charIndex))

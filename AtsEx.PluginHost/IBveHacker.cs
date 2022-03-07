@@ -90,6 +90,11 @@ namespace Automatic9045.AtsEx.PluginHost
         Form ChartForm { get; }
 
 
+        void ThrowError(string text, string senderFileName = "", int lineIndex = 0, int charIndex = 0);
+        void ThrowError(ILoadError error);
+        void ThrowError(IEnumerable<ILoadError> errors);
+
+
         /// <summary>
         /// 現在読込中または実行中のシナリオの情報を取得・設定します。
         /// </summary>

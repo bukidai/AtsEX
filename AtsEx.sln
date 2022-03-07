@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.PluginHost", "AtsEx.P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.VehiclePlugin.StateViewer", "Plugins\VehiclePlugins\AtsEx.VehiclePlugin.StateViewer\AtsEx.VehiclePlugin.StateViewer.csproj", "{9205EC14-287D-413E-9E1C-64C92D58D1F2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{E528AAA7-6712-4D73-A3AB-BCF41E75F137}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VehiclePlugins", "VehiclePlugins", "{31284256-F435-4CDC-B1B6-FCB71C97D6EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.BveTypeCollection", "AtsEx.BveTypeCollection\AtsEx.BveTypeCollection.csproj", "{2F0061CC-C22A-4A33-B70F-77A01C264C6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +33,17 @@ Global
 		{9205EC14-287D-413E-9E1C-64C92D58D1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9205EC14-287D-413E-9E1C-64C92D58D1F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9205EC14-287D-413E-9E1C-64C92D58D1F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F0061CC-C22A-4A33-B70F-77A01C264C6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F0061CC-C22A-4A33-B70F-77A01C264C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F0061CC-C22A-4A33-B70F-77A01C264C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F0061CC-C22A-4A33-B70F-77A01C264C6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9205EC14-287D-413E-9E1C-64C92D58D1F2} = {31284256-F435-4CDC-B1B6-FCB71C97D6EF}
+		{31284256-F435-4CDC-B1B6-FCB71C97D6EF} = {E528AAA7-6712-4D73-A3AB-BCF41E75F137}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434AD268-BAE2-48A7-8AE5-2AB6B982F843}

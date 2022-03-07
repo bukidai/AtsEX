@@ -58,7 +58,7 @@ namespace Automatic9045.AtsEx
             }
             catch (BadImageFormatException)
             {
-                int currentBveVersion = App.BveInfo.Version.Major;
+                int currentBveVersion = App.BveAssembly.GetName().Version.Major;
                 int otherBveVersion = currentBveVersion == 6 ? 5 : 6;
                 throw new BveFileLoadException(
                     $"\"{relativePath}\" は対象プラットフォームが間違っているか、.NET アセンブリではありません。" +

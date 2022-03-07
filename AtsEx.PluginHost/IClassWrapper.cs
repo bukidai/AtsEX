@@ -11,4 +11,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         Type SrcType { get; }
         dynamic Src { get; }
     }
+
+    public interface IStaticWrapperContainer
+    {
+    }
 }

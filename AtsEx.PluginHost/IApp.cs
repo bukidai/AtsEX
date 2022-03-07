@@ -27,19 +27,19 @@ namespace Automatic9045.AtsEx.PluginHost
 
 
         /// <summary>
-        /// AtsEX の情報を格納している <see cref="AssemblyName"/> を取得します。
+        /// AtsEX の <see cref="Assembly"/> を取得します。
         /// </summary>
-        AssemblyName AtsExInfo { get; }
+        Assembly AtsExAssembly { get; }
 
         /// <summary>
-        /// AtsEX プラグインホストの情報を格納している <see cref="AssemblyName"/> を取得します。
+        /// AtsEX プラグインホストの <see cref="Assembly"/> を取得します。
         /// </summary>
-        AssemblyName AtsExPluginHostInfo { get; }
+        Assembly AtsExPluginHostAssembly { get; }
 
         /// <summary>
-        /// 実行元の BVE の情報を格納している <see cref="AssemblyName"/> を取得します。
+        /// 実行元の BVE の <see cref="Assembly"/> を取得します。
         /// </summary>
-        AssemblyName BveInfo { get; }
+        Assembly BveAssembly { get; }
 
 
         /// <summary>

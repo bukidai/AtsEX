@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Automatic9045.AtsEx.BveTypeCollection;
 using Automatic9045.AtsEx.CoreHackServices;
 using Automatic9045.AtsEx.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost;
@@ -20,18 +21,19 @@ namespace Automatic9045.AtsEx
 
         internal ServiceCollection Services { get; }
 
-        internal BveHacker(App app, Process targetProcess, Assembly targetAssembly)
+        internal BveHacker(App app, Process targetProcess)
         {
             App = app;
 
             Process = targetProcess;
-            Assembly = targetAssembly;
+            Assembly = App.BveAssembly;
 
-            Services = CoreHackServiceCollectionBuilder.Build(targetProcess, targetAssembly);
+            Services = CoreHackServiceCollectionBuilder.Build(targetProcess, App.BveAssembly);
         }
 
         public Process Process { get; }
         public Assembly Assembly { get; }
+
         public Form MainForm => Services.GetService<IMainFormHacker>().TargetForm;
         public IntPtr MainFormHandle => Services.GetService<IMainFormHacker>().TargetFormHandle;
         public Type MainFormType => Services.GetService<IMainFormHacker>().TargetFormType;
@@ -52,9 +54,9 @@ namespace Automatic9045.AtsEx
         public Form ChartForm => Services.GetService<ISubFormHacker>().ChartForm;
 
 
-        public void ThrowError(string text, string senderFileName, int lineIndex, int charIndex) => Services.GetService<ILoadErrorHacker>().ThrowError(text, senderFileName, lineIndex, charIndex);
-        public void ThrowError(LoadError error) => Services.GetService<ILoadErrorHacker>().ThrowError(error);
-        public void ThrowError(IEnumerable<LoadError> errors) => Services.GetService<ILoadErrorHacker>().ThrowError(errors);
+        public void ThrowError(string text, string senderFileName = "", int lineIndex = 0, int charIndex = 0) => Services.GetService<ILoadErrorHacker>().ThrowError(text, senderFileName, lineIndex, charIndex);
+        public void ThrowError(ILoadError error) => Services.GetService<ILoadErrorHacker>().ThrowError(error);
+        public void ThrowError(IEnumerable<ILoadError> errors) => Services.GetService<ILoadErrorHacker>().ThrowErrors(errors);
 
 
         public IScenarioInfo CurrentScenarioInfo

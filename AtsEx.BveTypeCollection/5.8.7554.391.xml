@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<BveTypeNameDefinitions xmlns="http://automatic9045.github.io/ns/xmlschemas/BveTypesXmlSchema.xsd">
+	<!-- Internal class wrappers -->
+	<BveType Wrapper="IChartForm" Original="bj">
+	</BveType>
+	<BveType Wrapper="ILoadingProgressForm" Original="dt">
+		<Method Wrapper="ThrowError" WrapperParams="System.String, System.String, System.Int32, System.Int32" Original="a"/>
+		<Method Wrapper="ThrowError" WrapperParams="ILoadError" Original="a"/>
+		<Method Wrapper="ThrowErrors" WrapperParams="System.Collections.Generic.IEnumerable`1[ILoadError]" Original="a"/>
+	</BveType>
+	<BveType Wrapper="IMainForm" Original="bz">
+		<Field WrapperProperty="ContextMenu" Original="y" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="CurrentScenarioInfo" Original="q" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="CurrentScenarioProvider" Original="n" IsOriginalPrivate="true"/>
+	</BveType>
+	<BveType Wrapper="IScenarioSelectionForm" Original="da">
+	</BveType>
+	<BveType Wrapper="ITimePosForm" Original="aj">
+	</BveType>
+	<!-- Internal class wrappers END -->
+	
+	<BveType Wrapper="IBveFile" Original="b5">
+		<Property Wrapper="Path">
+			<Getter Original="d"/>
+			<Setter Original="c"/>
+		</Property>
+	</BveType>
+
+	<BveType Wrapper="ILoadError" Original="ai">
+		<Property Wrapper="Text">
+			<Getter Original="b"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="SenderFileName">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="LineIndex">
+			<Getter Original="d"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="CharIndex">
+			<Getter Original="a"/>
+			<Setter Original="a"/>
+		</Property>
+	</BveType>
+
+	<BveType Wrapper="IRandomFileList" Original="dr">
+		<Property Wrapper="SelectedFile">
+			<Getter Original="a"/>
+			<Setter Original="a" IsOriginalPrivate="true"/>
+		</Property>
+	</BveType>
+
+	<BveType Wrapper="IScenarioInfo" Original="ek">
+		<Property Wrapper="Path">
+			<Getter Original="i"/>
+			<Setter Original="g"/>
+		</Property>
+		<Property Wrapper="FileName">
+			<Getter Original="d"/>
+			<Setter Original="i"/>
+		</Property>
+		<Property Wrapper="DirectoryName">
+			<Getter Original="c"/>
+			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="Title">
+			<Getter Original="k"/>
+			<Setter Original="d"/>
+		</Property>
+		<Property Wrapper="ImagePath">
+			<Getter Original="j"/>
+			<Setter Original="f"/>
+		</Property>
+		<Property Wrapper="Author">
+			<Getter Original="a"/>
+			<Setter Original="h"/>
+		</Property>
+		<Property Wrapper="Comment">
+			<Getter Original="f"/>
+			<Setter Original="e"/>
+		</Property>
+		<Property Wrapper="RouteFiles">
+			<Getter Original="h"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="VehicleFiles">
+			<Getter Original="g"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="RouteTitle">
+			<Getter Original="b"/>
+			<Setter Original="j"/>
+		</Property>
+		<Property Wrapper="VehicleTitle">
+			<Getter Original="e"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="ScenarioFileLoadErrors">
+			<Getter Original="l"/>
+			<Setter Original="a"/>
+		</Property>
+		
+		<!-- Static methods -->
+		<Method Wrapper="FromFile" WrapperParams="System.String" Original="a" IsWrapperStatic="true" StaticWrapperContainer="IScenarioInfoGenerator" IsOriginalStatic="true"/>
+		<!-- Static methods END -->
+	</BveType>
+
+	<BveType Wrapper="IScenarioProvider" Original="er">
+	</BveType>
+</BveTypeNameDefinitions>

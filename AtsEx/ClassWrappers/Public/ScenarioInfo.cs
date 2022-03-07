@@ -5,55 +5,53 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.ClassWrappers
 {
     public class ScenarioInfo : ClassWrapper, IScenarioInfo
     {
-        [UnderConstruction]
-        private Assembly _assembly;
-
-        [WillRefactor]
-        public ScenarioInfo(Assembly assembly, object src) : base(src)
+        public ScenarioInfo(object src) : base(src)
         {
-            _assembly = assembly;
+            IBveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<IScenarioInfo>();
 
-            PathGetMethod = GetMethod("i");
-            PathSetMethod = GetMethod("g", typeof(string));
+            PathGetMethod = members.GetSourcePropertyGetterOf(nameof(Path));
+            PathSetMethod = members.GetSourcePropertySetterOf(nameof(Path));
 
-            FileNameGetMethod = GetMethod("d");
-            FileNameSetMethod = GetMethod("i", typeof(string));
+            FileNameGetMethod = members.GetSourcePropertyGetterOf(nameof(FileName));
+            FileNameSetMethod = members.GetSourcePropertySetterOf(nameof(FileName));
 
-            DirectoryNameGetMethod = GetMethod("c");
-            DirectoryNameSetMethod = GetMethod("c", typeof(string));
+            DirectoryNameGetMethod = members.GetSourcePropertyGetterOf(nameof(DirectoryName));
+            DirectoryNameSetMethod = members.GetSourcePropertySetterOf(nameof(DirectoryName));
 
-            TitleGetMethod = GetMethod("k");
-            TitleSetMethod = GetMethod("d", typeof(string));
+            TitleGetMethod = members.GetSourcePropertyGetterOf(nameof(Title));
+            TitleSetMethod = members.GetSourcePropertySetterOf(nameof(Title));
 
-            ImagePathGetMethod = GetMethod("j");
-            ImagePathSetMethod = GetMethod("f", typeof(string));
+            ImagePathGetMethod = members.GetSourcePropertyGetterOf(nameof(ImagePath));
+            ImagePathSetMethod = members.GetSourcePropertySetterOf(nameof(ImagePath));
 
-            AuthorGetMethod = GetMethod("a");
-            AuthorSetMethod = GetMethod("h", typeof(string));
+            AuthorGetMethod = members.GetSourcePropertyGetterOf(nameof(Author));
+            AuthorSetMethod = members.GetSourcePropertySetterOf(nameof(Author));
 
-            CommentGetMethod = GetMethod("f");
-            CommentSetMethod = GetMethod("e", typeof(string));
+            CommentGetMethod = members.GetSourcePropertyGetterOf(nameof(Comment));
+            CommentSetMethod = members.GetSourcePropertySetterOf(nameof(Comment));
 
-            RouteFilesGetMethod = GetMethod("h");
-            RouteFilesSetMethod = GetMethod("b", assembly, "dr");
+            RouteFilesGetMethod = members.GetSourcePropertyGetterOf(nameof(RouteFiles));
+            RouteFilesSetMethod = members.GetSourcePropertySetterOf(nameof(RouteFiles));
 
-            VehicleFilesGetMethod = GetMethod("g");
-            VehicleFilesSetMethod = GetMethod("a", assembly, "dr");
+            VehicleFilesGetMethod = members.GetSourcePropertyGetterOf(nameof(VehicleFiles));
+            VehicleFilesSetMethod = members.GetSourcePropertySetterOf(nameof(VehicleFiles));
 
-            RouteTitleGetMethod = GetMethod("b");
-            RouteTitleSetMethod = GetMethod("j", typeof(string));
+            RouteTitleGetMethod = members.GetSourcePropertyGetterOf(nameof(RouteTitle));
+            RouteTitleSetMethod = members.GetSourcePropertySetterOf(nameof(RouteTitle));
 
-            VehicleTitleGetMethod = GetMethod("e");
-            VehicleTitleSetMethod = GetMethod("b", typeof(string));
+            VehicleTitleGetMethod = members.GetSourcePropertyGetterOf(nameof(VehicleTitle));
+            VehicleTitleSetMethod = members.GetSourcePropertySetterOf(nameof(VehicleTitle));
 
-            ScenarioFileLoadErrorsGetMethod = GetMethod("l");
-            ScenarioFileLoadErrorsSetMethod = GetMethod("a", typeof(List<>));
+            ScenarioFileLoadErrorsGetMethod = members.GetSourcePropertyGetterOf(nameof(ScenarioFileLoadErrors));
+            ScenarioFileLoadErrorsSetMethod = members.GetSourcePropertySetterOf(nameof(ScenarioFileLoadErrors));
         }
 
         protected MethodInfo PathGetMethod;
@@ -66,7 +64,6 @@ namespace Automatic9045.AtsEx.ClassWrappers
 
         protected MethodInfo FileNameGetMethod;
         protected MethodInfo FileNameSetMethod;
-        [WillRefactor]
         public string FileName
         {
             get => FileNameGetMethod.Invoke(Src, null);
@@ -75,7 +72,6 @@ namespace Automatic9045.AtsEx.ClassWrappers
 
         protected MethodInfo DirectoryNameGetMethod;
         protected MethodInfo DirectoryNameSetMethod;
-        [WillRefactor]
         public string DirectoryName
         {
             get => DirectoryNameGetMethod.Invoke(Src, null);
@@ -84,7 +80,6 @@ namespace Automatic9045.AtsEx.ClassWrappers
 
         protected MethodInfo TitleGetMethod;
         protected MethodInfo TitleSetMethod;
-        [WillRefactor]
         public string Title
         {
             get => TitleGetMethod.Invoke(Src, null);
@@ -93,7 +88,6 @@ namespace Automatic9045.AtsEx.ClassWrappers
 
         protected MethodInfo ImagePathGetMethod;
         protected MethodInfo ImagePathSetMethod;
-        [WillRefactor]
         public string ImagePath
         {
             get => ImagePathGetMethod.Invoke(Src, null);
@@ -102,7 +96,6 @@ namespace Automatic9045.AtsEx.ClassWrappers
 
         protected MethodInfo AuthorGetMethod;
         protected MethodInfo AuthorSetMethod;
-        [WillRefactor]
         public string Author
         {
             get => AuthorGetMethod.Invoke(Src, null);
@@ -111,7 +104,6 @@ namespace Automatic9045.AtsEx.ClassWrappers
 
         protected MethodInfo CommentGetMethod;
         protected MethodInfo CommentSetMethod;
-        [WillRefactor]
         public string Comment
         {
             get => CommentGetMethod.Invoke(Src, null);
@@ -120,25 +112,22 @@ namespace Automatic9045.AtsEx.ClassWrappers
 
         protected MethodInfo RouteFilesGetMethod;
         protected MethodInfo RouteFilesSetMethod;
-        [WillRefactor]
         public IRandomFileList RouteFiles
         {
-            get => new RandomFileList(_assembly, RouteFilesGetMethod.Invoke(Src, null));
+            get => new RandomFileList(RouteFilesGetMethod.Invoke(Src, null));
             internal set => RouteFilesSetMethod.Invoke(Src, new object[] { value.Src } );
         }
 
         protected MethodInfo VehicleFilesGetMethod;
         protected MethodInfo VehicleFilesSetMethod;
-        [WillRefactor]
         public IRandomFileList VehicleFiles
         {
-            get => new RandomFileList(_assembly, VehicleFilesGetMethod.Invoke(Src, null));
+            get => new RandomFileList(VehicleFilesGetMethod.Invoke(Src, null));
             internal set => VehicleFilesSetMethod.Invoke(Src, new object[] { value.Src } );
         }
 
         protected MethodInfo RouteTitleGetMethod;
         protected MethodInfo RouteTitleSetMethod;
-        [WillRefactor]
         public string RouteTitle
         {
             get => RouteTitleGetMethod.Invoke(Src, null);
@@ -147,7 +136,6 @@ namespace Automatic9045.AtsEx.ClassWrappers
 
         protected MethodInfo VehicleTitleGetMethod;
         protected MethodInfo VehicleTitleSetMethod;
-        [WillRefactor]
         public string VehicleTitle
         {
             get => VehicleTitleGetMethod.Invoke(Src, null);
@@ -156,7 +144,6 @@ namespace Automatic9045.AtsEx.ClassWrappers
 
         protected MethodInfo ScenarioFileLoadErrorsGetMethod;
         protected MethodInfo ScenarioFileLoadErrorsSetMethod;
-        [WillRefactor]
         public List<ILoadError> ScenarioFileLoadErrors
         {
             get

@@ -54,7 +54,7 @@ namespace Automatic9045.AtsEx
                 Top = 88,
                 Width = 480,
                 UseMnemonic = false,
-                Text = $"{App.ProductName}　Version {App.AtsExInfo.Version}",
+                Text = $"{App.ProductName}　Version {App.AtsExAssembly.GetName().Version}",
             };
             Controls.Add(Description);
 

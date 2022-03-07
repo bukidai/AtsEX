@@ -6,28 +6,27 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.ClassWrappers
 {
     public class RandomFileList : ClassWrapper, IRandomFileList
     {
-        [UnderConstruction]
-        private Assembly _assembly;
-
-        public RandomFileList(Assembly assembly, object src) : base(src)
+        public RandomFileList(object src) : base(src)
         {
-            _assembly = assembly;
+            IBveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<IRandomFileList>();
 
-            SelectedFileGetMethod = GetMethod("a");
-            SelectedFileSetMethod = GetMethod("a", assembly, "b5");
+            SelectedFileGetMethod = members.GetSourcePropertyGetterOf(nameof(SelectedFile));
+            SelectedFileSetMethod = members.GetSourcePropertySetterOf(nameof(SelectedFile));
         }
 
         protected MethodInfo SelectedFileGetMethod;
         protected MethodInfo SelectedFileSetMethod;
         public IBveFile SelectedFile
         {
-            get => new BveFile(_assembly, SelectedFileGetMethod.Invoke(Src, null));
+            get => new BveFile(SelectedFileGetMethod.Invoke(Src, null));
             set => SelectedFileGetMethod.Invoke(Src, new object[] { value.Src });
         }
 

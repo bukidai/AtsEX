@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Automatic9045.AtsEx.BveTypeCollection;
 using Automatic9045.AtsEx.PluginHost;
 
 namespace Automatic9045.AtsEx
@@ -18,6 +19,7 @@ namespace Automatic9045.AtsEx
         private AppDomain TargetAppDomain { get; }
         private Assembly TargetAssembly { get; }
         private Assembly ExecutingAssembly { get; } = Assembly.GetExecutingAssembly();
+        private Assembly PluginHostAssembly { get; }
 
         private App App { get; }
         private BveHacker BveHacker { get; }
@@ -31,15 +33,19 @@ namespace Automatic9045.AtsEx
         private List<AtsExPluginInfo> VehiclePlugins { get; }
         private List<AtsExPluginInfo> MapPlugins { get; }
 
-        [UnderConstruction]
         public AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly)
         {
+            string pluginHostAssemblyPath = Path.Combine(Path.GetDirectoryName(ExecutingAssembly.Location), "atsex.pihost.dll");
+            PluginHostAssembly = Assembly.LoadFrom(pluginHostAssemblyPath);
+
             TargetProcess = targetProcess;
             TargetAppDomain = targetAppDomain;
             TargetAssembly = targetAssembly;
 
-            App = new App(ExecutingAssembly, TargetAssembly);
-            BveHacker = new BveHacker(App, TargetProcess, TargetAssembly);
+            BveTypeCollectionProvider.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly);
+
+            App = new App(TargetAssembly, ExecutingAssembly, PluginHostAssembly);
+            BveHacker = new BveHacker(App, TargetProcess);
 
             BveHackServices = BveHackServiceCollectionBuilder.Build(BveHacker);
             Vehicle = new Vehicle(BveHacker, BveHackServices);
@@ -57,10 +63,11 @@ namespace Automatic9045.AtsEx
             }
             catch (BveFileLoadException ex)
             {
-                MessageBox.Show(ex.ToString(), $"エラー - {App.ProductShortName}");
+                BveHacker.ThrowError(ex.Message, ex.SenderFileName, ex.LineIndex, ex.CharIndex);
             }
             catch (Exception ex)
             {
+                BveHacker.ThrowError(ex.Message);
                 MessageBox.Show(ex.ToString(), $"ハンドルされていない例外 - {App.ProductShortName}");
             }
 
@@ -89,6 +96,7 @@ namespace Automatic9045.AtsEx
             VersionFormProvider.Dispose();
             BveHackServices.Dispose();
             BveHacker.Dispose();
+            BveTypeCollectionProvider.Instance.Dispose();
         }
 
         public void Started(BrakePosition defaultBrakePosition)

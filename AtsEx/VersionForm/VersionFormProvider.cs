@@ -19,7 +19,6 @@ namespace Automatic9045.AtsEx
         public App App { get; }
         public BveHacker BveHacker { get; }
 
-        [WillRefactor]
         public VersionFormProvider(App app, BveHacker bveHacker)
         {
             App = app;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
-	public interface IScenarioInfoGenerator
+	public interface IScenarioInfoGenerator : IStaticWrapperContainer
 	{
 		IScenarioInfo FromFile(string path);
 	}

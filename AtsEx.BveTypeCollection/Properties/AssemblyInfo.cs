@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // 制御されます。アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("AtsEX PluginHost")]
-[assembly: AssemblyDescription("AtsEX プラグインホスト")]
+[assembly: AssemblyTitle("AtsEX BveMemberCollection")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("AtsEX")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // このプロジェクトが COM に公開される場合、次の GUID が typelib の ID になります
-[assembly: Guid("ac6ebf16-d22b-4da8-a0be-5afb729ea2e4")]
+[assembly: Guid("5f82ba66-656e-457f-962f-a972ecf2fed8")]
 
 // アセンブリのバージョン情報は、以下の 4 つの値で構成されています:
 //

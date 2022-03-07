@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Automatic9045.AtsEx.ClassWrappers;
+
 namespace Automatic9045.AtsEx.CoreHackServices
 {
     internal interface IContextMenuHacker : IDisposable
@@ -19,7 +21,6 @@ namespace Automatic9045.AtsEx.CoreHackServices
         ToolStripSeparator AddSeparator();
     }
 
-    [WillRefactor]
     internal sealed class ContextMenuHacker : CoreHackService, IContextMenuHacker
     {
         private ToolStripItemCollection ContextMenuItems;
@@ -30,9 +31,10 @@ namespace Automatic9045.AtsEx.CoreHackServices
 
         public ContextMenuHacker(Process targetProcess, Assembly targetAssembly, ServiceCollection services) : base(targetProcess, targetAssembly, services)
         {
-            FieldInfo contextMenuField = Services.GetService<IMainFormHacker>().TargetFormType.GetField("y", BindingFlags.Instance | BindingFlags.NonPublic);
-            ContextMenuStrip contextMenu = (ContextMenuStrip)contextMenuField.GetValue(Services.GetService<IMainFormHacker>().TargetForm);
-            ContextMenuItems = contextMenu.Items;
+            Form formSource = Services.GetService<IMainFormHacker>().TargetForm;
+            MainForm MainForm = new MainForm(formSource);
+
+            ContextMenuItems = MainForm.ContextMenu.Items;
 
             DefaultItemCount = ContextMenuItems.Count;
             AddStartIndex = ContextMenuItems.IndexOfKey("toolStripMenuItem") + 1;
