@@ -18,7 +18,7 @@
 	<BveType Wrapper="ITimePosForm" Original="aj">
 	</BveType>
 	<!-- Internal class wrappers END -->
-	
+
 	<BveType Wrapper="IBveFile" Original="b5">
 		<Property Wrapper="Path">
 			<Getter Original="d"/>
@@ -50,6 +50,9 @@
 			<Getter Original="a"/>
 			<Setter Original="a" IsOriginalPrivate="true"/>
 		</Property>
+	</BveType>
+
+	<BveType Wrapper="IRoute" Original="br">
 	</BveType>
 
 	<BveType Wrapper="IScenarioInfo" Original="ek">
@@ -101,12 +104,19 @@
 			<Getter Original="l"/>
 			<Setter Original="a"/>
 		</Property>
-		
-		<!-- Static methods -->
+
 		<Method Wrapper="FromFile" WrapperParams="System.String" Original="a" IsWrapperStatic="true" StaticWrapperContainer="IScenarioInfoGenerator" IsOriginalStatic="true"/>
-		<!-- Static methods END -->
 	</BveType>
 
 	<BveType Wrapper="IScenarioProvider" Original="er">
+		<Property Wrapper="Route">
+			<Getter Original="h"/>
+		</Property>
+		<Property Wrapper="Vehicle">
+			<Getter Original="a"/>
+		</Property>
+	</BveType>
+
+	<BveType Wrapper="IVehicle" Original="f">
 	</BveType>
 </BveTypeNameDefinitions>

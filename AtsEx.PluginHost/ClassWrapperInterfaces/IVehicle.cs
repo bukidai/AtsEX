@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
-	public interface IScenarioProvider : IClassWrapper
+	public interface IVehicle : IClassWrapper
 	{
-		IRoute Route { get; }
-		IVehicle Vehicle { get; }
 	}
 }

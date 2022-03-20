@@ -52,6 +52,9 @@
 		</Property>
 	</BveType>
 
+	<BveType Wrapper="IRoute" Original="br">
+	</BveType>
+
 	<BveType Wrapper="IScenarioInfo" Original="ek">
 		<Property Wrapper="Path">
 			<Getter Original="i"/>
@@ -102,11 +105,18 @@
 			<Setter Original="a"/>
 		</Property>
 		
-		<!-- Static methods -->
 		<Method Wrapper="FromFile" WrapperParams="System.String" Original="a" IsWrapperStatic="true" StaticWrapperContainer="IScenarioInfoGenerator" IsOriginalStatic="true"/>
-		<!-- Static methods END -->
 	</BveType>
 
 	<BveType Wrapper="IScenarioProvider" Original="er">
+		<Property Wrapper="Route">
+			<Getter Original="h"/>
+		</Property>
+		<Property Wrapper="Vehicle">
+			<Getter Original="a"/>
+		</Property>
+	</BveType>
+
+	<BveType Wrapper="IVehicle" Original="f">
 	</BveType>
 </BveTypeNameDefinitions>
