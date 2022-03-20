@@ -12,9 +12,9 @@ using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.ClassWrappers
 {
-    public class RandomFileList : ClassWrapper, IRandomFileList
+    internal sealed class RandomFileList : ClassWrapper, IRandomFileList
     {
-        public RandomFileList(object src) : base(src)
+        static RandomFileList()
         {
             IBveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<IRandomFileList>();
 
@@ -22,8 +22,12 @@ namespace Automatic9045.AtsEx.ClassWrappers
             SelectedFileSetMethod = members.GetSourcePropertySetterOf(nameof(SelectedFile));
         }
 
-        protected MethodInfo SelectedFileGetMethod;
-        protected MethodInfo SelectedFileSetMethod;
+        public RandomFileList(object src) : base(src)
+        {
+        }
+
+        private static MethodInfo SelectedFileGetMethod;
+        private static MethodInfo SelectedFileSetMethod;
         public IBveFile SelectedFile
         {
             get => new BveFile(SelectedFileGetMethod.Invoke(Src, null));

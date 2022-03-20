@@ -71,6 +71,7 @@
     <Compile Include="BveHacker\CoreHackService.cs" />
     <Compile Include="BveHacker\CoreHackServices\ContextMenuHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\LoadErrorHacker.cs" />
+    <Compile Include="ClassWrappers\Helpers\ScenarioInfoGenerator.cs" />
     <Compile Include="ClassWrappers\Internal\ChartForm.cs" />
     <Compile Include="ClassWrappers\Internal\LoadingProgressForm.cs" />
     <Compile Include="ClassWrappers\Internal\MainForm.cs" />
@@ -80,7 +81,6 @@
     <Compile Include="ClassWrappers\Public\LoadError.cs" />
     <Compile Include="ClassWrappers\Public\RandomFileList.cs" />
     <Compile Include="ClassWrappers\Public\ScenarioInfo.cs" />
-    <Compile Include="ClassWrappers\Public\ScenarioInfoGenerator.cs" />
     <Compile Include="ClassWrappers\Public\ScenarioProvider.cs" />
     <Compile Include="VersionForm\VersionFormProvider.cs" />
     <Compile Include="VersionForm\VersionForm.gui.cs">

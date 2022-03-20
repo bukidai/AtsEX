@@ -13,22 +13,17 @@ namespace Automatic9045.AtsEx.ClassWrappers
 {
     internal sealed class ScenarioInfoGenerator : IScenarioInfoGenerator
     {
-        private BveHacker BveHacker;
-
-        private MethodInfo FromFileMethod;
-
-        public ScenarioInfoGenerator(BveHacker bveHacker)
+        static ScenarioInfoGenerator()
         {
-            BveHacker = bveHacker;
-
             IBveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<IScenarioInfo>();
 
             FromFileMethod = members.GetSourceMethodOf(nameof(FromFile));
         }
 
+        private static MethodInfo FromFileMethod;
         public IScenarioInfo FromFile(string path)
         {
-            dynamic src = FromFileMethod.Invoke(null, new object[] { path });
+            object src = FromFileMethod.Invoke(null, new object[] { path });
             return new ScenarioInfo(src);
         }
     }

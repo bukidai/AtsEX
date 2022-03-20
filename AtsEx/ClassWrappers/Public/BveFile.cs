@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx.ClassWrappers
     [UnderConstruction]
     internal class BveFile : ClassWrapper, IBveFile
     {
-        public BveFile(object src) : base(src)
+        static BveFile()
         {
             IBveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<IBveFile>();
 
@@ -22,8 +22,12 @@ namespace Automatic9045.AtsEx.ClassWrappers
             PathSetMethod = members.GetSourcePropertySetterOf(nameof(Path));
         }
 
-        protected MethodInfo PathGetMethod;
-        protected MethodInfo PathSetMethod;
+        public BveFile(object src) : base(src)
+        {
+        }
+
+        private static MethodInfo PathGetMethod;
+        private static MethodInfo PathSetMethod;
         public string Path
         {
             get => PathGetMethod.Invoke(Src, null);

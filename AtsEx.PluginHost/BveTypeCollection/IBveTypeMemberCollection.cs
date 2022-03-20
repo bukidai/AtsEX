@@ -45,10 +45,18 @@ namespace Automatic9045.AtsEx.PluginHost
         FieldInfo GetSourceFieldOf(string wrapperName);
 
         /// <summary>
+        /// <paramref name="parameters"/> で指定したパラメータをもつラッパーコンストラクタのオリジナルを取得します。
+        /// </summary>
+        /// <param name="parameters">ラッパーコンストラクタのパラメータのリスト。パラメータが無い場合は <see cref="Type.EmptyTypes"/> を指定します。
+        /// オーバーロードしていない場合は <see langword="null"/> を指定して省略することもできます。</param>
+        /// <returns>オリジナルコンストラクタの <see cref="ConstructorInfo"/>。</returns>
+        ConstructorInfo GetSourceConstructorOf(Type[] parameters = null);
+
+        /// <summary>
         /// <paramref name="wrapperName"/> で指定した名前のラッパーメソッドのオリジナルを取得します。
         /// </summary>
         /// <param name="wrapperName">ラッパーメソッドの名前。</param>
-        /// <param name="parameters">ラッパーメソッドの引数のリスト。パラメータが無い場合は <see cref="Type.EmptyTypes"/>を指定します。
+        /// <param name="parameters">ラッパーメソッドのパラメータのリスト。パラメータが無い場合は <see cref="Type.EmptyTypes"/> を指定します。
         /// オーバーロードしていない場合は <see langword="null"/> を指定して省略することもできます。</param>
         /// <returns>オリジナルメソッドの <see cref="MethodInfo"/>。</returns>
         MethodInfo GetSourceMethodOf(string wrapperName, Type[] parameters = null);
