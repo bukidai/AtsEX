@@ -13,9 +13,9 @@ namespace Automatic9045.AtsEx.BveTypeCollection
 {
     public partial class BveTypeCollectionProvider : IBveTypeCollectionProvider
     {
-        protected SortedList<Type, BveTypeMemberCollection> Types { get; }
+        protected SortedList<Type, IBveTypeMemberCollection> Types { get; }
 
-        protected BveTypeCollectionProvider(SortedList<Type, BveTypeMemberCollection> types)
+        protected BveTypeCollectionProvider(SortedList<Type, IBveTypeMemberCollection> types)
         {
             Type illegalType = types.Keys.FirstOrDefault(type => !type.IsInterface || !type.GetInterfaces().Contains(typeof(IClassWrapper)));
             if (!(illegalType is null))

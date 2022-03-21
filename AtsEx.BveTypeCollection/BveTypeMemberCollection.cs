@@ -9,7 +9,7 @@ using Automatic9045.AtsEx.PluginHost;
 
 namespace Automatic9045.AtsEx.BveTypeCollection
 {
-    public class BveTypeMemberCollection : IBveTypeMemberCollection
+    internal class BveTypeMemberCollection : IBveTypeMemberCollection
     {
         public Type WrapperType { get; }
         public Type OriginalType { get; }
