@@ -17,5 +17,27 @@ namespace Automatic9045.AtsEx
         {
             Src = src;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is ClassWrapper classWrapper)
+            {
+                return (Src as object).Equals(classWrapper.Src);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return (Src as object).GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return (Src as object).ToString();
+        }
     }
 }
