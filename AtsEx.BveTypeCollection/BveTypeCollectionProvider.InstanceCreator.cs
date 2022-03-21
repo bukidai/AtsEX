@@ -219,8 +219,10 @@ namespace Automatic9045.AtsEx.BveTypeCollection
             {
                 if (type.IsArray)
                 {
+                    int arrayRank = type.GetArrayRank();
                     Type elementType = type.GetElementType();
-                    type = GetOriginalTypeIfWrapper((Type)elementType, typeLoadExceptionMessage);
+                    Type originalElementType = GetOriginalTypeIfWrapper(elementType, typeLoadExceptionMessage);
+                    type = arrayRank == 1 ? originalElementType.MakeArrayType() : originalElementType.MakeArrayType(arrayRank);
                 }
                 else if (type.IsConstructedGenericType)
                 {
