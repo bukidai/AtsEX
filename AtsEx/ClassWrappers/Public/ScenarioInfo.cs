@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -148,13 +149,13 @@ namespace Automatic9045.AtsEx.ClassWrappers
         {
             get
             {
-                var dynamicList = ScenarioFileLoadErrorsGetMethod.Invoke(Src, null) as List<dynamic>;
-                return dynamicList.ConvertAll(item => new LoadError(item) as ILoadError);
+                dynamic list = ScenarioFileLoadErrorsGetMethod.Invoke(Src, null);
+                return list.ConvertAll<ILoadError>(new Converter<dynamic, ILoadError>(item => new LoadError(item)));
             }
             internal set
             {
-                List<dynamic> dynamicList = value.ConvertAll(item => item.Src);
-                ScenarioFileLoadErrorsSetMethod.Invoke(Src, new object[] { dynamicList });
+                List<dynamic> list = value.ConvertAll(item => item.Src);
+                ScenarioFileLoadErrorsSetMethod.Invoke(Src, new object[] { list });
             }
         }
     }
