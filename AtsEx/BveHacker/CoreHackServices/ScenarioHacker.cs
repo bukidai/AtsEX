@@ -7,7 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using HarmonyLib;
+
+using Automatic9045.AtsEx.BveTypeCollection;
 using Automatic9045.AtsEx.ClassWrappers;
+using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.CoreHackServices
@@ -20,13 +24,22 @@ namespace Automatic9045.AtsEx.CoreHackServices
 
     internal sealed class ScenarioHacker : CoreHackService, IScenarioHacker
     {
-        MainForm MainForm;
+        private IMainForm MainForm;
 
         public ScenarioHacker(Process targetProcess, Assembly targetAssembly, ServiceCollection services) : base(targetProcess, targetAssembly, services)
         {
-            Form formSource = Services.GetService<IMainFormHacker>().TargetForm;
-            MainForm = new MainForm(formSource);
+            Form formSrc = Services.GetService<IMainFormHacker>().TargetForm;
+            MainForm = new MainForm(formSrc);
+
+
+            IBveTypeMemberCollection timePosFormMembers = BveTypeCollectionProvider.Instance.GetTypeInfoOf<ITimePosForm>();
+            MethodInfo setScenarioMethod = timePosFormMembers.GetSourceMethodOf(nameof(ITimePosForm.SetScenario));
+
+            Harmony harmony = new Harmony("http://automatic9045.github.io/ns/harmony/atsex/core-hack-services/scenario-hacker");
+            harmony.Patch(setScenarioMethod, new HarmonyMethod(typeof(ScenarioHacker), nameof(SetScenarioPreFix)));
         }
+
+        public static event ScenarioProviderCreatedEventHandler ScenarioProviderCreated;
 
         public IScenarioInfo CurrentScenarioInfo
         {
@@ -38,6 +51,12 @@ namespace Automatic9045.AtsEx.CoreHackServices
         {
             get => MainForm.CurrentScenarioProvider;
             set => MainForm.CurrentScenarioProvider = value;
+        }
+
+        private static void SetScenarioPreFix(object[] __args)
+        {
+            IScenarioProvider scenarioProvider = new ScenarioProvider(__args[0]);
+            ScenarioProviderCreated?.Invoke(scenarioProvider);
         }
     }
 }

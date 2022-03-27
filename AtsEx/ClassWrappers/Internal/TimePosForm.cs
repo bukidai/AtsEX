@@ -10,5 +10,6 @@ namespace Automatic9045.AtsEx.ClassWrappers
 {
     internal interface ITimePosForm : IClassWrapper
     {
+        void SetScenario(IScenarioProvider scenarioProvider);
     }
 }

@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using HarmonyLib;
+
 using Automatic9045.AtsEx.BveTypeCollection;
 using Automatic9045.AtsEx.CoreHackServices;
 using Automatic9045.AtsEx.ClassWrappers;
@@ -29,6 +31,9 @@ namespace Automatic9045.AtsEx
             Assembly = App.BveAssembly;
 
             Services = CoreHackServiceCollectionBuilder.Build(targetProcess, App.BveAssembly);
+
+
+            ScenarioHacker.ScenarioProviderCreated += e => ScenarioProviderCreated?.Invoke(e);
         }
 
         public Process Process { get; }
@@ -59,6 +64,8 @@ namespace Automatic9045.AtsEx
         public void ThrowError(IEnumerable<ILoadError> errors) => Services.GetService<ILoadErrorHacker>().ThrowErrors(errors);
 
 
+        public event ScenarioProviderCreatedEventHandler ScenarioProviderCreated;
+
         public IScenarioInfo CurrentScenarioInfo
         {
             get => Services.GetService<IScenarioHacker>().CurrentScenarioInfo;
@@ -67,7 +74,7 @@ namespace Automatic9045.AtsEx
 
         public IScenarioProvider CurrentScenarioProvider
         {
-            get => Services.GetService<IScenarioHacker>().CurrentScenarioProvider;
+            get => Services.GetService<IScenarioHacker>().CurrentScenarioProvider ?? throw new InvalidOperationException();
             internal set => Services.GetService<IScenarioHacker>().CurrentScenarioProvider = value as ScenarioProvider;
         }
 

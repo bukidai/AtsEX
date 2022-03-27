@@ -54,6 +54,9 @@
     <DllExportPostProcType>0</DllExportPostProcType>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lib.Harmony.2.2.1\lib\net48\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
       <HintPath>..\packages\SlimDX.4.0.13.44\lib\NET40\SlimDX.dll</HintPath>
       <Private>False</Private>
@@ -166,7 +169,9 @@
     <MSBuild BuildInParallel="true" UseResultsCache="true" Projects="$(MSBuildProjectFullPath)" Properties="DllExportRPkgDyn=true" Targets="Build" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(TargetDir)x64\$(TargetName).dll" "$(SolutionDir)_DummyTrain\Ats\$(TargetName).x64.dll"
+    <PostBuildEvent>copy /y "$(TargetDir)0Harmony.dll" "$(SolutionDir)_DummyTrain\Ats\"
+
+copy /y "$(TargetDir)x64\$(TargetName).dll" "$(SolutionDir)_DummyTrain\Ats\$(TargetName).x64.dll"
 if exist "$(TargetDir)x64\$(TargetName).pdb" copy /y "$(TargetDir)x64\$(TargetName).pdb" "$(SolutionDir)_DummyTrain\Ats\$(TargetName).x64.pdb"
 
 copy /y "$(TargetDir)x86\$(TargetName).dll" "$(SolutionDir)_DummyTrain\Ats\$(TargetName).x86.dll"

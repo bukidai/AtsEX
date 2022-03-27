@@ -36,17 +36,6 @@ namespace Automatic9045.AtsEx.Ats
             MessageBox.Show("AtsEX ATSプラグイン拡張キット\n\nデバッグモードで読み込まれました。");
 #endif
 
-            try
-            {
-                Process a = Process.GetCurrentProcess();
-                AppDomain b = AppDomain.CurrentDomain;
-                Assembly c = Assembly.GetEntryAssembly();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
             Process targetProcess = Process.GetCurrentProcess();
             AppDomain targetAppDomain = AppDomain.CurrentDomain;
             Assembly targetAssembly = Assembly.GetEntryAssembly();
@@ -61,6 +50,7 @@ namespace Automatic9045.AtsEx.Ats
             }
             
             AssemblyResolver assemblyResolver = new AssemblyResolver(targetAppDomain);
+            assemblyResolver.Register(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "0Harmony.dll"));
             assemblyResolver.Register(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "atsex.pihost.dll"));
             assemblyResolver.Register(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "atsex.bvetypes.dll"));
 

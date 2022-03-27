@@ -16,6 +16,7 @@
 	<BveType Wrapper="IScenarioSelectionForm" Original="da">
 	</BveType>
 	<BveType Wrapper="ITimePosForm" Original="aj">
+		<Method Wrapper="SetScenario" WrapperParams="IScenarioProvider" Original="a"/>
 	</BveType>
 	<!-- Internal class wrappers END -->
 
