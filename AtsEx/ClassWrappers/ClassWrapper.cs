@@ -11,13 +11,11 @@ namespace Automatic9045.AtsEx
 {
     public class ClassWrapper : IClassWrapper
     {
-        public Type SrcType { get; }
         public dynamic Src { get; }
 
         public ClassWrapper(dynamic src)
         {
             Src = src;
-            SrcType = Src.GetType();
         }
     }
 }

@@ -8,7 +8,6 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
     public interface IClassWrapper
     {
-        Type SrcType { get; }
         dynamic Src { get; }
     }
 
