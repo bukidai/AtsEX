@@ -45,6 +45,39 @@
 		</Property>
 	</BveType>
 
+	<BveType Wrapper="IMapObjectBase" Original="db">
+		<Property Wrapper="Location">
+			<Getter Original="v"/>
+			<Setter Original="g"/>
+		</Property>
+	</BveType>
+
+	<BveType Wrapper="IMaterialInfo" Original="e0">
+		<Property Wrapper="Material">
+			<Getter Original="a"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Texture">
+			<Getter Original="b"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Is2D">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+	</BveType>
+
+	<BveType Wrapper="IModel" Original="fp">
+		<Property Wrapper="Mesh">
+			<Getter Original="e"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="Materials">
+			<Getter Original="a"/>
+			<Setter Original="a"/>
+		</Property>
+	</BveType>
+
 	<BveType Wrapper="IRandomFileList" Original="dr">
 		<Property Wrapper="SelectedFile">
 			<Getter Original="a"/>
@@ -53,6 +86,23 @@
 	</BveType>
 
 	<BveType Wrapper="IRoute" Original="br">
+		<Property Wrapper="DrawLimitLocation">
+			<Getter Original="e"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Structures">
+			<Getter Original="y"/>
+		</Property>
+		<Property Wrapper="Sounds">
+			<Getter Original="t"/>
+		</Property>
+		<Property Wrapper="Sounds3D">
+			<Getter Original="h"/>
+		</Property>
+		<Property Wrapper="StructureModels">
+			<Getter Original="s"/>
+			<Setter Original="a"/>
+		</Property>
 	</BveType>
 
 	<BveType Wrapper="IScenarioInfo" Original="ek">
@@ -114,6 +164,122 @@
 		</Property>
 		<Property Wrapper="Vehicle">
 			<Getter Original="a"/>
+		</Property>
+	</BveType>
+
+	<BveType Wrapper="ISingleStructureList" Original="bg">
+	</BveType>
+
+	<BveType Wrapper="ISound" Original="ep">
+	</BveType>
+
+	<BveType Wrapper="IStation" Original="ef">
+		<Property Wrapper="Name">
+			<Getter Original="a"/>
+			<Setter Original="a" IsOriginalPrivate="true"/>
+		</Property>
+		<Property Wrapper="ArrivalTime">
+			<Getter Original="g"/>
+			<Setter Original="c" IsOriginalPrivate="true"/>
+		</Property>
+		<Property Wrapper="DepertureTime">
+			<Getter Original="m"/>
+			<Setter Original="b" IsOriginalPrivate="true"/>
+		</Property>
+		<Property Wrapper="DoorCloseTime">
+			<Getter Original="n"/>
+			<Setter Original="h"/>
+		</Property>
+		<Property Wrapper="DefaultTime">
+			<Getter Original="d"/>
+			<Setter Original="e"/>
+		</Property>
+		<Property Wrapper="Pass">
+			<Getter Original="p"/>
+			<Setter Original="b" IsOriginalPrivate="true"/>
+		</Property>
+		<Property Wrapper="IsTerminal">
+			<Getter Original="l"/>
+			<Setter Original="a" IsOriginalPrivate="true"/>
+		</Property>
+		<Property Wrapper="StoppageTime">
+			<Getter Original="c"/>
+			<Setter Original="a" IsOriginalPrivate="true"/>
+		</Property>
+		<Property Wrapper="DoorSide">
+			<Getter Original="o"/>
+			<Setter Original="f"/>
+		</Property>
+		<Property Wrapper="DepertureSound">
+			<Getter Original="h"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="ArrivalSound">
+			<Getter Original="t"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="SignalFlag">
+			<Getter Original="e"/>
+			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="MarginMax">
+			<Getter Original="b"/>
+			<Setter Original="e"/>
+		</Property>
+		<Property Wrapper="MarginMin">
+			<Getter Original="s"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="MinStopPosition">
+			<Getter Original="j"/>
+		</Property>
+		<Property Wrapper="MaxStopPosition">
+			<Getter Original="f"/>
+		</Property>
+		<Property Wrapper="AlightingTime">
+			<Getter Original="q"/>
+			<Setter Original="g"/>
+		</Property>
+		<Property Wrapper="TargetLoadFactor">
+			<Getter Original="u"/>
+			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="CurrentLoadFactor">
+			<Getter Original="k"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="DoorReopen">
+			<Getter Original="r"/>
+			<Setter Original="d"/>
+		</Property>
+		<Property Wrapper="StuckInDoor">
+			<Getter Original="i"/>
+			<Setter Original="d"/>
+		</Property>
+	</BveType>
+
+	<BveType Wrapper="IStationList" Original="dp">
+	</BveType>
+
+	<BveType Wrapper="IStructureList" Original="b6">
+	</BveType>
+
+	<BveType Wrapper="IStructureSet" Original="dn">
+		<Property Wrapper="DrawLimitLocation">
+			<Getter Original="a"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Repeated">
+			<Getter Original="c"/>
+		</Property>
+		<Property Wrapper="Put">
+			<Getter Original="b"/>
+		</Property>
+		<Property Wrapper="PutBetween">
+			<Getter Original="e"/>
+		</Property>
+		<Property Wrapper="Signals">
+			<Getter Original="d"/>
 		</Property>
 	</BveType>
 

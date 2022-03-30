@@ -54,6 +54,10 @@
     <DllExportPostProcType>0</DllExportPostProcType>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
+      <HintPath>..\packages\SlimDX.4.0.13.44\lib\NET40\SlimDX.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -79,8 +83,18 @@
     <Compile Include="ClassWrappers\Internal\TimePosForm.cs" />
     <Compile Include="ClassWrappers\Public\BveFile.cs" />
     <Compile Include="ClassWrappers\Public\LoadError.cs" />
+    <Compile Include="ClassWrappers\Public\MaterialInfo.cs" />
     <Compile Include="ClassWrappers\Public\RandomFileList.cs" />
+    <Compile Include="ClassWrappers\Public\SingleStructureList.cs" />
+    <Compile Include="ClassWrappers\Public\Station.cs" />
+    <Compile Include="ClassWrappers\Public\StationList.cs" />
+    <Compile Include="ClassWrappers\Public\StructureSet.cs" />
+    <Compile Include="ClassWrappers\Public\StructureList.cs" />
+    <Compile Include="ClassWrappers\Public\Model.cs" />
+    <Compile Include="ClassWrappers\Public\Sound.cs" />
+    <Compile Include="ClassWrappers\Public\Vehicle.cs" />
     <Compile Include="ClassWrappers\Public\ScenarioInfo.cs" />
+    <Compile Include="ClassWrappers\Public\Route.cs" />
     <Compile Include="ClassWrappers\Public\ScenarioProvider.cs" />
     <Compile Include="ClassWrappers\Extensions\WrappedSortedList.cs" />
     <Compile Include="VersionForm\VersionFormProvider.cs" />

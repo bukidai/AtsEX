@@ -17,3 +17,7 @@ Copyright (c) .NET Foundation and Contributors
 
 Copyright (c) 2009-2015  Robert Giesecke  
 Copyright (c) 2016-2021  Denis Kuzmin <x-3F@outlook.com> github/3F
+
+### [SlimDX](https://www.nuget.org/packages/SlimDX/) (MIT)
+
+Copyright (c) 2013  exDreamDuck

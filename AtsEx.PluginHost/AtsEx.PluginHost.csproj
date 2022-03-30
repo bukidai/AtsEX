@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
+      <HintPath>..\packages\SlimDX.4.0.13.44\lib\NET40\SlimDX.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -46,6 +50,15 @@
   <ItemGroup>
     <Compile Include="BveTypeCollection\IBveTypeMemberCollection.cs" />
     <Compile Include="BveTypeCollection\IBveTypeCollectionProvider.cs" />
+    <Compile Include="ClassWrapperInterfaces\IMaterialInfo.cs" />
+    <Compile Include="ClassWrapperInterfaces\ISound.cs" />
+    <Compile Include="ClassWrapperInterfaces\IStation.cs" />
+    <Compile Include="ClassWrapperInterfaces\IStationList.cs" />
+    <Compile Include="ClassWrapperInterfaces\ISingleStructureList.cs" />
+    <Compile Include="ClassWrapperInterfaces\IMapObjectBase.cs" />
+    <Compile Include="ClassWrapperInterfaces\IStructureList.cs" />
+    <Compile Include="ClassWrapperInterfaces\IStructureSet.cs" />
+    <Compile Include="ClassWrapperInterfaces\IModel.cs" />
     <Compile Include="ClassWrapperInterfaces\IVehicle.cs" />
     <Compile Include="ClassWrapperInterfaces\IRoute.cs" />
     <Compile Include="Enums\BrakePosition.cs" />
@@ -77,7 +90,9 @@
     <Compile Include="HostServiceCollection.cs" />
     <Compile Include="ClassWrapperInterfaces\Extensions\IWrappedSortedList.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /y "$(TargetDir)" "$(SolutionDir)_DummyTrain\Ats\"</PostBuildEvent>
