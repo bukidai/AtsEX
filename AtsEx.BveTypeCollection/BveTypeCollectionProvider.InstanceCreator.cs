@@ -224,8 +224,15 @@ namespace Automatic9045.AtsEx.BveTypeCollection
                 }
                 else if (type.IsConstructedGenericType)
                 {
+                    Type genericTypeDefinition = type.GetGenericTypeDefinition();
                     Type[] typeParams = type.GetGenericArguments().Select(t => GetOriginalTypeIfWrapper(t, typeLoadExceptionMessage)).ToArray();
-                    type = type.GetGenericTypeDefinition().MakeGenericType(typeParams);
+
+                    if (genericTypeDefinition == typeof(IWrappedSortedList<,>))
+                    {
+                        genericTypeDefinition = typeof(SortedList<,>);
+                    }
+
+                    type = genericTypeDefinition.MakeGenericType(typeParams);
                 }
 
                 if (type.IsInterface && type.GetInterfaces().Contains(typeof(IClassWrapper)))
