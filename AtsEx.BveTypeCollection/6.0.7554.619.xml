@@ -94,6 +94,9 @@
 		<Property Wrapper="Structures">
 			<Getter Original="y"/>
 		</Property>
+		<Property Wrapper="Stations">
+			<Getter Original="f"/>
+		</Property>
 		<Property Wrapper="Sounds">
 			<Getter Original="t"/>
 		</Property>

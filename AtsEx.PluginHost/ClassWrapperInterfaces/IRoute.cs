@@ -10,6 +10,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 	{
 		double DrawLimitLocation { get; set; }
 		IStructureSet Structures { get; }
+		IStationList Stations { get; }
 		IWrappedSortedList<string, ISound> Sounds { get; }
 		IWrappedSortedList<string, ISound[]> Sounds3D { get; }
 		IWrappedSortedList<string, IModel> StructureModels { get; }

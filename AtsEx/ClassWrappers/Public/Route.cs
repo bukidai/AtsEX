@@ -23,6 +23,8 @@ namespace Automatic9045.AtsEx.ClassWrappers
 
             StructuresGetMethod = members.GetSourcePropertyGetterOf(nameof(Structures));
 
+            StationsGetMethod = members.GetSourcePropertyGetterOf(nameof(Stations));
+
             SoundsGetMethod = members.GetSourcePropertyGetterOf(nameof(Sounds));
 
             Sounds3DGetMethod = members.GetSourcePropertyGetterOf(nameof(Sounds3D));
@@ -46,6 +48,12 @@ namespace Automatic9045.AtsEx.ClassWrappers
         public IStructureSet Structures
         {
             get => new StructureSet(StructuresGetMethod.Invoke(Src, null));
+        }
+
+        private static MethodInfo StationsGetMethod;
+        public IStationList Stations
+        {
+            get => new StationList(StationsGetMethod.Invoke(Src, null));
         }
 
         private static MethodInfo SoundsGetMethod;
