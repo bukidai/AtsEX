@@ -14,19 +14,23 @@ namespace Automatic9045.AtsEx.BveTypeCollection
     public partial class BveTypeCollectionProvider : IBveTypeCollectionProvider
     {
         protected SortedList<Type, IBveTypeMemberCollection> Types { get; }
+        protected SortedList<Type, Type> OriginalAndWrapperTypes { get; }
 
-        protected BveTypeCollectionProvider(SortedList<Type, IBveTypeMemberCollection> types)
+        protected BveTypeCollectionProvider(IEnumerable<IBveTypeMemberCollection> types)
         {
-            Type illegalType = types.Keys.FirstOrDefault(type => !type.IsInterface || !type.GetInterfaces().Contains(typeof(IClassWrapper)));
+            IBveTypeMemberCollection illegalType = types.FirstOrDefault(type => !type.WrapperType.IsInterface || !type.WrapperType.GetInterfaces().Contains(typeof(IClassWrapper)));
             if (!(illegalType is null))
             {
-                throw new ArgumentException($"型 '{illegalType.FullName}' は {typeof(IClassWrapper).FullName} を継承したインターフェースではありません。");
+                throw new ArgumentException($"型 '{illegalType.WrapperType.FullName}' は {typeof(IClassWrapper).FullName} を継承したインターフェースではありません。");
             }
 
-            Types = types;
+            Types = new SortedList<Type, IBveTypeMemberCollection>(types.ToDictionary(type => type.WrapperType, type => type), new TypeComparer());
+            OriginalAndWrapperTypes = new SortedList<Type, Type>(types.ToDictionary(type => type.OriginalType, type => type.WrapperType), new TypeComparer());
         }
 
         public IBveTypeMemberCollection GetTypeInfoOf<TWrapper>() => Types[typeof(TWrapper)];
+        public IBveTypeMemberCollection GetTypeInfoOf(Type wrapperType) => Types[wrapperType];
+        public Type GetWrapperTypeOf(Type originalType) => OriginalAndWrapperTypes[originalType];
 
         public void Dispose()
         {

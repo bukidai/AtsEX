@@ -9,5 +9,7 @@ namespace Automatic9045.AtsEx.PluginHost
     public interface IBveTypeCollectionProvider
     {
         IBveTypeMemberCollection GetTypeInfoOf<TWrapper>();
+        IBveTypeMemberCollection GetTypeInfoOf(Type wrapperType);
+        Type GetWrapperTypeOf(Type originalType);
     }
 }

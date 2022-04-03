@@ -47,7 +47,7 @@ namespace Automatic9045.AtsEx.BveTypeCollection
             IEnumerable<Type> staticWrapperContainerTypes = atsExPluginHostAssembly.GetTypes().Concat(atsExAssembly.GetTypes()).Where(type => type.IsInterface && type.GetInterfaces().Contains(typeof(IStaticWrapperContainer)));
             IEnumerable<Type> originalTypes = bveAssembly.GetTypes();
 
-            SortedList<Type, IBveTypeMemberCollection> types = new SortedList<Type, IBveTypeMemberCollection>(nameCollection.Select(src =>
+            IEnumerable<IBveTypeMemberCollection> types = nameCollection.Select(src =>
             {
                 Type wrapperType = ParseWrapperTypeName(src.WrapperTypeName);
                 if (wrapperType is null)
@@ -204,8 +204,8 @@ namespace Automatic9045.AtsEx.BveTypeCollection
 
 
                 BveTypeMemberCollection members = new BveTypeMemberCollection(wrapperType, originalType, propertyGetters, propertySetters, fields, methods);
-                return new KeyValuePair<Type, IBveTypeMemberCollection>(wrapperType, members);
-            }).ToDictionary(pair => pair.Key, pair => pair.Value), new TypeComparer());
+                return members;
+            });
 
             Instance = new BveTypeCollectionProvider(types);
 
