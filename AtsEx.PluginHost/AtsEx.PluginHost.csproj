@@ -56,7 +56,7 @@
     <Compile Include="ClassWrapperInterfaces\IStationList.cs" />
     <Compile Include="ClassWrapperInterfaces\ISingleStructureList.cs" />
     <Compile Include="ClassWrapperInterfaces\IMapObjectBase.cs" />
-    <Compile Include="ClassWrapperInterfaces\IStructureList.cs" />
+    <Compile Include="ClassWrapperInterfaces\IMapObjectList.cs" />
     <Compile Include="ClassWrapperInterfaces\IStructureSet.cs" />
     <Compile Include="ClassWrapperInterfaces\IModel.cs" />
     <Compile Include="ClassWrapperInterfaces\IVehicle.cs" />

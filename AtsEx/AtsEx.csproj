@@ -92,7 +92,7 @@
     <Compile Include="ClassWrappers\Public\Station.cs" />
     <Compile Include="ClassWrappers\Public\StationList.cs" />
     <Compile Include="ClassWrappers\Public\StructureSet.cs" />
-    <Compile Include="ClassWrappers\Public\StructureList.cs" />
+    <Compile Include="ClassWrappers\Public\MapObjectList.cs" />
     <Compile Include="ClassWrappers\Public\Model.cs" />
     <Compile Include="ClassWrappers\Public\Sound.cs" />
     <Compile Include="ClassWrappers\Public\Vehicle.cs" />

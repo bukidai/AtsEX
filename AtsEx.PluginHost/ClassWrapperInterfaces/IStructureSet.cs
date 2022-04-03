@@ -9,7 +9,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 	public interface IStructureSet : IClassWrapper
 	{
 		double DrawLimitLocation { get; set; }
-		IWrappedSortedList<string, IStructureList> Repeated { get; }
+		IWrappedSortedList<string, IMapObjectList> Repeated { get; }
 		ISingleStructureList Put { get; }
 		ISingleStructureList PutBetween { get; }
 		ISingleStructureList Signals { get; }

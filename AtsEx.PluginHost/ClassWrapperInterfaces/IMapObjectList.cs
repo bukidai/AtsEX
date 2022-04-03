@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
-	public interface IStructureList : IClassWrapper, IList<IMapObjectBase>
+	public interface IMapObjectList : IClassWrapper, IList<IMapObjectBase>
 	{
 	}
 }

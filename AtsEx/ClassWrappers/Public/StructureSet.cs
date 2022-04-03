@@ -43,13 +43,13 @@ namespace Automatic9045.AtsEx.ClassWrappers
         }
 
         private static MethodInfo RepeatedGetMethod;
-        private static readonly Func<object, IStructureList> RepeatedParserToWrapper = src => src is null ? null : new StructureList(src);
-        public IWrappedSortedList<string, IStructureList> Repeated
+        private static readonly Func<object, IMapObjectList> RepeatedParserToWrapper = src => src is null ? null : new MapObjectList(src);
+        public IWrappedSortedList<string, IMapObjectList> Repeated
         {
             get
             {
                 IDictionary dictionarySrc = RepeatedGetMethod.Invoke(Src, null);
-                return new WrappedSortedList<string, IStructureList>(dictionarySrc, RepeatedParserToWrapper);
+                return new WrappedSortedList<string, IMapObjectList>(dictionarySrc, RepeatedParserToWrapper);
             }
         }
 

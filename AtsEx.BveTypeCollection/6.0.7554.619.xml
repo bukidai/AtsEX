@@ -53,6 +53,9 @@
 		</Property>
 	</BveType>
 
+	<BveType Wrapper="IMapObjectList" Original="b6">
+	</BveType>
+
 	<BveType Wrapper="IMaterialInfo" Original="e0">
 		<Property Wrapper="Material">
 			<Getter Original="a"/>
@@ -263,9 +266,6 @@
 	</BveType>
 
 	<BveType Wrapper="IStationList" Original="dp">
-	</BveType>
-
-	<BveType Wrapper="IStructureList" Original="b6">
 	</BveType>
 
 	<BveType Wrapper="IStructureSet" Original="dn">

@@ -12,14 +12,14 @@ using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.ClassWrappers
 {
-    internal class StructureList : ClassWrapper, IStructureList
+    internal class MapObjectList : ClassWrapper, IMapObjectList
     {
-        static StructureList()
+        static MapObjectList()
         {
-            IBveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<IStructureList>();
+            IBveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<IMapObjectList>();
         }
 
-        public StructureList(object src) : base(src)
+        public MapObjectList(object src) : base(src)
         {
         }
 
