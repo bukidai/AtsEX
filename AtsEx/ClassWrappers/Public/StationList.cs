@@ -16,10 +16,19 @@ namespace Automatic9045.AtsEx.ClassWrappers
         static StationList()
         {
             IBveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<IStationList>();
+
+            InsertMethod = members.GetSourceMethodOf(nameof(Insert));
+            GetStandardTimeMethod = members.GetSourceMethodOf(nameof(GetStandardTime));
         }
 
         public StationList(object src) : base(src)
         {
         }
+
+        private static MethodInfo InsertMethod;
+        public void Insert(IStation item) => InsertMethod.Invoke(Src, new object[] { item.Src });
+
+        private static MethodInfo GetStandardTimeMethod;
+        public int GetStandardTime(double location) => GetStandardTimeMethod.Invoke(Src, new object[] { location });
     }
 }

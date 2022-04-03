@@ -8,5 +8,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
 	public interface IStationList : IMapObjectList
 	{
+		void Insert(IStation item);
+		int GetStandardTime(double location);
 	}
 }

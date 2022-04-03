@@ -266,6 +266,8 @@
 	</BveType>
 
 	<BveType Wrapper="IStationList" Original="dp">
+		<Method Wrapper="Insert" WrapperParams="IStation" Original="a"/>
+		<Method Wrapper="GetStandardTime" WrapperParams="System.Double" Original="a"/>
 	</BveType>
 
 	<BveType Wrapper="IStructureSet" Original="dn">
