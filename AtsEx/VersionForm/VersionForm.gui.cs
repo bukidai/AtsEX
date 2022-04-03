@@ -33,7 +33,7 @@ namespace Automatic9045.AtsEx
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(800, 480);
             Font = new Font("Yu Gothic UI", 9);
-            Text = $"{App.ProductShortName} バージョン情報・プラグイン一覧";
+            Text = $"{App.Instance.ProductShortName} バージョン情報・プラグイン一覧";
 
 
             Title = new Label()
@@ -43,7 +43,7 @@ namespace Automatic9045.AtsEx
                 Width = 160,
                 Height = 48,
                 Font = new Font("Yu Gothic UI", 28, FontStyle.Bold),
-                Text = App.ProductShortName,
+                Text = App.Instance.ProductShortName,
             };
             Controls.Add(Title);
 
@@ -54,7 +54,7 @@ namespace Automatic9045.AtsEx
                 Top = 88,
                 Width = 480,
                 UseMnemonic = false,
-                Text = $"{App.ProductName}　Version {App.AtsExAssembly.GetName().Version}",
+                Text = $"{App.Instance.ProductName}　Version {App.Instance.AtsExAssembly.GetName().Version}",
             };
             Controls.Add(Description);
 
@@ -86,7 +86,7 @@ namespace Automatic9045.AtsEx
                 Left = 96,
                 Top = 148,
                 Width = 176,
-                Text = $"{App.ProductShortName} 紹介ページ (岡オカ営業所)",
+                Text = $"{App.Instance.ProductShortName} 紹介ページ (岡オカ営業所)",
             };
             HomepageLink.LinkClicked += LinkClicked;
             Controls.Add(HomepageLink);

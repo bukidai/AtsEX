@@ -9,12 +9,10 @@ namespace Automatic9045.AtsEx
 
     internal class BveHackService
     {
-        public BveHacker BveHacker { get; protected set; }
         public ServiceCollection Services { get; protected set; }
 
-        public BveHackService(BveHacker bveHacker, ServiceCollection services)
+        public BveHackService(ServiceCollection services)
         {
-            BveHacker = bveHacker;
             Services = services;
         }
     }

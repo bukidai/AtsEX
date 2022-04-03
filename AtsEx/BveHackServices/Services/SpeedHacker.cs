@@ -28,7 +28,7 @@ namespace Automatic9045.AtsEx.BveHackServices
             }
         }
 
-        public SpeedHacker(BveHacker bveHacker, ServiceCollection services) : base(bveHacker, services)
+        public SpeedHacker(ServiceCollection services) : base(services)
         {
             VelocityTextBox = FindVelocityTextBox();
             VelocityTextBoxUpdateMethod = FindVelocityTextBoxUpdateMethod();
@@ -36,7 +36,7 @@ namespace Automatic9045.AtsEx.BveHackServices
 
         private ToolStripTextBox FindVelocityTextBox()
         {
-            ToolStripContainer toolStripContainer = (ToolStripContainer)BveHacker.TimePosForm.Controls.Find("toolStripContainer1", false)[0];
+            ToolStripContainer toolStripContainer = (ToolStripContainer)BveHacker.Instance.TimePosForm.Controls.Find("toolStripContainer1", false)[0];
             ToolStrip toolStrip = (ToolStrip)toolStripContainer.TopToolStripPanel.Controls.Find("toolStrip3", false)[0];
             ToolStripTextBox velocityTextBox = (ToolStripTextBox)toolStrip.Items.Find("velocityBox", false)[0];
 
@@ -45,7 +45,7 @@ namespace Automatic9045.AtsEx.BveHackServices
 
         private MethodInfo FindVelocityTextBoxUpdateMethod()
         {
-            Type timePosFormType = BveHacker.TimePosForm.GetType();
+            Type timePosFormType = BveHacker.Instance.TimePosForm.GetType();
 
             Type[] argTypes = new Type[] { typeof(int) };
             MethodInfo updateMethod = timePosFormType.GetMethod("a", BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Instance, null, argTypes, null);
@@ -55,7 +55,7 @@ namespace Automatic9045.AtsEx.BveHackServices
 
         protected void UpdateSpeed()
         {
-            VelocityTextBoxUpdateMethod.Invoke(BveHacker.TimePosForm, new object[] { 0 });
+            VelocityTextBoxUpdateMethod.Invoke(BveHacker.Instance.TimePosForm, new object[] { 0 });
         }
     }
 }

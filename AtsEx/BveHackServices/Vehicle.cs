@@ -12,7 +12,7 @@ namespace Automatic9045.AtsEx
 {
     internal class Vehicle : BveHackService, IVehicle
     {
-        public Vehicle(BveHacker bveHacker, ServiceCollection services) : base(bveHacker, services)
+        public Vehicle(ServiceCollection services) : base(services)
         {
         }
 

@@ -14,14 +14,8 @@ namespace Automatic9045.AtsEx
 {
     internal partial class VersionForm : Form
     {
-        protected App App { get; }
-        protected BveHacker BveHacker { get; }
-
-        public VersionForm(App app, BveHacker bveHacker)
+        public VersionForm()
         {
-            App = app;
-            BveHacker = bveHacker;
-
             InitializeComponent();
         }
 

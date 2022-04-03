@@ -11,9 +11,17 @@ using Automatic9045.AtsEx.PluginHost;
 
 namespace Automatic9045.AtsEx
 {
-    internal class App : IApp
+    internal sealed class App : IApp
     {
-        public App(Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
+        public static App Instance { get; private set; }
+
+        public static void CreateInstance(Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
+        {
+            Instance = new App(bveAssembly, atsExAssembly, atsExPluginHostAssembly);
+        }
+
+
+        private App(Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
         {
             AtsExAssembly = Assembly.GetExecutingAssembly();
             BveAssembly = bveAssembly;
@@ -27,7 +35,7 @@ namespace Automatic9045.AtsEx
         public Assembly AtsExPluginHostAssembly { get; }
         public Assembly BveAssembly { get; }
 
-        protected List<AtsExPluginInfo> _VehiclePlugins = null;
+        private List<AtsExPluginInfo> _VehiclePlugins = null;
         public List<AtsExPluginInfo> VehiclePlugins
         {
             get
@@ -42,7 +50,7 @@ namespace Automatic9045.AtsEx
             }
         }
 
-        protected List<AtsExPluginInfo> _MapPlugins = null;
+        private List<AtsExPluginInfo> _MapPlugins = null;
         public List<AtsExPluginInfo> MapPlugins
         {
             get

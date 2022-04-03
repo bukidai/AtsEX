@@ -12,9 +12,6 @@ namespace Automatic9045.AtsEx
 {
     internal class AtsExPluginLoader
     {
-        public App App { get; }
-        public BveHacker BveHacker { get; }
-
         public Vehicle Vehicle { get; }
         public Route Route { get; }
 
@@ -22,15 +19,12 @@ namespace Automatic9045.AtsEx
 
         public AssemblyResolver AssemblyResolver { get; }
 
-        public AtsExPluginLoader(App app, BveHacker bveHacker, Vehicle vehicle, Route route, AssemblyResolver assemblyResolver)
+        public AtsExPluginLoader(Vehicle vehicle, Route route, AssemblyResolver assemblyResolver)
         {
-            App = app;
-            BveHacker = bveHacker;
-
             Vehicle = vehicle;
             Route = route;
 
-            HostServiceCollection = new HostServiceCollection(App, BveHacker, Vehicle, Route);
+            HostServiceCollection = new HostServiceCollection(App.Instance, BveHacker.Instance, Vehicle, Route);
 
             AssemblyResolver = assemblyResolver;
         }
@@ -58,7 +52,7 @@ namespace Automatic9045.AtsEx
             }
             catch (BadImageFormatException)
             {
-                int currentBveVersion = App.BveAssembly.GetName().Version.Major;
+                int currentBveVersion = App.Instance.BveAssembly.GetName().Version.Major;
                 int otherBveVersion = currentBveVersion == 6 ? 5 : 6;
                 throw new BveFileLoadException(
                     $"\"{relativePath}\" は対象プラットフォームが間違っているか、.NET アセンブリではありません。" +

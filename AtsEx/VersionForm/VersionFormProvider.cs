@@ -16,22 +16,17 @@ namespace Automatic9045.AtsEx
         private VersionForm Form = null;
         private ToolStripMenuItem MenuItem;
 
-        public App App { get; }
-        public BveHacker BveHacker { get; }
 
-        public VersionFormProvider(App app, BveHacker bveHacker)
+        public VersionFormProvider()
         {
-            App = app;
-            BveHacker = bveHacker;
-
-            MenuItem = BveHacker.AddClickableMenuItemToContextMenu($"{App.ProductShortName} バージョン情報...", MenuItemClick);
+            MenuItem = BveHacker.Instance.AddClickableMenuItemToContextMenu($"{App.Instance.ProductShortName} バージョン情報...", MenuItemClick);
         }
 
         private void MenuItemClick(object sender, EventArgs e)
         {
             if (!Form.Visible)
             {
-                Form.Show(BveHacker.MainForm);
+                Form.Show(BveHacker.Instance.MainForm);
             }
 
             Form.Focus();
@@ -54,7 +49,7 @@ namespace Automatic9045.AtsEx
         {
             if (!(Form is null)) DisposeForm();
 
-            Form = new VersionForm(App, BveHacker);
+            Form = new VersionForm();
             Form.FormClosing += FormClosing;
             Form.SetPluginDetails(plugins);
         }

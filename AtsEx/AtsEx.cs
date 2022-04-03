@@ -21,9 +21,6 @@ namespace Automatic9045.AtsEx
         private Assembly ExecutingAssembly { get; } = Assembly.GetExecutingAssembly();
         private Assembly PluginHostAssembly { get; }
 
-        private App App { get; }
-        private BveHacker BveHacker { get; }
-
         private ServiceCollection BveHackServices { get; }
         private Vehicle Vehicle { get; }
         private Route Route { get; }
@@ -44,35 +41,35 @@ namespace Automatic9045.AtsEx
 
             BveTypeCollectionProvider.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly);
 
-            App = new App(TargetAssembly, ExecutingAssembly, PluginHostAssembly);
-            BveHacker = new BveHacker(App, TargetProcess);
+            App.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly);
+            BveHacker.CreateInstance(TargetProcess);
 
-            BveHackServices = BveHackServiceCollectionBuilder.Build(BveHacker);
-            Vehicle = new Vehicle(BveHacker, BveHackServices);
-            Route = new Route(BveHacker, BveHackServices);
+            BveHackServices = BveHackServiceCollectionBuilder.Build();
+            Vehicle = new Vehicle(BveHackServices);
+            Route = new Route(BveHackServices);
 
-            VersionFormProvider = new VersionFormProvider(App, BveHacker);
+            VersionFormProvider = new VersionFormProvider();
 
             AssemblyResolver assemblyResolver = new AssemblyResolver(TargetAppDomain);
-            AtsExPluginLoader pluginLoader = new AtsExPluginLoader(App, BveHacker, Vehicle, Route, assemblyResolver);
+            AtsExPluginLoader pluginLoader = new AtsExPluginLoader(Vehicle, Route, assemblyResolver);
             try
             {
                 string vehiclePluginListPath = Path.Combine(Path.GetDirectoryName(ExecutingAssembly.Location), "atsex.pilist.txt");
                 VehiclePlugins = pluginLoader.LoadFromList(PluginType.VehiclePlugin, vehiclePluginListPath).ToList();
-                App.VehiclePlugins = VehiclePlugins;
+                App.Instance.VehiclePlugins = VehiclePlugins;
             }
             catch (BveFileLoadException ex)
             {
-                BveHacker.ThrowError(ex.Message, ex.SenderFileName, ex.LineIndex, ex.CharIndex);
+                BveHacker.Instance.ThrowError(ex.Message, ex.SenderFileName, ex.LineIndex, ex.CharIndex);
             }
             catch (Exception ex)
             {
-                BveHacker.ThrowError(ex.Message);
-                MessageBox.Show(ex.ToString(), $"ハンドルされていない例外 - {App.ProductShortName}");
+                BveHacker.Instance.ThrowError(ex.Message);
+                MessageBox.Show(ex.ToString(), $"ハンドルされていない例外 - {App.Instance.ProductShortName}");
             }
 
             MapPlugins = new List<AtsExPluginInfo>();
-            App.MapPlugins = MapPlugins;
+            App.Instance.MapPlugins = MapPlugins;
         }
 
         public void Dispose()
@@ -95,7 +92,7 @@ namespace Automatic9045.AtsEx
 
             VersionFormProvider.Dispose();
             BveHackServices.Dispose();
-            BveHacker.Dispose();
+            BveHacker.Instance.Dispose();
             BveTypeCollectionProvider.Instance.Dispose();
         }
 
@@ -103,12 +100,12 @@ namespace Automatic9045.AtsEx
         {
             VersionFormProvider.Intialize(Enumerable.Concat(VehiclePlugins, MapPlugins));
 
-            App.InvokeStarted(defaultBrakePosition);
+            App.Instance.InvokeStarted(defaultBrakePosition);
         }
 
         public void Elapse()
         {
-            App.InvokeElapse();
+            App.Instance.InvokeElapse();
         }
     }
 }

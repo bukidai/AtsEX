@@ -19,18 +19,22 @@ namespace Automatic9045.AtsEx
 {
     internal sealed class BveHacker : IBveHacker
     {
-        private App App;
+        public static BveHacker Instance { get; private set; }
+
+        public static void CreateInstance(Process targetProcess)
+        {
+            Instance = new BveHacker(targetProcess);
+        }
+
 
         internal ServiceCollection Services { get; }
 
-        internal BveHacker(App app, Process targetProcess)
+        private BveHacker(Process targetProcess)
         {
-            App = app;
-
             Process = targetProcess;
-            Assembly = App.BveAssembly;
+            Assembly = App.Instance.BveAssembly;
 
-            Services = CoreHackServiceCollectionBuilder.Build(targetProcess, App.BveAssembly);
+            Services = CoreHackServiceCollectionBuilder.Build(targetProcess, App.Instance.BveAssembly);
 
 
             ScenarioHacker.ScenarioProviderCreated += e => ScenarioProviderCreated?.Invoke(e);

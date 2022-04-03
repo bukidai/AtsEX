@@ -27,7 +27,7 @@ namespace Automatic9045.AtsEx.BveHackServices
             }
         }
 
-        public LocationHacker(BveHacker bveHacker, ServiceCollection services) : base(bveHacker, services)
+        public LocationHacker(ServiceCollection services) : base(services)
         {
             LocationTextBox = FindLocationTextBox();
             LocationTextBoxUpdateMethod = FindLocationTextBoxUpdateMethod();
@@ -35,7 +35,7 @@ namespace Automatic9045.AtsEx.BveHackServices
 
         private ToolStripTextBox FindLocationTextBox()
         {
-            ToolStripContainer toolStripContainer = (ToolStripContainer)BveHacker.TimePosForm.Controls.Find("toolStripContainer1", false)[0];
+            ToolStripContainer toolStripContainer = (ToolStripContainer)BveHacker.Instance.TimePosForm.Controls.Find("toolStripContainer1", false)[0];
             ToolStrip toolStrip = (ToolStrip)toolStripContainer.TopToolStripPanel.Controls.Find("toolStrip2", false)[0];
             ToolStripTextBox locationTextBox = (ToolStripTextBox)toolStrip.Items.Find("distanceBox", false)[0];
 
@@ -44,7 +44,7 @@ namespace Automatic9045.AtsEx.BveHackServices
 
         private MethodInfo FindLocationTextBoxUpdateMethod()
         {
-            Type timePosFormType = BveHacker.TimePosForm.GetType();
+            Type timePosFormType = BveHacker.Instance.TimePosForm.GetType();
 
             Type[] argTypes = new Type[] { typeof(int) };
             MethodInfo updateMethod = timePosFormType.GetMethod("b", BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Instance, null, argTypes, null);
@@ -54,7 +54,7 @@ namespace Automatic9045.AtsEx.BveHackServices
 
         protected void UpdateLocation()
         {
-            LocationTextBoxUpdateMethod.Invoke(BveHacker.TimePosForm, new object[] { 0 });
+            LocationTextBoxUpdateMethod.Invoke(BveHacker.Instance.TimePosForm, new object[] { 0 });
         }
     }
 }

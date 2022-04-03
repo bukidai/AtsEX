@@ -12,7 +12,7 @@ namespace Automatic9045.AtsEx
 {
     internal class Route : BveHackService, IRoute
     {
-        public Route(BveHacker bveHacker, ServiceCollection services) : base(bveHacker, services)
+        public Route(ServiceCollection services) : base(services)
         {
         }
 
