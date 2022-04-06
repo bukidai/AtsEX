@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
-	public interface IStation : IClassWrapper
+	public interface IStation : IMapObjectBase
 	{
 		string Name { get; set; }
 		int ArrivalTime { get; set; }

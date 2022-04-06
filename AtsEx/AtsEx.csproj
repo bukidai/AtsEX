@@ -84,6 +84,7 @@
     <Compile Include="ClassWrappers\Internal\MainForm.cs" />
     <Compile Include="ClassWrappers\Internal\ScenarioSelectionForm.cs" />
     <Compile Include="ClassWrappers\Internal\TimePosForm.cs" />
+    <Compile Include="ClassWrappers\Public\MapObjectBase.cs" />
     <Compile Include="ClassWrappers\Public\BveFile.cs" />
     <Compile Include="ClassWrappers\Public\LoadError.cs" />
     <Compile Include="ClassWrappers\Public\MaterialInfo.cs" />

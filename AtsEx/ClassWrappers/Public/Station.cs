@@ -11,7 +11,7 @@ using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.ClassWrappers
 {
-    internal sealed class Station : ClassWrapper, IStation
+    internal sealed class Station : MapObjectBase, IStation
     {
         static Station()
         {
