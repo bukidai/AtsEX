@@ -26,10 +26,15 @@ namespace Automatic9045.AtsEx.ClassWrappers
         [UnderConstruction]
         private static IMapObjectBase Parse(object src)
         {
-            switch (src)
+            Type originalType = src.GetType();
+            Type wrapperType = BveTypeCollectionProvider.Instance.GetWrapperTypeOf(originalType);
+            if (wrapperType == typeof(IStation))
             {
-                default:
-                    throw new NotImplementedException();
+                return new Station(src);
+            }
+            else
+            {
+                throw new DevelopException($"{nameof(IMapObjectBase)} '{wrapperType.Name}' は認識されていません。");
             }
         }
 
