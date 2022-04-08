@@ -191,7 +191,7 @@ namespace Automatic9045.AtsEx.BveTypeCollection
                     }
 
                     Type[] originalMethodParams = methodInfo.WrapperParamNames.Select(p => ParseTypeName(p, true)).ToArray();
-                    MethodInfo originalMethod = originalType.GetMethod(methodInfo.OriginalName, CreateBindingAttribute(methodInfo.IsWrapperPrivate, methodInfo.IsWrapperStatic), null, originalMethodParams, null);
+                    MethodInfo originalMethod = originalType.GetMethod(methodInfo.OriginalName, CreateBindingAttribute(methodInfo.IsOriginalPrivate, methodInfo.IsOriginalStatic), null, originalMethodParams, null);
                     if (originalMethod is null)
                     {
                         throw new KeyNotFoundException($"パラメータ '{string.Join(", ", originalMethodParams.Select(GetTypeFullName))}' をもつ" +
