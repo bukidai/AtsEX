@@ -197,6 +197,9 @@
 		<Property Wrapper="Vehicle">
 			<Getter Original="a"/>
 		</Property>
+		<Property Wrapper="TimeTable">
+			<Getter Original="d"/>
+		</Property>
 	</BveType>
 
 	<BveType Wrapper="ISingleStructureList" Original="bg">

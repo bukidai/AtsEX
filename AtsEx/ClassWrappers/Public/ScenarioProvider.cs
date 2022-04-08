@@ -19,6 +19,7 @@ namespace Automatic9045.AtsEx.ClassWrappers
 
             RouteGetMethod = members.GetSourcePropertyGetterOf(nameof(Route));
             VehicleGetMethod = members.GetSourcePropertyGetterOf(nameof(Vehicle));
+            TimeTableGetMethod = members.GetSourcePropertyGetterOf(nameof(TimeTable));
         }
 
         public ScenarioProvider(object src) : base(src)
@@ -35,6 +36,12 @@ namespace Automatic9045.AtsEx.ClassWrappers
         public PluginHost.ClassWrappers.IVehicle Vehicle
         {
             get => new Vehicle(VehicleGetMethod.Invoke(Src, null));
+        }
+
+        protected static MethodInfo TimeTableGetMethod;
+        public ITimeTable TimeTable
+        {
+            get => new TimeTable(TimeTableGetMethod.Invoke(Src, null));
         }
     }
 }

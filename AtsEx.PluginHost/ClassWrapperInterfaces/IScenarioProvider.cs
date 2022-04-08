@@ -9,6 +9,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 	public interface IScenarioProvider : IClassWrapper
 	{
 		IRoute Route { get; }
+		ITimeTable TimeTable { get; }
 		IVehicle Vehicle { get; }
 	}
 }
