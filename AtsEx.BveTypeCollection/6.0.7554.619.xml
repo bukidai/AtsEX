@@ -21,6 +21,7 @@
 	</BveType>
 	<BveType Wrapper="ITimePosForm" Original="aj">
 		<Method Wrapper="SetScenario" WrapperParams="IScenarioProvider" Original="a"/>
+		<Method Wrapper="Draw" WrapperParams="void" Original="d" IsOriginalPrivate="true"/>
 	</BveType>
 	<!-- Internal class wrappers END -->
 

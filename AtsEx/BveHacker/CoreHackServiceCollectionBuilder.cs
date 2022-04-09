@@ -22,6 +22,7 @@ namespace Automatic9045.AtsEx
             services.Register<ISubFormHacker>(() => new SubFormHacker(targetProcess, services));
             services.Register<ILoadErrorHacker>(() => new LoadErrorHacker(targetProcess, services));
             services.Register<IScenarioHacker>(() => new ScenarioHacker(targetProcess, services));
+            services.Register<IDiagramHacker>(() => new DiagramHacker(targetProcess, services));
 
             services.Lock();
 

@@ -82,6 +82,10 @@ namespace Automatic9045.AtsEx
             internal set => Services.GetService<IScenarioHacker>().CurrentScenarioProvider = value as ScenarioProvider;
         }
 
+
+        public void UpdateDiagram() => Services.GetService<IDiagramHacker>().Draw();
+
+
         public void Dispose()
         {
             Services.Dispose();

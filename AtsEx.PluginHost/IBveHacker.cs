@@ -112,5 +112,11 @@ namespace Automatic9045.AtsEx.PluginHost
         /// シナリオの読込中に <see cref="IScenarioProvider"/> を取得するには <see cref="ScenarioProviderCreated"/> イベントを購読してください。
         /// </summary>
         IScenarioProvider CurrentScenarioProvider { get; }
+
+
+        /// <summary>
+        /// BVE の「時刻と位置」フォームのダイヤグラムを再描画します。
+        /// </summary>
+        void UpdateDiagram();
     }
 }

@@ -82,6 +82,7 @@
     <Compile Include="BveHacker\CoreHackService.cs" />
     <Compile Include="BveHacker\CoreHackServices\ContextMenuHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\LoadErrorHacker.cs" />
+    <Compile Include="BveHacker\CoreHackServices\DiagramHacker.cs" />
     <Compile Include="ClassWrappers\Helpers\ScenarioInfoGenerator.cs" />
     <Compile Include="ClassWrappers\Internal\ChartForm.cs" />
     <Compile Include="ClassWrappers\Internal\LoadingProgressForm.cs" />
