@@ -10,7 +10,7 @@ using Automatic9045.AtsEx.PluginHost;
 
 namespace Automatic9045.AtsEx
 {
-    internal class AtsExPluginLoader
+    internal class PluginLoader
     {
         public Vehicle Vehicle { get; }
         public Route Route { get; }
@@ -19,7 +19,7 @@ namespace Automatic9045.AtsEx
 
         public AssemblyResolver AssemblyResolver { get; }
 
-        public AtsExPluginLoader(Vehicle vehicle, Route route, AssemblyResolver assemblyResolver)
+        public PluginLoader(Vehicle vehicle, Route route, AssemblyResolver assemblyResolver)
         {
             Vehicle = vehicle;
             Route = route;
@@ -36,7 +36,7 @@ namespace Automatic9045.AtsEx
                 throw new BveFileLoadException($"ATSEx プラグインリスト \"{listAbsolutePath}\" が見つかりません。");
             }
 
-            IEnumerable<AtsExPluginListLoader.RecognizedDll> dlls = AtsExPluginListLoader.LoadFrom(listAbsolutePath);
+            IEnumerable<PluginListLoader.RecognizedDll> dlls = PluginListLoader.LoadFrom(listAbsolutePath);
 
             string pluginListName = Path.GetFileName(listAbsolutePath);
             return dlls.Select(dll => Load(pluginType, dll.RelativePath, dll.AbsolutePath, pluginListName, dll.LineIndex)).SelectMany(x => x);

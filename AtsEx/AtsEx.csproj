@@ -118,8 +118,8 @@
     </Compile>
     <Compile Include="ServiceCollection.cs" />
     <Compile Include="BveHackServices\BveHackServiceCollectionBuilder.cs" />
-    <Compile Include="PluginLoader\AtsExPluginListLoader.cs" />
-    <Compile Include="PluginLoader\AtsExPluginLoader.cs" />
+    <Compile Include="PluginLoader\PluginListLoader.cs" />
+    <Compile Include="PluginLoader\PluginLoader.cs" />
     <Compile Include="AssemblyResolver.cs" />
     <Compile Include="Ats\AtsCore.cs" />
     <Compile Include="BveHackServices\BveHackService.cs" />

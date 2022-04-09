@@ -59,7 +59,7 @@ namespace Automatic9045.AtsEx
             VersionFormProvider = new VersionFormProvider();
 
             AssemblyResolver assemblyResolver = new AssemblyResolver(TargetAppDomain);
-            AtsExPluginLoader pluginLoader = new AtsExPluginLoader(Vehicle, Route, assemblyResolver);
+            PluginLoader pluginLoader = new PluginLoader(Vehicle, Route, assemblyResolver);
             try
             {
                 string vehiclePluginListPath = Path.Combine(Path.GetDirectoryName(ExecutingAssembly.Location), "atsex.pilist.txt");

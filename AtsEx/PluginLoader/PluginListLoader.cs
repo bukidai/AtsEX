@@ -10,7 +10,7 @@ using Automatic9045.AtsEx.PluginHost;
 
 namespace Automatic9045.AtsEx
 {
-    internal static class AtsExPluginListLoader
+    internal static class PluginListLoader
     {
         public static IEnumerable<RecognizedDll> LoadFrom(string absolutePath)
         {
