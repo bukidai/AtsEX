@@ -141,10 +141,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MemberNames\6.0\" />
-    <Folder Include="Updater\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\AtsEx.BveTypeCollection\AtsEx.BveTypeCollection.csproj">
       <Project>{2f0061cc-c22a-4a33-b70f-77a01c264c6e}</Project>
