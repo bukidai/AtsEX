@@ -15,7 +15,19 @@ namespace Automatic9045.AtsEx.BveTypeCollection
     {
         public static BveTypeCollectionProvider Instance { get; protected set; } = null;
 
-        public static void CreateInstance(Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
+        /// <summary>
+        /// <see cref="BveTypeCollectionProvider"/> のインスタンスを作成します。
+        /// </summary>
+        /// <param name="bveAssembly">BVE の <see cref="Assembly"/>。</param>
+        /// <param name="atsExAssembly">AtsEX 本体 (atsex.dll) の <see cref="Assembly"/>。</param>
+        /// <param name="atsExPluginHostAssembly">AtsEX プラグインホスト (atsex.pihost.dll) の <see cref="Assembly"/>。</param>
+        /// <param name="loadLatestVersionIfNotSupported">実行中の BVE がサポートされる最新のバージョンを超えている場合、サポートされる最新のバージョンのプロファイルで代用するか。</param>
+        /// <returns>使用するプロファイルが対応する BVE のバージョン。</returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        /// <exception cref="KeyNotFoundException"></exception>
+        /// <exception cref="TypeLoadException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        public static Version CreateInstance(Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly, bool loadLatestVersionIfNotSupported)
         {
             if (!(Instance is null))
             {
@@ -26,16 +38,59 @@ namespace Automatic9045.AtsEx.BveTypeCollection
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
             string defaultNamespace = typeof(BveTypeCollectionProvider).Namespace;
 
+            Version profileVersion;
             {
                 string[] resourceNames = executingAssembly.GetManifestResourceNames();
-                if (!resourceNames.Contains($"{defaultNamespace}.{bveVersion}.xml"))
+                if (resourceNames.Contains($"{defaultNamespace}.{bveVersion}.xml"))
                 {
-                    throw new NotSupportedException($"BVE バージョン {bveVersion} には対応していません。");
+                    profileVersion = bveVersion;
+                }
+                else
+                {
+                    if (loadLatestVersionIfNotSupported)
+                    {
+                        IEnumerable<Version> supportedAllVersions = resourceNames.Select(name => Version.Parse(name.Replace(".xml", "")));
+                        IEnumerable<Version> supportedVersions = supportedAllVersions.Where(version => version.Major == bveVersion.Major);
+                        if (supportedVersions.Any())
+                        {
+                            Version latestVersion = supportedVersions.Max();
+                            Version oldestVersion = supportedVersions.Min();
+                            if (bveVersion < latestVersion)
+                            {
+                                if (bveVersion < oldestVersion)
+                                {
+                                    throw new NotSupportedException($"BVE バージョン {bveVersion} には対応していません。{oldestVersion} 以降のみサポートしています。");
+                                }
+                                else
+                                {
+                                    throw new NotSupportedException($"BVE バージョン {bveVersion} は認識されていません。サポートされないバージョンであるか、不正なバージョンです。");
+                                }
+                            }
+
+                            profileVersion = latestVersion;
+                        }
+                        else
+                        {
+                            IEnumerable<Version> newerVersions = supportedAllVersions.Where(version => version.Major < bveVersion.Major);
+                            if (newerVersions.Any())
+                            {
+                                profileVersion = newerVersions.Max();
+                            }
+                            else
+                            {
+                                throw new NotSupportedException($"BVE バージョン {bveVersion} には対応していません。{supportedAllVersions.Min().Major}.x 以降のみサポートしています。");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        throw new NotSupportedException($"BVE バージョン {bveVersion} には対応していません。");
+                    }
                 }
             }
 
             IEnumerable<TypeMemberNameCollection> nameCollection;
-            using (Stream doc = executingAssembly.GetManifestResourceStream($"{defaultNamespace}.{bveVersion}.xml"))
+            using (Stream doc = executingAssembly.GetManifestResourceStream($"{defaultNamespace}.{profileVersion}.xml"))
             {
                 using (Stream schema = executingAssembly.GetManifestResourceStream($"{defaultNamespace}.BveTypesXmlSchema.xsd"))
                 {
@@ -208,6 +263,8 @@ namespace Automatic9045.AtsEx.BveTypeCollection
             });
 
             Instance = new BveTypeCollectionProvider(types);
+
+            return profileVersion;
 
 
             #region メソッド

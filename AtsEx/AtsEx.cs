@@ -39,7 +39,15 @@ namespace Automatic9045.AtsEx
             TargetAppDomain = targetAppDomain;
             TargetAssembly = targetAssembly;
 
-            BveTypeCollectionProvider.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly);
+            {
+                Version bveVersion = TargetAssembly.GetName().Version;
+                Version profileVersion = BveTypeCollectionProvider.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly, true);
+                if (profileVersion != bveVersion)
+                {
+                    BveHacker.Instance.ThrowError($"BVE バージョン {bveVersion} には対応していません。" +
+                        $"{profileVersion} 向けのプロファイルで代用しますが、{App.Instance.ProductShortName} による拡張機能は正常に動作しない可能性があります。");
+                }
+            }
 
             App.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly);
             BveHacker.CreateInstance(TargetProcess);
