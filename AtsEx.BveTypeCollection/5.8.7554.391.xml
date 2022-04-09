@@ -20,6 +20,31 @@
 	</BveType>
 	<!-- Internal class wrappers END -->
 
+	<BveType Wrapper="IAssistantText" Original="bc">
+		<Property Wrapper="Color">
+			<Getter Original="e"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Text">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+	</BveType>
+
+	<BveType Wrapper="IAssistantTextBase" Original="cu">
+		<Property Wrapper="AssistantSettings">
+			<Getter Original="h"/>
+		</Property>
+		<Property Wrapper="BackgroundColor">
+			<Getter Original="f"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="TextArea">
+			<Getter Original="g"/>
+		</Property>
+		<Method Wrapper="Draw" WrapperParams="void" Original="o"/>
+	</BveType>
+
 	<BveType Wrapper="IBveFile" Original="b5">
 		<Property Wrapper="Path">
 			<Getter Original="d"/>
@@ -287,6 +312,17 @@
 		<Property Wrapper="Signals">
 			<Getter Original="d"/>
 		</Property>
+	</BveType>
+
+	<BveType Wrapper="ITimeTable" Original="aw">
+		<Field WrapperProperty="Model" Original="j"/>
+		<Field WrapperProperty="NameTexts" Original="b"/>
+		<Field WrapperProperty="ArrivalTimeTexts" Original="c"/>
+		<Field WrapperProperty="DepertureTimeTexts" Original="d"/>
+		<Field WrapperProperty="NameTextWidths" Original="e"/>
+		<Field WrapperProperty="ArrivalTimeTextWidths" Original="f"/>
+		<Field WrapperProperty="DepertureTimeTextWidths" Original="g"/>
+		<Method Wrapper="Update" WrapperParams="void" Original="a" IsOriginalPrivate="true"/>
 	</BveType>
 
 	<BveType Wrapper="IVehicle" Original="f">
