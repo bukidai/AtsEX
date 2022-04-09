@@ -29,7 +29,7 @@ namespace Automatic9045.AtsEx.CoreHackServices
         private int AddStartIndex;
         private int AddedItemCount = 0;
 
-        public ContextMenuHacker(Process targetProcess, Assembly targetAssembly, ServiceCollection services) : base(targetProcess, targetAssembly, services)
+        public ContextMenuHacker(Process targetProcess, ServiceCollection services) : base(targetProcess, services)
         {
             Form formSource = Services.GetService<IMainFormHacker>().TargetForm;
             MainForm MainForm = new MainForm(formSource);

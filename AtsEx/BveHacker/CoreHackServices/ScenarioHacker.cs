@@ -26,7 +26,7 @@ namespace Automatic9045.AtsEx.CoreHackServices
     {
         private IMainForm MainForm;
 
-        public ScenarioHacker(Process targetProcess, Assembly targetAssembly, ServiceCollection services) : base(targetProcess, targetAssembly, services)
+        public ScenarioHacker(Process targetProcess, ServiceCollection services) : base(targetProcess, services)
         {
             Form formSrc = Services.GetService<IMainFormHacker>().TargetForm;
             MainForm = new MainForm(formSrc);

@@ -13,13 +13,11 @@ namespace Automatic9045.AtsEx
     internal class CoreHackService
     {
         protected Process TargetProcess { get; }
-        protected Assembly TargetAssembly { get; }
         protected ServiceCollection Services { get; }
 
-        public CoreHackService(Process targetProcess, Assembly targetAssembly, ServiceCollection services)
+        public CoreHackService(Process targetProcess, ServiceCollection services)
         {
             TargetProcess = targetProcess;
-            TargetAssembly = targetAssembly;
             Services = services;
         }
     }

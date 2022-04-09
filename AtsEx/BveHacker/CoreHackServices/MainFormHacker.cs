@@ -24,7 +24,7 @@ namespace Automatic9045.AtsEx.CoreHackServices
         public IntPtr TargetFormHandle { get; }
         public Type TargetFormType { get; }
 
-        public MainFormHacker(Process targetProcess, Assembly targetAssembly, ServiceCollection services) : base(targetProcess, targetAssembly, services)
+        public MainFormHacker(Process targetProcess, ServiceCollection services) : base(targetProcess, services)
         {
             TargetFormHandle = TargetProcess.MainWindowHandle;
             TargetForm = (Form)Control.FromHandle(TargetFormHandle);

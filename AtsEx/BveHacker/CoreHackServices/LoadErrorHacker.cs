@@ -23,7 +23,7 @@ namespace Automatic9045.AtsEx.CoreHackServices
     {
         private ILoadingProgressForm LoadingProgressForm;
 
-        public LoadErrorHacker(Process targetProcess, Assembly targetAssembly, ServiceCollection services) : base(targetProcess, targetAssembly, services)
+        public LoadErrorHacker(Process targetProcess, ServiceCollection services) : base(targetProcess, services)
         {
             Form formSource = services.GetService<ISubFormHacker>().LoadingProgressForm;
             LoadingProgressForm = new LoadingProgressForm(formSource);

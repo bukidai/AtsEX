@@ -32,7 +32,7 @@ namespace Automatic9045.AtsEx.CoreHackServices
         public Form TimePosForm { get; }
         public Form ChartForm { get; }
 
-        public SubFormHacker(Process targetProcess, Assembly targetAssembly, ServiceCollection services) : base(targetProcess, targetAssembly, services)
+        public SubFormHacker(Process targetProcess, ServiceCollection services) : base(targetProcess, services)
         {
             Form mainFormSrc = Services.GetService<IMainFormHacker>().TargetForm;
             MainForm mainForm = new MainForm(mainFormSrc);

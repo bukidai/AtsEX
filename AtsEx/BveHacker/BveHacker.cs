@@ -34,7 +34,7 @@ namespace Automatic9045.AtsEx
             Process = targetProcess;
             Assembly = App.Instance.BveAssembly;
 
-            Services = CoreHackServiceCollectionBuilder.Build(targetProcess, App.Instance.BveAssembly);
+            Services = CoreHackServiceCollectionBuilder.Build(targetProcess);
 
 
             ScenarioHacker.ScenarioProviderCreated += e => ScenarioProviderCreated?.Invoke(e);
