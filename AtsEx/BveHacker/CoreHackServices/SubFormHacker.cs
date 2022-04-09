@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Automatic9045.AtsEx.ClassWrappers;
+
 namespace Automatic9045.AtsEx.CoreHackServices
 {
     /// <summary>
@@ -32,19 +34,14 @@ namespace Automatic9045.AtsEx.CoreHackServices
 
         public SubFormHacker(Process targetProcess, Assembly targetAssembly, ServiceCollection services) : base(targetProcess, targetAssembly, services)
         {
-            ScenarioSelectForm = FindFormFromField("c");
-            LoadingProgressForm = FindFormFromField("k");
+            Form mainFormSrc = Services.GetService<IMainFormHacker>().TargetForm;
+            MainForm mainForm = new MainForm(mainFormSrc);
 
-            TimePosForm = FindFormFromField("d");
-            ChartForm = FindFormFromField("e");
-        }
+            ScenarioSelectForm = mainForm.ScenarioSelectForm;
+            LoadingProgressForm = mainForm.LoadingProgressForm;
 
-        private Form FindFormFromField(string fieldName)
-        {
-            FieldInfo fieldInfo = Services.GetService<IMainFormHacker>().TargetFormType.GetField(fieldName, BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Instance);
-            Form form = (Form)fieldInfo.GetValue(Services.GetService<IMainFormHacker>().TargetForm);
-
-            return form;
+            TimePosForm = mainForm.TimePosForm;
+            ChartForm = mainForm.ChartForm;
         }
     }
 }

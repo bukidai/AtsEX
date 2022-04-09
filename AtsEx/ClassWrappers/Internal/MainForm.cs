@@ -14,6 +14,11 @@ namespace Automatic9045.AtsEx.ClassWrappers
 {
     internal interface IMainForm : IClassWrapper
     {
+        Form ScenarioSelectForm { get; }
+        Form LoadingProgressForm { get; }
+        Form TimePosForm { get; }
+        Form ChartForm { get; }
+
         ContextMenuStrip ContextMenu { get; set; }
 
         IScenarioInfo CurrentScenarioInfo { get; set; }
@@ -30,7 +35,37 @@ namespace Automatic9045.AtsEx.ClassWrappers
 
             CurrentScenarioInfoField = members.GetSourceFieldOf(nameof(CurrentScenarioInfo));
             CurrentScenarioProviderField = members.GetSourceFieldOf(nameof(CurrentScenarioProvider));
+
+            ScenarioSelectFormField = members.GetSourceFieldOf(nameof(ScenarioSelectForm));
+            LoadingProgressFormField = members.GetSourceFieldOf(nameof(LoadingProgressForm));
+            TimePosFormField = members.GetSourceFieldOf(nameof(TimePosForm));
+            ChartFormField = members.GetSourceFieldOf(nameof(ChartForm));
         }
+
+        private FieldInfo ScenarioSelectFormField;
+        public Form ScenarioSelectForm
+        {
+            get => ScenarioSelectFormField.GetValue(Src);
+        }
+
+        private FieldInfo LoadingProgressFormField;
+        public Form LoadingProgressForm
+        {
+            get => LoadingProgressFormField.GetValue(Src);
+        }
+
+        private FieldInfo TimePosFormField;
+        public Form TimePosForm
+        {
+            get => TimePosFormField.GetValue(Src);
+        }
+
+        private FieldInfo ChartFormField;
+        public Form ChartForm
+        {
+            get => ChartFormField.GetValue(Src);
+        }
+
 
         private FieldInfo ContextMenuField;
         public ContextMenuStrip ContextMenu

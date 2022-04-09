@@ -9,6 +9,10 @@
 		<Method Wrapper="ThrowErrors" WrapperParams="System.Collections.Generic.IEnumerable`1[ILoadError]" Original="a"/>
 	</BveType>
 	<BveType Wrapper="IMainForm" Original="bz">
+		<Field WrapperProperty="ScenarioSelectForm" Original="c" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="LoadingProgressForm" Original="k" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="TimePosForm" Original="d" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="ChartForm" Original="e" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="ContextMenu" Original="y" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="CurrentScenarioInfo" Original="q" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="CurrentScenarioProvider" Original="n" IsOriginalPrivate="true"/>
@@ -44,7 +48,7 @@
 		</Property>
 		<Method Wrapper="Draw" WrapperParams="void" Original="o"/>
 	</BveType>
-
+	
 	<BveType Wrapper="IBveFile" Original="b5">
 		<Property Wrapper="Path">
 			<Getter Original="d"/>
@@ -186,7 +190,7 @@
 			<Getter Original="l"/>
 			<Setter Original="a"/>
 		</Property>
-
+		
 		<Method Wrapper="FromFile" WrapperParams="System.String" Original="a" IsWrapperStatic="true" StaticWrapperContainer="IScenarioInfoGenerator" IsOriginalStatic="true"/>
 	</BveType>
 
