@@ -39,6 +39,8 @@ namespace Automatic9045.VehiclePlugins.StateViewer
         protected Label DisplaySpeedKey;
         protected Label DisplaySpeedValue;
 
+        protected Button RemoveLastStationButton;
+
         protected void InitializeComponent()
         {
             MaximizeBox = false;
@@ -220,6 +222,16 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             };
             DisplaySpeedValue.KeyDown += OnKeyDown;
             Controls.Add(DisplaySpeedValue);
+
+            RemoveLastStationButton = new Button()
+            {
+                Left = 16,
+                Top = 304,
+                Width = 80,
+                Text = "駅を減らす",
+            };
+            RemoveLastStationButton.Click += OnButtonClicked;
+            Controls.Add(RemoveLastStationButton);
         }
     }
 }

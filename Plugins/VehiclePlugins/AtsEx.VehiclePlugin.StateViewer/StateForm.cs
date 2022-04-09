@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.VehiclePlugins.StateViewer
 {
@@ -15,10 +16,10 @@ namespace Automatic9045.VehiclePlugins.StateViewer
         private IApp App;
         private IBveHacker BveHacker;
 
-        private IVehicle Vehicle;
-        private IRoute Route;
+        private AtsEx.PluginHost.IVehicle Vehicle;
+        private AtsEx.PluginHost.IRoute Route;
 
-        public StateForm(IApp app, IBveHacker bveHacker, IVehicle vehicle, IRoute route)
+        public StateForm(IApp app, IBveHacker bveHacker, AtsEx.PluginHost.IVehicle vehicle, AtsEx.PluginHost.IRoute route)
         {
             App = app;
             BveHacker = bveHacker;
@@ -65,6 +66,36 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                     }
                 }
             }
+        }
+
+        private void OnButtonClicked(object sender, EventArgs e)
+        {
+            IStationList stations = BveHacker.CurrentScenarioProvider.Route.Stations;
+            if (stations.Count == 0) return;
+            stations.RemoveAt(stations.Count - 1);
+
+            if (stations.Count == 0)
+            {
+                RemoveLastStationButton.Enabled = false;
+            }
+            else
+            {
+                IStation lastStation = stations.Last() as IStation;
+                lastStation.DepertureTime = int.MaxValue; // 終点の発車時刻は int.MaxValue に設定する
+                lastStation.Pass = false;
+                lastStation.IsTerminal = true;
+            }
+
+            ITimeTable timeTable = BveHacker.CurrentScenarioProvider.TimeTable;
+            timeTable.NameTexts = new string[stations.Count + 1];
+            timeTable.NameTextWidths = new int[stations.Count + 1];
+            timeTable.ArrivalTimeTexts = new string[stations.Count + 1];
+            timeTable.ArrivalTimeTextWidths = new int[stations.Count + 1];
+            timeTable.DepertureTimeTexts = new string[stations.Count + 1];
+            timeTable.DepertureTimeTextWidths = new int[stations.Count + 1];
+            timeTable.Update();
+
+            BveHacker.UpdateDiagram();
         }
 
         private void Elapse(EventArgs e)
