@@ -322,13 +322,13 @@
 	</BveType>
 
 	<BveType Wrapper="ITimeTable" Original="aw">
-		<Field WrapperProperty="Model" Original="j"/>
-		<Field WrapperProperty="NameTexts" Original="b"/>
-		<Field WrapperProperty="ArrivalTimeTexts" Original="c"/>
-		<Field WrapperProperty="DepertureTimeTexts" Original="d"/>
-		<Field WrapperProperty="NameTextWidths" Original="e"/>
-		<Field WrapperProperty="ArrivalTimeTextWidths" Original="f"/>
-		<Field WrapperProperty="DepertureTimeTextWidths" Original="g"/>
+		<Field WrapperProperty="Model" Original="j" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="NameTexts" Original="b" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="ArrivalTimeTexts" Original="c" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="DepertureTimeTexts" Original="d" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="NameTextWidths" Original="e" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="ArrivalTimeTextWidths" Original="f" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="DepertureTimeTextWidths" Original="g" IsOriginalPrivate="true"/>
 		<Method Wrapper="Update" WrapperParams="void" Original="a" IsOriginalPrivate="true"/>
 	</BveType>
 
