@@ -68,7 +68,11 @@ namespace Automatic9045.AtsEx
                 }
 
                 {
-                    MapPlugins = new List<AtsExPluginInfo>();
+                    MapLoader mapLoader = new MapLoader(pluginLoader);
+                    mapLoader.Load();
+                    MapPlugins = mapLoader.LoadedPlugins;
+
+                    // TODO: NOMPI、MPIUSINGのエラーの除去
                 }
             }
             catch (BveFileLoadException ex)

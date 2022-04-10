@@ -109,6 +109,7 @@
     <Compile Include="ClassWrappers\Public\Route.cs" />
     <Compile Include="ClassWrappers\Public\ScenarioProvider.cs" />
     <Compile Include="ClassWrappers\Extensions\WrappedSortedList.cs" />
+    <Compile Include="MapLoader\MapLoader.cs" />
     <Compile Include="VersionForm\VersionFormProvider.cs" />
     <Compile Include="VersionForm\VersionForm.gui.cs">
       <SubType>Form</SubType>
