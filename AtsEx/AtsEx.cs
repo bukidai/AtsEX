@@ -62,9 +62,14 @@ namespace Automatic9045.AtsEx
             PluginLoader pluginLoader = new PluginLoader(Vehicle, Route, assemblyResolver);
             try
             {
-                string vehiclePluginListPath = Path.Combine(Path.GetDirectoryName(ExecutingAssembly.Location), "atsex.pilist.txt");
-                VehiclePlugins = pluginLoader.LoadFromList(PluginType.VehiclePlugin, vehiclePluginListPath).ToList();
-                App.Instance.VehiclePlugins = VehiclePlugins;
+                {
+                    string vehiclePluginListPath = Path.Combine(Path.GetDirectoryName(ExecutingAssembly.Location), "atsex.pilist.txt");
+                    VehiclePlugins = pluginLoader.LoadFromList(PluginType.VehiclePlugin, vehiclePluginListPath).ToList();
+                }
+
+                {
+                    MapPlugins = new List<AtsExPluginInfo>();
+                }
             }
             catch (BveFileLoadException ex)
             {
@@ -75,9 +80,14 @@ namespace Automatic9045.AtsEx
                 BveHacker.Instance.ThrowError(ex.Message);
                 MessageBox.Show(ex.ToString(), $"ハンドルされていない例外 - {App.Instance.ProductShortName}");
             }
+            finally
+            {
+                if (VehiclePlugins is null) VehiclePlugins = new List<AtsExPluginInfo>();
+                if (MapPlugins is null) MapPlugins = new List<AtsExPluginInfo>();
 
-            MapPlugins = new List<AtsExPluginInfo>();
-            App.Instance.MapPlugins = MapPlugins;
+                App.Instance.VehiclePlugins = VehiclePlugins;
+                App.Instance.MapPlugins = MapPlugins;
+            }
         }
 
         public void Dispose()
