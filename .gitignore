@@ -4,7 +4,7 @@ bin
 obj
 /DllExport.bat
 /packages
-/_DummyTrain/Ats/*.dll
-/_DummyTrain/Ats/*.pdb
-/_DummyTrain/Ats/AtsEXPlugins/*.dll
-/_DummyTrain/Ats/AtsEXPlugins/*.pdb
+/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/*.dll
+/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/*.pdb
+/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/AtsEXPlugins/*.dll
+/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/AtsEXPlugins/*.pdb

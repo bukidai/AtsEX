@@ -61,6 +61,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(TargetDir)" "$(SolutionDir)_DummyTrain\Ats\AtsEXPlugins\"</PostBuildEvent>
+    <PostBuildEvent>copy /y "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\Trains\AtsExSampleTrain\Ats\AtsEXPlugins\"</PostBuildEvent>
   </PropertyGroup>
 </Project>
