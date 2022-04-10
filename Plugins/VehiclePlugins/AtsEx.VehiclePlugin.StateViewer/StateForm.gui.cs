@@ -41,13 +41,11 @@ namespace Automatic9045.VehiclePlugins.StateViewer
         protected Label DisplaySpeedKey;
         protected Label DisplaySpeedValue;
 
-        protected Button RemoveLastStationButton;
-
         protected void InitializeComponent()
         {
             MaximizeBox = false;
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(800, 600);
+            ClientSize = new Size(480, 320);
             Font = new Font("Yu Gothic UI", 9);
             Text = "AtsEX 車両プラグイン 状態取得・設定サンプル";
 
@@ -224,16 +222,6 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             };
             DisplaySpeedValue.KeyDown += OnKeyDown;
             Controls.Add(DisplaySpeedValue);
-
-            RemoveLastStationButton = new Button()
-            {
-                Left = 16,
-                Top = 304,
-                Width = 80,
-                Text = "駅を減らす",
-            };
-            RemoveLastStationButton.Click += OnButtonClicked;
-            Controls.Add(RemoveLastStationButton);
         }
     }
 }

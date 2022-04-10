@@ -56,36 +56,6 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             }
         }
 
-        private void OnButtonClicked(object sender, EventArgs e)
-        {
-            IStationList stations = AtsExPlugin.BveHacker.CurrentScenarioProvider.Route.Stations;
-            if (stations.Count == 0) return;
-            stations.RemoveAt(stations.Count - 1);
-
-            if (stations.Count == 0)
-            {
-                RemoveLastStationButton.Enabled = false;
-            }
-            else
-            {
-                IStation lastStation = stations.Last() as IStation;
-                lastStation.DepertureTime = int.MaxValue; // 終点の発車時刻は int.MaxValue に設定する
-                lastStation.Pass = false;
-                lastStation.IsTerminal = true;
-            }
-
-            ITimeTable timeTable = AtsExPlugin.BveHacker.CurrentScenarioProvider.TimeTable;
-            timeTable.NameTexts = new string[stations.Count + 1];
-            timeTable.NameTextWidths = new int[stations.Count + 1];
-            timeTable.ArrivalTimeTexts = new string[stations.Count + 1];
-            timeTable.ArrivalTimeTextWidths = new int[stations.Count + 1];
-            timeTable.DepertureTimeTexts = new string[stations.Count + 1];
-            timeTable.DepertureTimeTextWidths = new int[stations.Count + 1];
-            timeTable.Update();
-
-            AtsExPlugin.BveHacker.UpdateDiagram();
-        }
-
         private void Elapse(EventArgs e)
         {
             if (!TimeValue.Focused) TimeValue.Text = AtsExPlugin.Route.Time.ToString("HH:mm:ss");
