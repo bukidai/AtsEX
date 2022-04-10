@@ -93,7 +93,6 @@
     <Compile Include="IBveHacker.cs" />
     <Compile Include="AtsExPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IHostServiceCollection.cs" />
     <Compile Include="HostServiceCollection.cs" />
     <Compile Include="ClassWrapperInterfaces\Extensions\IWrappedSortedList.cs" />
   </ItemGroup>

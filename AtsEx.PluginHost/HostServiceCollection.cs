@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost
 {
-    public class HostServiceCollection : IHostServiceCollection
+    public class HostServiceCollection
     {
         internal IApp App { get; }
         internal IBveHacker BveHacker { get; }

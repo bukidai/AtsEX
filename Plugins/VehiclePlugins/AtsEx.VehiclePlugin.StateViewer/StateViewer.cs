@@ -14,7 +14,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
         private StateForm Form;
         private ToolStripMenuItem MenuItem;
 
-        public StateViewer(IHostServiceCollection services) : base(services)
+        public StateViewer() : base()
         {
             MenuItem = BveHacker.AddCheckableMenuItemToContextMenu("状態ウィンドウを表示", MenuItemCheckedChanged);
 
@@ -27,7 +27,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
 
             MenuItem.Checked = false;
 
-            Form = new StateForm(App, BveHacker, Vehicle, Route);
+            Form = new StateForm();
             Form.FormClosing += FormClosing;
             Form.WindowState = FormWindowState.Normal;
 

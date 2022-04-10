@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Automatic9045.AtsEx.PluginHost;
+
 namespace Automatic9045.VehiclePlugins.StateViewer
 {
     public partial class StateForm : Form
@@ -64,7 +66,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                 Left = 112,
                 Top = 16,
                 Width = 160,
-                Text = BveHacker.CurrentScenarioInfo.Path,
+                Text = AtsExPlugin.BveHacker.CurrentScenarioInfo.Path,
             };
             Controls.Add(ScenarioPathValue);
 
@@ -83,7 +85,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                 Left = 112,
                 Top = 48,
                 Width = 560,
-                Text = BveHacker.CurrentScenarioInfo.VehicleFiles.SelectedFile.Path,
+                Text = AtsExPlugin.BveHacker.CurrentScenarioInfo.VehicleFiles.SelectedFile.Path,
             };
             Controls.Add(VehiclePathValue);
 
@@ -102,7 +104,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                 Left = 112,
                 Top = 80,
                 Width = 560,
-                Text = BveHacker.CurrentScenarioInfo.VehicleTitle,
+                Text = AtsExPlugin.BveHacker.CurrentScenarioInfo.VehicleTitle,
             };
             Controls.Add(VehicleTitleValue);
 
@@ -121,7 +123,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                 Left = 112,
                 Top = 112,
                 Width = 560,
-                Text = BveHacker.CurrentScenarioInfo.RouteFiles.SelectedFile.Path,
+                Text = AtsExPlugin.BveHacker.CurrentScenarioInfo.RouteFiles.SelectedFile.Path,
             };
             Controls.Add(RoutePathValue);
 
@@ -140,7 +142,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                 Left = 112,
                 Top = 144,
                 Width = 560,
-                Text = BveHacker.CurrentScenarioInfo.RouteTitle,
+                Text = AtsExPlugin.BveHacker.CurrentScenarioInfo.RouteTitle,
             };
             Controls.Add(RouteTitleValue);
 
