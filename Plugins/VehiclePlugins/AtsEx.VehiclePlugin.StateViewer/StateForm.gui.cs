@@ -45,7 +45,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
         {
             MaximizeBox = false;
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(480, 320);
+            ClientSize = new Size(640, 352);
             Font = new Font("Yu Gothic UI", 9);
             Text = "AtsEX 車両プラグイン 状態取得・設定サンプル";
 
@@ -63,8 +63,9 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             {
                 Left = 112,
                 Top = 16,
-                Width = 160,
+                Width = 432,
                 Text = AtsExPlugin.BveHacker.CurrentScenarioInfo.Path,
+                AutoEllipsis = true,
             };
             Controls.Add(ScenarioPathValue);
 
@@ -82,8 +83,11 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             {
                 Left = 112,
                 Top = 48,
-                Width = 560,
+                Width = 432,
+                Height = 32,
+                AutoSize = false,
                 Text = AtsExPlugin.BveHacker.CurrentScenarioInfo.VehicleFiles.SelectedFile.Path,
+                AutoEllipsis = true,
             };
             Controls.Add(VehiclePathValue);
 
@@ -91,7 +95,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             VehicleTitleKey = new Label()
             {
                 Left = 16,
-                Top = 80,
+                Top = 96,
                 Width = 80,
                 Text = "車両名",
             };
@@ -100,9 +104,10 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             VehicleTitleValue = new Label()
             {
                 Left = 112,
-                Top = 80,
-                Width = 560,
+                Top = 96,
+                Width = 432,
                 Text = AtsExPlugin.BveHacker.CurrentScenarioInfo.VehicleTitle,
+                AutoEllipsis = true,
             };
             Controls.Add(VehicleTitleValue);
 
@@ -110,7 +115,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             RoutePathKey = new Label()
             {
                 Left = 16,
-                Top = 112,
+                Top = 128,
                 Width = 80,
                 Text = "ﾏｯﾌﾟﾌｧｲﾙﾊﾟｽ",
             };
@@ -119,9 +124,12 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             RoutePathValue = new Label()
             {
                 Left = 112,
-                Top = 112,
-                Width = 560,
+                Top = 128,
+                Width = 432,
+                Height = 36,
+                AutoSize = false,
                 Text = AtsExPlugin.BveHacker.CurrentScenarioInfo.RouteFiles.SelectedFile.Path,
+                AutoEllipsis = true,
             };
             Controls.Add(RoutePathValue);
 
@@ -129,7 +137,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             RouteTitleKey = new Label()
             {
                 Left = 16,
-                Top = 144,
+                Top = 176,
                 Width = 80,
                 Text = "路線名",
             };
@@ -138,9 +146,10 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             RouteTitleValue = new Label()
             {
                 Left = 112,
-                Top = 144,
-                Width = 560,
+                Top = 176,
+                Width = 432,
                 Text = AtsExPlugin.BveHacker.CurrentScenarioInfo.RouteTitle,
+                AutoEllipsis = true,
             };
             Controls.Add(RouteTitleValue);
 
@@ -148,7 +157,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             TimeKey = new Label()
             {
                 Left = 16,
-                Top = 176,
+                Top = 208,
                 Width = 80,
                 Text = "時刻",
             };
@@ -158,7 +167,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             {
                 Name = nameof(TimeValue),
                 Left = 112,
-                Top = 176 - 2,
+                Top = 208 - 2,
                 Width = 160,
             };
             TimeValue.KeyDown += OnKeyDown;
@@ -168,7 +177,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             LocationKey = new Label()
             {
                 Left = 16,
-                Top = 208,
+                Top = 240,
                 Width = 80,
                 Text = "位置",
             };
@@ -178,7 +187,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             {
                 Name = nameof(LocationValue),
                 Left = 112,
-                Top = 208 - 2,
+                Top = 240 - 2,
                 Width = 160,
             };
             LocationValue.KeyDown += OnKeyDown;
@@ -188,7 +197,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             SpeedKey = new Label()
             {
                 Left = 16,
-                Top = 240,
+                Top = 272,
                 Width = 80,
                 Text = "速度",
             };
@@ -198,7 +207,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             {
                 Name = nameof(SpeedValue),
                 Left = 112,
-                Top = 240 - 2,
+                Top = 272 - 2,
                 Width = 160,
             };
             SpeedValue.KeyDown += OnKeyDown;
@@ -208,7 +217,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             DisplaySpeedKey = new Label()
             {
                 Left = 16,
-                Top = 272,
+                Top = 304,
                 Width = 80,
                 Text = "表示速度",
             };
@@ -217,7 +226,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             DisplaySpeedValue = new Label()
             {
                 Left = 112,
-                Top = 272,
+                Top = 304,
                 Width = 160,
             };
             DisplaySpeedValue.KeyDown += OnKeyDown;
