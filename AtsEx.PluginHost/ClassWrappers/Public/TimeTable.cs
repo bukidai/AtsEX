@@ -27,9 +27,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             UpdateMethod = members.GetSourceMethodOf(nameof(Update));
         }
 
-        public TimeTable(object src) : base(src)
+        protected TimeTable(object src) : base(src)
         {
-		}
+        }
+
+        public static new TimeTable FromSource(object src) => new TimeTable(src);
 
         protected static FieldInfo ModelField;
         public Model Model

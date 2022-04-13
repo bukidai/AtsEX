@@ -28,9 +28,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             SignalsGetMethod = members.GetSourcePropertyGetterOf(nameof(Signals));
         }
 
-        public StructureSet(object src) : base(src)
+        private StructureSet(object src) : base(src)
         {
         }
+
+        public static StructureSet FromSource(object src) => new StructureSet(src);
 
         private static MethodInfo DrawLimitLocationGetMethod;
         private static MethodInfo DrawLimitLocationSetMethod;
@@ -41,7 +43,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static MethodInfo RepeatedGetMethod;
-        private static readonly Func<object, MapObjectList> RepeatedParserToWrapper = src => src is null ? null : new MapObjectList(src);
+        private static readonly Func<object, MapObjectList> RepeatedParserToWrapper = src => src is null ? null : MapObjectList.FromSource(src);
         public WrappedSortedList<string, MapObjectList> Repeated
         {
             get
@@ -54,19 +56,19 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         private static MethodInfo PutGetMethod;
         public SingleStructureList Put
         {
-            get => new SingleStructureList(PutGetMethod.Invoke(Src, null));
+            get => SingleStructureList.FromSource(PutGetMethod.Invoke(Src, null));
         }
 
         private static MethodInfo PutBetweenGetMethod;
         public SingleStructureList PutBetween
         {
-            get => new SingleStructureList(PutBetweenGetMethod.Invoke(Src, null));
+            get => SingleStructureList.FromSource(PutBetweenGetMethod.Invoke(Src, null));
         }
 
         private static MethodInfo SignalsGetMethod;
         public SingleStructureList Signals
         {
-            get => new SingleStructureList(SignalsGetMethod.Invoke(Src, null));
+            get => SingleStructureList.FromSource(SignalsGetMethod.Invoke(Src, null));
         }
     }
 }

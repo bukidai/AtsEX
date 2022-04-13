@@ -20,9 +20,11 @@ namespace Automatic9045.AtsEx
             DrawMethod = members.GetSourceMethodOf(nameof(TimePosForm.Draw));
         }
 
-        public TimePosForm(object src) : base(src)
+        private TimePosForm(object src) : base(src)
         {
         }
+
+        public static TimePosForm FromSource(object src) => new TimePosForm(src);
 
         public void SetScenario(ScenarioProvider scenarioProvider) => throw new NotImplementedException();
 

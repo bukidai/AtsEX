@@ -11,7 +11,7 @@ using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx
 {
-    internal class MainForm : ClassWrapper
+    internal sealed class MainForm : ClassWrapper
     {
         static MainForm()
         {
@@ -28,9 +28,11 @@ namespace Automatic9045.AtsEx
             ChartFormField = members.GetSourceFieldOf(nameof(ChartForm));
         }
 
-        public MainForm(object src) : base(src)
+        private MainForm(object src) : base(src)
         {
         }
+
+        public static MainForm FromSource(object src) => new MainForm(src);
 
         private static FieldInfo ScenarioSelectFormField;
         public Form ScenarioSelectForm
@@ -68,14 +70,14 @@ namespace Automatic9045.AtsEx
         private static FieldInfo CurrentScenarioInfoField;
         public ScenarioInfo CurrentScenarioInfo
         {
-            get => new ScenarioInfo(CurrentScenarioInfoField.GetValue(Src));
+            get => ScenarioInfo.FromSource(CurrentScenarioInfoField.GetValue(Src));
             set => CurrentScenarioInfoField.SetValue(Src, value);
         }
 
         private static FieldInfo CurrentScenarioProviderField;
         public ScenarioProvider CurrentScenarioProvider
         {
-            get => new ScenarioProvider(CurrentScenarioProviderField.GetValue(Src));
+            get => ScenarioProvider.FromSource(CurrentScenarioProviderField.GetValue(Src));
             set => CurrentScenarioProviderField.SetValue(Src, value);
         }
     }

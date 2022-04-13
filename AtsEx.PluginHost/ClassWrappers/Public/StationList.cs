@@ -19,9 +19,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             GetStandardTimeMethod = members.GetSourceMethodOf(nameof(GetStandardTime));
         }
 
-        public StationList(object src) : base(src)
+        private StationList(object src) : base(src)
         {
         }
+
+        public static new StationList FromSource(object src) => new StationList(src);
 
         private static MethodInfo InsertMethod;
         public void Insert(Station item) => InsertMethod.Invoke(Src, new object[] { item.Src });

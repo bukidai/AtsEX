@@ -33,7 +33,7 @@ namespace Automatic9045.AtsEx.CoreHackServices
         public SubFormHacker(Process targetProcess, ServiceCollection services) : base(targetProcess, services)
         {
             Form mainFormSrc = Services.GetService<IMainFormHacker>().TargetForm;
-            MainForm mainForm = new MainForm(mainFormSrc);
+            MainForm mainForm = MainForm.FromSource(mainFormSrc);
 
             ScenarioSelectForm = mainForm.ScenarioSelectForm;
             LoadingProgressForm = mainForm.LoadingProgressForm;

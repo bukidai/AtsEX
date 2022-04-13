@@ -21,9 +21,11 @@ namespace Automatic9045.AtsEx
             ThrowErrorsMethod = members.GetSourceMethodOf(nameof(ThrowErrors), new Type[] { typeof(IEnumerable<LoadError>) });
         }
 
-        public LoadingProgressForm(object src) : base(src)
+        private LoadingProgressForm(object src) : base(src)
         {
         }
+
+        public static LoadingProgressForm FromSource(object src) => new LoadingProgressForm(src);
 
         private static MethodInfo ThrowErrorMethod1;
         public void ThrowError(string text, string senderFileName, int lineIndex, int charIndex)

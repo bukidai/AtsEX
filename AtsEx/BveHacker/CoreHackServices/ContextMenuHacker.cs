@@ -32,7 +32,7 @@ namespace Automatic9045.AtsEx.CoreHackServices
         public ContextMenuHacker(Process targetProcess, ServiceCollection services) : base(targetProcess, services)
         {
             Form formSource = Services.GetService<IMainFormHacker>().TargetForm;
-            MainForm MainForm = new MainForm(formSource);
+            MainForm MainForm = MainForm.FromSource(formSource);
 
             ContextMenuItems = MainForm.ContextMenu.Items;
 

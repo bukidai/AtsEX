@@ -28,9 +28,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             DrawMethod = members.GetSourceMethodOf(nameof(Draw));
         }
 
-        public AssistantTextBase(object src) : base(src)
+        protected AssistantTextBase(object src) : base(src)
         {
         }
+
+        public static AssistantTextBase FromSource(object src) => new AssistantTextBase(src);
 
         protected static MethodInfo AssistantSettingsGetMethod;
         public AssistantSettings AssistantSettings

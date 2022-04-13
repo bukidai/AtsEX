@@ -20,9 +20,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             PathSetMethod = members.GetSourcePropertySetterOf(nameof(Path));
         }
 
-        public BveFile(object src) : base(src)
+        protected BveFile(object src) : base(src)
         {
         }
+
+        public static BveFile FromSource(object src) => new BveFile(src);
 
         private static MethodInfo PathGetMethod;
         private static MethodInfo PathSetMethod;

@@ -27,7 +27,7 @@ namespace Automatic9045.AtsEx.CoreHackServices
         public DiagramHacker(Process targetProcess, ServiceCollection services) : base(targetProcess, services)
         {
             Form formSrc = services.GetService<ISubFormHacker>().TimePosForm;
-            TimePosForm = new TimePosForm(formSrc);
+            TimePosForm = TimePosForm.FromSource(formSrc);
         }
 
         public void Draw() => TimePosForm.Draw();

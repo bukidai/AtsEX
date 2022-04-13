@@ -19,9 +19,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             LocationSetMethod = members.GetSourcePropertySetterOf(nameof(Location));
         }
 
-        public MapObjectBase(object src) : base(src)
+        protected MapObjectBase(object src) : base(src)
         {
         }
+
+        public static MapObjectBase FromSource(object src) => new MapObjectBase(src);
 
         private static MethodInfo LocationGetMethod;
         private static MethodInfo LocationSetMethod;

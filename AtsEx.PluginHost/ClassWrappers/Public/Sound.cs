@@ -16,8 +16,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<Sound>();
         }
 
-        public Sound(object src) : base(src)
+        private Sound(object src) : base(src)
         {
         }
+
+        public static Sound FromSource(object src) => new Sound(src);
     }
 }

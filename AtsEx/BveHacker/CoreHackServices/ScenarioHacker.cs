@@ -28,7 +28,7 @@ namespace Automatic9045.AtsEx.CoreHackServices
         public ScenarioHacker(Process targetProcess, ServiceCollection services) : base(targetProcess, services)
         {
             Form formSrc = Services.GetService<IMainFormHacker>().TargetForm;
-            MainForm = new MainForm(formSrc);
+            MainForm = MainForm.FromSource(formSrc);
 
 
             BveTypeMemberCollection timePosFormMembers = BveTypeCollectionProvider.Instance.GetTypeInfoOf<TimePosForm>();
@@ -54,7 +54,7 @@ namespace Automatic9045.AtsEx.CoreHackServices
 
         private static void SetScenarioPreFix(object[] __args)
         {
-            ScenarioProvider scenarioProvider = new ScenarioProvider(__args[0]);
+            ScenarioProvider scenarioProvider = ScenarioProvider.FromSource(__args[0]);
             ScenarioProviderCreated?.Invoke(scenarioProvider);
         }
     }

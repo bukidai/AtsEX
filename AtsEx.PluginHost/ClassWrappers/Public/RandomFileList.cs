@@ -20,15 +20,17 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             SelectedFileSetMethod = members.GetSourcePropertySetterOf(nameof(SelectedFile));
         }
 
-        public RandomFileList(object src) : base(src)
+        private RandomFileList(object src) : base(src)
         {
         }
+
+        public static RandomFileList FromSource(object src) => new RandomFileList(src);
 
         private static MethodInfo SelectedFileGetMethod;
         private static MethodInfo SelectedFileSetMethod;
         public BveFile SelectedFile
         {
-            get => new BveFile(SelectedFileGetMethod.Invoke(Src, null));
+            get => BveFile.FromSource(SelectedFileGetMethod.Invoke(Src, null));
             set => SelectedFileGetMethod.Invoke(Src, new object[] { value.Src });
         }
 

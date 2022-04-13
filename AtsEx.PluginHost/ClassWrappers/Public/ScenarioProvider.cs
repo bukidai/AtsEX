@@ -20,26 +20,28 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             TimeTableGetMethod = members.GetSourcePropertyGetterOf(nameof(TimeTable));
         }
 
-        public ScenarioProvider(object src) : base(src)
+        private ScenarioProvider(object src) : base(src)
         {
         }
+
+        public static ScenarioProvider FromSource(object src) => new ScenarioProvider(src);
 
         private static MethodInfo RouteGetMethod;
         public Route Route
         {
-            get => new Route(RouteGetMethod.Invoke(Src, null));
+            get => ClassWrappers.Route.FromSource(RouteGetMethod.Invoke(Src, null));
         }
 
         private static MethodInfo VehicleGetMethod;
         public Vehicle Vehicle
         {
-            get => new Vehicle(VehicleGetMethod.Invoke(Src, null));
+            get => ClassWrappers.Vehicle.FromSource(VehicleGetMethod.Invoke(Src, null));
         }
 
         private static MethodInfo TimeTableGetMethod;
         public TimeTable TimeTable
         {
-            get => new TimeTable(TimeTableGetMethod.Invoke(Src, null));
+            get => ClassWrappers.TimeTable.FromSource(TimeTableGetMethod.Invoke(Src, null));
         }
     }
 }

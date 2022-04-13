@@ -55,9 +55,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             ScenarioFileLoadErrorsSetMethod = members.GetSourcePropertySetterOf(nameof(ScenarioFileLoadErrors));
         }
 
-        public ScenarioInfo(object src) : base(src)
+        protected ScenarioInfo(object src) : base(src)
         {
         }
+
+        public static ScenarioInfo FromSource(object src) => new ScenarioInfo(src);
 
         private static MethodInfo FromFileMethod;
         public static ScenarioInfo FromFile(string path)
@@ -126,7 +128,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         private static MethodInfo RouteFilesSetMethod;
         public RandomFileList RouteFiles
         {
-            get => new RandomFileList(RouteFilesGetMethod.Invoke(Src, null));
+            get => RandomFileList.FromSource(RouteFilesGetMethod.Invoke(Src, null));
             internal set => RouteFilesSetMethod.Invoke(Src, new object[] { value.Src } );
         }
 
@@ -134,7 +136,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         private static MethodInfo VehicleFilesSetMethod;
         public RandomFileList VehicleFiles
         {
-            get => new RandomFileList(VehicleFilesGetMethod.Invoke(Src, null));
+            get => RandomFileList.FromSource(VehicleFilesGetMethod.Invoke(Src, null));
             internal set => VehicleFilesSetMethod.Invoke(Src, new object[] { value.Src } );
         }
 
@@ -161,7 +163,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get
             {
                 dynamic list = ScenarioFileLoadErrorsGetMethod.Invoke(Src, null);
-                return list.ConvertAll<LoadError>(new Converter<dynamic, LoadError>(item => new LoadError(item)));
+                return list.ConvertAll<LoadError>(new Converter<dynamic, LoadError>(item => LoadError.FromSource(item)));
             }
             internal set
             {

@@ -24,9 +24,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             MaterialsSetMethod = members.GetSourcePropertySetterOf(nameof(Materials));
         }
 
-        public Model(object src) : base(src)
+        private Model(object src) : base(src)
         {
         }
+
+        public static Model FromSource(object src) => new Model(src);
 
         private static MethodInfo MeshGetMethod;
         private static MethodInfo MeshSetMethod;
@@ -45,7 +47,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             for (int i = 0; i < srcArray.Length; i++)
             {
                 object srcArrayItem = srcArray.GetValue(i);
-                result[i] = srcArrayItem is null ? null : new MaterialInfo(srcArrayItem);
+                result[i] = srcArrayItem is null ? null : MaterialInfo.FromSource(srcArrayItem);
             }
 
             return result;

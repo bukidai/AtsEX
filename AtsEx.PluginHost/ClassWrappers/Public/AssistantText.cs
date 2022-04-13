@@ -23,9 +23,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             TextSetMethod = members.GetSourcePropertySetterOf(nameof(Text));
         }
 
-        public AssistantText(object src) : base(src)
+        protected AssistantText(object src) : base(src)
         {
         }
+
+        public static new AssistantText FromSource(object src) => new AssistantText(src);
 
         protected static MethodInfo ColorGetMethod;
         protected static MethodInfo ColorSetMethod;

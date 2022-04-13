@@ -30,9 +30,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             StructureModelsGetMethod = members.GetSourcePropertyGetterOf(nameof(StructureModels));
         }
 
-        public Route(object src) : base(src)
+        private Route(object src) : base(src)
         {
         }
+
+        public static Route FromSource(object src) => new Route(src);
 
         private static MethodInfo DrawLimitLocationGetMethod;
         private static MethodInfo DrawLimitLocationSetMethod;
@@ -45,17 +47,17 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         private static MethodInfo StructuresGetMethod;
         public StructureSet Structures
         {
-            get => new StructureSet(StructuresGetMethod.Invoke(Src, null));
+            get => StructureSet.FromSource(StructuresGetMethod.Invoke(Src, null));
         }
 
         private static MethodInfo StationsGetMethod;
         public StationList Stations
         {
-            get => new StationList(StationsGetMethod.Invoke(Src, null));
+            get => StationList.FromSource(StationsGetMethod.Invoke(Src, null));
         }
 
         private static MethodInfo SoundsGetMethod;
-        private static readonly Func<object, Sound> SoundsParserToWrapper = src => src is null ? null : new Sound(src);
+        private static readonly Func<object, Sound> SoundsParserToWrapper = src => src is null ? null : Sound.FromSource(src);
         public WrappedSortedList<string, Sound> Sounds
         {
             get
@@ -73,7 +75,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             for (int i = 0; i < srcArray.Length; i++)
             {
                 object srcArrayItem = srcArray.GetValue(i);
-                result[i] = srcArrayItem is null ? null : new Sound(srcArrayItem);
+                result[i] = srcArrayItem is null ? null : Sound.FromSource(srcArrayItem);
             }
 
             return result;
@@ -98,7 +100,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static MethodInfo StructureModelsGetMethod;
-        private static readonly Func<object, Model> StructureModelsParserToWrapper = src => src is null ? null : new Model(src);
+        private static readonly Func<object, Model> StructureModelsParserToWrapper = src => src is null ? null : Model.FromSource(src);
         public WrappedSortedList<string, Model> StructureModels
         {
             get

@@ -30,9 +30,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 			CharIndexSetMethod = members.GetSourcePropertySetterOf(nameof(CharIndex));
 		}
 
-        public LoadError(object src) : base(src)
+        private LoadError(object src) : base(src)
         {
 		}
+
+		public static LoadError FromSource(object src) => new LoadError(src);
 
 		private static ConstructorInfo Constructor;
 		public LoadError(string text, string senderFileName, int lineIndex, int charIndex) : this(Constructor.Invoke(new object[] { text, senderFileName, lineIndex, charIndex }))

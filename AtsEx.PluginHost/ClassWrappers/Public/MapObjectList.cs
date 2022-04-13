@@ -17,9 +17,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<MapObjectList>();
         }
 
-        public MapObjectList(object src) : base(src)
+        protected MapObjectList(object src) : base(src)
         {
         }
+
+        public static MapObjectList FromSource(object src) => new MapObjectList(src);
 
         [UnderConstruction]
         private static MapObjectBase Parse(object src)
@@ -28,7 +30,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             Type wrapperType = BveTypeCollectionProvider.Instance.GetWrapperTypeOf(originalType);
             if (wrapperType == typeof(Station))
             {
-                return new Station(src);
+                return Station.FromSource(src);
             }
             else
             {

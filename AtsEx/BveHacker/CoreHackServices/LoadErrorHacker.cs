@@ -25,7 +25,7 @@ namespace Automatic9045.AtsEx.CoreHackServices
         public LoadErrorHacker(Process targetProcess, ServiceCollection services) : base(targetProcess, services)
         {
             Form formSource = services.GetService<ISubFormHacker>().LoadingProgressForm;
-            LoadingProgressForm = new LoadingProgressForm(formSource);
+            LoadingProgressForm = LoadingProgressForm.FromSource(formSource);
         }
 
         public void ThrowError(string text, string senderFileName, int lineIndex, int charIndex) => LoadingProgressForm.ThrowError(text, senderFileName, lineIndex, charIndex);

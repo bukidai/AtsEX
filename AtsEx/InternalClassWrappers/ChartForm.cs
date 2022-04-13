@@ -10,7 +10,7 @@ namespace Automatic9045.AtsEx
 {
     internal sealed class ChartForm : ClassWrapper
     {
-        public ChartForm(object src) : base(src)
+        private ChartForm(object src) : base(src)
         {
             throw new NotImplementedException();
         }

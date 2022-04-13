@@ -10,7 +10,7 @@ namespace Automatic9045.AtsEx
 {
     internal sealed class ScenarioSelectionForm : ClassWrapper
     {
-        public ScenarioSelectionForm(object src) : base(src)
+        private ScenarioSelectionForm(object src) : base(src)
         {
             throw new NotImplementedException();
         }

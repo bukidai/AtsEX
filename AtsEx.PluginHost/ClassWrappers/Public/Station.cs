@@ -15,6 +15,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<Station>();
 
+            Constructor = members.GetSourceConstructor();
+
             NameGetMethod = members.GetSourcePropertyGetterOf(nameof(Name));
             NameSetMethod = members.GetSourcePropertySetterOf(nameof(Name));
 
@@ -77,7 +79,14 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             StuckInDoorSetMethod = members.GetSourcePropertySetterOf(nameof(StuckInDoor));
         }
 
-        public Station(object src) : base(src)
+        private Station(object src) : base(src)
+        {
+        }
+
+        public static new Station FromSource(object src) => new Station(src);
+
+        private static ConstructorInfo Constructor;
+        public Station(string name) : base(Constructor.Invoke(new object[] { name }))
         {
         }
 
@@ -157,7 +166,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         private static MethodInfo DepertureSoundSetMethod;
         public Sound DepertureSound
         {
-            get => new Sound(DepertureSoundGetMethod.Invoke(Src, null));
+            get => Sound.FromSource(DepertureSoundGetMethod.Invoke(Src, null));
             set => DepertureSoundSetMethod.Invoke(Src, new object[] { value.Src });
         }
 
@@ -165,7 +174,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         private static MethodInfo ArrivalSoundSetMethod;
         public Sound ArrivalSound
         {
-            get => new Sound(ArrivalSoundGetMethod.Invoke(Src, null));
+            get => Sound.FromSource(ArrivalSoundGetMethod.Invoke(Src, null));
             set => ArrivalSoundSetMethod.Invoke(Src, new object[] { value.Src });
         }
 
