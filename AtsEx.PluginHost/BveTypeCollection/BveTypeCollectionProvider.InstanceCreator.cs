@@ -14,6 +14,8 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
     {
         public static BveTypeCollectionProvider Instance { get; protected set; } = null;
 
+        protected const BindingFlags SearchAllBindingAttribute = BindingFlags.NonPublic | BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance;
+
         /// <summary>
         /// <see cref="BveTypeCollectionProvider"/> のインスタンスを作成します。
         /// </summary>
@@ -100,7 +102,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             IEnumerable<Type> wrapperTypes = atsExPluginHostAssembly.GetTypes().Concat(atsExAssembly.GetTypes()).Where(type => type.IsClass && type.IsSubclassOf(typeof(ClassWrapper)));
             IEnumerable<Type> originalTypes = bveAssembly.GetTypes();
 
-            IEnumerable<BveTypeMemberCollection> types = nameCollection.Select(src =>
+            IEnumerable<KeyValuePair<Type, Type>> wrapperOriginalTypePairs = nameCollection.Select(src =>
             {
                 Type wrapperType = ParseWrapperTypeName(src.WrapperTypeName);
                 if (wrapperType is null)
@@ -114,7 +116,18 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                     throw new KeyNotFoundException($"ラッパー型 '{src.WrapperTypeName}' のオリジナル型 '{src.OriginalTypeName}' は BVE 内に存在しません。");
                 }
 
-                IEnumerable<MethodInfo> originalTypeMethods = originalType.GetMethods();
+                return new KeyValuePair<Type, Type>(wrapperType, originalType);
+            });
+
+            IEnumerable<BveTypeMemberCollection> types = nameCollection.Select(src =>
+            {
+                Type wrapperType = ParseWrapperTypeName(src.WrapperTypeName);
+                Type originalType = wrapperOriginalTypePairs.First(x => x.Key == wrapperType).Value;
+
+                SortedList<Type[], ConstructorInfo> constructors = new SortedList<Type[], ConstructorInfo>(originalType.GetConstructors(SearchAllBindingAttribute).ToDictionary(
+                    c => c.GetParameters().Select(p => GetWrapperTypeIfOriginal(p.ParameterType)).ToArray(),
+                    c => c),
+                    new TypeArrayComparer());
 
                 SortedList<string, MethodInfo> propertyGetters = new SortedList<string, MethodInfo>(src.PropertyGetters.Select(getterInfo =>
                 {
@@ -199,7 +212,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                 }).ToDictionary(x => x.Key, x => x.Value), new StringTypeArrayTupleComparer());
 
 
-                BveTypeMemberCollection members = new BveTypeMemberCollection(wrapperType, originalType, propertyGetters, propertySetters, fields, methods);
+                BveTypeMemberCollection members = new BveTypeMemberCollection(wrapperType, originalType, constructors, propertyGetters, propertySetters, fields, methods);
                 return members;
             });
 
@@ -236,8 +249,8 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 
                 if (type.IsClass && type.IsSubclassOf(typeof(ClassWrapper)))
                 {
-                    string originalTypeName = nameCollection.FirstOrDefault(src2 => src2.WrapperTypeName == type.Name).OriginalTypeName;
-                    if (originalTypeName is null)
+                    Type originalType = wrapperOriginalTypePairs.FirstOrDefault(x => x.Key == type).Value;
+                    if (originalType is null)
                     {
                         if (typeLoadExceptionMessage is null)
                         {
@@ -247,7 +260,50 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                         throw new TypeLoadException(typeLoadExceptionMessage);
                     }
 
-                    return originalTypes.FirstOrDefault(originalType => originalType.FullName == originalTypeName);
+                    return originalType;
+                }
+                else
+                {
+                    return type;
+                }
+            }
+
+            Type GetWrapperTypeIfOriginal(Type type, string typeLoadExceptionMessage = null)
+            {
+                if (type.IsArray)
+                {
+                    int arrayRank = type.GetArrayRank();
+                    Type elementType = type.GetElementType();
+                    Type wrapperElementType = GetWrapperTypeIfOriginal(elementType, typeLoadExceptionMessage);
+                    type = arrayRank == 1 ? wrapperElementType.MakeArrayType() : wrapperElementType.MakeArrayType(arrayRank);
+                }
+                else if (type.IsConstructedGenericType)
+                {
+                    Type genericTypeDefinition = type.GetGenericTypeDefinition();
+                    Type[] typeParams = type.GetGenericArguments().Select(t => GetWrapperTypeIfOriginal(t, typeLoadExceptionMessage)).ToArray();
+
+                    if (genericTypeDefinition == typeof(SortedList<,>))
+                    {
+                        genericTypeDefinition = typeof(WrappedSortedList<,>);
+                    }
+
+                    type = genericTypeDefinition.MakeGenericType(typeParams);
+                }
+
+                if (type.IsClass && type.IsSubclassOf(typeof(ClassWrapper)))
+                {
+                    Type wrapperType = wrapperOriginalTypePairs.FirstOrDefault(x => x.Value == type).Key;
+                    if (wrapperType is null)
+                    {
+                        if (typeLoadExceptionMessage is null)
+                        {
+                            typeLoadExceptionMessage = $"型 '{type.Name}' のラッパー型が見つかりませんでした。";
+                        }
+
+                        throw new TypeLoadException(typeLoadExceptionMessage);
+                    }
+
+                    return wrapperType;
                 }
                 else
                 {
