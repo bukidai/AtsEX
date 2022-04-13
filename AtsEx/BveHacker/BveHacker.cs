@@ -9,10 +9,9 @@ using System.Windows.Forms;
 
 using HarmonyLib;
 
-using Automatic9045.AtsEx.BveTypeCollection;
 using Automatic9045.AtsEx.CoreHackServices;
-using Automatic9045.AtsEx.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx
@@ -64,19 +63,19 @@ namespace Automatic9045.AtsEx
 
 
         public void ThrowError(string text, string senderFileName = "", int lineIndex = 0, int charIndex = 0) => Services.GetService<ILoadErrorHacker>().ThrowError(text, senderFileName, lineIndex, charIndex);
-        public void ThrowError(ILoadError error) => Services.GetService<ILoadErrorHacker>().ThrowError(error);
-        public void ThrowError(IEnumerable<ILoadError> errors) => Services.GetService<ILoadErrorHacker>().ThrowErrors(errors);
+        public void ThrowError(LoadError error) => Services.GetService<ILoadErrorHacker>().ThrowError(error);
+        public void ThrowError(IEnumerable<LoadError> errors) => Services.GetService<ILoadErrorHacker>().ThrowErrors(errors);
 
 
         public event ScenarioProviderCreatedEventHandler ScenarioProviderCreated;
 
-        public IScenarioInfo CurrentScenarioInfo
+        public ScenarioInfo CurrentScenarioInfo
         {
             get => Services.GetService<IScenarioHacker>().CurrentScenarioInfo;
             set => Services.GetService<IScenarioHacker>().CurrentScenarioInfo = value as ScenarioInfo;
         }
 
-        public IScenarioProvider CurrentScenarioProvider
+        public ScenarioProvider CurrentScenarioProvider
         {
             get => Services.GetService<IScenarioHacker>().CurrentScenarioProvider ?? throw new InvalidOperationException();
             internal set => Services.GetService<IScenarioHacker>().CurrentScenarioProvider = value as ScenarioProvider;

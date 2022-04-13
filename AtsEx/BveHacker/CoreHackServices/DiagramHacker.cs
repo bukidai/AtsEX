@@ -9,9 +9,8 @@ using System.Windows.Forms;
 
 using HarmonyLib;
 
-using Automatic9045.AtsEx.BveTypeCollection;
-using Automatic9045.AtsEx.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.CoreHackServices
@@ -23,7 +22,7 @@ namespace Automatic9045.AtsEx.CoreHackServices
 
     internal sealed class DiagramHacker : CoreHackService, IDiagramHacker
     {
-        private ITimePosForm TimePosForm;
+        private TimePosForm TimePosForm;
 
         public DiagramHacker(Process targetProcess, ServiceCollection services) : base(targetProcess, services)
         {

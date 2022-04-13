@@ -7,8 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Automatic9045.AtsEx.ClassWrappers;
-
 namespace Automatic9045.AtsEx.CoreHackServices
 {
     /// <summary>

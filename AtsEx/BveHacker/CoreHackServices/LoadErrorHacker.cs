@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Automatic9045.AtsEx.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.CoreHackServices
@@ -15,13 +14,13 @@ namespace Automatic9045.AtsEx.CoreHackServices
     internal interface ILoadErrorHacker
     {
         void ThrowError(string text, string senderFileName, int lineIndex = 0, int charIndex = 0);
-        void ThrowError(ILoadError error);
-        void ThrowErrors(IEnumerable<ILoadError> errors);
+        void ThrowError(LoadError error);
+        void ThrowErrors(IEnumerable<LoadError> errors);
     }
 
     internal sealed class LoadErrorHacker : CoreHackService, ILoadErrorHacker
     {
-        private ILoadingProgressForm LoadingProgressForm;
+        private LoadingProgressForm LoadingProgressForm;
 
         public LoadErrorHacker(Process targetProcess, ServiceCollection services) : base(targetProcess, services)
         {
@@ -31,8 +30,8 @@ namespace Automatic9045.AtsEx.CoreHackServices
 
         public void ThrowError(string text, string senderFileName, int lineIndex, int charIndex) => LoadingProgressForm.ThrowError(text, senderFileName, lineIndex, charIndex);
 
-        public void ThrowError(ILoadError error) => LoadingProgressForm.ThrowError(error);
+        public void ThrowError(LoadError error) => LoadingProgressForm.ThrowError(error);
 
-        public void ThrowErrors(IEnumerable<ILoadError> errors) => LoadingProgressForm.ThrowErrors(errors);
+        public void ThrowErrors(IEnumerable<LoadError> errors) => LoadingProgressForm.ThrowErrors(errors);
     }
 }

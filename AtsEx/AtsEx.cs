@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Automatic9045.AtsEx.BveTypeCollection;
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx
 {

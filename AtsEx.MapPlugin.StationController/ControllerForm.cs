@@ -20,7 +20,7 @@ namespace Automatic9045.MapPlugins.StationController
 
         private void OnButtonClicked(object sender, EventArgs e)
         {
-            IStationList stations = AtsExPlugin.BveHacker.CurrentScenarioProvider.Route.Stations;
+            StationList stations = AtsExPlugin.BveHacker.CurrentScenarioProvider.Route.Stations;
             if (stations.Count == 0) return;
             stations.RemoveAt(stations.Count - 1);
 
@@ -30,13 +30,13 @@ namespace Automatic9045.MapPlugins.StationController
             }
             else
             {
-                IStation lastStation = stations.Last() as IStation;
+                Station lastStation = stations.Last() as Station;
                 lastStation.DepertureTime = int.MaxValue; // 終点の発車時刻は int.MaxValue に設定する
                 lastStation.Pass = false;
                 lastStation.IsTerminal = true;
             }
 
-            ITimeTable timeTable = AtsExPlugin.BveHacker.CurrentScenarioProvider.TimeTable;
+            TimeTable timeTable = AtsExPlugin.BveHacker.CurrentScenarioProvider.TimeTable;
             timeTable.NameTexts = new string[stations.Count + 1];
             timeTable.NameTextWidths = new int[stations.Count + 1];
             timeTable.ArrivalTimeTexts = new string[stations.Count + 1];

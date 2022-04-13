@@ -9,22 +9,21 @@ using System.Windows.Forms;
 
 using HarmonyLib;
 
-using Automatic9045.AtsEx.BveTypeCollection;
-using Automatic9045.AtsEx.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.CoreHackServices
 {
     internal interface IScenarioHacker
     {
-        IScenarioInfo CurrentScenarioInfo { get; set; }
-        IScenarioProvider CurrentScenarioProvider { get; set; }
+        ScenarioInfo CurrentScenarioInfo { get; set; }
+        ScenarioProvider CurrentScenarioProvider { get; set; }
     }
 
     internal sealed class ScenarioHacker : CoreHackService, IScenarioHacker
     {
-        private IMainForm MainForm;
+        private MainForm MainForm;
 
         public ScenarioHacker(Process targetProcess, ServiceCollection services) : base(targetProcess, services)
         {
@@ -32,8 +31,8 @@ namespace Automatic9045.AtsEx.CoreHackServices
             MainForm = new MainForm(formSrc);
 
 
-            IBveTypeMemberCollection timePosFormMembers = BveTypeCollectionProvider.Instance.GetTypeInfoOf<ITimePosForm>();
-            MethodInfo setScenarioMethod = timePosFormMembers.GetSourceMethodOf(nameof(ITimePosForm.SetScenario));
+            BveTypeMemberCollection timePosFormMembers = BveTypeCollectionProvider.Instance.GetTypeInfoOf<TimePosForm>();
+            MethodInfo setScenarioMethod = timePosFormMembers.GetSourceMethodOf(nameof(TimePosForm.SetScenario));
 
             Harmony harmony = new Harmony("http://automatic9045.github.io/ns/harmony/atsex/core-hack-services/scenario-hacker");
             harmony.Patch(setScenarioMethod, new HarmonyMethod(typeof(ScenarioHacker), nameof(SetScenarioPreFix)));
@@ -41,13 +40,13 @@ namespace Automatic9045.AtsEx.CoreHackServices
 
         public static event ScenarioProviderCreatedEventHandler ScenarioProviderCreated;
 
-        public IScenarioInfo CurrentScenarioInfo
+        public ScenarioInfo CurrentScenarioInfo
         {
             get => MainForm.CurrentScenarioInfo;
             set => MainForm.CurrentScenarioInfo = value;
         }
 
-        public IScenarioProvider CurrentScenarioProvider
+        public ScenarioProvider CurrentScenarioProvider
         {
             get => MainForm.CurrentScenarioProvider;
             set => MainForm.CurrentScenarioProvider = value;
@@ -55,7 +54,7 @@ namespace Automatic9045.AtsEx.CoreHackServices
 
         private static void SetScenarioPreFix(object[] __args)
         {
-            IScenarioProvider scenarioProvider = new ScenarioProvider(__args[0]);
+            ScenarioProvider scenarioProvider = new ScenarioProvider(__args[0]);
             ScenarioProviderCreated?.Invoke(scenarioProvider);
         }
     }

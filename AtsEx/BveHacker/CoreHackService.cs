@@ -6,8 +6,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.ClassWrappers;
-
 namespace Automatic9045.AtsEx
 {
     internal class CoreHackService

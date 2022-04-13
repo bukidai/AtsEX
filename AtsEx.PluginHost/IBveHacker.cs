@@ -11,7 +11,7 @@ using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.PluginHost
 {
-    public delegate void ScenarioProviderCreatedEventHandler(IScenarioProvider scenarioProvider);
+    public delegate void ScenarioProviderCreatedEventHandler(ScenarioProvider scenarioProvider);
 
     public interface IBveHacker : IDisposable
     {
@@ -93,8 +93,8 @@ namespace Automatic9045.AtsEx.PluginHost
 
 
         void ThrowError(string text, string senderFileName = "", int lineIndex = 0, int charIndex = 0);
-        void ThrowError(ILoadError error);
-        void ThrowError(IEnumerable<ILoadError> errors);
+        void ThrowError(LoadError error);
+        void ThrowError(IEnumerable<LoadError> errors);
 
 
         /// <summary>
@@ -105,13 +105,13 @@ namespace Automatic9045.AtsEx.PluginHost
         /// <summary>
         /// 現在読込中または実行中のシナリオの情報を取得・設定します。
         /// </summary>
-        IScenarioInfo CurrentScenarioInfo { get; set; }
+        ScenarioInfo CurrentScenarioInfo { get; set; }
 
         /// <summary>
         /// 現在実行中のシナリオを取得します。シナリオの読込中は <see cref="InvalidOperationException"/> をスローします。
         /// シナリオの読込中に <see cref="IScenarioProvider"/> を取得するには <see cref="ScenarioProviderCreated"/> イベントを購読してください。
         /// </summary>
-        IScenarioProvider CurrentScenarioProvider { get; }
+        ScenarioProvider CurrentScenarioProvider { get; }
 
 
         /// <summary>

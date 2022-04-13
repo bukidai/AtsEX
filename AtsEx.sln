@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{E528
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VehiclePlugins", "VehiclePlugins", "{31284256-F435-4CDC-B1B6-FCB71C97D6EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.BveTypeCollection", "AtsEx.BveTypeCollection\AtsEx.BveTypeCollection.csproj", "{2F0061CC-C22A-4A33-B70F-77A01C264C6E}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MapPlugins", "MapPlugins", "{FCA108F3-EC46-4DD5-962E-3ECCBC2100AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.MapPlugin.StationController", "AtsEx.MapPlugin.StationController\AtsEx.MapPlugin.StationController.csproj", "{9BF5F305-141D-4B74-B5FE-27DC09FF68A5}"
@@ -37,10 +35,6 @@ Global
 		{9205EC14-287D-413E-9E1C-64C92D58D1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9205EC14-287D-413E-9E1C-64C92D58D1F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9205EC14-287D-413E-9E1C-64C92D58D1F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2F0061CC-C22A-4A33-B70F-77A01C264C6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F0061CC-C22A-4A33-B70F-77A01C264C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F0061CC-C22A-4A33-B70F-77A01C264C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F0061CC-C22A-4A33-B70F-77A01C264C6E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9BF5F305-141D-4B74-B5FE-27DC09FF68A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9BF5F305-141D-4B74-B5FE-27DC09FF68A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BF5F305-141D-4B74-B5FE-27DC09FF68A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
