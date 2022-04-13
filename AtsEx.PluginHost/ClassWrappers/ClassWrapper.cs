@@ -11,7 +11,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         public dynamic Src { get; }
 
-        public ClassWrapper(dynamic src)
+        public ClassWrapper(object src)
         {
             Src = src;
         }
