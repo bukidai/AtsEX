@@ -63,7 +63,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             return Fields[wrapperName];
         }
 
-        public ConstructorInfo GetSourceConstructorOf(Type[] parameters = null)
+        public ConstructorInfo GetSourceConstructor(Type[] parameters = null)
         {
             ConstructorInfo matchConstructor = Constructors.FirstOrDefault(x => parameters is null || x.Key.SequenceEqual(parameters)).Value;
             if (matchConstructor is null)

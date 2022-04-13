@@ -15,7 +15,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 		{
 			BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<LoadError>();
 
-			Constructor = members.GetSourceConstructorOf(new Type[] { typeof(string), typeof(string), typeof(int), typeof(int) });
+			Constructor = members.GetSourceConstructor(new Type[] { typeof(string), typeof(string), typeof(int), typeof(int) });
 
 			TextGetMethod = members.GetSourcePropertyGetterOf(nameof(Text));
 			TextSetMethod = members.GetSourcePropertySetterOf(nameof(Text));
