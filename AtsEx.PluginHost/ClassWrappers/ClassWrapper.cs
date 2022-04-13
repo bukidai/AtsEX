@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
-    public class ClassWrapper
+    public abstract class ClassWrapper
     {
         public dynamic Src { get; }
 
