@@ -81,6 +81,11 @@ namespace Automatic9045.AtsEx
             internal set => Services.GetService<IScenarioHacker>().CurrentScenarioProvider = value as ScenarioProvider;
         }
 
+        public bool HasScenarioProviderCreated
+        {
+            get => !(Services.GetService<IScenarioHacker>().CurrentScenarioProvider is null);
+        }
+
 
         public void UpdateDiagram() => Services.GetService<IDiagramHacker>().Draw();
 

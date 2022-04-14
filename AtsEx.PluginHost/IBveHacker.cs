@@ -113,6 +113,11 @@ namespace Automatic9045.AtsEx.PluginHost
         /// </summary>
         ScenarioProvider CurrentScenarioProvider { get; }
 
+        /// <summary>
+        /// <see cref="CurrentScenarioProvider"/> が取得可能かどうかを取得します。
+        /// </summary>
+        bool HasScenarioProviderCreated { get; }
+
 
         /// <summary>
         /// BVE の「時刻と位置」フォームのダイヤグラムを再描画します。
