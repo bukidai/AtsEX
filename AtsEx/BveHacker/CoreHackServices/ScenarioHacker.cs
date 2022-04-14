@@ -55,7 +55,7 @@ namespace Automatic9045.AtsEx.CoreHackServices
         private static void SetScenarioPreFix(object[] __args)
         {
             ScenarioProvider scenarioProvider = ScenarioProvider.FromSource(__args[0]);
-            ScenarioProviderCreated?.Invoke(scenarioProvider);
+            ScenarioProviderCreated?.Invoke(new ScenarioProviderCreatedEventArgs(scenarioProvider));
         }
     }
 }

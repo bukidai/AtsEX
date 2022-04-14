@@ -82,6 +82,7 @@
     <Compile Include="ClassWrappers\Public\Vehicle.cs" />
     <Compile Include="Enums\BrakePosition.cs" />
     <Compile Include="Enums\PluginType.cs" />
+    <Compile Include="EventArgs\ScenarioProviderCreatedEventArgs.cs" />
     <Compile Include="EventArgs\StartedEventArgs.cs" />
     <Compile Include="EventArgs\AllPluginLoadedEventArgs.cs" />
     <Compile Include="Exceptions\BveFileLoadException.cs" />

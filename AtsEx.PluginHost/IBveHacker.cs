@@ -11,7 +11,7 @@ using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.PluginHost
 {
-    public delegate void ScenarioProviderCreatedEventHandler(ScenarioProvider scenarioProvider);
+    public delegate void ScenarioProviderCreatedEventHandler(ScenarioProviderCreatedEventArgs e);
 
     public interface IBveHacker : IDisposable
     {
