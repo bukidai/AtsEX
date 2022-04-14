@@ -17,7 +17,9 @@ namespace Automatic9045.AtsEx
         {
             BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<TimePosForm>();
 
-            DrawMethod = members.GetSourceMethodOf(nameof(TimePosForm.Draw));
+            SetScenarioMethod = members.GetSourceMethodOf(nameof(SetScenario));
+
+            DrawMethod = members.GetSourceMethodOf(nameof(Draw));
         }
 
         private TimePosForm(object src) : base(src)
@@ -26,7 +28,8 @@ namespace Automatic9045.AtsEx
 
         public static TimePosForm FromSource(object src) => new TimePosForm(src);
 
-        public void SetScenario(ScenarioProvider scenarioProvider) => throw new NotImplementedException();
+        private static MethodInfo SetScenarioMethod;
+        public void SetScenario(ScenarioProvider scenarioProvider) => SetScenarioMethod.Invoke(Src, new object[] { scenarioProvider.Src });
 
         private static MethodInfo DrawMethod;
         public void Draw() => DrawMethod.Invoke(Src, null);

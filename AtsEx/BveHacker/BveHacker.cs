@@ -87,7 +87,7 @@ namespace Automatic9045.AtsEx
         }
 
 
-        public void UpdateDiagram() => Services.GetService<IDiagramHacker>().Draw();
+        public void UpdateDiagram() => Services.GetService<IDiagramHacker>().Update();
 
 
         public void Dispose()
