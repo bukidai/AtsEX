@@ -25,8 +25,26 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         public static new StationList FromSource(object src) => new StationList(src);
 
+        public override void Add(MapObjectBase item)
+        {
+            if (Count > 0 && this[0].Location == item.Location)
+            {
+                throw new NotSupportedException("最初の駅と最後の駅の距離程を同一にすることはできません。");
+            }
+
+            base.Add(item);
+        }
+
         private static MethodInfo InsertMethod;
-        public void Insert(Station item) => InsertMethod.Invoke(Src, new object[] { item.Src });
+        public void Insert(Station item)
+        {
+            if (Count > 0 && this[0].Location == item.Location)
+            {
+                throw new NotSupportedException("最初の駅と最後の駅の距離程を同一にすることはできません。");
+            }
+            
+            InsertMethod.Invoke(Src, new object[] { item.Src });
+        }
 
         private static MethodInfo GetStandardTimeMethod;
         public int GetStandardTime(double location) => GetStandardTimeMethod.Invoke(Src, new object[] { location });

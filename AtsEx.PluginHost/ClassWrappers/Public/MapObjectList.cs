@@ -48,7 +48,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         public bool IsReadOnly => Src.IsReadOnly;
 
-        public void Add(MapObjectBase item) => Src.Add(item.Src);
+        public virtual void Add(MapObjectBase item) => Src.Add(item.Src);
 
         public void Clear() => Src.Clear();
 
