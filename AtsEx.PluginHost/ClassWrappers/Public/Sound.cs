@@ -20,6 +20,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static Sound FromSource(object src) => new Sound(src);
+        public static Sound FromSource(object src)
+        {
+            if (src is null) return null;
+            return new Sound(src);
+        }
     }
 }

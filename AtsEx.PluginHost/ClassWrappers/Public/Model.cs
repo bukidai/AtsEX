@@ -28,7 +28,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static Model FromSource(object src) => new Model(src);
+        public static Model FromSource(object src)
+        {
+            if (src is null) return null;
+            return new Model(src);
+        }
 
         private static MethodInfo MeshGetMethod;
         private static MethodInfo MeshSetMethod;

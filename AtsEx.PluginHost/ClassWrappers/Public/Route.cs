@@ -34,7 +34,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static Route FromSource(object src) => new Route(src);
+        public static Route FromSource(object src)
+        {
+            if (src is null) return null;
+            return new Route(src);
+        }
 
         private static MethodInfo DrawLimitLocationGetMethod;
         private static MethodInfo DrawLimitLocationSetMethod;

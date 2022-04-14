@@ -13,6 +13,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         public ClassWrapper(object src)
         {
+            if (src is null) throw new ArgumentNullException();
+
             Src = src;
         }
 

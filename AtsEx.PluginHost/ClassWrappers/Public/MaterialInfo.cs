@@ -31,7 +31,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static MaterialInfo FromSource(object src) => new MaterialInfo(src);
+        public static MaterialInfo FromSource(object src)
+        {
+            if (src is null) return null;
+            return new MaterialInfo(src);
+        }
 
         private static MethodInfo MaterialGetMethod;
         private static MethodInfo MaterialSetMethod;

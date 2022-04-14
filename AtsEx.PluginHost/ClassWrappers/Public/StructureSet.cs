@@ -32,7 +32,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static StructureSet FromSource(object src) => new StructureSet(src);
+        public static StructureSet FromSource(object src)
+        {
+            if (src is null) return null;
+            return new StructureSet(src);
+        }
 
         private static MethodInfo DrawLimitLocationGetMethod;
         private static MethodInfo DrawLimitLocationSetMethod;

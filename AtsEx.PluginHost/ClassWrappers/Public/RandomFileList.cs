@@ -24,7 +24,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static RandomFileList FromSource(object src) => new RandomFileList(src);
+        public static RandomFileList FromSource(object src)
+        {
+            if (src is null) return null;
+            return new RandomFileList(src);
+        }
 
         private static MethodInfo SelectedFileGetMethod;
         private static MethodInfo SelectedFileSetMethod;

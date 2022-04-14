@@ -27,7 +27,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static new AssistantText FromSource(object src) => new AssistantText(src);
+        public static new AssistantText FromSource(object src)
+        {
+            if (src is null) return null;
+            return new AssistantText(src);
+        }
 
         protected static MethodInfo ColorGetMethod;
         protected static MethodInfo ColorSetMethod;

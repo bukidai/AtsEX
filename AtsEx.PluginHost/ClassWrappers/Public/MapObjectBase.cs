@@ -23,7 +23,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static MapObjectBase FromSource(object src) => new MapObjectBase(src);
+        public static MapObjectBase FromSource(object src)
+        {
+            if (src is null) return null;
+            return new MapObjectBase(src);
+        }
 
         private static MethodInfo LocationGetMethod;
         private static MethodInfo LocationSetMethod;

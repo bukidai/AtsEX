@@ -21,7 +21,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static MapObjectList FromSource(object src) => new MapObjectList(src);
+        public static MapObjectList FromSource(object src)
+        {
+            if (src is null) return null;
+            return new MapObjectList(src);
+        }
 
         [UnderConstruction]
         private static MapObjectBase Parse(object src)

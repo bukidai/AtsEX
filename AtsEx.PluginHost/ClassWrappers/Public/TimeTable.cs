@@ -31,7 +31,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static new TimeTable FromSource(object src) => new TimeTable(src);
+        public static new TimeTable FromSource(object src)
+        {
+            if (src is null) return null;
+            return new TimeTable(src);
+        }
 
         protected static FieldInfo ModelField;
         public Model Model

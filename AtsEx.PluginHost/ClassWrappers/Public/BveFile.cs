@@ -24,7 +24,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static BveFile FromSource(object src) => new BveFile(src);
+        public static BveFile FromSource(object src)
+        {
+            if (src is null) return null;
+            return new BveFile(src);
+        }
 
         private static MethodInfo PathGetMethod;
         private static MethodInfo PathSetMethod;

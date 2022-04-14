@@ -34,7 +34,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
 		}
 
-		public static LoadError FromSource(object src) => new LoadError(src);
+		public static LoadError FromSource(object src)
+{
+    if (src is null) return null;
+    return new LoadError(src);
+}
 
 		private static ConstructorInfo Constructor;
 		public LoadError(string text, string senderFileName, int lineIndex, int charIndex) : this(Constructor.Invoke(new object[] { text, senderFileName, lineIndex, charIndex }))

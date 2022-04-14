@@ -59,7 +59,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static ScenarioInfo FromSource(object src) => new ScenarioInfo(src);
+        public static ScenarioInfo FromSource(object src)
+        {
+            if (src is null) return null;
+            return new ScenarioInfo(src);
+        }
 
         private static MethodInfo FromFileMethod;
         public static ScenarioInfo FromFile(string path)

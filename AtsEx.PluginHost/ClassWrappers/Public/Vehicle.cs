@@ -20,6 +20,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static Vehicle FromSource(object src) => new Vehicle(src);
+        public static Vehicle FromSource(object src)
+        {
+            if (src is null) return null;
+            return new Vehicle(src);
+        }
     }
 }

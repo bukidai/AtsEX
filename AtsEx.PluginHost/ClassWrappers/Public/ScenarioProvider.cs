@@ -24,7 +24,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static ScenarioProvider FromSource(object src) => new ScenarioProvider(src);
+        public static ScenarioProvider FromSource(object src)
+        {
+            if (src is null) return null;
+            return new ScenarioProvider(src);
+        }
 
         private static MethodInfo RouteGetMethod;
         public Route Route

@@ -21,6 +21,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static new SingleStructureList FromSource(object src) => new SingleStructureList(src);
+        public static new SingleStructureList FromSource(object src)
+        {
+            if (src is null) return null;
+            return new SingleStructureList(src);
+        }
     }
 }

@@ -32,7 +32,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static AssistantTextBase FromSource(object src) => new AssistantTextBase(src);
+        public static AssistantTextBase FromSource(object src)
+        {
+            if (src is null) return null;
+            return new AssistantTextBase(src);
+        }
 
         protected static MethodInfo AssistantSettingsGetMethod;
         public AssistantSettings AssistantSettings
