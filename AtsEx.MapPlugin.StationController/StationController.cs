@@ -16,7 +16,7 @@ namespace Automatic9045.MapPlugins.StationController
 
         public StationController() : base()
         {
-            MenuItem = AtsExPlugin.BveHacker.AddCheckableMenuItemToContextMenu("駅編集ウィンドウを表示", MenuItemCheckedChanged);
+            MenuItem = BveHacker.AddCheckableMenuItemToContextMenu("駅編集ウィンドウを表示", MenuItemCheckedChanged);
 
             App.Started += Started;
         }
