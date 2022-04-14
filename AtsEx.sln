@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VehiclePlugins", "VehiclePl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MapPlugins", "MapPlugins", "{FCA108F3-EC46-4DD5-962E-3ECCBC2100AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.MapPlugin.StationController", "AtsEx.MapPlugin.StationController\AtsEx.MapPlugin.StationController.csproj", "{9BF5F305-141D-4B74-B5FE-27DC09FF68A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.MapPlugin.StationController", "Plugins\MapPlugins\AtsEx.MapPlugin.StationController\AtsEx.MapPlugin.StationController.csproj", "{9BF5F305-141D-4B74-B5FE-27DC09FF68A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -54,7 +54,7 @@
     <Compile Include="TimeTextParser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AtsEx.PluginHost\AtsEx.PluginHost.csproj">
+    <ProjectReference Include="..\..\..\AtsEx.PluginHost\AtsEx.PluginHost.csproj">
       <Project>{ac6ebf16-d22b-4da8-a0be-5afb729ea2e4}</Project>
       <Name>AtsEx.PluginHost</Name>
       <Private>False</Private>
