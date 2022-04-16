@@ -52,7 +52,6 @@ namespace Automatic9045.AtsEx.Ats
             AssemblyResolver assemblyResolver = new AssemblyResolver(targetAppDomain);
             assemblyResolver.Register(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "0Harmony.dll"));
             assemblyResolver.Register(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "atsex.pihost.dll"));
-            assemblyResolver.Register(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "atsex.bvetypes.dll"));
 
             AtsEx = new AtsEx(targetProcess, targetAppDomain, targetAssembly);
 
