@@ -13,17 +13,13 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx
 {
-    internal sealed class AtsEx : IDisposable
+    public sealed class AtsEx : IDisposable
     {
         private Process TargetProcess { get; }
         private AppDomain TargetAppDomain { get; }
         private Assembly TargetAssembly { get; }
         private Assembly ExecutingAssembly { get; } = Assembly.GetExecutingAssembly();
         private Assembly PluginHostAssembly { get; }
-
-        private ServiceCollection BveHackServices { get; }
-        private Vehicle Vehicle { get; }
-        private Route Route { get; }
 
         private VersionFormProvider VersionFormProvider { get; }
 
@@ -52,14 +48,9 @@ namespace Automatic9045.AtsEx
             App.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly);
             BveHacker.CreateInstance(TargetProcess);
 
-            BveHackServices = BveHackServiceCollectionBuilder.Build();
-            Vehicle = new Vehicle(BveHackServices);
-            Route = new Route(BveHackServices);
-
             VersionFormProvider = new VersionFormProvider();
 
-            AssemblyResolver assemblyResolver = new AssemblyResolver(TargetAppDomain);
-            PluginLoader pluginLoader = new PluginLoader(Vehicle, Route, assemblyResolver);
+            PluginLoader pluginLoader = new PluginLoader();
             try
             {
                 {
@@ -113,9 +104,14 @@ namespace Automatic9045.AtsEx
             });
 
             VersionFormProvider.Dispose();
-            BveHackServices.Dispose();
             BveHacker.Instance.Dispose();
             BveTypeCollectionProvider.Instance.Dispose();
+        }
+
+        [WillRefactor]
+        public void SetVehicleSpec(VehicleSpec vehicleSpec)
+        {
+            BveHacker.Instance.VehicleSpec = vehicleSpec;
         }
 
         public void Started(BrakePosition defaultBrakePosition)
@@ -125,8 +121,11 @@ namespace Automatic9045.AtsEx
             App.Instance.InvokeStarted(defaultBrakePosition);
         }
 
-        public void Tick()
+        [WillRefactor]
+        public void Tick(VehicleState vehicleState)
         {
+            BveHacker.Instance.VehicleState = vehicleState;
+
             VehiclePlugins.ForEach(plugin => plugin.PluginInstance.Tick());
             MapPlugins.ForEach(plugin => plugin.PluginInstance.Tick());
         }

@@ -12,21 +12,11 @@ namespace Automatic9045.AtsEx
 {
     internal class PluginLoader
     {
-        public Vehicle Vehicle { get; }
-        public Route Route { get; }
-
         public HostServiceCollection HostServiceCollection { get; }
 
-        public AssemblyResolver AssemblyResolver { get; }
-
-        public PluginLoader(Vehicle vehicle, Route route, AssemblyResolver assemblyResolver)
+        public PluginLoader()
         {
-            Vehicle = vehicle;
-            Route = route;
-
-            HostServiceCollection = new HostServiceCollection(App.Instance, BveHacker.Instance, Vehicle, Route);
-
-            AssemblyResolver = assemblyResolver;
+            HostServiceCollection = new HostServiceCollection(App.Instance, BveHacker.Instance);
         }
 
         public IEnumerable<AtsExPluginInfo> LoadFromList(PluginType pluginType, string listAbsolutePath)
@@ -50,7 +40,6 @@ namespace Automatic9045.AtsEx
             }
 
             Assembly assembly = null;
-            AssemblyResolver.Register(assembly);
             try
             {
                 assembly = Assembly.LoadFrom(absolutePath);

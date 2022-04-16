@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MapPlugins", "MapPlugins", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.MapPlugin.StationController", "Plugins\MapPlugins\AtsEx.MapPlugin.StationController\AtsEx.MapPlugin.StationController.csproj", "{9BF5F305-141D-4B74-B5FE-27DC09FF68A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.Core", "AtsEx.Core\AtsEx.Core.csproj", "{3B4337CE-9252-4140-8742-E9EAB8382FA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{9BF5F305-141D-4B74-B5FE-27DC09FF68A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BF5F305-141D-4B74-B5FE-27DC09FF68A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BF5F305-141D-4B74-B5FE-27DC09FF68A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B4337CE-9252-4140-8742-E9EAB8382FA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B4337CE-9252-4140-8742-E9EAB8382FA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B4337CE-9252-4140-8742-E9EAB8382FA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B4337CE-9252-4140-8742-E9EAB8382FA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

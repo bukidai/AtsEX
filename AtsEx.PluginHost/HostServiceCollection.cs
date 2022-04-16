@@ -11,16 +11,10 @@ namespace Automatic9045.AtsEx.PluginHost
         internal IApp App { get; }
         internal IBveHacker BveHacker { get; }
 
-        internal IVehicle Vehicle { get; }
-        internal IRoute Route { get; }
-
-        public HostServiceCollection(IApp app, IBveHacker bveHacker, IVehicle vehicle, IRoute route)
+        public HostServiceCollection(IApp app, IBveHacker bveHacker)
         {
             App = app;
             BveHacker = bveHacker;
-
-            Vehicle = vehicle;
-            Route = route;
         }
     }
 }

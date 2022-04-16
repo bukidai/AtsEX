@@ -90,6 +90,13 @@ namespace Automatic9045.AtsEx
         public void UpdateDiagram() => Services.GetService<IDiagramHacker>().Update();
 
 
+        [WillRefactor]
+        public VehicleSpec VehicleSpec { get; internal set; } = null;
+
+        [WillRefactor]
+        public VehicleState VehicleState { get; internal set; } = null;
+
+
         public void Dispose()
         {
             Services.Dispose();

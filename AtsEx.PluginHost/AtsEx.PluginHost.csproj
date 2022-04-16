@@ -59,6 +59,8 @@
     <Compile Include="BveTypeCollection\Comparer.cs" />
     <Compile Include="BveTypeCollection\TypeMemberNameCollection.cs" />
     <Compile Include="BveTypeCollection\TypeTextParser.cs" />
+    <Compile Include="Imports\VehicleSpec.cs" />
+    <Compile Include="Imports\VehicleState.cs" />
     <Compile Include="ClassWrappers\ClassWrapper.cs" />
     <Compile Include="ClassWrappers\Extensions\WrappedSortedList.cs" />
     <Compile Include="ClassWrappers\Public\AssistantText.cs" />
@@ -94,8 +96,6 @@
     <Compile Include="Attributes\WillRefactorAttribute.cs" />
     <Compile Include="Enums\ConstantSpeedState.cs" />
     <Compile Include="Enums\ReverserPosition.cs" />
-    <Compile Include="IRoute.cs" />
-    <Compile Include="IVehicle.cs" />
     <Compile Include="IBveHacker.cs" />
     <Compile Include="AtsExPluginBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,6 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BveTypeCollection\TypeNameDefinitions\6.0.7554.619.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

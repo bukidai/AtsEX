@@ -18,18 +18,10 @@ namespace Automatic9045.AtsEx.PluginHost
         public static IApp App { get; private set; }
         public static IBveHacker BveHacker { get; private set; }
 
-        public static IVehicle Vehicle { get; private set; }
-        public static IRoute Route { get; private set; }
-
         public static void Initialize(HostServiceCollection services)
         {
-            HostServiceCollection pluginHost = services;
-
-            App = pluginHost.App;
-            BveHacker = pluginHost.BveHacker;
-
-            Vehicle = pluginHost.Vehicle;
-            Route = pluginHost.Route;
+            App = services.App;
+            BveHacker = services.BveHacker;
 
             HasInitialized = true;
         }

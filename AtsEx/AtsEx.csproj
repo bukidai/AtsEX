@@ -7,7 +7,7 @@
     <ProjectGuid>{15F8005B-285B-4B98-B4D8-13978AD876F8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Automatic9045.AtsEx</RootNamespace>
+    <RootNamespace>Automatic9045.AtsEx.Export</RootNamespace>
     <AssemblyName>atsex</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -35,10 +35,52 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyResolver.cs" />
+    <Compile Include="AtsCore.cs" />
+    <Compile Include="AtsMain.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AtsEx.Core\AtsEx.Core.csproj">
+      <Project>{3b4337ce-9252-4140-8742-e9eab8382fa7}</Project>
+      <Name>AtsEx.Core</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\AtsEx.PluginHost\AtsEx.PluginHost.csproj">
+      <Project>{ac6ebf16-d22b-4da8-a0be-5afb729ea2e4}</Project>
+      <Name>AtsEx.PluginHost</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /y "$(TargetDir)0Harmony.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\Trains\AtsExSampleTrain\Ats\"
+
+copy /y "$(TargetDir)x64\$(TargetName).dll" "$(SolutionDir)_SampleScenarios\Automatic9045\Trains\AtsExSampleTrain\Ats\$(TargetName).x64.dll"
+if exist "$(TargetDir)x64\$(TargetName).pdb" copy /y "$(TargetDir)x64\$(TargetName).pdb" "$(SolutionDir)_SampleScenarios\Automatic9045\Trains\AtsExSampleTrain\Ats\$(TargetName).x64.pdb"
+
+copy /y "$(TargetDir)x86\$(TargetName).dll" "$(SolutionDir)_SampleScenarios\Automatic9045\Trains\AtsExSampleTrain\Ats\$(TargetName).x86.dll"
+if exist "$(TargetDir)x86\$(TargetName).pdb" copy /y "$(TargetDir)x86\$(TargetName).pdb" "$(SolutionDir)_SampleScenarios\Automatic9045\Trains\AtsExSampleTrain\Ats\$(TargetName).x86.pdb"</PostBuildEvent>
+  </PropertyGroup>
   <PropertyGroup>
     <DllExportIdent>65C8A9CF-CDA3-4651-82A2-EF4D34F5721F</DllExportIdent>
     <DllExportMetaLibName>DllExport.dll</DllExportMetaLibName>
-    <DllExportNamespace>Automatic9045.AtsEx.Ats</DllExportNamespace>
+    <DllExportNamespace>Automatic9045.AtsEx.Export</DllExportNamespace>
     <DllExportDDNSCecil>true</DllExportDDNSCecil>
     <DllExportSkipOnAnyCpu>false</DllExportSkipOnAnyCpu>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,82 +95,6 @@
     <DllExportPreProcType>0</DllExportPreProcType>
     <DllExportPostProcType>0</DllExportPostProcType>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="0Harmony, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lib.Harmony.2.2.1\lib\net48\0Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="Mackoy.XmlInterfaces">
-      <HintPath>..\..\..\..\..\BVE\BveTs6\Mackoy.XmlInterfaces.DLL</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
-      <HintPath>..\packages\SlimDX.4.0.13.44\lib\NET40\SlimDX.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="App.cs" />
-    <Compile Include="BveHacker\CoreHackServiceCollectionBuilder.cs" />
-    <Compile Include="BveHacker\CoreHackService.cs" />
-    <Compile Include="BveHacker\CoreHackServices\ContextMenuHacker.cs" />
-    <Compile Include="BveHacker\CoreHackServices\LoadErrorHacker.cs" />
-    <Compile Include="BveHacker\CoreHackServices\DiagramHacker.cs" />
-    <Compile Include="InternalClassWrappers\ChartForm.cs" />
-    <Compile Include="InternalClassWrappers\LoadingProgressForm.cs" />
-    <Compile Include="InternalClassWrappers\MainForm.cs" />
-    <Compile Include="InternalClassWrappers\ScenarioSelectionForm.cs" />
-    <Compile Include="InternalClassWrappers\TimePosForm.cs" />
-    <Compile Include="MapLoader\MapLoader.cs" />
-    <Compile Include="VersionForm\VersionFormProvider.cs" />
-    <Compile Include="VersionForm\VersionForm.gui.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VersionForm\VersionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ServiceCollection.cs" />
-    <Compile Include="BveHackServices\BveHackServiceCollectionBuilder.cs" />
-    <Compile Include="PluginLoader\PluginListLoader.cs" />
-    <Compile Include="PluginLoader\PluginLoader.cs" />
-    <Compile Include="AssemblyResolver.cs" />
-    <Compile Include="Ats\AtsCore.cs" />
-    <Compile Include="BveHackServices\BveHackService.cs" />
-    <Compile Include="BveHacker\CoreHackServices\MainFormHacker.cs" />
-    <Compile Include="BveHackServices\Services\LocationHacker.cs" />
-    <Compile Include="BveHackServices\Services\TimeHacker.cs" />
-    <Compile Include="BveHacker\CoreHackServices\SubFormHacker.cs" />
-    <Compile Include="BveHackServices\Services\SpeedHacker.cs" />
-    <Compile Include="BveHacker\CoreHackServices\ScenarioHacker.cs" />
-    <Compile Include="BveHackServices\Route.cs" />
-    <Compile Include="BveHackServices\Vehicle.cs" />
-    <Compile Include="AtsEx.cs" />
-    <Compile Include="BveHacker\BveHacker.cs" />
-    <Compile Include="Ats\AtsMain.cs" />
-    <Compile Include="Ats\PILoad.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\AtsEx.PluginHost\AtsEx.PluginHost.csproj">
-      <Project>{ac6ebf16-d22b-4da8-a0be-5afb729ea2e4}</Project>
-      <Name>AtsEx.PluginHost</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ImportGroup Label=".NET DllExport">
     <Import Project="$(SolutionDir)packages\DllExport.1.7.4\tools\net.r_eg.DllExport.targets" Condition="Exists($([MSBuild]::Escape('$(SolutionDir)packages\DllExport.1.7.4\tools\net.r_eg.DllExport.targets')))" Label="8337224c9ad9e356" />
   </ImportGroup>
@@ -149,13 +115,4 @@
   <Target Name="DllExportRPkgDynamicImport" BeforeTargets="PostBuildEvent" DependsOnTargets="GetFrameworkPaths" Condition="'$(DllExportModImported)' != 'true' And '$(DllExportRPkgDyn)' != 'false'">
     <MSBuild BuildInParallel="true" UseResultsCache="true" Projects="$(MSBuildProjectFullPath)" Properties="DllExportRPkgDyn=true" Targets="Build" />
   </Target>
-  <PropertyGroup>
-    <PostBuildEvent>copy /y "$(TargetDir)0Harmony.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\Trains\AtsExSampleTrain\Ats\"
-
-copy /y "$(TargetDir)x64\$(TargetName).dll" "$(SolutionDir)_SampleScenarios\Automatic9045\Trains\AtsExSampleTrain\Ats\$(TargetName).x64.dll"
-if exist "$(TargetDir)x64\$(TargetName).pdb" copy /y "$(TargetDir)x64\$(TargetName).pdb" "$(SolutionDir)_SampleScenarios\Automatic9045\Trains\AtsExSampleTrain\Ats\$(TargetName).x64.pdb"
-
-copy /y "$(TargetDir)x86\$(TargetName).dll" "$(SolutionDir)_SampleScenarios\Automatic9045\Trains\AtsExSampleTrain\Ats\$(TargetName).x86.dll"
-if exist "$(TargetDir)x86\$(TargetName).pdb" copy /y "$(TargetDir)x86\$(TargetName).pdb" "$(SolutionDir)_SampleScenarios\Automatic9045\Trains\AtsExSampleTrain\Ats\$(TargetName).x86.pdb"</PostBuildEvent>
-  </PropertyGroup>
 </Project>

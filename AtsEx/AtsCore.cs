@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.Ats
+namespace Automatic9045.AtsEx.Export
 {
 
     /// <summary>列車のスペックに関する構造体</summary>
@@ -203,8 +203,7 @@ namespace Automatic9045.AtsEx.Ats
         [DllExport(CallingConvention = CallingConvention.StdCall)]
         public static Handles Elapse(VehicleState vehicleState, int[] panel, int[] sound)
         {
-            AtsMain.VehicleState = vehicleState;
-            AtsMain.Elapse(panel, sound);
+            AtsMain.Elapse(vehicleState, panel, sound);
             return AtsMain.Handle;
         }
 
