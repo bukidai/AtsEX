@@ -125,9 +125,10 @@ namespace Automatic9045.AtsEx
             App.Instance.InvokeStarted(defaultBrakePosition);
         }
 
-        public void Elapse()
+        public void Tick()
         {
-            App.Instance.InvokeElapse();
+            VehiclePlugins.ForEach(plugin => plugin.PluginInstance.Tick());
+            MapPlugins.ForEach(plugin => plugin.PluginInstance.Tick());
         }
     }
 }

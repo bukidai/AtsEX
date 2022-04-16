@@ -97,7 +97,7 @@
     <Compile Include="IRoute.cs" />
     <Compile Include="IVehicle.cs" />
     <Compile Include="IBveHacker.cs" />
-    <Compile Include="AtsExPlugin.cs" />
+    <Compile Include="AtsExPluginBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HostServiceCollection.cs" />
   </ItemGroup>

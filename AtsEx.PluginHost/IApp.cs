@@ -11,7 +11,7 @@ namespace Automatic9045.AtsEx.PluginHost
 {
     public delegate void AllPluginLoadedEventHandler(AllPluginLoadedEventArgs e);
     public delegate void StartedEventHandler(StartedEventArgs e);
-    public delegate void ElapseEventHandler(EventArgs e);
+    public delegate void TickEventHandler(EventArgs e);
 
     public interface IApp
     {
@@ -44,13 +44,13 @@ namespace Automatic9045.AtsEx.PluginHost
 
         /// <summary>
         /// 読み込まれた AtsEX 車両プラグインのリストを取得します。
-        /// <see cref="AtsExPlugin"/> のコンストラクタ内など、<see cref="AllVehiclePluginLoaded"/> イベントが発生するより前には取得できないので注意してください。
+        /// <see cref="AtsExPluginBase"/> のコンストラクタ内など、<see cref="AllVehiclePluginLoaded"/> イベントが発生するより前には取得できないので注意してください。
         /// </summary>
         List<AtsExPluginInfo> VehiclePlugins { get; }
 
         /// <summary>
         /// 読み込まれた AtsEX 路線プラグインのリストを取得します。
-        /// <see cref="AtsExPlugin"/> のコンストラクタ内など、<see cref="AllMapPluginLoaded"/> イベントが発生するより前には取得できないので注意してください。
+        /// <see cref="AtsExPluginBase"/> のコンストラクタ内など、<see cref="AllMapPluginLoaded"/> イベントが発生するより前には取得できないので注意してください。
         /// </summary>
         List<AtsExPluginInfo> MapPlugins { get; }
 
@@ -71,10 +71,5 @@ namespace Automatic9045.AtsEx.PluginHost
         /// シナリオ開始時に発生します。従来の ATS プラグインの Initialize(int brake) に当たります。
         /// </summary>
         event StartedEventHandler Started;
-
-        /// <summary>
-        /// 毎フレーム発生します。従来の ATS プラグインの Elapse(ATS_VEHICLESTATE vehicleState, int[] panel, int[] sound) に当たります。
-        /// </summary>
-        event ElapseEventHandler Elapse;
     }
 }

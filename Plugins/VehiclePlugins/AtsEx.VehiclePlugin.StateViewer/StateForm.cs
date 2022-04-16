@@ -16,8 +16,6 @@ namespace Automatic9045.VehiclePlugins.StateViewer
         public StateForm()
         {
             InitializeComponent();
-
-            AtsExPlugin.App.Elapse += Elapse;
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
@@ -32,7 +30,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                             DateTime time;
                             if (DateTime.TryParse(textBox.Text, out time))
                             {
-                                AtsExPlugin.Route.Time = time;
+                                AtsExPluginBase.Route.Time = time;
                             }
                             break;
 
@@ -40,7 +38,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                             int location;
                             if (int.TryParse(textBox.Text, out location))
                             {
-                                AtsExPlugin.Vehicle.Location = location;
+                                AtsExPluginBase.Vehicle.Location = location;
                             }
                             break;
 
@@ -48,7 +46,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                             int speed;
                             if (int.TryParse(textBox.Text, out speed))
                             {
-                                AtsExPlugin.Vehicle.Speed = speed;
+                                AtsExPluginBase.Vehicle.Speed = speed;
                             }
                             break;
                     }
@@ -56,12 +54,12 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             }
         }
 
-        private void Elapse(EventArgs e)
+        public void Tick()
         {
-            if (!TimeValue.Focused) TimeValue.Text = AtsExPlugin.Route.Time.ToString("HH:mm:ss");
-            if (!LocationValue.Focused) LocationValue.Text = AtsExPlugin.Vehicle.Location.ToString();
-            if (!SpeedValue.Focused) SpeedValue.Text = AtsExPlugin.Vehicle.Speed.ToString();
-            DisplaySpeedValue.Text = AtsExPlugin.Vehicle.DisplaySpeed.ToString();
+            if (!TimeValue.Focused) TimeValue.Text = AtsExPluginBase.Route.Time.ToString("HH:mm:ss");
+            if (!LocationValue.Focused) LocationValue.Text = AtsExPluginBase.Vehicle.Location.ToString();
+            if (!SpeedValue.Focused) SpeedValue.Text = AtsExPluginBase.Vehicle.Speed.ToString();
+            DisplaySpeedValue.Text = AtsExPluginBase.Vehicle.DisplaySpeed.ToString();
         }
     }
 }

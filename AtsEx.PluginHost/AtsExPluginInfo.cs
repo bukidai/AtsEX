@@ -23,16 +23,16 @@ namespace Automatic9045.AtsEx.PluginHost
         public Assembly SourceAssembly { get; }
 
         /// <summary>
-        /// AtsEX プラグインの <see cref="AtsExPlugin"/> を継承するメインクラスの完全修飾名を取得します。
+        /// AtsEX プラグインの <see cref="AtsExPluginBase"/> を継承するメインクラスの完全修飾名を取得します。
         /// </summary>
         public string MainClassFullName { get; }
 
         /// <summary>
-        /// AtsEX プラグインの <see cref="AtsExPlugin"/> を継承するメインクラスのインスタンスを取得します。
+        /// AtsEX プラグインの <see cref="AtsExPluginBase"/> を継承するメインクラスのインスタンスを取得します。
         /// </summary>
-        public AtsExPlugin PluginInstance { get; }
+        public AtsExPluginBase PluginInstance { get; }
 
-        public AtsExPluginInfo(PluginType pluginType,Assembly sourceAssembly, string mainClassFullName, AtsExPlugin pluginInstance)
+        public AtsExPluginInfo(PluginType pluginType,Assembly sourceAssembly, string mainClassFullName, AtsExPluginBase pluginInstance)
         {
             PluginType = pluginType;
             SourceAssembly = sourceAssembly;

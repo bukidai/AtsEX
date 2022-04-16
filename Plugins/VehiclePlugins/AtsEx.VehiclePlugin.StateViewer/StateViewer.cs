@@ -9,7 +9,7 @@ using Automatic9045.AtsEx.PluginHost;
 
 namespace Automatic9045.VehiclePlugins.StateViewer
 {
-    public class StateViewer : AtsExPlugin, IDisposable
+    public class StateViewer : AtsExPluginBase, IDisposable
     {
         private StateForm Form;
         private ToolStripMenuItem MenuItem;
@@ -33,6 +33,11 @@ namespace Automatic9045.VehiclePlugins.StateViewer
 
             MenuItem.Checked = true;
             BveHacker.MainForm.Focus();
+        }
+
+        public override void Tick()
+        {
+            Form.Tick();
         }
 
         private void MenuItemCheckedChanged(object sender, EventArgs e)

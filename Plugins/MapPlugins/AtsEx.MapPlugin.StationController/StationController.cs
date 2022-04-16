@@ -9,7 +9,7 @@ using Automatic9045.AtsEx.PluginHost;
 
 namespace Automatic9045.MapPlugins.StationController
 {
-    public class StationController : AtsExPlugin, IDisposable
+    public class StationController : AtsExPluginBase, IDisposable
     {
         private ControllerForm Form;
         private ToolStripMenuItem MenuItem;
@@ -33,6 +33,10 @@ namespace Automatic9045.MapPlugins.StationController
 
             MenuItem.Checked = true;
             BveHacker.MainForm.Focus();
+        }
+
+        public override void Tick()
+        {
         }
 
         private void MenuItemCheckedChanged(object sender, EventArgs e)

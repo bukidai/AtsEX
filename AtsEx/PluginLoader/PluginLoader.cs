@@ -44,9 +44,9 @@ namespace Automatic9045.AtsEx
 
         public IEnumerable<AtsExPluginInfo> Load(PluginType pluginType, string relativePath, string absolutePath, string senderFileName = null, int lineIndex = 0)
         {
-            if (!AtsExPlugin.HasInitialized)
+            if (!AtsExPluginBase.HasInitialized)
             {
-                AtsExPlugin.Initialize(HostServiceCollection);
+                AtsExPluginBase.Initialize(HostServiceCollection);
             }
 
             Assembly assembly = null;
@@ -66,12 +66,12 @@ namespace Automatic9045.AtsEx
             }
 
             Type[] allTypes = assembly.GetTypes();
-            IEnumerable<Type> pluginTypeCandidates = allTypes.Where(t => t.IsClass && t.IsPublic && !t.IsAbstract && t.IsSubclassOf(typeof(AtsExPlugin)));
+            IEnumerable<Type> pluginTypeCandidates = allTypes.Where(t => t.IsClass && t.IsPublic && !t.IsAbstract && t.IsSubclassOf(typeof(AtsExPluginBase)));
             if (!pluginTypeCandidates.Any())
             {
                 throw new BveFileLoadException(
-                    $"\"{relativePath}\" で {nameof(AtsExPlugin)} を継承しているクラスが見つかりませんでした。AtsEX プラグインではない可能性があります。" +
-                    $"AtsEX プラグインとして認識されるには、{nameof(AtsExPlugin)} を継承しているクラスが必要です。",
+                    $"\"{relativePath}\" で {nameof(AtsExPluginBase)} を継承しているクラスが見つかりませんでした。AtsEX プラグインではない可能性があります。" +
+                    $"AtsEX プラグインとして認識されるには、{nameof(AtsExPluginBase)} を継承しているクラスが必要です。",
                     senderFileName, lineIndex);
             }
 
@@ -80,14 +80,14 @@ namespace Automatic9045.AtsEx
                 ConstructorInfo constructorInfo = t.GetConstructor(new Type[0]);
                 if (constructorInfo is null) return null;
 
-                AtsExPlugin pluginInstance = constructorInfo.Invoke(new object[0]) as AtsExPlugin;
+                AtsExPluginBase pluginInstance = constructorInfo.Invoke(new object[0]) as AtsExPluginBase;
                 AtsExPluginInfo pluginInfo = new AtsExPluginInfo(pluginType, assembly, t.FullName, pluginInstance);
                 return pluginInfo;
             }).Where(plugin => !(plugin is null)).ToArray();
             if (!plugins.Any())
             {
                 throw new BveFileLoadException(
-                    $"\"{relativePath}\" で {nameof(AtsExPlugin)} を継承しているクラスは見つかりましたが、パラメータを持たないコンストラクタが見つかりませんでした。",
+                    $"\"{relativePath}\" で {nameof(AtsExPluginBase)} を継承しているクラスは見つかりましたが、パラメータを持たないコンストラクタが見つかりませんでした。",
                     senderFileName, lineIndex);
             }
 

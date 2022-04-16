@@ -71,15 +71,8 @@ namespace Automatic9045.AtsEx
             Started?.Invoke(e);
         }
 
-        public void InvokeElapse()
-        {
-            EventArgs e = new EventArgs();
-            Elapse?.Invoke(e);
-        }
-
         public event AllPluginLoadedEventHandler AllVehiclePluginLoaded;
         public event AllPluginLoadedEventHandler AllMapPluginLoaded;
         public event StartedEventHandler Started;
-        public event ElapseEventHandler Elapse;
     }
 }

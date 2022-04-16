@@ -93,7 +93,7 @@ namespace Automatic9045.AtsEx.Ats
 
         public static void Elapse(int[] panel, int[] sound)
         {
-            AtsEx?.Elapse();
+            AtsEx?.Tick();
         }
 
         public static void SetPower(int notch)

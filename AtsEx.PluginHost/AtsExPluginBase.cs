@@ -11,7 +11,7 @@ namespace Automatic9045.AtsEx.PluginHost
     /// <summary>
     /// AtsEX プラグインを表します。
     /// </summary>
-    public class AtsExPlugin
+    public abstract class AtsExPluginBase
     {
         public static bool HasInitialized { get; private set; } = false;
 
@@ -23,7 +23,7 @@ namespace Automatic9045.AtsEx.PluginHost
 
         public static void Initialize(HostServiceCollection services)
         {
-            HostServiceCollection pluginHost = services as HostServiceCollection;
+            HostServiceCollection pluginHost = services;
 
             App = pluginHost.App;
             BveHacker = pluginHost.BveHacker;
@@ -34,8 +34,13 @@ namespace Automatic9045.AtsEx.PluginHost
             HasInitialized = true;
         }
 
-        public AtsExPlugin()
+        public AtsExPluginBase()
         {
         }
+
+        /// <summary>
+        /// 毎フレーム呼び出されます。従来の ATS プラグインの Elapse(ATS_VEHICLESTATE vehicleState, int[] panel, int[] sound) に当たります。
+        /// </summary>
+        public abstract void Tick();
     }
 }
