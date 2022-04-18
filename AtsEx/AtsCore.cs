@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Automatic9045.AtsEx.Export
 {
@@ -168,9 +169,22 @@ namespace Automatic9045.AtsEx.Export
     {
         private const int Version = 0x00020000;
 
+        private static AtsExActivator Activator;
+
+        static AtsCore()
+        {
+#if DEBUG
+            MessageBox.Show("AtsEX ATSプラグイン拡張キット\n\nデバッグモードで読み込まれました。");
+#endif
+
+            Activator = new AtsExActivator();
+            Activator.UpdateIfNotLatest();
+            Activator.ResolveAssemblies();
+        }
+
         /// <summary>Called when this plugin is loaded</summary>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void Load() => AtsMain.Load();
+        public static void Load() => AtsMain.Load(Activator);
 
         /// <summary>Called when this plugin is unloaded</summary>
         [DllExport(CallingConvention = CallingConvention.StdCall)]

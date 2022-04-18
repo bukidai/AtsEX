@@ -31,49 +31,9 @@ namespace Automatic9045.AtsEx.Export
 
         public static AtsEx AtsEx { get; private set; }
 
-        public static void Load()
+        public static void Load(AtsExActivator activator)
         {
-#if DEBUG
-            MessageBox.Show("AtsEX ATSプラグイン拡張キット\n\nデバッグモードで読み込まれました。");
-#endif
-
-            Process targetProcess = Process.GetCurrentProcess();
-            AppDomain targetAppDomain = AppDomain.CurrentDomain;
-            Assembly targetAssembly = Assembly.GetEntryAssembly();
-
-            if (targetAssembly is null)
-            {
-                ShowErrorDialog("BVE 本体が読み込めないフォーマットです。");
-            }
-            else if (!targetAssembly.GetTypes().Any(t => t.Namespace == "Mackoy.Bvets"))
-            {
-                ShowErrorDialog("BVE 本体と異なるプロセスで実行することはできません。", "https://automatic9045.github.io/contents/bve/AtsEX/faq/#diff-process");
-            }
-            
-            AssemblyResolver assemblyResolver = new AssemblyResolver(targetAppDomain);
-            assemblyResolver.Register(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "0Harmony.dll"));
-            assemblyResolver.Register(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "atsex.pihost.dll"));
-
-            AtsEx = new AtsEx(targetProcess, targetAppDomain, targetAssembly);
-
-
-            void ShowErrorDialog(string message, string faqUrl = null)
-            {
-                if (faqUrl is null)
-                {
-                    MessageBox.Show(message, $"エラー - AtsEX", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    DialogResult dialogResult = MessageBox.Show($"{message}\n\nこのエラーに関する情報を表示しますか？\n（ブラウザで Web サイトが開きます）", $"エラー - AtsEX", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        Process.Start(faqUrl);
-                    }
-                }
-
-                throw new NotSupportedException(message);
-            }
+            AtsEx = new AtsEx(activator.TargetProcess, activator.TargetAppDomain, activator.TargetAssembly);
         }
 
         public static void Dispose()

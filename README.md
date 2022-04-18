@@ -25,3 +25,7 @@ Copyright (c) 2017  Andreas Pardeike
 ### [SlimDX](https://www.nuget.org/packages/SlimDX/) (MIT)
 
 Copyright (c) 2013  exDreamDuck
+
+### [Octokit](https://github.com/octokit/octokit.net) (MIT)
+
+Copyright 2017 GitHub, Inc.
