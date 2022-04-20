@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Automatic9045.AtsEx.Export
+namespace Automatic9045.AtsEx
 {
     internal class AtsExActivator
     {

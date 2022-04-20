@@ -15,22 +15,24 @@ namespace Automatic9045.AtsEx
     {
         public static App Instance { get; private set; }
 
-        public static void CreateInstance(Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
+        public static void CreateInstance(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
         {
-            Instance = new App(bveAssembly, atsExAssembly, atsExPluginHostAssembly);
+            Instance = new App(bveAssembly, callerAssembly, atsExAssembly, atsExPluginHostAssembly);
         }
 
 
-        private App(Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
+        private App(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
         {
-            AtsExAssembly = Assembly.GetExecutingAssembly();
             BveAssembly = bveAssembly;
+            AtsExCallerAssembly = callerAssembly;
+            AtsExAssembly = atsExAssembly;
             AtsExPluginHostAssembly = atsExPluginHostAssembly;
         }
 
         public string ProductName { get; } = "AtsEX ATSプラグイン拡張キット for BVE 5 & 6";
         public string ProductShortName { get; } = "AtsEX";
 
+        public Assembly AtsExCallerAssembly { get; }
         public Assembly AtsExAssembly { get; }
         public Assembly AtsExPluginHostAssembly { get; }
         public Assembly BveAssembly { get; }

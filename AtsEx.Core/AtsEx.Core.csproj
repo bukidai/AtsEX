@@ -90,12 +90,13 @@
     <ProjectReference Include="..\AtsEx.PluginHost\AtsEx.PluginHost.csproj">
       <Project>{ac6ebf16-d22b-4da8-a0be-5afb729ea2e4}</Project>
       <Name>AtsEx.PluginHost</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(TargetDir)0Harmony.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\Trains\AtsExSampleTrain\Ats\"
+    <PostBuildEvent>copy /y "$(TargetDir)0Harmony.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
 
-copy /y "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\Trains\AtsExSampleTrain\Ats\"</PostBuildEvent>
+copy /y "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

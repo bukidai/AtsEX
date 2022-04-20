@@ -2,5 +2,5 @@ bvets Vehicle 2.00
 PerformanceCurve = Notch\Notch.txt
 Parameters = Parameters.txt
 Sound = Sound.txt
-Ats64 = Ats\atsex.x64.dll
-Ats32 = Ats\atsex.x86.dll
+Ats64 = Ats\AtsEx.Caller.x64.dll
+Ats32 = Ats\AtsEx.Caller.x86.dll

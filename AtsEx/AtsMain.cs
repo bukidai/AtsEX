@@ -8,10 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Automatic9045.AtsEx;
 using Automatic9045.AtsEx.PluginHost;
 
-namespace Automatic9045.AtsEx.Export
+namespace Automatic9045.AtsEx
 {
     /// <summary>メインの機能をここに実装する。</summary>
     internal static class AtsMain
@@ -31,9 +30,9 @@ namespace Automatic9045.AtsEx.Export
 
         public static AtsEx AtsEx { get; private set; }
 
-        public static void Load(AtsExActivator activator)
+        public static void Load(Assembly callerAssembly, AtsExActivator activator)
         {
-            AtsEx = new AtsEx(activator.TargetProcess, activator.TargetAppDomain, activator.TargetAssembly);
+            AtsEx = new AtsEx(activator.TargetProcess, activator.TargetAppDomain, activator.TargetAssembly, callerAssembly);
         }
 
         public static void Dispose()

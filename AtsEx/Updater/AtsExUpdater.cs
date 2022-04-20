@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 using Octokit;
 
-namespace Automatic9045.AtsEx.Export
+namespace Automatic9045.AtsEx
 {
     internal sealed class AtsExUpdater
     {

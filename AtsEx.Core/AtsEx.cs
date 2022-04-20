@@ -18,6 +18,7 @@ namespace Automatic9045.AtsEx
         private Process TargetProcess { get; }
         private AppDomain TargetAppDomain { get; }
         private Assembly TargetAssembly { get; }
+        private Assembly CallerAssembly { get; }
         private Assembly ExecutingAssembly { get; } = Assembly.GetExecutingAssembly();
         private Assembly PluginHostAssembly { get; }
 
@@ -26,7 +27,7 @@ namespace Automatic9045.AtsEx
         private List<AtsExPluginInfo> VehiclePlugins { get; }
         private List<AtsExPluginInfo> MapPlugins { get; }
 
-        public AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly)
+        public AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, Assembly callerAssembly)
         {
             string pluginHostAssemblyPath = Path.Combine(Path.GetDirectoryName(ExecutingAssembly.Location), "atsex.pihost.dll");
             PluginHostAssembly = Assembly.LoadFrom(pluginHostAssemblyPath);
@@ -34,6 +35,7 @@ namespace Automatic9045.AtsEx
             TargetProcess = targetProcess;
             TargetAppDomain = targetAppDomain;
             TargetAssembly = targetAssembly;
+            CallerAssembly = callerAssembly;
 
             {
                 Version bveVersion = TargetAssembly.GetName().Version;
@@ -45,7 +47,7 @@ namespace Automatic9045.AtsEx
                 }
             }
 
-            App.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly);
+            App.CreateInstance(TargetAssembly, CallerAssembly, ExecutingAssembly, PluginHostAssembly);
             BveHacker.CreateInstance(TargetProcess);
 
             VersionFormProvider = new VersionFormProvider();
@@ -54,7 +56,7 @@ namespace Automatic9045.AtsEx
             try
             {
                 {
-                    string vehiclePluginListPath = Path.Combine(Path.GetDirectoryName(ExecutingAssembly.Location), "atsex.pilist.txt");
+                    string vehiclePluginListPath = Path.Combine(Path.GetDirectoryName(CallerAssembly.Location), "atsex.pilist.txt");
                     VehiclePlugins = pluginLoader.LoadFromList(PluginType.VehiclePlugin, vehiclePluginListPath).ToList();
                 }
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Automatic9045.AtsEx.Export
+namespace Automatic9045.AtsEx
 {
     internal class AutoUpdatePackageInfo
     {
