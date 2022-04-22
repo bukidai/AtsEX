@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <BveTypeNameDefinitions xmlns="http://automatic9045.github.io/ns/xmlschemas/BveTypesXmlSchema.xsd">
 	<!-- Internal class wrappers -->
-	<BveType Wrapper="ChartForm" Original="bj">
-	</BveType>
-	<BveType Wrapper="LoadingProgressForm" Original="dt">
+	<Class Wrapper="ChartForm" Original="bj">
+	</Class>
+	<Class Wrapper="LoadingProgressForm" Original="dt">
 		<Method Wrapper="ThrowError" WrapperParams="System.String, System.String, System.Int32, System.Int32" Original="a"/>
 		<Method Wrapper="ThrowError" WrapperParams="LoadError" Original="a"/>
 		<Method Wrapper="ThrowErrors" WrapperParams="System.Collections.Generic.IEnumerable`1[LoadError]" Original="a"/>
-	</BveType>
-	<BveType Wrapper="MainForm" Original="bz">
+	</Class>
+	<Class Wrapper="MainForm" Original="bz">
 		<Field WrapperProperty="ScenarioSelectForm" Original="c" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="LoadingProgressForm" Original="k" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="TimePosForm" Original="d" IsOriginalPrivate="true"/>
@@ -16,16 +16,16 @@
 		<Field WrapperProperty="ContextMenu" Original="y" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="CurrentScenarioInfo" Original="q" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="CurrentScenarioProvider" Original="n" IsOriginalPrivate="true"/>
-	</BveType>
-	<BveType Wrapper="ScenarioSelectionForm" Original="da">
-	</BveType>
-	<BveType Wrapper="TimePosForm" Original="aj">
+	</Class>
+	<Class Wrapper="ScenarioSelectionForm" Original="da">
+	</Class>
+	<Class Wrapper="TimePosForm" Original="aj">
 		<Method Wrapper="SetScenario" WrapperParams="ScenarioProvider" Original="a"/>
 		<Method Wrapper="Draw" WrapperParams="void" Original="d" IsOriginalPrivate="true"/>
-	</BveType>
+	</Class>
 	<!-- Internal class wrappers END -->
 
-	<BveType Wrapper="AssistantText" Original="bc">
+	<Class Wrapper="AssistantText" Original="bc">
 		<Property Wrapper="Color">
 			<Getter Original="e"/>
 			<Setter Original="a"/>
@@ -34,9 +34,9 @@
 			<Getter Original="c"/>
 			<Setter Original="a"/>
 		</Property>
-	</BveType>
+	</Class>
 
-	<BveType Wrapper="AssistantTextBase" Original="cu">
+	<Class Wrapper="AssistantTextBase" Original="cu">
 		<Property Wrapper="AssistantSettings">
 			<Getter Original="h"/>
 		</Property>
@@ -48,16 +48,16 @@
 			<Getter Original="g"/>
 		</Property>
 		<Method Wrapper="Draw" WrapperParams="void" Original="o"/>
-	</BveType>
+	</Class>
 
-	<BveType Wrapper="BveFile" Original="b5">
+	<Class Wrapper="BveFile" Original="b5">
 		<Property Wrapper="Path">
 			<Getter Original="d"/>
 			<Setter Original="c"/>
 		</Property>
-	</BveType>
+	</Class>
 
-	<BveType Wrapper="LoadError" Original="ai">
+	<Class Wrapper="LoadError" Original="ai">
 		<Property Wrapper="Text">
 			<Getter Original="b"/>
 			<Setter Original="b"/>
@@ -74,19 +74,19 @@
 			<Getter Original="a"/>
 			<Setter Original="a"/>
 		</Property>
-	</BveType>
+	</Class>
 
-	<BveType Wrapper="MapObjectBase" Original="db">
+	<Class Wrapper="MapObjectBase" Original="db">
 		<Property Wrapper="Location">
 			<Getter Original="v"/>
 			<Setter Original="g"/>
 		</Property>
-	</BveType>
+	</Class>
 
-	<BveType Wrapper="MapObjectList" Original="b6">
-	</BveType>
+	<Class Wrapper="MapObjectList" Original="b6">
+	</Class>
 
-	<BveType Wrapper="MaterialInfo" Original="e0">
+	<Class Wrapper="MaterialInfo" Original="e0">
 		<Property Wrapper="Material">
 			<Getter Original="a"/>
 			<Setter Original="a"/>
@@ -99,9 +99,9 @@
 			<Getter Original="c"/>
 			<Setter Original="a"/>
 		</Property>
-	</BveType>
+	</Class>
 
-	<BveType Wrapper="Model" Original="fp">
+	<Class Wrapper="Model" Original="fp">
 		<Property Wrapper="Mesh">
 			<Getter Original="e"/>
 			<Setter Original="b"/>
@@ -110,16 +110,16 @@
 			<Getter Original="a"/>
 			<Setter Original="a"/>
 		</Property>
-	</BveType>
+	</Class>
 
-	<BveType Wrapper="RandomFileList" Original="dr">
+	<Class Wrapper="RandomFileList" Original="dr">
 		<Property Wrapper="SelectedFile">
 			<Getter Original="a"/>
 			<Setter Original="a" IsOriginalPrivate="true"/>
 		</Property>
-	</BveType>
+	</Class>
 
-	<BveType Wrapper="Route" Original="br">
+	<Class Wrapper="Route" Original="br">
 		<Property Wrapper="DrawLimitLocation">
 			<Getter Original="e"/>
 			<Setter Original="a"/>
@@ -140,9 +140,9 @@
 			<Getter Original="s"/>
 			<Setter Original="a"/>
 		</Property>
-	</BveType>
+	</Class>
 
-	<BveType Wrapper="ScenarioInfo" Original="ek">
+	<Class Wrapper="ScenarioInfo" Original="ek">
 		<Property Wrapper="Path">
 			<Getter Original="i"/>
 			<Setter Original="g"/>
@@ -193,9 +193,15 @@
 		</Property>
 
 		<Method Wrapper="FromFile" WrapperParams="System.String" Original="a" IsWrapperStatic="true" IsOriginalStatic="true"/>
-	</BveType>
+	</Class>
 
-	<BveType Wrapper="ScenarioProvider" Original="er">
+	<Class Wrapper="ScenarioProvider" Original="er">
+		<Property Wrapper="TimeManager">
+			<Getter Original="j"/>
+		</Property>
+		<Property Wrapper="LocationManager">
+			<Getter Original="b"/>
+		</Property>
 		<Property Wrapper="Route">
 			<Getter Original="h"/>
 		</Property>
@@ -205,15 +211,15 @@
 		<Property Wrapper="TimeTable">
 			<Getter Original="d"/>
 		</Property>
-	</BveType>
+	</Class>
 
-	<BveType Wrapper="SingleStructureList" Original="bg">
-	</BveType>
+	<Class Wrapper="SingleStructureList" Original="bg">
+	</Class>
 
-	<BveType Wrapper="Sound" Original="ep">
-	</BveType>
+	<Class Wrapper="Sound" Original="ep">
+	</Class>
 
-	<BveType Wrapper="Station" Original="ef">
+	<Class Wrapper="Station" Original="ef">
 		<Property Wrapper="Name">
 			<Getter Original="a"/>
 			<Setter Original="a" IsOriginalPrivate="true"/>
@@ -296,14 +302,14 @@
 			<Getter Original="i"/>
 			<Setter Original="d"/>
 		</Property>
-	</BveType>
+	</Class>
 
-	<BveType Wrapper="StationList" Original="dp">
+	<Class Wrapper="StationList" Original="dp">
 		<Method Wrapper="Insert" WrapperParams="Station" Original="a"/>
 		<Method Wrapper="GetStandardTime" WrapperParams="System.Double" Original="a"/>
-	</BveType>
+	</Class>
 
-	<BveType Wrapper="StructureSet" Original="dn">
+	<Class Wrapper="StructureSet" Original="dn">
 		<Property Wrapper="DrawLimitLocation">
 			<Getter Original="a"/>
 			<Setter Original="a"/>
@@ -320,9 +326,9 @@
 		<Property Wrapper="Signals">
 			<Getter Original="d"/>
 		</Property>
-	</BveType>
+	</Class>
 
-	<BveType Wrapper="TimeTable" Original="aw">
+	<Class Wrapper="TimeTable" Original="aw">
 		<Field WrapperProperty="Model" Original="j" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="NameTexts" Original="b" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="ArrivalTimeTexts" Original="c" IsOriginalPrivate="true"/>
@@ -331,8 +337,8 @@
 		<Field WrapperProperty="ArrivalTimeTextWidths" Original="f" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="DepertureTimeTextWidths" Original="g" IsOriginalPrivate="true"/>
 		<Method Wrapper="Update" WrapperParams="void" Original="a" IsOriginalPrivate="true"/>
-	</BveType>
+	</Class>
 
-	<BveType Wrapper="Vehicle" Original="f">
-	</BveType>
+	<Class Wrapper="Vehicle" Original="f">
+	</Class>
 </BveTypeNameDefinitions>

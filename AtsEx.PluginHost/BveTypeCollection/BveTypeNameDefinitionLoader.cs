@@ -23,19 +23,17 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 
             string targetNamespace = $"{{{schema.TargetNamespace}}}";
 
-            var a = doc.Elements();
-
             XElement root = doc.Element(targetNamespace + "BveTypeNameDefinitions");
-            IEnumerable<XElement> types = root.Elements(targetNamespace + "BveType");
-            foreach (XElement type in types)
+            IEnumerable<XElement> classElements = root.Elements(targetNamespace + "Class");
+            foreach (XElement classElement in classElements)
             {
-                string typeWrapperName = (string)type.Attribute("Wrapper");
-                string typeOriginalName = (string)type.Attribute("Original");
+                string typeWrapperName = (string)classElement.Attribute("Wrapper");
+                string typeOriginalName = (string)classElement.Attribute("Original");
 
                 TypeMemberNameCollection memberCollection = new TypeMemberNameCollection(typeWrapperName, typeOriginalName);
 
                 {
-                    IEnumerable<XElement> properties = type.Elements(targetNamespace + "Property");
+                    IEnumerable<XElement> properties = classElement.Elements(targetNamespace + "Property");
                     foreach (XElement property in properties)
                     {
                         string wrapperName = (string)property.Attribute("Wrapper");
@@ -78,7 +76,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                 }
 
                 {
-                    IEnumerable<XElement> methods = type.Elements(targetNamespace + "Method");
+                    IEnumerable<XElement> methods = classElement.Elements(targetNamespace + "Method");
                     foreach (XElement method in methods)
                     {
                         string wrapperName = (string)method.Attribute("Wrapper");
@@ -97,7 +95,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                 }
 
                 {
-                    IEnumerable<XElement> fields = type.Elements(targetNamespace + "Field");
+                    IEnumerable<XElement> fields = classElement.Elements(targetNamespace + "Field");
                     foreach (XElement field in fields)
                     {
                         string wrapperPropertyName = (string)field.Attribute("WrapperProperty");
