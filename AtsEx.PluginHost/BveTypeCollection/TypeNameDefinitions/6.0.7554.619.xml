@@ -76,6 +76,13 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="LocationManager" Original="ct">
+		<Property Wrapper="SpeedMeterPerSecond">
+			<Getter Original="g"/>
+		</Property>
+		<Method Wrapper="SetSpeed" WrapperParams="System.Double" Original="d"/>
+	</Class>
+
 	<Class Wrapper="MapObjectBase" Original="db">
 		<Property Wrapper="Location">
 			<Getter Original="v"/>
@@ -328,6 +335,19 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="TimeManager" Original="cn">
+		<Enum Wrapper="GameState" Original="a"/>
+
+		<Property Wrapper="GameState">
+			<Getter Original="g"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="TimeMilliseconds">
+			<Getter Original="b"/>
+		</Property>
+		<Method Wrapper="SetTime" WrapperParams="System.Int32" Original="a"/>
+	</Class>
+
 	<Class Wrapper="TimeTable" Original="aw">
 		<Field WrapperProperty="Model" Original="j" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="NameTexts" Original="b" IsOriginalPrivate="true"/>
@@ -337,6 +357,13 @@
 		<Field WrapperProperty="ArrivalTimeTextWidths" Original="f" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="DepertureTimeTextWidths" Original="g" IsOriginalPrivate="true"/>
 		<Method Wrapper="Update" WrapperParams="void" Original="a" IsOriginalPrivate="true"/>
+	</Class>
+
+	<Class Wrapper="UserVehicleLocationManager" Original="fu">
+		<Property Wrapper="Location">
+			<Getter Original="c"/>
+		</Property>
+		<Method Wrapper="SetLocation" WrapperParams="System.Double, System.Boolean" Original="a"/>
 	</Class>
 
 	<Class Wrapper="Vehicle" Original="f">

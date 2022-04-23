@@ -67,6 +67,10 @@
     <Compile Include="BveTypeCollection\TypeMemberNameCollection\TypeMemberNameCollectionBase.cs" />
     <Compile Include="BveTypeCollection\TypeTextParser.cs" />
     <Compile Include="BveTypeCollection\TypeMemberNameCollection\ClassMemberNameCollection.cs" />
+    <Compile Include="ClassWrappers\Public\UserVehicleLocationManager.cs" />
+    <Compile Include="ClassWrappers\Public\LocationManager.cs" />
+    <Compile Include="ClassWrappers\Public\TimeManager.cs" />
+    <Compile Include="Enums\GameState.cs" />
     <Compile Include="Imports\VehicleSpec.cs" />
     <Compile Include="Imports\VehicleState.cs" />
     <Compile Include="ClassWrappers\ClassWrapper.cs" />

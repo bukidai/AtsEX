@@ -15,6 +15,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<ScenarioProvider>();
 
+            TimeManagerGetMethod = members.GetSourcePropertyGetterOf(nameof(TimeManager));
+            LocationManagerGetMethod = members.GetSourcePropertyGetterOf(nameof(LocationManager));
             RouteGetMethod = members.GetSourcePropertyGetterOf(nameof(Route));
             VehicleGetMethod = members.GetSourcePropertyGetterOf(nameof(Vehicle));
             TimeTableGetMethod = members.GetSourcePropertyGetterOf(nameof(TimeTable));
@@ -28,6 +30,18 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             if (src is null) return null;
             return new ScenarioProvider(src);
+        }
+
+        private static MethodInfo TimeManagerGetMethod;
+        public TimeManager TimeManager
+        {
+            get => ClassWrappers.TimeManager.FromSource(TimeManagerGetMethod.Invoke(Src, null));
+        }
+
+        private static MethodInfo LocationManagerGetMethod;
+        public UserVehicleLocationManager LocationManager
+        {
+            get => ClassWrappers.UserVehicleLocationManager.FromSource(LocationManagerGetMethod.Invoke(Src, null));
         }
 
         private static MethodInfo RouteGetMethod;
