@@ -22,107 +22,46 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
         /// <param name="bveAssembly">BVE の <see cref="Assembly"/>。</param>
         /// <param name="atsExAssembly">AtsEX 本体 (atsex.dll) の <see cref="Assembly"/>。</param>
         /// <param name="atsExPluginHostAssembly">AtsEX プラグインホスト (atsex.pihost.dll) の <see cref="Assembly"/>。</param>
-        /// <param name="loadLatestVersionIfNotSupported">実行中の BVE がサポートされる最新のバージョンを超えている場合、サポートされる最新のバージョンのプロファイルで代用するか。</param>
+        /// <param name="allowNotSupportedVersion">実行中の BVE がサポートされないバージョンの場合、他のバージョン向けのプロファイルで代用するか。</param>
         /// <returns>使用するプロファイルが対応する BVE のバージョン。</returns>
         /// <exception cref="InvalidOperationException"></exception>
         /// <exception cref="KeyNotFoundException"></exception>
         /// <exception cref="TypeLoadException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        public static Version CreateInstance(Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly, bool loadLatestVersionIfNotSupported)
+        public static Version CreateInstance(Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly, bool allowNotSupportedVersion)
         {
             if (!(Instance is null))
             {
                 throw new InvalidOperationException("インスタンスは既に生成されています。");
             }
 
-            Version bveVersion = bveAssembly.GetName().Version;
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
-            string defaultNamespace = $"{typeof(BveTypeCollectionProvider).Namespace}.TypeNameDefinitions";
 
+            ProfileSelector profileSelector = new ProfileSelector(bveAssembly);
             Version profileVersion;
-            {
-                string[] resourceNames = executingAssembly.GetManifestResourceNames();
-                if (resourceNames.Contains($"{defaultNamespace}.{bveVersion}.xml"))
-                {
-                    profileVersion = bveVersion;
-                }
-                else
-                {
-                    if (loadLatestVersionIfNotSupported)
-                    {
-                        IEnumerable<Version> supportedAllVersions = resourceNames.Select(name => Version.Parse(name.Replace(".xml", "")));
-                        IEnumerable<Version> supportedVersions = supportedAllVersions.Where(version => version.Major == bveVersion.Major);
-                        if (supportedVersions.Any())
-                        {
-                            Version latestVersion = supportedVersions.Max();
-                            Version oldestVersion = supportedVersions.Min();
-                            if (bveVersion < latestVersion)
-                            {
-                                if (bveVersion < oldestVersion)
-                                {
-                                    throw new NotSupportedException($"BVE バージョン {bveVersion} には対応していません。{oldestVersion} 以降のみサポートしています。");
-                                }
-                                else
-                                {
-                                    throw new NotSupportedException($"BVE バージョン {bveVersion} は認識されていません。サポートされないバージョンであるか、不正なバージョンです。");
-                                }
-                            }
-
-                            profileVersion = latestVersion;
-                        }
-                        else
-                        {
-                            IEnumerable<Version> newerVersions = supportedAllVersions.Where(version => version.Major < bveVersion.Major);
-                            if (newerVersions.Any())
-                            {
-                                profileVersion = newerVersions.Max();
-                            }
-                            else
-                            {
-                                throw new NotSupportedException($"BVE バージョン {bveVersion} には対応していません。{supportedAllVersions.Min().Major}.x 以降のみサポートしています。");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        throw new NotSupportedException($"BVE バージョン {bveVersion} には対応していません。");
-                    }
-                }
-            }
-
             IEnumerable<TypeMemberNameCollectionBase> nameCollection;
-            using (Stream doc = executingAssembly.GetManifestResourceStream($"{defaultNamespace}.{profileVersion}.xml"))
+            using (ProfileInfo profile = profileSelector.GetProfileStream(allowNotSupportedVersion))
             {
-                using (Stream schema = executingAssembly.GetManifestResourceStream($"{defaultNamespace}.BveTypesXmlSchema.xsd"))
+                profileVersion = profile.Version;
+
+                using (Stream schema = profileSelector.GetSchemaStream())
                 {
-                    nameCollection = BveTypeNameDefinitionLoader.LoadFile(doc, schema).ToArray();
+                    nameCollection = BveTypeNameDefinitionLoader.LoadFile(profile.Stream, schema).ToArray();
                 }
             }
 
             IEnumerable<Type> wrapperTypes = atsExPluginHostAssembly.GetTypes().Concat(atsExAssembly.GetTypes()).Where(type => (type.IsClass && type.IsSubclassOf(typeof(ClassWrapper))) || type.IsEnum);
             IEnumerable<Type> originalTypes = bveAssembly.GetTypes();
 
-            IEnumerable<KeyValuePair<Type, Type>> wrapperOriginalTypePairs = nameCollection.Select(src =>
-            {
-                Type wrapperType = ParseWrapperTypeName(src.WrapperTypeName);
-                if (wrapperType is null)
-                {
-                    throw new KeyNotFoundException($"ラッパー型 '{src.WrapperTypeName}' は存在しません。");
-                }
-
-                Type originalType = ParseOriginalTypeName(src.OriginalTypeName);
-                if (originalType is null)
-                {
-                    throw new KeyNotFoundException($"ラッパー型 '{src.WrapperTypeName}' のオリジナル型 '{src.OriginalTypeName}' は BVE 内に存在しません。");
-                }
-
-                return new KeyValuePair<Type, Type>(wrapperType, originalType);
-            });
+            TypeInfoGenerator typeInfoGenerator = new TypeInfoGenerator(bveAssembly, atsExAssembly);
+            IEnumerable<TypeInfo> typeInfos = typeInfoGenerator.ConvertTypeMemberNameCollections(nameCollection);
 
             IEnumerable<TypeMemberCollectionBase> types = nameCollection.Select<TypeMemberNameCollectionBase, TypeMemberCollectionBase>(src =>
             {
-                Type wrapperType = ParseWrapperTypeName(src.WrapperTypeName);
-                Type originalType = wrapperOriginalTypePairs.First(x => x.Key == wrapperType).Value;
+                TypeInfo typeInfo = typeInfos.First(t => t.Src == src);
+
+                Type wrapperType = typeInfo.WrapperType;
+                Type originalType = typeInfo.OriginalType;
 
                 switch (src)
                 {
@@ -238,9 +177,6 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 
 
             #region メソッド
-            Type ParseWrapperTypeName(string typeName) => wrapperTypes.FirstOrDefault(wrapperType => wrapperType.Name == typeName);
-            Type ParseOriginalTypeName(string typeName) => originalTypes.FirstOrDefault(originalType => originalType.FullName == typeName);
-
             Type GetOriginalTypeIfWrapper(Type type, string typeLoadExceptionMessage = null)
             {
                 if (type.IsArray)
@@ -265,7 +201,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 
                 if (type.IsClass && type.IsSubclassOf(typeof(ClassWrapper)))
                 {
-                    Type originalType = wrapperOriginalTypePairs.FirstOrDefault(x => x.Key == type).Value;
+                    Type originalType = typeInfos.FirstOrDefault(x => x.WrapperType == type)?.OriginalType;
                     if (originalType is null)
                     {
                         if (typeLoadExceptionMessage is null)
@@ -280,7 +216,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                 }
                 else if (type.IsEnum)
                 {
-                    Type originalType = wrapperOriginalTypePairs.FirstOrDefault(x => x.Key == type).Value;
+                    Type originalType = typeInfos.FirstOrDefault(x => x.WrapperType == type)?.OriginalType;
                     return originalType ?? type;
                 }
                 else
@@ -311,7 +247,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                     type = genericTypeDefinition.MakeGenericType(typeParams);
                 }
 
-                Type wrapperType = wrapperOriginalTypePairs.FirstOrDefault(x => x.Value == type).Key;
+                Type wrapperType = typeInfos.FirstOrDefault(x => x.OriginalType == type)?.WrapperType;
                 return wrapperType ?? type;
             }
 
@@ -351,7 +287,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                             type = Type.GetType(basicTypeInfo.TypeName);
                             if (type is null)
                             {
-                                type = ParseWrapperTypeName(basicTypeInfo.TypeName);
+                                type = wrapperTypes.FirstOrDefault(t => t.Name == basicTypeInfo.TypeName);
                                 if (type is null)
                                 {
                                     throw new ArgumentException($"型 '{basicTypeInfo.TypeName}' は存在しません。");

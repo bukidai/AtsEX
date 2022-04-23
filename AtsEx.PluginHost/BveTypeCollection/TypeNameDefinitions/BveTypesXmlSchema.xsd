@@ -24,6 +24,9 @@
 	<xs:element name="Class">
 		<xs:complexType>
 			<xs:sequence>
+				<xs:element ref="Enum" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Class" minOccurs="0" maxOccurs="unbounded"/>
+				
 				<xs:element name="Property" minOccurs="0" maxOccurs="unbounded">
 					<xs:complexType>
 						<xs:all>

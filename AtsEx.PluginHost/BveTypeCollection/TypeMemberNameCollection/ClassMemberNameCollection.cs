@@ -13,7 +13,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
         public List<FieldInfo> Fields { get; }
         public List<MethodInfo> Methods { get; }
 
-        public ClassMemberNameCollection(string wrapperTypeName, string originalTypeName) : base(wrapperTypeName, originalTypeName)
+        public ClassMemberNameCollection(string wrapperTypeName, string originalTypeName, IEnumerable<TypeMemberNameCollectionBase> children) : base(wrapperTypeName, originalTypeName, children)
         {
             PropertyGetters = new List<PropertyAccessorInfo>();
             PropertySetters = new List<PropertyAccessorInfo>();

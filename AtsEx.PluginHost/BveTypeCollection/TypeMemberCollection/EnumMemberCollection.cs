@@ -12,5 +12,10 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
         public EnumMemberCollection(Type wrapperType, Type originalType) : base(wrapperType, originalType)
         {
         }
+
+        internal static EnumMemberCollection FromTypeCollection(TypeInfo src)
+        {
+            return new EnumMemberCollection(src.WrapperType, src.OriginalType);
+        }
     }
 }

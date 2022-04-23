@@ -11,10 +11,20 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
         public string WrapperTypeName { get; }
         public string OriginalTypeName { get; }
 
-        public TypeMemberNameCollectionBase(string wrapperTypeName, string originalTypeName)
+        public TypeMemberNameCollectionBase Parent { get; private set; } = null;
+        public IEnumerable<TypeMemberNameCollectionBase> Children { get; }
+
+        public TypeMemberNameCollectionBase(string wrapperTypeName, string originalTypeName, IEnumerable<TypeMemberNameCollectionBase> children)
         {
             WrapperTypeName = wrapperTypeName;
             OriginalTypeName = originalTypeName;
+
+            Children = children.ToArray();
+            foreach (TypeMemberNameCollectionBase child in Children) child.Parent = this;
+        }
+
+        public TypeMemberNameCollectionBase(string wrapperTypeName, string originalTypeName) : this(wrapperTypeName, originalTypeName, Enumerable.Empty<TypeMemberNameCollectionBase>())
+        {
         }
 
         public override string ToString() => WrapperTypeName;

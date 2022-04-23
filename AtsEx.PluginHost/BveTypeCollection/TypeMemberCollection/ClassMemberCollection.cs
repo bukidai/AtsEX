@@ -28,6 +28,12 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             Methods = methods;
         }
 
+        internal static ClassMemberCollection FromTypeCollection(TypeInfo src, SortedList<Type[], ConstructorInfo> constructors,
+            SortedList<string, MethodInfo> propertyGetters, SortedList<string, MethodInfo> propertySetters, SortedList<string, FieldInfo> fields, SortedList<(string, Type[]), MethodInfo> methods)
+        {
+            return new ClassMemberCollection(src.WrapperType, src.OriginalType, constructors, propertyGetters, propertySetters, fields, methods);
+        }
+
         public MethodInfo GetSourcePropertyGetterOf(string wrapperName)
         {
             if (!PropertyGetters.Keys.Contains(wrapperName))

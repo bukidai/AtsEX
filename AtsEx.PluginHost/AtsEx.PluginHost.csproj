@@ -54,6 +54,10 @@
   <ItemGroup>
     <Compile Include="BveTypeCollection\BveTypeCollectionProvider.cs" />
     <Compile Include="BveTypeCollection\BveTypeCollectionProvider.InstanceCreator.cs" />
+    <Compile Include="BveTypeCollection\ProfileInfo.cs" />
+    <Compile Include="BveTypeCollection\ProfileSelector.cs" />
+    <Compile Include="BveTypeCollection\TypeInfo\TypeInfo.cs" />
+    <Compile Include="BveTypeCollection\TypeInfo\TypeInfoGenerator.cs" />
     <Compile Include="BveTypeCollection\TypeMemberCollection\EnumMemberCollection.cs" />
     <Compile Include="BveTypeCollection\TypeMemberCollection\TypeMemberCollectionBase.cs" />
     <Compile Include="BveTypeCollection\TypeMemberCollection\ClassMemberCollection.cs" />

@@ -24,106 +24,128 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             string targetNamespace = $"{{{schema.TargetNamespace}}}";
 
             XElement root = doc.Element(targetNamespace + "BveTypeNameDefinitions");
+            return LoadChildTypes(root);
 
-            IEnumerable<XElement> enumElements = root.Elements(targetNamespace + "Enum");
-            foreach (XElement enumElement in enumElements)
+
+            IEnumerable<TypeMemberNameCollectionBase> LoadChildTypes(XElement parent)
             {
-                string typeWrapperName = (string)enumElement.Attribute("Wrapper");
-                string typeOriginalName = (string)enumElement.Attribute("Original");
+                {
+                    IEnumerable<XElement> elements = parent.Elements(targetNamespace + "Enum");
+                    foreach (EnumMemberNameCollection item in LoadEnums(elements)) yield return item;
+                }
 
-                EnumMemberNameCollection memberCollection = new EnumMemberNameCollection(typeWrapperName, typeOriginalName);
-                yield return memberCollection;
+                {
+                    IEnumerable<XElement> elements = parent.Elements(targetNamespace + "Class");
+                    foreach (ClassMemberNameCollection item in LoadClasses(elements)) yield return item;
+                }
             }
 
-            IEnumerable<XElement> classElements = root.Elements(targetNamespace + "Class");
-            foreach (XElement classElement in classElements)
+
+            IEnumerable<EnumMemberNameCollection> LoadEnums(IEnumerable<XElement> elements)
             {
-                string typeWrapperName = (string)classElement.Attribute("Wrapper");
-                string typeOriginalName = (string)classElement.Attribute("Original");
-
-                ClassMemberNameCollection memberCollection = new ClassMemberNameCollection(typeWrapperName, typeOriginalName);
-
+                foreach (XElement element in elements)
                 {
-                    IEnumerable<XElement> properties = classElement.Elements(targetNamespace + "Property");
-                    foreach (XElement property in properties)
+                    string typeWrapperName = (string)element.Attribute("Wrapper");
+                    string typeOriginalName = (string)element.Attribute("Original");
+
+                    EnumMemberNameCollection memberCollection = new EnumMemberNameCollection(typeWrapperName, typeOriginalName);
+                    yield return memberCollection;
+                }
+            }
+
+            IEnumerable<ClassMemberNameCollection> LoadClasses(IEnumerable<XElement> elements)
+            {
+                foreach (XElement element in elements)
+                {
+                    string typeWrapperName = (string)element.Attribute("Wrapper");
+                    string typeOriginalName = (string)element.Attribute("Original");
+
+                    IEnumerable<TypeMemberNameCollectionBase> children = LoadChildTypes(element);
+
+                    ClassMemberNameCollection memberCollection = new ClassMemberNameCollection(typeWrapperName, typeOriginalName, children);
+
                     {
-                        string wrapperName = (string)property.Attribute("Wrapper");
-
-                        XElement getter = property.Element(targetNamespace + "Getter");
-                        if (!(getter is null))
+                        IEnumerable<XElement> properties = element.Elements(targetNamespace + "Property");
+                        foreach (XElement property in properties)
                         {
-                            string originalName = (string)getter.Attribute("Original");
+                            string wrapperName = (string)property.Attribute("Wrapper");
 
-                            bool isOriginalStatic = (bool?)getter.Attribute("IsOriginalStatic") ?? false;
-                            bool isOriginalPrivate = (bool?)getter.Attribute("IsOriginalPrivate") ?? false;
-                            bool isWrapperStatic = (bool?)getter.Attribute("IsWrapperStatic") ?? false;
-                            bool isWrapperPrivate = (bool?)getter.Attribute("IsWrapperPrivate") ?? false;
+                            XElement getter = property.Element(targetNamespace + "Getter");
+                            if (!(getter is null))
+                            {
+                                string originalName = (string)getter.Attribute("Original");
 
-                            TypeMemberNameCollectionBase.PropertyAccessorInfo getterInfo =
-                                new TypeMemberNameCollectionBase.PropertyAccessorInfo(wrapperName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
-                            memberCollection.PropertyGetters.Add(getterInfo);
-                        }
+                                bool isOriginalStatic = (bool?)getter.Attribute("IsOriginalStatic") ?? false;
+                                bool isOriginalPrivate = (bool?)getter.Attribute("IsOriginalPrivate") ?? false;
+                                bool isWrapperStatic = (bool?)getter.Attribute("IsWrapperStatic") ?? false;
+                                bool isWrapperPrivate = (bool?)getter.Attribute("IsWrapperPrivate") ?? false;
 
-                        XElement setter = property.Element(targetNamespace + "Setter");
-                        if (!(setter is null))
-                        {
-                            string originalName = (string)setter.Attribute("Original");
+                                TypeMemberNameCollectionBase.PropertyAccessorInfo getterInfo =
+                                    new TypeMemberNameCollectionBase.PropertyAccessorInfo(wrapperName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
+                                memberCollection.PropertyGetters.Add(getterInfo);
+                            }
 
-                            bool isOriginalStatic = (bool?)setter.Attribute("IsOriginalStatic") ?? false;
-                            bool isOriginalPrivate = (bool?)setter.Attribute("IsOriginalPrivate") ?? false;
-                            bool isWrapperStatic = (bool?)setter.Attribute("IsWrapperStatic") ?? false;
-                            bool isWrapperPrivate = (bool?)setter.Attribute("IsWrapperPrivate") ?? false;
+                            XElement setter = property.Element(targetNamespace + "Setter");
+                            if (!(setter is null))
+                            {
+                                string originalName = (string)setter.Attribute("Original");
 
-                            TypeMemberNameCollectionBase.PropertyAccessorInfo setterInfo =
-                                new TypeMemberNameCollectionBase.PropertyAccessorInfo(wrapperName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
-                            memberCollection.PropertySetters.Add(setterInfo);
-                        }
+                                bool isOriginalStatic = (bool?)setter.Attribute("IsOriginalStatic") ?? false;
+                                bool isOriginalPrivate = (bool?)setter.Attribute("IsOriginalPrivate") ?? false;
+                                bool isWrapperStatic = (bool?)setter.Attribute("IsWrapperStatic") ?? false;
+                                bool isWrapperPrivate = (bool?)setter.Attribute("IsWrapperPrivate") ?? false;
 
-                        if (getter is null && setter is null)
-                        {
-                            throw new FormatException($"プロパティ '{typeWrapperName}.{wrapperName}' について、set / get いずれのアクセサも定義されていません。");
+                                TypeMemberNameCollectionBase.PropertyAccessorInfo setterInfo =
+                                    new TypeMemberNameCollectionBase.PropertyAccessorInfo(wrapperName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
+                                memberCollection.PropertySetters.Add(setterInfo);
+                            }
+
+                            if (getter is null && setter is null)
+                            {
+                                throw new FormatException($"プロパティ '{typeWrapperName}.{wrapperName}' について、set / get いずれのアクセサも定義されていません。");
+                            }
                         }
                     }
-                }
 
-                {
-                    IEnumerable<XElement> methods = classElement.Elements(targetNamespace + "Method");
-                    foreach (XElement method in methods)
                     {
-                        string wrapperName = (string)method.Attribute("Wrapper");
-                        IEnumerable<TypeMemberNameCollectionBase.TypeInfoBase> wrapperParamNames = ParseParamArrayText((string)method.Attribute("WrapperParams"));
-                        string originalName = (string)method.Attribute("Original");
+                        IEnumerable<XElement> methods = element.Elements(targetNamespace + "Method");
+                        foreach (XElement method in methods)
+                        {
+                            string wrapperName = (string)method.Attribute("Wrapper");
+                            IEnumerable<TypeMemberNameCollectionBase.TypeInfoBase> wrapperParamNames = ParseParamArrayText((string)method.Attribute("WrapperParams"));
+                            string originalName = (string)method.Attribute("Original");
 
-                        bool isOriginalStatic = (bool?)method.Attribute("IsOriginalStatic") ?? false;
-                        bool isOriginalPrivate = (bool?)method.Attribute("IsOriginalPrivate") ?? false;
-                        bool isWrapperStatic = (bool?)method.Attribute("IsWrapperStatic") ?? false;
-                        bool isWrapperPrivate = (bool?)method.Attribute("IsWrapperPrivate") ?? false;
+                            bool isOriginalStatic = (bool?)method.Attribute("IsOriginalStatic") ?? false;
+                            bool isOriginalPrivate = (bool?)method.Attribute("IsOriginalPrivate") ?? false;
+                            bool isWrapperStatic = (bool?)method.Attribute("IsWrapperStatic") ?? false;
+                            bool isWrapperPrivate = (bool?)method.Attribute("IsWrapperPrivate") ?? false;
 
-                        TypeMemberNameCollectionBase.MethodInfo methodInfo =
-                            new TypeMemberNameCollectionBase.MethodInfo(wrapperName, originalName, wrapperParamNames, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
-                        memberCollection.Methods.Add(methodInfo);
+                            TypeMemberNameCollectionBase.MethodInfo methodInfo =
+                                new TypeMemberNameCollectionBase.MethodInfo(wrapperName, originalName, wrapperParamNames, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
+                            memberCollection.Methods.Add(methodInfo);
+                        }
                     }
-                }
 
-                {
-                    IEnumerable<XElement> fields = classElement.Elements(targetNamespace + "Field");
-                    foreach (XElement field in fields)
                     {
-                        string wrapperPropertyName = (string)field.Attribute("WrapperProperty");
-                        string originalName = (string)field.Attribute("Original");
+                        IEnumerable<XElement> fields = element.Elements(targetNamespace + "Field");
+                        foreach (XElement field in fields)
+                        {
+                            string wrapperPropertyName = (string)field.Attribute("WrapperProperty");
+                            string originalName = (string)field.Attribute("Original");
 
-                        bool isOriginalStatic = (bool?)field.Attribute("IsOriginalStatic") ?? false;
-                        bool isOriginalPrivate = (bool?)field.Attribute("IsOriginalPrivate") ?? false;
-                        bool isWrapperStatic = (bool?)field.Attribute("IsWrapperStatic") ?? false;
-                        bool isWrapperPrivate = (bool?)field.Attribute("IsWrapperPrivate") ?? false;
+                            bool isOriginalStatic = (bool?)field.Attribute("IsOriginalStatic") ?? false;
+                            bool isOriginalPrivate = (bool?)field.Attribute("IsOriginalPrivate") ?? false;
+                            bool isWrapperStatic = (bool?)field.Attribute("IsWrapperStatic") ?? false;
+                            bool isWrapperPrivate = (bool?)field.Attribute("IsWrapperPrivate") ?? false;
 
-                        TypeMemberNameCollectionBase.FieldInfo fieldInfo =
-                            new TypeMemberNameCollectionBase.FieldInfo(wrapperPropertyName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
-                        memberCollection.Fields.Add(fieldInfo);
+                            TypeMemberNameCollectionBase.FieldInfo fieldInfo =
+                                new TypeMemberNameCollectionBase.FieldInfo(wrapperPropertyName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
+                            memberCollection.Fields.Add(fieldInfo);
+                        }
                     }
-                }
 
-                yield return memberCollection;
+                    yield return memberCollection;
+                }
             }
 
 
