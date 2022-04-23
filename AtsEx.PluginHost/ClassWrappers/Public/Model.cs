@@ -15,7 +15,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         static Model()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<Model>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<Model>();
 
             MeshGetMethod = members.GetSourcePropertyGetterOf(nameof(Mesh));
             MeshSetMethod = members.GetSourcePropertySetterOf(nameof(Mesh));

@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         static StructureSet()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<StructureSet>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<StructureSet>();
 
             DrawLimitLocationGetMethod = members.GetSourcePropertyGetterOf(nameof(DrawLimitLocation));
             DrawLimitLocationSetMethod = members.GetSourcePropertySetterOf(nameof(DrawLimitLocation));

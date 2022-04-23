@@ -13,7 +13,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         static Vehicle()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<Vehicle>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<Vehicle>();
         }
 
         private Vehicle(object src) : base(src)

@@ -13,7 +13,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         static MapObjectBase()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<MapObjectBase>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<MapObjectBase>();
 
             LocationGetMethod = members.GetSourcePropertyGetterOf(nameof(Location));
             LocationSetMethod = members.GetSourcePropertySetterOf(nameof(Location));

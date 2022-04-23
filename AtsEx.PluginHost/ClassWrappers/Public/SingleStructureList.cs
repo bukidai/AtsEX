@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         static SingleStructureList()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<SingleStructureList>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<SingleStructureList>();
         }
 
         private SingleStructureList(object src) : base(src)

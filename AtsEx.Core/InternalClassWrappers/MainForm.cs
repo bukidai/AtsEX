@@ -15,7 +15,7 @@ namespace Automatic9045.AtsEx
     {
         static MainForm()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<MainForm>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<MainForm>();
 
             ContextMenuField = members.GetSourceFieldOf(nameof(ContextMenu));
 

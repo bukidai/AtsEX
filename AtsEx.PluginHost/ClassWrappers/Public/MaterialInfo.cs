@@ -15,7 +15,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         static MaterialInfo()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<MaterialInfo>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<MaterialInfo>();
 
             MaterialGetMethod = members.GetSourcePropertyGetterOf(nameof(Material));
             MaterialSetMethod = members.GetSourcePropertySetterOf(nameof(Material));

@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         static RandomFileList()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<RandomFileList>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<RandomFileList>();
 
             SelectedFileGetMethod = members.GetSourcePropertyGetterOf(nameof(SelectedFile));
             SelectedFileSetMethod = members.GetSourcePropertySetterOf(nameof(SelectedFile));

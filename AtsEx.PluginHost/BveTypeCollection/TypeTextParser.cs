@@ -9,11 +9,11 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 {
     internal static class TypeTextParser
     {
-        public static TypeMemberNameCollection.TypeInfoBase Parse(string text)
+        public static TypeMemberNameCollectionBase.TypeInfoBase Parse(string text)
         {
             try
             {
-                IEnumerable<TypeMemberNameCollection.TypeInfoBase> typeParams = null;
+                IEnumerable<TypeMemberNameCollectionBase.TypeInfoBase> typeParams = null;
                 List<int> arrayDimensionCounts = new List<int>();
 
                 string name = "";
@@ -58,19 +58,19 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                     }
                 }
 
-                TypeMemberNameCollection.TypeInfoBase result;
+                TypeMemberNameCollectionBase.TypeInfoBase result;
                 if (typeParams is null)
                 {
-                    result = new TypeMemberNameCollection.TypeInfo(name);
+                    result = new TypeMemberNameCollectionBase.TypeInfo(name);
                 }
                 else
                 {
-                    result = new TypeMemberNameCollection.GenericTypeInfo(name, typeParams);
+                    result = new TypeMemberNameCollectionBase.GenericTypeInfo(name, typeParams);
                 }
 
                 arrayDimensionCounts.ForEach(dimensionCount =>
                 {
-                    result = new TypeMemberNameCollection.ArrayTypeInfo(result, dimensionCount);
+                    result = new TypeMemberNameCollectionBase.ArrayTypeInfo(result, dimensionCount);
                 });
 
                 return result;

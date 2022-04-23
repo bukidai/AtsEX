@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx
     {
         static LoadingProgressForm()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<LoadingProgressForm>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<LoadingProgressForm>();
 
             ThrowErrorMethod1 = members.GetSourceMethodOf(nameof(ThrowError), new Type[] { typeof(string), typeof(string), typeof(int), typeof(int) });
             ThrowErrorMethod2 = members.GetSourceMethodOf(nameof(ThrowError), new Type[] { typeof(LoadError) });

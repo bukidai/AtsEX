@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 {
-    public class BveTypeMemberCollection
+    public class ClassMemberCollection : TypeMemberCollectionBase
     {
-        public Type WrapperType { get; }
-        public Type OriginalType { get; }
-
         protected SortedList<Type[], ConstructorInfo> Constructors { get; }
 
         protected SortedList<string, MethodInfo> PropertyGetters { get; }
@@ -19,12 +16,10 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
         protected SortedList<string, FieldInfo> Fields { get; }
         protected SortedList<(string, Type[]), MethodInfo> Methods { get; }
 
-        internal BveTypeMemberCollection(Type wrapperType, Type originalType, SortedList<Type[], ConstructorInfo> constructors,
+        internal ClassMemberCollection(Type wrapperType, Type originalType, SortedList<Type[], ConstructorInfo> constructors,
             SortedList<string, MethodInfo> propertyGetters, SortedList<string, MethodInfo> propertySetters, SortedList<string, FieldInfo> fields, SortedList<(string, Type[]), MethodInfo> methods)
+            : base(wrapperType, originalType)
         {
-            WrapperType = wrapperType;
-            OriginalType = originalType;
-
             Constructors = constructors;
 
             PropertyGetters = propertyGetters;

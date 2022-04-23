@@ -54,11 +54,15 @@
   <ItemGroup>
     <Compile Include="BveTypeCollection\BveTypeCollectionProvider.cs" />
     <Compile Include="BveTypeCollection\BveTypeCollectionProvider.InstanceCreator.cs" />
-    <Compile Include="BveTypeCollection\BveTypeMemberCollection.cs" />
+    <Compile Include="BveTypeCollection\TypeMemberCollection\EnumMemberCollection.cs" />
+    <Compile Include="BveTypeCollection\TypeMemberCollection\TypeMemberCollectionBase.cs" />
+    <Compile Include="BveTypeCollection\TypeMemberCollection\ClassMemberCollection.cs" />
     <Compile Include="BveTypeCollection\BveTypeNameDefinitionLoader.cs" />
     <Compile Include="BveTypeCollection\Comparer.cs" />
-    <Compile Include="BveTypeCollection\TypeMemberNameCollection.cs" />
+    <Compile Include="BveTypeCollection\TypeMemberNameCollection\EnumMemberNameCollection.cs" />
+    <Compile Include="BveTypeCollection\TypeMemberNameCollection\TypeMemberNameCollectionBase.cs" />
     <Compile Include="BveTypeCollection\TypeTextParser.cs" />
+    <Compile Include="BveTypeCollection\TypeMemberNameCollection\ClassMemberNameCollection.cs" />
     <Compile Include="Imports\VehicleSpec.cs" />
     <Compile Include="Imports\VehicleState.cs" />
     <Compile Include="ClassWrappers\ClassWrapper.cs" />

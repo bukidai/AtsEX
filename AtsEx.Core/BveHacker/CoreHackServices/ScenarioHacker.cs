@@ -31,7 +31,7 @@ namespace Automatic9045.AtsEx.CoreHackServices
             MainForm = MainForm.FromSource(formSrc);
 
 
-            BveTypeMemberCollection timePosFormMembers = BveTypeCollectionProvider.Instance.GetTypeInfoOf<TimePosForm>();
+            ClassMemberCollection timePosFormMembers = BveTypeCollectionProvider.Instance.GetClassInfoOf<TimePosForm>();
             MethodInfo setScenarioMethod = timePosFormMembers.GetSourceMethodOf(nameof(TimePosForm.SetScenario));
 
             Harmony harmony = new Harmony("http://automatic9045.github.io/ns/harmony/atsex/core-hack-services/scenario-hacker");

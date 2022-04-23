@@ -13,7 +13,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         static Station()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<Station>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<Station>();
 
             Constructor = members.GetSourceConstructor();
 

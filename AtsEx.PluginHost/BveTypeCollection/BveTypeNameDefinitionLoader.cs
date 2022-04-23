@@ -12,7 +12,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 {
     internal static class BveTypeNameDefinitionLoader
     {
-        public static IEnumerable<TypeMemberNameCollection> LoadFile(Stream docStream, Stream schemaStream)
+        public static IEnumerable<TypeMemberNameCollectionBase> LoadFile(Stream docStream, Stream schemaStream)
         {
             XDocument doc = XDocument.Load(docStream);
 
@@ -24,13 +24,24 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             string targetNamespace = $"{{{schema.TargetNamespace}}}";
 
             XElement root = doc.Element(targetNamespace + "BveTypeNameDefinitions");
+
+            IEnumerable<XElement> enumElements = root.Elements(targetNamespace + "Enum");
+            foreach (XElement enumElement in enumElements)
+            {
+                string typeWrapperName = (string)enumElement.Attribute("Wrapper");
+                string typeOriginalName = (string)enumElement.Attribute("Original");
+
+                EnumMemberNameCollection memberCollection = new EnumMemberNameCollection(typeWrapperName, typeOriginalName);
+                yield return memberCollection;
+            }
+
             IEnumerable<XElement> classElements = root.Elements(targetNamespace + "Class");
             foreach (XElement classElement in classElements)
             {
                 string typeWrapperName = (string)classElement.Attribute("Wrapper");
                 string typeOriginalName = (string)classElement.Attribute("Original");
 
-                TypeMemberNameCollection memberCollection = new TypeMemberNameCollection(typeWrapperName, typeOriginalName);
+                ClassMemberNameCollection memberCollection = new ClassMemberNameCollection(typeWrapperName, typeOriginalName);
 
                 {
                     IEnumerable<XElement> properties = classElement.Elements(targetNamespace + "Property");
@@ -48,8 +59,8 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                             bool isWrapperStatic = (bool?)getter.Attribute("IsWrapperStatic") ?? false;
                             bool isWrapperPrivate = (bool?)getter.Attribute("IsWrapperPrivate") ?? false;
 
-                            TypeMemberNameCollection.PropertyAccessorInfo getterInfo =
-                                new TypeMemberNameCollection.PropertyAccessorInfo(wrapperName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
+                            TypeMemberNameCollectionBase.PropertyAccessorInfo getterInfo =
+                                new TypeMemberNameCollectionBase.PropertyAccessorInfo(wrapperName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
                             memberCollection.PropertyGetters.Add(getterInfo);
                         }
 
@@ -63,8 +74,8 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                             bool isWrapperStatic = (bool?)setter.Attribute("IsWrapperStatic") ?? false;
                             bool isWrapperPrivate = (bool?)setter.Attribute("IsWrapperPrivate") ?? false;
 
-                            TypeMemberNameCollection.PropertyAccessorInfo setterInfo =
-                                new TypeMemberNameCollection.PropertyAccessorInfo(wrapperName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
+                            TypeMemberNameCollectionBase.PropertyAccessorInfo setterInfo =
+                                new TypeMemberNameCollectionBase.PropertyAccessorInfo(wrapperName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
                             memberCollection.PropertySetters.Add(setterInfo);
                         }
 
@@ -80,7 +91,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                     foreach (XElement method in methods)
                     {
                         string wrapperName = (string)method.Attribute("Wrapper");
-                        IEnumerable<TypeMemberNameCollection.TypeInfoBase> wrapperParamNames = ParseParamArrayText((string)method.Attribute("WrapperParams"));
+                        IEnumerable<TypeMemberNameCollectionBase.TypeInfoBase> wrapperParamNames = ParseParamArrayText((string)method.Attribute("WrapperParams"));
                         string originalName = (string)method.Attribute("Original");
 
                         bool isOriginalStatic = (bool?)method.Attribute("IsOriginalStatic") ?? false;
@@ -88,8 +99,8 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                         bool isWrapperStatic = (bool?)method.Attribute("IsWrapperStatic") ?? false;
                         bool isWrapperPrivate = (bool?)method.Attribute("IsWrapperPrivate") ?? false;
 
-                        TypeMemberNameCollection.MethodInfo methodInfo =
-                            new TypeMemberNameCollection.MethodInfo(wrapperName, originalName, wrapperParamNames, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
+                        TypeMemberNameCollectionBase.MethodInfo methodInfo =
+                            new TypeMemberNameCollectionBase.MethodInfo(wrapperName, originalName, wrapperParamNames, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
                         memberCollection.Methods.Add(methodInfo);
                     }
                 }
@@ -106,8 +117,8 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                         bool isWrapperStatic = (bool?)field.Attribute("IsWrapperStatic") ?? false;
                         bool isWrapperPrivate = (bool?)field.Attribute("IsWrapperPrivate") ?? false;
 
-                        TypeMemberNameCollection.FieldInfo fieldInfo =
-                            new TypeMemberNameCollection.FieldInfo(wrapperPropertyName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
+                        TypeMemberNameCollectionBase.FieldInfo fieldInfo =
+                            new TypeMemberNameCollectionBase.FieldInfo(wrapperPropertyName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
                         memberCollection.Fields.Add(fieldInfo);
                     }
                 }
@@ -116,7 +127,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             }
 
 
-            IEnumerable<TypeMemberNameCollection.TypeInfoBase> ParseParamArrayText(string text)
+            IEnumerable<TypeMemberNameCollectionBase.TypeInfoBase> ParseParamArrayText(string text)
             {
                 switch (text)
                 {
@@ -124,7 +135,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                     case "":
                     case "void":
                     case "System.Void":
-                        return Enumerable.Empty<TypeMemberNameCollection.TypeInfoBase>();
+                        return Enumerable.Empty<TypeMemberNameCollectionBase.TypeInfoBase>();
 
                     default:
                         return TypeTextParser.SplitArrayText(text).Select(TypeTextParser.Parse);

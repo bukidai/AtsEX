@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         static BveFile()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<BveFile>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<BveFile>();
 
             PathGetMethod = members.GetSourcePropertyGetterOf(nameof(Path));
             PathSetMethod = members.GetSourcePropertySetterOf(nameof(Path));

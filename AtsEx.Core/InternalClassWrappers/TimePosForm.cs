@@ -15,7 +15,7 @@ namespace Automatic9045.AtsEx
     {
         static TimePosForm()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<TimePosForm>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<TimePosForm>();
 
             SetScenarioMethod = members.GetSourceMethodOf(nameof(SetScenario));
 

@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         static ScenarioInfo()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<ScenarioInfo>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<ScenarioInfo>();
 
             FromFileMethod = members.GetSourceMethodOf(nameof(FromFile));
 

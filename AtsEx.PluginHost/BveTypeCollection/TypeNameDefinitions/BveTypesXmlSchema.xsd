@@ -8,68 +8,78 @@
 	<xs:element name="BveTypeNameDefinitions">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="Class" minOccurs="0" maxOccurs="unbounded">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="Property" minOccurs="0" maxOccurs="unbounded">
-								<xs:complexType>
-									<xs:all>
-										<xs:element name="Getter" minOccurs="0">
-											<xs:complexType>
-												<xs:attribute name="Original" type="xs:Name" use="required" />
-												<xs:attribute name="IsOriginalPrivate" type="xs:boolean" default="false" />
-												<xs:attribute name="IsOriginalStatic" type="xs:boolean" default="false" />
-											</xs:complexType>
-										</xs:element>
-										<xs:element name="Setter" minOccurs="0">
-											<xs:complexType>
-												<xs:attribute name="Original" type="xs:Name" use="required" />
-												<xs:attribute name="IsOriginalPrivate" type="xs:boolean" default="false" />
-												<xs:attribute name="IsOriginalStatic" type="xs:boolean" default="false" />
-											</xs:complexType>
-										</xs:element>
-									</xs:all>
-									<xs:attribute name="Wrapper" type="xs:Name" use="required" />
-									<xs:attribute name="IsWrapperPrivate" type="xs:boolean" default="false" />
-									<xs:attribute name="IsWrapperStatic" type="xs:boolean" default="false" />
-								</xs:complexType>
-							</xs:element>
-							
-							<xs:element name="Field" minOccurs="0" maxOccurs="unbounded">
-								<xs:complexType>
-									<xs:attribute name="WrapperProperty" type="xs:Name" use="required" />
-									<xs:attribute name="IsWrapperPrivate" type="xs:boolean" default="false" />
-									<xs:attribute name="IsWrapperStatic" type="xs:boolean" default="false" />
-									<xs:attribute name="Original" type="xs:Name" use="required" />
-									<xs:attribute name="IsOriginalPrivate" type="xs:boolean" default="false" />
-									<xs:attribute name="IsOriginalStatic" type="xs:boolean" default="false" />
-								</xs:complexType>
-							</xs:element>
+				<xs:element ref="Enum" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Class" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 
-							<xs:element name="Method" minOccurs="0" maxOccurs="unbounded">
+	<xs:element name="Enum">
+		<xs:complexType>
+			<xs:attribute name="Wrapper" type="xs:Name" use="required" />
+			<xs:attribute name="Original" type="xs:Name" use="required" />
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="Class">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Property" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:all>
+							<xs:element name="Getter" minOccurs="0">
 								<xs:complexType>
-									<xs:attribute name="Wrapper" type="xs:Name" use="required" />
-									<xs:attribute name="WrapperParams" use="required">
-										<xs:simpleType>
-											<xs:restriction base="xs:string">
-												<xs:pattern value="([0-9a-zA-Z_.`\[\]]+,[ \t]*)*[0-9a-zA-Z_,.`\[\]]+" />
-											</xs:restriction>
-										</xs:simpleType>
-									</xs:attribute>
-									<xs:attribute name="IsWrapperPrivate" type="xs:boolean" default="false" />
-									<xs:attribute name="IsWrapperStatic" type="xs:boolean" default="false" />
 									<xs:attribute name="Original" type="xs:Name" use="required" />
 									<xs:attribute name="IsOriginalPrivate" type="xs:boolean" default="false" />
 									<xs:attribute name="IsOriginalStatic" type="xs:boolean" default="false" />
 								</xs:complexType>
 							</xs:element>
-						</xs:sequence>
-						
+							<xs:element name="Setter" minOccurs="0">
+								<xs:complexType>
+									<xs:attribute name="Original" type="xs:Name" use="required" />
+									<xs:attribute name="IsOriginalPrivate" type="xs:boolean" default="false" />
+									<xs:attribute name="IsOriginalStatic" type="xs:boolean" default="false" />
+								</xs:complexType>
+							</xs:element>
+						</xs:all>
 						<xs:attribute name="Wrapper" type="xs:Name" use="required" />
+						<xs:attribute name="IsWrapperPrivate" type="xs:boolean" default="false" />
+						<xs:attribute name="IsWrapperStatic" type="xs:boolean" default="false" />
+					</xs:complexType>
+				</xs:element>
+
+				<xs:element name="Field" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="WrapperProperty" type="xs:Name" use="required" />
+						<xs:attribute name="IsWrapperPrivate" type="xs:boolean" default="false" />
+						<xs:attribute name="IsWrapperStatic" type="xs:boolean" default="false" />
 						<xs:attribute name="Original" type="xs:Name" use="required" />
+						<xs:attribute name="IsOriginalPrivate" type="xs:boolean" default="false" />
+						<xs:attribute name="IsOriginalStatic" type="xs:boolean" default="false" />
+					</xs:complexType>
+				</xs:element>
+
+				<xs:element name="Method" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="Wrapper" type="xs:Name" use="required" />
+						<xs:attribute name="WrapperParams" use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="([0-9a-zA-Z_.`\[\]]+,[ \t]*)*[0-9a-zA-Z_,.`\[\]]+" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="IsWrapperPrivate" type="xs:boolean" default="false" />
+						<xs:attribute name="IsWrapperStatic" type="xs:boolean" default="false" />
+						<xs:attribute name="Original" type="xs:Name" use="required" />
+						<xs:attribute name="IsOriginalPrivate" type="xs:boolean" default="false" />
+						<xs:attribute name="IsOriginalStatic" type="xs:boolean" default="false" />
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
+
+			<xs:attribute name="Wrapper" type="xs:Name" use="required" />
+			<xs:attribute name="Original" type="xs:Name" use="required" />
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

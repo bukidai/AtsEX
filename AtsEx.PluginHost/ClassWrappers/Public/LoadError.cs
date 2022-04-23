@@ -13,7 +13,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
 		static LoadError()
 		{
-			BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<LoadError>();
+			ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<LoadError>();
 
 			Constructor = members.GetSourceConstructor(new Type[] { typeof(string), typeof(string), typeof(int), typeof(int) });
 

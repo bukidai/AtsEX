@@ -90,7 +90,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                 }
             }
 
-            IEnumerable<TypeMemberNameCollection> nameCollection;
+            IEnumerable<TypeMemberNameCollectionBase> nameCollection;
             using (Stream doc = executingAssembly.GetManifestResourceStream($"{defaultNamespace}.{profileVersion}.xml"))
             {
                 using (Stream schema = executingAssembly.GetManifestResourceStream($"{defaultNamespace}.BveTypesXmlSchema.xsd"))
@@ -99,7 +99,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                 }
             }
 
-            IEnumerable<Type> wrapperTypes = atsExPluginHostAssembly.GetTypes().Concat(atsExAssembly.GetTypes()).Where(type => type.IsClass && type.IsSubclassOf(typeof(ClassWrapper)));
+            IEnumerable<Type> wrapperTypes = atsExPluginHostAssembly.GetTypes().Concat(atsExAssembly.GetTypes()).Where(type => (type.IsClass && type.IsSubclassOf(typeof(ClassWrapper))) || type.IsEnum);
             IEnumerable<Type> originalTypes = bveAssembly.GetTypes();
 
             IEnumerable<KeyValuePair<Type, Type>> wrapperOriginalTypePairs = nameCollection.Select(src =>
@@ -119,101 +119,117 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                 return new KeyValuePair<Type, Type>(wrapperType, originalType);
             });
 
-            IEnumerable<BveTypeMemberCollection> types = nameCollection.Select(src =>
+            IEnumerable<TypeMemberCollectionBase> types = nameCollection.Select<TypeMemberNameCollectionBase, TypeMemberCollectionBase>(src =>
             {
                 Type wrapperType = ParseWrapperTypeName(src.WrapperTypeName);
                 Type originalType = wrapperOriginalTypePairs.First(x => x.Key == wrapperType).Value;
 
-                SortedList<Type[], ConstructorInfo> constructors = new SortedList<Type[], ConstructorInfo>(originalType.GetConstructors(SearchAllBindingAttribute).ToDictionary(
-                    c => c.GetParameters().Select(p => GetWrapperTypeIfOriginal(p.ParameterType)).ToArray(),
-                    c => c),
-                    new TypeArrayComparer());
-
-                SortedList<string, MethodInfo> propertyGetters = new SortedList<string, MethodInfo>(src.PropertyGetters.Select(getterInfo =>
+                switch (src)
                 {
-                    PropertyInfo wrapperProperty = wrapperType.GetProperty(getterInfo.WrapperName, CreateBindingAttribute(getterInfo.IsWrapperPrivate, getterInfo.IsWrapperStatic));
-                    if (wrapperProperty is null)
-                    {
-                        throw new KeyNotFoundException($"{GetAccessibilityDescription(getterInfo.IsWrapperPrivate)}プロパティ '{getterInfo.WrapperName}' は" +
-                            $"ラッパー型 '{src.WrapperTypeName}' に存在しません。");
-                    }
+                    case EnumMemberNameCollection enumSrc:
+                        {
+                            EnumMemberCollection members = new EnumMemberCollection(wrapperType, originalType);
+                            return members;
+                        }
 
-                    MethodInfo originalGetter = originalType.GetMethod(getterInfo.OriginalName, CreateBindingAttribute(getterInfo.IsOriginalPrivate, getterInfo.IsOriginalStatic), null, Type.EmptyTypes, null);
-                    if (originalGetter is null)
-                    {
-                        throw new KeyNotFoundException($"{GetAccessibilityDescription(getterInfo.IsOriginalPrivate, getterInfo.IsOriginalStatic)}プロパティ get アクセサ '{getterInfo.OriginalName}' は" +
-                            $"ラッパー型 '{src.WrapperTypeName}' のオリジナル型 '{src.OriginalTypeName}' に存在しません。");
-                    }
+                    case ClassMemberNameCollection classSrc:
+                        {
+                            SortedList<Type[], ConstructorInfo> constructors = new SortedList<Type[], ConstructorInfo>(originalType.GetConstructors(SearchAllBindingAttribute).ToDictionary(
+                                c => c.GetParameters().Select(p => GetWrapperTypeIfOriginal(p.ParameterType)).ToArray(),
+                                c => c),
+                                new TypeArrayComparer());
 
-                    return new KeyValuePair<string, MethodInfo>(wrapperProperty.Name, originalGetter);
-                }).ToDictionary(x => x.Key, x => x.Value));
+                            SortedList<string, MethodInfo> propertyGetters = new SortedList<string, MethodInfo>(classSrc.PropertyGetters.Select(getterInfo =>
+                            {
+                                PropertyInfo wrapperProperty = wrapperType.GetProperty(getterInfo.WrapperName, CreateBindingAttribute(getterInfo.IsWrapperPrivate, getterInfo.IsWrapperStatic));
+                                if (wrapperProperty is null)
+                                {
+                                    throw new KeyNotFoundException($"{GetAccessibilityDescription(getterInfo.IsWrapperPrivate)}プロパティ '{getterInfo.WrapperName}' は" +
+                                        $"ラッパー型 '{classSrc.WrapperTypeName}' に存在しません。");
+                                }
 
-                SortedList<string, MethodInfo> propertySetters = new SortedList<string, MethodInfo>(src.PropertySetters.Select(setterInfo =>
-                {
-                    PropertyInfo wrapperProperty = wrapperType.GetProperty(setterInfo.WrapperName, CreateBindingAttribute(setterInfo.IsWrapperPrivate, setterInfo.IsWrapperStatic));
-                    if (wrapperProperty is null)
-                    {
-                        throw new KeyNotFoundException($"{GetAccessibilityDescription(setterInfo.IsWrapperPrivate)}プロパティ '{setterInfo.WrapperName}' は" +
-                            $"ラッパー型 '{src.WrapperTypeName}' に存在しません。");
-                    }
+                                MethodInfo originalGetter = originalType.GetMethod(getterInfo.OriginalName, CreateBindingAttribute(getterInfo.IsOriginalPrivate, getterInfo.IsOriginalStatic), null, Type.EmptyTypes, null);
+                                if (originalGetter is null)
+                                {
+                                    throw new KeyNotFoundException($"{GetAccessibilityDescription(getterInfo.IsOriginalPrivate, getterInfo.IsOriginalStatic)}プロパティ get アクセサ '{getterInfo.OriginalName}' は" +
+                                        $"ラッパー型 '{classSrc.WrapperTypeName}' のオリジナル型 '{classSrc.OriginalTypeName}' に存在しません。");
+                                }
 
-                    Type originalParamType = GetOriginalTypeIfWrapper(wrapperProperty.PropertyType,
-                        $"ラッパープロパティ '{src.WrapperTypeName}.{setterInfo.WrapperName}' の型 '{wrapperProperty.PropertyType.Name}' のオリジナル型が見つかりませんでした。");
-                    MethodInfo originalSetter = originalType.GetMethod(setterInfo.OriginalName, CreateBindingAttribute(setterInfo.IsOriginalPrivate, setterInfo.IsOriginalStatic), null, new Type[] { originalParamType }, null);
-                    if (originalSetter is null)
-                    {
-                        throw new KeyNotFoundException($"{GetAccessibilityDescription(setterInfo.IsOriginalPrivate, setterInfo.IsOriginalStatic)}プロパティ set アクセサ '{setterInfo.OriginalName}' は" +
-                            $"ラッパー型 '{src.WrapperTypeName}' のオリジナル型 '{src.OriginalTypeName}' に存在しません。");
-                    }
+                                return new KeyValuePair<string, MethodInfo>(wrapperProperty.Name, originalGetter);
+                            }).ToDictionary(x => x.Key, x => x.Value));
 
-                    return new KeyValuePair<string, MethodInfo>(wrapperProperty.Name, originalSetter);
-                }).ToDictionary(x => x.Key, x => x.Value));
+                            SortedList<string, MethodInfo> propertySetters = new SortedList<string, MethodInfo>(classSrc.PropertySetters.Select(setterInfo =>
+                            {
+                                PropertyInfo wrapperProperty = wrapperType.GetProperty(setterInfo.WrapperName, CreateBindingAttribute(setterInfo.IsWrapperPrivate, setterInfo.IsWrapperStatic));
+                                if (wrapperProperty is null)
+                                {
+                                    throw new KeyNotFoundException($"{GetAccessibilityDescription(setterInfo.IsWrapperPrivate)}プロパティ '{setterInfo.WrapperName}' は" +
+                                        $"ラッパー型 '{classSrc.WrapperTypeName}' に存在しません。");
+                                }
 
-                SortedList<string, FieldInfo> fields = new SortedList<string, FieldInfo>(src.Fields.Select(fieldInfo =>
-                {
-                    PropertyInfo wrapperProperty = wrapperType.GetProperty(fieldInfo.WrapperName, CreateBindingAttribute(fieldInfo.IsWrapperPrivate, fieldInfo.IsWrapperStatic));
-                    if (wrapperProperty is null)
-                    {
-                        throw new KeyNotFoundException($"{GetAccessibilityDescription(fieldInfo.IsWrapperPrivate)}プロパティ '{fieldInfo.WrapperName}' は" +
-                            $"ラッパー型 '{src.WrapperTypeName}' に存在しません。");
-                    }
+                                Type originalParamType = GetOriginalTypeIfWrapper(wrapperProperty.PropertyType,
+                                    $"ラッパープロパティ '{classSrc.WrapperTypeName}.{setterInfo.WrapperName}' の型 '{wrapperProperty.PropertyType.Name}' のオリジナル型が見つかりませんでした。");
+                                MethodInfo originalSetter = originalType.GetMethod(setterInfo.OriginalName, CreateBindingAttribute(setterInfo.IsOriginalPrivate, setterInfo.IsOriginalStatic), null, new Type[] { originalParamType }, null);
+                                if (originalSetter is null)
+                                {
+                                    throw new KeyNotFoundException($"{GetAccessibilityDescription(setterInfo.IsOriginalPrivate, setterInfo.IsOriginalStatic)}プロパティ set アクセサ '{setterInfo.OriginalName}' は" +
+                                        $"ラッパー型 '{classSrc.WrapperTypeName}' のオリジナル型 '{classSrc.OriginalTypeName}' に存在しません。");
+                                }
 
-                    FieldInfo originalField = originalType.GetField(fieldInfo.OriginalName, CreateBindingAttribute(fieldInfo.IsOriginalPrivate, fieldInfo.IsOriginalStatic));
-                    if (originalField is null)
-                    {
-                        throw new KeyNotFoundException($"{GetAccessibilityDescription(fieldInfo.IsOriginalPrivate, fieldInfo.IsOriginalStatic)}フィールド '{fieldInfo.OriginalName}' は" +
-                            $"ラッパー型 '{src.WrapperTypeName}' のオリジナル型 '{src.OriginalTypeName}' に存在しません。");
-                    }
+                                return new KeyValuePair<string, MethodInfo>(wrapperProperty.Name, originalSetter);
+                            }).ToDictionary(x => x.Key, x => x.Value));
 
-                    return new KeyValuePair<string, FieldInfo>(wrapperProperty.Name, originalField);
-                }).ToDictionary(x => x.Key, x => x.Value));
+                            SortedList<string, FieldInfo> fields = new SortedList<string, FieldInfo>(classSrc.Fields.Select(fieldInfo =>
+                            {
+                                PropertyInfo wrapperProperty = wrapperType.GetProperty(fieldInfo.WrapperName, CreateBindingAttribute(fieldInfo.IsWrapperPrivate, fieldInfo.IsWrapperStatic));
+                                if (wrapperProperty is null)
+                                {
+                                    throw new KeyNotFoundException($"{GetAccessibilityDescription(fieldInfo.IsWrapperPrivate)}プロパティ '{fieldInfo.WrapperName}' は" +
+                                        $"ラッパー型 '{classSrc.WrapperTypeName}' に存在しません。");
+                                }
 
-                SortedList<(string, Type[]), MethodInfo> methods = new SortedList<(string, Type[]), MethodInfo>(src.Methods.Select(methodInfo =>
-                {
-                    Type[] wrapperMethodParams = methodInfo.WrapperParamNames.Select(p => ParseTypeName(p, false)).ToArray();
-                    MethodInfo wrapperMethod = wrapperType.GetMethod(methodInfo.WrapperName, CreateBindingAttribute(methodInfo.IsWrapperPrivate, methodInfo.IsWrapperStatic), null, wrapperMethodParams, null);
-                    if (wrapperMethod is null)
-                    {
-                        throw new KeyNotFoundException($"パラメータ '{string.Join(", ", wrapperMethodParams.Select(GetTypeFullName))}' をもつ" +
-                            $"{GetAccessibilityDescription(methodInfo.IsWrapperPrivate)}メソッド '{methodInfo.WrapperName}' は" +
-                            $"ラッパー型 '{src.WrapperTypeName}' に存在しません。");
-                    }
+                                FieldInfo originalField = originalType.GetField(fieldInfo.OriginalName, CreateBindingAttribute(fieldInfo.IsOriginalPrivate, fieldInfo.IsOriginalStatic));
+                                if (originalField is null)
+                                {
+                                    throw new KeyNotFoundException($"{GetAccessibilityDescription(fieldInfo.IsOriginalPrivate, fieldInfo.IsOriginalStatic)}フィールド '{fieldInfo.OriginalName}' は" +
+                                        $"ラッパー型 '{classSrc.WrapperTypeName}' のオリジナル型 '{classSrc.OriginalTypeName}' に存在しません。");
+                                }
 
-                    Type[] originalMethodParams = methodInfo.WrapperParamNames.Select(p => ParseTypeName(p, true)).ToArray();
-                    MethodInfo originalMethod = originalType.GetMethod(methodInfo.OriginalName, CreateBindingAttribute(methodInfo.IsOriginalPrivate, methodInfo.IsOriginalStatic), null, originalMethodParams, null);
-                    if (originalMethod is null)
-                    {
-                        throw new KeyNotFoundException($"パラメータ '{string.Join(", ", originalMethodParams.Select(GetTypeFullName))}' をもつ" +
-                            $"{GetAccessibilityDescription(methodInfo.IsOriginalPrivate, methodInfo.IsOriginalStatic)}メソッド '{methodInfo.OriginalName}' は" +
-                            $"ラッパー型 '{src.WrapperTypeName}' のオリジナル型 '{src.OriginalTypeName}' に存在しません。");
-                    }
+                                return new KeyValuePair<string, FieldInfo>(wrapperProperty.Name, originalField);
+                            }).ToDictionary(x => x.Key, x => x.Value));
 
-                    return new KeyValuePair<(string, Type[]), MethodInfo>((wrapperMethod.Name, wrapperMethodParams), originalMethod);
-                }).ToDictionary(x => x.Key, x => x.Value), new StringTypeArrayTupleComparer());
+                            SortedList<(string, Type[]), MethodInfo> methods = new SortedList<(string, Type[]), MethodInfo>(classSrc.Methods.Select(methodInfo =>
+                            {
+                                Type[] wrapperMethodParams = methodInfo.WrapperParamNames.Select(p => ParseTypeName(p, false)).ToArray();
+                                MethodInfo wrapperMethod = wrapperType.GetMethod(methodInfo.WrapperName, CreateBindingAttribute(methodInfo.IsWrapperPrivate, methodInfo.IsWrapperStatic), null, wrapperMethodParams, null);
+                                if (wrapperMethod is null)
+                                {
+                                    throw new KeyNotFoundException($"パラメータ '{string.Join(", ", wrapperMethodParams.Select(GetTypeFullName))}' をもつ" +
+                                        $"{GetAccessibilityDescription(methodInfo.IsWrapperPrivate)}メソッド '{methodInfo.WrapperName}' は" +
+                                        $"ラッパー型 '{classSrc.WrapperTypeName}' に存在しません。");
+                                }
+
+                                Type[] originalMethodParams = methodInfo.WrapperParamNames.Select(p => ParseTypeName(p, true)).ToArray();
+                                MethodInfo originalMethod = originalType.GetMethod(methodInfo.OriginalName, CreateBindingAttribute(methodInfo.IsOriginalPrivate, methodInfo.IsOriginalStatic), null, originalMethodParams, null);
+                                if (originalMethod is null)
+                                {
+                                    throw new KeyNotFoundException($"パラメータ '{string.Join(", ", originalMethodParams.Select(GetTypeFullName))}' をもつ" +
+                                        $"{GetAccessibilityDescription(methodInfo.IsOriginalPrivate, methodInfo.IsOriginalStatic)}メソッド '{methodInfo.OriginalName}' は" +
+                                        $"ラッパー型 '{classSrc.WrapperTypeName}' のオリジナル型 '{classSrc.OriginalTypeName}' に存在しません。");
+                                }
+
+                                return new KeyValuePair<(string, Type[]), MethodInfo>((wrapperMethod.Name, wrapperMethodParams), originalMethod);
+                            }).ToDictionary(x => x.Key, x => x.Value), new StringTypeArrayTupleComparer());
 
 
-                BveTypeMemberCollection members = new BveTypeMemberCollection(wrapperType, originalType, constructors, propertyGetters, propertySetters, fields, methods);
-                return members;
+                            ClassMemberCollection members = new ClassMemberCollection(wrapperType, originalType, constructors, propertyGetters, propertySetters, fields, methods);
+                            return members;
+                        }
+
+                    default:
+                        throw new NotImplementedException($"{nameof(TypeMemberNameCollectionBase)} の派生クラス {src.GetType().Name} は認識されていません。");
+
+                }
             });
 
             Instance = new BveTypeCollectionProvider(types, typeof(ClassWrapper));
@@ -262,6 +278,11 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 
                     return originalType;
                 }
+                else if (type.IsEnum)
+                {
+                    Type originalType = wrapperOriginalTypePairs.FirstOrDefault(x => x.Key == type).Value;
+                    return originalType ?? type;
+                }
                 else
                 {
                     return type;
@@ -290,40 +311,23 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                     type = genericTypeDefinition.MakeGenericType(typeParams);
                 }
 
-                if (type.IsClass && type.IsSubclassOf(typeof(ClassWrapper)))
-                {
-                    Type wrapperType = wrapperOriginalTypePairs.FirstOrDefault(x => x.Value == type).Key;
-                    if (wrapperType is null)
-                    {
-                        if (typeLoadExceptionMessage is null)
-                        {
-                            typeLoadExceptionMessage = $"型 '{type.Name}' のラッパー型が見つかりませんでした。";
-                        }
-
-                        throw new TypeLoadException(typeLoadExceptionMessage);
-                    }
-
-                    return wrapperType;
-                }
-                else
-                {
-                    return type;
-                }
+                Type wrapperType = wrapperOriginalTypePairs.FirstOrDefault(x => x.Value == type).Key;
+                return wrapperType ?? type;
             }
 
-            Type ParseTypeName(TypeMemberNameCollection.TypeInfoBase typeInfo, bool convertToOriginalType)
+            Type ParseTypeName(TypeMemberNameCollectionBase.TypeInfoBase typeInfo, bool convertToOriginalType)
             {
                 Type type;
                 switch (typeInfo)
                 {
-                    case TypeMemberNameCollection.ArrayTypeInfo arrayTypeInfo:
+                    case TypeMemberNameCollectionBase.ArrayTypeInfo arrayTypeInfo:
                         {
                             Type baseType = ParseTypeName(arrayTypeInfo.BaseType, convertToOriginalType);
                             type = baseType.MakeArrayType(arrayTypeInfo.DimensionCount);
                         }
                         break;
 
-                    case TypeMemberNameCollection.GenericTypeInfo genericTypeInfo:
+                    case TypeMemberNameCollectionBase.GenericTypeInfo genericTypeInfo:
                         {
                             Type[] paramTypes = genericTypeInfo.TypeParams.Select(t => ParseTypeName(t, convertToOriginalType)).ToArray();
 
@@ -342,7 +346,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                         }
                         break;
 
-                    case TypeMemberNameCollection.TypeInfo basicTypeInfo:
+                    case TypeMemberNameCollectionBase.TypeInfo basicTypeInfo:
                         {
                             type = Type.GetType(basicTypeInfo.TypeName);
                             if (type is null)

@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         static MapObjectList()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<MapObjectList>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<MapObjectList>();
         }
 
         protected MapObjectList(object src) : base(src)

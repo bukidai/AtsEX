@@ -13,7 +13,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         static ScenarioProvider()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<ScenarioProvider>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<ScenarioProvider>();
 
             RouteGetMethod = members.GetSourcePropertyGetterOf(nameof(Route));
             VehicleGetMethod = members.GetSourcePropertyGetterOf(nameof(Vehicle));

@@ -13,7 +13,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         static StationList()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<StationList>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<StationList>();
 
             InsertMethod = members.GetSourceMethodOf(nameof(Insert));
             GetStandardTimeMethod = members.GetSourceMethodOf(nameof(GetStandardTime));

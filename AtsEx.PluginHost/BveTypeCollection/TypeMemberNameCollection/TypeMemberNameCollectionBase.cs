@@ -6,24 +6,15 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 {
-    internal struct TypeMemberNameCollection
+    internal abstract class TypeMemberNameCollectionBase
     {
         public string WrapperTypeName { get; }
         public string OriginalTypeName { get; }
-        public List<PropertyAccessorInfo> PropertyGetters { get; }
-        public List<PropertyAccessorInfo> PropertySetters { get; }
-        public List<FieldInfo> Fields { get; }
-        public List<MethodInfo> Methods { get; }
 
-        public TypeMemberNameCollection(string wrapperTypeName, string originalTypeName)
+        public TypeMemberNameCollectionBase(string wrapperTypeName, string originalTypeName)
         {
             WrapperTypeName = wrapperTypeName;
             OriginalTypeName = originalTypeName;
-
-            PropertyGetters = new List<PropertyAccessorInfo>();
-            PropertySetters = new List<PropertyAccessorInfo>();
-            Fields = new List<FieldInfo>();
-            Methods = new List<MethodInfo>();
         }
 
         public override string ToString() => WrapperTypeName;

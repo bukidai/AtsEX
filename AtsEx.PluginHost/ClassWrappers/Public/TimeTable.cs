@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         static TimeTable()
         {
-            BveTypeMemberCollection members = BveTypeCollectionProvider.Instance.GetTypeInfoOf<TimeTable>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<TimeTable>();
 
             ModelField = members.GetSourceFieldOf(nameof(Model));
             NameTextsField = members.GetSourceFieldOf(nameof(NameTexts));
