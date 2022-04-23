@@ -20,6 +20,8 @@ namespace Automatic9045.VehiclePlugins.StateViewer
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
+            ScenarioProvider scenarioProvider = AtsExPluginBase.BveHacker.CurrentScenarioProvider;
+
             if (e.KeyCode == Keys.Enter)
             {
                 if (sender is TextBox textBox)
@@ -27,26 +29,26 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                     switch (textBox.Name)
                     {
                         case nameof(TimeValue):
-                            DateTime time;
-                            if (DateTime.TryParse(textBox.Text, out time))
+                            TimeSpan time;
+                            if (TimeSpan.TryParse(textBox.Text, out time))
                             {
-                                AtsExPluginBase.Route.Time = time;
+                                scenarioProvider.TimeManager.SetTime((int)time.TotalMilliseconds);
                             }
                             break;
-
+                            
                         case nameof(LocationValue):
-                            int location;
-                            if (int.TryParse(textBox.Text, out location))
+                            double location;
+                            if (double.TryParse(textBox.Text, out location))
                             {
-                                AtsExPluginBase.Vehicle.Location = location;
+                                scenarioProvider.LocationManager.SetLocation(location, true);
                             }
                             break;
 
                         case nameof(SpeedValue):
-                            int speed;
-                            if (int.TryParse(textBox.Text, out speed))
+                            double speed;
+                            if (double.TryParse(textBox.Text, out speed))
                             {
-                                AtsExPluginBase.Vehicle.Speed = speed;
+                                scenarioProvider.LocationManager.SetSpeed(speed / 3.6);
                             }
                             break;
                     }
@@ -56,10 +58,11 @@ namespace Automatic9045.VehiclePlugins.StateViewer
 
         public void Tick()
         {
-            if (!TimeValue.Focused) TimeValue.Text = AtsExPluginBase.Route.Time.ToString("HH:mm:ss");
-            if (!LocationValue.Focused) LocationValue.Text = AtsExPluginBase.Vehicle.Location.ToString();
-            if (!SpeedValue.Focused) SpeedValue.Text = AtsExPluginBase.Vehicle.Speed.ToString();
-            DisplaySpeedValue.Text = AtsExPluginBase.Vehicle.DisplaySpeed.ToString();
+            ScenarioProvider scenarioProvider = AtsExPluginBase.BveHacker.CurrentScenarioProvider;
+
+            if (!TimeValue.Focused) TimeValue.Text = TimeSpan.FromMilliseconds(scenarioProvider.TimeManager.TimeMilliseconds).ToString(@"hh\:mm\:ss");
+            if (!LocationValue.Focused) LocationValue.Text = scenarioProvider.LocationManager.Location.ToString("F");
+            if (!SpeedValue.Focused) SpeedValue.Text = (scenarioProvider.LocationManager.SpeedMeterPerSecond * 3.6).ToString("F");
         }
     }
 }
