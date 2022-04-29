@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Helpers;
 
 namespace Automatic9045.MapPlugins.StationController
 {
@@ -16,7 +17,7 @@ namespace Automatic9045.MapPlugins.StationController
 
         public StationController() : base()
         {
-            MenuItem = BveHacker.AddCheckableMenuItemToContextMenu("駅編集ウィンドウを表示", MenuItemCheckedChanged);
+            MenuItem = ContextMenuHacker.AddCheckableMenuItem("駅編集ウィンドウを表示", MenuItemCheckedChanged);
 
             App.Started += Started;
         }
@@ -32,7 +33,7 @@ namespace Automatic9045.MapPlugins.StationController
             Form.WindowState = FormWindowState.Normal;
 
             MenuItem.Checked = true;
-            BveHacker.MainForm.Focus();
+            BveHacker.MainFormSource.Focus();
         }
 
         public override void Tick()
@@ -43,7 +44,7 @@ namespace Automatic9045.MapPlugins.StationController
         {
             if (MenuItem.Checked)
             {
-                Form.Show(BveHacker.MainForm);
+                Form.Show(BveHacker.MainFormSource);
             }
             else
             {

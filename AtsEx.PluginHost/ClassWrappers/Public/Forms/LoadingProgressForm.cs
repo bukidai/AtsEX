@@ -6,11 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx
+namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
-    internal sealed class LoadingProgressForm : ClassWrapper
+    public sealed class LoadingProgressForm : ClassWrapper
     {
         static LoadingProgressForm()
         {
@@ -25,7 +24,11 @@ namespace Automatic9045.AtsEx
         {
         }
 
-        public static LoadingProgressForm FromSource(object src) => new LoadingProgressForm(src);
+        public static LoadingProgressForm FromSource(object src)
+        {
+            if (src is null) return null;
+            return new LoadingProgressForm(src);
+        }
 
         private static MethodInfo ThrowErrorMethod1;
         public void ThrowError(string text, string senderFileName, int lineIndex, int charIndex)

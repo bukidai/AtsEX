@@ -7,29 +7,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Automatic9045.AtsEx.CoreHackServices
+using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+
+namespace Automatic9045.AtsEx
 {
-    internal interface IMainFormHacker
+    internal sealed class MainFormHacker
     {
-        Form TargetForm { get; }
-        dynamic TargetFormAsDynamic { get; }
-        IntPtr TargetFormHandle { get; }
-        Type TargetFormType { get; }
-    }
-
-    internal sealed class MainFormHacker : CoreHackService, IMainFormHacker
-    {
-        public Form TargetForm { get; }
-        public dynamic TargetFormAsDynamic { get; }
         public IntPtr TargetFormHandle { get; }
-        public Type TargetFormType { get; }
+        public Form TargetFormSource { get; }
+        public MainForm TargetForm { get; }
 
-        public MainFormHacker(Process targetProcess, ServiceCollection services) : base(targetProcess, services)
+        public MainFormHacker(Process targetProcess)
         {
-            TargetFormHandle = TargetProcess.MainWindowHandle;
-            TargetForm = (Form)Control.FromHandle(TargetFormHandle);
-            TargetFormAsDynamic = TargetForm as dynamic;
-            TargetFormType = TargetForm.GetType();
+            TargetFormHandle = targetProcess.MainWindowHandle;
+            TargetFormSource = (Form)Control.FromHandle(TargetFormHandle);
+            TargetForm = MainForm.FromSource(TargetFormSource);
         }
     }
 }

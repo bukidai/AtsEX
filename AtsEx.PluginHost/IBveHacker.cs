@@ -13,22 +13,13 @@ namespace Automatic9045.AtsEx.PluginHost
 {
     public delegate void ScenarioProviderCreatedEventHandler(ScenarioProviderCreatedEventArgs e);
 
-    public interface IBveHacker : IDisposable
+    public interface IBveHacker
     {
         /// <summary>
         /// 制御対象の BVE を実行している <see cref="System.Diagnostics.Process"/> を取得します。
         /// </summary>
         Process Process { get; }
 
-        /// <summary>
-        /// 制御対象の BVE の <see cref="Assembly"/> を取得します。
-        /// </summary>
-        Assembly Assembly { get; }
-
-        /// <summary>
-        /// BVE のメインフォームを取得します。
-        /// </summary>
-        Form MainForm { get; }
 
         /// <summary>
         /// BVE のメインフォームのハンドルを取得します。
@@ -36,65 +27,55 @@ namespace Automatic9045.AtsEx.PluginHost
         IntPtr MainFormHandle { get; }
 
         /// <summary>
-        /// BVE のメインフォームの <see cref="Type"/> を取得します。<see cref="MainForm.GetType()"/> と同じ実行結果が得られます。
+        /// BVE のメインフォームの <see cref="Form"/> インスタンスを取得します。
         /// </summary>
-        Type MainFormType { get; }
+        Form MainFormSource { get; }
+
+        /// <summary>
+        /// BVE のメインフォームを取得します。
+        /// </summary>
+        MainForm MainForm { get; }
 
 
         /// <summary>
-        /// BVE の右クリックメニューにクリック可能な <see cref="ToolStripMenuItem"/> を追加します。
+        /// BVE の「シナリオの選択」フォームの <see cref="Form"/> インスタンスを取得します。
         /// </summary>
-        /// <param name="text">メニューに表示するテキスト。</param>
-        /// <param name="click">クリックされると発生する <see cref="ToolStripItem.Click"/> イベントに登録する <see cref="EventHandler"/>。</param>
-        ToolStripMenuItem AddClickableMenuItemToContextMenu(string text, EventHandler click);
-
-        /// <summary>
-        /// BVE の右クリックメニューにチェック可能な <see cref="ToolStripMenuItem"/> を追加します。
-        /// </summary>
-        /// <param name="text">メニューに表示するテキスト。</param>
-        /// <param name="checkedChanged">チェック・アンチェックされると発生する <see cref="ToolStripMenuItem.CheckedChanged"/> イベントに登録する <see cref="EventHandler"/>。</param>
-        /// <param name="checkByDefault">デフォルトでチェックするか。</param>
-        ToolStripMenuItem AddCheckableMenuItemToContextMenu(string text, EventHandler checkedChanged, bool checkByDefault = false);
-
-        /// <summary>
-        /// BVE の右クリックメニューにチェック可能な <see cref="ToolStripMenuItem"/> を追加します。
-        /// </summary>
-        /// <param name="text">メニューに表示するテキスト。</param>
-        /// <param name="checkByDefault">デフォルトでチェックするか。</param>
-        ToolStripMenuItem AddCheckableMenuItemToContextMenu(string text, bool checkByDefault = false);
-
-        /// <summary>
-        /// BVE の右クリックメニューに独自の <see cref="ToolStripMenuItem"/> を追加します。
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="click"></param>
-        ToolStripMenuItem AddMenuItemToContextMenu(ToolStripMenuItem item);
-
+        Form ScenarioSelectionFormSource { get; }
 
         /// <summary>
         /// BVE の「シナリオの選択」フォームを取得します。
         /// </summary>
-        Form ScenarioSelectForm { get; }
+        ScenarioSelectionForm ScenarioSelectionForm { get; }
+
+        /// <summary>
+        /// BVE の「シナリオを読み込んでいます...」フォームの <see cref="Form"/> インスタンスを取得します。
+        /// </summary>
+        Form LoadingProgressFormSource { get; }
 
         /// <summary>
         /// BVE の「シナリオを読み込んでいます...」フォームを取得します。
         /// </summary>
-        Form LoadingProgressForm { get; }
+        LoadingProgressForm LoadingProgressForm { get; }
+
+        /// <summary>
+        /// BVE の「時刻と位置」フォームの <see cref="Form"/> インスタンスを取得します。
+        /// </summary>
+        Form TimePosFormSource { get; }
 
         /// <summary>
         /// BVE の「時刻と位置」フォームを取得します。
         /// </summary>
-        Form TimePosForm { get; }
+        TimePosForm TimePosForm { get; }
+
+        /// <summary>
+        /// BVE の「車両物理量」フォームの <see cref="Form"/> インスタンスを取得します。
+        /// </summary>
+        Form ChartFormSource { get; }
 
         /// <summary>
         /// BVE の「車両物理量」フォームを取得します。
         /// </summary>
-        Form ChartForm { get; }
-
-
-        void ThrowError(string text, string senderFileName = "", int lineIndex = 0, int charIndex = 0);
-        void ThrowError(LoadError error);
-        void ThrowError(IEnumerable<LoadError> errors);
+        ChartForm ChartForm { get; }
 
 
         /// <summary>
@@ -105,23 +86,17 @@ namespace Automatic9045.AtsEx.PluginHost
         /// <summary>
         /// 現在読込中または実行中のシナリオの情報を取得・設定します。
         /// </summary>
-        ScenarioInfo CurrentScenarioInfo { get; set; }
+        ScenarioInfo ScenarioInfo { get; set; }
 
         /// <summary>
         /// 現在実行中のシナリオを取得します。シナリオの読込中は <see cref="InvalidOperationException"/> をスローします。
         /// シナリオの読込中に <see cref="IScenarioProvider"/> を取得するには <see cref="ScenarioProviderCreated"/> イベントを購読してください。
         /// </summary>
-        ScenarioProvider CurrentScenarioProvider { get; }
+        ScenarioProvider ScenarioProvider { get; }
 
         /// <summary>
-        /// <see cref="CurrentScenarioProvider"/> が取得可能かどうかを取得します。
+        /// <see cref="ScenarioProvider"/> が取得可能かどうかを取得します。
         /// </summary>
         bool HasScenarioProviderCreated { get; }
-
-
-        /// <summary>
-        /// BVE の「時刻と位置」フォームのダイヤグラムを再描画します。
-        /// </summary>
-        void UpdateDiagram();
     }
 }

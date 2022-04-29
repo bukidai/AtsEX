@@ -5,13 +5,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx
+namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
-    internal sealed class TimePosForm : ClassWrapper
+    public sealed class TimePosForm : ClassWrapper
     {
         static TimePosForm()
         {
@@ -26,7 +24,11 @@ namespace Automatic9045.AtsEx
         {
         }
 
-        public static TimePosForm FromSource(object src) => new TimePosForm(src);
+        public static TimePosForm FromSource(object src)
+        {
+            if (src is null) return null;
+            return new TimePosForm(src);
+        }
 
         private static MethodInfo SetScenarioMethod;
         public void SetScenario(ScenarioProvider scenarioProvider) => SetScenarioMethod.Invoke(Src, new object[] { scenarioProvider.Src });

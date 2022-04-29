@@ -13,22 +13,15 @@ using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx.CoreHackServices
+namespace Automatic9045.AtsEx
 {
-    internal interface IScenarioHacker
-    {
-        ScenarioInfo CurrentScenarioInfo { get; set; }
-        ScenarioProvider CurrentScenarioProvider { get; set; }
-    }
-
-    internal sealed class ScenarioHacker : CoreHackService, IScenarioHacker
+    internal sealed class ScenarioHacker
     {
         private MainForm MainForm;
 
-        public ScenarioHacker(Process targetProcess, ServiceCollection services) : base(targetProcess, services)
+        public ScenarioHacker(MainFormHacker mainFormHacker)
         {
-            Form formSrc = Services.GetService<IMainFormHacker>().TargetForm;
-            MainForm = MainForm.FromSource(formSrc);
+            MainForm = mainFormHacker.TargetForm;
 
 
             ClassMemberCollection timePosFormMembers = BveTypeCollectionProvider.Instance.GetClassInfoOf<TimePosForm>();

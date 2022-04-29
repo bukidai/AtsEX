@@ -57,19 +57,8 @@
     <Compile Include="App.cs" />
     <Compile Include="AtsEx.cs" />
     <Compile Include="BveHacker\BveHacker.cs" />
-    <Compile Include="BveHacker\CoreHackService.cs" />
-    <Compile Include="BveHacker\CoreHackServiceCollectionBuilder.cs" />
-    <Compile Include="BveHacker\CoreHackServices\ContextMenuHacker.cs" />
-    <Compile Include="BveHacker\CoreHackServices\DiagramHacker.cs" />
-    <Compile Include="BveHacker\CoreHackServices\LoadErrorHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\MainFormHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\ScenarioHacker.cs" />
-    <Compile Include="BveHacker\CoreHackServices\SubFormHacker.cs" />
-    <Compile Include="InternalClassWrappers\ChartForm.cs" />
-    <Compile Include="InternalClassWrappers\LoadingProgressForm.cs" />
-    <Compile Include="InternalClassWrappers\MainForm.cs" />
-    <Compile Include="InternalClassWrappers\ScenarioSelectionForm.cs" />
-    <Compile Include="InternalClassWrappers\TimePosForm.cs" />
     <Compile Include="MapLoader\MapLoader.cs" />
     <Compile Include="PluginLoader\PluginListLoader.cs" />
     <Compile Include="PluginLoader\PluginLoader.cs" />
@@ -93,6 +82,7 @@
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /y "$(TargetDir)0Harmony.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"

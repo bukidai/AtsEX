@@ -1,13 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <BveTypeNameDefinitions xmlns="http://automatic9045.github.io/ns/xmlschemas/BveTypesXmlSchema.xsd">
-	<!-- Internal class wrappers -->
+	<!-- Forms -->
 	<Class Wrapper="ChartForm" Original="bj">
 	</Class>
+
 	<Class Wrapper="LoadingProgressForm" Original="dt">
 		<Method Wrapper="ThrowError" WrapperParams="System.String, System.String, System.Int32, System.Int32" Original="a"/>
 		<Method Wrapper="ThrowError" WrapperParams="LoadError" Original="a"/>
 		<Method Wrapper="ThrowErrors" WrapperParams="System.Collections.Generic.IEnumerable`1[LoadError]" Original="a"/>
 	</Class>
+
 	<Class Wrapper="MainForm" Original="bz">
 		<Field WrapperProperty="ScenarioSelectForm" Original="c" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="LoadingProgressForm" Original="k" IsOriginalPrivate="true"/>
@@ -17,13 +19,15 @@
 		<Field WrapperProperty="CurrentScenarioInfo" Original="q" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="CurrentScenarioProvider" Original="n" IsOriginalPrivate="true"/>
 	</Class>
+
 	<Class Wrapper="ScenarioSelectionForm" Original="da">
 	</Class>
+
 	<Class Wrapper="TimePosForm" Original="aj">
 		<Method Wrapper="SetScenario" WrapperParams="ScenarioProvider" Original="a"/>
 		<Method Wrapper="Draw" WrapperParams="void" Original="d" IsOriginalPrivate="true"/>
 	</Class>
-	<!-- Internal class wrappers END -->
+	<!-- Forms END -->
 
 	<Class Wrapper="AssistantText" Original="bc">
 		<Property Wrapper="Color">

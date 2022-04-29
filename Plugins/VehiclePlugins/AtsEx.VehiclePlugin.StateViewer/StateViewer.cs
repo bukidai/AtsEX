@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Helpers;
 
 namespace Automatic9045.VehiclePlugins.StateViewer
 {
@@ -16,7 +17,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
 
         public StateViewer() : base()
         {
-            MenuItem = BveHacker.AddCheckableMenuItemToContextMenu("状態ウィンドウを表示", MenuItemCheckedChanged);
+            MenuItem = ContextMenuHacker.AddCheckableMenuItem("状態ウィンドウを表示", MenuItemCheckedChanged);
 
             App.Started += Started;
         }
@@ -32,7 +33,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             Form.WindowState = FormWindowState.Normal;
 
             MenuItem.Checked = true;
-            BveHacker.MainForm.Focus();
+            BveHacker.MainFormSource.Focus();
         }
 
         public override void Tick()
@@ -44,7 +45,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
         {
             if (MenuItem.Checked)
             {
-                Form.Show(BveHacker.MainForm);
+                Form.Show(BveHacker.MainFormSource);
             }
             else
             {

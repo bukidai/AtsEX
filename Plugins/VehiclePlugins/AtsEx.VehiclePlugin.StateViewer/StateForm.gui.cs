@@ -64,7 +64,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                 Left = 112,
                 Top = 16,
                 Width = 432,
-                Text = AtsExPluginBase.BveHacker.CurrentScenarioInfo.Path,
+                Text = AtsExPluginBase.BveHacker.ScenarioInfo.Path,
                 AutoEllipsis = true,
             };
             Controls.Add(ScenarioPathValue);
@@ -86,7 +86,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                 Width = 432,
                 Height = 32,
                 AutoSize = false,
-                Text = AtsExPluginBase.BveHacker.CurrentScenarioInfo.VehicleFiles.SelectedFile.Path,
+                Text = AtsExPluginBase.BveHacker.ScenarioInfo.VehicleFiles.SelectedFile.Path,
                 AutoEllipsis = true,
             };
             Controls.Add(VehiclePathValue);
@@ -106,7 +106,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                 Left = 112,
                 Top = 96,
                 Width = 432,
-                Text = AtsExPluginBase.BveHacker.CurrentScenarioInfo.VehicleTitle,
+                Text = AtsExPluginBase.BveHacker.ScenarioInfo.VehicleTitle,
                 AutoEllipsis = true,
             };
             Controls.Add(VehicleTitleValue);
@@ -128,7 +128,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                 Width = 432,
                 Height = 36,
                 AutoSize = false,
-                Text = AtsExPluginBase.BveHacker.CurrentScenarioInfo.RouteFiles.SelectedFile.Path,
+                Text = AtsExPluginBase.BveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path,
                 AutoEllipsis = true,
             };
             Controls.Add(RoutePathValue);
@@ -148,7 +148,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                 Left = 112,
                 Top = 176,
                 Width = 432,
-                Text = AtsExPluginBase.BveHacker.CurrentScenarioInfo.RouteTitle,
+                Text = AtsExPluginBase.BveHacker.ScenarioInfo.RouteTitle,
                 AutoEllipsis = true,
             };
             Controls.Add(RouteTitleValue);

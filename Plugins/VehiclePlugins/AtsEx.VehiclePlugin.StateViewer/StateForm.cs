@@ -20,7 +20,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            ScenarioProvider scenarioProvider = AtsExPluginBase.BveHacker.CurrentScenarioProvider;
+            ScenarioProvider scenarioProvider = AtsExPluginBase.BveHacker.ScenarioProvider;
 
             if (e.KeyCode == Keys.Enter)
             {
@@ -58,7 +58,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
 
         public void Tick()
         {
-            ScenarioProvider scenarioProvider = AtsExPluginBase.BveHacker.CurrentScenarioProvider;
+            ScenarioProvider scenarioProvider = AtsExPluginBase.BveHacker.ScenarioProvider;
 
             if (!TimeValue.Focused) TimeValue.Text = TimeSpan.FromMilliseconds(scenarioProvider.TimeManager.TimeMilliseconds).ToString(@"hh\:mm\:ss");
             if (!LocationValue.Focused) LocationValue.Text = scenarioProvider.LocationManager.Location.ToString("F");

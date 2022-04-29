@@ -11,7 +11,6 @@ namespace Automatic9045.AtsEx.PluginHost
 {
     public delegate void AllPluginLoadedEventHandler(AllPluginLoadedEventArgs e);
     public delegate void StartedEventHandler(StartedEventArgs e);
-    public delegate void TickEventHandler(EventArgs e);
 
     public interface IApp
     {

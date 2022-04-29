@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using Automatic9045.AtsEx.PluginHost.Helpers;
 
 namespace Automatic9045.MapPlugins.StationController
 {
@@ -35,7 +36,7 @@ namespace Automatic9045.MapPlugins.StationController
 
         private void ResetInput(ScenarioProvider scenarioProvider = null)
         {
-            scenarioProvider = scenarioProvider ?? AtsExPluginBase.BveHacker.CurrentScenarioProvider;
+            scenarioProvider = scenarioProvider ?? AtsExPluginBase.BveHacker.ScenarioProvider;
 
             StationList stations = scenarioProvider.Route.Stations;
             Station lastStation = stations.Count == 0 ? null : stations[stations.Count - 1] as Station;
@@ -48,7 +49,7 @@ namespace Automatic9045.MapPlugins.StationController
 
         private void AddButtonClicked(object sender, EventArgs e)
         {
-            StationList stations = AtsExPluginBase.BveHacker.CurrentScenarioProvider.Route.Stations;
+            StationList stations = AtsExPluginBase.BveHacker.ScenarioProvider.Route.Stations;
 
             try
             {
@@ -76,7 +77,7 @@ namespace Automatic9045.MapPlugins.StationController
 
         private void RemoveButtonClicked(object sender, EventArgs e)
         {
-            StationList stations = AtsExPluginBase.BveHacker.CurrentScenarioProvider.Route.Stations;
+            StationList stations = AtsExPluginBase.BveHacker.ScenarioProvider.Route.Stations;
             if (stations.Count == 0) return;
             stations.RemoveAt(stations.Count - 1);
 
@@ -94,8 +95,8 @@ namespace Automatic9045.MapPlugins.StationController
 
         private void UpdateStationList()
         {
-            StationList stations = AtsExPluginBase.BveHacker.CurrentScenarioProvider.Route.Stations;
-            TimeTable timeTable = AtsExPluginBase.BveHacker.CurrentScenarioProvider.TimeTable;
+            StationList stations = AtsExPluginBase.BveHacker.ScenarioProvider.Route.Stations;
+            TimeTable timeTable = AtsExPluginBase.BveHacker.ScenarioProvider.TimeTable;
             timeTable.NameTexts = new string[stations.Count + 1];
             timeTable.NameTextWidths = new int[stations.Count + 1];
             timeTable.ArrivalTimeTexts = new string[stations.Count + 1];
@@ -104,7 +105,7 @@ namespace Automatic9045.MapPlugins.StationController
             timeTable.DepertureTimeTextWidths = new int[stations.Count + 1];
             timeTable.Update();
 
-            AtsExPluginBase.BveHacker.UpdateDiagram();
+            DiagramUpdater.Update();
         }
     }
 }

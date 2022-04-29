@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Helpers;
 
 namespace Automatic9045.AtsEx
 {
@@ -19,14 +20,14 @@ namespace Automatic9045.AtsEx
 
         public VersionFormProvider()
         {
-            MenuItem = BveHacker.Instance.AddClickableMenuItemToContextMenu($"{App.Instance.ProductShortName} バージョン情報...", MenuItemClick);
+            MenuItem = ContextMenuHacker.AddClickableMenuItem($"{App.Instance.ProductShortName} バージョン情報...", MenuItemClick);
         }
 
         private void MenuItemClick(object sender, EventArgs e)
         {
             if (!Form.Visible)
             {
-                Form.Show(BveHacker.Instance.MainForm);
+                Form.Show(BveHacker.Instance.MainFormSource);
             }
 
             Form.Focus();

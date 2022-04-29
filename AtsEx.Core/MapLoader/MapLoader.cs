@@ -26,7 +26,7 @@ namespace Automatic9045.AtsEx
 
         public bool Load()
         {
-            string mapFilePath = BveHacker.Instance.CurrentScenarioInfo.RouteFiles.SelectedFile.Path;
+            string mapFilePath = BveHacker.Instance.ScenarioInfo.RouteFiles.SelectedFile.Path;
             return Load(mapFilePath);
         }
 

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost.Helpers;
 
 namespace Automatic9045.AtsEx
 {
@@ -37,18 +38,19 @@ namespace Automatic9045.AtsEx
             TargetAssembly = targetAssembly;
             CallerAssembly = callerAssembly;
 
-            {
-                Version bveVersion = TargetAssembly.GetName().Version;
-                Version profileVersion = BveTypeCollectionProvider.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly, true);
-                if (profileVersion != bveVersion)
-                {
-                    BveHacker.Instance.ThrowError($"BVE バージョン {bveVersion} には対応していません。" +
-                        $"{profileVersion} 向けのプロファイルで代用しますが、{App.Instance.ProductShortName} による拡張機能は正常に動作しない可能性があります。");
-                }
-            }
+            Version bveVersion = TargetAssembly.GetName().Version;
+            Version profileVersion = BveTypeCollectionProvider.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly, true);
 
             App.CreateInstance(TargetAssembly, CallerAssembly, ExecutingAssembly, PluginHostAssembly);
             BveHacker.CreateInstance(TargetProcess);
+
+            InstanceStore.Initialize(App.Instance, BveHacker.Instance);
+
+            if (profileVersion != bveVersion)
+            {
+                LoadErrorManager.ThrowError($"BVE バージョン {bveVersion} には対応していません。" +
+                    $"{profileVersion} 向けのプロファイルで代用しますが、{App.Instance.ProductShortName} による拡張機能は正常に動作しない可能性があります。");
+            }
 
             VersionFormProvider = new VersionFormProvider();
 
@@ -70,11 +72,11 @@ namespace Automatic9045.AtsEx
             }
             catch (BveFileLoadException ex)
             {
-                BveHacker.Instance.ThrowError(ex.Message, ex.SenderFileName, ex.LineIndex, ex.CharIndex);
+                LoadErrorManager.ThrowError(ex.Message, ex.SenderFileName, ex.LineIndex, ex.CharIndex);
             }
             catch (Exception ex)
             {
-                BveHacker.Instance.ThrowError(ex.Message);
+                LoadErrorManager.ThrowError(ex.Message);
                 MessageBox.Show(ex.ToString(), $"ハンドルされていない例外 - {App.Instance.ProductShortName}");
             }
             finally
@@ -106,7 +108,7 @@ namespace Automatic9045.AtsEx
             });
 
             VersionFormProvider.Dispose();
-            BveHacker.Instance.Dispose();
+            InstanceStore.Dispose();
             BveTypeCollectionProvider.Instance.Dispose();
         }
 

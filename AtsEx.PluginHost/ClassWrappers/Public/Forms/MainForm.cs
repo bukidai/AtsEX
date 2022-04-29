@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx
+namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
-    internal sealed class MainForm : ClassWrapper
+    public sealed class MainForm : ClassWrapper
     {
         static MainForm()
         {
@@ -32,31 +31,23 @@ namespace Automatic9045.AtsEx
         {
         }
 
-        public static MainForm FromSource(object src) => new MainForm(src);
+        public static MainForm FromSource(object src)
+        {
+            if (src is null) return null;
+            return new MainForm(src);
+        }
 
         private static FieldInfo ScenarioSelectFormField;
-        public Form ScenarioSelectForm
-        {
-            get => ScenarioSelectFormField.GetValue(Src);
-        }
+        public ScenarioSelectionForm ScenarioSelectForm => ClassWrappers.ScenarioSelectionForm.FromSource(ScenarioSelectFormField.GetValue(Src));
 
         private static FieldInfo LoadingProgressFormField;
-        public Form LoadingProgressForm
-        {
-            get => LoadingProgressFormField.GetValue(Src);
-        }
+        public LoadingProgressForm LoadingProgressForm => ClassWrappers.LoadingProgressForm.FromSource(LoadingProgressFormField.GetValue(Src));
 
         private static FieldInfo TimePosFormField;
-        public Form TimePosForm
-        {
-            get => TimePosFormField.GetValue(Src);
-        }
+        public TimePosForm TimePosForm => ClassWrappers.TimePosForm.FromSource(TimePosFormField.GetValue(Src));
 
         private static FieldInfo ChartFormField;
-        public Form ChartForm
-        {
-            get => ChartFormField.GetValue(Src);
-        }
+        public ChartForm ChartForm => ClassWrappers.ChartForm.FromSource(ChartFormField.GetValue(Src));
 
 
         private static FieldInfo ContextMenuField;
