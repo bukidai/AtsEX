@@ -68,7 +68,17 @@ namespace Automatic9045.AtsEx
                     mapLoader.Load();
                     MapPlugins = mapLoader.LoadedPlugins;
 
-                    IEnumerable<LoadError> removeTargetErrors = LoadErrorManager.Errors.Where(error => error.Text.Contains("[[NOMPI]]"));
+                    IEnumerable<LoadError> removeTargetErrors = LoadErrorManager.Errors.Where(error =>
+                    {
+                        if (error.Text.Contains("[[NOMPI]]")) return true;
+
+                        bool isMapPluginUsingError = mapLoader.RemoveErrorIncludePositions.Any(pos =>
+                        {
+                            if (Path.GetFileName(pos.Key) != error.SenderFileName) return false;
+                            return pos.Value.Contains((error.LineIndex, error.CharIndex));
+                        });
+                        return isMapPluginUsingError;
+                    });
                     foreach (LoadError error in removeTargetErrors)
                     {
                         LoadErrorManager.Errors.Remove(error);
