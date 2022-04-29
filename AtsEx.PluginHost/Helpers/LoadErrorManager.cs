@@ -10,7 +10,25 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
 {
     public static partial class LoadErrorManager
     {
-        public static LoadErrorList Errors { get; } = new LoadErrorList();
+        static LoadErrorManager()
+        {
+            if (InstanceStore.IsInitialized)
+            {
+                Initialize();
+            }
+            else
+            {
+                InstanceStore.Initialized += e => Initialize();
+            }
+        }
+
+        private static void Initialize()
+        {
+            Errors = new LoadErrorList();
+        }
+
+
+        public static LoadErrorList Errors { get; private set; }
 
 
         public static void Throw(string text, string senderFileName, int lineIndex, int charIndex)

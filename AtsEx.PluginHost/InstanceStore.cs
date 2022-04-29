@@ -8,6 +8,7 @@ using Automatic9045.AtsEx.PluginHost.Helpers;
 
 namespace Automatic9045.AtsEx.PluginHost
 {
+    internal delegate void InitializedEventHandler(EventArgs e);
     internal delegate void ClosingEventHandler(EventArgs e);
 
     public static class InstanceStore
@@ -20,6 +21,7 @@ namespace Automatic9045.AtsEx.PluginHost
         private static IBveHacker bveHacker;
         internal static IBveHacker BveHacker => IsInitialized ? bveHacker : throw new InvalidOperationException($"{nameof(InstanceStore)} は初期化されていません。");
 
+        internal static event InitializedEventHandler Initialized;
         internal static event ClosingEventHandler Closing;
 
         public static void Initialize(IApp app, IBveHacker bveHacker)
@@ -29,6 +31,8 @@ namespace Automatic9045.AtsEx.PluginHost
 
             InstanceStore.app = app;
             InstanceStore.bveHacker = bveHacker;
+
+            Initialized?.Invoke(EventArgs.Empty);
         }
 
         public static void Dispose()
