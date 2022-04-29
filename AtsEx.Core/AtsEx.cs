@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.Helpers;
 
 namespace Automatic9045.AtsEx
@@ -48,7 +49,7 @@ namespace Automatic9045.AtsEx
 
             if (profileVersion != bveVersion)
             {
-                LoadErrorManager.ThrowError($"BVE バージョン {bveVersion} には対応していません。" +
+                LoadErrorManager.Throw($"BVE バージョン {bveVersion} には対応していません。" +
                     $"{profileVersion} 向けのプロファイルで代用しますが、{App.Instance.ProductShortName} による拡張機能は正常に動作しない可能性があります。");
             }
 
@@ -72,11 +73,11 @@ namespace Automatic9045.AtsEx
             }
             catch (BveFileLoadException ex)
             {
-                LoadErrorManager.ThrowError(ex.Message, ex.SenderFileName, ex.LineIndex, ex.CharIndex);
+                LoadErrorManager.Throw(ex.Message, ex.SenderFileName, ex.LineIndex, ex.CharIndex);
             }
             catch (Exception ex)
             {
-                LoadErrorManager.ThrowError(ex.Message);
+                LoadErrorManager.Throw(ex.Message);
                 MessageBox.Show(ex.ToString(), $"ハンドルされていない例外 - {App.Instance.ProductShortName}");
             }
             finally

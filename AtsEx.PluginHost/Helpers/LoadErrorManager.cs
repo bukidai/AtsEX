@@ -8,20 +8,23 @@ using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.PluginHost.Helpers
 {
-    public static class LoadErrorManager
+    public static partial class LoadErrorManager
     {
-        public static void ThrowError(string text, string senderFileName, int lineIndex, int charIndex)
+        public static LoadErrorList Errors { get; } = new LoadErrorList();
+
+
+        public static void Throw(string text, string senderFileName, int lineIndex, int charIndex)
         {
             InstanceStore.BveHacker.LoadingProgressForm.ThrowError(text, senderFileName, lineIndex, charIndex);
         }
 
-        public static void ThrowError(string text, string senderFileName, int lineIndex) => ThrowError(text, senderFileName, lineIndex, 0);
+        public static void Throw(string text, string senderFileName, int lineIndex) => Throw(text, senderFileName, lineIndex, 0);
 
-        public static void ThrowError(string text, string senderFileName) => ThrowError(text, senderFileName, 0);
+        public static void Throw(string text, string senderFileName) => Throw(text, senderFileName, 0);
 
-        public static void ThrowError(string text) => ThrowError(text, "");
+        public static void Throw(string text) => Throw(text, "");
 
-        public static void ThrowError(LoadError error)
+        public static void Throw(LoadError error)
         {
             InstanceStore.BveHacker.LoadingProgressForm.ThrowError(error);
         }

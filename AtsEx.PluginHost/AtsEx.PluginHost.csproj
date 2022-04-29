@@ -79,6 +79,7 @@
     <Compile Include="Helpers\ContextMenuHacker.cs" />
     <Compile Include="Helpers\DiagramUpdater.cs" />
     <Compile Include="Helpers\LoadErrorManager.cs" />
+    <Compile Include="Helpers\LoadErrorManager.LoadErrorList.cs" />
     <Compile Include="Imports\VehicleSpec.cs" />
     <Compile Include="Imports\VehicleState.cs" />
     <Compile Include="ClassWrappers\ClassWrapper.cs" />
