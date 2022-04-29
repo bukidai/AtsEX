@@ -22,7 +22,7 @@ namespace Automatic9045.AtsEx
         {
             TargetAppDomain.AssemblyResolve += (sender, e) =>
             {
-                if (e.Name != assembly.FullName) return null;
+                if (new AssemblyName(e.Name).Name != assembly.GetName().Name) return null;
 #if DEBUG
                 MessageBox.Show($"{assembly.Location} が登録されました。");
 #endif
