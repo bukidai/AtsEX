@@ -68,7 +68,11 @@ namespace Automatic9045.AtsEx
                     mapLoader.Load();
                     MapPlugins = mapLoader.LoadedPlugins;
 
-                    // TODO: NOMPI、MPIUSINGのエラーの除去
+                    IEnumerable<LoadError> removeTargetErrors = LoadErrorManager.Errors.Where(error => error.Text.Contains("[[NOMPI]]"));
+                    foreach (LoadError error in removeTargetErrors)
+                    {
+                        LoadErrorManager.Errors.Remove(error);
+                    }
                 }
             }
             catch (BveFileLoadException ex)
