@@ -5,6 +5,11 @@
 	</Class>
 
 	<Class Wrapper="LoadingProgressForm" Original="dt">
+		<Field WrapperProperty="IsErrorCritical" Original="a" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="ErrorCount" IsWrapperPrivate="true" Original="b" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="Panel" IsWrapperPrivate="true" Original="e" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="ErrorListView" IsWrapperPrivate="true" Original="p" IsOriginalPrivate="true"/>
+
 		<Method Wrapper="ThrowError" WrapperParams="System.String, System.String, System.Int32, System.Int32" Original="a"/>
 		<Method Wrapper="ThrowError" WrapperParams="LoadError" Original="a"/>
 		<Method Wrapper="ThrowErrors" WrapperParams="System.Collections.Generic.IEnumerable`1[LoadError]" Original="a"/>
