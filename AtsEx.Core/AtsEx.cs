@@ -124,6 +124,8 @@ namespace Automatic9045.AtsEx
 
             VersionFormProvider.Dispose();
             InstanceStore.Dispose();
+            BveHacker.Dispose();
+            App.Dispose();
             BveTypeCollectionProvider.Instance.Dispose();
         }
 

@@ -20,6 +20,11 @@ namespace Automatic9045.AtsEx
             Instance = new App(bveAssembly, callerAssembly, atsExAssembly, atsExPluginHostAssembly);
         }
 
+        public static void Dispose()
+        {
+            Instance = null;
+        }
+
 
         private App(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
         {

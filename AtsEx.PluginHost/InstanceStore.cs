@@ -38,6 +38,12 @@ namespace Automatic9045.AtsEx.PluginHost
         public static void Dispose()
         {
             Closing?.Invoke(EventArgs.Empty);
+
+            app = null;
+            bveHacker = null;
+            Initialized = null;
+            Closing = null;
+            IsInitialized = false;
         }
     }
 }

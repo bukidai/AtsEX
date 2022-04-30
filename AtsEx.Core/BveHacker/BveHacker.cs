@@ -24,6 +24,12 @@ namespace Automatic9045.AtsEx
             Instance = new BveHacker(targetProcess);
         }
 
+        public static void Dispose()
+        {
+            Instance = null;
+        }
+
+
         private BveHacker(Process targetProcess)
         {
             Process = targetProcess;
