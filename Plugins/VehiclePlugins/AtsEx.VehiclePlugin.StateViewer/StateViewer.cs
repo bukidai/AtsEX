@@ -19,13 +19,6 @@ namespace Automatic9045.VehiclePlugins.StateViewer
         {
             MenuItem = ContextMenuHacker.Instance.AddCheckableMenuItem("状態ウィンドウを表示", MenuItemCheckedChanged);
 
-            App.Started += Started;
-        }
-
-        private void Started(StartedEventArgs e)
-        {
-            if (!(Form is null)) DisposeForm();
-
             MenuItem.Checked = false;
 
             Form = new StateForm();
@@ -38,7 +31,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
 
         public override void Tick()
         {
-            Form.Tick();
+            Form?.Tick();
         }
 
         private void MenuItemCheckedChanged(object sender, EventArgs e)
@@ -59,13 +52,11 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             MenuItem.Checked = false;
         }
 
-        private void DisposeForm()
+        public void Dispose()
         {
             Form.FormClosing -= FormClosing;
             Form.Close();
             Form.Dispose();
         }
-
-        public void Dispose() => DisposeForm();
     }
 }

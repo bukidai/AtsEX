@@ -19,13 +19,6 @@ namespace Automatic9045.MapPlugins.StationController
         {
             MenuItem = ContextMenuHacker.Instance.AddCheckableMenuItem("駅編集ウィンドウを表示", MenuItemCheckedChanged);
 
-            App.Started += Started;
-        }
-
-        private void Started(StartedEventArgs e)
-        {
-            if (!(Form is null)) DisposeForm();
-
             MenuItem.Checked = false;
 
             Form = new ControllerForm();
@@ -58,13 +51,11 @@ namespace Automatic9045.MapPlugins.StationController
             MenuItem.Checked = false;
         }
 
-        private void DisposeForm()
+        public void Dispose()
         {
             Form.FormClosing -= FormClosing;
             Form.Close();
             Form.Dispose();
         }
-
-        public void Dispose() => DisposeForm();
     }
 }
