@@ -38,7 +38,7 @@ namespace Automatic9045.MapPlugins.StationController
         {
             MaximizeBox = false;
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(480, 480);
+            ClientSize = new Size(480, 112);
             Font = new Font("Yu Gothic UI", 9);
             Text = "AtsEX マッププラグイン 停車場リスト編集サンプル";
 
