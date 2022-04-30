@@ -20,7 +20,7 @@ namespace Automatic9045.AtsEx
 
         public VersionFormProvider()
         {
-            MenuItem = ContextMenuHacker.AddClickableMenuItem($"{App.Instance.ProductShortName} バージョン情報...", MenuItemClick);
+            MenuItem = ContextMenuHacker.Instance.AddClickableMenuItem($"{App.Instance.ProductShortName} バージョン情報...", MenuItemClick);
         }
 
         private void MenuItemClick(object sender, EventArgs e)

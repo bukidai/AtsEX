@@ -9,40 +9,36 @@ using System.Windows.Forms;
 
 namespace Automatic9045.AtsEx.PluginHost.Helpers
 {
-    public static class ContextMenuHacker
+    public class ContextMenuHacker
     {
-        private static ToolStripItemCollection ContextMenuItems;
+        private static ContextMenuHacker instance = null;
+        public static ContextMenuHacker Instance => instance = instance ?? new ContextMenuHacker();
 
-        private static int DefaultItemCount;
-        private static int AddStartIndex;
-        private static int AddedItemCount = 0;
 
-        static ContextMenuHacker()
+        private ToolStripItemCollection ContextMenuItems;
+
+        private int AddStartIndex;
+        private List<ToolStripItem> AddedItems = new List<ToolStripItem>();
+
+        private ContextMenuHacker()
         {
             InstanceStore.Closing += Dispose;
 
             ContextMenuItems = InstanceStore.BveHacker.MainForm.ContextMenu.Items;
-
-            DefaultItemCount = ContextMenuItems.Count;
             AddStartIndex = ContextMenuItems.IndexOfKey("toolStripMenuItem") + 1;
 
             AddSeparator();
         }
 
-        public static ToolStripItem AddItem(ToolStripItem item)
+        public ToolStripItem AddItem(ToolStripItem item)
         {
-            if (ContextMenuItems.Count != DefaultItemCount + AddedItemCount)
-            {
-                throw new Exception("AtsEX 以外から右クリックメニューを編集しないでください。");
-            }
-
-            ContextMenuItems.Insert(AddStartIndex + AddedItemCount, item);
-            AddedItemCount++;
+            ContextMenuItems.Insert(AddStartIndex + AddedItems.Count, item);
+            AddedItems.Add(item);
 
             return item;
         }
 
-        public static ToolStripMenuItem AddClickableMenuItem(string text, EventHandler click)
+        public ToolStripMenuItem AddClickableMenuItem(string text, EventHandler click)
         {
             ToolStripMenuItem item = new ToolStripMenuItem(text);
             item.Click += click;
@@ -51,7 +47,7 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
             return item;
         }
 
-        public static ToolStripMenuItem AddCheckableMenuItem(string text, EventHandler checkedChanged)
+        public ToolStripMenuItem AddCheckableMenuItem(string text, EventHandler checkedChanged)
         {
             ToolStripMenuItem item = new ToolStripMenuItem(text)
             {
@@ -63,15 +59,15 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
             return item;
         }
 
-        public static ToolStripMenuItem AddCheckableMenuItem(string text) => AddCheckableMenuItem(text, (_, _1) => { });
+        public ToolStripMenuItem AddCheckableMenuItem(string text) => AddCheckableMenuItem(text, (_, _1) => { });
 
-        public static ToolStripMenuItem AddMenuItem(ToolStripMenuItem item)
+        public ToolStripMenuItem AddMenuItem(ToolStripMenuItem item)
         {
             AddItem(item);
             return item;
         }
 
-        public static ToolStripSeparator AddSeparator()
+        public ToolStripSeparator AddSeparator()
         {
             ToolStripSeparator item = new ToolStripSeparator();
             AddItem(item);
@@ -79,12 +75,12 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
             return item;
         }
 
-        private static void Dispose(EventArgs e)
+        private void Dispose(EventArgs e)
         {
-            for (int i = AddedItemCount - 1; i >= 0; i--)
-            {
-                ContextMenuItems.RemoveAt(AddStartIndex + i);
-            }
+            AddedItems.ForEach(item => ContextMenuItems.Remove(item));
+            AddedItems.Clear();
+
+            instance = null;
         }
     }
 }

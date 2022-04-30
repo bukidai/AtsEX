@@ -17,7 +17,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
 
         public StateViewer() : base()
         {
-            MenuItem = ContextMenuHacker.AddCheckableMenuItem("状態ウィンドウを表示", MenuItemCheckedChanged);
+            MenuItem = ContextMenuHacker.Instance.AddCheckableMenuItem("状態ウィンドウを表示", MenuItemCheckedChanged);
 
             App.Started += Started;
         }

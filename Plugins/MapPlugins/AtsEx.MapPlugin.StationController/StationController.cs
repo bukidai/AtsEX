@@ -17,7 +17,7 @@ namespace Automatic9045.MapPlugins.StationController
 
         public StationController() : base()
         {
-            MenuItem = ContextMenuHacker.AddCheckableMenuItem("駅編集ウィンドウを表示", MenuItemCheckedChanged);
+            MenuItem = ContextMenuHacker.Instance.AddCheckableMenuItem("駅編集ウィンドウを表示", MenuItemCheckedChanged);
 
             App.Started += Started;
         }
