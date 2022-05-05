@@ -80,6 +80,7 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
             AddedItems.ForEach(item => ContextMenuItems.Remove(item));
             AddedItems.Clear();
 
+            InstanceStore.Closing -= Dispose;
             instance = null;
         }
     }
