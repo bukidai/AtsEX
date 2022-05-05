@@ -6,6 +6,32 @@
 ## ライセンス
 [The MIT License](LICENSE)
 
+## リリースのダウンロード
+
+[こちら](https://github.com/automatic9045/AtsEX/releases)
+
+## リポジトリのセットアップ手順
+
+**※AtsEX自体のソースコードを編集するための手順です。AtsEXを利用してプラグインを開発する場合はこちらではなく[リリース](https://github.com/automatic9045/AtsEX/releases)を参照してください。**
+
+### 1. リポジトリをクローンする
+
+もちろんご自身のGitHubアカウントでフォークしてからクローンされても構いません。
+
+### 2. ローカルで参照しているアセンブリを配置する
+
+以下のアセンブリはNuGetを介さずに参照しているため、手動での配置が必要です。
+
+#### Mackoy.XmlInterfaces.DLL (Mackoy氏)
+
+BVE本体（`BveTs.exe`）と同じフォルダ内にある`Mackoy.XmlInterfaces.DLL`を`AtsEx.PluginHost\LocalReferences\BveTs`内にコピーしてください。
+
+### 3. （既にソリューションをVisual Studioで開いている場合は）Visual Studioを再起動する
+
+### 4. NuGet経由で参照しているアセンブリをダウンロードする
+
+一度ビルドすると自動でダウンロードされます。
+
 ## 使用ライブラリ（アルファベット順）
 ### [.NET Runtime](https://github.com/dotnet/runtime) (MIT)
 
