@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mackoy.XmlInterfaces">
-      <HintPath>..\..\..\..\..\BVE\BveTs6\Mackoy.XmlInterfaces.DLL</HintPath>
+      <HintPath>LocalReferences\BveTs\Mackoy.XmlInterfaces.DLL</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
@@ -135,7 +135,10 @@
   <ItemGroup>
     <EmbeddedResource Include="BveTypeCollection\TypeNameDefinitions\6.0.7554.619.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="LocalReferences\.gitignore" />
+    <Content Include="LocalReferences\BveTs\Mackoy.XmlInterfaces.DLL" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /y "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"</PostBuildEvent>
