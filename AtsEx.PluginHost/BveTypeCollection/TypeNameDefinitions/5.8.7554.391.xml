@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <BveTypeNameDefinitions xmlns="http://automatic9045.github.io/ns/xmlschemas/BveTypesXmlSchema.xsd">
+	<!-- Unidentified classes -->
+	<Class Wrapper="cz" Original="cz">
+		<Method Wrapper="SetRoute" WrapperParams="Route" IsWrapperPrivate="true" Original="a"/>
+	</Class>
+	<!-- Unidentified classes END -->
+
 	<!-- Forms -->
 	<Class Wrapper="ChartForm" Original="bj">
 	</Class>

@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lib.Harmony.2.2.1\lib\net48\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="Mackoy.XmlInterfaces">
       <HintPath>LocalReferences\BveTs\Mackoy.XmlInterfaces.DLL</HintPath>
       <Private>False</Private>
@@ -79,11 +82,13 @@
     <Compile Include="ClassWrappers\Public\TimeManager.cs" />
     <Compile Include="ClassWrappers\Public\Forms\ScenarioSelectionForm.cs" />
     <Compile Include="ClassWrappers\Public\Forms\TimePosForm.cs" />
+    <Compile Include="ClassWrappers\UnidentifiedClasses\cz.cs" />
     <Compile Include="Enums\GameState.cs" />
     <Compile Include="Helpers\ContextMenuHacker.cs" />
     <Compile Include="Helpers\DiagramUpdater.cs" />
     <Compile Include="Helpers\LoadErrorManager.cs" />
     <Compile Include="Helpers\LoadErrorManager.LoadErrorList.cs" />
+    <Compile Include="Helpers\StructureSetLifeProlonger.cs" />
     <Compile Include="Imports\VehicleSpec.cs" />
     <Compile Include="Imports\VehicleState.cs" />
     <Compile Include="ClassWrappers\ClassWrapper.cs" />
