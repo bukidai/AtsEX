@@ -71,7 +71,7 @@ namespace Automatic9045.MapPlugins.StationController
                 return;
             }
 
-            UpdateStationList();
+            DiagramUpdater.Update();
             ResetInput();
         }
 
@@ -89,21 +89,6 @@ namespace Automatic9045.MapPlugins.StationController
             {
                 Station lastStation = stations.Last() as Station;
             }
-
-            UpdateStationList();
-        }
-
-        private void UpdateStationList()
-        {
-            StationList stations = AtsExPluginBase.BveHacker.ScenarioProvider.Route.Stations;
-            TimeTable timeTable = AtsExPluginBase.BveHacker.ScenarioProvider.TimeTable;
-            timeTable.NameTexts = new string[stations.Count + 1];
-            timeTable.NameTextWidths = new int[stations.Count + 1];
-            timeTable.ArrivalTimeTexts = new string[stations.Count + 1];
-            timeTable.ArrivalTimeTextWidths = new int[stations.Count + 1];
-            timeTable.DepertureTimeTexts = new string[stations.Count + 1];
-            timeTable.DepertureTimeTextWidths = new int[stations.Count + 1];
-            timeTable.Update();
 
             DiagramUpdater.Update();
         }
