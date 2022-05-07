@@ -37,6 +37,7 @@ namespace Automatic9045.AtsEx
             MainFormHacker = new MainFormHacker(Process);
             ScenarioHacker = new ScenarioHacker(MainFormHacker);
 
+            ScenarioHacker.ScenarioProviderCreated += e => PreviewScenarioProviderCreated?.Invoke(e);
             ScenarioHacker.ScenarioProviderCreated += e => ScenarioProviderCreated?.Invoke(e);
         }
 
@@ -66,6 +67,7 @@ namespace Automatic9045.AtsEx
 
         private ScenarioHacker ScenarioHacker;
 
+        public event ScenarioProviderCreatedEventHandler PreviewScenarioProviderCreated;
         public event ScenarioProviderCreatedEventHandler ScenarioProviderCreated;
 
         public ScenarioInfo ScenarioInfo

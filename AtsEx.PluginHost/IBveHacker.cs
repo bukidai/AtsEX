@@ -79,6 +79,11 @@ namespace Automatic9045.AtsEx.PluginHost
 
 
         /// <summary>
+        /// <see cref="ScenarioProviderCreated"/> が発生する直前に通知します。特に理由がなければ <see cref="ScenarioProviderCreated"/> を使用してください。
+        /// </summary>
+        event ScenarioProviderCreatedEventHandler PreviewScenarioProviderCreated;
+
+        /// <summary>
         /// <see cref="IScenarioProvider"/> のインスタンスが生成されたときに通知します。
         /// </summary>
         event ScenarioProviderCreatedEventHandler ScenarioProviderCreated;
