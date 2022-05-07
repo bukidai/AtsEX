@@ -20,6 +20,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             DrawLimitLocationSetMethod = members.GetSourcePropertySetterOf(nameof(DrawLimitLocation));
 
             StructuresGetMethod = members.GetSourcePropertyGetterOf(nameof(Structures));
+            StructuresField = members.GetSourceFieldOf(nameof(Structures));
 
             StationsGetMethod = members.GetSourcePropertyGetterOf(nameof(Stations));
 
@@ -49,9 +50,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static MethodInfo StructuresGetMethod;
+        private static FieldInfo StructuresField;
         public StructureSet Structures
         {
             get => StructureSet.FromSource(StructuresGetMethod.Invoke(Src, null));
+            internal set => StructuresField.SetValue(Src, value.Src);
         }
 
         private static MethodInfo StationsGetMethod;

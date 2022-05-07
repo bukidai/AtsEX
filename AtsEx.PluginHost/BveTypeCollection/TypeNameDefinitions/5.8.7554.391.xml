@@ -85,6 +85,29 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="LocatableMapObject" Original="fs">
+		<Property Wrapper="Matrix">
+			<Getter Original="e"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="TrackKey">
+			<Getter Original="h"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Span">
+			<Getter Original="g"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="TiltsAlongCant">
+			<Getter Original="f"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="TiltsAlongGradient">
+			<Getter Original="d"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="LocationManager" Original="ct">
 		<Property Wrapper="SpeedMeterPerSecond">
 			<Getter Original="g"/>
@@ -128,6 +151,24 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="PutBetweenStructure" Original="df">
+		<Property Wrapper="Model">
+			<Getter Original="d"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="TrackKey1">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="TrackKey2">
+			<Getter Original="b"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="TransformOnlyX">
+			<Getter Original="a"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="RandomFileList" Original="dr">
 		<Property Wrapper="SelectedFile">
 			<Getter Original="a"/>
@@ -156,6 +197,7 @@
 			<Getter Original="s"/>
 			<Setter Original="a"/>
 		</Property>
+		<Field WrapperProperty="Structures" Original="d" IsOriginalPrivate="true"/>
 	</Class>
 
 	<Class Wrapper="ScenarioInfo" Original="ek">
@@ -323,6 +365,13 @@
 	<Class Wrapper="StationList" Original="dp">
 		<Method Wrapper="Insert" WrapperParams="Station" Original="a"/>
 		<Method Wrapper="GetStandardTime" WrapperParams="System.Double" Original="a"/>
+	</Class>
+
+	<Class Wrapper="Structure" Original="n">
+		<Property Wrapper="Model">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
 	</Class>
 
 	<Class Wrapper="StructureSet" Original="dn">

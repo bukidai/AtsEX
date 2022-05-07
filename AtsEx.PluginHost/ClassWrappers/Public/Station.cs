@@ -83,14 +83,14 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static new Station FromSource(object src)
+        public static Station FromSource(object src)
         {
             if (src is null) return null;
             return new Station(src);
         }
 
         private static ConstructorInfo Constructor;
-        public Station(string name) : base(Constructor.Invoke(new object[] { name }))
+        public Station(string name) : this(Constructor.Invoke(new object[] { name }))
         {
         }
 

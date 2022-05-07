@@ -32,10 +32,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             Type originalType = src.GetType();
             Type wrapperType = BveTypeCollectionProvider.Instance.GetWrapperTypeOf(originalType);
-            if (wrapperType == typeof(Station))
-            {
-                return Station.FromSource(src);
-            }
+
+            if (wrapperType == typeof(PutBetweenStructure)) return PutBetweenStructure.FromSource(src);
+            else if (wrapperType == typeof(Station)) return Station.FromSource(src);
+            else if (wrapperType == typeof(Structure)) return Structure.FromSource(src);
             else
             {
                 throw new DevelopException($"{nameof(MapObjectBase)} '{wrapperType.Name}' は認識されていません。");

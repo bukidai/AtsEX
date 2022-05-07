@@ -9,11 +9,13 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
-    public class MapObjectBase : ClassWrapper
+    public class MapObjectBase : ClassWrapper, IComparable
     {
         static MapObjectBase()
         {
             ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<MapObjectBase>();
+
+            Constructor = members.GetSourceConstructor();
 
             LocationGetMethod = members.GetSourcePropertyGetterOf(nameof(Location));
             LocationSetMethod = members.GetSourcePropertySetterOf(nameof(Location));
@@ -23,10 +25,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        public static MapObjectBase FromSource(object src)
+        private static ConstructorInfo Constructor;
+        protected MapObjectBase(double location) : this(Constructor.Invoke(new object[] { location }))
         {
-            if (src is null) return null;
-            return new MapObjectBase(src);
         }
 
         private static MethodInfo LocationGetMethod;
