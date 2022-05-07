@@ -32,6 +32,8 @@ namespace Automatic9045.AtsEx.PluginHost
             InstanceStore.app = app;
             InstanceStore.bveHacker = bveHacker;
 
+            StaticConstructorInvoker.InvokeAll();
+
             Initialized?.Invoke(EventArgs.Empty);
         }
 
