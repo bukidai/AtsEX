@@ -23,7 +23,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             BackgroundColorGetMethod = members.GetSourcePropertyGetterOf(nameof(BackgroundColor));
             BackgroundColorSetMethod = members.GetSourcePropertySetterOf(nameof(BackgroundColor));
 
-            TextAreaGetMethod = members.GetSourcePropertyGetterOf(nameof(TextArea));
+            DisplayAreaGetMethod = members.GetSourcePropertyGetterOf(nameof(DisplayArea));
 
             DrawMethod = members.GetSourceMethodOf(nameof(Draw));
         }
@@ -52,10 +52,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => BackgroundColorSetMethod.Invoke(Src, new object[] { value });
         }
 
-        protected static MethodInfo TextAreaGetMethod;
-        public Rectangle TextArea
+        protected static MethodInfo DisplayAreaGetMethod;
+        public Rectangle DisplayArea
         {
-            get => TextAreaGetMethod.Invoke(Src, null);
+            get => DisplayAreaGetMethod.Invoke(Src, null);
         }
 
         protected static MethodInfo DrawMethod;

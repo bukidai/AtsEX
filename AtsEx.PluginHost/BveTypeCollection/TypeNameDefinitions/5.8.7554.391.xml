@@ -59,7 +59,7 @@
 			<Getter Original="f"/>
 			<Setter Original="b"/>
 		</Property>
-		<Property Wrapper="TextArea">
+		<Property Wrapper="DisplayArea">
 			<Getter Original="g"/>
 		</Property>
 		<Method Wrapper="Draw" WrapperParams="void" Original="o"/>
