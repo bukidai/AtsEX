@@ -289,7 +289,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo StuckInDoorGetMethod;
         private static MethodInfo StuckInDoorSetMethod;
-        public double StuckInDoorMilliseconds
+        public int StuckInDoorMilliseconds
         {
             get => StuckInDoorGetMethod.Invoke(Src, null);
             set => StuckInDoorSetMethod.Invoke(Src, new object[] { value });
