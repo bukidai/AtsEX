@@ -42,14 +42,24 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static ConstructorInfo Constructor1;
-        protected LocatableMapObject(double location, string trackKey, double x, double y, double z, double dx, double dy, double dz, int tilt, double span)
+        private LocatableMapObject(double location, string trackKey, double x, double y, double z, double dx, double dy, double dz, int tilt, double span)
             : this(Constructor1.Invoke(new object[] { location, trackKey, x, y, z, dx, dy, dz, tilt, span }))
         {
         }
 
+        protected LocatableMapObject(double location, string trackKey, double x, double y, double z, double dx, double dy, double dz, TiltOptions tiltOptions, double span)
+            : this(location, trackKey, x, y, z, dx, dy, dz, (int)tiltOptions, span)
+        {
+        }
+
         private static ConstructorInfo Constructor2;
-        protected LocatableMapObject(double location, string trackKey, int tilt, double span)
+        private LocatableMapObject(double location, string trackKey, int tilt, double span)
             : this(Constructor2.Invoke(new object[] { location, trackKey, tilt, span }))
+        {
+        }
+
+        protected LocatableMapObject(double location, string trackKey, TiltOptions tiltOptions, double span)
+            : this(location, trackKey, (int)tiltOptions, span)
         {
         }
 

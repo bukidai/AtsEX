@@ -84,6 +84,7 @@
     <Compile Include="ClassWrappers\Public\Forms\TimePosForm.cs" />
     <Compile Include="ClassWrappers\UnidentifiedClasses\cz.cs" />
     <Compile Include="Enums\GameState.cs" />
+    <Compile Include="Enums\TiltOptions.cs" />
     <Compile Include="Helpers\ContextMenuHacker.cs" />
     <Compile Include="Helpers\DiagramUpdater.cs" />
     <Compile Include="Helpers\LoadErrorManager.cs" />

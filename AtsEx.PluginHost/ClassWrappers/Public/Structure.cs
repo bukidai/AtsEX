@@ -33,14 +33,24 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static ConstructorInfo Constructor1;
-        public Structure(double location, string trackKey, double x, double y, double z, double dx, double dy, double dz, int tilt, double span, Model model)
+        private Structure(double location, string trackKey, double x, double y, double z, double dx, double dy, double dz, int tilt, double span, Model model)
             : this(Constructor1.Invoke(new object[] { location, trackKey, x, y, z, dx, dy, dz, tilt, span, model }))
         {
         }
 
+        public Structure(double location, string trackKey, double x, double y, double z, double dx, double dy, double dz, TiltOptions tiltOptions, double span, Model model)
+            : this(location, trackKey, x, y, z, dx, dy, dz, (int)tiltOptions, span, model)
+        {
+        }
+
         private static ConstructorInfo Constructor2;
-        public Structure(double location, string trackKey, int tilt, double span, Model model)
+        private Structure(double location, string trackKey, int tilt, double span, Model model)
             : this(Constructor2.Invoke(new object[] { location, trackKey, tilt, span, model }))
+        {
+        }
+
+        public Structure(double location, string trackKey, TiltOptions tiltOptions, double span, Model model)
+            : this(location, trackKey, (int)tiltOptions, span, model)
         {
         }
 
