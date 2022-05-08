@@ -42,7 +42,7 @@ namespace Automatic9045.MapPlugins.StationController
             Station lastStation = stations.Count == 0 ? null : stations[stations.Count - 1] as Station;
             
             LocationValue.Text = (lastStation is null ? 0 : lastStation.Location + 500).ToString();
-            int arrivalTime = lastStation is null ? 10 * 60 * 60 * 1000 : lastStation.DefaultTime + 2 * 60 * 1000;
+            int arrivalTime = lastStation is null ? 10 * 60 * 60 * 1000 : lastStation.DefaultTimeMilliseconds + 2 * 60 * 1000;
             ArrivalTimeValue.Text = arrivalTime.ToTimeText();
             DepertureTimeValue.Text = (arrivalTime + 30 * 1000).ToTimeText();
         }
@@ -56,9 +56,9 @@ namespace Automatic9045.MapPlugins.StationController
                 Station newStation = new Station(NameValue.Text)
                 {
                     Location = int.Parse(LocationValue.Text),
-                    DefaultTime = ArrivalTimeValue.Text.ToTimeMilliseconds(),
-                    ArrivalTime = ArrivalTimeValue.Text.ToTimeMilliseconds(),
-                    DepertureTime = Pass.Checked ? int.MaxValue : DepertureTimeValue.Text.ToTimeMilliseconds(),
+                    DefaultTimeMilliseconds = ArrivalTimeValue.Text.ToTimeMilliseconds(),
+                    ArrivalTimeMilliseconds = ArrivalTimeValue.Text.ToTimeMilliseconds(),
+                    DepertureTimeMilliseconds = Pass.Checked ? int.MaxValue : DepertureTimeValue.Text.ToTimeMilliseconds(),
                     Pass = Pass.Checked,
                     IsTerminal = IsTerminal.Checked,
                 };

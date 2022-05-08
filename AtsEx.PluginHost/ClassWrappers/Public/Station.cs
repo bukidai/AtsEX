@@ -20,17 +20,17 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             NameGetMethod = members.GetSourcePropertyGetterOf(nameof(Name));
             NameSetMethod = members.GetSourcePropertySetterOf(nameof(Name));
 
-            ArrivalTimeGetMethod = members.GetSourcePropertyGetterOf(nameof(ArrivalTime));
-            ArrivalTimeSetMethod = members.GetSourcePropertySetterOf(nameof(ArrivalTime));
+            ArrivalTimeGetMethod = members.GetSourcePropertyGetterOf(nameof(ArrivalTimeMilliseconds));
+            ArrivalTimeSetMethod = members.GetSourcePropertySetterOf(nameof(ArrivalTimeMilliseconds));
 
-            DepertureTimeGetMethod = members.GetSourcePropertyGetterOf(nameof(DepertureTime));
-            DepertureTimeSetMethod = members.GetSourcePropertySetterOf(nameof(DepertureTime));
+            DepertureTimeGetMethod = members.GetSourcePropertyGetterOf(nameof(DepertureTimeMilliseconds));
+            DepertureTimeSetMethod = members.GetSourcePropertySetterOf(nameof(DepertureTimeMilliseconds));
 
-            DoorCloseTimeGetMethod = members.GetSourcePropertyGetterOf(nameof(DoorCloseTime));
-            DoorCloseTimeSetMethod = members.GetSourcePropertySetterOf(nameof(DoorCloseTime));
+            DoorCloseTimeGetMethod = members.GetSourcePropertyGetterOf(nameof(DoorCloseTimeMilliseconds));
+            DoorCloseTimeSetMethod = members.GetSourcePropertySetterOf(nameof(DoorCloseTimeMilliseconds));
 
-            DefaultTimeGetMethod = members.GetSourcePropertyGetterOf(nameof(DefaultTime));
-            DefaultTimeSetMethod = members.GetSourcePropertySetterOf(nameof(DefaultTime));
+            DefaultTimeGetMethod = members.GetSourcePropertyGetterOf(nameof(DefaultTimeMilliseconds));
+            DefaultTimeSetMethod = members.GetSourcePropertySetterOf(nameof(DefaultTimeMilliseconds));
 
             PassGetMethod = members.GetSourcePropertyGetterOf(nameof(Pass));
             PassSetMethod = members.GetSourcePropertySetterOf(nameof(Pass));
@@ -38,8 +38,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             IsTerminalGetMethod = members.GetSourcePropertyGetterOf(nameof(IsTerminal));
             IsTerminalSetMethod = members.GetSourcePropertySetterOf(nameof(IsTerminal));
 
-            StoppageTimeGetMethod = members.GetSourcePropertyGetterOf(nameof(StoppageTime));
-            StoppageTimeSetMethod = members.GetSourcePropertySetterOf(nameof(StoppageTime));
+            StoppageTimeGetMethod = members.GetSourcePropertyGetterOf(nameof(StoppageTimeMilliseconds));
+            StoppageTimeSetMethod = members.GetSourcePropertySetterOf(nameof(StoppageTimeMilliseconds));
 
             DoorSideGetMethod = members.GetSourcePropertyGetterOf(nameof(DoorSide));
             DoorSideSetMethod = members.GetSourcePropertySetterOf(nameof(DoorSide));
@@ -63,8 +63,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
             MaxStopPositionGetMethod = members.GetSourcePropertyGetterOf(nameof(MaxStopPosition));
 
-            AlightingTimeGetMethod = members.GetSourcePropertyGetterOf(nameof(AlightingTime));
-            AlightingTimeSetMethod = members.GetSourcePropertySetterOf(nameof(AlightingTime));
+            AlightingTimeGetMethod = members.GetSourcePropertyGetterOf(nameof(AlightingTimeMilliseconds));
+            AlightingTimeSetMethod = members.GetSourcePropertySetterOf(nameof(AlightingTimeMilliseconds));
 
             TargetLoadFactorGetMethod = members.GetSourcePropertyGetterOf(nameof(TargetLoadFactor));
             TargetLoadFactorSetMethod = members.GetSourcePropertySetterOf(nameof(TargetLoadFactor));
@@ -75,8 +75,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             DoorReopenGetMethod = members.GetSourcePropertyGetterOf(nameof(DoorReopen));
             DoorReopenSetMethod = members.GetSourcePropertySetterOf(nameof(DoorReopen));
 
-            StuckInDoorGetMethod = members.GetSourcePropertyGetterOf(nameof(StuckInDoor));
-            StuckInDoorSetMethod = members.GetSourcePropertySetterOf(nameof(StuckInDoor));
+            StuckInDoorGetMethod = members.GetSourcePropertyGetterOf(nameof(StuckInDoorMilliseconds));
+            StuckInDoorSetMethod = members.GetSourcePropertySetterOf(nameof(StuckInDoorMilliseconds));
         }
 
         private Station(object src) : base(src)
@@ -104,7 +104,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo ArrivalTimeGetMethod;
         private static MethodInfo ArrivalTimeSetMethod;
-        public int ArrivalTime
+        public int ArrivalTimeMilliseconds
         {
             get => ArrivalTimeGetMethod.Invoke(Src, null);
             set => ArrivalTimeSetMethod.Invoke(Src, new object[] { value });
@@ -112,7 +112,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo DepertureTimeGetMethod;
         private static MethodInfo DepertureTimeSetMethod;
-        public int DepertureTime
+        public int DepertureTimeMilliseconds
         {
             get => DepertureTimeGetMethod.Invoke(Src, null);
             set => DepertureTimeSetMethod.Invoke(Src, new object[] { value });
@@ -120,7 +120,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo DoorCloseTimeGetMethod;
         private static MethodInfo DoorCloseTimeSetMethod;
-        public int DoorCloseTime
+        public int DoorCloseTimeMilliseconds
         {
             get => DoorCloseTimeGetMethod.Invoke(Src, null);
             set => DoorCloseTimeSetMethod.Invoke(Src, new object[] { value });
@@ -128,7 +128,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo DefaultTimeGetMethod;
         private static MethodInfo DefaultTimeSetMethod;
-        public int DefaultTime
+        public int DefaultTimeMilliseconds
         {
             get => DefaultTimeGetMethod.Invoke(Src, null);
             set => DefaultTimeSetMethod.Invoke(Src, new object[] { value });
@@ -152,7 +152,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo StoppageTimeGetMethod;
         private static MethodInfo StoppageTimeSetMethod;
-        public int StoppageTime
+        public int StoppageTimeMilliseconds
         {
             get => StoppageTimeGetMethod.Invoke(Src, null);
             set => StoppageTimeSetMethod.Invoke(Src, new object[] { value });
@@ -221,7 +221,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         private static MethodInfo AlightingTimeGetMethod;
         private static MethodInfo AlightingTimeSetMethod;
 
-        public int AlightingTime
+        public int AlightingTimeMilliseconds
         {
             get => AlightingTimeGetMethod.Invoke(Src, null);
             set => AlightingTimeSetMethod.Invoke(Src, new object[] { value });
@@ -253,7 +253,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo StuckInDoorGetMethod;
         private static MethodInfo StuckInDoorSetMethod;
-        public double StuckInDoor
+        public double StuckInDoorMilliseconds
         {
             get => StuckInDoorGetMethod.Invoke(Src, null);
             set => StuckInDoorSetMethod.Invoke(Src, new object[] { value });

@@ -288,19 +288,19 @@
 			<Getter Original="a"/>
 			<Setter Original="a" IsOriginalPrivate="true"/>
 		</Property>
-		<Property Wrapper="ArrivalTime">
+		<Property Wrapper="ArrivalTimeMilliseconds">
 			<Getter Original="g"/>
 			<Setter Original="c" IsOriginalPrivate="true"/>
 		</Property>
-		<Property Wrapper="DepertureTime">
+		<Property Wrapper="DepertureTimeMilliseconds">
 			<Getter Original="m"/>
 			<Setter Original="b" IsOriginalPrivate="true"/>
 		</Property>
-		<Property Wrapper="DoorCloseTime">
+		<Property Wrapper="DoorCloseTimeMilliseconds">
 			<Getter Original="n"/>
 			<Setter Original="h"/>
 		</Property>
-		<Property Wrapper="DefaultTime">
+		<Property Wrapper="DefaultTimeMilliseconds">
 			<Getter Original="d"/>
 			<Setter Original="e"/>
 		</Property>
@@ -312,7 +312,7 @@
 			<Getter Original="l"/>
 			<Setter Original="a" IsOriginalPrivate="true"/>
 		</Property>
-		<Property Wrapper="StoppageTime">
+		<Property Wrapper="StoppageTimeMilliseconds">
 			<Getter Original="c"/>
 			<Setter Original="a" IsOriginalPrivate="true"/>
 		</Property>
@@ -346,7 +346,7 @@
 		<Property Wrapper="MaxStopPosition">
 			<Getter Original="f"/>
 		</Property>
-		<Property Wrapper="AlightingTime">
+		<Property Wrapper="AlightingTimeMilliseconds">
 			<Getter Original="q"/>
 			<Setter Original="g"/>
 		</Property>
@@ -362,7 +362,7 @@
 			<Getter Original="r"/>
 			<Setter Original="d"/>
 		</Property>
-		<Property Wrapper="StuckInDoor">
+		<Property Wrapper="StuckInDoorMilliseconds">
 			<Getter Original="i"/>
 			<Setter Original="d"/>
 		</Property>
