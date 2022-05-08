@@ -102,5 +102,22 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get => TiltsAlongGradientGetMethod.Invoke(Src, null);
             set => TiltsAlongGradientSetMethod.Invoke(Src, new object[] { value });
         }
+
+        public TiltOptions TiltOptions
+        {
+            get
+            {
+                TiltOptions result = TiltOptions.Default;
+                if (TiltsAlongGradient) result |= TiltOptions.TiltsAlongGradient;
+                if (TiltsAlongCant) result |= TiltOptions.TiltsAlongCant;
+
+                return result;
+            }
+            set
+            {
+                TiltsAlongGradient = TiltOptions.HasFlag(TiltOptions.TiltsAlongGradient);
+                TiltsAlongCant = TiltOptions.HasFlag(TiltOptions.TiltsAlongCant);
+            }
+        }
     }
 }
