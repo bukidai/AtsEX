@@ -47,8 +47,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get => TimeMillisecondsGetMethod.Invoke(Src, null);
         }
 
+        public TimeSpan Time => TimeSpan.FromMilliseconds(TimeMilliseconds);
 
         private static MethodInfo SetTimeMethod;
         public void SetTime(int timeMilliseconds) => SetTimeMethod.Invoke(Src, new object[] { timeMilliseconds });
+
+        public void SetTime(TimeSpan time) => SetTime((int)time.TotalMilliseconds);
     }
 }
