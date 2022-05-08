@@ -9,6 +9,9 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// 車両の位置に関する処理を行います。
+    /// </summary>
     public class LocationManager : ClassWrapper
     {
         static LocationManager()
@@ -24,6 +27,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="LocationManager"/> クラスのインスタンス。</returns>
         public static LocationManager FromSource(object src)
         {
             if (src is null) return null;
@@ -31,13 +39,27 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static MethodInfo SpeedMeterPerSecondGetMethod;
+        /// <summary>
+        /// 車両の速度 [m/s] を取得します。
+        /// </summary>
+        /// <remarks>
+        /// 車両の速度の変更には <see cref="SetSpeed(double)"/> メソッドを使用してください。
+        /// </remarks>
+        /// <seealso cref="SetSpeed(double)"/>
         public double SpeedMeterPerSecond
         {
             get => SpeedMeterPerSecondGetMethod.Invoke(Src, null);
         }
 
-
         private static MethodInfo SetSpeedMethod;
+        /// <summary>
+        /// 車両の速度を設定します。
+        /// </summary>
+        /// <param name="speedMeterPerSecond">車両の速度 [m/s]。</param>
+        /// <remarks>
+        /// 車両の速度の取得には <see cref="SpeedMeterPerSecond"/> プロパティを使用してください。
+        /// </remarks>
+        /// <seealso cref="SpeedMeterPerSecond"/>
         public void SetSpeed(double speedMeterPerSecond) => SetSpeedMethod.Invoke(Src, new object[] { speedMeterPerSecond });
     }
 }

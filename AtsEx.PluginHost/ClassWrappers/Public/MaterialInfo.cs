@@ -11,6 +11,9 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// SlimDX で表示するための 2D および 3D モデルのマテリアル情報を表します。
+    /// </summary>
     public sealed class MaterialInfo : ClassWrapper
     {
         static MaterialInfo()
@@ -31,6 +34,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="MaterialInfo"/> クラスのインスタンス。</returns>
         public static MaterialInfo FromSource(object src)
         {
             if (src is null) return null;
@@ -39,6 +47,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo MaterialGetMethod;
         private static MethodInfo MaterialSetMethod;
+        /// <summary>
+        /// マテリアルを取得・設定します。
+        /// </summary>
         public Material Material
         {
             get => MaterialGetMethod.Invoke(Src, null);
@@ -47,6 +58,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo TextureGetMethod;
         private static MethodInfo TextureSetMethod;
+        /// <summary>
+        /// <see cref="Material"/> に関連付けるテクスチャを取得・設定します。
+        /// </summary>
         public Texture Texture
         {
             get => TextureGetMethod.Invoke(Src, null);
@@ -55,6 +69,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo Is2DGetMethod;
         private static MethodInfo Is2DSetMethod;
+        /// <summary>
+        /// 2D モデルであるか (Z 座標を使用しないかどうか) を取得・設定します。
+        /// </summary>
         public bool Is2D
         {
             get => Is2DGetMethod.Invoke(Src, null);

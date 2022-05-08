@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// 値がオリジナル型の <see cref="SortedList{TKey, TValue}"/> のラッパーを表します。
+    /// </summary>
+    /// <typeparam name="TKey">キーの型。</typeparam>
+    /// <typeparam name="TValueWrapper">値のオリジナル型に対応するラッパー型。</typeparam>
+    /// <seealso cref="SortedList{TKey, TValue}"/>
     public class WrappedSortedList<TKey, TValueWrapper> : IDictionary<TKey, TValueWrapper>, IDictionary, IReadOnlyDictionary<TKey, TValueWrapper>
     {
         protected static readonly Func<TValueWrapper, object> DefaultParserToSource = wrapper => (wrapper as ClassWrapper).Src;
@@ -27,6 +33,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         protected TKey[] KeyArray => KeysField.GetValue(Src) as TKey[];
         protected Array ValueArray => ValuesField.GetValue(Src) as Array;
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <param name="parserToWrapper">オリジナル型からラッパー型に変換するためのデリゲート。</param>
+        /// <param name="parserToSource">ラッパー型からオリジナル型に変換するためのデリゲート。</param>
         public WrappedSortedList(IDictionary src, Func<object, TValueWrapper> parserToWrapper, Func<TValueWrapper, object> parserToSource)
         {
             Src = src;
@@ -41,6 +53,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             ValuesField = SrcType.GetField("values", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.InvokeMethod);
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <param name="parserToWrapper">オリジナル型からラッパー型に変換するためのデリゲート。</param>
         public WrappedSortedList(IDictionary src, Func<object, TValueWrapper> parserToWrapper) : this(src, parserToWrapper, DefaultParserToSource)
         {
 #if DEBUG

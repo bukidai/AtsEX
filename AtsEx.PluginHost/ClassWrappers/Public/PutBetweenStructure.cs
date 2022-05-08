@@ -9,6 +9,10 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// Structure[].PutBetween ステートメントで設置されたストラクチャーを表します。
+    /// </summary>
+    /// <seealso cref="StructureSet"/>
     public class PutBetweenStructure : MapObjectBase
     {
         static PutBetweenStructure()
@@ -33,6 +37,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="PutBetweenStructure"/> クラスのインスタンス。</returns>
         public static PutBetweenStructure FromSource(object src)
         {
             if (src is null) return null;
@@ -40,6 +49,14 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static ConstructorInfo Constructor;
+        /// <summary>
+        /// 距離程、設置位置の計算の基となる 2 軌道、モデル、変形方向を指定して <see cref="PutBetweenStructure"/> の新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="location">設置する距離程 [m]。</param>
+        /// <param name="trackKey1">一方の軌道の軌道名。</param>
+        /// <param name="trackKey2">他方の軌道の軌道名。</param>
+        /// <param name="model">ストラクチャーの 3D モデルを表す <see cref="ClassWrappers.Model"/>。</param>
+        /// <param name="transformOnlyX">X 方向のみに変形するか。</param>
         public PutBetweenStructure(double location, string trackKey1, string trackKey2, Model model, bool transformOnlyX)
             : this(Constructor.Invoke(new object[] { location, trackKey1, trackKey2, model, transformOnlyX }))
         {
@@ -47,6 +64,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo ModelGetMethod;
         private static MethodInfo ModelSetMethod;
+        /// <summary>
+        /// ストラクチャーの 3D モデルを表す <see cref="ClassWrappers.Model"/> を取得・設定します。
+        /// </summary>
         public Model Model
         {
             get => ModelGetMethod.Invoke(Src, null);
@@ -55,6 +75,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo TrackKey1GetMethod;
         private static MethodInfo TrackKey1SetMethod;
+        /// <summary>
+        /// 一方の軌道の軌道名を取得・設定します。
+        /// </summary>
         public string TrackKey1
         {
             get => TrackKey1GetMethod.Invoke(Src, null);
@@ -63,6 +86,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo TrackKey2GetMethod;
         private static MethodInfo TrackKey2SetMethod;
+        /// <summary>
+        /// 他方の軌道の軌道名を取得・設定します。
+        /// </summary>
         public string TrackKey2
         {
             get => TrackKey2GetMethod.Invoke(Src, null);
@@ -70,6 +96,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static MethodInfo TransformOnlyXGetMethod;
+        /// <summary>
+        /// X 方向のみに変形するかを取得・設定します。
+        /// </summary>
         public bool TransformOnlyX
         {
             get => TransformOnlyXGetMethod.Invoke(Src, null);

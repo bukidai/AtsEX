@@ -10,6 +10,9 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// ランダムに 1 つの項目が選ばれる <see cref="BveFile"/> のリストを表します。
+    /// </summary>
     public sealed class RandomFileList : ClassWrapper, IList<BveFile>
     {
         static RandomFileList()
@@ -24,6 +27,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="RandomFileList"/> クラスのインスタンス。</returns>
         public static RandomFileList FromSource(object src)
         {
             if (src is null) return null;
@@ -32,6 +40,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo SelectedFileGetMethod;
         private static MethodInfo SelectedFileSetMethod;
+        /// <summary>
+        /// ランダムに選ばれた項目を取得・設定します。
+        /// </summary>
         public BveFile SelectedFile
         {
             get => BveFile.FromSource(SelectedFileGetMethod.Invoke(Src, null));

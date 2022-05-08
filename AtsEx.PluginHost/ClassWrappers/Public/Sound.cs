@@ -9,6 +9,9 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// サウンドを表します。
+    /// </summary>
     public sealed class Sound : ClassWrapper
     {
         static Sound()
@@ -20,6 +23,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="Sound"/> クラスのインスタンス。</returns>
         public static Sound FromSource(object src)
         {
             if (src is null) return null;

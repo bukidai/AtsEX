@@ -9,6 +9,9 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// 自車両に関する情報にアクセスするための機能を提供します。
+    /// </summary>
     public sealed class Vehicle : ClassWrapper
     {
         static Vehicle()
@@ -20,6 +23,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="Vehicle"/> クラスのインスタンス。</returns>
         public static Vehicle FromSource(object src)
         {
             if (src is null) return null;

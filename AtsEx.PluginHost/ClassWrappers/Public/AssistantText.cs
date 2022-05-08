@@ -10,6 +10,9 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// 補助表示を表します。
+    /// </summary>
     public class AssistantText : AssistantTextBase
     {
         static AssistantText()
@@ -27,6 +30,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="AssistantText"/> クラスのインスタンス。</returns>
         public static new AssistantText FromSource(object src)
         {
             if (src is null) return null;
@@ -35,6 +43,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         protected static MethodInfo ColorGetMethod;
         protected static MethodInfo ColorSetMethod;
+        /// <summary>
+        /// 表示するテキストの文字色を取得・設定します。
+        /// </summary>
         public Color Color
         {
             get => ColorGetMethod.Invoke(Src, null);
@@ -43,6 +54,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         protected static MethodInfo TextGetMethod;
         protected static MethodInfo TextSetMethod;
+        /// <summary>
+        /// 表示するテキストを取得・設定します。
+        /// </summary>
         public string Text
         {
             get => TextGetMethod.Invoke(Src, null);

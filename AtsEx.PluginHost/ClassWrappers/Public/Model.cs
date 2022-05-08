@@ -11,6 +11,9 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// SlimDX で表示するための 2D および 3D モデルを表します。
+    /// </summary>
     public sealed class Model : ClassWrapper
     {
         static Model()
@@ -28,6 +31,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="Model"/> クラスのインスタンス。</returns>
         public static Model FromSource(object src)
         {
             if (src is null) return null;
@@ -36,6 +44,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo MeshGetMethod;
         private static MethodInfo MeshSetMethod;
+        /// <summary>
+        /// モデルを構成する <see cref="Mesh"/> を取得・設定します。
+        /// </summary>
         public Mesh Mesh
         {
             get => MeshGetMethod.Invoke(Src, null);
@@ -66,6 +77,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
             return result;
         };
+        /// <summary>
+        /// モデルのマテリアル情報の一覧を取得・設定します。
+        /// </summary>
         public MaterialInfo[] Materials
         {
             get => MaterialsParserToWrapper(MaterialsGetMethod.Invoke(Src, null));

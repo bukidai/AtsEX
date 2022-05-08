@@ -12,6 +12,10 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// 基準となる距離程・軌道からの変位を指定するマップ オブジェクトを表します。
+    /// </summary>
+    /// <seealso cref="Structure"/>
     public class LocatableMapObject : MapObjectBase
     {
         static LocatableMapObject()
@@ -47,6 +51,19 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// 距離程、設置先の軌道、軌道からの変位、傾斜オプション、弦の長さを指定して <see cref="LocatableMapObject"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="location">設置する距離程 [m]。</param>
+        /// <param name="trackKey">設置先の軌道名。</param>
+        /// <param name="x">軌道からの x 座標 [m]。</param>
+        /// <param name="y">軌道からの y 座標 [m]。</param>
+        /// <param name="z">軌道からの z 座標 [m]。</param>
+        /// <param name="dx">軌道に対する x 軸回りの角 [deg]。</param>
+        /// <param name="dy">軌道に対する y 軸回りの角 [deg]。</param>
+        /// <param name="dz">軌道に対する z 軸回りの角 [deg]。</param>
+        /// <param name="tiltOptions">傾斜オプション。</param>
+        /// <param name="span">曲線における弦の長さ [m]。</param>
         protected LocatableMapObject(double location, string trackKey, double x, double y, double z, double dx, double dy, double dz, TiltOptions tiltOptions, double span)
             : this(location, trackKey, x, y, z, dx, dy, dz, (int)tiltOptions, span)
         {
@@ -58,6 +75,13 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// 距離程、設置先の軌道、傾斜オプション、弦の長さを指定して <see cref="LocatableMapObject"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="location">設置する距離程 [m]。</param>
+        /// <param name="trackKey">設置先の軌道名。</param>
+        /// <param name="tiltOptions">傾斜オプション。</param>
+        /// <param name="span">曲線における弦の長さ [m]。</param>
         protected LocatableMapObject(double location, string trackKey, TiltOptions tiltOptions, double span)
             : this(location, trackKey, (int)tiltOptions, span)
         {
@@ -65,6 +89,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo MatrixGetMethod;
         private static MethodInfo MatrixSetMethod;
+        /// <summary>
+        /// 軌道からの変位を表す <see cref="SlimDX.Matrix"/> を取得・設定します。<see cref="SlimDX.Matrix"/> の単位は [m] です。
+        /// </summary>
         public Matrix Matrix
         {
             get => MatrixGetMethod.Invoke(Src, null);
@@ -73,6 +100,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo TrackKeyGetMethod;
         private static MethodInfo TrackKeySetMethod;
+        /// <summary>
+        /// 設置先の軌道名を取得・設定します。
+        /// </summary>
         public string TrackKey
         {
             get => TrackKeyGetMethod.Invoke(Src, null);
@@ -81,6 +111,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo SpanGetMethod;
         private static MethodInfo SpanSetMethod;
+        /// <summary>
+        /// 曲線における弦の長さ [m] を取得・設定します。
+        /// </summary>
         public double Span
         {
             get => SpanGetMethod.Invoke(Src, null);
@@ -89,6 +122,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo TiltsAlongCantGetMethod;
         private static MethodInfo TiltsAlongCantSetMethod;
+        /// <summary>
+        /// カントに連動して傾斜させるかどうかを取得・設定します。
+        /// </summary>
         public bool TiltsAlongCant
         {
             get => TiltsAlongCantGetMethod.Invoke(Src, null);
@@ -97,12 +133,18 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo TiltsAlongGradientGetMethod;
         private static MethodInfo TiltsAlongGradientSetMethod;
+        /// <summary>
+        /// 勾配に連動して傾斜させるかどうかを取得・設定します。
+        /// </summary>
         public bool TiltsAlongGradient
         {
             get => TiltsAlongGradientGetMethod.Invoke(Src, null);
             set => TiltsAlongGradientSetMethod.Invoke(Src, new object[] { value });
         }
 
+        /// <summary>
+        /// マップ オブジェクトを傾斜させる方法を取得・設定します。
+        /// </summary>
         public TiltOptions TiltOptions
         {
             get

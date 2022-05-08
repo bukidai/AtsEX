@@ -12,6 +12,9 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// すべての補助表示の基本クラスを表します。
+    /// </summary>
     public class AssistantTextBase : ClassWrapper
     {
         static AssistantTextBase()
@@ -32,6 +35,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="AssistantTextBase"/> クラスのインスタンス。</returns>
         public static AssistantTextBase FromSource(object src)
         {
             if (src is null) return null;
@@ -39,6 +47,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         protected static MethodInfo AssistantSettingsGetMethod;
+        /// <summary>
+        /// 補助表示の設定を取得します。
+        /// </summary>
         public AssistantSettings AssistantSettings
         {
             get => AssistantSettingsGetMethod.Invoke(Src, null);
@@ -46,6 +57,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         protected static MethodInfo BackgroundColorGetMethod;
         protected static MethodInfo BackgroundColorSetMethod;
+        /// <summary>
+        /// 補助表示の背景色を取得・設定します。
+        /// </summary>
         public Color BackgroundColor
         {
             get => BackgroundColorGetMethod.Invoke(Src, null);
@@ -53,12 +67,18 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         protected static MethodInfo DisplayAreaGetMethod;
+        /// <summary>
+        /// 表示する位置とサイズを表す <see cref="Rectangle"/> を取得します。
+        /// </summary>
         public Rectangle DisplayArea
         {
             get => DisplayAreaGetMethod.Invoke(Src, null);
         }
 
         protected static MethodInfo DrawMethod;
+        /// <summary>
+        /// 補助表示を描画します。
+        /// </summary>
         public void Draw()
         {
             DrawMethod.Invoke(Src, null);

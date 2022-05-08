@@ -10,6 +10,9 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// Structure マップ要素、Repeater マップ要素で設置されたストラクチャーの情報を提供します。
+    /// </summary>
     public sealed class StructureSet : ClassWrapper
     {
         static StructureSet()
@@ -32,6 +35,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="StructureSet"/> クラスのインスタンス。</returns>
         public static StructureSet FromSource(object src)
         {
             if (src is null) return null;
@@ -40,6 +48,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo DrawLimitLocationGetMethod;
         private static MethodInfo DrawLimitLocationSetMethod;
+        /// <summary>
+        /// ストラクチャーが設置される限界の距離程 [m] を取得・設定します。通常は最後の駅の 10km 先の位置になります。
+        /// </summary>
+        /// <remarks>
+        /// この数値を変更しても BVE には反映されません。
+        /// </remarks>
         public double DrawLimitLocation
         {
             get => DrawLimitLocationGetMethod.Invoke(Src, null);
@@ -48,6 +62,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo RepeatedGetMethod;
         private static readonly Func<object, MapObjectList> RepeatedParserToWrapper = src => src is null ? null : MapObjectList.FromSource(src);
+        /// <summary>
+        /// Repeater マップ要素で設置されたストラクチャーを取得します。
+        /// </summary>
+        /// <value>キーが RepeaterKey で指定した連続ストラクチャーー名、値が設置するストラクチャーのリストを表す <see cref="MapObjectList"/> の <see cref="WrappedSortedList{string, MapObjectList}"/>。</value>
         public WrappedSortedList<string, MapObjectList> Repeated
         {
             get
@@ -58,18 +76,27 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static MethodInfo PutGetMethod;
+        /// <summary>
+        /// Structure[].Put ステートメント、Structure[].Put0 ステートメントで設置されたストラクチャーを取得します。
+        /// </summary>
         public SingleStructureList Put
         {
             get => SingleStructureList.FromSource(PutGetMethod.Invoke(Src, null));
         }
 
         private static MethodInfo PutBetweenGetMethod;
+        /// <summary>
+        /// Structure[].PutBetween ステートメントで設置されたストラクチャーを取得します。
+        /// </summary>
         public SingleStructureList PutBetween
         {
             get => SingleStructureList.FromSource(PutBetweenGetMethod.Invoke(Src, null));
         }
 
         private static MethodInfo SignalsGetMethod;
+        /// <summary>
+        /// Signal[].Put ステートメントで設置された信号ストラクチャーを取得します。
+        /// </summary>
         public SingleStructureList Signals
         {
             get => SingleStructureList.FromSource(SignalsGetMethod.Invoke(Src, null));

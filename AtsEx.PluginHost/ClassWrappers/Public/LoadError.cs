@@ -9,6 +9,9 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+	/// <summary>
+	/// シナリオの読込中に発生したエラーを表します。
+	/// </summary>
     public sealed class LoadError : ClassWrapper
     {
 		static LoadError()
@@ -34,19 +37,34 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
 		}
 
+		/// <summary>
+		/// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+		/// </summary>
+		/// <param name="src">ラップするオリジナル オブジェクト。</param>
+		/// <returns>オリジナル オブジェクトをラップした <see cref="LoadError"/> クラスのインスタンス。</returns>
 		public static LoadError FromSource(object src)
-{
-    if (src is null) return null;
-    return new LoadError(src);
-}
+		{
+			if (src is null) return null;
+			return new LoadError(src);
+		}
 
 		private static ConstructorInfo Constructor;
+		/// <summary>
+		/// エラーの内容を指定して <see cref="LoadError"/> クラスの新しいインスタンスを初期化します。
+		/// </summary>
+		/// <param name="text">エラーの内容を表すテキスト。</param>
+		/// <param name="senderFileName">エラーの発生元となるファイルのファイル名。</param>
+		/// <param name="lineIndex">エラーの発生元となる行番号。</param>
+		/// <param name="charIndex">エラーの発生元となる列番号。</param>
 		public LoadError(string text, string senderFileName, int lineIndex, int charIndex) : this(Constructor.Invoke(new object[] { text, senderFileName, lineIndex, charIndex }))
         {
         }
 
 		private static MethodInfo TextGetMethod;
 		private static MethodInfo TextSetMethod;
+		/// <summary>
+		/// エラーの内容を表すテキストを取得します。
+		/// </summary>
 		public string Text
 		{
 			get => TextGetMethod.Invoke(Src, new object[0]);
@@ -55,6 +73,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
 		private static MethodInfo SenderFileNameGetMethod;
 		private static MethodInfo SenderFileNameSetMethod;
+		/// <summary>
+		/// エラーの発生元となるファイルのファイル名を取得します。
+		/// </summary>
 		public string SenderFileName
 		{
 			get => SenderFileNameGetMethod.Invoke(Src, new object[0]);
@@ -63,6 +84,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
 		private static MethodInfo LineIndexGetMethod;
 		private static MethodInfo LineIndexSetMethod;
+		/// <summary>
+		/// エラーの発生元となる行番号を取得します。
+		/// </summary>
 		public int LineIndex
 		{
 			get => LineIndexGetMethod.Invoke(Src, new object[0]);
@@ -71,6 +95,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
 		private static MethodInfo CharIndexGetMethod;
 		private static MethodInfo CharIndexSetMethod;
+		/// <summary>
+		/// エラーの発生元となる列番号を取得します。
+		/// </summary>
 		public int CharIndex
 		{
 			get => CharIndexGetMethod.Invoke(Src, new object[0]);

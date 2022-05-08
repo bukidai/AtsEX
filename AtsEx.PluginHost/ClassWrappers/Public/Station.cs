@@ -9,6 +9,9 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// 停車場を表します。
+    /// </summary>
     public sealed class Station : MapObjectBase
     {
         static Station()
@@ -83,6 +86,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="Station"/> クラスのインスタンス。</returns>
         public static Station FromSource(object src)
         {
             if (src is null) return null;
@@ -90,12 +98,25 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static ConstructorInfo Constructor;
+        /// <summary>
+        /// 停車場の名前を指定して <see cref="Station"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <remarks>
+        /// <paramref name="name"/> には BVE 上に表示される名前を指定します。停車場名 (停車場リストファイルで定義した文字列) とは異なります。
+        /// </remarks>
+        /// <param name="name">停車場の名前。</param>
         public Station(string name) : this(Constructor.Invoke(new object[] { name }))
         {
         }
 
         private static MethodInfo NameGetMethod;
         private static MethodInfo NameSetMethod;
+        /// <summary>
+        /// 停車場の名前を取得・設定します。
+        /// </summary>
+        /// <remarks>
+        /// BVE 上に表示される名前です。停車場名 (停車場リストファイルで定義した文字列) とは異なります。
+        /// </remarks>
         public string Name
         {
             get => NameGetMethod.Invoke(Src, null);
@@ -104,12 +125,19 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo ArrivalTimeGetMethod;
         private static MethodInfo ArrivalTimeSetMethod;
+        /// <summary>
+        /// 到着時刻をミリ秒単位で取得・設定します。
+        /// </summary>
+        /// <value>0 時丁度から到着時刻までに経過したミリ秒数 [ms]。</value>
         public int ArrivalTimeMilliseconds
         {
             get => ArrivalTimeGetMethod.Invoke(Src, null);
             set => ArrivalTimeSetMethod.Invoke(Src, new object[] { value });
         }
 
+        /// <summary>
+        /// 到着時刻を取得・設定します。
+        /// </summary>
         public TimeSpan ArrivalTime
         {
             get => TimeSpan.FromMilliseconds(ArrivalTimeMilliseconds);
@@ -118,12 +146,19 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo DepertureTimeGetMethod;
         private static MethodInfo DepertureTimeSetMethod;
+        /// <summary>
+        /// 発車時刻または通過時刻をミリ秒単位で取得・設定します。
+        /// </summary>
+        /// <value>0 時丁度から発車時刻または通過時刻までに経過したミリ秒数 [ms]。</value>
         public int DepertureTimeMilliseconds
         {
             get => DepertureTimeGetMethod.Invoke(Src, null);
             set => DepertureTimeSetMethod.Invoke(Src, new object[] { value });
         }
 
+        /// <summary>
+        /// 発車時刻または通過時刻を取得・設定します。
+        /// </summary>
         public TimeSpan DepertureTime
         {
             get => TimeSpan.FromMilliseconds(DepertureTimeMilliseconds);
@@ -132,12 +167,18 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo DoorCloseTimeGetMethod;
         private static MethodInfo DoorCloseTimeSetMethod;
+        /// <summary>
+        /// ドアが閉まるのに要する時間をミリ秒単位で取得・設定します。
+        /// </summary>
         public int DoorCloseTimeMilliseconds
         {
             get => DoorCloseTimeGetMethod.Invoke(Src, null);
             set => DoorCloseTimeSetMethod.Invoke(Src, new object[] { value });
         }
 
+        /// <summary>
+        /// ドアが閉まるのに要する時間を取得・設定します。
+        /// </summary>
         public TimeSpan DoorCloseTime
         {
             get => TimeSpan.FromMilliseconds(DoorCloseTimeMilliseconds);
@@ -146,12 +187,19 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo DefaultTimeGetMethod;
         private static MethodInfo DefaultTimeSetMethod;
+        /// <summary>
+        /// 駅にジャンプしたときの時刻をミリ秒単位で取得・設定します。
+        /// </summary>
+        /// <value>0 時丁度から駅にジャンプしたときの時刻までに経過したミリ秒数 [ms]。</value>
         public int DefaultTimeMilliseconds
         {
             get => DefaultTimeGetMethod.Invoke(Src, null);
             set => DefaultTimeSetMethod.Invoke(Src, new object[] { value });
         }
 
+        /// <summary>
+        /// 駅にジャンプしたときの時刻を取得・設定します。
+        /// </summary>
         public TimeSpan DefaultTime
         {
             get => TimeSpan.FromMilliseconds(DefaultTimeMilliseconds);
@@ -160,6 +208,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo PassGetMethod;
         private static MethodInfo PassSetMethod;
+        /// <summary>
+        /// この停車場を通過するかどうかを取得・設定します。
+        /// </summary>
         public bool Pass
         {
             get => PassGetMethod.Invoke(Src, null);
@@ -168,6 +219,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo IsTerminalGetMethod;
         private static MethodInfo IsTerminalSetMethod;
+        /// <summary>
+        /// この停車場が終点かどうかを取得・設定します。
+        /// </summary>
         public bool IsTerminal
         {
             get => IsTerminalGetMethod.Invoke(Src, null);
@@ -176,12 +230,18 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo StoppageTimeGetMethod;
         private static MethodInfo StoppageTimeSetMethod;
+        /// <summary>
+        /// 標準停車時間をミリ秒単位で取得・設定します。
+        /// </summary>
         public int StoppageTimeMilliseconds
         {
             get => StoppageTimeGetMethod.Invoke(Src, null);
             set => StoppageTimeSetMethod.Invoke(Src, new object[] { value });
         }
 
+        /// <summary>
+        /// 標準停車時間を取得・設定します。
+        /// </summary>
         public TimeSpan StoppageTime
         {
             get => TimeSpan.FromMilliseconds(StoppageTimeMilliseconds);
@@ -190,6 +250,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo DoorSideGetMethod;
         private static MethodInfo DoorSideSetMethod;
+        /// <summary>
+        /// 開くドアの方向を取得・設定します。
+        /// </summary>
         public int DoorSide
         {
             get => DoorSideGetMethod.Invoke(Src, null);
@@ -198,6 +261,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo DepertureSoundGetMethod;
         private static MethodInfo DepertureSoundSetMethod;
+        /// <summary>
+        /// <see cref="DepertureTime"/> の <see cref="StoppageTime"/> 前の時刻に再生されるサウンドを取得・設定します。
+        /// </summary>
         public Sound DepertureSound
         {
             get => Sound.FromSource(DepertureSoundGetMethod.Invoke(Src, null));
@@ -206,6 +272,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo ArrivalSoundGetMethod;
         private static MethodInfo ArrivalSoundSetMethod;
+        /// <summary>
+        /// ドアが開いたときに再生されるサウンドを取得・設定します。
+        /// </summary>
         public Sound ArrivalSound
         {
             get => Sound.FromSource(ArrivalSoundGetMethod.Invoke(Src, null));
@@ -214,6 +283,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo SignalFlagGetMethod;
         private static MethodInfo SignalFlagSetMethod;
+        /// <summary>
+        /// <see cref="DepertureTime"/> の <see cref="StoppageTime"/> 前の時刻まで出発信号が停止を現示するかどうかを取得・設定します。
+        /// </summary>
         public bool SignalFlag
         {
             get => SignalFlagGetMethod.Invoke(Src, null);
@@ -222,6 +294,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo MarginMaxGetMethod;
         private static MethodInfo MarginMaxSetMethod;
+        /// <summary>
+        /// 停止位置誤差の前方許容範囲 [m] を取得・設定します。
+        /// </summary>
         public double MarginMax
         {
             get => MarginMaxGetMethod.Invoke(Src, null);
@@ -230,6 +305,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo MarginMinGetMethod;
         private static MethodInfo MarginMinSetMethod;
+        /// <summary>
+        /// 停止位置誤差の後方許容範囲 [m] を負の値で取得・設定します。
+        /// </summary>
         public double MarginMin
         {
             get => MarginMinGetMethod.Invoke(Src, null);
@@ -237,12 +315,18 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static MethodInfo MinStopPositionGetMethod;
+        /// <summary>
+        /// 停止位置誤差の下限の距離程 [m] を取得します。
+        /// </summary>
         public double MinStopPosition
         {
             get => MinStopPositionGetMethod.Invoke(Src, null);
         }
 
         private static MethodInfo MaxStopPositionGetMethod;
+        /// <summary>
+        /// 停止位置誤差の上限の距離程 [m] を取得します。
+        /// </summary>
         public double MaxStopPosition
         {
             get => MaxStopPositionGetMethod.Invoke(Src, null);
@@ -250,13 +334,18 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo AlightingTimeGetMethod;
         private static MethodInfo AlightingTimeSetMethod;
-
+        /// <summary>
+        /// 降車時間をミリ秒単位で取得・設定します。
+        /// </summary>
         public int AlightingTimeMilliseconds
         {
             get => AlightingTimeGetMethod.Invoke(Src, null);
             set => AlightingTimeSetMethod.Invoke(Src, new object[] { value });
         }
 
+        /// <summary>
+        /// 降車時間を取得・設定します。
+        /// </summary>
         public TimeSpan AlightingTime
         {
             get => TimeSpan.FromMilliseconds(AlightingTimeMilliseconds);
@@ -265,6 +354,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo TargetLoadFactorGetMethod;
         private static MethodInfo TargetLoadFactorSetMethod;
+        /// <summary>
+        /// 出発時の乗車率を取得・設定します。
+        /// </summary>
         public double TargetLoadFactor
         {
             get => TargetLoadFactorGetMethod.Invoke(Src, null);
@@ -273,6 +365,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo CurrentLoadFactorGetMethod;
         private static MethodInfo CurrentLoadFactorSetMethod;
+        /// <summary>
+        /// 到着時の乗車率を取得・設定します。
+        /// </summary>
         public double CurrentLoadFactor
         {
             get => CurrentLoadFactorGetMethod.Invoke(Src, null);
@@ -281,6 +376,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo DoorReopenGetMethod;
         private static MethodInfo DoorReopenSetMethod;
+        /// <summary>
+        /// ドアが再開閉される確率を取得・設定します。
+        /// </summary>
         public double DoorReopen
         {
             get => DoorReopenGetMethod.Invoke(Src, null);
@@ -289,12 +387,18 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo StuckInDoorGetMethod;
         private static MethodInfo StuckInDoorSetMethod;
+        /// <summary>
+        /// 旅客がドアに挟まる時間をミリ秒単位で取得・設定します。
+        /// </summary>
         public int StuckInDoorMilliseconds
         {
             get => StuckInDoorGetMethod.Invoke(Src, null);
             set => StuckInDoorSetMethod.Invoke(Src, new object[] { value });
         }
 
+        /// <summary>
+        /// 旅客がドアに挟まる時間を取得・設定します。
+        /// </summary>
         public TimeSpan StuckInDoor
         {
 

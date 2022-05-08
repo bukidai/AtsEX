@@ -10,6 +10,11 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// <see cref="MapObjectBase"/> のリストを表します。
+    /// </summary>
+    /// <seealso cref="SingleStructureList"/>
+    /// <seealso cref="StationList"/>
     public class MapObjectList : ClassWrapper, IList<MapObjectBase>
     {
         static MapObjectList()
@@ -21,6 +26,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="MapObjectList"/> クラスのインスタンス。</returns>
         public static MapObjectList FromSource(object src)
         {
             if (src is null) return null;

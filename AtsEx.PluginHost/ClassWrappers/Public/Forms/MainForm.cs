@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost.Helpers;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// メインのフォームを表します。
+    /// </summary>
     public sealed class MainForm : ClassWrapper
     {
         static MainForm()
@@ -31,6 +35,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="MainForm"/> クラスのインスタンス。</returns>
         public static MainForm FromSource(object src)
         {
             if (src is null) return null;
@@ -38,19 +47,37 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static FieldInfo ScenarioSelectFormField;
+        /// <summary>
+        /// 「シナリオの選択」フォームを取得します。
+        /// </summary>
         public ScenarioSelectionForm ScenarioSelectForm => ClassWrappers.ScenarioSelectionForm.FromSource(ScenarioSelectFormField.GetValue(Src));
 
         private static FieldInfo LoadingProgressFormField;
+        /// <summary>
+        /// 「シナリオを読み込んでいます...」フォームを取得します。
+        /// </summary>
         public LoadingProgressForm LoadingProgressForm => ClassWrappers.LoadingProgressForm.FromSource(LoadingProgressFormField.GetValue(Src));
 
         private static FieldInfo TimePosFormField;
+        /// <summary>
+        /// 「時刻と位置」フォームを取得します。
+        /// </summary>
         public TimePosForm TimePosForm => ClassWrappers.TimePosForm.FromSource(TimePosFormField.GetValue(Src));
 
         private static FieldInfo ChartFormField;
+        /// <summary>
+        /// 「車両物理量」フォームを取得します。
+        /// </summary>
         public ChartForm ChartForm => ClassWrappers.ChartForm.FromSource(ChartFormField.GetValue(Src));
 
 
         private static FieldInfo ContextMenuField;
+        /// <summary>
+        /// 右クリックで表示されるショートカット メニューを取得します。
+        /// </summary>
+        /// <remarks>
+        /// メニューの内容を編集する場合、通常は <see cref="ContextMenuHacker"/> を使用してください。
+        /// </remarks>
         public ContextMenuStrip ContextMenu
         {
             get => ContextMenuField.GetValue(Src);
@@ -59,6 +86,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
 
         private static FieldInfo CurrentScenarioInfoField;
+        /// <summary>
+        /// 現在のシナリオの <see cref="ScenarioInfo"/> を取得します。
+        /// </summary>
         public ScenarioInfo CurrentScenarioInfo
         {
             get => ScenarioInfo.FromSource(CurrentScenarioInfoField.GetValue(Src));
@@ -66,6 +96,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static FieldInfo CurrentScenarioProviderField;
+        /// <summary>
+        /// 現在のシナリオの <see cref="ScenarioProvider"/> を取得します。
+        /// </summary>
         public ScenarioProvider CurrentScenarioProvider
         {
             get => ScenarioProvider.FromSource(CurrentScenarioProviderField.GetValue(Src));

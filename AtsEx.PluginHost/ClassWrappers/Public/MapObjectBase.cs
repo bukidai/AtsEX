@@ -9,6 +9,17 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// マップ上に設置されたすべてのオブジェクトの基本クラスを表します。
+    /// </summary>
+    /// <remarks>
+    /// ストラクチャーに限らず、停車場や信号機、地上子など、ステートメントによって設置したすべてのオブジェクトを表します。
+    /// </remarks>
+    /// <seealso cref="MapObjectList"/>
+    /// <seealso cref="LocatableMapObject"/>
+    /// <seealso cref="PutBetweenStructure"/>
+    /// <seealso cref="Station"/>
+    /// <seealso cref="Structure"/>
     public class MapObjectBase : ClassWrapper, IComparable
     {
         static MapObjectBase()
@@ -32,6 +43,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo LocationGetMethod;
         private static MethodInfo LocationSetMethod;
+        /// <summary>
+        /// 設置された距離程を取得・設定します。
+        /// </summary>
+        /// <remarks>
+        /// マップ オブジェクトの種類によっては、この数値を変更しても BVE に反映されない場合があります。
+        /// </remarks>
         public double Location
         {
             get => LocationGetMethod.Invoke(Src, null);

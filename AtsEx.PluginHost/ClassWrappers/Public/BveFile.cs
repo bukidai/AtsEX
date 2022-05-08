@@ -9,6 +9,9 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// シナリオを構成するファイルを表します。
+    /// </summary>
     [UnderConstruction]
     public class BveFile : ClassWrapper
     {
@@ -24,6 +27,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="BveFile"/> クラスのインスタンス。</returns>
         public static BveFile FromSource(object src)
         {
             if (src is null) return null;
@@ -32,6 +40,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static MethodInfo PathGetMethod;
         private static MethodInfo PathSetMethod;
+        /// <summary>
+        /// ファイルのパスを取得します。
+        /// </summary>
         public string Path
         {
             get => PathGetMethod.Invoke(Src, null);

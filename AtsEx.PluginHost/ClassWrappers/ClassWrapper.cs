@@ -7,10 +7,21 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// すべてのクラスラッパーの基本クラスを表します。
+    /// </summary>
     public abstract class ClassWrapper
     {
+        /// <summary>
+        /// ラップされているオリジナル オブジェクトを取得します。
+        /// </summary>
         public dynamic Src { get; }
 
+        /// <summary>
+        /// <see cref="ClassWrapper"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <exception cref="ArgumentNullException"><paramref name="src"/> が <see langword="null"/> です。</exception>
         public ClassWrapper(object src)
         {
             if (src is null) throw new ArgumentNullException();
