@@ -110,12 +110,24 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => ArrivalTimeSetMethod.Invoke(Src, new object[] { value });
         }
 
+        public TimeSpan ArrivalTime
+        {
+            get => TimeSpan.FromMilliseconds(ArrivalTimeMilliseconds);
+            set => ArrivalTimeMilliseconds = (int)value.TotalMilliseconds;
+        }
+
         private static MethodInfo DepertureTimeGetMethod;
         private static MethodInfo DepertureTimeSetMethod;
         public int DepertureTimeMilliseconds
         {
             get => DepertureTimeGetMethod.Invoke(Src, null);
             set => DepertureTimeSetMethod.Invoke(Src, new object[] { value });
+        }
+
+        public TimeSpan DepertureTime
+        {
+            get => TimeSpan.FromMilliseconds(DepertureTimeMilliseconds);
+            set => DepertureTimeMilliseconds = (int)value.TotalMilliseconds;
         }
 
         private static MethodInfo DoorCloseTimeGetMethod;
@@ -126,12 +138,24 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => DoorCloseTimeSetMethod.Invoke(Src, new object[] { value });
         }
 
+        public TimeSpan DoorCloseTime
+        {
+            get => TimeSpan.FromMilliseconds(DoorCloseTimeMilliseconds);
+            set => DoorCloseTimeMilliseconds = (int)value.TotalMilliseconds;
+        }
+
         private static MethodInfo DefaultTimeGetMethod;
         private static MethodInfo DefaultTimeSetMethod;
         public int DefaultTimeMilliseconds
         {
             get => DefaultTimeGetMethod.Invoke(Src, null);
             set => DefaultTimeSetMethod.Invoke(Src, new object[] { value });
+        }
+
+        public TimeSpan DefaultTime
+        {
+            get => TimeSpan.FromMilliseconds(DefaultTimeMilliseconds);
+            set => DefaultTimeMilliseconds = (int)value.TotalMilliseconds;
         }
 
         private static MethodInfo PassGetMethod;
@@ -156,6 +180,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             get => StoppageTimeGetMethod.Invoke(Src, null);
             set => StoppageTimeSetMethod.Invoke(Src, new object[] { value });
+        }
+
+        public TimeSpan StoppageTime
+        {
+            get => TimeSpan.FromMilliseconds(StoppageTimeMilliseconds);
+            set => StoppageTimeMilliseconds = (int)value.TotalMilliseconds;
         }
 
         private static MethodInfo DoorSideGetMethod;
@@ -227,6 +257,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => AlightingTimeSetMethod.Invoke(Src, new object[] { value });
         }
 
+        public TimeSpan AlightingTime
+        {
+            get => TimeSpan.FromMilliseconds(AlightingTimeMilliseconds);
+            set => AlightingTimeMilliseconds = (int)value.TotalMilliseconds;
+        }
+
         private static MethodInfo TargetLoadFactorGetMethod;
         private static MethodInfo TargetLoadFactorSetMethod;
         public double TargetLoadFactor
@@ -257,6 +293,13 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             get => StuckInDoorGetMethod.Invoke(Src, null);
             set => StuckInDoorSetMethod.Invoke(Src, new object[] { value });
+        }
+
+        public TimeSpan StuckInDoor
+        {
+
+            get => TimeSpan.FromMilliseconds(StoppageTimeMilliseconds);
+            set => StoppageTimeMilliseconds = (int)value.TotalMilliseconds;
         }
     }
 }
