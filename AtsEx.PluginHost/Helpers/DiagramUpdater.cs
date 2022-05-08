@@ -13,8 +13,14 @@ using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.PluginHost.Helpers
 {
+    /// <summary>
+    /// 時刻表、ダイヤグラムなどの行路に関わるオブジェクトの更新機能を提供します。
+    /// </summary>
     public static class DiagramUpdater
     {
+        /// <summary>
+        /// 時刻表と「時刻と位置」フォーム内のダイヤグラムの表示を最新の設定に更新します。
+        /// </summary>
         public static void Update()
         {
             StationList stations = AtsExPluginBase.BveHacker.ScenarioProvider.Route.Stations;

@@ -13,11 +13,17 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
 {
     public static partial class LoadErrorManager
     {
+        /// <summary>
+        /// <see cref="LoadErrorList"/> のリストを表します。
+        /// </summary>
         public class LoadErrorList : IList<LoadError>
         {
             protected LoadingProgressForm Form;
             protected Form FormSource;
 
+            /// <summary>
+            /// <see cref="LoadErrorList"/> クラスの新しいインスタンスを初期化します。
+            /// </summary>
             public LoadErrorList()
             {
                 Form = InstanceStore.BveHacker.LoadingProgressForm;
