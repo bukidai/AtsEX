@@ -20,7 +20,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            ScenarioProvider scenarioProvider = AtsExPluginBase.BveHacker.ScenarioProvider;
+            Scenario scenario = AtsExPluginBase.BveHacker.Scenario;
 
             if (e.KeyCode == Keys.Enter)
             {
@@ -32,7 +32,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                             TimeSpan time;
                             if (TimeSpan.TryParse(textBox.Text, out time))
                             {
-                                scenarioProvider.TimeManager.SetTime((int)time.TotalMilliseconds);
+                                scenario.TimeManager.SetTime((int)time.TotalMilliseconds);
                             }
                             break;
                             
@@ -40,7 +40,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                             double location;
                             if (double.TryParse(textBox.Text, out location))
                             {
-                                scenarioProvider.LocationManager.SetLocation(location, true);
+                                scenario.LocationManager.SetLocation(location, true);
                             }
                             break;
 
@@ -48,7 +48,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
                             double speed;
                             if (double.TryParse(textBox.Text, out speed))
                             {
-                                scenarioProvider.LocationManager.SetSpeed(speed / 3.6);
+                                scenario.LocationManager.SetSpeed(speed / 3.6);
                             }
                             break;
                     }
@@ -58,11 +58,11 @@ namespace Automatic9045.VehiclePlugins.StateViewer
 
         public void Tick()
         {
-            ScenarioProvider scenarioProvider = AtsExPluginBase.BveHacker.ScenarioProvider;
+            Scenario scenario = AtsExPluginBase.BveHacker.Scenario;
 
-            if (!TimeValue.Focused) TimeValue.Text = TimeSpan.FromMilliseconds(scenarioProvider.TimeManager.TimeMilliseconds).ToString(@"hh\:mm\:ss");
-            if (!LocationValue.Focused) LocationValue.Text = scenarioProvider.LocationManager.Location.ToString("F");
-            if (!SpeedValue.Focused) SpeedValue.Text = (scenarioProvider.LocationManager.SpeedMeterPerSecond * 3.6).ToString("F");
+            if (!TimeValue.Focused) TimeValue.Text = TimeSpan.FromMilliseconds(scenario.TimeManager.TimeMilliseconds).ToString(@"hh\:mm\:ss");
+            if (!LocationValue.Focused) LocationValue.Text = scenario.LocationManager.Location.ToString("F");
+            if (!SpeedValue.Focused) SpeedValue.Text = (scenario.LocationManager.SpeedMeterPerSecond * 3.6).ToString("F");
         }
     }
 }

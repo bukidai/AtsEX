@@ -14,9 +14,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// シナリオファイルから読み込んだ情報にアクセスするための機能を提供します。
     /// </summary>
     /// <remarks>
-    /// シナリオ本体の詳細へアクセスするには <see cref="ScenarioProvider"/> を使用してください。
+    /// シナリオ本体の詳細へアクセスするには <see cref="Scenario"/> を使用してください。
     /// </remarks>
-    /// <seealso cref="ScenarioProvider"/>
+    /// <seealso cref="Scenario"/>
     public class ScenarioInfo : ClassWrapper
     {
         static ScenarioInfo()

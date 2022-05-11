@@ -31,7 +31,7 @@ namespace Automatic9045.AtsEx
             harmony.Patch(setScenarioMethod, new HarmonyMethod(typeof(ScenarioHacker), nameof(SetScenarioPreFix)));
         }
 
-        public static event ScenarioProviderCreatedEventHandler ScenarioProviderCreated;
+        public static event ScenarioCreatedEventHandler ScenarioCreated;
 
         public ScenarioInfo CurrentScenarioInfo
         {
@@ -39,16 +39,16 @@ namespace Automatic9045.AtsEx
             set => MainForm.CurrentScenarioInfo = value;
         }
 
-        public ScenarioProvider CurrentScenarioProvider
+        public Scenario CurrentScenario
         {
-            get => MainForm.CurrentScenarioProvider;
-            set => MainForm.CurrentScenarioProvider = value;
+            get => MainForm.CurrentScenario;
+            set => MainForm.CurrentScenario = value;
         }
 
         private static void SetScenarioPreFix(object[] __args)
         {
-            ScenarioProvider scenarioProvider = ScenarioProvider.FromSource(__args[0]);
-            ScenarioProviderCreated?.Invoke(new ScenarioProviderCreatedEventArgs(scenarioProvider));
+            Scenario scenario = Scenario.FromSource(__args[0]);
+            ScenarioCreated?.Invoke(new ScenarioCreatedEventArgs(scenario));
         }
     }
 }

@@ -23,9 +23,9 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
         {
             Route route = Route.FromSource(__args[0]);
             StructureSet structures = route.Structures;
-            InstanceStore.BveHacker.PreviewScenarioProviderCreated += e =>
+            InstanceStore.BveHacker.PreviewScenarioCreated += e =>
             {
-                e.ScenarioProvider.Route.Structures = structures;
+                e.Scenario.Route.Structures = structures;
             };
         }
     }

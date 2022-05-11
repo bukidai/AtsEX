@@ -37,8 +37,8 @@ namespace Automatic9045.AtsEx
             MainFormHacker = new MainFormHacker(Process);
             ScenarioHacker = new ScenarioHacker(MainFormHacker);
 
-            ScenarioHacker.ScenarioProviderCreated += e => PreviewScenarioProviderCreated?.Invoke(e);
-            ScenarioHacker.ScenarioProviderCreated += e => ScenarioProviderCreated?.Invoke(e);
+            ScenarioHacker.ScenarioCreated += e => PreviewScenarioCreated?.Invoke(e);
+            ScenarioHacker.ScenarioCreated += e => ScenarioCreated?.Invoke(e);
         }
 
 
@@ -67,8 +67,8 @@ namespace Automatic9045.AtsEx
 
         private ScenarioHacker ScenarioHacker;
 
-        public event ScenarioProviderCreatedEventHandler PreviewScenarioProviderCreated;
-        public event ScenarioProviderCreatedEventHandler ScenarioProviderCreated;
+        public event ScenarioCreatedEventHandler PreviewScenarioCreated;
+        public event ScenarioCreatedEventHandler ScenarioCreated;
 
         public ScenarioInfo ScenarioInfo
         {
@@ -76,15 +76,15 @@ namespace Automatic9045.AtsEx
             set => ScenarioHacker.CurrentScenarioInfo = value;
         }
 
-        public ScenarioProvider ScenarioProvider
+        public Scenario Scenario
         {
-            get => ScenarioHacker.CurrentScenarioProvider ?? throw new InvalidOperationException();
-            internal set => ScenarioHacker.CurrentScenarioProvider = value;
+            get => ScenarioHacker.CurrentScenario ?? throw new InvalidOperationException();
+            internal set => ScenarioHacker.CurrentScenario = value;
         }
 
-        public bool HasScenarioProviderCreated
+        public bool HasScenarioCreated
         {
-            get => !(ScenarioHacker.CurrentScenarioProvider is null);
+            get => !(ScenarioHacker.CurrentScenario is null);
         }
 
 

@@ -18,27 +18,27 @@ namespace Automatic9045.MapPlugins.StationController
         {
             InitializeComponent();
 
-            if (AtsExPluginBase.BveHacker.HasScenarioProviderCreated)
+            if (AtsExPluginBase.BveHacker.HasScenarioCreated)
             {
                 ResetInput();
             }
             else
             {
-                AtsExPluginBase.BveHacker.ScenarioProviderCreated += ScenarioProviderCreated;
+                AtsExPluginBase.BveHacker.ScenarioCreated += ScenarioCreated;
             }
 
-            void ScenarioProviderCreated(ScenarioProviderCreatedEventArgs e)
+            void ScenarioCreated(ScenarioCreatedEventArgs e)
             {
-                AtsExPluginBase.BveHacker.ScenarioProviderCreated -= ScenarioProviderCreated;
-                ResetInput(e.ScenarioProvider);
+                AtsExPluginBase.BveHacker.ScenarioCreated -= ScenarioCreated;
+                ResetInput(e.Scenario);
             }
         }
 
-        private void ResetInput(ScenarioProvider scenarioProvider = null)
+        private void ResetInput(Scenario scenario = null)
         {
-            scenarioProvider = scenarioProvider ?? AtsExPluginBase.BveHacker.ScenarioProvider;
+            scenario = scenario ?? AtsExPluginBase.BveHacker.Scenario;
 
-            StationList stations = scenarioProvider.Route.Stations;
+            StationList stations = scenario.Route.Stations;
             Station lastStation = stations.Count == 0 ? null : stations[stations.Count - 1] as Station;
             
             LocationValue.Text = (lastStation is null ? 0 : lastStation.Location + 500).ToString();
@@ -49,7 +49,7 @@ namespace Automatic9045.MapPlugins.StationController
 
         private void AddButtonClicked(object sender, EventArgs e)
         {
-            StationList stations = AtsExPluginBase.BveHacker.ScenarioProvider.Route.Stations;
+            StationList stations = AtsExPluginBase.BveHacker.Scenario.Route.Stations;
 
             try
             {
@@ -77,7 +77,7 @@ namespace Automatic9045.MapPlugins.StationController
 
         private void RemoveButtonClicked(object sender, EventArgs e)
         {
-            StationList stations = AtsExPluginBase.BveHacker.ScenarioProvider.Route.Stations;
+            StationList stations = AtsExPluginBase.BveHacker.Scenario.Route.Stations;
             if (stations.Count == 0) return;
             stations.RemoveAt(stations.Count - 1);
 

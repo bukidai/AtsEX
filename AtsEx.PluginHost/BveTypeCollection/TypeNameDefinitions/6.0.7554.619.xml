@@ -28,14 +28,14 @@
 		<Field WrapperProperty="ChartForm" Original="e" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="ContextMenu" Original="y" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="CurrentScenarioInfo" Original="q" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="CurrentScenarioProvider" Original="n" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="CurrentScenario" Original="n" IsOriginalPrivate="true"/>
 	</Class>
 	
 	<Class Wrapper="ScenarioSelectionForm" Original="da">
 	</Class>
 	
 	<Class Wrapper="TimePosForm" Original="aj">
-		<Method Wrapper="SetScenario" WrapperParams="ScenarioProvider" Original="a"/>
+		<Method Wrapper="SetScenario" WrapperParams="Scenario" Original="a"/>
 		<Method Wrapper="Draw" WrapperParams="void" Original="d" IsOriginalPrivate="true"/>
 	</Class>
 	<!-- Forms END -->
@@ -259,7 +259,7 @@
 		<Method Wrapper="FromFile" WrapperParams="System.String" Original="a" IsWrapperStatic="true" IsOriginalStatic="true"/>
 	</Class>
 
-	<Class Wrapper="ScenarioProvider" Original="er">
+	<Class Wrapper="Scenario" Original="er">
 		<Property Wrapper="TimeManager">
 			<Getter Original="j"/>
 		</Property>

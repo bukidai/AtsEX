@@ -42,8 +42,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <summary>
         /// 指定したシナリオに基づいてダイヤグラムの表示を初期化します。
         /// </summary>
-        /// <param name="scenarioProvider">シナリオを表す <see cref="ScenarioProvider"/>。</param>
-        public void SetScenario(ScenarioProvider scenarioProvider) => SetScenarioMethod.Invoke(Src, new object[] { scenarioProvider.Src });
+        /// <param name="scenario">シナリオを表す <see cref="Scenario"/>。</param>
+        public void SetScenario(Scenario scenario) => SetScenarioMethod.Invoke(Src, new object[] { scenario.Src });
 
         private static MethodInfo DrawMethod;
         /// <summary>

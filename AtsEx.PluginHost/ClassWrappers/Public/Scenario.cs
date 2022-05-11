@@ -16,11 +16,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// 読み込まれたファイルに関する情報にアクセスするには <see cref="ScenarioInfo"/> を使用してください。
     /// </remarks>
     /// <seealso cref="ScenarioInfo"/>
-    public sealed class ScenarioProvider : ClassWrapper
+    public sealed class Scenario : ClassWrapper
     {
-        static ScenarioProvider()
+        static Scenario()
         {
-            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<ScenarioProvider>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<Scenario>();
 
             TimeManagerGetMethod = members.GetSourcePropertyGetterOf(nameof(TimeManager));
             LocationManagerGetMethod = members.GetSourcePropertyGetterOf(nameof(LocationManager));
@@ -29,7 +29,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             TimeTableGetMethod = members.GetSourcePropertyGetterOf(nameof(TimeTable));
         }
 
-        private ScenarioProvider(object src) : base(src)
+        private Scenario(object src) : base(src)
         {
         }
 
@@ -37,11 +37,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
-        /// <returns>オリジナル オブジェクトをラップした <see cref="ScenarioProvider"/> クラスのインスタンス。</returns>
-        public static ScenarioProvider FromSource(object src)
+        /// <returns>オリジナル オブジェクトをラップした <see cref="Scenario"/> クラスのインスタンス。</returns>
+        public static Scenario FromSource(object src)
         {
             if (src is null) return null;
-            return new ScenarioProvider(src);
+            return new Scenario(src);
         }
 
         private static MethodInfo TimeManagerGetMethod;

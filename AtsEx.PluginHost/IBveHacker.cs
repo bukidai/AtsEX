@@ -11,7 +11,7 @@ using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.PluginHost
 {
-    public delegate void ScenarioProviderCreatedEventHandler(ScenarioProviderCreatedEventArgs e);
+    public delegate void ScenarioCreatedEventHandler(ScenarioCreatedEventArgs e);
 
     public interface IBveHacker
     {
@@ -79,14 +79,14 @@ namespace Automatic9045.AtsEx.PluginHost
 
 
         /// <summary>
-        /// <see cref="ScenarioProviderCreated"/> が発生する直前に通知します。特に理由がなければ <see cref="ScenarioProviderCreated"/> を使用してください。
+        /// <see cref="ScenarioCreated"/> が発生する直前に通知します。特に理由がなければ <see cref="ScenarioCreated"/> を使用してください。
         /// </summary>
-        event ScenarioProviderCreatedEventHandler PreviewScenarioProviderCreated;
+        event ScenarioCreatedEventHandler PreviewScenarioCreated;
 
         /// <summary>
-        /// <see cref="IScenarioProvider"/> のインスタンスが生成されたときに通知します。
+        /// <see cref="ClassWrappers.Scenario"/> のインスタンスが生成されたときに通知します。
         /// </summary>
-        event ScenarioProviderCreatedEventHandler ScenarioProviderCreated;
+        event ScenarioCreatedEventHandler ScenarioCreated;
 
         /// <summary>
         /// 現在読込中または実行中のシナリオの情報を取得・設定します。
@@ -95,14 +95,14 @@ namespace Automatic9045.AtsEx.PluginHost
 
         /// <summary>
         /// 現在実行中のシナリオを取得します。シナリオの読込中は <see cref="InvalidOperationException"/> をスローします。
-        /// シナリオの読込中に <see cref="IScenarioProvider"/> を取得するには <see cref="ScenarioProviderCreated"/> イベントを購読してください。
+        /// シナリオの読込中に <see cref="ClassWrappers.Scenario"/> を取得するには <see cref="ScenarioCreated"/> イベントを購読してください。
         /// </summary>
-        ScenarioProvider ScenarioProvider { get; }
+        Scenario Scenario { get; }
 
         /// <summary>
-        /// <see cref="ScenarioProvider"/> が取得可能かどうかを取得します。
+        /// <see cref="Scenario"/> が取得可能かどうかを取得します。
         /// </summary>
-        bool HasScenarioProviderCreated { get; }
+        bool HasScenarioCreated { get; }
 
 
         [WillRefactor]

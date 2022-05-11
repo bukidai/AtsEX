@@ -11,13 +11,13 @@ using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.PluginHost
 {
-    public class ScenarioProviderCreatedEventArgs : EventArgs
+    public class ScenarioCreatedEventArgs : EventArgs
     {
-        public ScenarioProvider ScenarioProvider { get; }
+        public Scenario Scenario { get; }
 
-        public ScenarioProviderCreatedEventArgs(ScenarioProvider scenarioProvider) : base()
+        public ScenarioCreatedEventArgs(Scenario scenario) : base()
         {
-            ScenarioProvider = scenarioProvider;
+            Scenario = scenario;
         }
     }
 }

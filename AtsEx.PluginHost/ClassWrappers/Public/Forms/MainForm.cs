@@ -23,7 +23,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             ContextMenuField = members.GetSourceFieldOf(nameof(ContextMenu));
 
             CurrentScenarioInfoField = members.GetSourceFieldOf(nameof(CurrentScenarioInfo));
-            CurrentScenarioProviderField = members.GetSourceFieldOf(nameof(CurrentScenarioProvider));
+            CurrentScenarioField = members.GetSourceFieldOf(nameof(CurrentScenario));
 
             ScenarioSelectFormField = members.GetSourceFieldOf(nameof(ScenarioSelectForm));
             LoadingProgressFormField = members.GetSourceFieldOf(nameof(LoadingProgressForm));
@@ -95,14 +95,14 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => CurrentScenarioInfoField.SetValue(Src, value);
         }
 
-        private static FieldInfo CurrentScenarioProviderField;
+        private static FieldInfo CurrentScenarioField;
         /// <summary>
-        /// 現在のシナリオの <see cref="ScenarioProvider"/> を取得します。
+        /// 現在のシナリオのインスタンスを取得します。
         /// </summary>
-        public ScenarioProvider CurrentScenarioProvider
+        public Scenario CurrentScenario
         {
-            get => ScenarioProvider.FromSource(CurrentScenarioProviderField.GetValue(Src));
-            set => CurrentScenarioProviderField.SetValue(Src, value);
+            get => Scenario.FromSource(CurrentScenarioField.GetValue(Src));
+            set => CurrentScenarioField.SetValue(Src, value);
         }
     }
 }

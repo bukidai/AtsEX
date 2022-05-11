@@ -30,6 +30,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -105,7 +107,7 @@
     <Compile Include="ClassWrappers\Public\RandomFileList.cs" />
     <Compile Include="ClassWrappers\Public\Route.cs" />
     <Compile Include="ClassWrappers\Public\ScenarioInfo.cs" />
-    <Compile Include="ClassWrappers\Public\ScenarioProvider.cs" />
+    <Compile Include="ClassWrappers\Public\Scenario.cs" />
     <Compile Include="ClassWrappers\Public\SingleStructureList.cs" />
     <Compile Include="ClassWrappers\Public\Sound.cs" />
     <Compile Include="ClassWrappers\Public\Station.cs" />
@@ -115,7 +117,7 @@
     <Compile Include="ClassWrappers\Public\Vehicle.cs" />
     <Compile Include="Enums\BrakePosition.cs" />
     <Compile Include="Enums\PluginType.cs" />
-    <Compile Include="EventArgs\ScenarioProviderCreatedEventArgs.cs" />
+    <Compile Include="EventArgs\ScenarioCreatedEventArgs.cs" />
     <Compile Include="EventArgs\StartedEventArgs.cs" />
     <Compile Include="EventArgs\AllPluginLoadedEventArgs.cs" />
     <Compile Include="Exceptions\BveFileLoadException.cs" />
