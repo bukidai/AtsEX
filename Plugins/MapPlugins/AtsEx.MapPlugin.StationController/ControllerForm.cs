@@ -18,7 +18,7 @@ namespace Automatic9045.MapPlugins.StationController
         {
             InitializeComponent();
 
-            if (AtsExPluginBase.BveHacker.HasScenarioCreated)
+            if (AtsExPluginBase.BveHacker.IsScenarioCreated)
             {
                 ResetInput();
             }

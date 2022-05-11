@@ -102,7 +102,7 @@ namespace Automatic9045.AtsEx.PluginHost
         /// <summary>
         /// <see cref="Scenario"/> が取得可能かどうかを取得します。
         /// </summary>
-        bool HasScenarioCreated { get; }
+        bool IsScenarioCreated { get; }
 
 
         [WillRefactor]

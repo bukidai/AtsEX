@@ -82,7 +82,7 @@ namespace Automatic9045.AtsEx
             internal set => ScenarioHacker.CurrentScenario = value;
         }
 
-        public bool HasScenarioCreated
+        public bool IsScenarioCreated
         {
             get => !(ScenarioHacker.CurrentScenario is null);
         }
