@@ -36,6 +36,10 @@ BVE本体（`BveTs.exe`）と同じフォルダ内にある`Mackoy.XmlInterfaces
 
 一度ビルドすると自動でダウンロードされます。
 
+## プロジェクトの構成
+
+![Projects](Projects.svg)
+
 ## 使用ライブラリ（アルファベット順）
 ### [.NET Runtime](https://github.com/dotnet/runtime) (MIT)
 
