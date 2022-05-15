@@ -21,6 +21,8 @@ namespace Automatic9045.AtsEx.PluginHost
         private static IBveHacker bveHacker;
         internal static IBveHacker BveHacker => IsInitialized ? bveHacker : throw new InvalidOperationException($"{nameof(InstanceStore)} は初期化されていません。");
 
+        private static DXDynamicTextureHost DXDynamicTextureHost;
+
         internal static event InitializedEventHandler Initialized;
         internal static event ClosingEventHandler Closing;
 
@@ -33,6 +35,7 @@ namespace Automatic9045.AtsEx.PluginHost
             InstanceStore.bveHacker = bveHacker;
 
             StaticConstructorInvoker.InvokeAll();
+            DXDynamicTextureHost = new DXDynamicTextureHost();
 
             Initialized?.Invoke(EventArgs.Empty);
         }
@@ -40,6 +43,8 @@ namespace Automatic9045.AtsEx.PluginHost
         public static void Dispose()
         {
             Closing?.Invoke(EventArgs.Empty);
+
+            DXDynamicTextureHost.Dispose();
 
             app = null;
             bveHacker = null;
