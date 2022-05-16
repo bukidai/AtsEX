@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -175,7 +176,7 @@ namespace Automatic9045.AtsEx
         static Export()
         {
 #if DEBUG
-            MessageBox.Show("AtsEX ATSプラグイン拡張キット\n\nデバッグモードで読み込まれました。");
+            if (!Debugger.IsAttached) Debugger.Launch();
 #endif
 
             Activator = new AtsExActivator();

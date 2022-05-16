@@ -23,9 +23,6 @@ namespace Automatic9045.AtsEx.Caller
             TargetAppDomain.AssemblyResolve += (sender, e) =>
             {
                 if (new AssemblyName(e.Name).Name != assembly.GetName().Name) return null;
-#if DEBUG
-                MessageBox.Show($"{assembly.Location} が登録されました。");
-#endif
                 return assembly;
             };
         }
