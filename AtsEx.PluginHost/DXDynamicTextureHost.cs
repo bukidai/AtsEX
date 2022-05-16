@@ -10,7 +10,7 @@ namespace Automatic9045.AtsEx.PluginHost
 {
     internal class DXDynamicTextureHost : IDisposable
     {
-        public void Initiaize()
+        public DXDynamicTextureHost()
         {
             TextureManager.Initialize();
         }
