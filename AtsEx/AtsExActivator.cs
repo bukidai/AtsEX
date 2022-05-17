@@ -100,6 +100,7 @@ namespace Automatic9045.AtsEx
             AssemblyResolver.Register(Path.Combine(DirectoryName, "atsex.pihost.dll"));
             AssemblyResolver.Register(Path.Combine(DirectoryName, "0Harmony.dll"));
             AssemblyResolver.Register(Path.Combine(DirectoryName, $"Zbx1425.DXDynamicTexture-net{(Environment.Is64BitProcess ? "48" : "35")}.dll"));
+            AssemblyResolver.Register(TargetAppDomain.GetAssemblies().First(asm => asm.GetName().Name == "SlimDX"));
         }
 
         private void CheckAssembly()
