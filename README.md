@@ -3,6 +3,9 @@
 
 詳細は→https://automatic9045.github.io/contents/bve/AtsEX/
 
+## 名前の由来
+**ATS**プラグインを拡張（**ex**tend）するプラグイン
+
 ## ライセンス
 [The MIT License](LICENSE)
 
