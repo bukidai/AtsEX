@@ -75,6 +75,7 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
                 FormSource.Update();
 
                 Form.ErrorListView.Update();
+                Application.DoEvents();
             }
 
 
