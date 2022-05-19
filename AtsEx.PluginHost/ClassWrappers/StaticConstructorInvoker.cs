@@ -17,16 +17,16 @@ namespace Automatic9045.AtsEx.PluginHost
             Type[] allTypes = InstanceStore.App.AtsExPluginHostAssembly.GetTypes();
 
             IEnumerable<Type> classWrapperTypes = allTypes.Where(t => t.IsSubclassOf(typeof(ClassWrapper)));
-            foreach (Type type in classWrapperTypes)
+            Parallel.ForEach(classWrapperTypes, type =>
             {
                 type.TypeInitializer?.Invoke(null, null);
-            }
+            });
 
             IEnumerable<Type> helperTypes = allTypes.Where(t => t.Namespace == typeof(ContextMenuHacker).Namespace);
-            foreach (Type type in helperTypes)
+            Parallel.ForEach(helperTypes, type =>
             {
                 type.TypeInitializer?.Invoke(null, null);
-            }
+            });
         }
     }
 }

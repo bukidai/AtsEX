@@ -39,14 +39,14 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 
             ProfileSelector profileSelector = new ProfileSelector(bveAssembly);
             Version profileVersion;
-            IEnumerable<TypeMemberNameCollectionBase> nameCollection;
+            List<TypeMemberNameCollectionBase> nameCollection;
             using (ProfileInfo profile = profileSelector.GetProfileStream(allowNotSupportedVersion))
             {
                 profileVersion = profile.Version;
 
                 using (Stream schema = profileSelector.GetSchemaStream())
                 {
-                    nameCollection = BveTypeNameDefinitionLoader.LoadFile(profile.Stream, schema).ToArray();
+                    nameCollection = BveTypeNameDefinitionLoader.LoadFile(profile.Stream, schema);
                 }
             }
 

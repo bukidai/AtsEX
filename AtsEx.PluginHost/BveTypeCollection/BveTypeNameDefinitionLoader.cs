@@ -12,7 +12,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 {
     internal static class BveTypeNameDefinitionLoader
     {
-        public static IEnumerable<TypeMemberNameCollectionBase> LoadFile(Stream docStream, Stream schemaStream)
+        public static List<TypeMemberNameCollectionBase> LoadFile(Stream docStream, Stream schemaStream)
         {
             XDocument doc = XDocument.Load(docStream);
 
@@ -27,40 +27,46 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             return LoadChildTypes(root);
 
 
-            IEnumerable<TypeMemberNameCollectionBase> LoadChildTypes(XElement parent)
+            List<TypeMemberNameCollectionBase> LoadChildTypes(XElement parent)
             {
+                List<TypeMemberNameCollectionBase> memberCollections = new List<TypeMemberNameCollectionBase>();
+
                 {
                     IEnumerable<XElement> elements = parent.Elements(targetNamespace + "Enum");
-                    foreach (EnumMemberNameCollection item in LoadEnums(elements)) yield return item;
+                    memberCollections.AddRange(LoadEnums(elements));
                 }
 
                 {
                     IEnumerable<XElement> elements = parent.Elements(targetNamespace + "Class");
-                    foreach (ClassMemberNameCollection item in LoadClasses(elements)) yield return item;
+                    memberCollections.AddRange(LoadClasses(elements));
                 }
+
+                return memberCollections;
             }
 
 
-            IEnumerable<EnumMemberNameCollection> LoadEnums(IEnumerable<XElement> elements)
+            List<EnumMemberNameCollection> LoadEnums(IEnumerable<XElement> elements)
             {
-                foreach (XElement element in elements)
+                List<EnumMemberNameCollection> memberCollections = elements.AsParallel().Select(element =>
                 {
                     string typeWrapperName = (string)element.Attribute("Wrapper");
                     string typeOriginalName = (string)element.Attribute("Original");
 
                     EnumMemberNameCollection memberCollection = new EnumMemberNameCollection(typeWrapperName, typeOriginalName);
-                    yield return memberCollection;
-                }
+                    return memberCollection;
+                }).ToList();
+
+                return memberCollections;
             }
 
-            IEnumerable<ClassMemberNameCollection> LoadClasses(IEnumerable<XElement> elements)
+            List<ClassMemberNameCollection> LoadClasses(IEnumerable<XElement> elements)
             {
-                foreach (XElement element in elements)
+                List<ClassMemberNameCollection> memberCollections = elements.AsParallel().Select(element =>
                 {
                     string typeWrapperName = (string)element.Attribute("Wrapper");
                     string typeOriginalName = (string)element.Attribute("Original");
 
-                    IEnumerable<TypeMemberNameCollectionBase> children = LoadChildTypes(element);
+                    List<TypeMemberNameCollectionBase> children = LoadChildTypes(element);
 
                     ClassMemberNameCollection memberCollection = new ClassMemberNameCollection(typeWrapperName, typeOriginalName, children);
 
@@ -144,8 +150,10 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                         }
                     }
 
-                    yield return memberCollection;
-                }
+                    return memberCollection;
+                }).ToList();
+
+                return memberCollections;
             }
 
 

@@ -28,16 +28,20 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             OriginalTypes = BveAssembly.GetTypes();
         }
 
-        public IEnumerable<TypeInfo> ConvertTypeMemberNameCollections(IEnumerable<TypeMemberNameCollectionBase> src)
+        public List<TypeInfo> ConvertTypeMemberNameCollections(List<TypeMemberNameCollectionBase> src)
         {
-            foreach (TypeMemberNameCollectionBase item in src)
+            List<TypeInfo> typeInfos = new List<TypeInfo>();
+
+            src.ForEach(item =>
             {
                 IEnumerable<TypeInfo> children = ConvertTypeMemberNameCollections(item.Children);
-                foreach (TypeInfo child in children) yield return child;
+                typeInfos.AddRange(children);
 
                 TypeInfo typeInfo = ConvertTypeMemberNameCollection(item);
-                yield return typeInfo;
-            }
+                typeInfos.Add(typeInfo);
+            });
+
+            return typeInfos;
         }
 
         public TypeInfo ConvertTypeMemberNameCollection(TypeMemberNameCollectionBase src)

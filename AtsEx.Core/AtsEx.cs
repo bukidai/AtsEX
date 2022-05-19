@@ -39,13 +39,24 @@ namespace Automatic9045.AtsEx
             TargetAssembly = targetAssembly;
             CallerAssembly = callerAssembly;
 
+            Stopwatch sw = new Stopwatch();
+
+            sw.Start();
             Version bveVersion = TargetAssembly.GetName().Version;
             Version profileVersion = BveTypeCollectionProvider.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly, true);
+            Debug.WriteLine($"BveTypeCollectionProvider: {sw.ElapsedMilliseconds}ms");
 
+            sw.Restart();
             App.CreateInstance(TargetAssembly, CallerAssembly, ExecutingAssembly, PluginHostAssembly);
-            BveHacker.CreateInstance(TargetProcess);
+            Debug.WriteLine($"App: {sw.ElapsedMilliseconds}ms");
 
+            sw.Restart();
+            BveHacker.CreateInstance(TargetProcess);
+            Debug.WriteLine($"BveHacker: {sw.ElapsedMilliseconds}ms");
+
+            sw.Restart();
             InstanceStore.Initialize(App.Instance, BveHacker.Instance);
+            Debug.WriteLine($"InstanceStore: {sw.ElapsedMilliseconds}ms");
 
             if (profileVersion != bveVersion)
             {
@@ -59,14 +70,18 @@ namespace Automatic9045.AtsEx
             try
             {
                 {
+                    sw.Restart();
                     string vehiclePluginListPath = Path.Combine(Path.GetDirectoryName(CallerAssembly.Location), "atsex.pilist.txt");
                     VehiclePlugins = pluginLoader.LoadFromList(PluginType.VehiclePlugin, vehiclePluginListPath).ToList();
+                    Debug.WriteLine($"VehiclePlugins: {sw.ElapsedMilliseconds}ms");
                 }
 
                 {
+                    sw.Restart();
                     MapLoader mapLoader = new MapLoader(pluginLoader);
                     mapLoader.Load();
                     MapPlugins = mapLoader.LoadedPlugins;
+                    Debug.WriteLine($"MapPlugins: {sw.ElapsedMilliseconds}ms");
 
                     IEnumerable<LoadError> removeTargetErrors = LoadErrorManager.Errors.Where(error =>
                     {
