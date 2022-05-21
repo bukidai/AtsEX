@@ -23,8 +23,8 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
         /// </summary>
         public static void Update()
         {
-            StationList stations = AtsExPluginBase.BveHacker.Scenario.Route.Stations;
-            TimeTable timeTable = AtsExPluginBase.BveHacker.Scenario.TimeTable;
+            StationList stations = InstanceStore.BveHacker.Scenario.Route.Stations;
+            TimeTable timeTable = InstanceStore.BveHacker.Scenario.TimeTable;
             timeTable.NameTexts = new string[stations.Count + 1];
             timeTable.NameTextWidths = new int[stations.Count + 1];
             timeTable.ArrivalTimeTexts = new string[stations.Count + 1];
