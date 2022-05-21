@@ -13,21 +13,13 @@ namespace Automatic9045.AtsEx.PluginHost
     /// </summary>
     public abstract class AtsExPluginBase
     {
-        public static bool HasInitialized { get; private set; } = false;
+        protected IApp App { get; }
+        protected IBveHacker BveHacker { get; }
 
-        public static IApp App { get; private set; }
-        public static IBveHacker BveHacker { get; private set; }
-
-        public static void Initialize(HostServiceCollection services)
+        public AtsExPluginBase(HostServiceCollection services)
         {
             App = services.App;
             BveHacker = services.BveHacker;
-
-            HasInitialized = true;
-        }
-
-        public AtsExPluginBase()
-        {
         }
 
         /// <summary>

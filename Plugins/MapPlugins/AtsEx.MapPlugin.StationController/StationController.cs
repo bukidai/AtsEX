@@ -15,8 +15,10 @@ namespace Automatic9045.MapPlugins.StationController
         private ControllerForm Form;
         private ToolStripMenuItem MenuItem;
 
-        public StationController() : base()
+        public StationController(HostServiceCollection services) : base(services)
         {
+            InstanceStore.Initialize(App, BveHacker);
+
             MenuItem = ContextMenuHacker.Instance.AddCheckableMenuItem("駅編集ウィンドウを表示", MenuItemCheckedChanged);
 
             MenuItem.Checked = false;

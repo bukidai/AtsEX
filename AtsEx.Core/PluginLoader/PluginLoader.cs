@@ -34,11 +34,6 @@ namespace Automatic9045.AtsEx
 
         public IEnumerable<AtsExPluginInfo> Load(PluginType pluginType, string relativePath, string absolutePath, string senderFileName = null, int lineIndex = 0)
         {
-            if (!AtsExPluginBase.HasInitialized)
-            {
-                AtsExPluginBase.Initialize(HostServiceCollection);
-            }
-
             Assembly assembly = null;
             try
             {
@@ -66,17 +61,17 @@ namespace Automatic9045.AtsEx
 
             IEnumerable<AtsExPluginInfo> plugins = pluginTypeCandidates.Select(t =>
             {
-                ConstructorInfo constructorInfo = t.GetConstructor(new Type[0]);
+                ConstructorInfo constructorInfo = t.GetConstructor(new Type[] { typeof(HostServiceCollection) });
                 if (constructorInfo is null) return null;
 
-                AtsExPluginBase pluginInstance = constructorInfo.Invoke(new object[0]) as AtsExPluginBase;
+                AtsExPluginBase pluginInstance = constructorInfo.Invoke(new object[] { HostServiceCollection }) as AtsExPluginBase;
                 AtsExPluginInfo pluginInfo = new AtsExPluginInfo(pluginType, assembly, t.FullName, pluginInstance);
                 return pluginInfo;
             }).Where(plugin => !(plugin is null)).ToArray();
             if (!plugins.Any())
             {
                 throw new BveFileLoadException(
-                    $"\"{relativePath}\" で {nameof(AtsExPluginBase)} を継承しているクラスは見つかりましたが、パラメータを持たないコンストラクタが見つかりませんでした。",
+                    $"\"{relativePath}\" で {nameof(AtsExPluginBase)} を継承しているクラスは見つかりましたが、パラメータ {typeof(HostServiceCollection)} を持つコンストラクタが見つかりませんでした。",
                     senderFileName, lineIndex);
             }
 
