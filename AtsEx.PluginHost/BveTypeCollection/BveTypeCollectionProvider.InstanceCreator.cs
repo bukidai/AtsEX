@@ -20,8 +20,8 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
         /// <see cref="BveTypeCollectionProvider"/> のインスタンスを作成します。
         /// </summary>
         /// <param name="bveAssembly">BVE の <see cref="Assembly"/>。</param>
-        /// <param name="atsExAssembly">AtsEX 本体 (atsex.dll) の <see cref="Assembly"/>。</param>
-        /// <param name="atsExPluginHostAssembly">AtsEX プラグインホスト (atsex.pihost.dll) の <see cref="Assembly"/>。</param>
+        /// <param name="atsExAssembly">AtsEX 本体 (AtsEx.dll) の <see cref="Assembly"/>。</param>
+        /// <param name="atsExPluginHostAssembly">AtsEX プラグインホスト (AtsEx.PluginHost.dll) の <see cref="Assembly"/>。</param>
         /// <param name="allowNotSupportedVersion">実行中の BVE がサポートされないバージョンの場合、他のバージョン向けのプロファイルで代用するか。</param>
         /// <returns>使用するプロファイルが対応する BVE のバージョン。</returns>
         /// <exception cref="InvalidOperationException"></exception>

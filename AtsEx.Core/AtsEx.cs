@@ -31,7 +31,7 @@ namespace Automatic9045.AtsEx
 
         public AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, Assembly callerAssembly)
         {
-            string pluginHostAssemblyPath = Path.Combine(Path.GetDirectoryName(ExecutingAssembly.Location), "atsex.pihost.dll");
+            string pluginHostAssemblyPath = Path.Combine(Path.GetDirectoryName(ExecutingAssembly.Location), "AtsEx.PluginHost.dll");
             PluginHostAssembly = Assembly.LoadFrom(pluginHostAssemblyPath);
 
             TargetProcess = targetProcess;
@@ -72,7 +72,7 @@ namespace Automatic9045.AtsEx
             {
                 {
                     sw.Restart();
-                    string vehiclePluginListPath = Path.Combine(Path.GetDirectoryName(CallerAssembly.Location), "atsex.pilist.txt");
+                    string vehiclePluginListPath = Path.Combine(Path.GetDirectoryName(CallerAssembly.Location), "AtsEx.VehiclePluginList.txt");
                     VehiclePlugins = pluginLoader.LoadFromList(PluginType.VehiclePlugin, vehiclePluginListPath).ToList();
                     Debug.WriteLine($"VehiclePlugins: {sw.ElapsedMilliseconds}ms");
                 }
