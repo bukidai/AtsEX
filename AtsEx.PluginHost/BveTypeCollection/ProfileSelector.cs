@@ -39,8 +39,21 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             {
                 if (allowNotSupportedVersion)
                 {
-                    IEnumerable<Version> supportedAllVersions = resourceNames.Select(name => Version.Parse(name.Replace(".xml", "")));
-                    IEnumerable<Version> supportedVersions = supportedAllVersions.Where(version => version.Major == BveVersion.Major);
+                    List<Version> supportedAllVersions = new List<Version>();
+                    foreach (string name in resourceNames)
+                    {
+                        if (!name.StartsWith($"{DefaultNamespace}.") || !name.EndsWith(".xml")) continue;
+
+                        string versionText = name.Substring(DefaultNamespace.Length + 1, name.Length - (DefaultNamespace.Length + 1 + ".xml".Length));
+                        Version version;
+                        if (Version.TryParse(versionText, out version))
+                        {
+                            supportedAllVersions.Add(version);
+                        }
+                    }
+
+                    List<Version> supportedVersions = supportedAllVersions.FindAll(version => version.Major == BveVersion.Major);
+
                     if (supportedVersions.Any())
                     {
                         Version latestVersion = supportedVersions.Max();
