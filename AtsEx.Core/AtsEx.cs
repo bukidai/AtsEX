@@ -58,10 +58,11 @@ namespace Automatic9045.AtsEx
             InstanceStore.Initialize(App.Instance, BveHacker.Instance);
             Debug.WriteLine($"InstanceStore: {sw.ElapsedMilliseconds}ms");
 
+            string versionWarningText = $"BVE バージョン {bveVersion} には対応していません。" +
+                    $"{profileVersion} 向けのプロファイルで代用しますが、{App.Instance.ProductShortName} による拡張機能は正常に動作しない可能性があります。";
             if (profileVersion != bveVersion)
             {
-                LoadErrorManager.Throw($"BVE バージョン {bveVersion} には対応していません。" +
-                    $"{profileVersion} 向けのプロファイルで代用しますが、{App.Instance.ProductShortName} による拡張機能は正常に動作しない可能性があります。");
+                LoadErrorManager.Throw(versionWarningText);
             }
 
             VersionFormProvider = new VersionFormProvider();
@@ -74,6 +75,15 @@ namespace Automatic9045.AtsEx
                     string vehiclePluginListPath = Path.Combine(Path.GetDirectoryName(CallerAssembly.Location), "atsex.pilist.txt");
                     VehiclePlugins = pluginLoader.LoadFromList(PluginType.VehiclePlugin, vehiclePluginListPath).ToList();
                     Debug.WriteLine($"VehiclePlugins: {sw.ElapsedMilliseconds}ms");
+                }
+
+                if (profileVersion != bveVersion && VehiclePlugins.All(plugin => !plugin.PluginInstance.UseAtsExExtensions))
+                {
+                    LoadError removeTargetError = LoadErrorManager.Errors.FirstOrDefault(error => error.Text == versionWarningText);
+                    if (!(removeTargetError is null))
+                    {
+                        LoadErrorManager.Errors.Remove(removeTargetError);
+                    }
                 }
 
                 {
