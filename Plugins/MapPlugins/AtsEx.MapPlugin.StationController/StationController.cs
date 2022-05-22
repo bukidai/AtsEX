@@ -15,7 +15,7 @@ namespace Automatic9045.MapPlugins.StationController
         private ControllerForm Form;
         private ToolStripMenuItem MenuItem;
 
-        public StationController(HostServiceCollection services) : base(services)
+        public StationController(HostServiceCollection services) : base(services, PluginType.MapPlugin)
         {
             InstanceStore.Initialize(App, BveHacker);
 

@@ -65,7 +65,9 @@ namespace Automatic9045.AtsEx
                 if (constructorInfo is null) return null;
 
                 AtsExPluginBase pluginInstance = constructorInfo.Invoke(new object[] { HostServiceCollection }) as AtsExPluginBase;
-                AtsExPluginInfo pluginInfo = new AtsExPluginInfo(pluginType, assembly, t.FullName, pluginInstance);
+                if (pluginInstance.PluginType != pluginType) throw new ArgumentException($"{pluginType.GetTypeString()}として{pluginInstance.PluginType}を読み込もうとしました。");
+
+                AtsExPluginInfo pluginInfo = new AtsExPluginInfo(assembly, t.FullName, pluginInstance);
                 return pluginInfo;
             }).Where(plugin => !(plugin is null)).ToArray();
             if (!plugins.Any())

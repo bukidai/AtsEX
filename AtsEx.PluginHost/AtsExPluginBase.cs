@@ -13,11 +13,20 @@ namespace Automatic9045.AtsEx.PluginHost
     /// </summary>
     public abstract class AtsExPluginBase
     {
+        public PluginType PluginType { get; }
+
         protected IApp App { get; }
         protected IBveHacker BveHacker { get; }
 
-        public AtsExPluginBase(HostServiceCollection services)
+        /// <summary>
+        /// AtsEX 拡張機能を利用する AtsEX プラグインの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="services">AtsEX から渡される BVE、AtsEX の情報。</param>
+        /// <param name="pluginType">プラグインの種別。</param>
+        public AtsExPluginBase(HostServiceCollection services, PluginType pluginType)
         {
+            PluginType = pluginType;
+
             App = services.App;
             BveHacker = services.BveHacker;
         }

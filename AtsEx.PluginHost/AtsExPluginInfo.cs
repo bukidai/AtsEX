@@ -13,11 +13,6 @@ namespace Automatic9045.AtsEx.PluginHost
     public class AtsExPluginInfo
     {
         /// <summary>
-        /// AtsEX プラグインの種類を取得します。
-        /// </summary>
-        public PluginType PluginType { get; }
-
-        /// <summary>
         /// AtsEX プラグインのソースの <see cref="SourceAssembly"/> を取得します。 
         /// </summary>
         public Assembly SourceAssembly { get; }
@@ -32,9 +27,8 @@ namespace Automatic9045.AtsEx.PluginHost
         /// </summary>
         public AtsExPluginBase PluginInstance { get; }
 
-        public AtsExPluginInfo(PluginType pluginType,Assembly sourceAssembly, string mainClassFullName, AtsExPluginBase pluginInstance)
+        public AtsExPluginInfo(Assembly sourceAssembly, string mainClassFullName, AtsExPluginBase pluginInstance)
         {
-            PluginType = pluginType;
             SourceAssembly = sourceAssembly;
             MainClassFullName = mainClassFullName;
             PluginInstance = pluginInstance;

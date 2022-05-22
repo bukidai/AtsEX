@@ -25,8 +25,8 @@ namespace Automatic9045.AtsEx
             {
                 string fileName = Path.GetFileName(plugin.SourceAssembly.Location);
                 string title = ((AssemblyTitleAttribute)Attribute.GetCustomAttribute(plugin.SourceAssembly, typeof(AssemblyTitleAttribute))).Title;
-                string type = plugin.PluginType.GetTypeString();
-                Color typeColor = plugin.PluginType.GetTypeColor();
+                string type = plugin.PluginInstance.PluginType.GetTypeString();
+                Color typeColor = plugin.PluginInstance.PluginType.GetTypeColor();
                 string version = plugin.SourceAssembly.GetName().Version.ToString();
                 string description = ((AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(plugin.SourceAssembly, typeof(AssemblyDescriptionAttribute))).Description;
 
