@@ -24,6 +24,8 @@ namespace Automatic9045.AtsEx
         private readonly Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
         private readonly Assembly PluginHostAssembly;
 
+        private readonly BveHacker BveHacker;
+
         private readonly ContextMenuHacker ContextMenuHacker;
 
         private readonly VersionFormProvider VersionFormProvider;
@@ -53,11 +55,11 @@ namespace Automatic9045.AtsEx
             Debug.WriteLine($"App: {sw.ElapsedMilliseconds}ms");
 
             sw.Restart();
-            BveHacker.CreateInstance(TargetProcess);
+            BveHacker = new BveHacker(TargetProcess);
             Debug.WriteLine($"BveHacker: {sw.ElapsedMilliseconds}ms");
 
             sw.Restart();
-            InstanceStore.Initialize(App.Instance, BveHacker.Instance);
+            InstanceStore.Initialize(App.Instance, BveHacker);
             Debug.WriteLine($"InstanceStore: {sw.ElapsedMilliseconds}ms");
 
             string versionWarningText = $"BVE バージョン {bveVersion} には対応していません。" +
@@ -70,9 +72,9 @@ namespace Automatic9045.AtsEx
             ContextMenuHacker = new ContextMenuHacker();
             ContextMenuHacker.AddSeparator();
 
-            VersionFormProvider = new VersionFormProvider();
+            VersionFormProvider = new VersionFormProvider(BveHacker);
 
-            PluginLoader pluginLoader = new PluginLoader();
+            PluginLoader pluginLoader = new PluginLoader(BveHacker);
             try
             {
                 {
@@ -93,7 +95,7 @@ namespace Automatic9045.AtsEx
 
                 {
                     sw.Restart();
-                    MapLoader mapLoader = new MapLoader(pluginLoader);
+                    MapLoader mapLoader = new MapLoader(BveHacker, pluginLoader);
                     mapLoader.Load();
                     MapPlugins = mapLoader.LoadedPlugins;
                     Debug.WriteLine($"MapPlugins: {sw.ElapsedMilliseconds}ms");
@@ -157,7 +159,6 @@ namespace Automatic9045.AtsEx
             VersionFormProvider.Dispose();
             ContextMenuHacker.Dispose();
             InstanceStore.Dispose();
-            BveHacker.Dispose();
             App.Dispose();
             BveTypeCollectionProvider.Instance.Dispose();
         }
@@ -165,7 +166,7 @@ namespace Automatic9045.AtsEx
         [WillRefactor]
         public void SetVehicleSpec(VehicleSpec vehicleSpec)
         {
-            BveHacker.Instance.VehicleSpec = vehicleSpec;
+            BveHacker.VehicleSpec = vehicleSpec;
         }
 
         public void Started(BrakePosition defaultBrakePosition)
@@ -176,7 +177,7 @@ namespace Automatic9045.AtsEx
         [WillRefactor]
         public void Tick(VehicleState vehicleState)
         {
-            BveHacker.Instance.VehicleState = vehicleState;
+            BveHacker.VehicleState = vehicleState;
 
             VehiclePlugins.ForEach(plugin => plugin.PluginInstance.Tick());
             MapPlugins.ForEach(plugin => plugin.PluginInstance.Tick());

@@ -17,16 +17,18 @@ namespace Automatic9045.AtsEx
         public List<AtsExPluginInfo> LoadedPlugins { get; } = new List<AtsExPluginInfo>();
         public Dictionary<string, List<(int, int)>> RemoveErrorIncludePositions { get; } = new Dictionary<string, List<(int, int)>>();
 
+        protected BveHacker BveHacker { get; }
         protected PluginLoader PluginLoader { get; }
 
-        public MapLoader(PluginLoader pluginLoader)
+        public MapLoader(BveHacker bveHacker, PluginLoader pluginLoader)
         {
+            BveHacker = bveHacker;
             PluginLoader = pluginLoader;
         }
 
         public bool Load()
         {
-            string mapFilePath = BveHacker.Instance.ScenarioInfo.RouteFiles.SelectedFile.Path;
+            string mapFilePath = BveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path;
             return Load(mapFilePath);
         }
 

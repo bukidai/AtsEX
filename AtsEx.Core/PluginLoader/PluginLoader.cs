@@ -14,9 +14,9 @@ namespace Automatic9045.AtsEx
     {
         public HostServiceCollection HostServiceCollection { get; }
 
-        public PluginLoader()
+        public PluginLoader(BveHacker bveHacker)
         {
-            HostServiceCollection = new HostServiceCollection(App.Instance, BveHacker.Instance);
+            HostServiceCollection = new HostServiceCollection(App.Instance, bveHacker);
         }
 
         public IEnumerable<AtsExPluginInfo> LoadFromList(PluginType pluginType, string listAbsolutePath)

@@ -14,14 +14,18 @@ namespace Automatic9045.AtsEx
 {
     internal sealed class VersionFormProvider : IDisposable
     {
+        private readonly BveHacker BveHacker;
+
         private ContextMenuHacker ContextMenuHacker = new ContextMenuHacker();
 
         private VersionForm Form = null;
         private ToolStripMenuItem MenuItem;
 
 
-        public VersionFormProvider()
+        public VersionFormProvider(BveHacker bveHacker)
         {
+            BveHacker = bveHacker;
+
             MenuItem = ContextMenuHacker.AddClickableMenuItem($"{App.Instance.ProductShortName} バージョン情報...", MenuItemClick);
 
             Form = new VersionForm();
@@ -32,7 +36,7 @@ namespace Automatic9045.AtsEx
         {
             if (!Form.Visible)
             {
-                Form.Show(BveHacker.Instance.MainFormSource);
+                Form.Show(BveHacker.MainFormSource);
             }
 
             Form.Focus();

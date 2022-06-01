@@ -17,20 +17,7 @@ namespace Automatic9045.AtsEx
 {
     internal sealed class BveHacker : IBveHacker
     {
-        public static BveHacker Instance { get; private set; }
-
-        public static void CreateInstance(Process targetProcess)
-        {
-            Instance = new BveHacker(targetProcess);
-        }
-
-        public static void Dispose()
-        {
-            Instance = null;
-        }
-
-
-        private BveHacker(Process targetProcess)
+        public BveHacker(Process targetProcess)
         {
             Process = targetProcess;
 
