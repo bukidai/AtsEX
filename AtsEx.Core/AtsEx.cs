@@ -17,19 +17,19 @@ namespace Automatic9045.AtsEx
 {
     public sealed class AtsEx : IDisposable
     {
-        private Process TargetProcess { get; }
-        private AppDomain TargetAppDomain { get; }
-        private Assembly TargetAssembly { get; }
-        private Assembly CallerAssembly { get; }
-        private Assembly ExecutingAssembly { get; } = Assembly.GetExecutingAssembly();
-        private Assembly PluginHostAssembly { get; }
+        private readonly Process TargetProcess;
+        private readonly AppDomain TargetAppDomain;
+        private readonly Assembly TargetAssembly;
+        private readonly Assembly CallerAssembly;
+        private readonly Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
+        private readonly Assembly PluginHostAssembly;
 
-        private ContextMenuHacker ContextMenuHacker;
+        private readonly ContextMenuHacker ContextMenuHacker;
 
-        private VersionFormProvider VersionFormProvider { get; }
+        private readonly VersionFormProvider VersionFormProvider;
 
-        private List<AtsExPluginInfo> VehiclePlugins { get; }
-        private List<AtsExPluginInfo> MapPlugins { get; }
+        private readonly List<AtsExPluginInfo> VehiclePlugins;
+        private readonly List<AtsExPluginInfo> MapPlugins;
 
         public AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, Assembly callerAssembly)
         {
