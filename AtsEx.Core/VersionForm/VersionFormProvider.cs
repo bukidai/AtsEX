@@ -14,13 +14,15 @@ namespace Automatic9045.AtsEx
 {
     internal sealed class VersionFormProvider : IDisposable
     {
+        private ContextMenuHacker ContextMenuHacker = new ContextMenuHacker();
+
         private VersionForm Form = null;
         private ToolStripMenuItem MenuItem;
 
 
         public VersionFormProvider()
         {
-            MenuItem = ContextMenuHacker.Instance.AddClickableMenuItem($"{App.Instance.ProductShortName} バージョン情報...", MenuItemClick);
+            MenuItem = ContextMenuHacker.AddClickableMenuItem($"{App.Instance.ProductShortName} バージョン情報...", MenuItemClick);
 
             Form = new VersionForm();
             Form.FormClosing += FormClosing;
@@ -52,6 +54,8 @@ namespace Automatic9045.AtsEx
             Form.FormClosing -= FormClosing;
             Form.Close();
             Form.Dispose();
+
+            ContextMenuHacker.Dispose();
         }
     }
 }

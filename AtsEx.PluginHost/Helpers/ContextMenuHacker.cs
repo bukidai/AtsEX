@@ -12,28 +12,21 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
     /// <summary>
     /// メインフォームの右クリックメニューを編集するための機能を提供します。
     /// </summary>
-    public class ContextMenuHacker
+    public class ContextMenuHacker : IDisposable
     {
-        private static ContextMenuHacker instance = null;
-        /// <summary>
-        /// <see cref="ContextMenuHacker"/> のインスタンスを取得します。
-        /// </summary>
-        public static ContextMenuHacker Instance => instance = instance ?? new ContextMenuHacker();
+        protected static readonly ToolStripItemCollection ContextMenuItems;
+        protected static int AddTargetIndex;
 
+        protected List<ToolStripItem> AddedItems = new List<ToolStripItem>();
 
-        private ToolStripItemCollection ContextMenuItems;
-
-        private int AddStartIndex;
-        private List<ToolStripItem> AddedItems = new List<ToolStripItem>();
-
-        private ContextMenuHacker()
+        static ContextMenuHacker()
         {
-            InstanceStore.Closing += Dispose;
-
             ContextMenuItems = InstanceStore.BveHacker.MainForm.ContextMenu.Items;
-            AddStartIndex = ContextMenuItems.IndexOfKey("toolStripMenuItem") + 1;
+            AddTargetIndex = ContextMenuItems.IndexOfKey("toolStripMenuItem") + 1;
+        }
 
-            AddSeparator();
+        public ContextMenuHacker()
+        {
         }
 
         /// <summary>
@@ -43,8 +36,10 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
         /// <returns>追加した項目。</returns>
         public ToolStripItem AddItem(ToolStripItem item)
         {
-            ContextMenuItems.Insert(AddStartIndex + AddedItems.Count, item);
+            ContextMenuItems.Insert(AddTargetIndex, item);
             AddedItems.Add(item);
+
+            AddTargetIndex++;
 
             return item;
         }
@@ -103,13 +98,10 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
             return item;
         }
 
-        private void Dispose(EventArgs e)
+        public void Dispose()
         {
             AddedItems.ForEach(item => ContextMenuItems.Remove(item));
             AddedItems.Clear();
-
-            InstanceStore.Closing -= Dispose;
-            instance = null;
         }
     }
 }

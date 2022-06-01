@@ -24,6 +24,8 @@ namespace Automatic9045.AtsEx
         private Assembly ExecutingAssembly { get; } = Assembly.GetExecutingAssembly();
         private Assembly PluginHostAssembly { get; }
 
+        private ContextMenuHacker ContextMenuHacker;
+
         private VersionFormProvider VersionFormProvider { get; }
 
         private List<AtsExPluginInfo> VehiclePlugins { get; }
@@ -64,6 +66,9 @@ namespace Automatic9045.AtsEx
             {
                 LoadErrorManager.Throw(versionWarningText);
             }
+
+            ContextMenuHacker = new ContextMenuHacker();
+            ContextMenuHacker.AddSeparator();
 
             VersionFormProvider = new VersionFormProvider();
 
@@ -150,6 +155,7 @@ namespace Automatic9045.AtsEx
             });
 
             VersionFormProvider.Dispose();
+            ContextMenuHacker.Dispose();
             InstanceStore.Dispose();
             BveHacker.Dispose();
             App.Dispose();

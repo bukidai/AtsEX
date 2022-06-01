@@ -12,6 +12,8 @@ namespace Automatic9045.MapPlugins.StationController
 {
     public class StationController : AtsExPluginBase, IDisposable
     {
+        private ContextMenuHacker ContextMenuHacker = new ContextMenuHacker();
+
         private ControllerForm Form;
         private ToolStripMenuItem MenuItem;
 
@@ -19,7 +21,7 @@ namespace Automatic9045.MapPlugins.StationController
         {
             InstanceStore.Initialize(App, BveHacker);
 
-            MenuItem = ContextMenuHacker.Instance.AddCheckableMenuItem("駅編集ウィンドウを表示", MenuItemCheckedChanged);
+            MenuItem = ContextMenuHacker.AddCheckableMenuItem("駅編集ウィンドウを表示", MenuItemCheckedChanged);
 
             MenuItem.Checked = false;
 
@@ -58,6 +60,8 @@ namespace Automatic9045.MapPlugins.StationController
             Form.FormClosing -= FormClosing;
             Form.Close();
             Form.Dispose();
+
+            ContextMenuHacker.Dispose();
         }
     }
 }
