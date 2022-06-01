@@ -127,6 +127,8 @@ namespace Automatic9045.AtsEx
                 App.Instance.VehiclePlugins = VehiclePlugins;
                 App.Instance.MapPlugins = MapPlugins;
             }
+
+            VersionFormProvider.Intialize(Enumerable.Concat(VehiclePlugins, MapPlugins));
         }
 
         public void Dispose()
@@ -162,8 +164,6 @@ namespace Automatic9045.AtsEx
 
         public void Started(BrakePosition defaultBrakePosition)
         {
-            VersionFormProvider.Intialize(Enumerable.Concat(VehiclePlugins, MapPlugins));
-
             App.Instance.InvokeStarted(defaultBrakePosition);
         }
 

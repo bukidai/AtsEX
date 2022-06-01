@@ -21,6 +21,9 @@ namespace Automatic9045.AtsEx
         public VersionFormProvider()
         {
             MenuItem = ContextMenuHacker.Instance.AddClickableMenuItem($"{App.Instance.ProductShortName} バージョン情報...", MenuItemClick);
+
+            Form = new VersionForm();
+            Form.FormClosing += FormClosing;
         }
 
         private void MenuItemClick(object sender, EventArgs e)
@@ -39,22 +42,16 @@ namespace Automatic9045.AtsEx
             Form.Hide();
         }
 
-        private void DisposeForm()
+        public void Intialize(IEnumerable<AtsExPluginInfo> plugins)
+        {
+            Form.SetPluginDetails(plugins);
+        }
+
+        public void Dispose()
         {
             Form.FormClosing -= FormClosing;
             Form.Close();
             Form.Dispose();
         }
-
-        public void Intialize(IEnumerable<AtsExPluginInfo> plugins)
-        {
-            if (!(Form is null)) DisposeForm();
-
-            Form = new VersionForm();
-            Form.FormClosing += FormClosing;
-            Form.SetPluginDetails(plugins);
-        }
-
-        public void Dispose() => DisposeForm();
     }
 }
