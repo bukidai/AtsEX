@@ -24,6 +24,7 @@ namespace Automatic9045.AtsEx
         private readonly Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
         private readonly Assembly PluginHostAssembly;
 
+        private readonly App App;
         private readonly BveHacker BveHacker;
 
         private readonly ContextMenuHacker ContextMenuHacker;
@@ -51,7 +52,7 @@ namespace Automatic9045.AtsEx
             Debug.WriteLine($"BveTypeCollectionProvider: {sw.ElapsedMilliseconds}ms");
 
             sw.Restart();
-            App.CreateInstance(TargetAssembly, CallerAssembly, ExecutingAssembly, PluginHostAssembly);
+            App = new App(TargetAssembly, CallerAssembly, ExecutingAssembly, PluginHostAssembly);
             Debug.WriteLine($"App: {sw.ElapsedMilliseconds}ms");
 
             sw.Restart();
@@ -59,11 +60,11 @@ namespace Automatic9045.AtsEx
             Debug.WriteLine($"BveHacker: {sw.ElapsedMilliseconds}ms");
 
             sw.Restart();
-            InstanceStore.Initialize(App.Instance, BveHacker);
+            InstanceStore.Initialize(App, BveHacker);
             Debug.WriteLine($"InstanceStore: {sw.ElapsedMilliseconds}ms");
 
             string versionWarningText = $"BVE バージョン {bveVersion} には対応していません。" +
-                    $"{profileVersion} 向けのプロファイルで代用しますが、{App.Instance.ProductShortName} による拡張機能は正常に動作しない可能性があります。";
+                    $"{profileVersion} 向けのプロファイルで代用しますが、{App.ProductShortName} による拡張機能は正常に動作しない可能性があります。";
             if (profileVersion != bveVersion)
             {
                 LoadErrorManager.Throw(versionWarningText);
@@ -72,9 +73,9 @@ namespace Automatic9045.AtsEx
             ContextMenuHacker = new ContextMenuHacker();
             ContextMenuHacker.AddSeparator();
 
-            VersionFormProvider = new VersionFormProvider(BveHacker);
+            VersionFormProvider = new VersionFormProvider(App, BveHacker);
 
-            PluginLoader pluginLoader = new PluginLoader(BveHacker);
+            PluginLoader pluginLoader = new PluginLoader(App, BveHacker);
             try
             {
                 {
@@ -124,15 +125,15 @@ namespace Automatic9045.AtsEx
             catch (Exception ex)
             {
                 LoadErrorManager.Throw(ex.Message);
-                MessageBox.Show(ex.ToString(), $"ハンドルされていない例外 - {App.Instance.ProductShortName}");
+                MessageBox.Show(ex.ToString(), $"ハンドルされていない例外 - {App.ProductShortName}");
             }
             finally
             {
                 if (VehiclePlugins is null) VehiclePlugins = new List<AtsExPluginInfo>();
                 if (MapPlugins is null) MapPlugins = new List<AtsExPluginInfo>();
 
-                App.Instance.VehiclePlugins = VehiclePlugins;
-                App.Instance.MapPlugins = MapPlugins;
+                App.VehiclePlugins = VehiclePlugins;
+                App.MapPlugins = MapPlugins;
             }
 
             VersionFormProvider.Intialize(Enumerable.Concat(VehiclePlugins, MapPlugins));
@@ -159,7 +160,6 @@ namespace Automatic9045.AtsEx
             VersionFormProvider.Dispose();
             ContextMenuHacker.Dispose();
             InstanceStore.Dispose();
-            App.Dispose();
             BveTypeCollectionProvider.Instance.Dispose();
         }
 
@@ -171,7 +171,7 @@ namespace Automatic9045.AtsEx
 
         public void Started(BrakePosition defaultBrakePosition)
         {
-            App.Instance.InvokeStarted(defaultBrakePosition);
+            App.InvokeStarted(defaultBrakePosition);
         }
 
         [WillRefactor]

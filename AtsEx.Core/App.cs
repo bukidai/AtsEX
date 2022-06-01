@@ -13,20 +13,7 @@ namespace Automatic9045.AtsEx
 {
     internal sealed class App : IApp
     {
-        public static App Instance { get; private set; }
-
-        public static void CreateInstance(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
-        {
-            Instance = new App(bveAssembly, callerAssembly, atsExAssembly, atsExPluginHostAssembly);
-        }
-
-        public static void Dispose()
-        {
-            Instance = null;
-        }
-
-
-        private App(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
+        public App(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
         {
             BveAssembly = bveAssembly;
             AtsExCallerAssembly = callerAssembly;

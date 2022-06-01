@@ -10,13 +10,17 @@ using Automatic9045.AtsEx.PluginHost;
 
 namespace Automatic9045.AtsEx
 {
-    internal class PluginLoader
+    internal sealed class PluginLoader
     {
         public HostServiceCollection HostServiceCollection { get; }
 
-        public PluginLoader(BveHacker bveHacker)
+        private readonly App App;
+
+        public PluginLoader(App app, BveHacker bveHacker)
         {
-            HostServiceCollection = new HostServiceCollection(App.Instance, bveHacker);
+            App = app;
+
+            HostServiceCollection = new HostServiceCollection(app, bveHacker);
         }
 
         public IEnumerable<AtsExPluginInfo> LoadFromList(PluginType pluginType, string listAbsolutePath)
@@ -41,7 +45,7 @@ namespace Automatic9045.AtsEx
             }
             catch (BadImageFormatException)
             {
-                int currentBveVersion = App.Instance.BveAssembly.GetName().Version.Major;
+                int currentBveVersion = App.BveAssembly.GetName().Version.Major;
                 int otherBveVersion = currentBveVersion == 6 ? 5 : 6;
                 throw new BveFileLoadException(
                     $"\"{relativePath}\" は対象プラットフォームが間違っているか、.NET アセンブリではありません。" +

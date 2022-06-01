@@ -14,9 +14,9 @@ namespace Automatic9045.AtsEx
 {
     internal partial class VersionForm : Form
     {
-        public VersionForm()
+        public VersionForm(App app)
         {
-            InitializeComponent();
+            InitializeComponent(app);
         }
 
         public void SetPluginDetails(IEnumerable<AtsExPluginInfo> plugins)
