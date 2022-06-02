@@ -18,7 +18,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <seealso cref="ScenarioInfo"/>
     public sealed class Scenario : ClassWrapper
     {
-        static Scenario()
+        [InitializeClassWrapper]
+        private static void Initialize()
         {
             ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<Scenario>();
 

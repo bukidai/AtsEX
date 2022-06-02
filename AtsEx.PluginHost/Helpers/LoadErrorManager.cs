@@ -13,20 +13,15 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
     /// </summary>
     public static partial class LoadErrorManager
     {
-        static LoadErrorManager()
-        {
-            if (InstanceStore.IsInitialized)
-            {
-                Initialize();
-            }
-            else
-            {
-                InstanceStore.Initialized += e => Initialize();
-            }
-        }
+        private static IApp App;
+        private static IBveHacker BveHacker;
 
-        private static void Initialize()
+        [InitializeHelper]
+        private static void Initialize(IApp app, IBveHacker bveHacker)
         {
+            App = app;
+            BveHacker = bveHacker;
+
             Errors = new LoadErrorList();
         }
 
@@ -46,7 +41,7 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
         /// <param name="charIndex">エラーの発生元となる列番号。</param>
         public static void Throw(string text, string senderFileName, int lineIndex, int charIndex)
         {
-            InstanceStore.BveHacker.LoadingProgressForm.ThrowError(text, senderFileName, lineIndex, charIndex);
+            BveHacker.LoadingProgressForm.ThrowError(text, senderFileName, lineIndex, charIndex);
         }
 
         /// <summary>
@@ -76,7 +71,7 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
         /// <param name="error">スローするエラー。</param>
         public static void Throw(LoadError error)
         {
-            InstanceStore.BveHacker.LoadingProgressForm.ThrowError(error);
+            BveHacker.LoadingProgressForm.ThrowError(error);
         }
     }
 }

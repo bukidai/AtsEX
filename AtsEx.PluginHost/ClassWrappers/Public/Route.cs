@@ -15,7 +15,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// </summary>
     public sealed class Route : ClassWrapper
     {
-        static Route()
+        [InitializeClassWrapper]
+        private static void Initialize()
         {
             ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<Route>();
 

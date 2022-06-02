@@ -22,7 +22,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <seealso cref="Structure"/>
     public class MapObjectBase : ClassWrapper, IComparable
     {
-        static MapObjectBase()
+        [InitializeClassWrapper]
+        private static void Initialize()
         {
             ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<MapObjectBase>();
 

@@ -14,7 +14,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// </summary>
     public sealed class TimePosForm : ClassWrapper
     {
-        static TimePosForm()
+        [InitializeClassWrapper]
+        private static void Initialize()
         {
             ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<TimePosForm>();
 

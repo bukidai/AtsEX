@@ -14,14 +14,21 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
     /// </summary>
     public class ContextMenuHacker : IDisposable
     {
-        protected static readonly ToolStripItemCollection ContextMenuItems;
+        private static IApp App;
+        private static IBveHacker BveHacker;
+
+        protected static ToolStripItemCollection ContextMenuItems;
         protected static int AddTargetIndex;
 
         protected List<ToolStripItem> AddedItems = new List<ToolStripItem>();
 
-        static ContextMenuHacker()
+        [InitializeHelper]
+        private static void Initialize(IApp app, IBveHacker bveHacker)
         {
-            ContextMenuItems = InstanceStore.BveHacker.MainForm.ContextMenu.Items;
+            App = app;
+            BveHacker = bveHacker;
+
+            ContextMenuItems = BveHacker.MainForm.ContextMenu.Items;
             AddTargetIndex = ContextMenuItems.IndexOfKey("toolStripMenuItem") + 1;
         }
 

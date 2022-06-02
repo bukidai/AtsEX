@@ -18,13 +18,23 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
     /// </summary>
     public static class DiagramUpdater
     {
+        private static IApp App;
+        private static IBveHacker BveHacker;
+
+        [InitializeHelper]
+        private static void Initialize(IApp app, IBveHacker bveHacker)
+        {
+            App = app;
+            BveHacker = bveHacker;
+        }
+
         /// <summary>
         /// 時刻表と「時刻と位置」フォーム内のダイヤグラムの表示を最新の設定に更新します。
         /// </summary>
         public static void Update()
         {
-            StationList stations = InstanceStore.BveHacker.Scenario.Route.Stations;
-            TimeTable timeTable = InstanceStore.BveHacker.Scenario.TimeTable;
+            StationList stations = BveHacker.Scenario.Route.Stations;
+            TimeTable timeTable = BveHacker.Scenario.TimeTable;
             timeTable.NameTexts = new string[stations.Count + 1];
             timeTable.NameTextWidths = new int[stations.Count + 1];
             timeTable.ArrivalTimeTexts = new string[stations.Count + 1];
@@ -33,7 +43,7 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
             timeTable.DepertureTimeTextWidths = new int[stations.Count + 1];
             timeTable.Update();
 
-            InstanceStore.BveHacker.TimePosForm.SetScenario(InstanceStore.BveHacker.Scenario);
+            BveHacker.TimePosForm.SetScenario(BveHacker.Scenario);
         }
     }
 }

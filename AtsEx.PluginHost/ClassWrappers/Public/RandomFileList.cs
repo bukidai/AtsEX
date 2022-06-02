@@ -15,7 +15,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// </summary>
     public sealed class RandomFileList : ClassWrapper, IList<BveFile>
     {
-        static RandomFileList()
+        [InitializeClassWrapper]
+        private static void Initialize()
         {
             ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<RandomFileList>();
 

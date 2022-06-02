@@ -60,8 +60,16 @@ namespace Automatic9045.AtsEx
             Debug.WriteLine($"BveHacker: {sw.ElapsedMilliseconds}ms");
 
             sw.Restart();
-            InstanceStore.Initialize(App, BveHacker);
-            Debug.WriteLine($"InstanceStore: {sw.ElapsedMilliseconds}ms");
+            ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(App, BveHacker);
+            classWrapperInitializer.InitializeAll();
+            Debug.WriteLine($"ClassWrapper: {sw.ElapsedMilliseconds}ms");
+
+            sw.Restart();
+            HelperInitializer helperInitializer = new HelperInitializer(App, BveHacker);
+            helperInitializer.InitializeAll();
+            Debug.WriteLine($"ClassWrapper: {sw.ElapsedMilliseconds}ms");
+            
+            //DXDynamicTextureHost = new DXDynamicTextureHost();
 
             string versionWarningText = $"BVE バージョン {bveVersion} には対応していません。" +
                     $"{profileVersion} 向けのプロファイルで代用しますが、{App.ProductShortName} による拡張機能は正常に動作しない可能性があります。";
@@ -159,7 +167,6 @@ namespace Automatic9045.AtsEx
 
             VersionFormProvider.Dispose();
             ContextMenuHacker.Dispose();
-            InstanceStore.Dispose();
             BveTypeCollectionProvider.Instance.Dispose();
         }
 

@@ -15,7 +15,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <seealso cref="StructureSet"/>
     public class Structure : LocatableMapObject
     {
-        static Structure()
+        [InitializeClassWrapper]
+        private static void Initialize()
         {
             ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<Structure>();
 

@@ -18,6 +18,17 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
         /// </summary>
         public class LoadErrorList : IList<LoadError>
         {
+            protected static IApp App;
+            protected static IBveHacker BveHacker;
+
+            [InitializeHelper]
+            private static void Initialize(IApp app, IBveHacker bveHacker)
+            {
+                App = app;
+                BveHacker = bveHacker;
+            }
+
+
             protected LoadingProgressForm Form;
             protected Form FormSource;
 
@@ -26,8 +37,8 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
             /// </summary>
             public LoadErrorList()
             {
-                Form = InstanceStore.BveHacker.LoadingProgressForm;
-                FormSource = InstanceStore.BveHacker.LoadingProgressFormSource;
+                Form = BveHacker.LoadingProgressForm;
+                FormSource = BveHacker.LoadingProgressFormSource;
             }
 
 

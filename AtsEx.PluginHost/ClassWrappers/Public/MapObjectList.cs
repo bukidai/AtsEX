@@ -17,7 +17,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <seealso cref="StationList"/>
     public class MapObjectList : ClassWrapper, IList<MapObjectBase>
     {
-        static MapObjectList()
+        [InitializeClassWrapper]
+        private static void Initialize()
         {
             ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<MapObjectList>();
         }

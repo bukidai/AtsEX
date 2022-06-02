@@ -13,8 +13,15 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
 {
     internal class StructureSetLifeProlonger
     {
-        static StructureSetLifeProlonger()
+        private static IApp App;
+        private static IBveHacker BveHacker;
+
+        [InitializeHelper]
+        private static void Initialize(IApp app, IBveHacker bveHacker)
         {
+            App = app;
+            BveHacker = bveHacker;
+
             Harmony harmony = new Harmony("com.automatic9045.atsex.classwrappers.structureset-life-prolonger");
             harmony.Patch(cz.OriginalMemberSet.SetRouteMethod, new HarmonyMethod(typeof(StructureSetLifeProlonger), nameof(SetRoutePrefix)));
         }
@@ -23,7 +30,7 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
         {
             Route route = Route.FromSource(__args[0]);
             StructureSet structures = route.Structures;
-            InstanceStore.BveHacker.PreviewScenarioCreated += e =>
+            BveHacker.PreviewScenarioCreated += e =>
             {
                 e.Scenario.Route.Structures = structures;
             };

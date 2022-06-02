@@ -18,7 +18,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             public static MethodInfo SetRouteMethod { get; internal set; }
         }
 
-        static cz()
+        [InitializeClassWrapper]
+        private static void Initialize()
         {
             ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<cz>();
 

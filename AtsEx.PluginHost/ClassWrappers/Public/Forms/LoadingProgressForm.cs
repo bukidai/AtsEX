@@ -16,7 +16,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// </summary>
     public sealed class LoadingProgressForm : ClassWrapper
     {
-        static LoadingProgressForm()
+        [InitializeClassWrapper]
+        private static void Initialize()
         {
             ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<LoadingProgressForm>();
 

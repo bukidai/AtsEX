@@ -76,7 +76,10 @@
     <Compile Include="BveTypeCollection\TypeMemberNameCollection\TypeMemberNameCollectionBase.cs" />
     <Compile Include="BveTypeCollection\TypeTextParser.cs" />
     <Compile Include="BveTypeCollection\TypeMemberNameCollection\ClassMemberNameCollection.cs" />
-    <Compile Include="ClassWrappers\StaticConstructorInvoker.cs" />
+    <Compile Include="ClassInitializer\ClassInitializerBase.cs" />
+    <Compile Include="ClassInitializer\ClassWrapperInitializer.cs" />
+    <Compile Include="ClassInitializer\HelperInitializer.cs" />
+    <Compile Include="ClassInitializer\InitializeClassWrapperAttribute.cs" />
     <Compile Include="ClassWrappers\Public\Forms\ChartForm.cs" />
     <Compile Include="ClassWrappers\Public\Forms\LoadingProgressForm.cs" />
     <Compile Include="ClassWrappers\Public\Forms\MainForm.cs" />
@@ -94,6 +97,7 @@
     <Compile Include="Enums\TiltOptions.cs" />
     <Compile Include="Helpers\ContextMenuHacker.cs" />
     <Compile Include="Helpers\DiagramUpdater.cs" />
+    <Compile Include="ClassInitializer\InitializeHelperAttribute.cs" />
     <Compile Include="Helpers\LoadErrorManager.cs" />
     <Compile Include="Helpers\LoadErrorManager.LoadErrorList.cs" />
     <Compile Include="Helpers\StructureSetLifeProlonger.cs" />
@@ -136,7 +140,6 @@
     <Compile Include="Enums\ReverserPosition.cs" />
     <Compile Include="IBveHacker.cs" />
     <Compile Include="AtsExPluginBase.cs" />
-    <Compile Include="InstanceStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HostServiceCollection.cs" />
   </ItemGroup>

@@ -17,7 +17,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <seealso cref="DiagramUpdater"/>
     public class TimeTable : AssistantText
     {
-        static TimeTable()
+        [InitializeClassWrapper]
+        private static void Initialize()
         {
             ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<TimeTable>();
 
