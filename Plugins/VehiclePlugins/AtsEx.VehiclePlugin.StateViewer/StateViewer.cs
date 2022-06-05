@@ -17,7 +17,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
         private StateForm Form;
         private ToolStripMenuItem MenuItem;
 
-        public StateViewer(HostServiceCollection services) : base(services, PluginType.VehiclePlugin)
+        public StateViewer(AtsExPluginBuilder services) : base(services, PluginType.VehiclePlugin)
         {
             InstanceStore.Initialize(App, BveHacker);
 

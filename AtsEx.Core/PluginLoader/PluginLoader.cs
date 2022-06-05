@@ -12,15 +12,13 @@ namespace Automatic9045.AtsEx
 {
     internal sealed class PluginLoader
     {
-        public HostServiceCollection HostServiceCollection { get; }
-
         private readonly App App;
+        private readonly BveHacker BveHacker;
 
         public PluginLoader(App app, BveHacker bveHacker)
         {
             App = app;
-
-            HostServiceCollection = new HostServiceCollection(app, bveHacker);
+            BveHacker = bveHacker;
         }
 
         public IEnumerable<AtsExPluginInfo> LoadFromList(PluginType pluginType, string listAbsolutePath)
@@ -36,6 +34,7 @@ namespace Automatic9045.AtsEx
             return dlls.Select(dll => Load(pluginType, dll.RelativePath, dll.AbsolutePath, pluginListName, dll.LineIndex)).SelectMany(x => x);
         }
 
+        [UnderConstruction] // AtsExPluginBuilderの作り分け
         public IEnumerable<AtsExPluginInfo> Load(PluginType pluginType, string relativePath, string absolutePath, string senderFileName = null, int lineIndex = 0)
         {
             Assembly assembly = null;
@@ -63,12 +62,15 @@ namespace Automatic9045.AtsEx
                     senderFileName, lineIndex);
             }
 
+            AtsExPluginBuilder pluginBuilder = new AtsExPluginBuilder(App)
+                .UseAtsExExtensions(BveHacker);
+
             IEnumerable<AtsExPluginInfo> plugins = pluginTypeCandidates.Select(t =>
             {
-                ConstructorInfo constructorInfo = t.GetConstructor(new Type[] { typeof(HostServiceCollection) });
+                ConstructorInfo constructorInfo = t.GetConstructor(new Type[] { typeof(AtsExPluginBuilder) });
                 if (constructorInfo is null) return null;
 
-                AtsExPluginBase pluginInstance = constructorInfo.Invoke(new object[] { HostServiceCollection }) as AtsExPluginBase;
+                AtsExPluginBase pluginInstance = constructorInfo.Invoke(new object[] { pluginBuilder }) as AtsExPluginBase;
                 if (pluginInstance.PluginType != pluginType) throw new ArgumentException($"{pluginType.GetTypeString()}として{pluginInstance.PluginType.GetTypeString()}を読み込もうとしました。");
                 if (pluginInstance.PluginType == PluginType.MapPlugin && !pluginInstance.UseAtsExExtensions) throw new NotSupportedException($"{pluginInstance.PluginType.GetTypeString()}では AtsEX の拡張機能を使用しないプラグインを開発することはできません。");
 
@@ -78,7 +80,7 @@ namespace Automatic9045.AtsEx
             if (!plugins.Any())
             {
                 throw new BveFileLoadException(
-                    $"\"{relativePath}\" で {nameof(AtsExPluginBase)} を継承しているクラスは見つかりましたが、パラメータ {typeof(HostServiceCollection)} を持つコンストラクタが見つかりませんでした。",
+                    $"\"{relativePath}\" で {nameof(AtsExPluginBase)} を継承しているクラスは見つかりましたが、パラメータ {typeof(AtsExPluginBuilder)} を持つコンストラクタが見つかりませんでした。",
                     senderFileName, lineIndex);
             }
 

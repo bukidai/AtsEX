@@ -6,15 +6,20 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost
 {
-    public class HostServiceCollection
+    public class AtsExPluginBuilder
     {
         internal IApp App { get; }
-        internal IBveHacker BveHacker { get; }
+        internal IBveHacker BveHacker { get; private set; } = null;
 
-        public HostServiceCollection(IApp app, IBveHacker bveHacker)
+        public AtsExPluginBuilder(IApp app)
         {
             App = app;
+        }
+
+        public AtsExPluginBuilder UseAtsExExtensions(IBveHacker bveHacker)
+        {
             BveHacker = bveHacker;
+            return this;
         }
     }
 }

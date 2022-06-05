@@ -23,29 +23,29 @@ namespace Automatic9045.AtsEx.PluginHost
         /// <summary>
         /// AtsEX 拡張機能を利用する AtsEX プラグインの新しいインスタンスを初期化します。
         /// </summary>
-        /// <param name="services">AtsEX から渡される BVE、AtsEX の情報。</param>
+        /// <param name="builder">AtsEX から渡される BVE、AtsEX の情報。</param>
         /// <param name="pluginType">プラグインの種別。</param>
-        public AtsExPluginBase(HostServiceCollection services, PluginType pluginType) : this(services, pluginType, true)
+        public AtsExPluginBase(AtsExPluginBuilder builder, PluginType pluginType) : this(builder, pluginType, true)
         {
         }
 
         /// <summary>
         /// AtsEX プラグインの新しいインスタンスを初期化します。
         /// </summary>
-        /// <param name="services">AtsEX から渡される BVE、AtsEX の情報。</param>
+        /// <param name="builder">AtsEX から渡される BVE、AtsEX の情報。</param>
         /// <param name="pluginType">AtsEX プラグインの種別。</param>
         /// <param name="useAtsExExtensions">AtsEX 拡張機能を利用するか。<br/>
         /// <see langword="false"/> を指定すると、<see cref="BveHacker"/> が取得できなくなる代わりに、BVE のバージョンの問題で AtsEX 拡張機能の読込に失敗した場合でもシナリオを開始できるようになります。<br/>
         /// マッププラグインでは <see langword="false"/> を指定することはできません。</param>
-        public AtsExPluginBase(HostServiceCollection services, PluginType pluginType, bool useAtsExExtensions)
+        public AtsExPluginBase(AtsExPluginBuilder builder, PluginType pluginType, bool useAtsExExtensions)
         {
             PluginType = pluginType;
             UseAtsExExtensions = useAtsExExtensions;
-            App = services.App;
+            App = builder.App;
 
             if (!UseAtsExExtensions) return;
 
-            _BveHacker = services.BveHacker;
+            _BveHacker = builder.BveHacker;
         }
 
         /// <summary>

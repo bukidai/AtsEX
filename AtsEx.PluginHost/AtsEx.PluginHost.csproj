@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AtsExPluginBuilder.cs" />
     <Compile Include="BveTypeCollection\BveTypeCollectionProvider.cs" />
     <Compile Include="BveTypeCollection\BveTypeCollectionProvider.InstanceCreator.cs" />
     <Compile Include="BveTypeCollection\ProfileInfo.cs" />
@@ -141,7 +142,6 @@
     <Compile Include="IBveHacker.cs" />
     <Compile Include="AtsExPluginBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HostServiceCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BveTypeCollection\TypeNameDefinitions\BveTypesXmlSchema.xsd">
