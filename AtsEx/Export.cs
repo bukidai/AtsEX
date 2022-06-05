@@ -222,17 +222,9 @@ namespace Automatic9045.AtsEx
             AtsMain.SetReverser(position);
         }
 
-        public static void KeyDown(int atsKeyCode)
-        {
-            AtsMain.IsKeyDown[atsKeyCode] = true;
-            AtsMain.KeyDown(atsKeyCode);
-        }
+        public static void KeyDown(int atsKeyCode) => AtsMain.KeyDown(atsKeyCode);
 
-        public static void KeyUp(int atsKeyCode)
-        {
-            AtsMain.IsKeyDown[atsKeyCode] = false;
-            AtsMain.KeyUp(atsKeyCode);
-        }
+        public static void KeyUp(int atsKeyCode) => AtsMain.KeyUp(atsKeyCode);
 
         public static void HornBlow(HornType hornType) => AtsMain.HornBlow(hornType);
 

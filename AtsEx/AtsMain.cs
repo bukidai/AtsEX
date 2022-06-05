@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Input.Native;
 
 namespace Automatic9045.AtsEx
 {
@@ -24,9 +25,6 @@ namespace Automatic9045.AtsEx
         public static Handles Handle = default;
 
         public static VehicleState VehicleState { get; set; } = default;
-
-        /// <summary>Current Key State</summary>
-        public static bool[] IsKeyDown { get; set; } = new bool[16];
 
         public static AtsEx AtsEx { get; private set; }
 
@@ -77,12 +75,12 @@ namespace Automatic9045.AtsEx
         }
         public static void KeyDown(int atsKeyCode)
         {
-
+            AtsEx.KeyDown((NativeAtsKey)atsKeyCode);
         }
 
         public static void KeyUp(int atsKeyCode)
         {
-
+            AtsEx.KeyUp((NativeAtsKey)atsKeyCode);
         }
 
         public static void DoorOpen()

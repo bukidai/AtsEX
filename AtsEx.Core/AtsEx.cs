@@ -12,6 +12,8 @@ using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.Helpers;
+using Automatic9045.AtsEx.PluginHost.Input;
+using Automatic9045.AtsEx.PluginHost.Input.Native;
 
 namespace Automatic9045.AtsEx
 {
@@ -188,6 +190,16 @@ namespace Automatic9045.AtsEx
 
             VehiclePlugins.ForEach(plugin => plugin.PluginInstance.Tick());
             MapPlugins.ForEach(plugin => plugin.PluginInstance.Tick());
+        }
+
+        public void KeyDown(NativeAtsKey key)
+        {
+            (App.NativeKeys.AtsKeys[key] as IPressableKey).Press();
+        }
+
+        public void KeyUp(NativeAtsKey key)
+        {
+            (App.NativeKeys.AtsKeys[key] as IPressableKey).Release();
         }
     }
 }

@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Automatic9045.AtsEx.PluginHost.Input.Native;
+
 namespace Automatic9045.AtsEx.PluginHost
 {
     public delegate void AllPluginLoadedEventHandler(AllPluginLoadedEventArgs e);
@@ -52,6 +54,12 @@ namespace Automatic9045.AtsEx.PluginHost
         /// <see cref="AtsExPluginBase"/> のコンストラクタ内など、<see cref="AllMapPluginLoaded"/> イベントが発生するより前には取得できないので注意してください。
         /// </summary>
         List<AtsExPluginInfo> MapPlugins { get; }
+
+
+        /// <summary>
+        /// BVE が ATS プラグイン向けに提供するキーの入力情報を取得します。
+        /// </summary>
+        NativeKeySet NativeKeys { get; }
 
 
         /// <summary>
