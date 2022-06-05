@@ -22,6 +22,8 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
             App = app;
             BveHacker = bveHacker;
 
+            LoadErrorList.Initialize(App, BveHacker);
+
             Errors = new LoadErrorList();
         }
 

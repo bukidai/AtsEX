@@ -21,8 +21,7 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
             protected static IApp App;
             protected static IBveHacker BveHacker;
 
-            [InitializeHelper]
-            private static void Initialize(IApp app, IBveHacker bveHacker)
+            internal static void Initialize(IApp app, IBveHacker bveHacker)
             {
                 App = app;
                 BveHacker = bveHacker;
