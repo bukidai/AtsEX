@@ -17,7 +17,7 @@ namespace Automatic9045.AtsEx.PluginHost.Input.Native
         /// <summary>
         /// ATS キーの入力情報を取得します。
         /// </summary>
-        public ReadOnlyDictionary<NativeAtsKey, KeyState> AtsKeys { get; }
+        public ReadOnlyDictionary<NativeAtsKey, Key> AtsKeys { get; }
 
         /// <summary>
         /// <see cref="NativeKeySet"/> クラスの新しいインスタンスを初期化します。
@@ -26,9 +26,9 @@ namespace Automatic9045.AtsEx.PluginHost.Input.Native
         {
             {
                 NativeAtsKey[] allKeyNames = Enum.GetValues(typeof(NativeAtsKey)) as NativeAtsKey[];
-                Dictionary<NativeAtsKey, KeyState> keys = allKeyNames.ToDictionary(keyName => keyName, _ => new KeyState());
+                Dictionary<NativeAtsKey, Key> keys = allKeyNames.ToDictionary(keyName => keyName, _ => new Key());
 
-                AtsKeys = new ReadOnlyDictionary<NativeAtsKey, KeyState>(keys);
+                AtsKeys = new ReadOnlyDictionary<NativeAtsKey, Key>(keys);
             }
         }
     }

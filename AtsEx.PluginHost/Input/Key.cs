@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace Automatic9045.AtsEx.PluginHost.Input
 {
     /// <summary>
-    /// キーの状態を表します。
+    /// キーを表します。
     /// このクラスはスレッド セーフです。
     /// </summary>
-    public class KeyState : IPressableKey
+    public class Key : IPressableKey
     {
         /// <summary>
         /// キーが押されているかを取得します。
@@ -62,14 +62,14 @@ namespace Automatic9045.AtsEx.PluginHost.Input
         protected readonly object LockObj = new object();
 
         /// <summary>
-        /// <see cref="KeyState"/> クラスの新しいインスタンスを初期化します。
+        /// <see cref="Key"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
-        public KeyState()
+        public Key()
         {
         }
 
         /// <summary>
-        /// この <see cref="KeyState"/> オブジェクトに対するロックを取得し、指定したデリゲートを実行します。<br/>
+        /// この <see cref="Key"/> オブジェクトに対するロックを取得し、指定したデリゲートを実行します。<br/>
         /// <see cref="Press"/>、<see cref="Release"/> を含むデリゲートを指定するとデッドロックするので注意してください。
         /// </summary>
         /// <param name="action">実行する <see cref="Action"/> デリゲート。</param>
