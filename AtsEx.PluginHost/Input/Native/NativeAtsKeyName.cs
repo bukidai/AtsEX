@@ -9,7 +9,7 @@ namespace Automatic9045.AtsEx.PluginHost.Input.Native
     /// <summary>
     /// BVE が ATS プラグイン向けに提供する ATS キーを表します。
     /// </summary>
-    public enum NativeAtsKey
+    public enum NativeAtsKeyName
     {
         /// <summary>ATS S キー (既定: Space)。</summary>
         S = 0,

@@ -192,12 +192,12 @@ namespace Automatic9045.AtsEx
             MapPlugins.ForEach(plugin => plugin.PluginInstance.Tick());
         }
 
-        public void KeyDown(NativeAtsKey key)
+        public void KeyDown(NativeAtsKeyName key)
         {
             (App.NativeKeys.AtsKeys[key] as IPressableKey).Press();
         }
 
-        public void KeyUp(NativeAtsKey key)
+        public void KeyUp(NativeAtsKeyName key)
         {
             (App.NativeKeys.AtsKeys[key] as IPressableKey).Release();
         }

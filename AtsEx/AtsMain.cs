@@ -75,12 +75,12 @@ namespace Automatic9045.AtsEx
         }
         public static void KeyDown(int atsKeyCode)
         {
-            AtsEx.KeyDown((NativeAtsKey)atsKeyCode);
+            AtsEx.KeyDown((NativeAtsKeyName)atsKeyCode);
         }
 
         public static void KeyUp(int atsKeyCode)
         {
-            AtsEx.KeyUp((NativeAtsKey)atsKeyCode);
+            AtsEx.KeyUp((NativeAtsKeyName)atsKeyCode);
         }
 
         public static void DoorOpen()
