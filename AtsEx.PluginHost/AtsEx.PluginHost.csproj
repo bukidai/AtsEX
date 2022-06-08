@@ -37,6 +37,10 @@
     <Reference Include="0Harmony, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Lib.Harmony.2.2.1\lib\net48\0Harmony.dll</HintPath>
     </Reference>
+    <Reference Include="Mackoy.IInputDevice">
+      <HintPath>LocalReferences\BveTs\Mackoy.IInputDevice.DLL</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Mackoy.XmlInterfaces">
       <HintPath>LocalReferences\BveTs\Mackoy.XmlInterfaces.DLL</HintPath>
       <Private>False</Private>

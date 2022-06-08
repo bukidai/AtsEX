@@ -25,6 +25,10 @@
 
 以下のアセンブリはNuGetを介さずに参照しているため、手動での配置が必要です。
 
+#### Mackoy.IInputDevice.DLL (Mackoy氏)
+
+BVE本体（`BveTs.exe`）と同じフォルダ内にある`Mackoy.IInputDevice.DLL`を`AtsEx.PluginHost\LocalReferences\BveTs`内にコピーしてください。
+
 #### Mackoy.XmlInterfaces.DLL (Mackoy氏)
 
 BVE本体（`BveTs.exe`）と同じフォルダ内にある`Mackoy.XmlInterfaces.DLL`を`AtsEx.PluginHost\LocalReferences\BveTs`内にコピーしてください。
