@@ -141,10 +141,9 @@
     <Compile Include="Enums\ReverserPosition.cs" />
     <Compile Include="IBveHacker.cs" />
     <Compile Include="AtsExPluginBase.cs" />
-    <Compile Include="Input\IPressableKey.cs" />
-    <Compile Include="Input\Key.cs" />
+    <Compile Include="Input\KeyBase.cs" />
+    <Compile Include="Input\Native\INativeKeySet.cs" />
     <Compile Include="Input\Native\NativeAtsKeyName.cs" />
-    <Compile Include="Input\Native\NativeKeySet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

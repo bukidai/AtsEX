@@ -59,6 +59,8 @@
     <Compile Include="BveHacker\BveHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\MainFormHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\ScenarioHacker.cs" />
+    <Compile Include="Input\NativeAtsKey.cs" />
+    <Compile Include="Input\NativeKeySet.cs" />
     <Compile Include="MapLoader\MapLoader.cs" />
     <Compile Include="PluginLoader\PluginListLoader.cs" />
     <Compile Include="PluginLoader\PluginLoader.cs" />

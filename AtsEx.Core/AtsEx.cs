@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Automatic9045.AtsEx.Input;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.Helpers;
-using Automatic9045.AtsEx.PluginHost.Input;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
 
 namespace Automatic9045.AtsEx
@@ -194,12 +194,12 @@ namespace Automatic9045.AtsEx
 
         public void KeyDown(NativeAtsKeyName key)
         {
-            (App.NativeKeys.AtsKeys[key] as IPressableKey).Press();
+            (App.NativeKeys.AtsKeys[key] as NativeAtsKey).Press();
         }
 
         public void KeyUp(NativeAtsKeyName key)
         {
-            (App.NativeKeys.AtsKeys[key] as IPressableKey).Release();
+            (App.NativeKeys.AtsKeys[key] as NativeAtsKey).Release();
         }
     }
 }

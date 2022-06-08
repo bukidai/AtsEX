@@ -59,7 +59,7 @@ namespace Automatic9045.AtsEx.PluginHost
         /// <summary>
         /// BVE が ATS プラグイン向けに提供するキーの入力情報を取得します。
         /// </summary>
-        NativeKeySet NativeKeys { get; }
+        INativeKeySet NativeKeys { get; }
 
 
         /// <summary>

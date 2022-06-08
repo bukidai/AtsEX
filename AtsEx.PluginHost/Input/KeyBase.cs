@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace Automatic9045.AtsEx.PluginHost.Input
 {
     /// <summary>
-    /// キーを表します。
+    /// すべてのキーの基本クラスを表します。
     /// このクラスはスレッド セーフです。
     /// </summary>
-    public class Key : IPressableKey
+    public abstract class KeyBase
     {
         /// <summary>
         /// キーが押されているかを取得します。
@@ -62,14 +62,14 @@ namespace Automatic9045.AtsEx.PluginHost.Input
         protected readonly object LockObj = new object();
 
         /// <summary>
-        /// <see cref="Key"/> クラスの新しいインスタンスを初期化します。
+        /// <see cref="KeyBase"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
-        public Key()
+        public KeyBase()
         {
         }
 
         /// <summary>
-        /// この <see cref="Key"/> オブジェクトに対するロックを取得し、指定したデリゲートを実行します。<br/>
+        /// この <see cref="KeyBase"/> オブジェクトに対するロックを取得し、指定したデリゲートを実行します。<br/>
         /// <see cref="Press"/>、<see cref="Release"/> を含むデリゲートを指定するとデッドロックするので注意してください。
         /// </summary>
         /// <param name="action">実行する <see cref="Action"/> デリゲート。</param>
@@ -78,7 +78,10 @@ namespace Automatic9045.AtsEx.PluginHost.Input
             lock (LockObj) action();
         }
 
-        void IPressableKey.Press()
+        /// <summary>
+        /// キーが押されたことをこの <see cref="KeyBase"/> オブジェクトに通知します。
+        /// </summary>
+        protected void Press()
         {
             lock (LockObj)
             {
@@ -90,7 +93,10 @@ namespace Automatic9045.AtsEx.PluginHost.Input
             }
         }
 
-        void IPressableKey.Release()
+        /// <summary>
+        /// キーが離されたことをこの <see cref="KeyBase"/> オブジェクトに通知します。
+        /// </summary>
+        protected void Release()
         {
             lock (LockObj)
             {
