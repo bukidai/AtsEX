@@ -16,7 +16,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         public override void InitializeAll()
         {
             Type[] allTypes = App.AtsExPluginHostAssembly.GetTypes();
-            IEnumerable<Type> classWrapperTypes = allTypes.Where(t => t.IsSubclassOf(typeof(ClassWrapper)));
+            IEnumerable<Type> classWrapperTypes = allTypes.Where(t => t.IsSubclassOf(typeof(ClassWrapperBase)));
 
             Initialize<InitializeClassWrapperAttribute>(classWrapperTypes, method =>
             {

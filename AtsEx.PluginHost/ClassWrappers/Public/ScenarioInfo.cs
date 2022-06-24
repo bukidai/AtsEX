@@ -17,7 +17,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// シナリオ本体の詳細へアクセスするには <see cref="Scenario"/> を使用してください。
     /// </remarks>
     /// <seealso cref="Scenario"/>
-    public class ScenarioInfo : ClassWrapper
+    public class ScenarioInfo : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize()

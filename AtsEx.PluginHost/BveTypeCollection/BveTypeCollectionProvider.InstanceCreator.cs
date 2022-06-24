@@ -50,7 +50,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                 }
             }
 
-            IEnumerable<Type> wrapperTypes = atsExPluginHostAssembly.GetTypes().Concat(atsExAssembly.GetTypes()).Where(type => (type.IsClass && type.IsSubclassOf(typeof(ClassWrapper))) || type.IsEnum);
+            IEnumerable<Type> wrapperTypes = atsExPluginHostAssembly.GetTypes().Concat(atsExAssembly.GetTypes()).Where(type => (type.IsClass && type.IsSubclassOf(typeof(ClassWrapperBase))) || type.IsEnum);
             IEnumerable<Type> originalTypes = bveAssembly.GetTypes();
 
             TypeInfoGenerator typeInfoGenerator = new TypeInfoGenerator(bveAssembly, atsExAssembly);
@@ -178,7 +178,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                 }
             });
 
-            Instance = new BveTypeCollectionProvider(types, typeof(ClassWrapper));
+            Instance = new BveTypeCollectionProvider(types, typeof(ClassWrapperBase));
 
             return profileVersion;
 
@@ -206,7 +206,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                     type = genericTypeDefinition.MakeGenericType(typeParams);
                 }
 
-                if (type.IsClass && type.IsSubclassOf(typeof(ClassWrapper)))
+                if (type.IsClass && type.IsSubclassOf(typeof(ClassWrapperBase)))
                 {
                     Type originalType = typeInfos.FirstOrDefault(x => x.WrapperType == type)?.OriginalType;
                     if (originalType is null)

@@ -20,7 +20,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <seealso cref="PutBetweenStructure"/>
     /// <seealso cref="Station"/>
     /// <seealso cref="Structure"/>
-    public class MapObjectBase : ClassWrapper, IComparable
+    public class MapObjectBase : ClassWrapperBase, IComparable
     {
         [InitializeClassWrapper]
         private static void Initialize()

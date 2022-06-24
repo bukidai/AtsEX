@@ -16,7 +16,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// 読み込まれたファイルに関する情報にアクセスするには <see cref="ScenarioInfo"/> を使用してください。
     /// </remarks>
     /// <seealso cref="ScenarioInfo"/>
-    public sealed class Scenario : ClassWrapper
+    public sealed class Scenario : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize()

@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// SlimDX で表示するための 2D および 3D モデルのマテリアル情報を表します。
     /// </summary>
-    public sealed class MaterialInfo : ClassWrapper
+    public sealed class MaterialInfo : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize()

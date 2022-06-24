@@ -12,7 +12,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// サウンドを表します。
     /// </summary>
-    public sealed class Sound : ClassWrapper
+    public sealed class Sound : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize()

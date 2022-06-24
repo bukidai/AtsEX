@@ -12,7 +12,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// 車両の位置に関する処理を行います。
     /// </summary>
-    public class LocationManager : ClassWrapper
+    public class LocationManager : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize()

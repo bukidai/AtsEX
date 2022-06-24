@@ -10,7 +10,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// すべてのクラスラッパーの基本クラスを表します。
     /// </summary>
-    public abstract class ClassWrapper
+    public abstract class ClassWrapperBase
     {
         /// <summary>
         /// ラップされているオリジナル オブジェクトを取得します。
@@ -18,11 +18,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         public dynamic Src { get; }
 
         /// <summary>
-        /// <see cref="ClassWrapper"/> クラスの新しいインスタンスを初期化します。
+        /// <see cref="ClassWrapperBase"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <exception cref="ArgumentNullException"><paramref name="src"/> が <see langword="null"/> です。</exception>
-        public ClassWrapper(object src)
+        public ClassWrapperBase(object src)
         {
             if (src is null) throw new ArgumentNullException();
 
@@ -31,7 +31,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         public override bool Equals(object obj)
         {
-            if (obj is ClassWrapper classWrapper)
+            if (obj is ClassWrapperBase classWrapper)
             {
                 return (Src as object).Equals(classWrapper.Src);
             }

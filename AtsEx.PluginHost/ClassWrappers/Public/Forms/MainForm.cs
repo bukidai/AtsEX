@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// メインのフォームを表します。
     /// </summary>
-    public sealed class MainForm : ClassWrapper
+    public sealed class MainForm : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize()

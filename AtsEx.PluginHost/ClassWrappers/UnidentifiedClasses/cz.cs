@@ -11,7 +11,7 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
     [WillRefactor]
-    internal sealed class cz : ClassWrapper
+    internal sealed class cz : ClassWrapperBase
     {
         public static class OriginalMemberSet
         {

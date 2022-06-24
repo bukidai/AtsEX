@@ -16,7 +16,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// </summary>
     /// <seealso cref="SingleStructureList"/>
     /// <seealso cref="StationList"/>
-    public class MapObjectList : ClassWrapper, IList<MapObjectBase>
+    public class MapObjectList : ClassWrapperBase, IList<MapObjectBase>
     {
         protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<MapObjectList>(@"PluginHost\ClassWrappers");
 

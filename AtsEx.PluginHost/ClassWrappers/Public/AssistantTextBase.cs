@@ -15,7 +15,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// すべての補助表示の基本クラスを表します。
     /// </summary>
-    public class AssistantTextBase : ClassWrapper
+    public class AssistantTextBase : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize()

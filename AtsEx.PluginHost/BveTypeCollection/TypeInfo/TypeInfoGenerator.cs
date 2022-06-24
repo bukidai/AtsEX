@@ -24,7 +24,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             AtsExAssembly = atsExAssembly;
             AtsExPluginHostAssembly = Assembly.GetExecutingAssembly();
 
-            WrapperTypes = AtsExPluginHostAssembly.GetTypes().Concat(AtsExAssembly.GetTypes()).Where(type => (type.IsClass && type.IsSubclassOf(typeof(ClassWrapper))) || type.IsEnum);
+            WrapperTypes = AtsExPluginHostAssembly.GetTypes().Concat(AtsExAssembly.GetTypes()).Where(type => (type.IsClass && type.IsSubclassOf(typeof(ClassWrapperBase))) || type.IsEnum);
             OriginalTypes = BveAssembly.GetTypes();
         }
 

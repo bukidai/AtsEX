@@ -13,7 +13,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// シナリオを構成するファイルを表します。
     /// </summary>
     [UnderConstruction]
-    public class BveFile : ClassWrapper
+    public class BveFile : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize()

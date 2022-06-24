@@ -104,7 +104,7 @@
     <Compile Include="Helpers\StructureSetLifeProlonger.cs" />
     <Compile Include="Imports\VehicleSpec.cs" />
     <Compile Include="Imports\VehicleState.cs" />
-    <Compile Include="ClassWrappers\ClassWrapper.cs" />
+    <Compile Include="ClassWrappers\ClassWrapperBase.cs" />
     <Compile Include="ClassWrappers\Extensions\WrappedSortedList.cs" />
     <Compile Include="ClassWrappers\Public\AssistantText.cs" />
     <Compile Include="ClassWrappers\Public\AssistantTextBase.cs" />

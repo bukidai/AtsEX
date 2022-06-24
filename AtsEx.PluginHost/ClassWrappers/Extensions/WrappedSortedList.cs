@@ -19,7 +19,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class WrappedSortedList<TKey, TValueWrapper> : IDictionary<TKey, TValueWrapper>, IDictionary, IReadOnlyDictionary<TKey, TValueWrapper>
     {
         protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(WrappedSortedList<,>), @"PluginHost\ClassWrappers");
-        protected static readonly Func<TValueWrapper, object> DefaultParserToSource = wrapper => (wrapper as ClassWrapper).Src;
+        protected static readonly Func<TValueWrapper, object> DefaultParserToSource = wrapper => (wrapper as ClassWrapperBase).Src;
 
         protected IDictionary Src;
         protected dynamic SrcAsDynamic;
@@ -64,9 +64,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         public WrappedSortedList(IDictionary src, Func<object, TValueWrapper> parserToWrapper) : this(src, parserToWrapper, DefaultParserToSource)
         {
 #if DEBUG
-            if (!typeof(TValueWrapper).IsSubclassOf(typeof(ClassWrapper)))
+            if (!typeof(TValueWrapper).IsSubclassOf(typeof(ClassWrapperBase)))
             {
-                throw new ArgumentException(string.Format(Resources.GetString("CannotOmitParameter").Value, nameof(TValueWrapper), nameof(ClassWrapper)));
+                throw new ArgumentException(string.Format(Resources.GetString("CannotOmitParameter").Value, nameof(TValueWrapper), nameof(ClassWrapperBase)));
             }
 #endif
         }

@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// 「シナリオを読み込んでいます...」フォームを表します。
     /// </summary>
-    public sealed class LoadingProgressForm : ClassWrapper
+    public sealed class LoadingProgressForm : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize()

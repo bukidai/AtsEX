@@ -9,7 +9,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// 「車両物理量」フォームを表します。
     /// </summary>
-    public sealed class ChartForm : ClassWrapper
+    public sealed class ChartForm : ClassWrapperBase
     {
         private ChartForm(object src) : base(src)
         {
