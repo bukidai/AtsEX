@@ -32,7 +32,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
         {
             if (!(Instance is null))
             {
-                throw new InvalidOperationException("インスタンスは既に生成されています。");
+                throw new InvalidOperationException(Resources.GetString("AlreadyInstantiated").Value);
             }
 
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
@@ -83,15 +83,17 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                                 PropertyInfo wrapperProperty = wrapperType.GetProperty(getterInfo.WrapperName, CreateBindingAttribute(getterInfo.IsWrapperPrivate, getterInfo.IsWrapperStatic));
                                 if (wrapperProperty is null)
                                 {
-                                    throw new KeyNotFoundException($"{GetAccessibilityDescription(getterInfo.IsWrapperPrivate)}プロパティ '{getterInfo.WrapperName}' は" +
-                                        $"ラッパー型 '{classSrc.WrapperTypeName}' に存在しません。");
+                                    throw new KeyNotFoundException(
+                                        string.Format(Resources.GetString("PropertyWrapperNotFound").Value,
+                                        GetAccessibilityDescription(getterInfo.IsWrapperPrivate), getterInfo.WrapperName, classSrc.WrapperTypeName));
                                 }
 
                                 MethodInfo originalGetter = originalType.GetMethod(getterInfo.OriginalName, CreateBindingAttribute(getterInfo.IsOriginalPrivate, getterInfo.IsOriginalStatic), null, Type.EmptyTypes, null);
                                 if (originalGetter is null)
                                 {
-                                    throw new KeyNotFoundException($"{GetAccessibilityDescription(getterInfo.IsOriginalPrivate, getterInfo.IsOriginalStatic)}プロパティ get アクセサ '{getterInfo.OriginalName}' は" +
-                                        $"ラッパー型 '{classSrc.WrapperTypeName}' のオリジナル型 '{classSrc.OriginalTypeName}' に存在しません。");
+                                    throw new KeyNotFoundException(
+                                        string.Format(Resources.GetString("PropertyGetterOriginalNotFound").Value,
+                                        GetAccessibilityDescription(getterInfo.IsOriginalPrivate, getterInfo.IsOriginalStatic), getterInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
                                 }
 
                                 return new KeyValuePair<string, MethodInfo>(wrapperProperty.Name, originalGetter);
@@ -102,17 +104,20 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                                 PropertyInfo wrapperProperty = wrapperType.GetProperty(setterInfo.WrapperName, CreateBindingAttribute(setterInfo.IsWrapperPrivate, setterInfo.IsWrapperStatic));
                                 if (wrapperProperty is null)
                                 {
-                                    throw new KeyNotFoundException($"{GetAccessibilityDescription(setterInfo.IsWrapperPrivate)}プロパティ '{setterInfo.WrapperName}' は" +
-                                        $"ラッパー型 '{classSrc.WrapperTypeName}' に存在しません。");
+                                    throw new KeyNotFoundException(
+                                        string.Format(Resources.GetString("PropertyWrapperNotFound").Value,
+                                        GetAccessibilityDescription(setterInfo.IsWrapperPrivate), setterInfo.WrapperName, classSrc.WrapperTypeName));
                                 }
 
                                 Type originalParamType = GetOriginalTypeIfWrapper(wrapperProperty.PropertyType,
-                                    $"ラッパープロパティ '{classSrc.WrapperTypeName}.{setterInfo.WrapperName}' の型 '{wrapperProperty.PropertyType.Name}' のオリジナル型が見つかりませんでした。");
+                                    string.Format(Resources.GetString("InvalidPropertyTypeWrapper").Value,
+                                    $"{classSrc.WrapperTypeName}.{setterInfo.WrapperName}", wrapperProperty.PropertyType.Name));
                                 MethodInfo originalSetter = originalType.GetMethod(setterInfo.OriginalName, CreateBindingAttribute(setterInfo.IsOriginalPrivate, setterInfo.IsOriginalStatic), null, new Type[] { originalParamType }, null);
                                 if (originalSetter is null)
                                 {
-                                    throw new KeyNotFoundException($"{GetAccessibilityDescription(setterInfo.IsOriginalPrivate, setterInfo.IsOriginalStatic)}プロパティ set アクセサ '{setterInfo.OriginalName}' は" +
-                                        $"ラッパー型 '{classSrc.WrapperTypeName}' のオリジナル型 '{classSrc.OriginalTypeName}' に存在しません。");
+                                    throw new KeyNotFoundException(
+                                        string.Format(Resources.GetString("PropertySetterOriginalNotFound").Value,
+                                        GetAccessibilityDescription(setterInfo.IsOriginalPrivate, setterInfo.IsOriginalStatic), setterInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
                                 }
 
                                 return new KeyValuePair<string, MethodInfo>(wrapperProperty.Name, originalSetter);
@@ -123,15 +128,17 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                                 PropertyInfo wrapperProperty = wrapperType.GetProperty(fieldInfo.WrapperName, CreateBindingAttribute(fieldInfo.IsWrapperPrivate, fieldInfo.IsWrapperStatic));
                                 if (wrapperProperty is null)
                                 {
-                                    throw new KeyNotFoundException($"{GetAccessibilityDescription(fieldInfo.IsWrapperPrivate)}プロパティ '{fieldInfo.WrapperName}' は" +
-                                        $"ラッパー型 '{classSrc.WrapperTypeName}' に存在しません。");
+                                    throw new KeyNotFoundException(
+                                        string.Format(Resources.GetString("FieldWrapperPropertyNotFound").Value,
+                                        GetAccessibilityDescription(fieldInfo.IsWrapperPrivate), fieldInfo.WrapperName, classSrc.WrapperTypeName));
                                 }
 
                                 FieldInfo originalField = originalType.GetField(fieldInfo.OriginalName, CreateBindingAttribute(fieldInfo.IsOriginalPrivate, fieldInfo.IsOriginalStatic));
                                 if (originalField is null)
                                 {
-                                    throw new KeyNotFoundException($"{GetAccessibilityDescription(fieldInfo.IsOriginalPrivate, fieldInfo.IsOriginalStatic)}フィールド '{fieldInfo.OriginalName}' は" +
-                                        $"ラッパー型 '{classSrc.WrapperTypeName}' のオリジナル型 '{classSrc.OriginalTypeName}' に存在しません。");
+                                    throw new KeyNotFoundException(
+                                        string.Format(Resources.GetString("FieldOriginalNotFound").Value,
+                                        GetAccessibilityDescription(fieldInfo.IsOriginalPrivate, fieldInfo.IsOriginalStatic), fieldInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
                                 }
 
                                 return new KeyValuePair<string, FieldInfo>(wrapperProperty.Name, originalField);
@@ -143,18 +150,18 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                                 MethodInfo wrapperMethod = wrapperType.GetMethod(methodInfo.WrapperName, CreateBindingAttribute(methodInfo.IsWrapperPrivate, methodInfo.IsWrapperStatic), null, wrapperMethodParams, null);
                                 if (wrapperMethod is null)
                                 {
-                                    throw new KeyNotFoundException($"パラメータ '{string.Join(", ", wrapperMethodParams.Select(GetTypeFullName))}' をもつ" +
-                                        $"{GetAccessibilityDescription(methodInfo.IsWrapperPrivate)}メソッド '{methodInfo.WrapperName}' は" +
-                                        $"ラッパー型 '{classSrc.WrapperTypeName}' に存在しません。");
+                                    throw new KeyNotFoundException(
+                                        string.Format(Resources.GetString("MethodWrapperNotFound").Value,
+                                        string.Join(", ", wrapperMethodParams.Select(GetTypeFullName)), GetAccessibilityDescription(methodInfo.IsWrapperPrivate), methodInfo.WrapperName, classSrc.WrapperTypeName));
                                 }
 
                                 Type[] originalMethodParams = methodInfo.WrapperParamNames.Select(p => ParseTypeName(p, true)).ToArray();
                                 MethodInfo originalMethod = originalType.GetMethod(methodInfo.OriginalName, CreateBindingAttribute(methodInfo.IsOriginalPrivate, methodInfo.IsOriginalStatic), null, originalMethodParams, null);
                                 if (originalMethod is null)
                                 {
-                                    throw new KeyNotFoundException($"パラメータ '{string.Join(", ", originalMethodParams.Select(GetTypeFullName))}' をもつ" +
-                                        $"{GetAccessibilityDescription(methodInfo.IsOriginalPrivate, methodInfo.IsOriginalStatic)}メソッド '{methodInfo.OriginalName}' は" +
-                                        $"ラッパー型 '{classSrc.WrapperTypeName}' のオリジナル型 '{classSrc.OriginalTypeName}' に存在しません。");
+                                    throw new KeyNotFoundException(
+                                        string.Format(Resources.GetString("MethodOriginalNotFound").Value,
+                                        string.Join(", ", originalMethodParams.Select(GetTypeFullName)), GetAccessibilityDescription(methodInfo.IsOriginalPrivate, methodInfo.IsOriginalStatic), methodInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
                                 }
 
                                 return new KeyValuePair<(string, Type[]), MethodInfo>((wrapperMethod.Name, wrapperMethodParams), originalMethod);
@@ -166,7 +173,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                         }
 
                     default:
-                        throw new NotImplementedException($"{nameof(TypeMemberNameCollectionBase)} の派生クラス {src.GetType().Name} は認識されていません。");
+                        throw new NotImplementedException(string.Format(Resources.GetString("CollectionTypeNotRecognized").Value, nameof(TypeMemberNameCollectionBase), src.GetType().Name));
 
                 }
             });
@@ -206,7 +213,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                     {
                         if (typeLoadExceptionMessage is null)
                         {
-                            typeLoadExceptionMessage = $"型 '{type.Name}' のオリジナル型が見つかりませんでした。";
+                            typeLoadExceptionMessage = string.Format(Resources.GetString("OriginalTypeNotFound").Value, type.Name);
                         }
 
                         throw new TypeLoadException(typeLoadExceptionMessage);
@@ -277,7 +284,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                             type = wrapperTypes.FirstOrDefault(t => t.Name == genericTypeInfo.TypeName && t.GenericTypeArguments.Length == paramTypes.Length);
                             if (type is null)
                             {
-                                throw new ArgumentException($"型名が '{genericTypeInfo.TypeName}'、型パラメータが {paramTypes.Length} 個のジェネリック型は存在しません。");
+                                throw new ArgumentException(string.Format(Resources.GetString("GenericWrapperTypeNotFound").Value, genericTypeInfo.TypeName, paramTypes.Length));
                             }
                         }
                         break;
@@ -290,7 +297,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                                 type = wrapperTypes.FirstOrDefault(t => t.Name == basicTypeInfo.TypeName);
                                 if (type is null)
                                 {
-                                    throw new ArgumentException($"型 '{basicTypeInfo.TypeName}' は存在しません。");
+                                    throw new ArgumentException(string.Format(Resources.GetString("WrapperTypeNotFound").Value, basicTypeInfo.TypeName));
                                 }
                             }
 
@@ -339,7 +346,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 
             string GetAccessibilityDescription(bool isNonPublic = false, bool isStatic = false)
             {
-                return $"パブリック{(isNonPublic ? "でない" : "")}{(isStatic ? "静的" : "インスタンス")}";
+                return Resources.GetString(isNonPublic ? "NonPublic" : "Public").Value + Resources.GetString(isStatic ? "Static" : "Instance").Value;
             }
             #endregion
         }

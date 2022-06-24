@@ -84,11 +84,45 @@
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\AtsEx.ja.resx" />
+    <Content Include="Resources\AtsEx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\PluginLoader.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\PluginLoader.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\App.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\App.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\VersionForm.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\PluginListLoader.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\VersionFormProvider.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\PluginListLoader.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\VersionForm.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\VersionFormProvider.resx" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /y "$(TargetDir)0Harmony.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
 
-copy /y "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"</PostBuildEvent>
+copy /y "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
+copy /y "$(ProjectDir)Resources\" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\Resources\Core\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

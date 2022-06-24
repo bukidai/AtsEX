@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.PluginHost.Resources;
+
 namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 {
-    internal static class TypeTextParser
+    internal sealed class TypeTextParser
     {
+        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<TypeTextParser>("PluginHost");
+
         public static TypeMemberNameCollectionBase.TypeInfoBase Parse(string text)
         {
             try
@@ -81,7 +86,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             }
             catch (Exception ex)
             {
-                throw new FormatException("テキストのフォーマットが不正です。", ex);
+                throw new FormatException(Resources.GetString("InvalidFormat").Value, ex);
             }
         }
 
@@ -135,5 +140,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 
             return returnEndIndex ? text.Length : -1;
         }
+
+        private TypeTextParser() { }
     }
 }

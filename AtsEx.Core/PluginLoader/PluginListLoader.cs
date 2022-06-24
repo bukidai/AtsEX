@@ -7,11 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
 {
     internal static class PluginListLoader
     {
+        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(PluginListLoader), "Core");
+
         public static IEnumerable<RecognizedDll> LoadFrom(string absolutePath)
         {
             string baseDirectory = Path.GetDirectoryName(absolutePath);
@@ -26,7 +29,7 @@ namespace Automatic9045.AtsEx
                     string pluginPath = Path.Combine(baseDirectory, validText);
                     if (!File.Exists(pluginPath))
                     {
-                        throw new BveFileLoadException($"AtsEX プラグイン \"{pluginPath}\" が見つかりませんでした。", Path.GetFileName(absolutePath), i);
+                        throw new BveFileLoadException(string.Format(Resources.GetString("PluginNotFound").Value, pluginPath), Path.GetFileName(absolutePath), i);
                     }
 
                     yield return new RecognizedDll(i, baseDirectory, validText);

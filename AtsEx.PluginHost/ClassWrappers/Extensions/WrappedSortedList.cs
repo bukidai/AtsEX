@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.PluginHost.Resources;
+
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
     /// <summary>
@@ -16,6 +18,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <seealso cref="SortedList{TKey, TValue}"/>
     public class WrappedSortedList<TKey, TValueWrapper> : IDictionary<TKey, TValueWrapper>, IDictionary, IReadOnlyDictionary<TKey, TValueWrapper>
     {
+        protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(WrappedSortedList<,>), @"PluginHost\ClassWrappers");
         protected static readonly Func<TValueWrapper, object> DefaultParserToSource = wrapper => (wrapper as ClassWrapper).Src;
 
         protected IDictionary Src;
@@ -63,7 +66,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 #if DEBUG
             if (!typeof(TValueWrapper).IsSubclassOf(typeof(ClassWrapper)))
             {
-                throw new ArgumentException($"{nameof(TValueWrapper)} が {nameof(ClassWrapper)} を継承しない場合、パラメータ parserToSource を省略することはできません。");
+                throw new ArgumentException(string.Format(Resources.GetString("CannotOmitParameter").Value, nameof(TValueWrapper), nameof(ClassWrapper)));
             }
 #endif
         }
@@ -312,7 +315,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                         case EnumeratorType.DictionaryEnumerator:
                             return Entry;
                         default:
-                            throw new NotSupportedException($"{nameof(Type)} の値 '{Type}' はサポートされていません。");
+                            throw new NotSupportedException(string.Format(Resources.GetString("TypeNotSupported").Value, nameof(Type), Type));
                     }
                 }
             }

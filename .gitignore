@@ -9,6 +9,8 @@ obj
 /_SampleScenarios/Automatic9045/AtsEx/*.pdb
 /_SampleScenarios/Automatic9045/AtsEx/0Harmony.xml
 /_SampleScenarios/Automatic9045/AtsEx/Octokit.xml
+/_SampleScenarios/Automatic9045/AtsEx/Resources/*/*.resx
+/_SampleScenarios/Automatic9045/AtsEx/Resources/*/*/*.resx
 
 /_SampleScenarios/Automatic9045/Maps/AtsExSampleMap/MapPlugins/*.dll
 /_SampleScenarios/Automatic9045/Maps/AtsExSampleMap/MapPlugins/*.pdb

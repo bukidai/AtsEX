@@ -10,11 +10,14 @@ using System.Windows.Forms;
 using Automatic9045.AtsEx.Input;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
+using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
 {
     internal sealed class App : IApp
     {
+        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<App>("Core");
+
         public App(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
         {
             BveAssembly = bveAssembly;
@@ -23,8 +26,8 @@ namespace Automatic9045.AtsEx
             AtsExPluginHostAssembly = atsExPluginHostAssembly;
         }
 
-        public string ProductName { get; } = "AtsEX ATSプラグイン拡張キット for BVE 5 & 6";
-        public string ProductShortName { get; } = "AtsEX";
+        public string ProductName { get; } = Resources.GetString("ProductName").Value;
+        public string ProductShortName { get; } = Resources.GetString("ProductShortName").Value;
 
         public Assembly AtsExCallerAssembly { get; }
         public Assembly AtsExAssembly { get; }

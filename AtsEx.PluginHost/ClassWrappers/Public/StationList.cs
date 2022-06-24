@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
@@ -14,6 +15,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// </summary>
     public sealed class StationList : MapObjectList
     {
+        private static new readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<StationList>(@"PluginHost\ClassWrappers");
+
         [InitializeClassWrapper]
         private static void Initialize()
         {
@@ -53,7 +56,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             if (Count > 0 && this[0].Location == item.Location)
             {
-                throw new NotSupportedException("BVE がダイヤグラムを正常に描画できなくなるため、最初の駅と最後の駅の距離程を同一にすることはできません。");
+                throw new NotSupportedException(Resources.GetString("SameLocation").Value);
             }
 
             base.Add(item);
@@ -69,7 +72,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             if (Count > 0 && this[0].Location == item.Location)
             {
-                throw new NotSupportedException("BVE がダイヤグラムを正常に描画できなくなるため、最初の駅と最後の駅の距離程を同一にすることはできません。");
+                throw new NotSupportedException(Resources.GetString("SameLocation").Value);
             }
             
             InsertMethod.Invoke(Src, new object[] { item.Src });

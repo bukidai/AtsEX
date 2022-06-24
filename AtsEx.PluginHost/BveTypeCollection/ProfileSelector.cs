@@ -6,10 +6,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.PluginHost.Resources;
+
 namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 {
     internal class ProfileSelector
     {
+        protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ProfileSelector>("PluginHost");
+
         private static readonly string DefaultNamespace = $"{typeof(BveTypeCollectionProvider).Namespace}.TypeNameDefinitions";
 
         private Assembly ExecutingAssembly;
@@ -62,11 +66,11 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                         {
                             if (BveVersion < oldestVersion)
                             {
-                                throw new NotSupportedException($"BVE バージョン {BveVersion} には対応していません。{oldestVersion} 以降のみサポートしています。");
+                                throw new NotSupportedException(string.Format(Resources.GetString("VersionTooOld").Value, BveVersion, oldestVersion));
                             }
                             else
                             {
-                                throw new NotSupportedException($"BVE バージョン {BveVersion} は認識されていません。サポートされないバージョンであるか、不正なバージョンです。");
+                                throw new NotSupportedException(string.Format(Resources.GetString("InvalidVersion").Value, BveVersion));
                             }
                         }
 
@@ -81,13 +85,13 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                         }
                         else
                         {
-                            throw new NotSupportedException($"BVE バージョン {BveVersion} には対応していません。{supportedAllVersions.Min().Major}.x 以降のみサポートしています。");
+                            throw new NotSupportedException(string.Format(Resources.GetString("MajorVersionTooOld").Value, BveVersion, supportedAllVersions.Min().Major));
                         }
                     }
                 }
                 else
                 {
-                    throw new NotSupportedException($"BVE バージョン {BveVersion} には対応していません。");
+                    throw new NotSupportedException(string.Format(Resources.GetString("VersionNotSupported").Value, BveVersion));
                 }
             }
         }

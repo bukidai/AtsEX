@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+
+using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx.PluginHost
 {
@@ -20,20 +24,24 @@ namespace Automatic9045.AtsEx.PluginHost
 
     public static class PluginTypeConverter
     {
-        public static string GetTypeString(this PluginType pluginType)
+        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(PluginTypeConverter), "PluginHost");
+
+        public static ResourceInfo<string> GetTypeStringResource(this PluginType pluginType)
         {
             switch (pluginType)
             {
                 case PluginType.VehiclePlugin:
-                    return "車両プラグイン";
+                    return Resources.GetString("VehiclePlugin");
 
                 case PluginType.MapPlugin:
-                    return "マッププラグイン";
+                    return Resources.GetString("MapPlugin");
 
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        public static string GetTypeString(this PluginType pluginType) => GetTypeStringResource(pluginType).Value;
 
         public static Color GetTypeColor(this PluginType pluginType)
         {

@@ -9,11 +9,14 @@ using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.Helpers;
+using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
 {
     internal sealed class VersionFormProvider : IDisposable
     {
+        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<VersionFormProvider>("Core");
+
         private readonly BveHacker BveHacker;
 
         private ContextMenuHacker ContextMenuHacker = new ContextMenuHacker();
@@ -26,7 +29,7 @@ namespace Automatic9045.AtsEx
         {
             BveHacker = bveHacker;
 
-            MenuItem = ContextMenuHacker.AddClickableMenuItem($"{app.ProductShortName} バージョン情報...", MenuItemClick);
+            MenuItem = ContextMenuHacker.AddClickableMenuItem(string.Format(Resources.GetString("VersionInfoMenuItem").Value, app.ProductShortName), MenuItemClick);
 
             Form = new VersionForm(app);
             Form.FormClosing += FormClosing;

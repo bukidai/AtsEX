@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
 {
     internal partial class VersionForm : Form
     {
+        protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<VersionForm>("Core");
+
         public VersionForm(App app)
         {
             InitializeComponent(app);
@@ -25,7 +28,8 @@ namespace Automatic9045.AtsEx
             {
                 string fileName = Path.GetFileName(plugin.SourceAssembly.Location);
                 string title = ((AssemblyTitleAttribute)Attribute.GetCustomAttribute(plugin.SourceAssembly, typeof(AssemblyTitleAttribute))).Title;
-                string type = plugin.PluginInstance.PluginType.GetTypeString();
+                ResourceInfo<string> typeResource = plugin.PluginInstance.PluginType.GetTypeStringResource();
+                string type = typeResource.Culture.TextInfo.ToTitleCase(typeResource.Value);
                 Color typeColor = plugin.PluginInstance.PluginType.GetTypeColor();
                 string version = plugin.SourceAssembly.GetName().Version.ToString();
                 string description = ((AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(plugin.SourceAssembly, typeof(AssemblyDescriptionAttribute))).Description;

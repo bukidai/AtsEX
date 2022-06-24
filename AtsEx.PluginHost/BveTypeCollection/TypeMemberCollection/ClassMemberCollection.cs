@@ -5,10 +5,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.PluginHost.Resources;
+
 namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 {
     public class ClassMemberCollection : TypeMemberCollectionBase
     {
+        protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ClassMemberCollection>("PluginHost");
+
         protected SortedList<Type[], ConstructorInfo> Constructors { get; }
 
         protected SortedList<string, MethodInfo> PropertyGetters { get; }
@@ -38,7 +42,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
         {
             if (!PropertyGetters.Keys.Contains(wrapperName))
             {
-                throw new KeyNotFoundException($"ソースプロパティが見つかりませんでした。{nameof(wrapperName)} '{wrapperName}' は無効なキーです。");
+                throw new KeyNotFoundException(string.Format(Resources.GetString("OriginalPropertyNotFound").Value, nameof(wrapperName), wrapperName));
             }
 
             return PropertyGetters[wrapperName];
@@ -48,7 +52,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
         {
             if (!PropertySetters.Keys.Contains(wrapperName))
             {
-                throw new KeyNotFoundException($"ソースプロパティが見つかりませんでした。{nameof(wrapperName)} '{wrapperName}' は無効なキーです。");
+                throw new KeyNotFoundException(string.Format(Resources.GetString("OriginalPropertyNotFound").Value, nameof(wrapperName), wrapperName));
             }
 
             return PropertySetters[wrapperName];
@@ -58,7 +62,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
         {
             if (!Fields.Keys.Contains(wrapperName))
             {
-                throw new KeyNotFoundException($"ソースフィールドが見つかりませんでした。{nameof(wrapperName)} '{wrapperName}' は無効なキーです。");
+                throw new KeyNotFoundException(string.Format(Resources.GetString("OriginalFieldNotFound").Value, nameof(wrapperName), wrapperName));
             }
 
             return Fields[wrapperName];
@@ -69,7 +73,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             ConstructorInfo matchConstructor = Constructors.FirstOrDefault(x => parameters is null || x.Key.SequenceEqual(parameters)).Value;
             if (matchConstructor is null)
             {
-                throw new KeyNotFoundException($"ソースコンストラクタが見つかりませんでした。{nameof(parameters)} '{parameters}' は無効なキーです。");
+                throw new KeyNotFoundException(string.Format(Resources.GetString("OriginalConstructorNotFound").Value, nameof(parameters), parameters));
             }
 
             return matchConstructor;
@@ -80,7 +84,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             MethodInfo matchMethod = Methods.FirstOrDefault(x => x.Key.Item1 == wrapperName && (parameters is null || x.Key.Item2.SequenceEqual(parameters))).Value;
             if (matchMethod is null)
             {
-                throw new KeyNotFoundException($"ソースメソッドが見つかりませんでした。{nameof(wrapperName)} '{wrapperName}' または {nameof(parameters)} '{parameters}' は無効なキーです。");
+                throw new KeyNotFoundException(string.Format(Resources.GetString("OriginalMethodNotFound").Value, nameof(wrapperName), wrapperName, nameof(parameters), parameters));
             }
 
             return matchMethod;

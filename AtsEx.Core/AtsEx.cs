@@ -14,6 +14,7 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.Helpers;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
+using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
 {
@@ -48,7 +49,11 @@ namespace Automatic9045.AtsEx
 
             Stopwatch sw = new Stopwatch();
 
-            sw.Start();
+            sw.Restart();
+            ResourceLocalizer resources = ResourceLocalizer.FromResXOfType<AtsEx>("Core");
+            Debug.WriteLine($"ResourceLocalizer: {sw.ElapsedMilliseconds}ms");
+
+            sw.Restart();
             Version bveVersion = TargetAssembly.GetName().Version;
             Version profileVersion = BveTypeCollectionProvider.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly, true);
             Debug.WriteLine($"BveTypeCollectionProvider: {sw.ElapsedMilliseconds}ms");
@@ -70,11 +75,10 @@ namespace Automatic9045.AtsEx
             HelperInitializer helperInitializer = new HelperInitializer(App, BveHacker);
             helperInitializer.InitializeAll();
             Debug.WriteLine($"ClassWrapper: {sw.ElapsedMilliseconds}ms");
-            
+
             //DXDynamicTextureHost = new DXDynamicTextureHost();
 
-            string versionWarningText = $"BVE バージョン {bveVersion} には対応していません。" +
-                    $"{profileVersion} 向けのプロファイルで代用しますが、{App.ProductShortName} による拡張機能は正常に動作しない可能性があります。";
+            string versionWarningText = string.Format(resources.GetString("BveVersionNotSupported").Value, bveVersion, profileVersion, App.ProductShortName);
             if (profileVersion != bveVersion)
             {
                 LoadErrorManager.Throw(versionWarningText);
@@ -135,7 +139,7 @@ namespace Automatic9045.AtsEx
             catch (Exception ex)
             {
                 LoadErrorManager.Throw(ex.Message);
-                MessageBox.Show(ex.ToString(), $"ハンドルされていない例外 - {App.ProductShortName}");
+                MessageBox.Show(ex.ToString(), string.Format(resources.GetString("UnhandledExceptionCaption").Value, App.ProductShortName));
             }
             finally
             {

@@ -154,6 +154,26 @@
     <EmbeddedResource Include="BveTypeCollection\TypeNameDefinitions\BveTypesXmlSchema.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Content Include="Resources\Files\PropertyNotInitializedException.resx" />
+    <Content Include="Resources\Files\PropertyNotInitializedException.ja.resx" />
+    <Content Include="Resources\Files\PluginTypeConverter.ja.resx" />
+    <Content Include="Resources\Files\PluginTypeConverter.resx" />
+    <Content Include="Resources\Files\TypeTextParser.resx" />
+    <Content Include="Resources\Files\TypeTextParser.ja.resx" />
+    <Content Include="Resources\Files\BveTypeCollectionProvider.resx" />
+    <Content Include="Resources\Files\BveTypeCollectionProvider.ja.resx" />
+    <Content Include="Resources\Files\ClassMemberCollection.ja.resx" />
+    <Content Include="Resources\Files\ProfileSelector.ja.resx" />
+    <Content Include="Resources\Files\BveTypeNameDefinitionLoader.ja.resx" />
+    <Content Include="Resources\Files\ProfileSelector.resx" />
+    <Content Include="Resources\Files\BveTypeNameDefinitionLoader.resx" />
+    <Content Include="Resources\Files\ClassMemberCollection.resx" />
+    <Content Include="Resources\Files\ClassWrappers\WrappedSortedList.ja.resx" />
+    <Content Include="Resources\Files\ClassWrappers\WrappedSortedList.resx" />
+    <Content Include="Resources\Files\ClassWrappers\MapObjectList.ja.resx" />
+    <Content Include="Resources\Files\ClassWrappers\StationList.ja.resx" />
+    <Content Include="Resources\Files\ClassWrappers\StationList.resx" />
+    <Content Include="Resources\Files\ClassWrappers\MapObjectList.resx" />
     <None Include="LocalReferences\DXDynamicTexture\LICENSE" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -176,6 +196,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /y "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
+xcopy /e /y "$(ProjectDir)Resources\Files\" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\Resources\PluginHost\"
 copy /y "$(ProjectDir)LocalReferences\DXDynamicTexture\Zbx1425.DXDynamicTexture-net35.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
 copy /y "$(ProjectDir)LocalReferences\DXDynamicTexture\Zbx1425.DXDynamicTexture-net48.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"</PostBuildEvent>
   </PropertyGroup>

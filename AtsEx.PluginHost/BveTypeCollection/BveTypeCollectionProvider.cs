@@ -6,10 +6,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.PluginHost.Resources;
+
 namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 {
     public partial class BveTypeCollectionProvider
     {
+        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<BveTypeCollectionProvider>("PluginHost");
+
         protected SortedList<Type, TypeMemberCollectionBase> Types { get; }
         protected SortedList<Type, Type> OriginalAndWrapperTypes { get; }
 
@@ -18,7 +22,9 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             TypeMemberCollectionBase illegalType = types.FirstOrDefault(type => !(type.WrapperType.IsClass && type.WrapperType.IsSubclassOf(classWrapperType)) && !type.WrapperType.IsEnum);
             if (!(illegalType is null))
             {
-                throw new ArgumentException($"型 '{illegalType.WrapperType.FullName}' は {classWrapperType.FullName} を継承したクラスではありません。");
+                throw new ArgumentException(
+                    string.Format(Resources.GetString("TypeNotClassWrapper").Value,
+                    illegalType.WrapperType.FullName, classWrapperType.FullName));
             }
 
             Types = new SortedList<Type, TypeMemberCollectionBase>(types.ToDictionary(type => type.WrapperType, type => type), new TypeComparer());

@@ -7,11 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
 {
     internal sealed class PluginLoader
     {
+        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<PluginLoader>("Core");
+
         private readonly App App;
         private readonly BveHacker BveHacker;
 
@@ -25,7 +28,7 @@ namespace Automatic9045.AtsEx
         {
             if (!File.Exists(listAbsolutePath))
             {
-                throw new BveFileLoadException($"ATSEx プラグインリスト \"{listAbsolutePath}\" が見つかりません。");
+                throw new BveFileLoadException(string.Format(Resources.GetString("PluginListNotFound").Value, App.ProductShortName, listAbsolutePath));
             }
 
             IEnumerable<PluginListLoader.RecognizedDll> dlls = PluginListLoader.LoadFrom(listAbsolutePath);
@@ -47,8 +50,7 @@ namespace Automatic9045.AtsEx
                 int currentBveVersion = App.BveAssembly.GetName().Version.Major;
                 int otherBveVersion = currentBveVersion == 6 ? 5 : 6;
                 throw new BveFileLoadException(
-                    $"\"{relativePath}\" は対象プラットフォームが間違っているか、.NET アセンブリではありません。" +
-                    $"BVE{otherBveVersion} 向けの AtsEX プラグインを BVE{currentBveVersion} で読み込もうとしているか、AtsEX プラグインではない可能性があります。",
+                    string.Format(Resources.GetString("BadImageFormat").Value, relativePath, otherBveVersion, App.ProductShortName, currentBveVersion),
                     senderFileName, lineIndex);
             }
 
@@ -57,8 +59,7 @@ namespace Automatic9045.AtsEx
             if (!pluginTypeCandidates.Any())
             {
                 throw new BveFileLoadException(
-                    $"\"{relativePath}\" で {nameof(AtsExPluginBase)} を継承しているクラスが見つかりませんでした。AtsEX プラグインではない可能性があります。" +
-                    $"AtsEX プラグインとして認識されるには、{nameof(AtsExPluginBase)} を継承しているクラスが必要です。",
+                    string.Format(Resources.GetString("PluginClassNotFound").Value, relativePath, nameof(AtsExPluginBase), App.ProductShortName),
                     senderFileName, lineIndex);
             }
 
@@ -71,8 +72,8 @@ namespace Automatic9045.AtsEx
                 if (constructorInfo is null) return null;
 
                 AtsExPluginBase pluginInstance = constructorInfo.Invoke(new object[] { pluginBuilder }) as AtsExPluginBase;
-                if (pluginInstance.PluginType != pluginType) throw new ArgumentException($"{pluginType.GetTypeString()}として{pluginInstance.PluginType.GetTypeString()}を読み込もうとしました。");
-                if (pluginInstance.PluginType == PluginType.MapPlugin && !pluginInstance.UseAtsExExtensions) throw new NotSupportedException($"{pluginInstance.PluginType.GetTypeString()}では AtsEX の拡張機能を使用しないプラグインを開発することはできません。");
+                if (pluginInstance.PluginType != pluginType) throw new InvalidOperationException(string.Format(Resources.GetString("WrongPluginType").Value, pluginType.GetTypeString(), pluginInstance.PluginType.GetTypeString()));
+                if (pluginInstance.PluginType == PluginType.MapPlugin && !pluginInstance.UseAtsExExtensions) throw new NotSupportedException(string.Format(Resources.GetString("MustUseExtensions").Value, pluginInstance.PluginType.GetTypeString(), App.ProductShortName));
 
                 AtsExPluginInfo pluginInfo = new AtsExPluginInfo(assembly, t.FullName, pluginInstance);
                 return pluginInfo;
@@ -80,7 +81,7 @@ namespace Automatic9045.AtsEx
             if (!plugins.Any())
             {
                 throw new BveFileLoadException(
-                    $"\"{relativePath}\" で {nameof(AtsExPluginBase)} を継承しているクラスは見つかりましたが、パラメータ {typeof(AtsExPluginBuilder)} を持つコンストラクタが見つかりませんでした。",
+                    string.Format(Resources.GetString("ConstructorNotFound").Value, relativePath, nameof(AtsExPluginBase), typeof(AtsExPluginBuilder)),
                     senderFileName, lineIndex);
             }
 

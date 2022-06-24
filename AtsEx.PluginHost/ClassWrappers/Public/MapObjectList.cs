@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
@@ -17,6 +18,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <seealso cref="StationList"/>
     public class MapObjectList : ClassWrapper, IList<MapObjectBase>
     {
+        protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<MapObjectList>(@"PluginHost\ClassWrappers");
+
         [InitializeClassWrapper]
         private static void Initialize()
         {
@@ -49,7 +52,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             else if (wrapperType == typeof(Structure)) return Structure.FromSource(src);
             else
             {
-                throw new DevelopException($"{nameof(MapObjectBase)} '{wrapperType.Name}' は認識されていません。");
+                throw new DevelopException(string.Format(Resources.GetString("MapObjectTypeNotRecognized").Value, nameof(MapObjectBase), wrapperType.Name));
             }
         }
 

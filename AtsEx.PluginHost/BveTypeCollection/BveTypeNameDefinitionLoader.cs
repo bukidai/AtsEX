@@ -8,10 +8,14 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Schema;
 
+using Automatic9045.AtsEx.PluginHost.Resources;
+
 namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 {
     internal static class BveTypeNameDefinitionLoader
     {
+        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(BveTypeNameDefinitionLoader), "PluginHost");
+
         public static List<TypeMemberNameCollectionBase> LoadFile(Stream docStream, Stream schemaStream)
         {
             XDocument doc = XDocument.Load(docStream);
@@ -108,7 +112,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 
                             if (getter is null && setter is null)
                             {
-                                throw new FormatException($"プロパティ '{typeWrapperName}.{wrapperName}' について、set / get いずれのアクセサも定義されていません。");
+                                throw new FormatException(string.Format(Resources.GetString("PropertyImplementationInvalid").Value, $"{typeWrapperName}.{wrapperName}"));
                             }
                         }
                     }
@@ -175,7 +179,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 
         static void SchemaValidation(object sender, ValidationEventArgs e)
         {
-            throw new FormatException("BVE 型・メンバー名定義 XML のスキーマが不正なフォーマットです。", e.Exception);
+            throw new FormatException(Resources.GetString("XmlSchemaValidation").Value, e.Exception);
         }
 
         static void DocumentValidation(object sender, ValidationEventArgs e)
