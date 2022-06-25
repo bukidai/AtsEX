@@ -10,13 +10,12 @@ namespace Automatic9045.VehiclePlugins.StateViewer
 {
     internal sealed class InstanceStore
     {
-        private static InstanceStore _Instance = null;
-        public static InstanceStore Instance => _Instance;
-        public static bool IsInitialized => !(_Instance is null);
+        public static InstanceStore Instance { get; private set; } = null;
+        public static bool IsInitialized => !(Instance is null);
 
         public static void Initialize(IApp app, IBveHacker bveHacker)
         {
-            _Instance = new InstanceStore(app, bveHacker);
+            Instance = new InstanceStore(app, bveHacker);
         }
 
 

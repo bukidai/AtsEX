@@ -12,10 +12,10 @@ namespace Automatic9045.MapPlugins.StationController
 {
     public class StationController : AtsExPluginBase, IDisposable
     {
-        private ContextMenuHacker ContextMenuHacker = new ContextMenuHacker();
+        private readonly ContextMenuHacker ContextMenuHacker = new ContextMenuHacker();
 
-        private ControllerForm Form;
-        private ToolStripMenuItem MenuItem;
+        private readonly ControllerForm Form;
+        private readonly ToolStripMenuItem MenuItem;
 
         public StationController(AtsExPluginBuilder services) : base(services, PluginType.MapPlugin)
         {

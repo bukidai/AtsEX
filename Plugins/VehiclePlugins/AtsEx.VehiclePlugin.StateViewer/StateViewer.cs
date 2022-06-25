@@ -12,10 +12,10 @@ namespace Automatic9045.VehiclePlugins.StateViewer
 {
     public class StateViewer : AtsExPluginBase, IDisposable
     {
-        private ContextMenuHacker ContextMenuHacker = new ContextMenuHacker();
+        private readonly ContextMenuHacker ContextMenuHacker = new ContextMenuHacker();
 
-        private StateForm Form;
-        private ToolStripMenuItem MenuItem;
+        private readonly StateForm Form;
+        private readonly ToolStripMenuItem MenuItem;
 
         public StateViewer(AtsExPluginBuilder services) : base(services, PluginType.VehiclePlugin)
         {
