@@ -19,12 +19,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class WrappedSortedList<TKey, TValueWrapper> : IDictionary<TKey, TValueWrapper>, IDictionary, IReadOnlyDictionary<TKey, TValueWrapper>
     {
         protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(WrappedSortedList<,>), @"PluginHost\ClassWrappers");
-        protected static readonly Func<TValueWrapper, object> DefaultParserToSource = wrapper => (wrapper as ClassWrapperBase).Src;
 
         protected IDictionary Src;
         protected dynamic SrcAsDynamic;
-        protected Func<object, TValueWrapper> ParserToWrapper;
-        protected Func<TValueWrapper, object> ParserToSource;
+        protected ITwoWayConverter<object, TValueWrapper> ValueConverter;
 
         protected Type SrcType;
 
@@ -42,12 +40,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <param name="parserToWrapper">オリジナル型からラッパー型に変換するためのデリゲート。</param>
         /// <param name="parserToSource">ラッパー型からオリジナル型に変換するためのデリゲート。</param>
-        public WrappedSortedList(IDictionary src, Func<object, TValueWrapper> parserToWrapper, Func<TValueWrapper, object> parserToSource)
+        public WrappedSortedList(IDictionary src, ITwoWayConverter<object, TValueWrapper> valueConverter)
         {
             Src = src;
             SrcAsDynamic = Src;
-            ParserToWrapper = parserToWrapper;
-            ParserToSource = parserToSource;
 
             SrcType = Src.GetType();
 
@@ -61,7 +57,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <param name="parserToWrapper">オリジナル型からラッパー型に変換するためのデリゲート。</param>
-        public WrappedSortedList(IDictionary src, Func<object, TValueWrapper> parserToWrapper) : this(src, parserToWrapper, DefaultParserToSource)
+        public WrappedSortedList(IDictionary src, Converter<object, TValueWrapper> converterToWrapper) : this(src, new ConverterToWrapper(converterToWrapper))
         {
 #if DEBUG
             if (!typeof(TValueWrapper).IsSubclassOf(typeof(ClassWrapperBase)))
@@ -74,8 +70,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         public TValueWrapper this[TKey key]
         {
-            get => ParserToWrapper(Src[key]);
-            set => Src[key] = ParserToSource(value);
+            get => ValueConverter.Convert(Src[key]);
+            set => Src[key] = ValueConverter.ConvertBack(value);
         }
 
         object IDictionary.this[object key]
@@ -118,7 +114,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         ICollection IDictionary.Values => _Values;
 
 
-        public void Add(TKey key, TValueWrapper value) => Src.Add(key, ParserToSource(value));
+        public void Add(TKey key, TValueWrapper value) => Src.Add(key, ValueConverter.ConvertBack(value));
 
         void ICollection<KeyValuePair<TKey, TValueWrapper>>.Add(KeyValuePair<TKey, TValueWrapper> item) => Add(item.Key, item.Value);
 
@@ -131,7 +127,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             int index = IndexOfKey(item.Key);
             if (index < 0 || Count <= index) return false;
 
-            return ValueArray.GetValue(index) == ParserToSource(item.Value);
+            return ValueArray.GetValue(index) == ValueConverter.ConvertBack(item.Value);
         }
 
         public bool ContainsKey(TKey key) => Src.Contains(key);
@@ -171,7 +167,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         public int IndexOfKey(TKey key) => Array.IndexOf(KeyArray, key);
 
-        public int IndexOfValue(TValueWrapper value) => Array.IndexOf(ValueArray, ParserToSource(value));
+        public int IndexOfValue(TValueWrapper value) => Array.IndexOf(ValueArray, ValueConverter.ConvertBack(value));
 
         public bool Remove(TKey key)
         {
@@ -217,6 +213,19 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 value = default(TValueWrapper);
                 return false;
             }
+        }
+
+        protected sealed class ConverterToWrapper : ITwoWayConverter<object, TValueWrapper>
+        {
+            private readonly Converter<object, TValueWrapper> Converter;
+
+            public ConverterToWrapper(Converter<object, TValueWrapper> converter)
+            {
+                Converter = converter;
+            }
+
+            public TValueWrapper Convert(object value) => Converter(value);
+            public object ConvertBack(TValueWrapper value) => (value as ClassWrapperBase).Src;
         }
 
         protected sealed class WrappedValueList : ICollection<TValueWrapper>, ICollection
@@ -393,7 +402,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 if (Index < SortedList.Count)
                 {
                     object currentValueSrc = SortedList.ValueArray.GetValue(Index);
-                    CurrentValue = SortedList.ParserToWrapper(currentValueSrc);
+                    CurrentValue = SortedList.ValueConverter.Convert(currentValueSrc);
                     Index++;
                     return true;
                 }

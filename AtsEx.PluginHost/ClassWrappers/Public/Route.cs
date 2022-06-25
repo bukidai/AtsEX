@@ -91,7 +91,6 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static MethodInfo SoundsGetMethod;
-        private static readonly Func<object, Sound> SoundsParserToWrapper = src => src is null ? null : Sound.FromSource(src);
         /// <summary>
         /// Sound.Load ステートメントから読み込まれたサウンドのリストを取得します。
         /// </summary>
@@ -105,33 +104,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get
             {
                 IDictionary dictionarySrc = SoundsGetMethod.Invoke(Src, null);
-                return new WrappedSortedList<string, Sound>(dictionarySrc, SoundsParserToWrapper);
+                return new WrappedSortedList<string, Sound>(dictionarySrc, src => src is null ? null : Sound.FromSource(src));
             }
         }
 
         private static MethodInfo Sounds3DGetMethod;
-        private static readonly Func<object, Sound[]> Sounds3DParserToWrapper = src =>
-        {
-            Array srcArray = src as Array;
-            Sound[] result = new Sound[srcArray.Length];
-            for (int i = 0; i < srcArray.Length; i++)
-            {
-                object srcArrayItem = srcArray.GetValue(i);
-                result[i] = srcArrayItem is null ? null : Sound.FromSource(srcArrayItem);
-            }
-
-            return result;
-        };
-        private static readonly Func<Sound[], object> Sounds3DParserToSource = wrapper =>
-        {
-            object[] result = new object[wrapper.Length];
-            for (int i = 0; i < wrapper.Length; i++)
-            {
-                result[i] = wrapper[i]?.Src;
-            }
-
-            return result;
-        };
         /// <summary>
         /// Sound3D.Load ステートメントから読み込まれたサウンドのリストを取得します。
         /// </summary>
@@ -145,12 +122,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get
             {
                 IDictionary dictionarySrc = Sounds3DGetMethod.Invoke(Src, null);
-                return new WrappedSortedList<string, Sound[]>(dictionarySrc, Sounds3DParserToWrapper, Sounds3DParserToSource);
+                return new WrappedSortedList<string, Sound[]>(dictionarySrc, new Sounds3DConverter());
             }
         }
 
         private static MethodInfo StructureModelsGetMethod;
-        private static readonly Func<object, Model> StructureModelsParserToWrapper = src => src is null ? null : Model.FromSource(src);
         /// <summary>
         /// Structure.Load ステートメントから読み込まれたストラクチャーの 3D モデルのリストを取得します。
         /// </summary>
@@ -164,7 +140,34 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get
             {
                 IDictionary dictionarySrc = StructureModelsGetMethod.Invoke(Src, null);
-                return new WrappedSortedList<string, Model>(dictionarySrc, StructureModelsParserToWrapper);
+                return new WrappedSortedList<string, Model>(dictionarySrc, src => src is null ? null : Model.FromSource(src));
+            }
+        }
+
+        private class Sounds3DConverter : ITwoWayConverter<object, Sound[]>
+        {
+            public Sound[] Convert(object value)
+            {
+                Array srcArray = value as Array;
+                Sound[] result = new Sound[srcArray.Length];
+                for (int i = 0; i < srcArray.Length; i++)
+                {
+                    object srcArrayItem = srcArray.GetValue(i);
+                    result[i] = srcArrayItem is null ? null : Sound.FromSource(srcArrayItem);
+                }
+
+                return result;
+            }
+
+            public object ConvertBack(Sound[] value)
+            {
+                object[] result = new object[value.Length];
+                for (int i = 0; i < value.Length; i++)
+                {
+                    result[i] = value[i]?.Src;
+                }
+
+                return result;
             }
         }
     }
