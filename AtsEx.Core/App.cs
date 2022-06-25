@@ -58,6 +58,9 @@ namespace Automatic9045.AtsEx
 
         public INativeKeySet NativeKeys { get; } = new NativeKeySet();
 
+        public VehicleSpec VehicleSpec { get; internal set; } = null;
+        public VehicleState VehicleState { get; internal set; } = null;
+
         public void InvokeStarted(BrakePosition defaultBrakePosition)
         {
             StartedEventArgs e = new StartedEventArgs(defaultBrakePosition);

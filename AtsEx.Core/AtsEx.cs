@@ -173,10 +173,9 @@ namespace Automatic9045.AtsEx
             BveTypeCollectionProvider.Instance.Dispose();
         }
 
-        [WillRefactor]
         public void SetVehicleSpec(VehicleSpec vehicleSpec)
         {
-            BveHacker.VehicleSpec = vehicleSpec;
+            App.VehicleSpec = vehicleSpec;
         }
 
         public void Started(BrakePosition defaultBrakePosition)
@@ -187,7 +186,7 @@ namespace Automatic9045.AtsEx
         [WillRefactor]
         public void Tick(VehicleState vehicleState)
         {
-            BveHacker.VehicleState = vehicleState;
+            App.VehicleState = vehicleState;
 
             VehiclePlugins.ForEach(plugin => plugin.PluginInstance.Tick());
             MapPlugins.ForEach(plugin => plugin.PluginInstance.Tick());

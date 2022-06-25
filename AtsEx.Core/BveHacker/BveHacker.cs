@@ -70,12 +70,5 @@ namespace Automatic9045.AtsEx
         }
 
         public bool IsScenarioCreated => !(ScenarioHacker.CurrentScenario is null);
-
-
-        [WillRefactor]
-        public VehicleSpec VehicleSpec { get; internal set; } = null;
-
-        [WillRefactor]
-        public VehicleState VehicleState { get; internal set; } = null;
     }
 }

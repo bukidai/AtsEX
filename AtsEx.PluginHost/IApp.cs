@@ -63,6 +63,18 @@ namespace Automatic9045.AtsEx.PluginHost
 
 
         /// <summary>
+        /// BVE が ATS プラグイン向けに提供する車両の性能に関する情報を取得します。
+        /// </summary>
+        VehicleSpec VehicleSpec { get; }
+
+        /// <summary>
+        /// BVE が ATS プラグイン向けに提供する車両の状態に関する情報を取得します。
+        /// このプロパティの値はフレーム毎に更新されます。
+        /// </summary>
+        VehicleState VehicleState { get; }
+
+
+        /// <summary>
         /// 全ての AtsEX 車両プラグインの読込が完了し、<see cref="VehiclePlugins"/> が取得可能になると発生します。
         /// <see cref="MapPlugins"/> は発生時点では読み込めないので注意してください。
         /// </summary>

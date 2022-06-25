@@ -103,12 +103,5 @@ namespace Automatic9045.AtsEx.PluginHost
         /// <see cref="Scenario"/> が取得可能かどうかを取得します。
         /// </summary>
         bool IsScenarioCreated { get; }
-
-
-        [WillRefactor]
-        VehicleSpec VehicleSpec { get; }
-
-        [WillRefactor]
-        VehicleState VehicleState { get; }
     }
 }
