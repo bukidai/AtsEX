@@ -194,12 +194,12 @@ namespace Automatic9045.AtsEx
 
         public void KeyDown(NativeAtsKeyName key)
         {
-            (App.NativeKeys.AtsKeys[key] as NativeAtsKey).Press();
+            (App.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyPressed();
         }
 
         public void KeyUp(NativeAtsKeyName key)
         {
-            (App.NativeKeys.AtsKeys[key] as NativeAtsKey).Release();
+            (App.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyReleased();
         }
     }
 }

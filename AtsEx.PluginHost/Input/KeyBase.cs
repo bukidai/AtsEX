@@ -70,7 +70,7 @@ namespace Automatic9045.AtsEx.PluginHost.Input
 
         /// <summary>
         /// この <see cref="KeyBase"/> オブジェクトに対するロックを取得し、指定したデリゲートを実行します。<br/>
-        /// <see cref="Press"/>、<see cref="Release"/> を含むデリゲートを指定するとデッドロックするので注意してください。
+        /// <see cref="NotifyPressed"/>、<see cref="NotifyReleased"/> を含むデリゲートを指定するとデッドロックするので注意してください。
         /// </summary>
         /// <param name="action">実行する <see cref="Action"/> デリゲート。</param>
         public void LockAndInvoke(Action action)
@@ -81,7 +81,7 @@ namespace Automatic9045.AtsEx.PluginHost.Input
         /// <summary>
         /// キーが押されたことをこの <see cref="KeyBase"/> オブジェクトに通知します。
         /// </summary>
-        protected void Press()
+        protected void NotifyPressed()
         {
             lock (LockObj)
             {
@@ -96,7 +96,7 @@ namespace Automatic9045.AtsEx.PluginHost.Input
         /// <summary>
         /// キーが離されたことをこの <see cref="KeyBase"/> オブジェクトに通知します。
         /// </summary>
-        protected void Release()
+        protected void NotifyReleased()
         {
             lock (LockObj)
             {

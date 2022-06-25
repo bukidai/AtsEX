@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx.Input
         {
         }
 
-        internal new void Press() => base.Press();
-        internal new void Release() => base.Release();
+        internal new void NotifyPressed() => base.NotifyPressed();
+        internal new void NotifyReleased() => base.NotifyReleased();
     }
 }
