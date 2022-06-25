@@ -85,6 +85,11 @@ namespace Automatic9045.AtsEx.PluginHost
         /// </summary>
         Preferences Preferences { get; }
 
+        /// <summary>
+        /// キー入力を管理する <see cref="ClassWrappers.KeyProvider"/> を取得します。
+        /// </summary>
+        KeyProvider KeyProvider { get; }
+
 
         /// <summary>
         /// <see cref="ScenarioCreated"/> が発生する直前に通知します。特に理由がなければ <see cref="ScenarioCreated"/> を使用してください。

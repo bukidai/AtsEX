@@ -27,6 +27,7 @@
 		<Field WrapperProperty="CurrentScenarioInfo" Original="q" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="CurrentScenario" Original="n" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="Preferences" Original="w" IsOriginalStatic="true"/>
+		<Field WrapperProperty="KeyProvider" Original="m" IsOriginalPrivate="true"/>
 	</Class>
 
 	<Class Wrapper="ScenarioSelectionForm" Original="da">
@@ -67,6 +68,12 @@
 		<Property Wrapper="Path">
 			<Getter Original="d"/>
 			<Setter Original="c"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="KeyProvider" Original="ag">
+		<Property Wrapper="InputDevices">
+			<Getter Original="c"/>
 		</Property>
 	</Class>
 

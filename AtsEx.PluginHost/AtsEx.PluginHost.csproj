@@ -91,6 +91,7 @@
     <Compile Include="ClassWrappers\Public\Forms\ChartForm.cs" />
     <Compile Include="ClassWrappers\Public\Forms\LoadingProgressForm.cs" />
     <Compile Include="ClassWrappers\Public\Forms\MainForm.cs" />
+    <Compile Include="ClassWrappers\Public\KeyProvider.cs" />
     <Compile Include="ClassWrappers\Public\LocatableMapObject.cs" />
     <Compile Include="ClassWrappers\Public\PutBetweenStructure.cs" />
     <Compile Include="ClassWrappers\Public\Structure.cs" />

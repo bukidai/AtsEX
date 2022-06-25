@@ -28,6 +28,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             CurrentScenarioInfoField = members.GetSourceFieldOf(nameof(CurrentScenarioInfo));
             CurrentScenarioField = members.GetSourceFieldOf(nameof(CurrentScenario));
             PreferencesField = members.GetSourceFieldOf(nameof(Preferences));
+            KeyProviderField = members.GetSourceFieldOf(nameof(KeyProvider));
 
             ScenarioSelectFormField = members.GetSourceFieldOf(nameof(ScenarioSelectForm));
             LoadingProgressFormField = members.GetSourceFieldOf(nameof(LoadingProgressForm));
@@ -114,6 +115,16 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             get => PreferencesField.GetValue(Src);
             set => PreferencesField.SetValue(Src, value);
+        }
+
+        private static FieldInfo KeyProviderField;
+        /// <summary>
+        /// キー入力を管理する <see cref="ClassWrappers.KeyProvider"/> を取得・設定します。
+        /// </summary>
+        public KeyProvider KeyProvider
+        {
+            get => KeyProvider.FromSource(KeyProviderField.GetValue(Src));
+            set => KeyProviderField.SetValue(Src, value.Src);
         }
     }
 }

@@ -60,6 +60,12 @@ namespace Automatic9045.AtsEx
             set => MainForm.Preferences = value;
         }
 
+        public KeyProvider KeyProvider
+        {
+            get => MainForm.KeyProvider;
+            set => MainForm.KeyProvider = value;
+        }
+
 
         private readonly ScenarioHacker ScenarioHacker;
 
