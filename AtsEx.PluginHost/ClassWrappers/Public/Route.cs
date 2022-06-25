@@ -44,11 +44,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="Route"/> クラスのインスタンス。</returns>
-        public static Route FromSource(object src)
-        {
-            if (src is null) return null;
-            return new Route(src);
-        }
+        public static Route FromSource(object src) => src is null ? null : new Route(src);
 
         private static MethodInfo DrawLimitLocationGetMethod;
         private static MethodInfo DrawLimitLocationSetMethod;
@@ -85,10 +81,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <summary>
         /// 停車場のリストを取得します。
         /// </summary>
-        public StationList Stations
-        {
-            get => StationList.FromSource(StationsGetMethod.Invoke(Src, null));
-        }
+        public StationList Stations => StationList.FromSource(StationsGetMethod.Invoke(Src, null));
 
         private static MethodInfo SoundsGetMethod;
         /// <summary>

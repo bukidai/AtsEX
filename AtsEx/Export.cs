@@ -171,7 +171,7 @@ namespace Automatic9045.AtsEx
     {
         private const int Version = 0x00020000;
 
-        private static AtsExActivator Activator;
+        private static readonly AtsExActivator Activator;
 
         static Export()
         {

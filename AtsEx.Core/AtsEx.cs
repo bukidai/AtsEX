@@ -119,11 +119,8 @@ namespace Automatic9045.AtsEx
                     {
                         if (error.Text.Contains("[[NOMPI]]")) return true;
 
-                        bool isMapPluginUsingError = mapLoader.RemoveErrorIncludePositions.Any(pos =>
-                        {
-                            if (Path.GetFileName(pos.Key) != error.SenderFileName) return false;
-                            return pos.Value.Contains((error.LineIndex, error.CharIndex));
-                        });
+                        bool isMapPluginUsingError = mapLoader.RemoveErrorIncludePositions.
+                            Any(pos => Path.GetFileName(pos.Key) == error.SenderFileName && pos.Value.Contains((error.LineIndex, error.CharIndex)));
                         return isMapPluginUsingError;
                     });
                     foreach (LoadError error in removeTargetErrors)

@@ -37,11 +37,7 @@ namespace Automatic9045.AtsEx
         private List<AtsExPluginInfo> _VehiclePlugins = null;
         public List<AtsExPluginInfo> VehiclePlugins
         {
-            get
-            {
-                if (_VehiclePlugins is null) throw new PropertyNotInitializedException(nameof(VehiclePlugins));
-                return _VehiclePlugins;
-            }
+            get => _VehiclePlugins is null ? throw new PropertyNotInitializedException(nameof(VehiclePlugins)) : _VehiclePlugins;
             set
             {
                 _VehiclePlugins = value;
@@ -52,11 +48,7 @@ namespace Automatic9045.AtsEx
         private List<AtsExPluginInfo> _MapPlugins = null;
         public List<AtsExPluginInfo> MapPlugins
         {
-            get
-            {
-                if (_MapPlugins is null) throw new PropertyNotInitializedException(nameof(MapPlugins));
-                return _MapPlugins;
-            }
+            get => _MapPlugins is null ? throw new PropertyNotInitializedException(nameof(MapPlugins)) : _MapPlugins;
             set
             {
                 _MapPlugins = value;

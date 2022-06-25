@@ -31,14 +31,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         public override bool Equals(object obj)
         {
-            if (obj is ClassWrapperBase classWrapper)
-            {
-                return (Src as object).Equals(classWrapper.Src);
-            }
-            else
-            {
-                return false;
-            }
+            return obj is ClassWrapperBase classWrapper && (bool)(Src as object).Equals(classWrapper.Src);
         }
 
         public override int GetHashCode()

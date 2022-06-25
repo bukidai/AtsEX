@@ -105,7 +105,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         public object SyncRoot => Src.SyncRoot;
 
         protected WrappedValueList __Values;
+#pragma warning disable IDE1006 // 命名スタイル
         protected WrappedValueList _Values => __Values = __Values ?? new WrappedValueList(this);
+#pragma warning restore IDE1006 // 命名スタイル
 
         public ICollection<TValueWrapper> Values => _Values;
 
@@ -125,9 +127,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         public bool Contains(KeyValuePair<TKey, TValueWrapper> item)
         {
             int index = IndexOfKey(item.Key);
-            if (index < 0 || Count <= index) return false;
-
-            return ValueArray.GetValue(index) == ValueConverter.ConvertBack(item.Value);
+            return index >= 0 && Count > index && ValueArray.GetValue(index) == ValueConverter.ConvertBack(item.Value);
         }
 
         public bool ContainsKey(TKey key) => Src.Contains(key);
@@ -210,7 +210,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
             else
             {
-                value = default(TValueWrapper);
+                value = default;
                 return false;
             }
         }
@@ -230,7 +230,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         protected sealed class WrappedValueList : ICollection<TValueWrapper>, ICollection
         {
-            private WrappedSortedList<TKey, TValueWrapper> SortedList;
+            private readonly WrappedSortedList<TKey, TValueWrapper> SortedList;
 
             public WrappedValueList(WrappedSortedList<TKey, TValueWrapper> sortedList)
             {
@@ -290,11 +290,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         protected sealed class Enumerator : IEnumerator<KeyValuePair<TKey, TValueWrapper>>, IDisposable, IEnumerator, IDictionaryEnumerator
         {
-            private WrappedSortedList<TKey, TValueWrapper> SortedList;
-            private EnumeratorType Type;
+            private readonly WrappedSortedList<TKey, TValueWrapper> SortedList;
+            private readonly EnumeratorType Type;
             
-            private IEnumerator<TKey> KeyEnumerator;
-            private IEnumerator<TValueWrapper> ValueEnumerator;
+            private readonly IEnumerator<TKey> KeyEnumerator;
+            private readonly IEnumerator<TValueWrapper> ValueEnumerator;
 
             public Enumerator(WrappedSortedList<TKey, TValueWrapper> sortedList, EnumeratorType type)
             {
@@ -340,14 +340,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 bool keyEnumeratorResult = KeyEnumerator.MoveNext();
                 bool valueEnumeratorResult = ValueEnumerator.MoveNext();
 
-                if (keyEnumeratorResult != valueEnumeratorResult)
-                {
-                    throw new AccessViolationException();
-                }
-                else
-                {
-                    return keyEnumeratorResult;
-                }
+                return keyEnumeratorResult != valueEnumeratorResult ? throw new AccessViolationException() : keyEnumeratorResult;
             }
 
             public void Reset()
@@ -359,11 +352,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         protected sealed class WrappedValueEnumerator : IEnumerator<TValueWrapper>, IDisposable, IEnumerator
         {
-            private WrappedSortedList<TKey, TValueWrapper> SortedList;
-            private int Version;
+            private readonly WrappedSortedList<TKey, TValueWrapper> SortedList;
+            private readonly int Version;
 
             private int Index;
-            private TValueWrapper CurrentValue;
 
             public WrappedValueEnumerator(WrappedSortedList<TKey, TValueWrapper> sortedList)
             {
@@ -371,25 +363,14 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 Version = SortedList.Version;
             }
 
-            public TValueWrapper Current => CurrentValue;
+            public TValueWrapper Current { get; private set; }
 
-            object IEnumerator.Current
-            {
-                get
-                {
-                    if (Index == 0 || Index == SortedList.Count + 1)
-                    {
-                        throw new InvalidOperationException();
-                    }
-
-                    return CurrentValue;
-                }
-            }
+            object IEnumerator.Current => Index == 0 || Index == SortedList.Count + 1 ? throw new InvalidOperationException() : Current;
 
             public void Dispose()
             {
                 Index = 0;
-                CurrentValue = default(TValueWrapper);
+                Current = default;
             }
 
             public bool MoveNext()
@@ -402,13 +383,13 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 if (Index < SortedList.Count)
                 {
                     object currentValueSrc = SortedList.ValueArray.GetValue(Index);
-                    CurrentValue = SortedList.ValueConverter.Convert(currentValueSrc);
+                    Current = SortedList.ValueConverter.Convert(currentValueSrc);
                     Index++;
                     return true;
                 }
 
                 Index = SortedList.Count + 1;
-                CurrentValue = default(TValueWrapper);
+                Current = default;
                 return false;
             }
 
@@ -420,7 +401,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 }
 
                 Index = 0;
-                CurrentValue = default(TValueWrapper);
+                Current = default;
             }
         }
     }

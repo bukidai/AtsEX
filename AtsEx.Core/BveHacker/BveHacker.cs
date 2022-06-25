@@ -32,7 +32,7 @@ namespace Automatic9045.AtsEx
         public Process Process { get; }
 
 
-        private MainFormHacker MainFormHacker;
+        private readonly MainFormHacker MainFormHacker;
 
         public IntPtr MainFormHandle => MainFormHacker.TargetFormHandle;
         public Form MainFormSource => MainFormHacker.TargetFormSource;
@@ -52,7 +52,7 @@ namespace Automatic9045.AtsEx
         public ChartForm ChartForm => MainForm.ChartForm;
 
 
-        private ScenarioHacker ScenarioHacker;
+        private readonly ScenarioHacker ScenarioHacker;
 
         public event ScenarioCreatedEventHandler PreviewScenarioCreated;
         public event ScenarioCreatedEventHandler ScenarioCreated;
@@ -69,10 +69,7 @@ namespace Automatic9045.AtsEx
             internal set => ScenarioHacker.CurrentScenario = value;
         }
 
-        public bool IsScenarioCreated
-        {
-            get => !(ScenarioHacker.CurrentScenario is null);
-        }
+        public bool IsScenarioCreated => !(ScenarioHacker.CurrentScenario is null);
 
 
         [WillRefactor]

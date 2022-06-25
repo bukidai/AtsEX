@@ -16,10 +16,10 @@ namespace Automatic9045.AtsEx
         public AppDomain TargetAppDomain { get; }
         public Assembly TargetAssembly { get; }
 
-        private Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
+        private readonly Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
-        private AssemblyResolver AssemblyResolver;
-        private string DirectoryName;
+        private readonly AssemblyResolver AssemblyResolver;
+        private readonly string DirectoryName;
 
         public AtsExActivator()
         {
@@ -88,7 +88,7 @@ namespace Automatic9045.AtsEx
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 throw;
             }

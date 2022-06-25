@@ -41,11 +41,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="StructureSet"/> クラスのインスタンス。</returns>
-        public static StructureSet FromSource(object src)
-        {
-            if (src is null) return null;
-            return new StructureSet(src);
-        }
+        public static StructureSet FromSource(object src) => src is null ? null : new StructureSet(src);
 
         private static MethodInfo DrawLimitLocationGetMethod;
         private static MethodInfo DrawLimitLocationSetMethod;
@@ -80,27 +76,18 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <summary>
         /// Structure[].Put ステートメント、Structure[].Put0 ステートメントで設置されたストラクチャーを取得します。
         /// </summary>
-        public SingleStructureList Put
-        {
-            get => SingleStructureList.FromSource(PutGetMethod.Invoke(Src, null));
-        }
+        public SingleStructureList Put => SingleStructureList.FromSource(PutGetMethod.Invoke(Src, null));
 
         private static MethodInfo PutBetweenGetMethod;
         /// <summary>
         /// Structure[].PutBetween ステートメントで設置されたストラクチャーを取得します。
         /// </summary>
-        public SingleStructureList PutBetween
-        {
-            get => SingleStructureList.FromSource(PutBetweenGetMethod.Invoke(Src, null));
-        }
+        public SingleStructureList PutBetween => SingleStructureList.FromSource(PutBetweenGetMethod.Invoke(Src, null));
 
         private static MethodInfo SignalsGetMethod;
         /// <summary>
         /// Signal[].Put ステートメントで設置された信号ストラクチャーを取得します。
         /// </summary>
-        public SingleStructureList Signals
-        {
-            get => SingleStructureList.FromSource(SignalsGetMethod.Invoke(Src, null));
-        }
+        public SingleStructureList Signals => SingleStructureList.FromSource(SignalsGetMethod.Invoke(Src, null));
     }
 }
