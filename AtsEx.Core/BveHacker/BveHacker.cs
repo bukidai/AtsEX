@@ -9,6 +9,8 @@ using System.Windows.Forms;
 
 using HarmonyLib;
 
+using Mackoy.Bvets;
+
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
@@ -50,6 +52,13 @@ namespace Automatic9045.AtsEx
 
         public Form ChartFormSource => MainForm.ChartForm.Src;
         public ChartForm ChartForm => MainForm.ChartForm;
+
+
+        public Preferences Preferences
+        {
+            get => MainForm.Preferences;
+            set => MainForm.Preferences = value;
+        }
 
 
         private readonly ScenarioHacker ScenarioHacker;

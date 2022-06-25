@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Mackoy.Bvets;
+
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.PluginHost
@@ -76,6 +78,12 @@ namespace Automatic9045.AtsEx.PluginHost
         /// BVE の「車両物理量」フォームを取得します。
         /// </summary>
         ChartForm ChartForm { get; }
+
+
+        /// <summary>
+        /// BVE の設定が格納された <see cref="Mackoy.Bvets.Preferences"/> を取得します。
+        /// </summary>
+        Preferences Preferences { get; }
 
 
         /// <summary>

@@ -26,6 +26,7 @@
 		<Field WrapperProperty="ContextMenu" Original="y" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="CurrentScenarioInfo" Original="q" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="CurrentScenario" Original="n" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="Preferences" Original="w" IsOriginalStatic="true"/>
 	</Class>
 	
 	<Class Wrapper="ScenarioSelectionForm" Original="da">

@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Mackoy.Bvets;
+
 using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 using Automatic9045.AtsEx.PluginHost.Helpers;
 
@@ -25,6 +27,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
             CurrentScenarioInfoField = members.GetSourceFieldOf(nameof(CurrentScenarioInfo));
             CurrentScenarioField = members.GetSourceFieldOf(nameof(CurrentScenario));
+            PreferencesField = members.GetSourceFieldOf(nameof(Preferences));
 
             ScenarioSelectFormField = members.GetSourceFieldOf(nameof(ScenarioSelectForm));
             LoadingProgressFormField = members.GetSourceFieldOf(nameof(LoadingProgressForm));
@@ -101,6 +104,16 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             get => Scenario.FromSource(CurrentScenarioField.GetValue(Src));
             set => CurrentScenarioField.SetValue(Src, value);
+        }
+
+        private static FieldInfo PreferencesField;
+        /// <summary>
+        /// BVE の設定が格納された <see cref="Mackoy.Bvets.Preferences"/> を取得・設定します。
+        /// </summary>
+        public Preferences Preferences
+        {
+            get => PreferencesField.GetValue(Src);
+            set => PreferencesField.SetValue(Src, value);
         }
     }
 }
