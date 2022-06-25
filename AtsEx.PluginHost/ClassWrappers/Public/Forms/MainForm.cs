@@ -75,7 +75,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static FieldInfo ContextMenuField;
         /// <summary>
-        /// 右クリックで表示されるショートカット メニューを取得します。
+        /// 右クリックで表示されるショートカット メニューを取得・設定します。
         /// </summary>
         /// <remarks>
         /// メニューの内容を編集する場合、通常は <see cref="ContextMenuHacker"/> を使用してください。
@@ -89,7 +89,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static FieldInfo CurrentScenarioInfoField;
         /// <summary>
-        /// 現在のシナリオの <see cref="ScenarioInfo"/> を取得します。
+        /// 現在のシナリオの <see cref="ScenarioInfo"/> を取得・設定します。
         /// </summary>
         public ScenarioInfo CurrentScenarioInfo
         {
@@ -99,7 +99,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         private static FieldInfo CurrentScenarioField;
         /// <summary>
-        /// 現在のシナリオのインスタンスを取得します。
+        /// 現在のシナリオのインスタンスを取得・設定します。
         /// </summary>
         public Scenario CurrentScenario
         {
