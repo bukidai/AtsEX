@@ -94,7 +94,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         public ScenarioInfo CurrentScenarioInfo
         {
             get => ScenarioInfo.FromSource(CurrentScenarioInfoField.GetValue(Src));
-            set => CurrentScenarioInfoField.SetValue(Src, value);
+            set => CurrentScenarioInfoField.SetValue(Src, value.Src);
         }
 
         private static FieldInfo CurrentScenarioField;
@@ -104,7 +104,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         public Scenario CurrentScenario
         {
             get => Scenario.FromSource(CurrentScenarioField.GetValue(Src));
-            set => CurrentScenarioField.SetValue(Src, value);
+            set => CurrentScenarioField.SetValue(Src, value.Src);
         }
 
         private static FieldInfo PreferencesField;
