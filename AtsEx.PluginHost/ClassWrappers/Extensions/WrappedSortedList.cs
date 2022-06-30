@@ -44,6 +44,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             Src = src;
             SrcAsDynamic = Src;
+            ValueConverter = valueConverter;
 
             SrcType = Src.GetType();
 
