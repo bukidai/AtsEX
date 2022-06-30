@@ -59,7 +59,6 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static MethodInfo RepeatedGetMethod;
-        private static readonly Converter<object, MapObjectList> RepeatedParserToWrapper = src => src is null ? null : MapObjectList.FromSource(src);
         /// <summary>
         /// Repeater マップ要素で設置されたストラクチャーを取得します。
         /// </summary>
@@ -69,7 +68,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get
             {
                 IDictionary dictionarySrc = RepeatedGetMethod.Invoke(Src, null);
-                return new WrappedSortedList<string, MapObjectList>(dictionarySrc, RepeatedParserToWrapper);
+                return new WrappedSortedList<string, MapObjectList>(dictionarySrc);
             }
         }
 

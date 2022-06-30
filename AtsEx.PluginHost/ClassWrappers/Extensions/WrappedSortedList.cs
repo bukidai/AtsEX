@@ -56,8 +56,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
-        /// <param name="parserToWrapper">オリジナル型からラッパー型に変換するためのデリゲート。</param>
-        public WrappedSortedList(IDictionary src, Converter<object, TValueWrapper> converterToWrapper) : this(src, new ConverterToWrapper(converterToWrapper))
+        public WrappedSortedList(IDictionary src) : this(src, new ClassWrapperConverter())
         {
 #if DEBUG
             if (!typeof(TValueWrapper).IsSubclassOf(typeof(ClassWrapperBase)))
@@ -215,16 +214,23 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
         }
 
-        protected sealed class ConverterToWrapper : ITwoWayConverter<object, TValueWrapper>
+        protected sealed class ClassWrapperConverter : ITwoWayConverter<object, TValueWrapper>
         {
-            private readonly Converter<object, TValueWrapper> Converter;
-
-            public ConverterToWrapper(Converter<object, TValueWrapper> converter)
+            public ClassWrapperConverter()
             {
-                Converter = converter;
             }
 
-            public TValueWrapper Convert(object value) => Converter(value);
+            public TValueWrapper Convert(object value)
+            {
+                ClassWrapperBase wrapper = ClassWrapperBase.CreateFromSource(value);
+                switch (wrapper)
+                {
+                    case null: return default;
+                    case TValueWrapper valueWrapper: return valueWrapper;
+                    default: throw new ArgumentException();
+                }
+            }
+
             public object ConvertBack(TValueWrapper value) => (value as ClassWrapperBase).Src;
         }
 

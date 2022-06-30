@@ -98,7 +98,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get
             {
                 IDictionary dictionarySrc = SoundsGetMethod.Invoke(Src, null);
-                return new WrappedSortedList<string, Sound>(dictionarySrc, src => src is null ? null : Sound.FromSource(src));
+                return new WrappedSortedList<string, Sound>(dictionarySrc);
             }
         }
 
@@ -134,7 +134,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get
             {
                 IDictionary dictionarySrc = StructureModelsGetMethod.Invoke(Src, null);
-                return new WrappedSortedList<string, Model>(dictionarySrc, src => src is null ? null : Model.FromSource(src));
+                return new WrappedSortedList<string, Model>(dictionarySrc);
             }
         }
 
