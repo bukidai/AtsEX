@@ -42,19 +42,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             return new MapObjectList(src);
         }
 
-        [UnderConstruction]
         private static MapObjectBase Parse(object src)
         {
-            Type originalType = src.GetType();
-            Type wrapperType = BveTypeCollectionProvider.Instance.GetWrapperTypeOf(originalType);
-
-            if (wrapperType == typeof(PutBetweenStructure)) return PutBetweenStructure.FromSource(src);
-            else if (wrapperType == typeof(Station)) return Station.FromSource(src);
-            else if (wrapperType == typeof(Structure)) return Structure.FromSource(src);
-            else
-            {
-                throw new DevelopException(string.Format(Resources.GetString("MapObjectTypeNotRecognized").Value, nameof(MapObjectBase), wrapperType.Name));
-            }
+            ClassWrapperBase wrapper = CreateFromSource(src);
+            return wrapper is MapObjectBase mapObject
+                ? mapObject
+                : throw new DevelopException(string.Format(Resources.GetString("ArgumentNotMapObject").Value, wrapper.GetType().Name, nameof(MapObjectBase)));
         }
 
         public MapObjectBase this[int index]
