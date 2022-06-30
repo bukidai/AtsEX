@@ -40,6 +40,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="LoadingProgressForm"/> クラスのインスタンス。</returns>
+        [CreateClassWrapperFromSource]
         public static LoadingProgressForm FromSource(object src)
         {
             if (src is null) return null;

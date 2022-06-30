@@ -37,6 +37,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="Model"/> クラスのインスタンス。</returns>
+        [CreateClassWrapperFromSource]
         public static Model FromSource(object src)
         {
             if (src is null) return null;

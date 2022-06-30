@@ -41,6 +41,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="StructureSet"/> クラスのインスタンス。</returns>
+        [CreateClassWrapperFromSource]
         public static StructureSet FromSource(object src) => src is null ? null : new StructureSet(src);
 
         private static MethodInfo DrawLimitLocationGetMethod;

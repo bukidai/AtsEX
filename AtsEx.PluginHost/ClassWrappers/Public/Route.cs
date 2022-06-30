@@ -44,6 +44,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="Route"/> クラスのインスタンス。</returns>
+        [CreateClassWrapperFromSource]
         public static Route FromSource(object src) => src is null ? null : new Route(src);
 
         private static MethodInfo DrawLimitLocationGetMethod;

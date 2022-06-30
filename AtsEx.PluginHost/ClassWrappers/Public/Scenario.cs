@@ -39,6 +39,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="Scenario"/> クラスのインスタンス。</returns>
+        [CreateClassWrapperFromSource]
         public static Scenario FromSource(object src) => src is null ? null : new Scenario(src);
 
         private static MethodInfo TimeManagerGetMethod;

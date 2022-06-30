@@ -81,6 +81,7 @@
     <Compile Include="ClassInitializer\ClassWrapperInitializer.cs" />
     <Compile Include="ClassInitializer\HelperInitializer.cs" />
     <Compile Include="ClassInitializer\InitializeClassWrapperAttribute.cs" />
+    <Compile Include="ClassWrappers\CreateClassWrapperFromSourceAttribute.cs" />
     <Compile Include="ClassWrappers\Public\Forms\ChartForm.cs" />
     <Compile Include="ClassWrappers\Public\Forms\LoadingProgressForm.cs" />
     <Compile Include="ClassWrappers\Public\Forms\MainForm.cs" />
@@ -175,6 +176,8 @@
     <Content Include="Resources\Files\ClassWrappers\StationList.ja.resx" />
     <Content Include="Resources\Files\ClassWrappers\StationList.resx" />
     <Content Include="Resources\Files\ClassWrappers\MapObjectList.resx" />
+    <Content Include="Resources\Files\ClassWrapperBase.ja.resx" />
+    <Content Include="Resources\Files\ClassWrapperBase.resx" />
     <None Include="LocalReferences\DXDynamicTexture\LICENSE" />
     <None Include="packages.config" />
   </ItemGroup>

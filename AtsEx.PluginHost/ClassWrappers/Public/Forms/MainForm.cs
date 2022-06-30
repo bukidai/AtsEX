@@ -41,6 +41,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="MainForm"/> クラスのインスタンス。</returns>
+        [CreateClassWrapperFromSource]
         public static MainForm FromSource(object src) => src is null ? null : new MainForm(src);
 
         private static FieldInfo ScenarioSelectFormField;

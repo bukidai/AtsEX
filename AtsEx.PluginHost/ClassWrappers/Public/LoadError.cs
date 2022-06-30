@@ -43,6 +43,7 @@ private static void Initialize()
 		/// </summary>
 		/// <param name="src">ラップするオリジナル オブジェクト。</param>
 		/// <returns>オリジナル オブジェクトをラップした <see cref="LoadError"/> クラスのインスタンス。</returns>
+		[CreateClassWrapperFromSource]
 		public static LoadError FromSource(object src)
 		{
 			if (src is null) return null;

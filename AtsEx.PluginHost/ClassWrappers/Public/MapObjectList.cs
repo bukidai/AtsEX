@@ -35,6 +35,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="MapObjectList"/> クラスのインスタンス。</returns>
+        [CreateClassWrapperFromSource]
         public static MapObjectList FromSource(object src)
         {
             if (src is null) return null;
