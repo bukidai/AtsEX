@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -26,7 +27,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             GetStandardTimeMethod = members.GetSourceMethodOf(nameof(GetStandardTime));
         }
 
-        private StationList(object src) : base(src)
+        private StationList(IList src) : base(src)
         {
         }
 
@@ -39,7 +40,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         public static new StationList FromSource(object src)
         {
             if (src is null) return null;
-            return new StationList(src);
+            return new StationList((IList)src);
         }
 
         /// <summary>
@@ -85,6 +86,6 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </summary>
         /// <param name="location">指定する距離程 [m]。</param>
         /// <returns>0 時丁度から現在時刻までに経過したミリ秒数 [ms]。</returns>
-        public int GetStandardTime(double location) => GetStandardTimeMethod.Invoke(Src, new object[] { location });
+        public int GetStandardTime(double location) => (int)GetStandardTimeMethod.Invoke(Src, new object[] { location });
     }
 }
