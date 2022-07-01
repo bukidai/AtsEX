@@ -81,7 +81,9 @@
     <Compile Include="ClassInitializer\ClassWrapperInitializer.cs" />
     <Compile Include="ClassInitializer\HelperInitializer.cs" />
     <Compile Include="ClassInitializer\InitializeClassWrapperAttribute.cs" />
+    <Compile Include="ClassWrappers\ClassWrapperConverter.cs" />
     <Compile Include="ClassWrappers\CreateClassWrapperFromSourceAttribute.cs" />
+    <Compile Include="ClassWrappers\Extensions\WrappedList.cs" />
     <Compile Include="ClassWrappers\Public\Forms\ChartForm.cs" />
     <Compile Include="ClassWrappers\Public\Forms\LoadingProgressForm.cs" />
     <Compile Include="ClassWrappers\Public\Forms\MainForm.cs" />

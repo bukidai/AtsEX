@@ -38,8 +38,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
-        /// <param name="parserToWrapper">オリジナル型からラッパー型に変換するためのデリゲート。</param>
-        /// <param name="parserToSource">ラッパー型からオリジナル型に変換するためのデリゲート。</param>
+        /// <param name="valueConverter">オリジナル型とラッパー型を相互に変換するための <see cref="ITwoWayConverter{T1, T2}"/>。</param>
         public WrappedSortedList(IDictionary src, ITwoWayConverter<object, TValueWrapper> valueConverter)
         {
             Src = src;
@@ -57,7 +56,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
-        public WrappedSortedList(IDictionary src) : this(src, new ClassWrapperConverter())
+        public WrappedSortedList(IDictionary src) : this(src, new ClassWrapperConverter<TValueWrapper>())
         {
 #if DEBUG
             if (!typeof(TValueWrapper).IsSubclassOf(typeof(ClassWrapperBase)))
@@ -213,26 +212,6 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 value = default;
                 return false;
             }
-        }
-
-        protected sealed class ClassWrapperConverter : ITwoWayConverter<object, TValueWrapper>
-        {
-            public ClassWrapperConverter()
-            {
-            }
-
-            public TValueWrapper Convert(object value)
-            {
-                ClassWrapperBase wrapper = ClassWrapperBase.CreateFromSource(value);
-                switch (wrapper)
-                {
-                    case null: return default;
-                    case TValueWrapper valueWrapper: return valueWrapper;
-                    default: throw new ArgumentException();
-                }
-            }
-
-            public object ConvertBack(TValueWrapper value) => (value as ClassWrapperBase).Src;
         }
 
         protected sealed class WrappedValueList : ICollection<TValueWrapper>, ICollection
