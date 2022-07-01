@@ -38,7 +38,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
 
             MethodInfo fromSourceMethod = wrapperType.
-                GetMethods(BindingFlags.Static | BindingFlags.InvokeMethod).
+                GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.InvokeMethod).
                 FirstOrDefault(method =>
                 {
                     if (method.GetCustomAttribute<CreateClassWrapperFromSourceAttribute>() is null) return false;
