@@ -272,6 +272,9 @@
 		<Property Wrapper="Vehicle">
 			<Getter Original="a"/>
 		</Property>
+		<Property Wrapper="Trains">
+			<Getter Original="g"/>
+		</Property>
 		<Property Wrapper="TimeTable">
 			<Getter Original="d"/>
 		</Property>
@@ -421,6 +424,22 @@
 		<Field WrapperProperty="ArrivalTimeTextWidths" Original="f" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="DepertureTimeTextWidths" Original="g" IsOriginalPrivate="true"/>
 		<Method Wrapper="Update" WrapperParams="void" Original="a" IsOriginalPrivate="true"/>
+	</Class>
+
+	<Class Wrapper="Train" Original="e4">
+		<Field WrapperProperty="TrainInfo" Original="d" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="Location" Original="g" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="Speed" Original="h" IsOriginalPrivate="true"/>
+	</Class>
+
+	<Class Wrapper="TrainInfo" Original="fc">
+		<Property Wrapper="Structures">
+			<Getter Original="f"/>
+		</Property>
+		<Property Wrapper="TrackKey">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
 	</Class>
 
 	<Class Wrapper="UserVehicleLocationManager" Original="fu">

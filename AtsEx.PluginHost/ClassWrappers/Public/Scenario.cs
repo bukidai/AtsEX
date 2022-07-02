@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -27,6 +28,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             LocationManagerGetMethod = members.GetSourcePropertyGetterOf(nameof(LocationManager));
             RouteGetMethod = members.GetSourcePropertyGetterOf(nameof(Route));
             VehicleGetMethod = members.GetSourcePropertyGetterOf(nameof(Vehicle));
+            TrainsGetMethod = members.GetSourcePropertyGetterOf(nameof(Trains));
             TimeTableGetMethod = members.GetSourcePropertyGetterOf(nameof(TimeTable));
         }
 
@@ -65,6 +67,20 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// このシナリオに関連付けられた <see cref="ClassWrappers.Vehicle"/> のインスタンスを取得します。
         /// </summary>
         public Vehicle Vehicle => ClassWrappers.Vehicle.FromSource(VehicleGetMethod.Invoke(Src, null));
+
+        private static MethodInfo TrainsGetMethod;
+        /// <summary>
+        /// 他列車の一覧を取得します。
+        /// </summary>
+        /// <remarks>キーはマップファイル内で定義した他列車名、値は他列車を表す <see cref="Train"/> です。</remarks>
+        public WrappedSortedList<string, Train> Trains
+        {
+            get
+            {
+                IDictionary dictionarySrc = TrainsGetMethod.Invoke(Src, null);
+                return new WrappedSortedList<string, Train>(dictionarySrc);
+            }
+        }
 
         private static MethodInfo TimeTableGetMethod;
         /// <summary>
