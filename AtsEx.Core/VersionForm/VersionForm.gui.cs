@@ -28,7 +28,7 @@ namespace Automatic9045.AtsEx
 
         protected void InitializeComponent(App app)
         {
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(800, 480);
