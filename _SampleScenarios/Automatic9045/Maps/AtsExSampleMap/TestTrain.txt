@@ -1,0 +1,4 @@
+BveTs Train 1.01
+
+[Structure]
+Key = Stop6

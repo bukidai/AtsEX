@@ -43,30 +43,38 @@ BVE本体（`BveTs.exe`）と同じフォルダ内にある`Mackoy.XmlInterfaces
 
 ![Projects](Projects.svg)
 
-## 使用ライブラリ（アルファベット順）
-### [.NET Runtime](https://github.com/dotnet/runtime) (MIT)
+## 使用ライブラリ等（アルファベット順）
+#### [.NET Runtime](https://github.com/dotnet/runtime) (MIT)
 
 Copyright (c) .NET Foundation and Contributors
 
 `System.Collection.Generic.SortedList<Tkey, TValue>` のソースを一部流用しています。
 
-### [DllExport](https://github.com/3F/DllExport) (MIT)
+#### [DllExport](https://github.com/3F/DllExport) (MIT)
 
 Copyright (c) 2009-2015  Robert Giesecke  
 Copyright (c) 2016-2021  Denis Kuzmin <x-3F@outlook.com> github/3F
 
-### [DXDynamicTexture](https://github.com/zbx1425/DXDynamicTexture) (MIT)
+#### [DXDynamicTexture](https://github.com/zbx1425/DXDynamicTexture) (MIT)
 
 Copyright (c) 2021 zbx1425
 
-### [Harmony](https://github.com/pardeike/Harmony) (MIT)
+#### [Harmony](https://github.com/pardeike/Harmony) (MIT)
 
 Copyright (c) 2017  Andreas Pardeike
 
-### [SlimDX](https://www.nuget.org/packages/SlimDX/) (MIT)
+#### [SlimDX](https://www.nuget.org/packages/SlimDX/) (MIT)
 
 Copyright (c) 2013  exDreamDuck
 
-### [Octokit](https://github.com/octokit/octokit.net) (MIT)
+#### [Octokit](https://github.com/octokit/octokit.net) (MIT)
 
 Copyright 2017 GitHub, Inc.
+
+### サンプルシナリオにのみ含まれるもの
+
+#### [KeyboardFont_Plus](http://www.gaiji.info/) (CC BY-ND 3.0)
+
+フォント by 外字神社 is licensed under a [Creative Commons 表示 - 改変禁止 3.0 Unported License.](http://creativecommons.org/licenses/by-nd/3.0/)
+
+www.gaiji.info にある作品に基づいている。
