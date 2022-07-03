@@ -184,12 +184,12 @@ namespace Automatic9045.AtsEx
         }
 
         [WillRefactor]
-        public void Tick(VehicleState vehicleState)
+        public void Tick(TimeSpan elapsed, VehicleState vehicleState)
         {
             App.VehicleState = vehicleState;
 
-            VehiclePlugins.ForEach(plugin => plugin.PluginInstance.Tick());
-            MapPlugins.ForEach(plugin => plugin.PluginInstance.Tick());
+            VehiclePlugins.ForEach(plugin => plugin.PluginInstance.Tick(elapsed));
+            MapPlugins.ForEach(plugin => plugin.PluginInstance.Tick(elapsed));
         }
 
         public void KeyDown(NativeAtsKeyName key)

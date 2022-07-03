@@ -33,7 +33,7 @@ namespace Automatic9045.MapPlugins.StationController
             BveHacker.MainFormSource.Focus();
         }
 
-        public override void Tick()
+        public override void Tick(TimeSpan elapsed)
         {
         }
 

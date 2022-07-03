@@ -51,6 +51,7 @@ namespace Automatic9045.AtsEx.PluginHost
         /// <summary>
         /// 毎フレーム呼び出されます。従来の ATS プラグインの Elapse(ATS_VEHICLESTATE vehicleState, int[] panel, int[] sound) に当たります。
         /// </summary>
-        public abstract void Tick();
+        /// <param name="elapsed">前フレームから経過した時間。</param>
+        public abstract void Tick(TimeSpan elapsed);
     }
 }

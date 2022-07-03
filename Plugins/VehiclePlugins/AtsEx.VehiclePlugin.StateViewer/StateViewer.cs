@@ -33,7 +33,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             BveHacker.MainFormSource.Focus();
         }
 
-        public override void Tick()
+        public override void Tick(TimeSpan elapsed)
         {
             Form?.Tick();
         }

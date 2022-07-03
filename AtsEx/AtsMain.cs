@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
@@ -24,9 +22,8 @@ namespace Automatic9045.AtsEx
         /// <summary>Current State of Handles</summary>
         public static Handles Handle = default;
 
-        public static VehicleState VehicleState { get; set; } = default;
-
-        public static AtsEx AtsEx { get; private set; }
+        private static readonly Stopwatch Stopwatch = new Stopwatch();
+        private static AtsEx AtsEx;
 
         public static void Load(Assembly callerAssembly, AtsExActivator activator)
         {
@@ -56,7 +53,9 @@ namespace Automatic9045.AtsEx
                 vehicleState.Location, vehicleState.Speed,
                 vehicleState.BcPressure, vehicleState.MrPressure, vehicleState.ErPressure, vehicleState.BpPressure, vehicleState.SapPressure, vehicleState.Current);
 
-            AtsEx?.Tick(exVehicleState);
+            AtsEx?.Tick(Stopwatch.IsRunning ? Stopwatch.Elapsed : TimeSpan.Zero, exVehicleState);
+
+            Stopwatch.Restart();
         }
 
         public static void SetPower(int notch)
