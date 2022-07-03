@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost.BveTypes;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
@@ -18,7 +18,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [InitializeClassWrapper]
         private static void Initialize()
         {
-            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<BveFile>();
+            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<BveFile>();
 
             PathGetMethod = members.GetSourcePropertyGetterOf(nameof(Path));
             PathSetMethod = members.GetSourcePropertySetterOf(nameof(Path));

@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
+namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
-    public partial class BveTypeCollectionProvider : IDisposable
+    public partial class BveTypeSet : IDisposable
     {
-        public static BveTypeCollectionProvider Instance { get; protected set; } = null;
+        public static BveTypeSet Instance { get; protected set; } = null;
 
         protected const BindingFlags SearchAllBindingAttribute = BindingFlags.NonPublic | BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance;
 
         /// <summary>
-        /// <see cref="BveTypeCollectionProvider"/> のインスタンスを作成します。
+        /// <see cref="BveTypeSet"/> のインスタンスを作成します。
         /// </summary>
         /// <param name="bveAssembly">BVE の <see cref="Assembly"/>。</param>
         /// <param name="atsExAssembly">AtsEX 本体 (AtsEx.dll) の <see cref="Assembly"/>。</param>
@@ -39,7 +39,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 
             ProfileSelector profileSelector = new ProfileSelector(bveAssembly);
             Version profileVersion;
-            List<TypeMemberNameCollectionBase> nameCollection;
+            List<TypeMemberNameSetBase> nameCollection;
             using (ProfileInfo profile = profileSelector.GetProfileStream(allowNotSupportedVersion))
             {
                 profileVersion = profile.Version;
@@ -53,10 +53,10 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             IEnumerable<Type> wrapperTypes = atsExPluginHostAssembly.GetTypes().Concat(atsExAssembly.GetTypes()).Where(type => (type.IsClass && type.IsSubclassOf(typeof(ClassWrapperBase))) || type.IsEnum);
             IEnumerable<Type> originalTypes = bveAssembly.GetTypes();
 
-            TypeInfoGenerator typeInfoGenerator = new TypeInfoGenerator(bveAssembly, atsExAssembly);
-            IEnumerable<TypeInfo> typeInfos = typeInfoGenerator.ConvertTypeMemberNameCollections(nameCollection);
+            TypeInfoCreator typeInfoGenerator = new TypeInfoCreator(bveAssembly, atsExAssembly);
+            IEnumerable<TypeInfo> typeInfos = typeInfoGenerator.Create(nameCollection);
 
-            IEnumerable<TypeMemberCollectionBase> types = nameCollection.Select<TypeMemberNameCollectionBase, TypeMemberCollectionBase>(src =>
+            IEnumerable<TypeMemberSetBase> types = nameCollection.Select<TypeMemberNameSetBase, TypeMemberSetBase>(src =>
             {
                 TypeInfo typeInfo = typeInfos.First(t => t.Src == src);
 
@@ -65,13 +65,13 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
 
                 switch (src)
                 {
-                    case EnumMemberNameCollection enumSrc:
+                    case EnumMemberNameSet enumSrc:
                         {
-                            EnumMemberCollection members = new EnumMemberCollection(wrapperType, originalType);
+                            EnumMemberSet members = new EnumMemberSet(wrapperType, originalType);
                             return members;
                         }
 
-                    case ClassMemberNameCollection classSrc:
+                    case ClassMemberNameSet classSrc:
                         {
                             SortedList<Type[], ConstructorInfo> constructors = new SortedList<Type[], ConstructorInfo>(originalType.GetConstructors(SearchAllBindingAttribute).ToDictionary(
                                 c => c.GetParameters().Select(p => GetWrapperTypeIfOriginal(p.ParameterType)).ToArray(),
@@ -168,17 +168,17 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                             }).ToDictionary(x => x.Key, x => x.Value), new StringTypeArrayTupleComparer());
 
 
-                            ClassMemberCollection members = new ClassMemberCollection(wrapperType, originalType, constructors, propertyGetters, propertySetters, fields, methods);
+                            ClassMemberSet members = new ClassMemberSet(wrapperType, originalType, constructors, propertyGetters, propertySetters, fields, methods);
                             return members;
                         }
 
                     default:
-                        throw new NotImplementedException(string.Format(Resources.GetString("CollectionTypeNotRecognized").Value, nameof(TypeMemberNameCollectionBase), src.GetType().Name));
+                        throw new NotImplementedException(string.Format(Resources.GetString("CollectionTypeNotRecognized").Value, nameof(TypeMemberNameSetBase), src.GetType().Name));
 
                 }
             });
 
-            Instance = new BveTypeCollectionProvider(types, typeof(ClassWrapperBase));
+            Instance = new BveTypeSet(types, typeof(ClassWrapperBase));
 
             return profileVersion;
 
@@ -258,19 +258,19 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                 return wrapperType ?? type;
             }
 
-            Type ParseTypeName(TypeMemberNameCollectionBase.TypeInfoBase typeInfo, bool convertToOriginalType)
+            Type ParseTypeName(TypeMemberNameSetBase.TypeInfoBase typeInfo, bool convertToOriginalType)
             {
                 Type type;
                 switch (typeInfo)
                 {
-                    case TypeMemberNameCollectionBase.ArrayTypeInfo arrayTypeInfo:
+                    case TypeMemberNameSetBase.ArrayTypeInfo arrayTypeInfo:
                         {
                             Type baseType = ParseTypeName(arrayTypeInfo.BaseType, convertToOriginalType);
                             type = baseType.MakeArrayType(arrayTypeInfo.DimensionCount);
                         }
                         break;
 
-                    case TypeMemberNameCollectionBase.GenericTypeInfo genericTypeInfo:
+                    case TypeMemberNameSetBase.GenericTypeInfo genericTypeInfo:
                         {
                             Type[] paramTypes = genericTypeInfo.TypeParams.Select(t => ParseTypeName(t, convertToOriginalType)).ToArray();
 
@@ -289,7 +289,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                         }
                         break;
 
-                    case TypeMemberNameCollectionBase.TypeInfo basicTypeInfo:
+                    case TypeMemberNameSetBase.TypeInfo basicTypeInfo:
                         {
                             type = Type.GetType(basicTypeInfo.TypeName);
                             if (type is null)

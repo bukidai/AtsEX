@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost.BveTypes;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
@@ -17,7 +17,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [InitializeClassWrapper]
         private static void Initialize()
         {
-            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<Sound>();
+            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<Sound>();
         }
 
         private Sound(object src) : base(src)

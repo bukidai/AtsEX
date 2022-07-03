@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost.BveTypes;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
@@ -18,7 +18,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [InitializeClassWrapper]
         private static void Initialize()
         {
-            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<Structure>();
+            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<Structure>();
 
             Constructor1 = members.GetSourceConstructor(new Type[] { typeof(double), typeof(string), typeof(double), typeof(double), typeof(double), typeof(double), typeof(double), typeof(double), typeof(int), typeof(double), typeof(Model) });
             Constructor2 = members.GetSourceConstructor(new Type[] { typeof(double), typeof(string), typeof(int), typeof(double), typeof(Model) });

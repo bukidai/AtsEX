@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.Helpers;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
@@ -20,7 +20,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [InitializeClassWrapper]
         private static void Initialize()
         {
-            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<TimeTable>();
+            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<TimeTable>();
 
             ModelField = members.GetSourceFieldOf(nameof(Model));
             NameTextsField = members.GetSourceFieldOf(nameof(NameTexts));

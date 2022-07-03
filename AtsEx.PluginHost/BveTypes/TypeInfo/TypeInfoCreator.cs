@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
+namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
-    internal class TypeInfoGenerator
+    internal class TypeInfoCreator
     {
         private Assembly BveAssembly;
         private Assembly AtsExAssembly;
@@ -18,7 +18,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
         private IEnumerable<Type> WrapperTypes;
         private IEnumerable<Type> OriginalTypes;
 
-        public TypeInfoGenerator(Assembly bveAssembly, Assembly atsExAssembly)
+        public TypeInfoCreator(Assembly bveAssembly, Assembly atsExAssembly)
         {
             BveAssembly = bveAssembly;
             AtsExAssembly = atsExAssembly;
@@ -28,23 +28,23 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             OriginalTypes = BveAssembly.GetTypes();
         }
 
-        public List<TypeInfo> ConvertTypeMemberNameCollections(List<TypeMemberNameCollectionBase> src)
+        public List<TypeInfo> Create(List<TypeMemberNameSetBase> src)
         {
             List<TypeInfo> typeInfos = new List<TypeInfo>();
 
             src.ForEach(item =>
             {
-                IEnumerable<TypeInfo> children = ConvertTypeMemberNameCollections(item.Children);
+                IEnumerable<TypeInfo> children = Create(item.Children);
                 typeInfos.AddRange(children);
 
-                TypeInfo typeInfo = ConvertTypeMemberNameCollection(item);
+                TypeInfo typeInfo = Create(item);
                 typeInfos.Add(typeInfo);
             });
 
             return typeInfos;
         }
 
-        public TypeInfo ConvertTypeMemberNameCollection(TypeMemberNameCollectionBase src)
+        public TypeInfo Create(TypeMemberNameSetBase src)
         {
             Type wrapperType = WrapperTypes.FirstOrDefault(t => t.Name == src.WrapperTypeName);
 
@@ -56,11 +56,11 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             }
             else
             {
-                parentTypeInfo = ConvertTypeMemberNameCollection(src.Parent);
+                parentTypeInfo = Create(src.Parent);
                 originalType = OriginalTypes.FirstOrDefault(t => t.DeclaringType == parentTypeInfo.OriginalType && t.Name == src.OriginalTypeName);
             }
 
-            IEnumerable<TypeInfo> children = src.Children.Select(ConvertTypeMemberNameCollection);
+            IEnumerable<TypeInfo> children = src.Children.Select(Create);
 
             TypeInfo typeInfo = new TypeInfo(wrapperType, originalType, parentTypeInfo, children, src);
             return typeInfo;

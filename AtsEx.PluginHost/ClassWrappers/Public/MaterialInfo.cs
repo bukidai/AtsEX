@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using SlimDX.Direct3D9;
 
-using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost.BveTypes;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
@@ -19,7 +19,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [InitializeClassWrapper]
         private static void Initialize()
         {
-            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<MaterialInfo>();
+            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<MaterialInfo>();
 
             MaterialGetMethod = members.GetSourcePropertyGetterOf(nameof(Material));
             MaterialSetMethod = members.GetSourcePropertySetterOf(nameof(Material));

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
+namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
     internal class TypeInfo
     {
@@ -14,9 +14,9 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
         public TypeInfo Parent { get; }
         public IEnumerable<TypeInfo> Children { get; }
 
-        public TypeMemberNameCollectionBase Src { get; }
+        public TypeMemberNameSetBase Src { get; }
 
-        public TypeInfo(Type wrapperType, Type originalType, TypeInfo parent, IEnumerable<TypeInfo> children, TypeMemberNameCollectionBase src)
+        public TypeInfo(Type wrapperType, Type originalType, TypeInfo parent, IEnumerable<TypeInfo> children, TypeMemberNameSetBase src)
         {
             WrapperType = wrapperType;
             OriginalType = originalType;

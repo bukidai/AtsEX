@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost.Resources;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
+namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
     internal class ProfileSelector
     {
         protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ProfileSelector>("PluginHost");
 
-        private static readonly string DefaultNamespace = $"{typeof(BveTypeCollectionProvider).Namespace}.TypeNameDefinitions";
+        private static readonly string DefaultNamespace = $"{typeof(BveTypeSet).Namespace}.TypeNameDefinitions";
 
         private Assembly ExecutingAssembly;
         private Version BveVersion;

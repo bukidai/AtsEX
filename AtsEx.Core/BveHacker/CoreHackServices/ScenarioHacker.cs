@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using HarmonyLib;
 
 using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx
@@ -24,7 +24,7 @@ namespace Automatic9045.AtsEx
             MainForm = mainFormHacker.TargetForm;
 
 
-            ClassMemberCollection timePosFormMembers = BveTypeCollectionProvider.Instance.GetClassInfoOf<TimePosForm>();
+            ClassMemberSet timePosFormMembers = BveTypeSet.Instance.GetClassInfoOf<TimePosForm>();
             MethodInfo setScenarioMethod = timePosFormMembers.GetSourceMethodOf(nameof(TimePosForm.SetScenario));
 
             Harmony harmony = new Harmony("com.automatic9045.atsex.scenario-hacker");
@@ -45,7 +45,9 @@ namespace Automatic9045.AtsEx
             set => MainForm.CurrentScenario = value;
         }
 
+#pragma warning disable IDE1006 // 命名スタイル
         private static void SetScenarioPreFix(object[] __args)
+#pragma warning restore IDE1006 // 命名スタイル
         {
             Scenario scenario = Scenario.FromSource(__args[0]);
             ScenarioCreated?.Invoke(new ScenarioCreatedEventArgs(scenario));

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost.Resources;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
+namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
-    public class ClassMemberCollection : TypeMemberCollectionBase
+    public class ClassMemberSet : TypeMemberSetBase
     {
-        protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ClassMemberCollection>("PluginHost");
+        protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ClassMemberSet>("PluginHost");
 
         protected SortedList<Type[], ConstructorInfo> Constructors { get; }
 
@@ -20,7 +20,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
         protected SortedList<string, FieldInfo> Fields { get; }
         protected SortedList<(string, Type[]), MethodInfo> Methods { get; }
 
-        internal ClassMemberCollection(Type wrapperType, Type originalType, SortedList<Type[], ConstructorInfo> constructors,
+        internal ClassMemberSet(Type wrapperType, Type originalType, SortedList<Type[], ConstructorInfo> constructors,
             SortedList<string, MethodInfo> propertyGetters, SortedList<string, MethodInfo> propertySetters, SortedList<string, FieldInfo> fields, SortedList<(string, Type[]), MethodInfo> methods)
             : base(wrapperType, originalType)
         {
@@ -32,10 +32,10 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             Methods = methods;
         }
 
-        internal static ClassMemberCollection FromTypeCollection(TypeInfo src, SortedList<Type[], ConstructorInfo> constructors,
+        internal static ClassMemberSet FromTypeCollection(TypeInfo src, SortedList<Type[], ConstructorInfo> constructors,
             SortedList<string, MethodInfo> propertyGetters, SortedList<string, MethodInfo> propertySetters, SortedList<string, FieldInfo> fields, SortedList<(string, Type[]), MethodInfo> methods)
         {
-            return new ClassMemberCollection(src.WrapperType, src.OriginalType, constructors, propertyGetters, propertySetters, fields, methods);
+            return new ClassMemberSet(src.WrapperType, src.OriginalType, constructors, propertyGetters, propertySetters, fields, methods);
         }
 
         public MethodInfo GetSourcePropertyGetterOf(string wrapperName)

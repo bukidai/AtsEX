@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
@@ -60,7 +60,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <exception cref="InvalidOperationException">ラッパー型内に有効なクラスラッパー生成メソッドが定義されていません。</exception>
         public static ClassWrapperBase CreateFromSource(object src)
         {
-            Type wrapperType = BveTypeCollectionProvider.Instance.GetWrapperTypeOf(src.GetType());
+            Type wrapperType = BveTypeSet.Instance.GetWrapperTypeOf(src.GetType());
             return CreateFromSource(wrapperType, src);
         }
 

@@ -66,21 +66,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AtsExPluginBuilder.cs" />
-    <Compile Include="BveTypeCollection\BveTypeCollectionProvider.cs" />
-    <Compile Include="BveTypeCollection\BveTypeCollectionProvider.InstanceCreator.cs" />
-    <Compile Include="BveTypeCollection\ProfileInfo.cs" />
-    <Compile Include="BveTypeCollection\ProfileSelector.cs" />
-    <Compile Include="BveTypeCollection\TypeInfo\TypeInfo.cs" />
-    <Compile Include="BveTypeCollection\TypeInfo\TypeInfoGenerator.cs" />
-    <Compile Include="BveTypeCollection\TypeMemberCollection\EnumMemberCollection.cs" />
-    <Compile Include="BveTypeCollection\TypeMemberCollection\TypeMemberCollectionBase.cs" />
-    <Compile Include="BveTypeCollection\TypeMemberCollection\ClassMemberCollection.cs" />
-    <Compile Include="BveTypeCollection\BveTypeNameDefinitionLoader.cs" />
-    <Compile Include="BveTypeCollection\Comparer.cs" />
-    <Compile Include="BveTypeCollection\TypeMemberNameCollection\EnumMemberNameCollection.cs" />
-    <Compile Include="BveTypeCollection\TypeMemberNameCollection\TypeMemberNameCollectionBase.cs" />
-    <Compile Include="BveTypeCollection\TypeTextParser.cs" />
-    <Compile Include="BveTypeCollection\TypeMemberNameCollection\ClassMemberNameCollection.cs" />
+    <Compile Include="BveTypes\BveTypeSet.cs" />
+    <Compile Include="BveTypes\BveTypeSet.InstanceCreator.cs" />
+    <Compile Include="BveTypes\ProfileInfo.cs" />
+    <Compile Include="BveTypes\ProfileSelector.cs" />
+    <Compile Include="BveTypes\TypeInfo\TypeInfo.cs" />
+    <Compile Include="BveTypes\TypeInfo\TypeInfoCreator.cs" />
+    <Compile Include="BveTypes\TypeMemberSet\EnumMemberSet.cs" />
+    <Compile Include="BveTypes\TypeMemberSet\TypeMemberSetBase.cs" />
+    <Compile Include="BveTypes\TypeMemberSet\ClassMemberSet.cs" />
+    <Compile Include="BveTypes\BveTypeNameDefinitionLoader.cs" />
+    <Compile Include="BveTypes\Comparer.cs" />
+    <Compile Include="BveTypes\TypeMemberNameSet\EnumMemberNameSet.cs" />
+    <Compile Include="BveTypes\TypeMemberNameSet\TypeMemberNameSetBase.cs" />
+    <Compile Include="BveTypes\TypeTextParser.cs" />
+    <Compile Include="BveTypes\TypeMemberNameSet\ClassMemberNameSet.cs" />
     <Compile Include="ClassInitializer\ClassInitializerBase.cs" />
     <Compile Include="ClassInitializer\ClassWrapperInitializer.cs" />
     <Compile Include="ClassInitializer\HelperInitializer.cs" />
@@ -162,7 +162,7 @@
     <Compile Include="Resources\ResourceLocalizer.ResourceSet.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BveTypeCollection\TypeNameDefinitions\BveTypesXmlSchema.xsd">
+    <EmbeddedResource Include="BveTypes\TypeNameDefinitions\BveTypesXmlSchema.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="Resources\Files\PropertyNotInitializedException.resx" />
@@ -171,14 +171,14 @@
     <Content Include="Resources\Files\PluginTypeConverter.resx" />
     <Content Include="Resources\Files\TypeTextParser.resx" />
     <Content Include="Resources\Files\TypeTextParser.ja.resx" />
-    <Content Include="Resources\Files\BveTypeCollectionProvider.resx" />
-    <Content Include="Resources\Files\BveTypeCollectionProvider.ja.resx" />
-    <Content Include="Resources\Files\ClassMemberCollection.ja.resx" />
+    <Content Include="Resources\Files\BveTypeSet.resx" />
+    <Content Include="Resources\Files\BveTypeSet.ja.resx" />
+    <Content Include="Resources\Files\ClassMemberSet.ja.resx" />
     <Content Include="Resources\Files\ProfileSelector.ja.resx" />
     <Content Include="Resources\Files\BveTypeNameDefinitionLoader.ja.resx" />
     <Content Include="Resources\Files\ProfileSelector.resx" />
     <Content Include="Resources\Files\BveTypeNameDefinitionLoader.resx" />
-    <Content Include="Resources\Files\ClassMemberCollection.resx" />
+    <Content Include="Resources\Files\ClassMemberSet.resx" />
     <Content Include="Resources\Files\ClassWrappers\WrappedSortedList.ja.resx" />
     <Content Include="Resources\Files\ClassWrappers\WrappedSortedList.resx" />
     <Content Include="Resources\Files\ClassWrappers\MapObjectList.ja.resx" />
@@ -191,10 +191,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BveTypeCollection\TypeNameDefinitions\5.8.7554.391.xml" />
+    <EmbeddedResource Include="BveTypes\TypeNameDefinitions\5.8.7554.391.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BveTypeCollection\TypeNameDefinitions\6.0.7554.619.xml" />
+    <EmbeddedResource Include="BveTypes\TypeNameDefinitions\6.0.7554.619.xml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="LocalReferences\.gitignore" />

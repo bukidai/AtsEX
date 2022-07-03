@@ -4,33 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
+namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
-    internal abstract class TypeMemberNameCollectionBase
+    internal abstract class TypeMemberNameSetBase
     {
         public string WrapperTypeName { get; }
         public string OriginalTypeName { get; }
 
-        public TypeMemberNameCollectionBase Parent { get; private set; } = null;
-        public List<TypeMemberNameCollectionBase> Children { get; }
+        public TypeMemberNameSetBase Parent { get; private set; } = null;
+        public List<TypeMemberNameSetBase> Children { get; }
 
-        public TypeMemberNameCollectionBase(string wrapperTypeName, string originalTypeName, List<TypeMemberNameCollectionBase> children)
+        public TypeMemberNameSetBase(string wrapperTypeName, string originalTypeName, List<TypeMemberNameSetBase> children)
         {
             WrapperTypeName = wrapperTypeName;
             OriginalTypeName = originalTypeName;
 
             Children = children;
-            foreach (TypeMemberNameCollectionBase child in Children) child.Parent = this;
+            foreach (TypeMemberNameSetBase child in Children) child.Parent = this;
         }
 
-        public TypeMemberNameCollectionBase(string wrapperTypeName, string originalTypeName) : this(wrapperTypeName, originalTypeName, new List<TypeMemberNameCollectionBase>())
+        public TypeMemberNameSetBase(string wrapperTypeName, string originalTypeName) : this(wrapperTypeName, originalTypeName, new List<TypeMemberNameSetBase>())
         {
         }
 
         public override string ToString() => WrapperTypeName;
 
 
-        public class MemberInfo : IComparable<MemberInfo>
+        public class Member : IComparable<Member>
         {
             public string WrapperName { get; }
             public string OriginalName { get; }
@@ -41,7 +41,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             public bool IsWrapperPrivate { get; }
             public bool IsWrapperStatic { get; }
 
-            protected MemberInfo(string wrapperName, string originalName, bool isOriginalStatic = false, bool isOriginalPrivate = false, bool isWrapperStatic = false, bool isWrapperPrivate = false)
+            protected Member(string wrapperName, string originalName, bool isOriginalStatic = false, bool isOriginalPrivate = false, bool isWrapperStatic = false, bool isWrapperPrivate = false)
             {
                 WrapperName = wrapperName;
                 OriginalName = originalName;
@@ -53,12 +53,12 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                 IsWrapperPrivate = isWrapperPrivate;
             }
 
-            public int CompareTo(MemberInfo other) => WrapperName.CompareTo(other.WrapperName);
+            public int CompareTo(Member other) => WrapperName.CompareTo(other.WrapperName);
         }
 
-        public class PropertyAccessorInfo : MemberInfo
+        public class PropertyAccessor : Member
         {
-            public PropertyAccessorInfo(string wrapperName, string originalName, bool isOriginalStatic = false, bool isOriginalPrivate = false, bool isWrapperStatic = false, bool isWrapperPrivate = false)
+            public PropertyAccessor(string wrapperName, string originalName, bool isOriginalStatic = false, bool isOriginalPrivate = false, bool isWrapperStatic = false, bool isWrapperPrivate = false)
                 : base(wrapperName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate)
             {
             }
@@ -66,9 +66,9 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             public override string ToString() => $"Property: {WrapperName}";
         }
 
-        public class FieldInfo : MemberInfo
+        public class Field : Member
         {
-            public FieldInfo(string wrapperPropertyName, string originalName, bool isOriginalStatic = false, bool isOriginalPrivate = false, bool isWrapperStatic = false, bool isWrapperPrivate = false)
+            public Field(string wrapperPropertyName, string originalName, bool isOriginalStatic = false, bool isOriginalPrivate = false, bool isWrapperStatic = false, bool isWrapperPrivate = false)
                 : base(wrapperPropertyName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate)
             {
             }
@@ -76,16 +76,16 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
             public override string ToString() => $"Field: {WrapperName}";
         }
 
-        public class MethodInfo : MemberInfo
+        public class Method : Member
         {
             public IEnumerable<TypeInfoBase> WrapperParamNames { get; set; }
 
-            public MethodInfo(string wrapperName, string originalName, bool isOriginalStatic = false, bool isOriginalPrivate = false, bool isWrapperStatic = false, bool isWrapperPrivate = false)
+            public Method(string wrapperName, string originalName, bool isOriginalStatic = false, bool isOriginalPrivate = false, bool isWrapperStatic = false, bool isWrapperPrivate = false)
                 : this(wrapperName, originalName, null, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate)
             {
             }
 
-            public MethodInfo(string wrapperName, string originalName, IEnumerable<TypeInfoBase> wrapperParamNames, bool isOriginalStatic = false, bool isOriginalPrivate = false, bool isWrapperStatic = false, bool isWrapperPrivate = false)
+            public Method(string wrapperName, string originalName, IEnumerable<TypeInfoBase> wrapperParamNames, bool isOriginalStatic = false, bool isOriginalPrivate = false, bool isWrapperStatic = false, bool isWrapperPrivate = false)
                 : base(wrapperName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate)
             {
                 WrapperParamNames = wrapperParamNames;

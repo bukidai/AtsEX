@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 using Automatic9045.AtsEx.Input;
 using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
+using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.Helpers;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
@@ -55,7 +55,7 @@ namespace Automatic9045.AtsEx
 
             sw.Restart();
             Version bveVersion = TargetAssembly.GetName().Version;
-            Version profileVersion = BveTypeCollectionProvider.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly, true);
+            Version profileVersion = BveTypeSet.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly, true);
             Debug.WriteLine($"BveTypeCollectionProvider: {sw.ElapsedMilliseconds}ms");
 
             sw.Restart();
@@ -170,7 +170,7 @@ namespace Automatic9045.AtsEx
 
             VersionFormProvider.Dispose();
             ContextMenuHacker.Dispose();
-            BveTypeCollectionProvider.Instance.Dispose();
+            BveTypeSet.Instance.Dispose();
         }
 
         public void SetVehicleSpec(VehicleSpec vehicleSpec)

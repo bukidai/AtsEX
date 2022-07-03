@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost.Resources;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
+namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
     internal sealed class TypeTextParser
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<TypeTextParser>("PluginHost");
 
-        public static TypeMemberNameCollectionBase.TypeInfoBase Parse(string text)
+        public static TypeMemberNameSetBase.TypeInfoBase Parse(string text)
         {
             try
             {
-                IEnumerable<TypeMemberNameCollectionBase.TypeInfoBase> typeParams = null;
+                IEnumerable<TypeMemberNameSetBase.TypeInfoBase> typeParams = null;
                 List<int> arrayDimensionCounts = new List<int>();
 
                 string name = "";
@@ -63,19 +63,19 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypeCollection
                     }
                 }
 
-                TypeMemberNameCollectionBase.TypeInfoBase result;
+                TypeMemberNameSetBase.TypeInfoBase result;
                 if (typeParams is null)
                 {
-                    result = new TypeMemberNameCollectionBase.TypeInfo(name);
+                    result = new TypeMemberNameSetBase.TypeInfo(name);
                 }
                 else
                 {
-                    result = new TypeMemberNameCollectionBase.GenericTypeInfo(name, typeParams);
+                    result = new TypeMemberNameSetBase.GenericTypeInfo(name, typeParams);
                 }
 
                 arrayDimensionCounts.ForEach(dimensionCount =>
                 {
-                    result = new TypeMemberNameCollectionBase.ArrayTypeInfo(result, dimensionCount);
+                    result = new TypeMemberNameSetBase.ArrayTypeInfo(result, dimensionCount);
                 });
 
                 return result;

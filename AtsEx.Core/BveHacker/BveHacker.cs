@@ -12,7 +12,6 @@ using HarmonyLib;
 using Mackoy.Bvets;
 
 using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx
