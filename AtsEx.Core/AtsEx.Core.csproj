@@ -119,9 +119,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(TargetDir)0Harmony.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
+    <PostBuildEvent>xcopy /y /i "$(TargetDir)0Harmony.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
 
-copy /y "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
-copy /y "$(ProjectDir)Resources\" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\Resources\Core\"</PostBuildEvent>
+xcopy /y /i "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
+xcopy /y /i "$(ProjectDir)Resources\" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\Resources\Core\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -206,9 +206,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
-xcopy /e /y "$(ProjectDir)Resources\Files\" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\Resources\PluginHost\"
-copy /y "$(ProjectDir)LocalReferences\DXDynamicTexture\Zbx1425.DXDynamicTexture-net35.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
-copy /y "$(ProjectDir)LocalReferences\DXDynamicTexture\Zbx1425.DXDynamicTexture-net48.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /y /i "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
+xcopy /e /y /i "$(ProjectDir)Resources\Files\" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\Resources\PluginHost\"
+xcopy /y /i "$(ProjectDir)LocalReferences\DXDynamicTexture\Zbx1425.DXDynamicTexture-net35.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
+xcopy /y /i "$(ProjectDir)LocalReferences\DXDynamicTexture\Zbx1425.DXDynamicTexture-net48.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

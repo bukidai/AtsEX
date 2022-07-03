@@ -77,9 +77,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(TargetDir)Octokit.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
+    <PostBuildEvent>xcopy /y /i "$(TargetDir)Octokit.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
 
-copy /y "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"</PostBuildEvent>
+xcopy /y /i "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PlatformTarget>AnyCPU</PlatformTarget>
