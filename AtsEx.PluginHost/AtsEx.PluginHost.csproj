@@ -97,7 +97,7 @@
     <Compile Include="ClassWrappers\Public\TimeManager.cs" />
     <Compile Include="ClassWrappers\Public\Forms\ScenarioSelectionForm.cs" />
     <Compile Include="ClassWrappers\Public\Forms\TimePosForm.cs" />
-    <Compile Include="ClassWrappers\UnidentifiedClasses\cz.cs" />
+    <Compile Include="ClassWrappers\Public\TrainDrawer.cs" />
     <Compile Include="DXDynamicTextureHost.cs" />
     <Compile Include="Enums\GameState.cs" />
     <Compile Include="Enums\TiltOptions.cs" />
@@ -200,6 +200,9 @@
     <Content Include="LocalReferences\DXDynamicTexture\Zbx1425.DXDynamicTexture-net48.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ClassWrappers\UnidentifiedClasses\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

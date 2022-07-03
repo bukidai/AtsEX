@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <BveTypeNameDefinitions xmlns="http://automatic9045.github.io/ns/xmlschemas/BveTypesXmlSchema.xsd">
 	<!-- Unidentified classes -->
-	<Class Wrapper="cz" Original="cz">
-		<Method Wrapper="SetRoute" WrapperParams="Route" IsWrapperPrivate="true" Original="a"/>
-	</Class>
 	<!-- Unidentified classes END -->
 	
 	<!-- Forms -->
@@ -430,6 +427,10 @@
 		<Field WrapperProperty="TrainInfo" Original="d" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="Location" Original="g" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="Speed" Original="h" IsOriginalPrivate="true"/>
+	</Class>
+
+	<Class Wrapper="TrainDrawer" Original="cz">
+		<Method Wrapper="SetRoute" WrapperParams="Route" IsWrapperPrivate="true" Original="a"/>
 	</Class>
 
 	<Class Wrapper="TrainInfo" Original="fc">

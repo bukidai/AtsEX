@@ -10,8 +10,7 @@ using Automatic9045.AtsEx.PluginHost.BveTypeCollection;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
-    [WillRefactor]
-    internal sealed class cz : ClassWrapperBase
+    public class TrainDrawer : ClassWrapperBase
     {
         public static class OriginalMemberSet
         {
@@ -21,12 +20,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [InitializeClassWrapper]
         private static void Initialize()
         {
-            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<cz>();
+            ClassMemberCollection members = BveTypeCollectionProvider.Instance.GetClassInfoOf<TrainDrawer>();
 
             OriginalMemberSet.SetRouteMethod = members.GetSourceMethodOf(nameof(SetRoute));
         }
 
-        private cz(object src) : base(src)
+        private TrainDrawer(object src) : base(src)
         {
         }
 

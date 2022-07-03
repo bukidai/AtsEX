@@ -23,7 +23,7 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
             BveHacker = bveHacker;
 
             Harmony harmony = new Harmony("com.automatic9045.atsex.classwrappers.structureset-life-prolonger");
-            harmony.Patch(cz.OriginalMemberSet.SetRouteMethod, new HarmonyMethod(typeof(StructureSetLifeProlonger), nameof(SetRoutePrefix)));
+            harmony.Patch(TrainDrawer.OriginalMemberSet.SetRouteMethod, new HarmonyMethod(typeof(StructureSetLifeProlonger), nameof(SetRoutePrefix)));
         }
 
         private static void SetRoutePrefix(object[] __args)
