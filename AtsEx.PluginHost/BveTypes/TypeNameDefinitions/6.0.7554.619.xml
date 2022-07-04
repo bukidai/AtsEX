@@ -459,5 +459,28 @@
 	</Class>
 
 	<Class Wrapper="Vehicle" Original="f">
+		<Property Wrapper="Dynamics">
+			<Getter Original="g"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="VehicleDynamics" Original="b2">
+		<Property Wrapper="CurveResistanceFactor">
+			<Getter Original="i"/>
+			<Setter Original="g"/>
+		</Property>
+		<Property Wrapper="RunningResistanceFactorA">
+			<Getter Original="a"/>
+			<Setter Original="d"/>
+		</Property>
+		<Property Wrapper="RunningResistanceFactorB">
+			<Getter Original="h"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="RunningResistanceFactorC">
+			<Getter Original="e"/>
+			<Setter Original="c"/>
+		</Property>
 	</Class>
 </BveTypeNameDefinitions>

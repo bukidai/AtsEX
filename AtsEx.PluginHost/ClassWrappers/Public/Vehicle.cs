@@ -18,6 +18,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         private static void Initialize()
         {
             ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<Vehicle>();
+
+            DynamicsGetMethod = members.GetSourcePropertyGetterOf(nameof(Dynamics));
+            DynamicsSetMethod = members.GetSourcePropertySetterOf(nameof(Dynamics));
         }
 
         private Vehicle(object src) : base(src)
@@ -34,6 +37,17 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             if (src is null) return null;
             return new Vehicle(src);
+        }
+
+        private static MethodInfo DynamicsGetMethod;
+        private static MethodInfo DynamicsSetMethod;
+        /// <summary>
+        /// 曲線抵抗の係数を取得・設定します。
+        /// </summary>
+        public VehicleDynamics Dynamics
+        {
+            get => VehicleDynamics.FromSource(DynamicsGetMethod.Invoke(Src, null));
+            set => DynamicsSetMethod.Invoke(Src, new object[] { value.Src });
         }
     }
 }

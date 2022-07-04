@@ -103,6 +103,7 @@
     <Compile Include="ClassWrappers\Public\Forms\ScenarioSelectionForm.cs" />
     <Compile Include="ClassWrappers\Public\Forms\TimePosForm.cs" />
     <Compile Include="ClassWrappers\Public\TrainDrawer.cs" />
+    <Compile Include="ClassWrappers\Public\VehicleDynamics.cs" />
     <Compile Include="DXDynamicTextureHost.cs" />
     <Compile Include="Enums\GameState.cs" />
     <Compile Include="Enums\TiltOptions.cs" />
