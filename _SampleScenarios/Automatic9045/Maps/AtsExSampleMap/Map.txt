@@ -58,6 +58,12 @@ Track['1'].X.Interpolate(-3.8);
 	Repeater['Form0R'].End();
 	Repeater['Form0CR'].End();
 	Repeater['Form0WallR'].End();
+
+1550;
+	Station['WindStart'].Put(-1, 0, 0);
+
+1650;
+	Station['WindEnd'].Put(-1, 0, 0);
 	
 2865;
 	Repeater['Form0R'].Begin0('0', 1, 5, 5, 'FormR');
