@@ -7,13 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Automatic9045.AtsEx.PluginHost
+namespace Automatic9045.AtsEx.PluginHost.Plugins
 {
     public class AllPluginLoadedEventArgs : EventArgs
     {
-        public List<AtsExPluginInfo> Plugins { get; }
+        public List<PluginInfo> Plugins { get; }
 
-        public AllPluginLoadedEventArgs(List<AtsExPluginInfo> plugins) : base()
+        public AllPluginLoadedEventArgs(List<PluginInfo> plugins) : base()
         {
             Plugins = plugins;
         }

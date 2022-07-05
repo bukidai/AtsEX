@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Automatic9045.AtsEx.PluginHost.Plugins;
+
 using Automatic9045.AtsEx.PluginHost.Input.Native;
 
 namespace Automatic9045.AtsEx.PluginHost
@@ -45,15 +47,15 @@ namespace Automatic9045.AtsEx.PluginHost
 
         /// <summary>
         /// 読み込まれた AtsEX 車両プラグインのリストを取得します。
-        /// <see cref="AtsExPluginBase"/> のコンストラクタ内など、<see cref="AllVehiclePluginLoaded"/> イベントが発生するより前には取得できないので注意してください。
+        /// <see cref="PluginBase"/> のコンストラクタ内など、<see cref="AllVehiclePluginLoaded"/> イベントが発生するより前には取得できないので注意してください。
         /// </summary>
-        List<AtsExPluginInfo> VehiclePlugins { get; }
+        List<PluginInfo> VehiclePlugins { get; }
 
         /// <summary>
         /// 読み込まれた AtsEX 路線プラグインのリストを取得します。
-        /// <see cref="AtsExPluginBase"/> のコンストラクタ内など、<see cref="AllMapPluginLoaded"/> イベントが発生するより前には取得できないので注意してください。
+        /// <see cref="PluginBase"/> のコンストラクタ内など、<see cref="AllMapPluginLoaded"/> イベントが発生するより前には取得できないので注意してください。
         /// </summary>
-        List<AtsExPluginInfo> MapPlugins { get; }
+        List<PluginInfo> MapPlugins { get; }
 
 
         /// <summary>

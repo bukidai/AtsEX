@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost
+namespace Automatic9045.AtsEx.PluginHost.Plugins
 {
-    public class AtsExPluginBuilder
+    public class PluginBuilder
     {
         internal IApp App { get; }
         internal IBveHacker BveHacker { get; private set; } = null;
 
-        public AtsExPluginBuilder(IApp app)
+        public PluginBuilder(IApp app)
         {
             App = app;
         }
 
-        public AtsExPluginBuilder UseAtsExExtensions(IBveHacker bveHacker)
+        public PluginBuilder UseAtsExExtensions(IBveHacker bveHacker)
         {
             BveHacker = bveHacker;
             return this;

@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.MapPlugins.TrainController
 {
-    public class TrainController : AtsExPluginBase, IDisposable
+    public class TrainController : PluginBase, IDisposable
     {
         private Train Train;
         private double Speed = 25 / 3.6; // 25[km/h] = (25 / 3.6)[m/s]
 
-        public TrainController(AtsExPluginBuilder builder) : base(builder, PluginType.MapPlugin)
+        public TrainController(PluginBuilder builder) : base(builder, PluginType.MapPlugin)
         {
             BveHacker.ScenarioCreated += e => Train = e.Scenario.Trains["test"];
 

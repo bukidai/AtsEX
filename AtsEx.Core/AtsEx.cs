@@ -14,6 +14,7 @@ using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.Helpers;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
@@ -34,8 +35,8 @@ namespace Automatic9045.AtsEx
 
         private readonly VersionFormProvider VersionFormProvider;
 
-        private readonly List<AtsExPluginInfo> VehiclePlugins;
-        private readonly List<AtsExPluginInfo> MapPlugins;
+        private readonly List<PluginInfo> VehiclePlugins;
+        private readonly List<PluginInfo> MapPlugins;
 
         public AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, Assembly callerAssembly)
         {
@@ -140,8 +141,8 @@ namespace Automatic9045.AtsEx
             }
             finally
             {
-                if (VehiclePlugins is null) VehiclePlugins = new List<AtsExPluginInfo>();
-                if (MapPlugins is null) MapPlugins = new List<AtsExPluginInfo>();
+                if (VehiclePlugins is null) VehiclePlugins = new List<PluginInfo>();
+                if (MapPlugins is null) MapPlugins = new List<PluginInfo>();
 
                 App.VehiclePlugins = VehiclePlugins;
                 App.MapPlugins = MapPlugins;

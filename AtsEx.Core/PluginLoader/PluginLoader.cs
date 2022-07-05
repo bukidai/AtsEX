@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
@@ -24,7 +25,7 @@ namespace Automatic9045.AtsEx
             BveHacker = bveHacker;
         }
 
-        public IEnumerable<AtsExPluginInfo> LoadFromList(PluginType pluginType, string listAbsolutePath)
+        public IEnumerable<PluginInfo> LoadFromList(PluginType pluginType, string listAbsolutePath)
         {
             if (!File.Exists(listAbsolutePath))
             {
@@ -38,7 +39,7 @@ namespace Automatic9045.AtsEx
         }
 
         [UnderConstruction] // AtsExPluginBuilderの作り分け
-        public IEnumerable<AtsExPluginInfo> Load(PluginType pluginType, string relativePath, string absolutePath, string senderFileName = null, int lineIndex = 0)
+        public IEnumerable<PluginInfo> Load(PluginType pluginType, string relativePath, string absolutePath, string senderFileName = null, int lineIndex = 0)
         {
             Assembly assembly = null;
             try
@@ -55,33 +56,33 @@ namespace Automatic9045.AtsEx
             }
 
             Type[] allTypes = assembly.GetTypes();
-            IEnumerable<Type> pluginTypeCandidates = allTypes.Where(t => t.IsClass && t.IsPublic && !t.IsAbstract && t.IsSubclassOf(typeof(AtsExPluginBase)));
+            IEnumerable<Type> pluginTypeCandidates = allTypes.Where(t => t.IsClass && t.IsPublic && !t.IsAbstract && t.IsSubclassOf(typeof(PluginBase)));
             if (!pluginTypeCandidates.Any())
             {
                 throw new BveFileLoadException(
-                    string.Format(Resources.GetString("PluginClassNotFound").Value, relativePath, nameof(AtsExPluginBase), App.ProductShortName),
+                    string.Format(Resources.GetString("PluginClassNotFound").Value, relativePath, nameof(PluginBase), App.ProductShortName),
                     senderFileName, lineIndex);
             }
 
-            AtsExPluginBuilder pluginBuilder = new AtsExPluginBuilder(App)
+            PluginBuilder pluginBuilder = new PluginBuilder(App)
                 .UseAtsExExtensions(BveHacker);
 
-            IEnumerable<AtsExPluginInfo> plugins = pluginTypeCandidates.Select(t =>
+            IEnumerable<PluginInfo> plugins = pluginTypeCandidates.Select(t =>
             {
-                ConstructorInfo constructorInfo = t.GetConstructor(new Type[] { typeof(AtsExPluginBuilder) });
+                ConstructorInfo constructorInfo = t.GetConstructor(new Type[] { typeof(PluginBuilder) });
                 if (constructorInfo is null) return null;
 
-                AtsExPluginBase pluginInstance = constructorInfo.Invoke(new object[] { pluginBuilder }) as AtsExPluginBase;
+                PluginBase pluginInstance = constructorInfo.Invoke(new object[] { pluginBuilder }) as PluginBase;
                 if (pluginInstance.PluginType != pluginType) throw new InvalidOperationException(string.Format(Resources.GetString("WrongPluginType").Value, pluginType.GetTypeString(), pluginInstance.PluginType.GetTypeString()));
                 if (pluginInstance.PluginType == PluginType.MapPlugin && !pluginInstance.UseAtsExExtensions) throw new NotSupportedException(string.Format(Resources.GetString("MustUseExtensions").Value, pluginInstance.PluginType.GetTypeString(), App.ProductShortName));
 
-                AtsExPluginInfo pluginInfo = new AtsExPluginInfo(assembly, t.FullName, pluginInstance);
+                PluginInfo pluginInfo = new PluginInfo(assembly, t.FullName, pluginInstance);
                 return pluginInfo;
             }).Where(plugin => !(plugin is null)).ToArray();
             if (!plugins.Any())
             {
                 throw new BveFileLoadException(
-                    string.Format(Resources.GetString("ConstructorNotFound").Value, relativePath, nameof(AtsExPluginBase), typeof(AtsExPluginBuilder)),
+                    string.Format(Resources.GetString("ConstructorNotFound").Value, relativePath, nameof(PluginBase), typeof(PluginBuilder)),
                     senderFileName, lineIndex);
             }
 

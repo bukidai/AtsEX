@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.Helpers;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
@@ -51,7 +52,7 @@ namespace Automatic9045.AtsEx
             Form.Hide();
         }
 
-        public void Intialize(IEnumerable<AtsExPluginInfo> plugins)
+        public void Intialize(IEnumerable<PluginInfo> plugins)
         {
             Form.SetPluginDetails(plugins);
         }

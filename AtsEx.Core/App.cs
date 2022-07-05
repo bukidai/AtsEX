@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Automatic9045.AtsEx.Input;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
@@ -34,8 +35,8 @@ namespace Automatic9045.AtsEx
         public Assembly AtsExPluginHostAssembly { get; }
         public Assembly BveAssembly { get; }
 
-        private List<AtsExPluginInfo> _VehiclePlugins = null;
-        public List<AtsExPluginInfo> VehiclePlugins
+        private List<PluginInfo> _VehiclePlugins = null;
+        public List<PluginInfo> VehiclePlugins
         {
             get => _VehiclePlugins is null ? throw new PropertyNotInitializedException(nameof(VehiclePlugins)) : _VehiclePlugins;
             set
@@ -45,8 +46,8 @@ namespace Automatic9045.AtsEx
             }
         }
 
-        private List<AtsExPluginInfo> _MapPlugins = null;
-        public List<AtsExPluginInfo> MapPlugins
+        private List<PluginInfo> _MapPlugins = null;
+        public List<PluginInfo> MapPlugins
         {
             get => _MapPlugins is null ? throw new PropertyNotInitializedException(nameof(MapPlugins)) : _MapPlugins;
             set

@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.MapPlugins.RunningResistanceTest
 {
-    public class Class1 : AtsExPluginBase
+    public class Class1 : PluginBase
     {
         private double defaultFactorA;
         private double defaultFactorB;
         private double defaultFactorC;
 
-        public Class1(AtsExPluginBuilder builder) : base(builder, PluginType.MapPlugin)
+        public Class1(PluginBuilder builder) : base(builder, PluginType.MapPlugin)
         {
             BveHacker.ScenarioCreated += OnScenarioCreated;
         }

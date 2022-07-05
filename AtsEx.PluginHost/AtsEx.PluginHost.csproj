@@ -65,7 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AtsExPluginBuilder.cs" />
+    <Compile Include="Plugins\PluginBuilder.cs" />
     <Compile Include="BveTypes\BveTypeSet.cs" />
     <Compile Include="BveTypes\BveTypeSet.InstanceCreator.cs" />
     <Compile Include="BveTypes\ProfileInfo.cs" />
@@ -145,13 +145,13 @@
     <Compile Include="Exceptions\DevelopException.cs" />
     <Compile Include="Exceptions\PropertyNotInitializedException.cs" />
     <Compile Include="IApp.cs" />
-    <Compile Include="AtsExPluginInfo.cs" />
+    <Compile Include="Plugins\PluginInfo.cs" />
     <Compile Include="Attributes\UnderConstructionAttribute.cs" />
     <Compile Include="Attributes\WillRefactorAttribute.cs" />
     <Compile Include="Enums\ConstantSpeedState.cs" />
     <Compile Include="Enums\ReverserPosition.cs" />
     <Compile Include="IBveHacker.cs" />
-    <Compile Include="AtsExPluginBase.cs" />
+    <Compile Include="Plugins\PluginBase.cs" />
     <Compile Include="Input\KeyBase.cs" />
     <Compile Include="Input\Native\INativeKeySet.cs" />
     <Compile Include="Input\Native\NativeAtsKeyName.cs" />

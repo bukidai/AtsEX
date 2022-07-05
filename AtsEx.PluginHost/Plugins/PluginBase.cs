@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Automatic9045.AtsEx.PluginHost
+namespace Automatic9045.AtsEx.PluginHost.Plugins
 {
     /// <summary>
     /// AtsEX プラグインを表します。
     /// </summary>
-    public abstract class AtsExPluginBase
+    public abstract class PluginBase
     {
         public PluginType PluginType { get; }
         public bool UseAtsExExtensions { get; }
@@ -25,7 +25,7 @@ namespace Automatic9045.AtsEx.PluginHost
         /// </summary>
         /// <param name="builder">AtsEX から渡される BVE、AtsEX の情報。</param>
         /// <param name="pluginType">プラグインの種別。</param>
-        public AtsExPluginBase(AtsExPluginBuilder builder, PluginType pluginType) : this(builder, pluginType, true)
+        public PluginBase(PluginBuilder builder, PluginType pluginType) : this(builder, pluginType, true)
         {
         }
 
@@ -37,7 +37,7 @@ namespace Automatic9045.AtsEx.PluginHost
         /// <param name="useAtsExExtensions">AtsEX 拡張機能を利用するか。<br/>
         /// <see langword="false"/> を指定すると、<see cref="BveHacker"/> が取得できなくなる代わりに、BVE のバージョンの問題で AtsEX 拡張機能の読込に失敗した場合でもシナリオを開始できるようになります。<br/>
         /// マッププラグインでは <see langword="false"/> を指定することはできません。</param>
-        public AtsExPluginBase(AtsExPluginBuilder builder, PluginType pluginType, bool useAtsExExtensions)
+        public PluginBase(PluginBuilder builder, PluginType pluginType, bool useAtsExExtensions)
         {
             PluginType = pluginType;
             UseAtsExExtensions = useAtsExExtensions;

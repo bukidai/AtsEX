@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.AtsEx
 {
@@ -14,7 +15,7 @@ namespace Automatic9045.AtsEx
         protected const string NoMapPluginHeader = "[[nompi]]";
         protected const string MapPluginUsingHeader = "<mpiusing>";
 
-        public List<AtsExPluginInfo> LoadedPlugins { get; } = new List<AtsExPluginInfo>();
+        public List<PluginInfo> LoadedPlugins { get; } = new List<PluginInfo>();
         public Dictionary<string, List<(int, int)>> RemoveErrorIncludePositions { get; } = new Dictionary<string, List<(int, int)>>();
 
         protected BveHacker BveHacker { get; }
@@ -52,7 +53,7 @@ namespace Automatic9045.AtsEx
                             {
                                 string mapPluginListRelativePath = includePath.Substring(MapPluginUsingHeader.Length);
                                 string mapPluginListAbsolutePath = Path.Combine(Path.GetDirectoryName(filePath), mapPluginListRelativePath);
-                                IEnumerable<AtsExPluginInfo> loadedMapPlugins = PluginLoader.LoadFromList(PluginType.MapPlugin, mapPluginListAbsolutePath);
+                                IEnumerable<PluginInfo> loadedMapPlugins = PluginLoader.LoadFromList(PluginType.MapPlugin, mapPluginListAbsolutePath);
                                 LoadedPlugins.AddRange(loadedMapPlugins);
 
                                 RemoveErrorIncludePositions[filePath].Add((i + 1, s.Key + 1));

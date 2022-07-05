@@ -7,17 +7,18 @@ using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.Helpers;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.VehiclePlugins.StateViewer
 {
-    public class StateViewer : AtsExPluginBase, IDisposable
+    public class StateViewer : PluginBase, IDisposable
     {
         private readonly ContextMenuHacker ContextMenuHacker = new ContextMenuHacker();
 
         private readonly StateForm Form;
         private readonly ToolStripMenuItem MenuItem;
 
-        public StateViewer(AtsExPluginBuilder services) : base(services, PluginType.VehiclePlugin)
+        public StateViewer(PluginBuilder services) : base(services, PluginType.VehiclePlugin)
         {
             InstanceStore.Initialize(App, BveHacker);
 

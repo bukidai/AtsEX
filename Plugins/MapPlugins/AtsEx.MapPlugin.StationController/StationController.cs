@@ -7,17 +7,18 @@ using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.Helpers;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.MapPlugins.StationController
 {
-    public class StationController : AtsExPluginBase, IDisposable
+    public class StationController : PluginBase, IDisposable
     {
         private readonly ContextMenuHacker ContextMenuHacker = new ContextMenuHacker();
 
         private readonly ControllerForm Form;
         private readonly ToolStripMenuItem MenuItem;
 
-        public StationController(AtsExPluginBuilder services) : base(services, PluginType.MapPlugin)
+        public StationController(PluginBuilder services) : base(services, PluginType.MapPlugin)
         {
             InstanceStore.Initialize(App, BveHacker);
 

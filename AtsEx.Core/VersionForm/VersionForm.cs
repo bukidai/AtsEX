@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
@@ -22,7 +23,7 @@ namespace Automatic9045.AtsEx
             InitializeComponent(app);
         }
 
-        public void SetPluginDetails(IEnumerable<AtsExPluginInfo> plugins)
+        public void SetPluginDetails(IEnumerable<PluginInfo> plugins)
         {
             ListViewItem[] listViewItems = plugins.Select(plugin =>
             {

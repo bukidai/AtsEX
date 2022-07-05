@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost
+namespace Automatic9045.AtsEx.PluginHost.Plugins
 {
     /// <summary>
     /// 読み込まれた AtsEX プラグインの情報を表します。
     /// </summary>
-    public class AtsExPluginInfo
+    public class PluginInfo
     {
         /// <summary>
         /// AtsEX プラグインのソースの <see cref="SourceAssembly"/> を取得します。 
@@ -18,16 +18,16 @@ namespace Automatic9045.AtsEx.PluginHost
         public Assembly SourceAssembly { get; }
 
         /// <summary>
-        /// AtsEX プラグインの <see cref="AtsExPluginBase"/> を継承するメインクラスの完全修飾名を取得します。
+        /// AtsEX プラグインの <see cref="PluginBase"/> を継承するメインクラスの完全修飾名を取得します。
         /// </summary>
         public string MainClassFullName { get; }
 
         /// <summary>
-        /// AtsEX プラグインの <see cref="AtsExPluginBase"/> を継承するメインクラスのインスタンスを取得します。
+        /// AtsEX プラグインの <see cref="PluginBase"/> を継承するメインクラスのインスタンスを取得します。
         /// </summary>
-        public AtsExPluginBase PluginInstance { get; }
+        public PluginBase PluginInstance { get; }
 
-        public AtsExPluginInfo(Assembly sourceAssembly, string mainClassFullName, AtsExPluginBase pluginInstance)
+        public PluginInfo(Assembly sourceAssembly, string mainClassFullName, PluginBase pluginInstance)
         {
             SourceAssembly = sourceAssembly;
             MainClassFullName = mainClassFullName;
