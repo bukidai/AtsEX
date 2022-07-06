@@ -19,13 +19,18 @@ namespace Automatic9045.AtsEx
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<App>("Core");
 
-        public App(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
+        public static App Instance { get; private set; }
+
+        private App(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
         {
             BveAssembly = bveAssembly;
             AtsExCallerAssembly = callerAssembly;
             AtsExAssembly = atsExAssembly;
             AtsExPluginHostAssembly = atsExPluginHostAssembly;
         }
+
+        public static void CreateInstance(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
+            => Instance = new App(bveAssembly, callerAssembly, atsExAssembly, atsExPluginHostAssembly);
 
         public string ProductName { get; } = Resources.GetString("ProductName").Value;
         public string ProductShortName { get; } = Resources.GetString("ProductShortName").Value;

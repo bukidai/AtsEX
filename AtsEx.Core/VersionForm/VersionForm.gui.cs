@@ -26,14 +26,14 @@ namespace Automatic9045.AtsEx
 
         protected Button OK;
 
-        protected void InitializeComponent(App app)
+        protected void InitializeComponent()
         {
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(800, 480);
             Font = new Font("Yu Gothic UI", 9);
-            Text = string.Format(Resources.GetString("Caption").Value, app.ProductShortName);
+            Text = string.Format(Resources.GetString("Caption").Value, App.Instance.ProductShortName);
 
 
             Title = new Label()
@@ -43,7 +43,7 @@ namespace Automatic9045.AtsEx
                 Width = 160,
                 Height = 48,
                 Font = new Font("Yu Gothic UI", 28, FontStyle.Bold),
-                Text = app.ProductShortName,
+                Text = App.Instance.ProductShortName,
             };
             Controls.Add(Title);
 
@@ -54,7 +54,7 @@ namespace Automatic9045.AtsEx
                 Top = 88,
                 Width = 480,
                 UseMnemonic = false,
-                Text = string.Format(Resources.GetString("Description").Value, app.ProductName, app.AtsExAssembly.GetName().Version),
+                Text = string.Format(Resources.GetString("Description").Value, App.Instance.ProductName, App.Instance.AtsExAssembly.GetName().Version),
             };
             Controls.Add(Description);
 
@@ -86,7 +86,7 @@ namespace Automatic9045.AtsEx
                 Left = 96,
                 Top = 148,
                 Width = 176,
-                Text = string.Format(Resources.GetString("Website").Value, app.ProductShortName),
+                Text = string.Format(Resources.GetString("Website").Value, App.Instance.ProductShortName),
             };
             HomepageLink.LinkClicked += LinkClicked;
             Controls.Add(HomepageLink);

@@ -28,7 +28,6 @@ namespace Automatic9045.AtsEx
         private readonly Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
         private readonly Assembly PluginHostAssembly;
 
-        private readonly App App;
         private readonly BveHacker BveHacker;
 
         private readonly ContextMenuHacker ContextMenuHacker;
@@ -60,7 +59,7 @@ namespace Automatic9045.AtsEx
             Debug.WriteLine($"BveTypeCollectionProvider: {sw.ElapsedMilliseconds}ms");
 
             sw.Restart();
-            App = new App(TargetAssembly, CallerAssembly, ExecutingAssembly, PluginHostAssembly);
+            App.CreateInstance(TargetAssembly, CallerAssembly, ExecutingAssembly, PluginHostAssembly);
             Debug.WriteLine($"App: {sw.ElapsedMilliseconds}ms");
 
             sw.Restart();
@@ -68,18 +67,18 @@ namespace Automatic9045.AtsEx
             Debug.WriteLine($"BveHacker: {sw.ElapsedMilliseconds}ms");
 
             sw.Restart();
-            ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(App, BveHacker);
+            ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(App.Instance, BveHacker);
             classWrapperInitializer.InitializeAll();
             Debug.WriteLine($"ClassWrapper: {sw.ElapsedMilliseconds}ms");
 
             sw.Restart();
-            HelperInitializer helperInitializer = new HelperInitializer(App, BveHacker);
+            HelperInitializer helperInitializer = new HelperInitializer(App.Instance, BveHacker);
             helperInitializer.InitializeAll();
             Debug.WriteLine($"ClassWrapper: {sw.ElapsedMilliseconds}ms");
 
             //DXDynamicTextureHost = new DXDynamicTextureHost();
 
-            string versionWarningText = string.Format(resources.GetString("BveVersionNotSupported").Value, bveVersion, profileVersion, App.ProductShortName);
+            string versionWarningText = string.Format(resources.GetString("BveVersionNotSupported").Value, bveVersion, profileVersion, App.Instance.ProductShortName);
             if (profileVersion != bveVersion)
             {
                 LoadErrorManager.Throw(versionWarningText);
@@ -88,9 +87,9 @@ namespace Automatic9045.AtsEx
             ContextMenuHacker = new ContextMenuHacker();
             ContextMenuHacker.AddSeparator();
 
-            VersionFormProvider = new VersionFormProvider(App, BveHacker);
+            VersionFormProvider = new VersionFormProvider(BveHacker);
 
-            PluginLoader pluginLoader = new PluginLoader(App, BveHacker);
+            PluginLoader pluginLoader = new PluginLoader(BveHacker);
             try
             {
                 {
@@ -137,15 +136,15 @@ namespace Automatic9045.AtsEx
             catch (Exception ex)
             {
                 LoadErrorManager.Throw(ex.Message);
-                MessageBox.Show(ex.ToString(), string.Format(resources.GetString("UnhandledExceptionCaption").Value, App.ProductShortName));
+                MessageBox.Show(ex.ToString(), string.Format(resources.GetString("UnhandledExceptionCaption").Value, App.Instance.ProductShortName));
             }
             finally
             {
                 if (VehiclePlugins is null) VehiclePlugins = new List<PluginInfo>();
                 if (MapPlugins is null) MapPlugins = new List<PluginInfo>();
 
-                App.VehiclePlugins = VehiclePlugins;
-                App.MapPlugins = MapPlugins;
+                App.Instance.VehiclePlugins = VehiclePlugins;
+                App.Instance.MapPlugins = MapPlugins;
             }
 
             VersionFormProvider.Intialize(Enumerable.Concat(VehiclePlugins, MapPlugins));
@@ -176,18 +175,18 @@ namespace Automatic9045.AtsEx
 
         public void SetVehicleSpec(VehicleSpec vehicleSpec)
         {
-            App.VehicleSpec = vehicleSpec;
+            App.Instance.VehicleSpec = vehicleSpec;
         }
 
         public void Started(BrakePosition defaultBrakePosition)
         {
-            App.InvokeStarted(defaultBrakePosition);
+            App.Instance.InvokeStarted(defaultBrakePosition);
         }
 
         [WillRefactor]
         public void Tick(TimeSpan elapsed, VehicleState vehicleState)
         {
-            App.VehicleState = vehicleState;
+            App.Instance.VehicleState = vehicleState;
 
             VehiclePlugins.ForEach(plugin => plugin.PluginInstance.Tick(elapsed));
             MapPlugins.ForEach(plugin => plugin.PluginInstance.Tick(elapsed));
@@ -195,12 +194,12 @@ namespace Automatic9045.AtsEx
 
         public void KeyDown(NativeAtsKeyName key)
         {
-            (App.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyPressed();
+            (App.Instance.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyPressed();
         }
 
         public void KeyUp(NativeAtsKeyName key)
         {
-            (App.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyReleased();
+            (App.Instance.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyReleased();
         }
     }
 }

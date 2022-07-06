@@ -16,12 +16,10 @@ namespace Automatic9045.AtsEx
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<PluginLoader>("Core");
 
-        private readonly App App;
         private readonly BveHacker BveHacker;
 
-        public PluginLoader(App app, BveHacker bveHacker)
+        public PluginLoader(BveHacker bveHacker)
         {
-            App = app;
             BveHacker = bveHacker;
         }
 
@@ -29,7 +27,7 @@ namespace Automatic9045.AtsEx
         {
             if (!File.Exists(listAbsolutePath))
             {
-                throw new BveFileLoadException(string.Format(Resources.GetString("PluginListNotFound").Value, App.ProductShortName, listAbsolutePath));
+                throw new BveFileLoadException(string.Format(Resources.GetString("PluginListNotFound").Value, App.Instance.ProductShortName, listAbsolutePath));
             }
 
             IEnumerable<PluginListLoader.RecognizedDll> dlls = PluginListLoader.LoadFrom(listAbsolutePath);
@@ -48,10 +46,10 @@ namespace Automatic9045.AtsEx
             }
             catch (BadImageFormatException)
             {
-                int currentBveVersion = App.BveAssembly.GetName().Version.Major;
+                int currentBveVersion = App.Instance.BveAssembly.GetName().Version.Major;
                 int otherBveVersion = currentBveVersion == 6 ? 5 : 6;
                 throw new BveFileLoadException(
-                    string.Format(Resources.GetString("BadImageFormat").Value, relativePath, otherBveVersion, App.ProductShortName, currentBveVersion),
+                    string.Format(Resources.GetString("BadImageFormat").Value, relativePath, otherBveVersion, App.Instance.ProductShortName, currentBveVersion),
                     senderFileName, lineIndex);
             }
 
@@ -60,11 +58,11 @@ namespace Automatic9045.AtsEx
             if (!pluginTypeCandidates.Any())
             {
                 throw new BveFileLoadException(
-                    string.Format(Resources.GetString("PluginClassNotFound").Value, relativePath, nameof(PluginBase), App.ProductShortName),
+                    string.Format(Resources.GetString("PluginClassNotFound").Value, relativePath, nameof(PluginBase), App.Instance.ProductShortName),
                     senderFileName, lineIndex);
             }
 
-            PluginBuilder pluginBuilder = new PluginBuilder(App)
+            PluginBuilder pluginBuilder = new PluginBuilder(App.Instance)
                 .UseAtsExExtensions(BveHacker);
 
             IEnumerable<PluginInfo> plugins = pluginTypeCandidates.Select(t =>
@@ -74,7 +72,7 @@ namespace Automatic9045.AtsEx
 
                 PluginBase pluginInstance = constructorInfo.Invoke(new object[] { pluginBuilder }) as PluginBase;
                 if (pluginInstance.PluginType != pluginType) throw new InvalidOperationException(string.Format(Resources.GetString("WrongPluginType").Value, pluginType.GetTypeString(), pluginInstance.PluginType.GetTypeString()));
-                if (pluginInstance.PluginType == PluginType.MapPlugin && !pluginInstance.UseAtsExExtensions) throw new NotSupportedException(string.Format(Resources.GetString("MustUseExtensions").Value, pluginInstance.PluginType.GetTypeString(), App.ProductShortName));
+                if (pluginInstance.PluginType == PluginType.MapPlugin && !pluginInstance.UseAtsExExtensions) throw new NotSupportedException(string.Format(Resources.GetString("MustUseExtensions").Value, pluginInstance.PluginType.GetTypeString(), App.Instance.ProductShortName));
 
                 PluginInfo pluginInfo = new PluginInfo(assembly, t.FullName, pluginInstance);
                 return pluginInfo;

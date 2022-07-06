@@ -26,13 +26,13 @@ namespace Automatic9045.AtsEx
         private ToolStripMenuItem MenuItem;
 
 
-        public VersionFormProvider(App app, BveHacker bveHacker)
+        public VersionFormProvider(BveHacker bveHacker)
         {
             BveHacker = bveHacker;
 
-            MenuItem = ContextMenuHacker.AddClickableMenuItem(string.Format(Resources.GetString("VersionInfoMenuItem").Value, app.ProductShortName), MenuItemClick);
+            MenuItem = ContextMenuHacker.AddClickableMenuItem(string.Format(Resources.GetString("VersionInfoMenuItem").Value, App.Instance.ProductShortName), MenuItemClick);
 
-            Form = new VersionForm(app);
+            Form = new VersionForm();
             Form.FormClosing += FormClosing;
         }
 

@@ -18,9 +18,9 @@ namespace Automatic9045.AtsEx
     {
         protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<VersionForm>("Core");
 
-        public VersionForm(App app)
+        public VersionForm()
         {
-            InitializeComponent(app);
+            InitializeComponent();
         }
 
         public void SetPluginDetails(IEnumerable<PluginInfo> plugins)
