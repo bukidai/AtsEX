@@ -52,7 +52,7 @@ namespace Automatic9045.AtsEx
             Form.Hide();
         }
 
-        public void Intialize(IEnumerable<PluginInfo> plugins)
+        public void Intialize(IEnumerable<PluginBase> plugins)
         {
             Form.SetPluginDetails(plugins);
         }

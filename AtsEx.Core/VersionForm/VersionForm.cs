@@ -23,17 +23,19 @@ namespace Automatic9045.AtsEx
             InitializeComponent();
         }
 
-        public void SetPluginDetails(IEnumerable<PluginInfo> plugins)
+        public void SetPluginDetails(IEnumerable<PluginBase> plugins)
         {
             ListViewItem[] listViewItems = plugins.Select(plugin =>
             {
-                string fileName = Path.GetFileName(plugin.SourceAssembly.Location);
-                string title = ((AssemblyTitleAttribute)Attribute.GetCustomAttribute(plugin.SourceAssembly, typeof(AssemblyTitleAttribute))).Title;
-                ResourceInfo<string> typeResource = plugin.PluginInstance.PluginType.GetTypeStringResource();
+                Assembly pluginAssembly = plugin.GetType().Assembly;
+
+                string fileName = Path.GetFileName(pluginAssembly.Location);
+                string title = ((AssemblyTitleAttribute)Attribute.GetCustomAttribute(pluginAssembly, typeof(AssemblyTitleAttribute))).Title;
+                ResourceInfo<string> typeResource = plugin.PluginType.GetTypeStringResource();
                 string type = typeResource.Culture.TextInfo.ToTitleCase(typeResource.Value);
-                Color typeColor = plugin.PluginInstance.PluginType.GetTypeColor();
-                string version = plugin.SourceAssembly.GetName().Version.ToString();
-                string description = ((AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(plugin.SourceAssembly, typeof(AssemblyDescriptionAttribute))).Description;
+                Color typeColor = plugin.PluginType.GetTypeColor();
+                string version = pluginAssembly.GetName().Version.ToString();
+                string description = ((AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(pluginAssembly, typeof(AssemblyDescriptionAttribute))).Description;
 
                 ListViewItem item = new ListViewItem();
 

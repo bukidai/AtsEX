@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BadImageFormat" xml:space="preserve">
-    <value>Failed loading '{0}': of which the target platform is invalid (trying to load the {2} plugin for BVE version {1} with version {3}) or which is not a .NET assembly (not a {2} plugin).</value>
-  </data>
   <data name="ConstructorNotFound" xml:space="preserve">
     <value>Some class(es) that implement {1} are found in '{0},' but any constructors with an {2} parameter are not found.</value>
   </data>
@@ -127,10 +124,7 @@
     <value>The {0} must use {1} extensions.</value>
   </data>
   <data name="PluginClassNotFound" xml:space="preserve">
-    <value>'{0}' で {1} を継承しているクラスが見つかりませんでした。{2} プラグインではない可能性があります。{2} プラグインとして認識されるには、{1} を継承しているクラスが必要です。</value>
-  </data>
-  <data name="PluginListNotFound" xml:space="preserve">
-    <value>The {0} plugin list '{1}' is not found.</value>
+    <value>Found no class subclass of {1} in '{0}.' It may not be a {2} plugin. The {2} plugin must have at least one class subclass of {1}.</value>
   </data>
   <data name="WrongPluginType" xml:space="preserve">
     <value>You tried to load a {1} as a {2}.</value>

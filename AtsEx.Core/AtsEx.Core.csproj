@@ -7,7 +7,7 @@
     <ProjectGuid>{3B4337CE-9252-4140-8742-E9EAB8382FA7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Automatic9045.AtsEx.Export</RootNamespace>
+    <RootNamespace>Automatic9045.AtsEx</RootNamespace>
     <AssemblyName>AtsEx.Core</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -62,8 +62,8 @@
     <Compile Include="Input\NativeAtsKey.cs" />
     <Compile Include="Input\NativeKeySet.cs" />
     <Compile Include="MapLoader\MapLoader.cs" />
-    <Compile Include="PluginLoader\PluginListLoader.cs" />
-    <Compile Include="PluginLoader\PluginLoader.cs" />
+    <Compile Include="Plugins\PluginLoader.cs" />
+    <Compile Include="Plugins\PluginUsing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VersionForm\VersionForm.cs">
       <SubType>Form</SubType>
@@ -75,6 +75,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <EmbeddedResource Include="Plugins\AtsExPluginUsingXmlSchema.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AtsEx.PluginHost\AtsEx.PluginHost.csproj">
@@ -86,9 +89,6 @@
   <ItemGroup>
     <Content Include="Resources\AtsEx.ja.resx" />
     <Content Include="Resources\AtsEx.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\PluginLoader.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\PluginLoader.ja.resx" />
@@ -103,19 +103,18 @@
     <Content Include="Resources\VersionForm.ja.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\PluginListLoader.ja.resx" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Resources\VersionFormProvider.ja.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\PluginListLoader.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\VersionForm.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\VersionFormProvider.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\PluginLoader.resx" />
+    <Content Include="Resources\PluginUsing.resx" />
+    <Content Include="Resources\PluginUsing.ja.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

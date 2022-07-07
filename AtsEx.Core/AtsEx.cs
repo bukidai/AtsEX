@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Automatic9045.AtsEx.Input;
+using Automatic9045.AtsEx.Plugins;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
@@ -34,8 +35,8 @@ namespace Automatic9045.AtsEx
 
         private readonly VersionFormProvider VersionFormProvider;
 
-        private readonly List<PluginInfo> VehiclePlugins;
-        private readonly List<PluginInfo> MapPlugins;
+        private readonly List<PluginBase> VehiclePlugins;
+        private readonly List<PluginBase> MapPlugins;
 
         public AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, Assembly callerAssembly)
         {
@@ -94,12 +95,13 @@ namespace Automatic9045.AtsEx
             {
                 {
                     sw.Restart();
-                    string vehiclePluginListPath = Path.Combine(Path.GetDirectoryName(CallerAssembly.Location), "AtsEx.VehiclePluginList.txt");
-                    VehiclePlugins = pluginLoader.LoadFromList(PluginType.VehiclePlugin, vehiclePluginListPath).ToList();
+                    string vehiclePluginUsingPath = Path.Combine(Path.GetDirectoryName(CallerAssembly.Location), Path.GetFileNameWithoutExtension(CallerAssembly.Location) + ".VehiclePluginUsing.xml");
+                    PluginUsing vehiclePluginUsing = PluginUsing.Load(PluginType.VehiclePlugin, vehiclePluginUsingPath);
+                    VehiclePlugins = pluginLoader.LoadFromPluginUsing(vehiclePluginUsing).ToList();
                     Debug.WriteLine($"VehiclePlugins: {sw.ElapsedMilliseconds}ms");
                 }
 
-                if (profileVersion != bveVersion && VehiclePlugins.All(plugin => !plugin.PluginInstance.UseAtsExExtensions))
+                if (profileVersion != bveVersion && VehiclePlugins.All(plugin => !plugin.UseAtsExExtensions))
                 {
                     LoadError removeTargetError = LoadErrorManager.Errors.FirstOrDefault(error => error.Text == versionWarningText);
                     if (!(removeTargetError is null))
@@ -140,8 +142,8 @@ namespace Automatic9045.AtsEx
             }
             finally
             {
-                if (VehiclePlugins is null) VehiclePlugins = new List<PluginInfo>();
-                if (MapPlugins is null) MapPlugins = new List<PluginInfo>();
+                if (VehiclePlugins is null) VehiclePlugins = new List<PluginBase>();
+                if (MapPlugins is null) MapPlugins = new List<PluginBase>();
 
                 App.Instance.VehiclePlugins = VehiclePlugins;
                 App.Instance.MapPlugins = MapPlugins;
@@ -154,7 +156,7 @@ namespace Automatic9045.AtsEx
         {
             VehiclePlugins.ForEach(plugin =>
             {
-                if (plugin.PluginInstance is IDisposable disposable)
+                if (plugin is IDisposable disposable)
                 {
                     disposable.Dispose();
                 }
@@ -162,7 +164,7 @@ namespace Automatic9045.AtsEx
 
             MapPlugins.ForEach(plugin =>
             {
-                if (plugin.PluginInstance is IDisposable disposable)
+                if (plugin is IDisposable disposable)
                 {
                     disposable.Dispose();
                 }
@@ -188,8 +190,8 @@ namespace Automatic9045.AtsEx
         {
             App.Instance.VehicleState = vehicleState;
 
-            VehiclePlugins.ForEach(plugin => plugin.PluginInstance.Tick(elapsed));
-            MapPlugins.ForEach(plugin => plugin.PluginInstance.Tick(elapsed));
+            VehiclePlugins.ForEach(plugin => plugin.Tick(elapsed));
+            MapPlugins.ForEach(plugin => plugin.Tick(elapsed));
         }
 
         public void KeyDown(NativeAtsKeyName key)

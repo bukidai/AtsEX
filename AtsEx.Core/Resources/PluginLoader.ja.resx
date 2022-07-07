@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BadImageFormat" xml:space="preserve">
-    <value>'{0}' は対象プラットフォームが間違っているか、.NET アセンブリではありません。BVE {1} 向けの {2} プラグインを BVE {3} で読み込もうとしているか、{2} プラグインではない可能性があります。</value>
-  </data>
   <data name="ConstructorNotFound" xml:space="preserve">
     <value>'{0}' で {1} を継承しているクラスは見つかりましたが、パラメータ {2} を持つコンストラクタが見つかりませんでした。</value>
   </data>
@@ -128,9 +125,6 @@
   </data>
   <data name="PluginClassNotFound" xml:space="preserve">
     <value>'{0}' で {1} を継承しているクラスが見つかりませんでした。{2} プラグインではない可能性があります。{2} プラグインとして認識されるには、{1} を継承しているクラスが必要です。</value>
-  </data>
-  <data name="PluginListNotFound" xml:space="preserve">
-    <value>{0} プラグインリスト '{1}' が見つかりません。</value>
   </data>
   <data name="WrongPluginType" xml:space="preserve">
     <value>{0}として{1}を読み込もうとしました。</value>

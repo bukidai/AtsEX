@@ -49,13 +49,13 @@ namespace Automatic9045.AtsEx.PluginHost
         /// 読み込まれた AtsEX 車両プラグインのリストを取得します。
         /// <see cref="PluginBase"/> のコンストラクタ内など、<see cref="AllVehiclePluginLoaded"/> イベントが発生するより前には取得できないので注意してください。
         /// </summary>
-        List<PluginInfo> VehiclePlugins { get; }
+        List<PluginBase> VehiclePlugins { get; }
 
         /// <summary>
         /// 読み込まれた AtsEX 路線プラグインのリストを取得します。
         /// <see cref="PluginBase"/> のコンストラクタ内など、<see cref="AllMapPluginLoaded"/> イベントが発生するより前には取得できないので注意してください。
         /// </summary>
-        List<PluginInfo> MapPlugins { get; }
+        List<PluginBase> MapPlugins { get; }
 
 
         /// <summary>

@@ -1,3 +1,0 @@
-MapPlugins\StationController.dll
-MapPlugins\TrainController.dll
-MapPlugins\RunningResistanceTest.dll
