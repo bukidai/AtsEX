@@ -10,7 +10,7 @@ using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.MapPlugins.RunningResistanceTest
 {
-    public class Class1 : PluginBase
+    public class Class1 : AssemblyPluginBase
     {
         private double defaultFactorA;
         private double defaultFactorB;

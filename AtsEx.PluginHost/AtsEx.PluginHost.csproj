@@ -65,6 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Plugins\AssemblyPluginBase.cs" />
     <Compile Include="Plugins\PluginBuilder.cs" />
     <Compile Include="BveTypes\BveTypeSet.cs" />
     <Compile Include="BveTypes\BveTypeSet.InstanceCreator.cs" />

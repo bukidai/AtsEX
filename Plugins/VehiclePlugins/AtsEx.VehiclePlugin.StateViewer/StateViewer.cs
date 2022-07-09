@@ -11,7 +11,7 @@ using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.VehiclePlugins.StateViewer
 {
-    public class StateViewer : PluginBase, IDisposable
+    public class StateViewer : AssemblyPluginBase, IDisposable
     {
         private readonly ContextMenuHacker ContextMenuHacker = new ContextMenuHacker();
 

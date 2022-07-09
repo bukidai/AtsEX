@@ -11,7 +11,7 @@ using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.MapPlugins.StationController
 {
-    public class StationController : PluginBase, IDisposable
+    public class StationController : AssemblyPluginBase, IDisposable
     {
         private readonly ContextMenuHacker ContextMenuHacker = new ContextMenuHacker();
 

@@ -11,7 +11,7 @@ using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.MapPlugins.TrainController
 {
-    public class TrainController : PluginBase, IDisposable
+    public class TrainController : AssemblyPluginBase, IDisposable
     {
         private Train Train;
         private double Speed = 25 / 3.6; // 25[km/h] = (25 / 3.6)[m/s]

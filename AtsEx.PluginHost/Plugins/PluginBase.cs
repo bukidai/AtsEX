@@ -21,6 +21,40 @@ namespace Automatic9045.AtsEx.PluginHost.Plugins
         protected IBveHacker BveHacker => UseAtsExExtensions ? _BveHacker : throw new InvalidOperationException($"{nameof(UseAtsExExtensions)} が {false} に設定されています。");
 
         /// <summary>
+        /// AtsEX プラグインのファイルの完全パスを取得します。
+        /// </summary>
+        public abstract string Location { get; }
+
+        /// <summary>
+        /// AtsEX プラグインのファイル名を取得します。
+        /// </summary>
+        /// <remarks>
+        /// 通常はプラグイン パッケージ ファイルの名前と拡張子 (例: MyPlugin.dll) を表しますが、<br/>
+        /// スクリプト プラグインの場合など、ファイル名でプラグインを判別できない場合 (例: Package.xml) は代替の文字列を使用することもできます。
+        /// </remarks>
+        public abstract string Name { get; }
+
+        /// <summary>
+        /// AtsEX プラグインのタイトルを取得します。
+        /// </summary>
+        public abstract string Title { get; }
+
+        /// <summary>
+        /// AtsEX プラグインのバージョンを表す文字列を取得します。
+        /// </summary>
+        public abstract string Version { get; }
+
+        /// <summary>
+        /// AtsEX プラグインの説明を取得します。
+        /// </summary>
+        public abstract string Description { get; }
+
+        /// <summary>
+        /// AtsEX プラグインの著作権表示を取得します。
+        /// </summary>
+        public abstract string Copyright { get; }
+
+        /// <summary>
         /// AtsEX 拡張機能を利用する AtsEX プラグインの新しいインスタンスを初期化します。
         /// </summary>
         /// <param name="builder">AtsEX から渡される BVE、AtsEX の情報。</param>
