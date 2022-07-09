@@ -29,22 +29,19 @@ namespace Automatic9045.AtsEx
             {
                 Assembly pluginAssembly = plugin.GetType().Assembly;
 
-                string fileName = Path.GetFileName(pluginAssembly.Location);
-                string title = ((AssemblyTitleAttribute)Attribute.GetCustomAttribute(pluginAssembly, typeof(AssemblyTitleAttribute))).Title;
                 ResourceInfo<string> typeResource = plugin.PluginType.GetTypeStringResource();
                 string type = typeResource.Culture.TextInfo.ToTitleCase(typeResource.Value);
                 Color typeColor = plugin.PluginType.GetTypeColor();
-                string version = pluginAssembly.GetName().Version.ToString();
-                string description = ((AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(pluginAssembly, typeof(AssemblyDescriptionAttribute))).Description;
 
-                ListViewItem item = new ListViewItem();
-
-                item.Text = fileName;
-                item.ToolTipText = fileName;
-                item.SubItems.Add(title);
+                ListViewItem item = new ListViewItem
+                {
+                    Text = plugin.Name,
+                    ToolTipText = plugin.Location,
+                };
+                item.SubItems.Add(plugin.Title);
                 item.SubItems.Add(CreateColoredSubItem(type, typeColor));
-                item.SubItems.Add(version);
-                item.SubItems.Add(description);
+                item.SubItems.Add(plugin.Version);
+                item.SubItems.Add(plugin.Description);
 
                 return item;
             }).ToArray();
