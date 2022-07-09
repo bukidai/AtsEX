@@ -48,6 +48,13 @@ namespace Automatic9045.AtsEx
             TargetAssembly = targetAssembly;
             CallerAssembly = callerAssembly;
 
+            AppDomain.CurrentDomain.AssemblyResolve += (sender, e) =>
+            {
+                AssemblyName assemblyName = new AssemblyName(e.Name);
+                string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), assemblyName.Name + ".dll");
+                return File.Exists(path) ? Assembly.LoadFrom(path) : null;
+            };
+
             Stopwatch sw = new Stopwatch();
 
             sw.Restart();
