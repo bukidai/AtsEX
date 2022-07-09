@@ -9,6 +9,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="Assembly" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="CSharpScript" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -16,6 +17,12 @@
 	<xs:element name="Assembly">
 		<xs:complexType>
 			<xs:attribute name="Path" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="CSharpScript">
+		<xs:complexType>
+			<xs:attribute name="PackageManifestPath" type="xs:string" use="required" />
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

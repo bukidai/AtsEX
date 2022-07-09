@@ -10,6 +10,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
 
+using Automatic9045.AtsEx.Plugins.Scripting;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.Resources;
 
@@ -27,6 +28,9 @@ namespace Automatic9045.AtsEx.Plugins
         protected readonly List<Assembly> _Assemblies;
         public ReadOnlyCollection<Assembly> Assemblies { get; }
 
+        protected readonly List<ScriptPluginPackage> _CSharpScripts;
+        public ReadOnlyCollection<ScriptPluginPackage> CSharpScripts { get; }
+
         static PluginUsing()
         {
             using (Stream schemaStream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"{typeof(PluginUsing).Namespace}.AtsExPluginUsingXmlSchema.xsd"))
@@ -37,12 +41,15 @@ namespace Automatic9045.AtsEx.Plugins
             }
         }
 
-        protected PluginUsing(PluginType pluginType, IEnumerable<Assembly> assemblies)
+        protected PluginUsing(PluginType pluginType, IEnumerable<Assembly> assemblies, IEnumerable<ScriptPluginPackage> csharpScripts)
         {
             PluginType = pluginType;
 
             _Assemblies = assemblies.ToList();
+            _CSharpScripts = csharpScripts.ToList();
+
             Assemblies = _Assemblies.AsReadOnly();
+            CSharpScripts = _CSharpScripts.AsReadOnly();
         }
 
         public static PluginUsing Load(PluginType pluginType, string listPath)
@@ -53,15 +60,16 @@ namespace Automatic9045.AtsEx.Plugins
             XElement root = doc.Element(TargetNamespace + "AtsExPluginUsing");
 
             IEnumerable<Assembly> assemblies = root.Elements(TargetNamespace + "Assembly").Select(element => LoadAssembly(element, listPath));
+            IEnumerable<ScriptPluginPackage> cSharpScriptPluginPackages = root.Elements(TargetNamespace + "CSharpScript").Select(element => LoadScriptPluginPackage(element, Path.GetDirectoryName(listPath)));
 
-            return new PluginUsing(pluginType, assemblies);
+            return new PluginUsing(pluginType, assemblies, cSharpScriptPluginPackages);
         }
 
         private static Assembly LoadAssembly(XElement element, string listPath)
         {
             IXmlLineInfo lineInfo = element;
 
-            string assemblyPath = (string)element.Attribute("Path");
+            string assemblyPath = element.Attribute("Path").Value;
             try
             {
                 return Assembly.LoadFrom(Path.Combine(Path.GetDirectoryName(listPath), assemblyPath));
@@ -74,6 +82,12 @@ namespace Automatic9045.AtsEx.Plugins
                     string.Format(Resources.GetString("BadImageFormat").Value, Path.GetDirectoryName(assemblyPath), otherBveVersion, App.Instance.ProductShortName, currentBveVersion),
                     Path.GetFileName(listPath), lineInfo.LineNumber, lineInfo.LinePosition);;
             }
+        }
+
+        private static ScriptPluginPackage LoadScriptPluginPackage(XElement element, string baseDirectory)
+        {
+            string packageManifestPath = element.Attribute("PackageManifestPath").Value;
+            return ScriptPluginPackage.Load(Path.Combine(baseDirectory, packageManifestPath));
         }
 
         private static void SchemaValidation(object sender, ValidationEventArgs e) => throw new FormatException(Resources.GetString("XmlSchemaValidation").Value, e.Exception);

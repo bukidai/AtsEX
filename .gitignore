@@ -7,16 +7,22 @@ obj
 
 /_SampleScenarios/Automatic9045/AtsEx/*.dll
 /_SampleScenarios/Automatic9045/AtsEx/*.pdb
-/_SampleScenarios/Automatic9045/AtsEx/0Harmony.xml
-/_SampleScenarios/Automatic9045/AtsEx/Octokit.xml
+/_SampleScenarios/Automatic9045/AtsEx/*.dll.config
+/_SampleScenarios/Automatic9045/AtsEx/*.xml
 /_SampleScenarios/Automatic9045/AtsEx/Resources/*/*.resx
 /_SampleScenarios/Automatic9045/AtsEx/Resources/*/*/*.resx
 
 /_SampleScenarios/Automatic9045/Maps/AtsExSampleMap/MapPlugins/*.dll
 /_SampleScenarios/Automatic9045/Maps/AtsExSampleMap/MapPlugins/*.pdb
+/_SampleScenarios/Automatic9045/Maps/AtsExSampleMap/MapPlugins/*.dll.config
+/_SampleScenarios/Automatic9045/Maps/AtsExSampleMap/MapPlugins/*.xml
 
 /_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/*.dll
 /_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/*.pdb
+/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/*.dll.config
+/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/*.xml
 /_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/AtsEXPlugins/*.dll
 /_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/AtsEXPlugins/*.pdb
+/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/AtsEXPlugins/*.dll.config
+/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/AtsEXPlugins/*.xml
 /_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/.AtsExBackup
