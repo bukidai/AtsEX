@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.Plugins;
+using Automatic9045.AtsEx.Plugins.Scripting.CSharp;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.Plugins;
 
@@ -55,9 +56,16 @@ namespace Automatic9045.AtsEx
                                 string mapPluginUsingRelativePath = includePath.Substring(MapPluginUsingHeader.Length);
                                 string mapPluginUsingAbsolutePath = Path.Combine(Path.GetDirectoryName(filePath), mapPluginUsingRelativePath);
 
-                                PluginUsing mapPluginUsing = PluginUsing.Load(PluginType.MapPlugin, mapPluginUsingAbsolutePath);
-                                IEnumerable<PluginBase> loadedMapPlugins = PluginLoader.LoadFromPluginUsing(mapPluginUsing);
-                                LoadedPlugins.AddRange(loadedMapPlugins);
+                                try
+                                {
+                                    PluginUsing mapPluginUsing = PluginUsing.Load(PluginType.MapPlugin, mapPluginUsingAbsolutePath);
+                                    IEnumerable<PluginBase> loadedMapPlugins = PluginLoader.LoadFromPluginUsing(mapPluginUsing);
+                                    LoadedPlugins.AddRange(loadedMapPlugins);
+                                }
+                                catch (CompilationException ex)
+                                {
+                                    ex.ThrowAsLoadError();
+                                }
 
                                 RemoveErrorIncludePositions[filePath].Add((i + 1, s.Key + 1));
                             }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using Automatic9045.AtsEx.Input;
 using Automatic9045.AtsEx.Plugins;
+using Automatic9045.AtsEx.Plugins.Scripting.CSharp;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
@@ -137,6 +138,10 @@ namespace Automatic9045.AtsEx
                         LoadErrorManager.Errors.Remove(error);
                     }
                 }
+            }
+            catch (CompilationException ex)
+            {
+                ex.ThrowAsLoadError();
             }
             catch (BveFileLoadException ex)
             {

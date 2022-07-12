@@ -21,17 +21,22 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
             AddReferences(App.Instance.AtsExPluginHostAssembly).
             AddImports(App.Instance.AtsExPluginHostAssembly.GetTypes().Select(t => t.Namespace).Distinct().Where(n => !(n is null)));
 
+        public string Name { get; } = null;
+
+        private Task<ImmutableArray<Diagnostic>> CompilationTask;
         protected readonly Script Script;
 
-        public PluginScript(string code)
+        public PluginScript(string code, string name)
         {
             Script = CSharpScript.Create(code, ScriptOptions, typeof(TGlobals));
+            Name = name;
             BeginCompile();
         }
 
-        public PluginScript(Stream code)
+        public PluginScript(Stream code, string name)
         {
             Script = CSharpScript.Create(code, ScriptOptions, typeof(TGlobals));
+            Name = name;
             BeginCompile();
         }
 
@@ -39,7 +44,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
         {
             using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                return new PluginScript<TGlobals>(stream);
+                return new PluginScript<TGlobals>(stream, Path.GetFileName(path));
             }
         }
 
@@ -55,7 +60,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
         public PluginScript<TGlobals> GetWithCheckCompilationErrors()
         {
             ImmutableArray<Diagnostic> compilationErrors = CompilationTask.Result;
-            return compilationErrors.Any() ? throw new CompilationException(compilationErrors) : this;
+            return compilationErrors.Any() ? throw new CompilationException(Name, compilationErrors) : this;
         }
 
         public IScriptResult Run(TGlobals globals)
