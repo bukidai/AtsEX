@@ -44,12 +44,12 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
 
             Globals = new Globals(App, BveHacker);
 
-            DisposeScript = builder.DisposeScript;
-            OnScenarioCreatedScript = builder.OnScenarioCreatedScript;
-            OnStartedScript = builder.OnStartedScript;
-            TickScript = builder.TickScript;
+            DisposeScript = builder.DisposeScript?.GetWithCheckCompilationErrors();
+            OnScenarioCreatedScript = builder.OnScenarioCreatedScript?.GetWithCheckCompilationErrors();
+            OnStartedScript = builder.OnStartedScript?.GetWithCheckCompilationErrors();
+            TickScript = builder.TickScript?.GetWithCheckCompilationErrors();
 
-            PluginScript<Globals> constructorScript = builder.ConstructorScript;
+            PluginScript<Globals> constructorScript = builder.ConstructorScript?.GetWithCheckCompilationErrors();
             constructorScript?.Run(Globals);
 
             BveHacker.ScenarioCreated += OnScenarioCreated;

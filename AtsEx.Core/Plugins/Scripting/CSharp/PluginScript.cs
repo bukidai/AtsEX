@@ -26,13 +26,13 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
         public PluginScript(string code)
         {
             Script = CSharpScript.Create(code, ScriptOptions, typeof(TGlobals));
-            Compile();
+            BeginCompile();
         }
 
         public PluginScript(Stream code)
         {
             Script = CSharpScript.Create(code, ScriptOptions, typeof(TGlobals));
-            Compile();
+            BeginCompile();
         }
 
         public static PluginScript<TGlobals> LoadFrom(string path)
@@ -43,14 +43,25 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
             }
         }
 
-        private void Compile()
+        private void BeginCompile()
         {
-            ImmutableArray<Diagnostic> compilationErrors = Script.Compile();
-            if (compilationErrors.Any()) throw new CompilationException(compilationErrors);
+            CompilationTask = Task.Run(() =>
+            {
+                ImmutableArray<Diagnostic> compilationErrors = Script.Compile();
+                return compilationErrors;
+            });
+        }
+
+        public PluginScript<TGlobals> GetWithCheckCompilationErrors()
+        {
+            ImmutableArray<Diagnostic> compilationErrors = CompilationTask.Result;
+            return compilationErrors.Any() ? throw new CompilationException(compilationErrors) : this;
         }
 
         public IScriptResult Run(TGlobals globals)
         {
+            if (!CompilationTask.IsCompleted) GetWithCheckCompilationErrors();
+
             ScriptState state = Script.RunAsync(globals).Result;
             return new ScriptResult(state);
         }
