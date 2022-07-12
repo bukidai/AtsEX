@@ -57,7 +57,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
             });
         }
 
-        public PluginScript<TGlobals> GetWithCheckCompilationErrors()
+        public IPluginScript<TGlobals> GetWithCheckErrors()
         {
             ImmutableArray<Diagnostic> compilationErrors = CompilationTask.Result;
             return compilationErrors.Any() ? throw new CompilationException(Name, compilationErrors) : this;
@@ -65,7 +65,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
 
         public IScriptResult Run(TGlobals globals)
         {
-            if (!CompilationTask.IsCompleted) GetWithCheckCompilationErrors();
+            if (!CompilationTask.IsCompleted) GetWithCheckErrors();
 
             ScriptState state = Script.RunAsync(globals).Result;
             return new ScriptResult(state);

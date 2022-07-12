@@ -106,7 +106,8 @@
     <Compile Include="Plugins\PluginUsing.cs" />
     <Compile Include="Plugins\Scripting\CSharp\CompilationException.cs" />
     <Compile Include="Plugins\Scripting\CSharp\CSharpScriptPlugin.cs" />
-    <Compile Include="Plugins\Scripting\CSharp\CSharpScriptPluginBuilder.cs" />
+    <Compile Include="Plugins\Scripting\ScriptPluginBase.cs" />
+    <Compile Include="Plugins\Scripting\ScriptPluginBuilder.cs" />
     <Compile Include="Plugins\Scripting\CSharp\PluginScript.cs" />
     <Compile Include="Plugins\Scripting\CSharp\ScriptResult.cs" />
     <Compile Include="Plugins\Scripting\Globals\Globals.cs" />
@@ -132,8 +133,8 @@
     <Content Include="Resources\CompilationException.resx" />
     <Content Include="Resources\ScriptPluginPackage.ja.resx" />
     <Content Include="Resources\ScriptPluginPackage.resx" />
-    <Content Include="Resources\CSharpScriptPlugin.ja.resx" />
-    <Content Include="Resources\CSharpScriptPlugin.resx" />
+    <Content Include="Resources\ScriptPluginBase.ja.resx" />
+    <Content Include="Resources\ScriptPluginBase.resx" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <EmbeddedResource Include="Plugins\AtsExPluginUsingXmlSchema.xsd">
