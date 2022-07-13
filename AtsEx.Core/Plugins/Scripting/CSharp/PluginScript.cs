@@ -26,18 +26,19 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
         private Task<ImmutableArray<Diagnostic>> CompilationTask;
         protected readonly Script Script;
 
-        public PluginScript(string code, string name)
+        protected PluginScript(Script script, string name)
         {
-            Script = CSharpScript.Create(code, ScriptOptions, typeof(TGlobals));
+            Script = script;
             Name = name;
             BeginCompile();
         }
 
-        public PluginScript(Stream code, string name)
+        public PluginScript(string code, string name) : this(CSharpScript.Create(code, ScriptOptions, typeof(TGlobals)), name)
         {
-            Script = CSharpScript.Create(code, ScriptOptions, typeof(TGlobals));
-            Name = name;
-            BeginCompile();
+        }
+
+        public PluginScript(Stream code, string name) : this(CSharpScript.Create(code, ScriptOptions, typeof(TGlobals)), name)
+        {
         }
 
         public static PluginScript<TGlobals> LoadFrom(string path)
