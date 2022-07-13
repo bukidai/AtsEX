@@ -28,8 +28,11 @@ namespace Automatic9045.AtsEx.Plugins
         protected readonly List<Assembly> _Assemblies;
         public ReadOnlyCollection<Assembly> Assemblies { get; }
 
-        protected readonly List<ScriptPluginPackage> _CSharpScripts;
-        public ReadOnlyCollection<ScriptPluginPackage> CSharpScripts { get; }
+        protected readonly List<ScriptPluginPackage> _CSharpScriptPackages;
+        public ReadOnlyCollection<ScriptPluginPackage> CSharpScriptPackages { get; }
+
+        protected readonly List<ScriptPluginPackage> _IronPython2Packages;
+        public ReadOnlyCollection<ScriptPluginPackage> IronPython2Packages { get; }
 
         static PluginUsing()
         {
@@ -41,15 +44,17 @@ namespace Automatic9045.AtsEx.Plugins
             }
         }
 
-        protected PluginUsing(PluginType pluginType, IEnumerable<Assembly> assemblies, IEnumerable<ScriptPluginPackage> csharpScripts)
+        protected PluginUsing(PluginType pluginType, IEnumerable<Assembly> assemblies, IEnumerable<ScriptPluginPackage> csharpScriptPackages, IEnumerable<ScriptPluginPackage> ironPython2Packages)
         {
             PluginType = pluginType;
 
             _Assemblies = assemblies.ToList();
-            _CSharpScripts = csharpScripts.ToList();
+            _CSharpScriptPackages = csharpScriptPackages.ToList();
+            _IronPython2Packages = ironPython2Packages.ToList();
 
             Assemblies = _Assemblies.AsReadOnly();
-            CSharpScripts = _CSharpScripts.AsReadOnly();
+            CSharpScriptPackages = _CSharpScriptPackages.AsReadOnly();
+            IronPython2Packages = _IronPython2Packages.AsReadOnly();
         }
 
         public static PluginUsing Load(PluginType pluginType, string listPath)
@@ -59,10 +64,16 @@ namespace Automatic9045.AtsEx.Plugins
 
             XElement root = doc.Element(TargetNamespace + "AtsExPluginUsing");
 
-            IEnumerable<Assembly> assemblies = root.Elements(TargetNamespace + "Assembly").Select(element => LoadAssembly(element, listPath));
-            IEnumerable<ScriptPluginPackage> cSharpScriptPluginPackages = root.Elements(TargetNamespace + "CSharpScript").Select(element => LoadScriptPluginPackage(element, Path.GetDirectoryName(listPath)));
+            IEnumerable<Assembly> assemblies = root.Elements(TargetNamespace + "Assembly").
+                Select(element => LoadAssembly(element, listPath));
 
-            return new PluginUsing(pluginType, assemblies, cSharpScriptPluginPackages);
+            IEnumerable<ScriptPluginPackage> cSharpScriptPackages = root.Elements(TargetNamespace + "CSharpScript").
+                Select(element => LoadScriptPluginPackage(element, Path.GetDirectoryName(listPath)));
+
+            IEnumerable<ScriptPluginPackage> ironPython2Packages = root.Elements(TargetNamespace + "IronPython2").
+                Select(element => LoadScriptPluginPackage(element, Path.GetDirectoryName(listPath)));
+
+            return new PluginUsing(pluginType, assemblies, cSharpScriptPackages, ironPython2Packages);
         }
 
         private static Assembly LoadAssembly(XElement element, string listPath)

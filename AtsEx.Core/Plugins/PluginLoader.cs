@@ -6,8 +6,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.Plugins.Scripting;
 using Automatic9045.AtsEx.Plugins.Scripting.CSharp;
+using Automatic9045.AtsEx.Plugins.Scripting.IronPython2;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.Plugins;
 using Automatic9045.AtsEx.PluginHost.Resources;
@@ -36,8 +36,11 @@ namespace Automatic9045.AtsEx.Plugins
                 Select(assembly => LoadFromAssembly(assembly, pluginUsing.PluginType)).
                 SelectMany(x => x);
 
-            IEnumerable<PluginBase> cSharpScriptPlugins = pluginUsing.CSharpScripts.
+            IEnumerable<PluginBase> cSharpScriptPlugins = pluginUsing.CSharpScriptPackages.
                 Select(package => CSharpScriptPlugin.FromPackage(PluginBuilder, pluginUsing.PluginType, package));
+
+            IEnumerable<PluginBase> ironPython2Plugins = pluginUsing.IronPython2Packages.
+                Select(package => IronPython2Plugin.FromPackage(PluginBuilder, pluginUsing.PluginType, package));
 
             // TODO: ここで他の種類のプラグイン（スクリプト、ネイティブなど）を読み込む
 
@@ -45,6 +48,7 @@ namespace Automatic9045.AtsEx.Plugins
             {
                 assemblyPlugins,
                 cSharpScriptPlugins,
+                ironPython2Plugins,
             }.SelectMany(x => x);
 
             return plugins;
