@@ -9,7 +9,7 @@ using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
 {
-    internal class CSharpScriptPlugin : ScriptPluginBase
+    internal sealed class CSharpScriptPlugin : ScriptPluginBase
     {
         protected CSharpScriptPlugin(ScriptPluginBuilder builder, PluginType pluginType, bool useAtsExExtensions) : base(builder, pluginType, useAtsExExtensions)
         {

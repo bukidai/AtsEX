@@ -13,7 +13,7 @@ using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
 {
-    internal class CompilationException : Exception
+    internal sealed class CompilationException : Exception
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<CompilationException>("Core");
 

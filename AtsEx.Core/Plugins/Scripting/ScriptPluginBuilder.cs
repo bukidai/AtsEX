@@ -8,7 +8,7 @@ using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.AtsEx.Plugins.Scripting
 {
-    internal class ScriptPluginBuilder : PluginBuilder
+    internal sealed class ScriptPluginBuilder : PluginBuilder
     {
         public string Location { get; set; }
         public string Title { get; set; }
