@@ -187,6 +187,17 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="RepeatedStructure" Original="ec">
+		<Property Wrapper="Models">
+			<Getter Original="a"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Interval">
+			<Getter Original="b"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="Route" Original="br">
 		<Property Wrapper="DrawLimitLocation">
 			<Getter Original="e"/>

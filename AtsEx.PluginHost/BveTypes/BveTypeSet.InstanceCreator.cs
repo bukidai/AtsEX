@@ -198,7 +198,11 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                     Type genericTypeDefinition = type.GetGenericTypeDefinition();
                     Type[] typeParams = type.GetGenericArguments().Select(t => GetOriginalTypeIfWrapper(t, typeLoadExceptionMessage)).ToArray();
 
-                    if (genericTypeDefinition == typeof(WrappedSortedList<,>))
+                    if (genericTypeDefinition == typeof(WrappedList<>))
+                    {
+                        genericTypeDefinition = typeof(List<>);
+                    }
+                    else if (genericTypeDefinition == typeof(WrappedSortedList<,>))
                     {
                         genericTypeDefinition = typeof(SortedList<,>);
                     }
@@ -246,7 +250,11 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                     Type genericTypeDefinition = type.GetGenericTypeDefinition();
                     Type[] typeParams = type.GetGenericArguments().Select(t => GetWrapperTypeIfOriginal(t, typeLoadExceptionMessage)).ToArray();
 
-                    if (genericTypeDefinition == typeof(SortedList<,>))
+                    if (genericTypeDefinition == typeof(List<>))
+                    {
+                        genericTypeDefinition = typeof(WrappedList<>);
+                    }
+                    else if (genericTypeDefinition == typeof(SortedList<,>))
                     {
                         genericTypeDefinition = typeof(WrappedSortedList<,>);
                     }

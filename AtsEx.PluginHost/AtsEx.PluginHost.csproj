@@ -68,6 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassWrappers\Public\RepeatedStructure.cs" />
     <Compile Include="Plugins\AssemblyPluginBase.cs" />
     <Compile Include="Plugins\PluginBuilder.cs" />
     <Compile Include="BveTypes\BveTypeSet.cs" />
