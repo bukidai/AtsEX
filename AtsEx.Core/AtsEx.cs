@@ -24,6 +24,8 @@ namespace Automatic9045.AtsEx
 {
     public sealed class AtsEx : IDisposable
     {
+        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<AtsEx>("Core");
+
         private readonly Process TargetProcess;
         private readonly AppDomain TargetAppDomain;
         private readonly Assembly TargetAssembly;
@@ -57,38 +59,21 @@ namespace Automatic9045.AtsEx
                 return File.Exists(path) ? Assembly.LoadFrom(path) : null;
             };
 
-            Stopwatch sw = new Stopwatch();
-
-            sw.Restart();
-            ResourceLocalizer resources = ResourceLocalizer.FromResXOfType<AtsEx>("Core");
-            Debug.WriteLine($"ResourceLocalizer: {sw.ElapsedMilliseconds}ms");
-
-            sw.Restart();
             Version bveVersion = TargetAssembly.GetName().Version;
             Version profileVersion = BveTypeSet.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly, true);
-            Debug.WriteLine($"BveTypeCollectionProvider: {sw.ElapsedMilliseconds}ms");
 
-            sw.Restart();
             App.CreateInstance(TargetAssembly, CallerAssembly, ExecutingAssembly, PluginHostAssembly);
-            Debug.WriteLine($"App: {sw.ElapsedMilliseconds}ms");
-
-            sw.Restart();
             BveHacker = new BveHacker(TargetProcess);
-            Debug.WriteLine($"BveHacker: {sw.ElapsedMilliseconds}ms");
 
-            sw.Restart();
             ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(App.Instance, BveHacker);
             classWrapperInitializer.InitializeAll();
-            Debug.WriteLine($"ClassWrapper: {sw.ElapsedMilliseconds}ms");
 
-            sw.Restart();
             HelperInitializer helperInitializer = new HelperInitializer(App.Instance, BveHacker);
             helperInitializer.InitializeAll();
-            Debug.WriteLine($"ClassWrapper: {sw.ElapsedMilliseconds}ms");
 
             //DXDynamicTextureHost = new DXDynamicTextureHost();
 
-            string versionWarningText = string.Format(resources.GetString("BveVersionNotSupported").Value, bveVersion, profileVersion, App.Instance.ProductShortName);
+            string versionWarningText = string.Format(Resources.GetString("BveVersionNotSupported").Value, bveVersion, profileVersion, App.Instance.ProductShortName);
             if (profileVersion != bveVersion)
             {
                 LoadErrorManager.Throw(versionWarningText);
@@ -103,11 +88,9 @@ namespace Automatic9045.AtsEx
             try
             {
                 {
-                    sw.Restart();
                     string vehiclePluginUsingPath = Path.Combine(Path.GetDirectoryName(CallerAssembly.Location), Path.GetFileNameWithoutExtension(CallerAssembly.Location) + ".VehiclePluginUsing.xml");
                     PluginUsing vehiclePluginUsing = PluginUsing.Load(PluginType.VehiclePlugin, vehiclePluginUsingPath);
                     VehiclePlugins = pluginLoader.LoadFromPluginUsing(vehiclePluginUsing).ToList();
-                    Debug.WriteLine($"VehiclePlugins: {sw.ElapsedMilliseconds}ms");
                 }
 
                 if (profileVersion != bveVersion && VehiclePlugins.All(plugin => !plugin.UseAtsExExtensions))
@@ -120,10 +103,8 @@ namespace Automatic9045.AtsEx
                 }
 
                 {
-                    sw.Restart();
                     Map map = Map.Load(BveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path, pluginLoader);
                     MapPlugins = map.LoadedPlugins;
-                    Debug.WriteLine($"MapPlugins: {sw.ElapsedMilliseconds}ms");
 
                     IEnumerable<LoadError> removeTargetErrors = LoadErrorManager.Errors.Where(error =>
                     {
@@ -149,7 +130,7 @@ namespace Automatic9045.AtsEx
             catch (Exception ex)
             {
                 LoadErrorManager.Throw(ex.Message);
-                MessageBox.Show(ex.ToString(), string.Format(resources.GetString("UnhandledExceptionCaption").Value, App.Instance.ProductShortName));
+                MessageBox.Show(ex.ToString(), string.Format(Resources.GetString("UnhandledExceptionCaption").Value, App.Instance.ProductShortName));
             }
             finally
             {
