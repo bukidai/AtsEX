@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,49 +9,42 @@ using System.Threading.Tasks;
 using Automatic9045.AtsEx.Plugins;
 using Automatic9045.AtsEx.Plugins.Scripting.CSharp;
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.AtsEx
 {
-    internal class MapLoader
+    internal class Map
     {
         protected const string NoMapPluginHeader = "[[nompi]]";
         protected const string MapPluginUsingHeader = "<mpiusing>";
 
         public List<PluginBase> LoadedPlugins { get; } = new List<PluginBase>();
-        public Dictionary<string, List<(int, int)>> RemoveErrorIncludePositions { get; } = new Dictionary<string, List<(int, int)>>();
+        public List<LoadError> MapPluginUsingErrors { get; } = new List<LoadError>();
 
-        protected BveHacker BveHacker { get; }
-        protected PluginLoader PluginLoader { get; }
-
-        public MapLoader(BveHacker bveHacker, PluginLoader pluginLoader)
+        protected Map(List<PluginBase> loadedPlugins, List<LoadError> mapPluginUsingErrors)
         {
-            BveHacker = bveHacker;
-            PluginLoader = pluginLoader;
+            LoadedPlugins = loadedPlugins;
+            MapPluginUsingErrors = mapPluginUsingErrors;
         }
 
-        public bool Load()
+        public static Map Load(string filePath, PluginLoader pluginLoader)
         {
-            string mapFilePath = BveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path;
-            return Load(mapFilePath);
-        }
+            List<PluginBase> loadedPlugins = new List<PluginBase>();
+            List<LoadError> mapPluginUsingErrors = new List<LoadError>();
 
-        protected bool Load(string filePath)
-        {
-            if (!File.Exists(filePath)) return false;
-
-            if (!RemoveErrorIncludePositions.ContainsKey(filePath)) RemoveErrorIncludePositions.Add(filePath, new List<(int, int)>());
+            string fileName = Path.GetFileName(filePath);
 
             using (StreamReader sr = new StreamReader(filePath))
             {
                 for (int i = 0; !sr.EndOfStream; i++)
                 {
-                    List<KeyValuePair<int, string>> statements = GetStatementsFromLine(sr.ReadLine());
+                    List<TextWithCharIndex> statements = GetStatementsFromLine(sr.ReadLine());
                     statements.ForEach(s =>
                     {
-                        if (s.Value.StartsWith("include'") && s.Value.EndsWith("'") && s.Value.Length - s.Value.Replace("'", "").Length == 2)
+                        if (s.Text.StartsWith("include'") && s.Text.EndsWith("'") && s.Text.Length - s.Text.Replace("'", "").Length == 2)
                         {
-                            string includePath = s.Value.Split('\'')[1];
+                            string includePath = s.Text.Split('\'')[1];
                             if (includePath.StartsWith(MapPluginUsingHeader))
                             {
                                 string mapPluginUsingRelativePath = includePath.Substring(MapPluginUsingHeader.Length);
@@ -59,39 +53,43 @@ namespace Automatic9045.AtsEx
                                 try
                                 {
                                     PluginUsing mapPluginUsing = PluginUsing.Load(PluginType.MapPlugin, mapPluginUsingAbsolutePath);
-                                    IEnumerable<PluginBase> loadedMapPlugins = PluginLoader.LoadFromPluginUsing(mapPluginUsing);
-                                    LoadedPlugins.AddRange(loadedMapPlugins);
+                                    IEnumerable<PluginBase> loadedMapPlugins = pluginLoader.LoadFromPluginUsing(mapPluginUsing);
+                                    loadedPlugins.AddRange(loadedMapPlugins);
                                 }
                                 catch (CompilationException ex)
                                 {
                                     ex.ThrowAsLoadError();
                                 }
 
-                                RemoveErrorIncludePositions[filePath].Add((i + 1, s.Key + 1));
+                                mapPluginUsingErrors.Add(new LoadError(null, fileName, i + 1, s.CharIndex + 1));
                             }
                             else if (includePath.StartsWith(NoMapPluginHeader))
                             {
-                                RemoveErrorIncludePositions[filePath].Add((i + 1, s.Key + 1));
+                                mapPluginUsingErrors.Add(new LoadError(null, fileName, i + 1, s.CharIndex + 1));
                             }
                             else
                             {
                                 string includeRelativePath = includePath.Substring(MapPluginUsingHeader.Length);
                                 string includeAbsolutePath = Path.Combine(Path.GetDirectoryName(filePath), includeRelativePath);
-                                Load(includeAbsolutePath);
+                                
+                                Map includedMap = Load(includeAbsolutePath, pluginLoader);
+
+                                loadedPlugins.AddRange(includedMap.LoadedPlugins);
+                                mapPluginUsingErrors.AddRange(includedMap.MapPluginUsingErrors);
                             }
                         }
                     });
                 }
             }
 
-            return true;
+            return new Map(loadedPlugins, mapPluginUsingErrors);
         }
 
-        protected List<KeyValuePair<int, string>> GetStatementsFromLine(string line)
+        protected static List<TextWithCharIndex> GetStatementsFromLine(string line)
         {
             string trimmedLine = line.ToLower();
 
-            List<KeyValuePair<int, string>> statements = new List<KeyValuePair<int, string>>();
+            List<TextWithCharIndex> statements = new List<TextWithCharIndex>();
 
             {
                 bool isInString = false;
@@ -134,7 +132,7 @@ namespace Automatic9045.AtsEx
                                     string statement = trimmedLine.Substring(lastStatementEndIndex + 1, i - lastStatementEndIndex);
                                     string notTrimmedStatement = line.Substring(notTrimmedLastStatementEndIndex + 1, n - notTrimmedLastStatementEndIndex);
                                     int headSpaceCount = notTrimmedStatement.Length - notTrimmedStatement.TrimStart().Length;
-                                    statements.Add(new KeyValuePair<int, string>(notTrimmedLastStatementEndIndex + headSpaceCount + 1, statement));
+                                    statements.Add(new TextWithCharIndex(notTrimmedLastStatementEndIndex + headSpaceCount + 1, statement));
                                 }
 
                                 lastStatementEndIndex = i;
@@ -149,6 +147,18 @@ namespace Automatic9045.AtsEx
             }
 
             return statements;
+        }
+
+        protected class TextWithCharIndex
+        {
+            public int CharIndex { get; }
+            public string Text { get; }
+
+            public TextWithCharIndex(int charIndex, string text)
+            {
+                CharIndex = charIndex;
+                Text = text;
+            }
         }
     }
 }

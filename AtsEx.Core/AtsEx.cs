@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -120,17 +121,15 @@ namespace Automatic9045.AtsEx
 
                 {
                     sw.Restart();
-                    MapLoader mapLoader = new MapLoader(BveHacker, pluginLoader);
-                    mapLoader.Load();
-                    MapPlugins = mapLoader.LoadedPlugins;
+                    Map map = Map.Load(BveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path, pluginLoader);
+                    MapPlugins = map.LoadedPlugins;
                     Debug.WriteLine($"MapPlugins: {sw.ElapsedMilliseconds}ms");
 
                     IEnumerable<LoadError> removeTargetErrors = LoadErrorManager.Errors.Where(error =>
                     {
                         if (error.Text.Contains("[[NOMPI]]")) return true;
 
-                        bool isMapPluginUsingError = mapLoader.RemoveErrorIncludePositions.
-                            Any(pos => Path.GetFileName(pos.Key) == error.SenderFileName && pos.Value.Contains((error.LineIndex, error.CharIndex)));
+                        bool isMapPluginUsingError = map.MapPluginUsingErrors.Contains(error, new LoadErrorEqualityComparer());
                         return isMapPluginUsingError;
                     });
                     foreach (LoadError error in removeTargetErrors)
@@ -215,5 +214,11 @@ namespace Automatic9045.AtsEx
         {
             (App.Instance.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyReleased();
         }
+    }
+
+    class LoadErrorEqualityComparer : IEqualityComparer<LoadError>
+    {
+        public bool Equals(LoadError x, LoadError y) => x.SenderFileName == y.SenderFileName && x.LineIndex == y.LineIndex && x.CharIndex == y.CharIndex;
+        public int GetHashCode(LoadError obj) => obj.GetHashCode();
     }
 }

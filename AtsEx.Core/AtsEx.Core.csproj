@@ -122,7 +122,7 @@
     <Compile Include="BveHacker\CoreHackServices\ScenarioHacker.cs" />
     <Compile Include="Input\NativeAtsKey.cs" />
     <Compile Include="Input\NativeKeySet.cs" />
-    <Compile Include="MapLoader\MapLoader.cs" />
+    <Compile Include="MapLoader\Map.cs" />
     <Compile Include="Plugins\PluginLoader.cs" />
     <Compile Include="Plugins\PluginUsing.cs" />
     <Compile Include="Plugins\Scripting\CSharp\CompilationException.cs" />
