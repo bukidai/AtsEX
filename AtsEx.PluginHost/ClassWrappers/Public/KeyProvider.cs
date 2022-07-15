@@ -11,6 +11,9 @@ using Automatic9045.AtsEx.PluginHost.BveTypes;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// キー入力を管理します。
+    /// </summary>
     public class KeyProvider : ClassWrapperBase
     {
         [InitializeClassWrapper]
