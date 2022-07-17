@@ -120,9 +120,17 @@
     <Compile Include="BveHacker\BveHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\MainFormHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\ScenarioHacker.cs" />
+    <Compile Include="ExtendedBeacons\Beacon.cs" />
+    <Compile Include="ExtendedBeacons\ExtendedBeaconBase.cs" />
+    <Compile Include="ExtendedBeacons\Globals\ExtendedBeaconGlobalsBase.cs" />
+    <Compile Include="ExtendedBeacons\Globals\PassedGlobals.cs" />
+    <Compile Include="ExtendedBeacons\Globals\TrainPassedGlobals.cs" />
+    <Compile Include="ExtendedBeacons\MapStatementIdentifiers.cs" />
+    <Compile Include="ExtendedBeacons\TrainObservingBeacon.cs" />
     <Compile Include="Input\NativeAtsKey.cs" />
     <Compile Include="Input\NativeKeySet.cs" />
     <Compile Include="MapLoader\Map.cs" />
+    <Compile Include="ExtendedBeacons\ExtendedBeaconSet.cs" />
     <Compile Include="Plugins\PluginLoader.cs" />
     <Compile Include="Plugins\PluginUsing.cs" />
     <Compile Include="Plugins\Scripting\CSharp\CompilationException.cs" />
@@ -131,6 +139,8 @@
     <Compile Include="Plugins\Scripting\IronPython2\PluginScript.cs" />
     <Compile Include="Plugins\Scripting\IronPython2\ScriptEngineProvider.cs" />
     <Compile Include="Plugins\Scripting\IronPython2\ScriptResult.cs" />
+    <Compile Include="Plugins\Scripting\MapStatementIdentifiers.cs" />
+    <Compile Include="Plugins\Scripting\ScriptLanguage.cs" />
     <Compile Include="Plugins\Scripting\ScriptPluginBase.cs" />
     <Compile Include="Plugins\Scripting\ScriptPluginBuilder.cs" />
     <Compile Include="Plugins\Scripting\CSharp\PluginScript.cs" />
@@ -160,6 +170,12 @@
     <Content Include="Resources\ScriptPluginPackage.resx" />
     <Content Include="Resources\ScriptPluginBase.ja.resx" />
     <Content Include="Resources\ScriptPluginBase.resx" />
+    <Content Include="Resources\ExtendedBeacons\ExtendedBeaconSet.resx" />
+    <Content Include="Resources\ExtendedBeacons\ExtendedBeaconSet.ja.resx" />
+    <Content Include="Resources\ExtendedBeacons\MapStatementIdentifiers.ja.resx" />
+    <Content Include="Resources\Plugins\MapStatementIdentifiers.ja.resx" />
+    <Content Include="Resources\Plugins\MapStatementIdentifiers.resx" />
+    <Content Include="Resources\ExtendedBeacons\MapStatementIdentifiers.resx" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <EmbeddedResource Include="Plugins\AtsExPluginUsingXmlSchema.xsd">
@@ -215,7 +231,7 @@
     <PostBuildEvent>xcopy /y /i "$(TargetDir)0Harmony.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
 
 xcopy /y /i "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
-xcopy /y /i "$(ProjectDir)Resources\" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\Resources\Core\"</PostBuildEvent>
+xcopy /e /y /i "$(ProjectDir)Resources\" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\Resources\Core\"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

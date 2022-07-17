@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Mackoy.Bvets;
 
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
 
 namespace Automatic9045.AtsEx.PluginHost
 {
@@ -89,6 +90,12 @@ namespace Automatic9045.AtsEx.PluginHost
         /// キー入力を管理する <see cref="ClassWrappers.KeyProvider"/> を取得します。
         /// </summary>
         KeyProvider KeyProvider { get; }
+
+
+        /// <summary>
+        /// 拡張地上子の一覧を取得します。
+        /// </summary>
+        IExtendedBeaconSet ExtendedBeacons { get; }
 
 
         /// <summary>

@@ -9,6 +9,7 @@ obj
 /_SampleScenarios/Automatic9045/AtsEx/*.pdb
 /_SampleScenarios/Automatic9045/AtsEx/*.dll.config
 /_SampleScenarios/Automatic9045/AtsEx/*.xml
+/_SampleScenarios/Automatic9045/AtsEx/*/*.resources.dll
 /_SampleScenarios/Automatic9045/AtsEx/Resources/*/*.resx
 /_SampleScenarios/Automatic9045/AtsEx/Resources/*/*/*.resx
 

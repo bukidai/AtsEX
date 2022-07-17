@@ -70,6 +70,14 @@
   <ItemGroup>
     <Compile Include="ClassWrappers\Public\AssistantTextDrawer.cs" />
     <Compile Include="ClassWrappers\Public\RepeatedStructure.cs" />
+    <Compile Include="DictionaryExtensions.cs" />
+    <Compile Include="ExtendedBeacons\ObservingTargetTrain.cs" />
+    <Compile Include="ExtendedBeacons\ExtendedBeaconBase.cs" />
+    <Compile Include="Direction.cs" />
+    <Compile Include="ExtendedBeacons\IExtendedBeaconSet.cs" />
+    <Compile Include="ExtendedBeacons\ObservingTargetTrack.cs" />
+    <Compile Include="ExtendedBeacons\PassedEventArgs.cs" />
+    <Compile Include="ExtendedBeacons\TrainPassedEventArgs.cs" />
     <Compile Include="Plugins\AssemblyPluginBase.cs" />
     <Compile Include="Plugins\PluginBuilder.cs" />
     <Compile Include="BveTypes\BveTypeSet.cs" />

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Automatic9045.AtsEx.ExtendedBeacons;
 using Automatic9045.AtsEx.Input;
 using Automatic9045.AtsEx.Plugins;
 using Automatic9045.AtsEx.Plugins.Scripting.CSharp;
@@ -63,7 +64,7 @@ namespace Automatic9045.AtsEx
             Version profileVersion = BveTypeSet.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly, true);
 
             App.CreateInstance(TargetAssembly, CallerAssembly, ExecutingAssembly, PluginHostAssembly);
-            BveHacker = new BveHacker(TargetProcess);
+            BveHacker = new BveHacker(TargetProcess, ResolveLoadExceptions);
 
             ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(App.Instance, BveHacker);
             classWrapperInitializer.InitializeAll();
@@ -119,18 +120,9 @@ namespace Automatic9045.AtsEx
                     }
                 }
             }
-            catch (CompilationException ex)
-            {
-                ex.ThrowAsLoadError();
-            }
-            catch (BveFileLoadException ex)
-            {
-                LoadErrorManager.Throw(ex.Message, ex.SenderFileName, ex.LineIndex, ex.CharIndex);
-            }
             catch (Exception ex)
             {
-                LoadErrorManager.Throw(ex.Message);
-                MessageBox.Show(ex.ToString(), string.Format(Resources.GetString("UnhandledExceptionCaption").Value, App.Instance.ProductShortName));
+                ResolveLoadExceptions(ex);
             }
             finally
             {
@@ -142,6 +134,23 @@ namespace Automatic9045.AtsEx
             }
 
             VersionFormProvider.Intialize(Enumerable.Concat(VehiclePlugins, MapPlugins));
+
+            void ResolveLoadExceptions(Exception exception)
+            {
+                if (exception is CompilationException ce)
+                {
+                    ce.ThrowAsLoadError();
+                }
+                else if (exception is BveFileLoadException fe)
+                {
+                    LoadErrorManager.Throw(fe.Message, fe.SenderFileName, fe.LineIndex, fe.CharIndex);
+                }
+                else
+                {
+                    LoadErrorManager.Throw(exception.Message);
+                    MessageBox.Show(exception.ToString(), string.Format(Resources.GetString("UnhandledExceptionCaption").Value, App.Instance.ProductShortName));
+                }
+            }
         }
 
         public void Dispose()
@@ -181,6 +190,8 @@ namespace Automatic9045.AtsEx
         public void Tick(TimeSpan elapsed, VehicleState vehicleState)
         {
             App.Instance.VehicleState = vehicleState;
+
+            BveHacker.Tick(elapsed);
 
             VehiclePlugins.ForEach(plugin => plugin.Tick(elapsed));
             MapPlugins.ForEach(plugin => plugin.Tick(elapsed));

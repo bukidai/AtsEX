@@ -11,14 +11,16 @@ using HarmonyLib;
 
 using Mackoy.Bvets;
 
+using Automatic9045.AtsEx.ExtendedBeacons;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
 
 namespace Automatic9045.AtsEx
 {
     internal sealed class BveHacker : IBveHacker
     {
-        public BveHacker(Process targetProcess)
+        public BveHacker(Process targetProcess, Action<Exception> resolveBeaconCreationExceptionAction)
         {
             Process = targetProcess;
 
@@ -26,6 +28,17 @@ namespace Automatic9045.AtsEx
             ScenarioHacker = new ScenarioHacker(MainFormHacker);
 
             ScenarioHacker.ScenarioCreated += e => PreviewScenarioCreated?.Invoke(e);
+            ScenarioHacker.ScenarioCreated += e =>
+            {
+                try
+                {
+                    _ExtendedBeacons = ExtendedBeaconSet.Load(this, e.Scenario.Route.Structures.Repeated, e.Scenario.Route.StructureModels, e.Scenario.Trains);
+                }
+                catch (Exception ex)
+                {
+                    resolveBeaconCreationExceptionAction(ex);
+                }
+            };
             ScenarioHacker.ScenarioCreated += e => ScenarioCreated?.Invoke(e);
         }
 
@@ -66,6 +79,10 @@ namespace Automatic9045.AtsEx
         }
 
 
+        private ExtendedBeaconSet _ExtendedBeacons;
+        public IExtendedBeaconSet ExtendedBeacons => _ExtendedBeacons;
+
+
         private readonly ScenarioHacker ScenarioHacker;
 
         public event ScenarioCreatedEventHandler PreviewScenarioCreated;
@@ -84,5 +101,12 @@ namespace Automatic9045.AtsEx
         }
 
         public bool IsScenarioCreated => !(ScenarioHacker.CurrentScenario is null);
+
+
+        [UnderConstruction]
+        public void Tick(TimeSpan elapsed)
+        {
+            _ExtendedBeacons?.Tick(Scenario.LocationManager.Location, 0); // TODO: 先行列車の位置
+        }
     }
 }
