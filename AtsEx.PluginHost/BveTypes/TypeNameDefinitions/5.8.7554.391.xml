@@ -228,6 +228,29 @@
 		<Field WrapperProperty="Structures" Original="d" IsOriginalPrivate="true"/>
 	</Class>
 
+	<Class Wrapper="Scenario" Original="er">
+		<Property Wrapper="TimeManager">
+			<Getter Original="j"/>
+		</Property>
+		<Property Wrapper="LocationManager">
+			<Getter Original="b"/>
+		</Property>
+		<Property Wrapper="Route">
+			<Getter Original="h"/>
+		</Property>
+		<Property Wrapper="Vehicle">
+			<Getter Original="a"/>
+		</Property>
+		<Property Wrapper="Trains">
+			<Getter Original="g"/>
+		</Property>
+		<Property Wrapper="TimeTable">
+			<Getter Original="d"/>
+		</Property>
+		<Method Wrapper="InitializeTimeAndLocation" WrapperParams="System.Double, System.Int32" Original="a" IsOriginalPrivate="true"/>
+		<Method Wrapper="Initialize" WrapperParams="System.Int32" Original="a"/>
+	</Class>
+
 	<Class Wrapper="ScenarioInfo" Original="ek">
 		<Property Wrapper="Path">
 			<Getter Original="i"/>
@@ -279,27 +302,6 @@
 		</Property>
 
 		<Method Wrapper="FromFile" WrapperParams="System.String" Original="a" IsWrapperStatic="true" IsOriginalStatic="true"/>
-	</Class>
-
-	<Class Wrapper="Scenario" Original="er">
-		<Property Wrapper="TimeManager">
-			<Getter Original="j"/>
-		</Property>
-		<Property Wrapper="LocationManager">
-			<Getter Original="b"/>
-		</Property>
-		<Property Wrapper="Route">
-			<Getter Original="h"/>
-		</Property>
-		<Property Wrapper="Vehicle">
-			<Getter Original="a"/>
-		</Property>
-		<Property Wrapper="Trains">
-			<Getter Original="g"/>
-		</Property>
-		<Property Wrapper="TimeTable">
-			<Getter Original="d"/>
-		</Property>
 	</Class>
 
 	<Class Wrapper="SingleStructureList" Original="bg">

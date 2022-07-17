@@ -30,6 +30,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             VehicleGetMethod = members.GetSourcePropertyGetterOf(nameof(Vehicle));
             TrainsGetMethod = members.GetSourcePropertyGetterOf(nameof(Trains));
             TimeTableGetMethod = members.GetSourcePropertyGetterOf(nameof(TimeTable));
+
+            InitializeTimeAndLocationMethod = members.GetSourceMethodOf(nameof(InitializeTimeAndLocation));
+            InitializeMethod = members.GetSourceMethodOf(nameof(Initialize));
         }
 
         private Scenario(object src) : base(src)
@@ -87,5 +90,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// このシナリオに関連付けられた <see cref="ClassWrappers.TimeTable"/> のインスタンスを取得します。
         /// </summary>
         public TimeTable TimeTable => ClassWrappers.TimeTable.FromSource(TimeTableGetMethod.Invoke(Src, null));
+
+        private static MethodInfo InitializeTimeAndLocationMethod;
+        public void InitializeTimeAndLocation(double location, int timeMilliseconds) => InitializeTimeAndLocationMethod.Invoke(Src, new object[] { location, timeMilliseconds });
+
+        private static MethodInfo InitializeMethod;
+        public void Initialize(int stationIndex) => InitializeMethod.Invoke(Src, new object[] { stationIndex });
     }
 }
