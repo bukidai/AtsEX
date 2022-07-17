@@ -23,12 +23,16 @@ namespace Automatic9045.AtsEx
         {
             MainForm = mainFormHacker.TargetForm;
 
+            ClassMemberSet scenarioMembers = BveTypeSet.Instance.GetClassInfoOf<Scenario>();
 
-            ClassMemberSet timePosFormMembers = BveTypeSet.Instance.GetClassInfoOf<TimePosForm>();
-            MethodInfo setScenarioMethod = timePosFormMembers.GetSourceMethodOf(nameof(TimePosForm.SetScenario));
+            MethodInfo initializeTimeAndLocationMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.InitializeTimeAndLocation));
+            MethodInfo initializeMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.Initialize));
 
             Harmony harmony = new Harmony("com.automatic9045.atsex.scenario-hacker");
-            harmony.Patch(setScenarioMethod, new HarmonyMethod(typeof(ScenarioHacker), nameof(SetScenarioPreFix)));
+            HarmonyMethod patch = new HarmonyMethod(typeof(ScenarioHacker), nameof(SetScenario));
+
+            harmony.Patch(initializeTimeAndLocationMethod, postfix: patch);
+            harmony.Patch(initializeMethod, postfix: patch);
         }
 
         public static event ScenarioCreatedEventHandler ScenarioCreated;
@@ -46,10 +50,10 @@ namespace Automatic9045.AtsEx
         }
 
 #pragma warning disable IDE1006 // 命名スタイル
-        private static void SetScenarioPreFix(object[] __args)
+        private static void SetScenario(object __instance)
 #pragma warning restore IDE1006 // 命名スタイル
         {
-            Scenario scenario = Scenario.FromSource(__args[0]);
+            Scenario scenario = Scenario.FromSource(__instance);
             ScenarioCreated?.Invoke(new ScenarioCreatedEventArgs(scenario));
         }
     }
