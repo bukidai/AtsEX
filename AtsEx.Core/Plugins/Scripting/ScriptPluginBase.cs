@@ -42,7 +42,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
             Description = builder.Description;
             Copyright = builder.Copyright;
 
-            Globals = new Globals(App, BveHacker);
+            Globals = new Globals(BveHacker);
 
             DisposeScript = builder.DisposeScript?.GetWithCheckErrors();
             OnScenarioCreatedScript = builder.OnScenarioCreatedScript?.GetWithCheckErrors();

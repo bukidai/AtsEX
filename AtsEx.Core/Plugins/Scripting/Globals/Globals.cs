@@ -10,24 +10,22 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
 {
     public class Globals
     {
-        public IApp App { get; }
         public IBveHacker BveHacker { get; }
 
         protected SortedList<string, dynamic> Variables;
 
-        private Globals(IApp app, IBveHacker bveHacker, SortedList<string, dynamic> variables)
+        private Globals(IBveHacker bveHacker, SortedList<string, dynamic> variables)
         {
-            App = app;
             BveHacker = bveHacker;
 
             Variables = variables;
         }
 
-        protected Globals(Globals source) : this(source.App, source.BveHacker, source.Variables)
+        protected Globals(Globals source) : this(source.BveHacker, source.Variables)
         {
         }
 
-        public Globals(IApp app, IBveHacker bveHacker) : this(app, bveHacker, new SortedList<string, dynamic>())
+        public Globals(IBveHacker bveHacker) : this(bveHacker, new SortedList<string, dynamic>())
         {
         }
 
