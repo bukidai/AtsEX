@@ -64,6 +64,12 @@
 		<Method Wrapper="Draw" WrapperParams="void" Original="o"/>
 	</Class>
 
+	<Class Wrapper="AssistantTextDrawer" Original="ar">
+		<Property Wrapper="AssistantTexts">
+			<Getter Original="a"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="BveFile" Original="b5">
 		<Property Wrapper="Path">
 			<Getter Original="d"/>
