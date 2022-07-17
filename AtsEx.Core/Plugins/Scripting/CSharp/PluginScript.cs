@@ -33,19 +33,32 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
             BeginCompile();
         }
 
-        public PluginScript(string code, string name) : this(CSharpScript.Create(code, ScriptOptions, typeof(TGlobals)), name)
+        public PluginScript(string code, ScriptSourceResolver scriptSourceResolver, string name)
+            : this(CSharpScript.Create(code, ScriptOptions.WithSourceResolver(scriptSourceResolver), typeof(TGlobals)), name)
         {
         }
 
-        public PluginScript(Stream code, string name) : this(CSharpScript.Create(code, ScriptOptions, typeof(TGlobals)), name)
+        public PluginScript(string code, string searchBaseDirectory, string name)
+            : this(code, ScriptSourceResolver.Default.WithBaseDirectory(searchBaseDirectory), name)
+        {
+        }
+
+        public PluginScript(string code, string name) : this(code, ScriptSourceResolver.Default, name)
+        {
+        }
+
+        protected PluginScript(Stream code, ScriptOptions scriptOptions, string name) : this(CSharpScript.Create(code, scriptOptions, typeof(TGlobals)), name)
         {
         }
 
         public static PluginScript<TGlobals> LoadFrom(string path)
         {
+            ScriptSourceResolver scriptSourceResolver = ScriptSourceResolver.Default.WithBaseDirectory(Path.GetDirectoryName(path));
+            ScriptOptions scriptOptions = ScriptOptions.WithSourceResolver(scriptSourceResolver);
+
             using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                return new PluginScript<TGlobals>(stream, Path.GetFileName(path));
+                return new PluginScript<TGlobals>(stream, scriptOptions, Path.GetFileName(path));
             }
         }
 
