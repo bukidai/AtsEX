@@ -15,6 +15,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         public T Convert(object value)
         {
+            if (value is null) return default;
             ClassWrapperBase wrapper = ClassWrapperBase.CreateFromSource(value);
             switch (wrapper)
             {
