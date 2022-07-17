@@ -272,55 +272,73 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                 switch (typeInfo)
                 {
                     case TypeMemberNameSetBase.ArrayTypeInfo arrayTypeInfo:
-                        {
-                            Type baseType = ParseTypeName(arrayTypeInfo.BaseType, convertToOriginalType);
-                            type = baseType.MakeArrayType(arrayTypeInfo.DimensionCount);
-                        }
+                    {
+                        Type baseType = ParseTypeName(arrayTypeInfo.BaseType, convertToOriginalType);
+                        type = baseType.MakeArrayType(arrayTypeInfo.DimensionCount);
+
                         break;
+                    }
 
                     case TypeMemberNameSetBase.GenericTypeInfo genericTypeInfo:
+                    {
+                        Type[] paramTypes = genericTypeInfo.TypeParams.Select(t => ParseTypeName(t, convertToOriginalType)).ToArray();
+
+                        Type genericDefinitionType = TryGetType($"{genericTypeInfo.TypeName}`{paramTypes.Length}");
+                        if (!(genericDefinitionType is null))
                         {
-                            Type[] paramTypes = genericTypeInfo.TypeParams.Select(t => ParseTypeName(t, convertToOriginalType)).ToArray();
-
-                            Type genericDefinitionType = Type.GetType($"{genericTypeInfo.TypeName}`{paramTypes.Length}");
-                            if (!(genericDefinitionType is null))
-                            {
-                                type = genericDefinitionType.MakeGenericType(paramTypes);
-                                break;
-                            }
-
-                            type = wrapperTypes.FirstOrDefault(t => t.Name == genericTypeInfo.TypeName && t.GenericTypeArguments.Length == paramTypes.Length);
-                            if (type is null)
-                            {
-                                throw new ArgumentException(string.Format(Resources.GetString("GenericWrapperTypeNotFound").Value, genericTypeInfo.TypeName, paramTypes.Length));
-                            }
+                            type = genericDefinitionType.MakeGenericType(paramTypes);
+                            break;
                         }
+
+                        type = wrapperTypes.FirstOrDefault(t => t.Name == genericTypeInfo.TypeName && t.GenericTypeArguments.Length == paramTypes.Length);
+                        if (type is null)
+                        {
+                            throw new ArgumentException(string.Format(Resources.GetString("GenericWrapperTypeNotFound").Value, genericTypeInfo.TypeName, paramTypes.Length));
+                        }
+
                         break;
+                    }
 
                     case TypeMemberNameSetBase.TypeInfo basicTypeInfo:
+                    {
+                        type = TryGetType(basicTypeInfo.TypeName);
+                        if (type is null)
                         {
-                            type = Type.GetType(basicTypeInfo.TypeName);
+                            type = wrapperTypes.FirstOrDefault(t => t.Name == basicTypeInfo.TypeName);
                             if (type is null)
                             {
-                                type = wrapperTypes.FirstOrDefault(t => t.Name == basicTypeInfo.TypeName);
-                                if (type is null)
-                                {
-                                    throw new ArgumentException(string.Format(Resources.GetString("WrapperTypeNotFound").Value, basicTypeInfo.TypeName));
-                                }
-                            }
-
-                            if (convertToOriginalType)
-                            {
-                                type = GetOriginalTypeIfWrapper(type);
+                                throw new ArgumentException(string.Format(Resources.GetString("WrapperTypeNotFound").Value, basicTypeInfo.TypeName));
                             }
                         }
+
+                        if (convertToOriginalType)
+                        {
+                            type = GetOriginalTypeIfWrapper(type);
+                        }
+
                         break;
+                    }
 
                     default:
                         throw new ArgumentException();
                 }
 
                 return type;
+
+                Type TryGetType(string name)
+                {
+                    Type result = Type.GetType(name);
+                    if (result is null)
+                    {
+                        foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+                        {
+                            result = assembly.GetType(name);
+                            if (!(result is null)) break;
+                        }
+                    }
+
+                    return result;
+                }
             }
 
             string GetTypeFullName(Type type)
