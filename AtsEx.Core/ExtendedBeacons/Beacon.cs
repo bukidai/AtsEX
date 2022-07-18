@@ -14,8 +14,8 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
     {
         private double OldLocation = 0d;
 
-        public Beacon(BveHacker bveHacker, string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script)
-            : base(bveHacker, name, definedStructure, observingTargetTrack, script)
+        public Beacon(BveHacker bveHacker, string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain, IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script)
+            : base(bveHacker, name, definedStructure, observingTargetTrack, observingTargetTrain, script)
         {
         }
 

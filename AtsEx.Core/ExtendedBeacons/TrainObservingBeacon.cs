@@ -15,7 +15,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
         private readonly List<TrainInfo> TargetTrains;
 
         public TrainObservingBeacon(BveHacker bveHacker, string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, IDictionary<string, Train> targetTrains, IPluginScript<ExtendedBeaconGlobalsBase<TrainPassedEventArgs>> script)
-            : base(bveHacker, name, definedStructure, observingTargetTrack, script)
+            : base(bveHacker, name, definedStructure, observingTargetTrack, ObservingTargetTrain.Trains, script)
         {
             TargetTrains = targetTrains.Select(train => new TrainInfo(train.Key, train.Value)).ToList();
         }

@@ -94,7 +94,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                         case ObservingTargetTrain.Myself:
                         {
                             IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script = CreateScript<PassedEventArgs>(code, scriptLanguage);
-                            Beacon beacon = new Beacon(bveHacker, name, repeatedStructure, observingTargetTrack, script);
+                            Beacon beacon = new Beacon(bveHacker, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
 
                             beacons[name] = beacon;
                             break;
@@ -112,7 +112,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                         case ObservingTargetTrain.PreTrain:
                         {
                             IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script = CreateScript<PassedEventArgs>(code, scriptLanguage);
-                            Beacon beacon = new Beacon(bveHacker, name, repeatedStructure, observingTargetTrack, script);
+                            Beacon beacon = new Beacon(bveHacker, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
 
                             preTrainObservingBeacons[name] = beacon;
                             break;

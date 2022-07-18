@@ -42,16 +42,22 @@ namespace Automatic9045.AtsEx.PluginHost.ExtendedBeacons
         public ObservingTargetTrack ObservingTargetTrack { get; }
 
         /// <summary>
+        /// この地上子が通過を検知する対象の列車を指定する <see cref="PluginHost.ExtendedBeacons.ObservingTargetTrain"/> を取得します。
+        /// </summary>
+        public ObservingTargetTrain ObservingTargetTrain { get; }
+
+        /// <summary>
         /// <see cref="ExtendedBeaconBase{TPassedEventArgs}"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
         /// <param name="name">地上子の名前。</param>
         /// <param name="definedStructure">地上子の定義に使用する連続ストラクチャー。</param>
         /// <param name="observingTargetTrack">検知対象の軌道。</param>
-        public ExtendedBeaconBase(string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack)
+        public ExtendedBeaconBase(string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             DefinedStructure = definedStructure ?? throw new ArgumentNullException(nameof(definedStructure));
             ObservingTargetTrack = observingTargetTrack;
+            ObservingTargetTrain = observingTargetTrain;
         }
 
         /// <summary>
