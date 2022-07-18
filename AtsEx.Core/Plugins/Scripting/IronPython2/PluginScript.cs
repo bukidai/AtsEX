@@ -29,13 +29,13 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
             BeginCompile();
         }
 
-        public PluginScript(string code, ScriptScope scope, string name) : this(ScriptEngineProvider.ScriptEngine.CreateScriptSourceFromString(code), scope, name)
+        public PluginScript(string code, ScriptEngine engine, ScriptScope scope, string name) : this(engine.CreateScriptSourceFromString(code), scope, name)
         {
         }
 
-        public static PluginScript<TGlobals> LoadFrom(string path, ScriptScope scope)
+        public static PluginScript<TGlobals> LoadFrom(string path, ScriptEngine engine, ScriptScope scope)
         {
-            ScriptSource source = ScriptEngineProvider.ScriptEngine.CreateScriptSourceFromFile(path, Encoding.UTF8);
+            ScriptSource source = engine.CreateScriptSourceFromFile(path, Encoding.UTF8);
             return new PluginScript<TGlobals>(source, scope, Path.GetFileName(path));
         }
 

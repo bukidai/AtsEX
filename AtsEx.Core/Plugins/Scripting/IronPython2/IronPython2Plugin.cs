@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,8 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
 
         public static IronPython2Plugin FromPackage(PluginBuilder builder, PluginType pluginType, ScriptPluginPackage package)
         {
-            ScriptScope scope = ScriptEngineProvider.ScriptEngine.CreateScope();
+            ScriptEngine engine = ScriptEngineProvider.CreateEngine(Path.GetDirectoryName(package.Location));
+            ScriptScope scope = ScriptEngineProvider.CreateScope(engine);
 
             ScriptPluginBuilder newBuilder = new ScriptPluginBuilder(builder)
             {
@@ -31,11 +33,11 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
                 Description = package.Description,
                 Copyright = package.Copyright,
 
-                ConstructorScript = package.ConstructorScriptPath is null ? null : PluginScript<Globals>.LoadFrom(package.ConstructorScriptPath, scope),
-                DisposeScript = package.DisposeScriptPath is null ? null : PluginScript<Globals>.LoadFrom(package.DisposeScriptPath, scope),
-                OnScenarioCreatedScript = package.OnScenarioCreatedScriptPath is null ? null : PluginScript<ScenarioCreatedGlobals>.LoadFrom(package.OnScenarioCreatedScriptPath, scope),
-                OnStartedScript = package.OnStartedScriptPath is null ? null : PluginScript<StartedGlobals>.LoadFrom(package.OnStartedScriptPath, scope),
-                TickScript = package.TickScriptPath is null ? null : PluginScript<TickGlobals>.LoadFrom(package.TickScriptPath, scope),
+                ConstructorScript = package.ConstructorScriptPath is null ? null : PluginScript<Globals>.LoadFrom(package.ConstructorScriptPath, engine, scope),
+                DisposeScript = package.DisposeScriptPath is null ? null : PluginScript<Globals>.LoadFrom(package.DisposeScriptPath, engine, scope),
+                OnScenarioCreatedScript = package.OnScenarioCreatedScriptPath is null ? null : PluginScript<ScenarioCreatedGlobals>.LoadFrom(package.OnScenarioCreatedScriptPath, engine, scope),
+                OnStartedScript = package.OnStartedScriptPath is null ? null : PluginScript<StartedGlobals>.LoadFrom(package.OnStartedScriptPath, engine, scope),
+                TickScript = package.TickScriptPath is null ? null : PluginScript<TickGlobals>.LoadFrom(package.TickScriptPath, engine, scope),
             };
 
             return new IronPython2Plugin(newBuilder, pluginType, !(newBuilder.BveHacker is null));

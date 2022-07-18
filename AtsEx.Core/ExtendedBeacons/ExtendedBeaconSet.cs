@@ -120,18 +120,20 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
 
             IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> CreateScript<TPassedEventArgs>(string code, ScriptLanguage language) where TPassedEventArgs : PassedEventArgs
             {
-                IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> script;
+                string mainMapDirectory = Path.GetDirectoryName(bveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path);
 
+                IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> script;
                 switch (language)
                 {
                     case ScriptLanguage.CSharpScript:
-                        string mainMapDirectory = Path.GetDirectoryName(bveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path);
                         script = new Plugins.Scripting.CSharp.PluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>>(code, mainMapDirectory, Resources.GetString("ItemName").Value);
                         break;
 
                     case ScriptLanguage.IronPython2:
-                        ScriptScope scriptScope = ScriptEngineProvider.ScriptEngine.CreateScope();
-                        script = new Plugins.Scripting.IronPython2.PluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>>(code, scriptScope, Resources.GetString("ItemName").Value);
+                        ScriptEngine scriptEngine = ScriptEngineProvider.CreateEngine(mainMapDirectory);
+                        ScriptScope scriptScope = ScriptEngineProvider.CreateScope(scriptEngine);
+
+                        script = new Plugins.Scripting.IronPython2.PluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>>(code, scriptEngine, scriptScope, Resources.GetString("ItemName").Value);
                         break;
 
                     default:
