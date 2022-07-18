@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.Scripting.Hosting;
 
 using Automatic9045.AtsEx.Plugins.Scripting;
@@ -19,28 +19,31 @@ using Automatic9045.AtsEx.PluginHost.Resources;
 using Identifiers = Automatic9045.AtsEx.ExtendedBeacons.MapStatementIdentifiers;
 using ScriptIdentifiers = Automatic9045.AtsEx.Plugins.Scripting.MapStatementIdentifiers;
 
+using BeaconBase = Automatic9045.AtsEx.PluginHost.ExtendedBeacons.ExtendedBeaconBase<Automatic9045.AtsEx.PluginHost.ExtendedBeacons.PassedEventArgs>;
+using TrainObservingBeaconBase = Automatic9045.AtsEx.PluginHost.ExtendedBeacons.ExtendedBeaconBase<Automatic9045.AtsEx.PluginHost.ExtendedBeacons.TrainPassedEventArgs>;
+
 namespace Automatic9045.AtsEx.ExtendedBeacons
 {
     internal partial class ExtendedBeaconSet : IExtendedBeaconSet
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ExtendedBeaconSet>(@"Core\ExtendedBeacons");
 
-        public IEnumerable<PluginHost.ExtendedBeacons.ExtendedBeaconBase<PassedEventArgs>> Beacons { get; }
-        public IEnumerable<PluginHost.ExtendedBeacons.ExtendedBeaconBase<TrainPassedEventArgs>> TrainObservingBeacons { get; }
-        public IEnumerable<PluginHost.ExtendedBeacons.ExtendedBeaconBase<PassedEventArgs>> PreTrainObservingBeacons { get; }
+        public ReadOnlyDictionary<string, BeaconBase> Beacons { get; }
+        public ReadOnlyDictionary<string, TrainObservingBeaconBase> TrainObservingBeacons { get; }
+        public ReadOnlyDictionary<string, BeaconBase> PreTrainObservingBeacons { get; }
 
-        protected ExtendedBeaconSet(IEnumerable<Beacon> beacons, IEnumerable<TrainObservingBeacon> trainObservingBeacons, IEnumerable<Beacon> preTrainObservingBeacons)
+        protected ExtendedBeaconSet(IDictionary<string, BeaconBase> beacons, IDictionary<string, TrainObservingBeaconBase> trainObservingBeacons, IDictionary<string, BeaconBase> preTrainObservingBeacons)
         {
-            Beacons = beacons;
-            TrainObservingBeacons = trainObservingBeacons;
-            PreTrainObservingBeacons = preTrainObservingBeacons;
+            Beacons = new ReadOnlyDictionary<string, BeaconBase>(beacons);
+            TrainObservingBeacons = new ReadOnlyDictionary<string, TrainObservingBeaconBase>(trainObservingBeacons);
+            PreTrainObservingBeacons = new ReadOnlyDictionary<string, BeaconBase>(preTrainObservingBeacons);
         }
 
         public static ExtendedBeaconSet Load(BveHacker bveHacker, IDictionary<string, MapObjectList> repeatedStructures, IDictionary<string, Model> structureModels, IDictionary<string, Train> trains)
         {
-            List<Beacon> beacons = new List<Beacon>();
-            List<TrainObservingBeacon> trainObservingBeacons = new List<TrainObservingBeacon>();
-            List<Beacon> preTrainObservingBeacons = new List<Beacon>();
+            SortedList<string, BeaconBase> beacons = new SortedList<string, BeaconBase>();
+            SortedList<string, TrainObservingBeaconBase> trainObservingBeacons = new SortedList<string, TrainObservingBeaconBase>();
+            SortedList<string, BeaconBase> preTrainObservingBeacons = new SortedList<string, BeaconBase>();
 
             IEnumerable<KeyValuePair<string, RepeatedStructure>> flattenRepeatedStructures = repeatedStructures.
                 Select(item => item.Value.Select(obj => new KeyValuePair<string, RepeatedStructure>(item.Key, obj as RepeatedStructure))).
@@ -59,21 +62,24 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                     if (definerText != Identifiers.Definer) continue;
                 }
 
-                if (repeatedStructure.Models.Count <= 3) throw new BveFileLoadException(Resources.GetString("ArgumentMissing").Value, Resources.GetString("ItemName").Value);
+                if (repeatedStructure.Models.Count <= 4) throw new BveFileLoadException(Resources.GetString("ArgumentMissing").Value, Resources.GetString("ItemName").Value);
 
-                string scriptLanguageText = structureModels.TryGetKey(repeatedStructure.Models[1]);
+                string name = structureModels.TryGetKey(repeatedStructure.Models[1]);
+                if (name == "atsex.null") name = Guid.NewGuid().ToString();
+
+                string scriptLanguageText = structureModels.TryGetKey(repeatedStructure.Models[2]);
                 if (!ScriptIdentifiers.ScriptLanguages.TryGetKey(scriptLanguageText, out ScriptLanguage scriptLanguage))
                 {
                     throw new BveFileLoadException(ScriptIdentifiers.ErrorTexts.InvalidScriptLanguage(scriptLanguageText), Resources.GetString("ItemName").Value);
                 }
 
-                string trackObservingTypeText = structureModels.TryGetKey(repeatedStructure.Models[2]);
+                string trackObservingTypeText = structureModels.TryGetKey(repeatedStructure.Models[3]);
                 if (!Identifiers.ObservingTargetTracks.TryGetKey(trackObservingTypeText, out ObservingTargetTrack observingTargetTrack))
                 {
                     throw new BveFileLoadException(Identifiers.ErrorTexts.InvalidObservingTargetTrack(trackObservingTypeText), Resources.GetString("ItemName").Value);
                 }
 
-                for (int i = 3; i < repeatedStructure.Models.Count; i++)
+                for (int i = 4; i < repeatedStructure.Models.Count; i++)
                 {
                     string observeTargetText = structureModels.TryGetKey(repeatedStructure.Models[i]);
                     if (!Identifiers.ObservingTargetTrains.TryGetKey(observeTargetText, out ObservingTargetTrain observingTargetTrain))
@@ -88,27 +94,27 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                         case ObservingTargetTrain.Myself:
                         {
                             IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script = CreateScript<PassedEventArgs>(code, scriptLanguage);
-                            Beacon beacon = new Beacon(bveHacker, repeatedStructure, observingTargetTrack, script);
+                            Beacon beacon = new Beacon(bveHacker, name, repeatedStructure, observingTargetTrack, script);
 
-                            beacons.Add(beacon);
+                            beacons[name] = beacon;
                             break;
                         }
 
                         case ObservingTargetTrain.Trains:
                         {
                             IPluginScript<ExtendedBeaconGlobalsBase<TrainPassedEventArgs>> script = CreateScript<TrainPassedEventArgs>(code, scriptLanguage);
-                            TrainObservingBeacon beacon = new TrainObservingBeacon(bveHacker, repeatedStructure, observingTargetTrack, trains, script);
+                            TrainObservingBeacon beacon = new TrainObservingBeacon(bveHacker, name, repeatedStructure, observingTargetTrack, trains, script);
 
-                            trainObservingBeacons.Add(beacon);
+                            trainObservingBeacons[name] = beacon;
                             break;
                         }
 
                         case ObservingTargetTrain.PreTrain:
                         {
                             IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script = CreateScript<PassedEventArgs>(code, scriptLanguage);
-                            Beacon beacon = new Beacon(bveHacker, repeatedStructure, observingTargetTrack, script);
+                            Beacon beacon = new Beacon(bveHacker, name, repeatedStructure, observingTargetTrack, script);
 
-                            preTrainObservingBeacons.Add(beacon);
+                            preTrainObservingBeacons[name] = beacon;
                             break;
                         }
                     }
@@ -146,9 +152,9 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
 
         public void Tick(double location, double preTrainLocation)
         {
-            foreach (Beacon beacon in Beacons) beacon.Tick(location);
-            foreach (TrainObservingBeacon beacon in TrainObservingBeacons) beacon.Tick();
-            foreach (Beacon beacon in PreTrainObservingBeacons) beacon.Tick(preTrainLocation);
+            foreach (Beacon beacon in Beacons.Values) beacon.Tick(location);
+            foreach (TrainObservingBeacon beacon in TrainObservingBeacons.Values) beacon.Tick();
+            foreach (Beacon beacon in PreTrainObservingBeacons.Values) beacon.Tick(preTrainLocation);
         }
     }
 }

@@ -14,8 +14,8 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
     {
         private readonly List<TrainInfo> TargetTrains;
 
-        public TrainObservingBeacon(BveHacker bveHacker, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, IDictionary<string, Train> targetTrains, IPluginScript<ExtendedBeaconGlobalsBase<TrainPassedEventArgs>> script)
-            : base(bveHacker, definedStructure, observingTargetTrack, script)
+        public TrainObservingBeacon(BveHacker bveHacker, string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, IDictionary<string, Train> targetTrains, IPluginScript<ExtendedBeaconGlobalsBase<TrainPassedEventArgs>> script)
+            : base(bveHacker, name, definedStructure, observingTargetTrack, script)
         {
             TargetTrains = targetTrains.Select(train => new TrainInfo(train.Key, train.Value)).ToList();
         }
@@ -26,16 +26,18 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             {
                 train.UpdateLocation();
 
-                if (train.OldLocation < Location && Location <= train.Location)
+                if (train.OldLocation < Location && Location <= train.Location && IsCurrentTrackTarget(train.Train))
                 {
                     NotifyPassed(train, Direction.Forward);
                 }
-                else if (Location < train.OldLocation && train.Location <= Location)
+                else if (Location < train.OldLocation && train.Location <= Location && IsCurrentTrackTarget(train.Train))
                 {
                     NotifyPassed(train, Direction.Backward);
                 }
             }
 
+
+            bool IsCurrentTrackTarget(Train train) => ObservingTargetTrack == ObservingTargetTrack.AllTracks || train.TrainInfo.TrackKey == DefinedStructure.TrackKey;
 
             void NotifyPassed(TrainInfo senderTrain, Direction direction)
             {

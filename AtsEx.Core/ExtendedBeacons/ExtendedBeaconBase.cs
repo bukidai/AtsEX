@@ -15,7 +15,8 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
         protected readonly BveHacker BveHacker;
         protected readonly IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> Script;
 
-        public ExtendedBeaconBase(BveHacker bveHacker, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> script) : base(definedStructure, observingTargetTrack)
+        public ExtendedBeaconBase(BveHacker bveHacker, string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> script) 
+            : base(name, definedStructure, observingTargetTrack)
         {
             BveHacker = bveHacker;
             Script = script;

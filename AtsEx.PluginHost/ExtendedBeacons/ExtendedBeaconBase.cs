@@ -22,6 +22,11 @@ namespace Automatic9045.AtsEx.PluginHost.ExtendedBeacons
         public event PassedEventHandler<TPassedEventArgs> Passed;
 
         /// <summary>
+        /// この地上子の名前を取得します。
+        /// </summary>
+        public string Name { get; }
+
+        /// <summary>
         /// この地上子の設置されている距離程 [m] を取得します。
         /// </summary>
         public double Location => DefinedStructure.Location;
@@ -39,10 +44,12 @@ namespace Automatic9045.AtsEx.PluginHost.ExtendedBeacons
         /// <summary>
         /// <see cref="ExtendedBeaconBase{TPassedEventArgs}"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
+        /// <param name="name">地上子の名前。</param>
         /// <param name="definedStructure">地上子の定義に使用する連続ストラクチャー。</param>
         /// <param name="observingTargetTrack">検知対象の軌道。</param>
-        public ExtendedBeaconBase(RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack)
+        public ExtendedBeaconBase(string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack)
         {
+            Name = name ?? throw new ArgumentNullException(nameof(name));
             DefinedStructure = definedStructure ?? throw new ArgumentNullException(nameof(definedStructure));
             ObservingTargetTrack = observingTargetTrack;
         }
