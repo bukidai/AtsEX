@@ -36,8 +36,9 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             void NotifyPassed(Direction direction)
             {
                 PassedEventArgs eventArgs = new PassedEventArgs(direction);
-                Script.Run(new PassedGlobals(BveHacker, this, eventArgs));
-                base.NotifyPassed(eventArgs);
+                PassedGlobals globals = new PassedGlobals(BveHacker, this, eventArgs);
+                Script.Run(globals);
+                base.NotifyPassed(globals.GetEventArgsWithScriptVariables());
             }
         }
     }

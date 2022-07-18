@@ -23,5 +23,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             this.sender = sender;
             e = eventArgs;
         }
+
+        internal abstract TPassedEventArgs GetEventArgsWithScriptVariables();
     }
 }

@@ -15,5 +15,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
         public TrainPassedGlobals(IBveHacker bveHacker, PluginHost.ExtendedBeacons.ExtendedBeaconBase<TrainPassedEventArgs> sender, TrainPassedEventArgs eventArgs) : base(bveHacker, sender, eventArgs)
         {
         }
+
+        internal override TrainPassedEventArgs GetEventArgsWithScriptVariables() => new TrainPassedEventArgs(e, Variables);
     }
 }

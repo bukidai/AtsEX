@@ -15,5 +15,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
         public PassedGlobals(IBveHacker bveHacker, PluginHost.ExtendedBeacons.ExtendedBeaconBase<PassedEventArgs> sender, PassedEventArgs eventArgs) : base(bveHacker, sender, eventArgs)
         {
         }
+
+        internal override PassedEventArgs GetEventArgsWithScriptVariables() => new PassedEventArgs(e, Variables);
     }
 }

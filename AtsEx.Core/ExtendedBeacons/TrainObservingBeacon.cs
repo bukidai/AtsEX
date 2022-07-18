@@ -42,8 +42,9 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             void NotifyPassed(TrainInfo senderTrain, Direction direction)
             {
                 TrainPassedEventArgs eventArgs = new TrainPassedEventArgs(senderTrain.Name, senderTrain.Train, direction);
-                Script.Run(new TrainPassedGlobals(BveHacker, this, eventArgs));
-                base.NotifyPassed(eventArgs);
+                TrainPassedGlobals globals = new TrainPassedGlobals(BveHacker, this, eventArgs);
+                Script.Run(globals);
+                base.NotifyPassed(globals.GetEventArgsWithScriptVariables());
             }
         }
 
