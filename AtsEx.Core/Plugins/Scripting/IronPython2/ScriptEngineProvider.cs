@@ -29,11 +29,27 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
             scriptEngine.Runtime.LoadAssembly(typeof(Form).Assembly);
             scriptEngine.Runtime.LoadAssembly(App.Instance.AtsExPluginHostAssembly);
 
+            ImportAssembliesFromArray("System", "System.Collections.Generic", "System.Text", "System.Windows.Forms");
+            ImportAssemblies(App.Instance.AtsExPluginHostAssembly.GetTypes().Select(t => t.Namespace).Distinct().Where(n => !(n is null)));
+
             ICollection<string> engineSearchPaths = scriptEngine.GetSearchPaths();
             foreach (string path in searchPaths) engineSearchPaths.Add(path);
             scriptEngine.SetSearchPaths(engineSearchPaths);
 
             return scriptEngine;
+
+
+            void ImportAssembly(string name) => scriptEngine.Execute($"import {name}");
+
+            void ImportAssemblies(IEnumerable<string> names)
+            {
+                foreach (string name in names)
+                {
+                    ImportAssembly(name);
+                }
+            }
+
+            void ImportAssembliesFromArray(params string[] names) => ImportAssemblies(names);
         }
 
         public static ScriptEngine CreateEngine(params string[] searchPaths) => CreateEngine(searchPaths as ICollection<string>);
