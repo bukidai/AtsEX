@@ -1,7 +1,26 @@
 BveTs Structure List 2.00,
 Info,Structures_Original\Info\HowToDriveOtherTrain.x
 ,
-//付属,
+#拡張地上子の名前用,
+BeaconName.1,Structures_Original\Null.x
+BeaconName.2,Structures_Original\Null.x
+,
+#AtsEX識別子（全般）,
+AtsEx.Null,Structures_Original\Null.x
+,
+#AtsEX識別子（拡張地上子）,
+AtsEx.ExtendedBeacon,Structures_Original\Null.x
+AtsEx.ExtendedBeacon.ObservingTargetTrack.SpecifiedTrackOnly,Structures_Original\Null.x
+AtsEx.ExtendedBeacon.ObservingTargetTrack.AllTracks,Structures_Original\Null.x
+AtsEx.ExtendedBeacon.ObservingTargetTrain.Myself,Structures_Original\Null.x
+AtsEx.ExtendedBeacon.ObservingTargetTrain.Trains,Structures_Original\Null.x
+AtsEx.ExtendedBeacon.ObservingTargetTrain.PreTrain,Structures_Original\Null.x
+,
+#AtsEX識別子（スクリプト言語）,
+AtsEx.ScriptLanguage.CSharpScript,Structures_Original\Null.x
+AtsEx.ScriptLanguage.IronPython2,Structures_Original\Null.x
+,
+#付属,
 Tr_Bal1-1,Structures\Track\Tr_Bal1.x
 Tr_Bal1-2,Structures\Track\Tr_Bal2.x
 Tr_Bal1-3,Structures\Track\Tr_Bal3.x
@@ -44,7 +63,7 @@ Stop10,structures\Station\Stop10.x
 Stop12,structures\Station\Stop12.x
 Bg1,structures\Background\Bg1.x
 ,
-//チュートリアル付属,
+#チュートリアル付属,
 RailL0,Structures_m\RailL0.x
 RailL1,Structures_m\RailL1.x
 RailL2,Structures_m\RailL2.x
