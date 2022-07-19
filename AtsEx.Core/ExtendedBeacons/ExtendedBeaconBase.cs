@@ -10,7 +10,8 @@ using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
 
 namespace Automatic9045.AtsEx.ExtendedBeacons
 {
-    internal abstract class ExtendedBeaconBase<TPassedEventArgs> : PluginHost.ExtendedBeacons.ExtendedBeaconBase<TPassedEventArgs> where TPassedEventArgs : PassedEventArgs
+    internal abstract class ExtendedBeaconBase<TPassedEventArgs> : PluginHost.ExtendedBeacons.ExtendedBeaconBase<TPassedEventArgs>, ICompilationErrorCheckable
+        where TPassedEventArgs : PassedEventArgs
     {
         protected readonly BveHacker BveHacker;
         protected readonly IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> Script;
@@ -21,5 +22,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             BveHacker = bveHacker;
             Script = script;
         }
+
+        public void CheckCompilationErrors() => _ = Script.GetWithCheckErrors();
     }
 }

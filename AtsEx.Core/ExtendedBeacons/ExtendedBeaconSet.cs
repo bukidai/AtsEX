@@ -45,6 +45,8 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             SortedList<string, TrainObservingBeaconBase> trainObservingBeacons = new SortedList<string, TrainObservingBeaconBase>();
             SortedList<string, BeaconBase> preTrainObservingBeacons = new SortedList<string, BeaconBase>();
 
+            List<ICompilationErrorCheckable> errorCheckList = new List<ICompilationErrorCheckable>();
+
             IEnumerable<KeyValuePair<string, RepeatedStructure>> flattenRepeatedStructures = repeatedStructures.
                 Select(item => item.Value.Select(obj => new KeyValuePair<string, RepeatedStructure>(item.Key, obj as RepeatedStructure))).
                 SelectMany(item => item);
@@ -97,6 +99,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                             Beacon beacon = new Beacon(bveHacker, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
 
                             beacons[name] = beacon;
+                            errorCheckList.Add(beacon);
                             break;
                         }
 
@@ -106,6 +109,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                             TrainObservingBeacon beacon = new TrainObservingBeacon(bveHacker, name, repeatedStructure, observingTargetTrack, trains, script);
 
                             trainObservingBeacons[name] = beacon;
+                            errorCheckList.Add(beacon);
                             break;
                         }
 
@@ -115,11 +119,14 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                             Beacon beacon = new Beacon(bveHacker, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
 
                             preTrainObservingBeacons[name] = beacon;
+                            errorCheckList.Add(beacon);
                             break;
                         }
                     }
                 }
             }
+
+            errorCheckList.ForEach(beacon => beacon.CheckCompilationErrors());
 
             return new ExtendedBeaconSet(beacons, trainObservingBeacons, preTrainObservingBeacons);
 
@@ -146,7 +153,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                         throw new DevelopException(string.Format(Resources.GetString("ScriptLanguageNotRecognized").Value, language));
                 }
 
-                return script.GetWithCheckErrors();
+                return script;
             }
         }
 

@@ -135,6 +135,7 @@
     <Compile Include="Plugins\PluginUsing.cs" />
     <Compile Include="Plugins\Scripting\CSharp\CompilationException.cs" />
     <Compile Include="Plugins\Scripting\CSharp\CSharpScriptPlugin.cs" />
+    <Compile Include="Plugins\Scripting\ICompilationErrorCheckable.cs" />
     <Compile Include="Plugins\Scripting\IronPython2\IronPython2Plugin.cs" />
     <Compile Include="Plugins\Scripting\IronPython2\PluginScript.cs" />
     <Compile Include="Plugins\Scripting\IronPython2\ScriptEngineProvider.cs" />
