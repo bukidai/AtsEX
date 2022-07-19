@@ -3,4 +3,5 @@
 	<Assembly Path="MapPlugins\StationController.dll" />
 	<Assembly Path="MapPlugins\TrainController.dll" />
 	<Assembly Path="MapPlugins\RunningResistanceTest.dll" />
+	<CSharpScript PackageManifestPath="MapPlugins\Empty\Package.xml" />
 </AtsExPluginUsing>
