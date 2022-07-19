@@ -8,15 +8,21 @@ namespace Automatic9045.AtsEx.PluginHost.Plugins
 {
     public class PluginBuilder
     {
-        public IApp App { get; }
-        public IBveHacker BveHacker { get; private set; } = null;
+        internal protected IApp App { get; }
+        internal protected IBveHacker BveHacker { get; private set; } = null;
 
-        public PluginBuilder(IApp app)
+        internal protected PluginBuilder(IApp app)
         {
             App = app;
         }
 
-        public PluginBuilder UseAtsExExtensions(IBveHacker bveHacker)
+        protected PluginBuilder(PluginBuilder pluginBuilder)
+        {
+            App = pluginBuilder.App;
+            BveHacker = pluginBuilder.BveHacker;
+        }
+
+        internal protected PluginBuilder UseAtsExExtensions(IBveHacker bveHacker)
         {
             BveHacker = bveHacker;
             return this;

@@ -22,9 +22,8 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
         public IPluginScript<StartedGlobals> OnStartedScript { get; set; }
         public IPluginScript<TickGlobals> TickScript { get; set; }
 
-        public ScriptPluginBuilder(PluginBuilder source) : base(source.App)
+        public ScriptPluginBuilder(PluginBuilder source) : base(source)
         {
-            if (!(source.BveHacker is null)) UseAtsExExtensions(source.BveHacker);
         }
     }
 }
