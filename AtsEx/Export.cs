@@ -166,7 +166,7 @@ namespace Automatic9045.AtsEx
 
 
 
-    /// <summarypublicするクラス</summary>
+    /// <summary>publicするクラス</summary>
     public static class Export
     {
         private const int Version = 0x00020000;
@@ -204,23 +204,11 @@ namespace Automatic9045.AtsEx
             return AtsMain.Handle;
         }
 
-        public static void SetPower(int notch)
-        {
-            AtsMain.Handle.Power = notch;
-            AtsMain.SetPower(notch);
-        }
+        public static void SetPower(int notch) => AtsMain.Handle.Power = notch;
 
-        public static void SetBrake(int notch)
-        {
-            AtsMain.Handle.Brake = notch;
-            AtsMain.SetBrake(notch);
-        }
+        public static void SetBrake(int notch) => AtsMain.Handle.Brake = notch;
 
-        public static void SetReverser(int position)
-        {
-            AtsMain.Handle.Reverser = position;
-            AtsMain.SetReverser(position);
-        }
+        public static void SetReverser(int position) => AtsMain.Handle.Reverser = position;
 
         public static void KeyDown(int atsKeyCode) => AtsMain.KeyDown(atsKeyCode);
 

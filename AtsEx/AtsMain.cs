@@ -58,20 +58,6 @@ namespace Automatic9045.AtsEx
             Stopwatch.Restart();
         }
 
-        public static void SetPower(int notch)
-        {
-
-        }
-
-        public static void SetBrake(int notch)
-        {
-
-        }
-
-        public static void SetReverser(int position)
-        {
-
-        }
         public static void KeyDown(int atsKeyCode)
         {
             AtsEx.KeyDown((NativeAtsKeyName)atsKeyCode);
