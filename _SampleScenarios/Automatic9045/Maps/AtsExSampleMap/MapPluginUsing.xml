@@ -2,6 +2,6 @@
 <AtsExPluginUsing xmlns="http://automatic9045.github.io/ns/xmlschemas/AtsExPluginUsingXmlSchema.xsd">
 	<Assembly Path="MapPlugins\StationController.dll" />
 	<Assembly Path="MapPlugins\TrainController.dll" />
-	<Assembly Path="MapPlugins\RunningResistanceTest.dll" />
 	<CSharpScript PackageManifestPath="MapPlugins\Empty\Package.xml" />
+	<CSharpScript PackageManifestPath="MapPlugins\RunningResistanceTest\Package.xml" />
 </AtsExPluginUsing>
