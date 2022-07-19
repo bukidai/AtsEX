@@ -25,8 +25,7 @@ namespace Automatic9045.AtsEx.Plugins
         {
             BveHacker = bveHacker;
 
-            PluginBuilder = new PluginBuilder(App.Instance)
-                .UseAtsExExtensions(BveHacker);
+            PluginBuilder = new PluginBuilder(App.Instance, BveHacker);
         }
 
         [UnderConstruction]

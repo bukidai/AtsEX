@@ -11,7 +11,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
 {
     internal sealed class CSharpScriptPlugin : ScriptPluginBase
     {
-        protected CSharpScriptPlugin(ScriptPluginBuilder builder, PluginType pluginType, bool useAtsExExtensions) : base(builder, pluginType, useAtsExExtensions)
+        protected CSharpScriptPlugin(ScriptPluginBuilder builder, PluginType pluginType) : base(builder, pluginType, true)
         {
         }
 
@@ -32,7 +32,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
                 TickScript = package.TickScriptPath is null ?                           null : PluginScript<TickGlobals>.LoadFrom(package.TickScriptPath),
             };
 
-            return new CSharpScriptPlugin(newBuilder, pluginType, !(newBuilder.BveHacker is null));
+            return new CSharpScriptPlugin(newBuilder, pluginType);
         }
     }
 }

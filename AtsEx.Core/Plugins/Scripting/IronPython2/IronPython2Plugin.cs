@@ -16,7 +16,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
 {
     internal sealed class IronPython2Plugin : ScriptPluginBase
     {
-        private IronPython2Plugin(ScriptPluginBuilder builder, PluginType pluginType, bool useAtsExExtensions) : base(builder, pluginType, useAtsExExtensions)
+        private IronPython2Plugin(ScriptPluginBuilder builder, PluginType pluginType) : base(builder, pluginType, true)
         {
         }
 
@@ -40,7 +40,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
                 TickScript = package.TickScriptPath is null ? null : PluginScript<TickGlobals>.LoadFrom(package.TickScriptPath, engine, scope),
             };
 
-            return new IronPython2Plugin(newBuilder, pluginType, !(newBuilder.BveHacker is null));
+            return new IronPython2Plugin(newBuilder, pluginType);
         }
     }
 }
