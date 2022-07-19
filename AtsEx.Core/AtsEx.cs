@@ -43,7 +43,7 @@ namespace Automatic9045.AtsEx
         private readonly List<PluginBase> VehiclePlugins;
         private readonly List<PluginBase> MapPlugins;
 
-        public AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, Assembly callerAssembly)
+        public AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, Assembly callerAssembly, VehicleSpec vehicleSpec)
         {
             string pluginHostAssemblyPath = Path.Combine(Path.GetDirectoryName(ExecutingAssembly.Location), "AtsEx.PluginHost.dll");
             PluginHostAssembly = Assembly.LoadFrom(pluginHostAssemblyPath);
@@ -63,7 +63,7 @@ namespace Automatic9045.AtsEx
             Version bveVersion = TargetAssembly.GetName().Version;
             Version profileVersion = BveTypeSet.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly, true);
 
-            App.CreateInstance(TargetAssembly, CallerAssembly, ExecutingAssembly, PluginHostAssembly);
+            App.CreateInstance(TargetAssembly, CallerAssembly, ExecutingAssembly, PluginHostAssembly, vehicleSpec);
             BveHacker = new BveHacker(TargetProcess, ResolveLoadExceptions);
 
             ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(App.Instance, BveHacker);
@@ -174,11 +174,6 @@ namespace Automatic9045.AtsEx
             VersionFormProvider.Dispose();
             ContextMenuHacker.Dispose();
             BveTypeSet.Instance.Dispose();
-        }
-
-        public void SetVehicleSpec(VehicleSpec vehicleSpec)
-        {
-            App.Instance.VehicleSpec = vehicleSpec;
         }
 
         public void Started(BrakePosition defaultBrakePosition)

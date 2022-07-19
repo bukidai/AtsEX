@@ -21,16 +21,17 @@ namespace Automatic9045.AtsEx
 
         public static App Instance { get; private set; }
 
-        private App(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
+        private App(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly, VehicleSpec vehicleSpec)
         {
             BveAssembly = bveAssembly;
             AtsExCallerAssembly = callerAssembly;
             AtsExAssembly = atsExAssembly;
             AtsExPluginHostAssembly = atsExPluginHostAssembly;
+            VehicleSpec = vehicleSpec;
         }
 
-        public static void CreateInstance(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
-            => Instance = new App(bveAssembly, callerAssembly, atsExAssembly, atsExPluginHostAssembly);
+        public static void CreateInstance(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly, VehicleSpec vehicleSpec)
+            => Instance = new App(bveAssembly, callerAssembly, atsExAssembly, atsExPluginHostAssembly, vehicleSpec);
 
         public string ProductName { get; } = Resources.GetString("ProductName").Value;
         public string ProductShortName { get; } = Resources.GetString("ProductShortName").Value;
@@ -64,7 +65,7 @@ namespace Automatic9045.AtsEx
 
         public INativeKeySet NativeKeys { get; } = new NativeKeySet();
 
-        public VehicleSpec VehicleSpec { get; internal set; } = null;
+        public VehicleSpec VehicleSpec { get; } = null;
         public VehicleState VehicleState { get; internal set; } = null;
 
         public void InvokeStarted(BrakePosition defaultBrakePosition)

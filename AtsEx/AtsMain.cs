@@ -22,12 +22,16 @@ namespace Automatic9045.AtsEx
         /// <summary>Current State of Handles</summary>
         public static Handles Handle = default;
 
+        private static Assembly CallerAssembly;
+        private static AtsExActivator Activator;
+
         private static readonly Stopwatch Stopwatch = new Stopwatch();
         private static AtsEx AtsEx;
 
         public static void Load(Assembly callerAssembly, AtsExActivator activator)
         {
-            AtsEx = new AtsEx(activator.TargetProcess, activator.TargetAppDomain, activator.TargetAssembly, callerAssembly);
+            CallerAssembly = callerAssembly;
+            Activator = activator;
         }
 
         public static void Dispose()
@@ -39,7 +43,7 @@ namespace Automatic9045.AtsEx
         {
             PluginHost.VehicleSpec exVehicleSpec = new PluginHost.VehicleSpec(vehicleSpec.BrakeNotches, vehicleSpec.PowerNotches, vehicleSpec.AtsNotch, vehicleSpec.B67Notch, vehicleSpec.Cars);
 
-            AtsEx?.SetVehicleSpec(exVehicleSpec);
+            AtsEx = new AtsEx(Activator.TargetProcess, Activator.TargetAppDomain, Activator.TargetAssembly, CallerAssembly, exVehicleSpec);
         }
 
         public static void Initialize(int defaultBrakePosition)
