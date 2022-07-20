@@ -80,6 +80,9 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                         {
                             string wrapperName = (string)property.Attribute("Wrapper");
 
+                            bool isWrapperStatic = (bool?)property.Attribute("IsWrapperStatic") ?? false;
+                            bool isWrapperPrivate = (bool?)property.Attribute("IsWrapperPrivate") ?? false;
+
                             XElement getter = property.Element(targetNamespace + "Getter");
                             if (!(getter is null))
                             {
@@ -87,8 +90,6 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 
                                 bool isOriginalStatic = (bool?)getter.Attribute("IsOriginalStatic") ?? false;
                                 bool isOriginalPrivate = (bool?)getter.Attribute("IsOriginalPrivate") ?? false;
-                                bool isWrapperStatic = (bool?)getter.Attribute("IsWrapperStatic") ?? false;
-                                bool isWrapperPrivate = (bool?)getter.Attribute("IsWrapperPrivate") ?? false;
 
                                 TypeMemberNameSetBase.PropertyAccessor getterInfo =
                                     new TypeMemberNameSetBase.PropertyAccessor(wrapperName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
@@ -102,8 +103,6 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 
                                 bool isOriginalStatic = (bool?)setter.Attribute("IsOriginalStatic") ?? false;
                                 bool isOriginalPrivate = (bool?)setter.Attribute("IsOriginalPrivate") ?? false;
-                                bool isWrapperStatic = (bool?)setter.Attribute("IsWrapperStatic") ?? false;
-                                bool isWrapperPrivate = (bool?)setter.Attribute("IsWrapperPrivate") ?? false;
 
                                 TypeMemberNameSetBase.PropertyAccessor setterInfo =
                                     new TypeMemberNameSetBase.PropertyAccessor(wrapperName, originalName, isOriginalStatic, isOriginalPrivate, isWrapperStatic, isWrapperPrivate);
