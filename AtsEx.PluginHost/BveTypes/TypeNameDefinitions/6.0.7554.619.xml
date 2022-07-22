@@ -77,6 +77,35 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="CabBase" Original="bl">
+		<Property Wrapper="Handles">
+			<Getter Original="d"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="HandleSet" Original="a2">
+		<Property Wrapper="NotchInfo">
+			<Getter Original="e"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="BrakeNotch">
+			<Getter Original="d"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="PowerNotch">
+			<Getter Original="c"/>
+			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="_ReverserPosition" IsWrapperPrivate="true">
+			<Getter Original="b"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="ConstantSpeed" IsWrapperPrivate="true">
+			<Getter Original="g"/>
+			<Setter Original="d"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="KeyProvider" Original="ag">
 		<Property Wrapper="InputDevices">
 			<Getter Original="c"/>
@@ -165,6 +194,44 @@
 		<Property Wrapper="Materials">
 			<Getter Original="a"/>
 			<Setter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="NotchInfo" Original="e9">
+		<Property Wrapper="PowerNotchCount">
+			<Getter Original="d"/>
+			<Setter Original="d"/>
+		</Property>
+		<Property Wrapper="HoldingSpeedNotchCount">
+			<Getter Original="c"/>
+			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="BrakeNotchCount">
+			<Getter Original="h"/>
+			<Setter Original="f"/>
+		</Property>
+		<Property Wrapper="B67Notch">
+			<Getter Original="j"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="AtsCancelNotch">
+			<Getter Original="k"/>
+			<Setter Original="e"/>
+		</Property>
+		<Property Wrapper="MotorBrakeNotch">
+			<Getter Original="f"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="HasHoldingSpeedBrake">
+			<Getter Original="b"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="EmergencyBrakeNotch">
+			<Getter Original="i"/>
+		</Property>
+		<Property Wrapper="PrioritizeBrake">
+			<Getter Original="a"/>
+			<Setter Original="c"/>
 		</Property>
 	</Class>
 
@@ -478,6 +545,10 @@
 	</Class>
 
 	<Class Wrapper="Vehicle" Original="f">
+		<Property Wrapper="Instruments">
+			<Getter Original="f"/>
+			<Setter Original="a"/>
+		</Property>
 		<Property Wrapper="Dynamics">
 			<Getter Original="g"/>
 			<Setter Original="a"/>
@@ -500,6 +571,13 @@
 		<Property Wrapper="RunningResistanceFactorC">
 			<Getter Original="e"/>
 			<Setter Original="c"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="VehicleInstrumentSet" Original="ck">
+		<Property Wrapper="Cab">
+			<Getter Original="e"/>
+			<Setter Original="a"/>
 		</Property>
 	</Class>
 </BveTypeNameDefinitions>

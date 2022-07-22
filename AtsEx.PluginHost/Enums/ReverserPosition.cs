@@ -9,15 +9,23 @@ using System.Windows.Forms;
 namespace Automatic9045.AtsEx.PluginHost
 {
     /// <summary>
-    /// レバーサーの位置を指定します。
+    /// 逆転器の位置を指定します。
     /// </summary>
     public enum ReverserPosition
     {
-        /// <summary>後進。</summary>
+        /// <summary>
+        /// 後退位置を表します。
+        /// </summary>
         B = -1,
-        /// <summary>中立。</summary>
+
+        /// <summary>
+        /// 中立位置を表します。
+        /// </summary>
         N = 0,
-        /// <summary>前進。</summary>
+
+        /// <summary>
+        /// 前進位置を表します。
+        /// </summary>
         F = 1,
     }
 }

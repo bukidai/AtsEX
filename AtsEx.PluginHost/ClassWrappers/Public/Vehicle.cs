@@ -19,6 +19,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<Vehicle>();
 
+            InstrumentsGetMethod = members.GetSourcePropertyGetterOf(nameof(Instruments));
+            InstrumentsSetMethod = members.GetSourcePropertySetterOf(nameof(Instruments));
+
             DynamicsGetMethod = members.GetSourcePropertyGetterOf(nameof(Dynamics));
             DynamicsSetMethod = members.GetSourcePropertySetterOf(nameof(Dynamics));
         }
@@ -37,6 +40,17 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             if (src is null) return null;
             return new Vehicle(src);
+        }
+
+        private static MethodInfo InstrumentsGetMethod;
+        private static MethodInfo InstrumentsSetMethod;
+        /// <summary>
+        /// 自列車を構成する機器を表す <see cref="VehicleInstrumentSet"/> を取得・設定します。
+        /// </summary>
+        public VehicleInstrumentSet Instruments
+        {
+            get => VehicleInstrumentSet.FromSource(InstrumentsGetMethod.Invoke(Src, null));
+            set => InstrumentsSetMethod.Invoke(Src, new object[] { value.Src });
         }
 
         private static MethodInfo DynamicsGetMethod;
