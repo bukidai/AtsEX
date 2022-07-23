@@ -6,7 +6,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.Handles;
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Handles;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
 
 namespace Automatic9045.AtsEx
@@ -18,9 +20,6 @@ namespace Automatic9045.AtsEx
 
         /// <summary>Is the Door Closed TF</summary>
         public static bool IsDoorClosed { get; set; } = false;
-
-        /// <summary>Current State of Handles</summary>
-        public static Handles Handle = default;
 
         private static Assembly CallerAssembly;
         private static AtsExActivator Activator;
@@ -51,15 +50,38 @@ namespace Automatic9045.AtsEx
             AtsEx?.Started((BrakePosition)defaultBrakePosition);
         }
 
-        public static void Elapse(VehicleState vehicleState, int[] panel, int[] sound)
+        public static AtsHandles Elapse(VehicleState vehicleState, int[] panel, int[] sound)
         {
             PluginHost.VehicleState exVehicleState = new PluginHost.VehicleState(
                 vehicleState.Location, vehicleState.Speed,
                 vehicleState.BcPressure, vehicleState.MrPressure, vehicleState.ErPressure, vehicleState.BpPressure, vehicleState.SapPressure, vehicleState.Current);
 
-            AtsEx?.Tick(Stopwatch.IsRunning ? Stopwatch.Elapsed : TimeSpan.Zero, exVehicleState);
+            HandlePositionSet handlePositionSet = AtsEx?.Tick(Stopwatch.IsRunning ? Stopwatch.Elapsed : TimeSpan.Zero, exVehicleState);
 
             Stopwatch.Restart();
+
+            return new AtsHandles()
+            {
+                Brake = handlePositionSet.Brake,
+                Power = handlePositionSet.Power,
+                Reverser = (int)handlePositionSet.ReverserPosition,
+                ConstantSpeed = (int)handlePositionSet.ConstantSpeed,
+            };
+        }
+
+        public static void SetPower(int notch)
+        {
+            AtsEx.SetPower(notch);
+        }
+
+        public static void SetBrake(int notch)
+        {
+            AtsEx.SetBrake(notch);
+        }
+
+        public static void SetReverser(int position)
+        {
+            AtsEx.SetReverser((ReverserPosition)position);
         }
 
         public static void KeyDown(int atsKeyCode)

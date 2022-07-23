@@ -7,8 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Automatic9045.AtsEx.Handles;
 using Automatic9045.AtsEx.Input;
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Handles;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
 using Automatic9045.AtsEx.PluginHost.Plugins;
 using Automatic9045.AtsEx.PluginHost.Resources;
@@ -27,7 +29,13 @@ namespace Automatic9045.AtsEx
             AtsExCallerAssembly = callerAssembly;
             AtsExAssembly = atsExAssembly;
             AtsExPluginHostAssembly = atsExPluginHostAssembly;
+
             VehicleSpec = vehicleSpec;
+
+            BrakeHandle brake = new BrakeHandle(VehicleSpec.BrakeNotches, false);
+            PowerHandle power = new PowerHandle(VehicleSpec.PowerNotches);
+            Reverser reverser = new Reverser();
+            Handles = new HandleSet(brake, power, reverser);
         }
 
         public static void CreateInstance(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly, VehicleSpec vehicleSpec)
@@ -62,6 +70,8 @@ namespace Automatic9045.AtsEx
                 AllMapPluginLoaded?.Invoke(new AllPluginLoadedEventArgs(_MapPlugins));
             }
         }
+
+        public HandleSet Handles { get; internal set; }
 
         public INativeKeySet NativeKeys { get; } = new NativeKeySet();
 

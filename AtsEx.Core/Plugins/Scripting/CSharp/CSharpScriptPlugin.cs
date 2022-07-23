@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Handles;
 using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
@@ -29,7 +30,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
                 DisposeScript = package.DisposeScriptPath is null ?                     null : PluginScript<Globals>.LoadFrom(package.DisposeScriptPath),
                 OnScenarioCreatedScript = package.OnScenarioCreatedScriptPath is null ? null : PluginScript<ScenarioCreatedGlobals>.LoadFrom(package.OnScenarioCreatedScriptPath),
                 OnStartedScript = package.OnStartedScriptPath is null ?                 null : PluginScript<StartedGlobals>.LoadFrom(package.OnStartedScriptPath),
-                TickScript = package.TickScriptPath is null ?                           null : PluginScript<TickGlobals>.LoadFrom(package.TickScriptPath),
+                TickScript = package.TickScriptPath is null ?                           null : PluginScript<HandleCommandSet, TickGlobals>.LoadFrom(package.TickScriptPath),
             };
 
             return new CSharpScriptPlugin(newBuilder, pluginType);

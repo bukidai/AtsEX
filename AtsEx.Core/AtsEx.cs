@@ -9,13 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Automatic9045.AtsEx.ExtendedBeacons;
+using Automatic9045.AtsEx.Handles;
 using Automatic9045.AtsEx.Input;
 using Automatic9045.AtsEx.Plugins;
 using Automatic9045.AtsEx.Plugins.Scripting.CSharp;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using Automatic9045.AtsEx.PluginHost.Handles;
 using Automatic9045.AtsEx.PluginHost.Helpers;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
 using Automatic9045.AtsEx.PluginHost.Plugins;
@@ -182,14 +183,54 @@ namespace Automatic9045.AtsEx
         }
 
         [WillRefactor]
-        public void Tick(TimeSpan elapsed, VehicleState vehicleState)
+        public HandlePositionSet Tick(TimeSpan elapsed, VehicleState vehicleState)
         {
             App.Instance.VehicleState = vehicleState;
 
             BveHacker.Tick(elapsed);
 
-            VehiclePlugins.ForEach(plugin => plugin.Tick(elapsed));
-            MapPlugins.ForEach(plugin => plugin.Tick(elapsed));
+            int powerNotch = App.Instance.Handles.Power.Notch;
+            int brakeNotch = App.Instance.Handles.Brake.Notch;
+            ReverserPosition reverserPosition = App.Instance.Handles.Reverser.Position;
+
+            int? atsPowerNotch = null;
+            int? atsBrakeNotch = null;
+            ReverserPosition? atsReverserPosition = null;
+            ConstantSpeedCommand? atsConstantSpeedCommand = null;
+
+            VehiclePlugins.ForEach(plugin =>
+            {
+                HandleCommandSet commandSet = plugin.Tick(elapsed);
+                if (commandSet is null) throw new InvalidOperationException(string.Format(Resources.GetString("VehiclePluginCannotReturnNullNotchCommand").Value, $"{nameof(PluginBase)}.{nameof(PluginBase.Tick)}"));
+
+                if (atsPowerNotch is null) atsPowerNotch = commandSet.PowerCommand.GetOverridenNotch(powerNotch);
+                if (atsBrakeNotch is null) atsBrakeNotch = commandSet.BrakeCommand.GetOverridenNotch(brakeNotch);
+                if (atsReverserPosition is null) atsReverserPosition = commandSet.ReverserCommand.GetOverridenPosition(reverserPosition);
+                if (atsConstantSpeedCommand is null) atsConstantSpeedCommand = commandSet.ConstantSpeedCommand;
+            });
+
+            MapPlugins.ForEach(plugin =>
+            {
+                HandleCommandSet commandSet = plugin.Tick(elapsed);
+                if (!(commandSet is null)) throw new InvalidOperationException(string.Format(Resources.GetString("MapPluginCannotReturnNotchCommand").Value, $"{nameof(PluginBase)}.{nameof(PluginBase.Tick)}"));
+            });
+
+            return new HandlePositionSet(atsPowerNotch ?? powerNotch, atsBrakeNotch ?? brakeNotch, atsReverserPosition ?? reverserPosition, atsConstantSpeedCommand ?? ConstantSpeedCommand.Continue);
+        }
+
+        public void SetPower(int notch)
+        {
+            (App.Instance.Handles.Power as PowerHandle).Notch = notch;
+        }
+
+        public void SetBrake(int notch)
+        {
+            (App.Instance.Handles.Brake as BrakeHandle).Notch = notch;
+        }
+
+        public void SetReverser(ReverserPosition position)
+        {
+            (App.Instance.Handles.Reverser as Reverser).Position = position;
         }
 
         public void KeyDown(NativeAtsKeyName key)

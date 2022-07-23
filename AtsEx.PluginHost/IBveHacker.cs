@@ -11,6 +11,7 @@ using Mackoy.Bvets;
 
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
+using Automatic9045.AtsEx.PluginHost.Handles;
 
 namespace Automatic9045.AtsEx.PluginHost
 {
@@ -91,6 +92,16 @@ namespace Automatic9045.AtsEx.PluginHost
         /// </summary>
         KeyProvider KeyProvider { get; }
 
+
+        /// <summary>
+        /// 全てのハンドルのセットを取得します。
+        /// </summary>
+        /// <remarks>
+        /// <see cref="IBveHacker"/> が利用できない場合は <see cref="IApp.Handles"/> プロパティを使用してください。
+        /// ただし、<see cref="IApp.Handles"/> プロパティに設定されている値は力行ハンドルの抑速ノッチ、ブレーキハンドルの抑速ブレーキノッチを無視したものになります。
+        /// </remarks>
+        /// <seealso cref="IApp.Handles"/>
+        Handles.HandleSet Handles { get; }
 
         /// <summary>
         /// 拡張地上子の一覧を取得します。

@@ -10,6 +10,7 @@ using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
 
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Handles;
 using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
@@ -37,7 +38,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
                 DisposeScript = package.DisposeScriptPath is null ? null : PluginScript<Globals>.LoadFrom(package.DisposeScriptPath, engine, scope),
                 OnScenarioCreatedScript = package.OnScenarioCreatedScriptPath is null ? null : PluginScript<ScenarioCreatedGlobals>.LoadFrom(package.OnScenarioCreatedScriptPath, engine, scope),
                 OnStartedScript = package.OnStartedScriptPath is null ? null : PluginScript<StartedGlobals>.LoadFrom(package.OnStartedScriptPath, engine, scope),
-                TickScript = package.TickScriptPath is null ? null : PluginScript<TickGlobals>.LoadFrom(package.TickScriptPath, engine, scope),
+                TickScript = package.TickScriptPath is null ? null : PluginScript<HandleCommandSet, TickGlobals>.LoadFrom(package.TickScriptPath, engine, scope),
             };
 
             return new IronPython2Plugin(newBuilder, pluginType);

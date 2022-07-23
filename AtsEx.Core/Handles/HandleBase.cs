@@ -17,7 +17,7 @@ namespace Automatic9045.AtsEx.Handles
         public int Notch
         {
             get => _Notch;
-            protected set
+            set
             {
                 _Notch = value < MinNotch ? throw new ArgumentOutOfRangeException(nameof(value))
                     : MaxNotch < value ? throw new ArgumentOutOfRangeException(nameof(value))

@@ -57,7 +57,7 @@ namespace Automatic9045.AtsEx.Caller
         /// <param name="sound">Sound (Pointer of int[256])</param>
         /// <returns></returns>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static Handles Elapse(VehicleState vehicleState, int[] panel, int[] sound) => Export.Elapse(vehicleState, panel, sound);
+        public static AtsHandles Elapse(VehicleState vehicleState, int[] panel, int[] sound) => Export.Elapse(vehicleState, panel, sound);
 
         /// <summary>Called when Power notch is moved</summary>
         /// <param name="notch">Notch Number</param>

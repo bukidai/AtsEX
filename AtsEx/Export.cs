@@ -51,7 +51,7 @@ namespace Automatic9045.AtsEx
     };
     /// <summary>ハンドル位置に関する構造体</summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct Handles
+    public struct AtsHandles
     {
         /// <summary>ブレーキハンドル位置</summary>
         public int Brake;
@@ -75,16 +75,6 @@ namespace Automatic9045.AtsEx
         /// <summary>Beaconの第三引数の値</summary>
         public int Data;
     };
-    /// <summary>レバーサー位置</summary>
-    public enum ReverserPosition
-    {
-        /// <summary>後進</summary>
-        B = -1,
-        /// <summary>中立</summary>
-        N = 0,
-        /// <summary>前進</summary>
-        F = 1,
-    }
     /// <summary>定速制御の状態</summary>
     public enum ConstantSpeed
     {
@@ -198,17 +188,13 @@ namespace Automatic9045.AtsEx
 
         public static void Initialize(int defaultBrakePosition) => AtsMain.Initialize(defaultBrakePosition);
 
-        public static Handles Elapse(VehicleState vehicleState, int[] panel, int[] sound)
-        {
-            AtsMain.Elapse(vehicleState, panel, sound);
-            return AtsMain.Handle;
-        }
+        public static AtsHandles Elapse(VehicleState vehicleState, int[] panel, int[] sound) => AtsMain.Elapse(vehicleState, panel, sound);
 
-        public static void SetPower(int notch) => AtsMain.Handle.Power = notch;
+        public static void SetPower(int notch) => AtsMain.SetPower(notch);
 
-        public static void SetBrake(int notch) => AtsMain.Handle.Brake = notch;
+        public static void SetBrake(int notch) => AtsMain.SetBrake(notch);
 
-        public static void SetReverser(int position) => AtsMain.Handle.Reverser = position;
+        public static void SetReverser(int position) => AtsMain.SetReverser(position);
 
         public static void KeyDown(int atsKeyCode) => AtsMain.KeyDown(atsKeyCode);
 

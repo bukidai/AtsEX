@@ -120,4 +120,7 @@
   <data name="Name" xml:space="preserve">
     <value>(C# スクリプトプラグイン)</value>
   </data>
+  <data name="NoReturnValue" xml:space="preserve">
+    <value>スクリプトプラグイン '{0}' の {1} メソッドで値が返されませんでした。</value>
+  </data>
 </root>

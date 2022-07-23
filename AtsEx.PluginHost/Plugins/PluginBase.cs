@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Automatic9045.AtsEx.PluginHost.Handles;
+
 namespace Automatic9045.AtsEx.PluginHost.Plugins
 {
     /// <summary>
@@ -86,6 +88,10 @@ namespace Automatic9045.AtsEx.PluginHost.Plugins
         /// 毎フレーム呼び出されます。従来の ATS プラグインの Elapse(ATS_VEHICLESTATE vehicleState, int[] panel, int[] sound) に当たります。
         /// </summary>
         /// <param name="elapsed">前フレームから経過した時間。</param>
-        public abstract void Tick(TimeSpan elapsed);
+        /// <returns>
+        /// 力行・ブレーキノッチの出力を編集するためのコマンド。<br/>
+        /// 何もしないことを表すには <see cref="HandleCommandSet.DoNothing"/> を返してください。マッププラグインでは戻り値を使用しないため、<see langword="null"/> を返してください。
+        /// </returns>
+        public abstract HandleCommandSet Tick(TimeSpan elapsed);
     }
 }

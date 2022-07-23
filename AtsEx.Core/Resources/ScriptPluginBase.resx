@@ -120,4 +120,7 @@
   <data name="Name" xml:space="preserve">
     <value>(C# Script Plugin)</value>
   </data>
+  <data name="NoReturnValue" xml:space="preserve">
+    <value>The method {1} of the script plugin '{0}' returned no value.</value>
+  </data>
 </root>

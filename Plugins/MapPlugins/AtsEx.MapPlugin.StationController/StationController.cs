@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Handles;
 using Automatic9045.AtsEx.PluginHost.Helpers;
 using Automatic9045.AtsEx.PluginHost.Plugins;
 
@@ -34,8 +35,9 @@ namespace Automatic9045.MapPlugins.StationController
             BveHacker.MainFormSource.Focus();
         }
 
-        public override void Tick(TimeSpan elapsed)
+        public override HandleCommandSet Tick(TimeSpan elapsed)
         {
+            return null;
         }
 
         private void MenuItemCheckedChanged(object sender, EventArgs e)

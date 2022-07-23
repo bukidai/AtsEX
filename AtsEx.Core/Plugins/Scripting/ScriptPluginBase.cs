@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Handles;
 using Automatic9045.AtsEx.PluginHost.Plugins;
 using Automatic9045.AtsEx.PluginHost.Resources;
 
@@ -27,7 +28,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
         private readonly IPluginScript<Globals> DisposeScript;
         private readonly IPluginScript<ScenarioCreatedGlobals> OnScenarioCreatedScript;
         private readonly IPluginScript<StartedGlobals> OnStartedScript;
-        private readonly IPluginScript<TickGlobals> TickScript;
+        private readonly IPluginScript<HandleCommandSet, TickGlobals> TickScript;
 
         static ScriptPluginBase()
         {
@@ -70,10 +71,24 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
             OnStartedScript?.Run(globals);
         }
 
-        public override void Tick(TimeSpan elapsed)
+        public override HandleCommandSet Tick(TimeSpan elapsed)
         {
+            if (TickScript is null)
+            {
+                switch (PluginType)
+                {
+                    case PluginType.VehiclePlugin:
+                        return HandleCommandSet.DoNothing;
+
+                    case PluginType.MapPlugin:
+                        return null;
+                }
+            }
+
             TickGlobals globals = new TickGlobals(Globals, elapsed);
-            TickScript?.Run(globals);
+            IScriptResult<HandleCommandSet> result = TickScript.Run(globals) ?? throw new InvalidOperationException(string.Format(Resources.GetString("NoReturnValue").Value, Title, nameof(Tick)));
+
+            return result.ReturnValue;
         }
     }
 }

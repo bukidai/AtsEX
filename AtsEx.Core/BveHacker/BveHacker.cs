@@ -12,9 +12,11 @@ using HarmonyLib;
 using Mackoy.Bvets;
 
 using Automatic9045.AtsEx.ExtendedBeacons;
+using Automatic9045.AtsEx.Handles;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
+using Automatic9045.AtsEx.PluginHost.Handles;
 
 namespace Automatic9045.AtsEx
 {
@@ -30,6 +32,15 @@ namespace Automatic9045.AtsEx
             ScenarioHacker.ScenarioCreated += e => PreviewScenarioCreated?.Invoke(e);
             ScenarioHacker.ScenarioCreated += e =>
             {
+                NotchInfo notchInfo = e.Scenario.Vehicle.Instruments.Cab.Handles.NotchInfo;
+
+                BrakeHandle brake = BrakeHandle.FromNotchInfo(notchInfo);
+                PowerHandle power = PowerHandle.FromNotchInfo(notchInfo);
+                Reverser reverser = new Reverser();
+
+                Handles = new PluginHost.Handles.HandleSet(brake, power, reverser);
+                App.Instance.Handles = Handles;
+
                 try
                 {
                     _ExtendedBeacons = ExtendedBeaconSet.Load(this, e.Scenario.Route.Structures.Repeated, e.Scenario.Route.StructureModels, e.Scenario.Trains);
@@ -78,6 +89,8 @@ namespace Automatic9045.AtsEx
             set => MainForm.KeyProvider = value;
         }
 
+
+        public PluginHost.Handles.HandleSet Handles { get; private set; }
 
         private ExtendedBeaconSet _ExtendedBeacons;
         public IExtendedBeaconSet ExtendedBeacons => _ExtendedBeacons;
