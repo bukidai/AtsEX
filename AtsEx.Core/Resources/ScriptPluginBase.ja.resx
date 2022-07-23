@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Name" xml:space="preserve">
-    <value>(C# スクリプトプラグイン)</value>
+    <value>(スクリプトプラグイン)</value>
   </data>
   <data name="NoReturnValue" xml:space="preserve">
     <value>スクリプトプラグイン '{0}' の {1} メソッドで値が返されませんでした。</value>
