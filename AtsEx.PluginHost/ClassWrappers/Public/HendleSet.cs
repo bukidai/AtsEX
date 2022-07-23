@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost.BveTypes;
+using Automatic9045.AtsEx.PluginHost.Handles;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {

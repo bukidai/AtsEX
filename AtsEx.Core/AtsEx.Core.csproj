@@ -127,6 +127,11 @@
     <Compile Include="ExtendedBeacons\Globals\TrainPassedGlobals.cs" />
     <Compile Include="ExtendedBeacons\MapStatementIdentifiers.cs" />
     <Compile Include="ExtendedBeacons\TrainObservingBeacon.cs" />
+    <Compile Include="Handles\BrakeHandle.cs" />
+    <Compile Include="Handles\HandleBase.cs" />
+    <Compile Include="Handles\HandlePositionSet.cs" />
+    <Compile Include="Handles\Reverser.cs" />
+    <Compile Include="Handles\PowerHandle.cs" />
     <Compile Include="Input\NativeAtsKey.cs" />
     <Compile Include="Input\NativeKeySet.cs" />
     <Compile Include="MapLoader\Map.cs" />
@@ -177,6 +182,8 @@
     <Content Include="Resources\Plugins\MapStatementIdentifiers.ja.resx" />
     <Content Include="Resources\Plugins\MapStatementIdentifiers.resx" />
     <Content Include="Resources\ExtendedBeacons\MapStatementIdentifiers.resx" />
+    <Content Include="Resources\Handles\BrakeHandle.ja.resx" />
+    <Content Include="Resources\Handles\BrakeHandle.resx" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <EmbeddedResource Include="Plugins\AtsExPluginUsingXmlSchema.xsd">
@@ -227,6 +234,7 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /y /i "$(TargetDir)0Harmony.dll" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
