@@ -5,8 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using IronPython.Hosting;
-
 using Microsoft.Scripting.Hosting;
 
 namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
@@ -35,9 +33,11 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
 
         public static PluginScript<TGlobals> LoadFrom(string path, ScriptEngine engine, ScriptScope scope)
         {
-            ScriptSource source = engine.CreateScriptSourceFromFile(path, Encoding.UTF8);
+            ScriptSource source = LoadSource(path, engine);
             return new PluginScript<TGlobals>(source, scope, Path.GetFileName(path));
         }
+
+        protected static ScriptSource LoadSource(string path, ScriptEngine engine) => engine.CreateScriptSourceFromFile(path, Encoding.UTF8);
 
         private void BeginCompile()
         {
@@ -63,11 +63,43 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
 
         public IScriptResult Run(TGlobals globals)
         {
+            ExecuteCode(globals);
+            return new ScriptResult(Scope);
+        }
+
+        protected dynamic ExecuteCode(TGlobals globals)
+        {
             if (!CompilationTask.IsCompleted) GetWithCheckErrors();
 
             Scope.SetVariable("g", globals);
-            CompiledCode.Execute(Scope);
-            return new ScriptResult();
+            dynamic returnValue = CompiledCode.Execute(Scope);
+
+            return returnValue;
+        }
+    }
+
+    internal class PluginScript<TResult, TGlobals> : PluginScript<TGlobals>, IPluginScript<TResult, TGlobals> where TGlobals : Globals
+    {
+        protected PluginScript(ScriptSource source, ScriptScope scope, string name) : base(source, scope, name)
+        {
+        }
+
+        public PluginScript(string code, ScriptEngine engine, ScriptScope scope, string name) : base(engine.CreateScriptSourceFromString(code), scope, name)
+        {
+        }
+
+        public static new PluginScript<TResult, TGlobals> LoadFrom(string path, ScriptEngine engine, ScriptScope scope)
+        {
+            ScriptSource source = LoadSource(path, engine);
+            return new PluginScript<TResult, TGlobals>(source, scope, Path.GetFileName(path));
+        }
+
+        public new IPluginScript<TResult, TGlobals> GetWithCheckErrors() => base.GetWithCheckErrors() as PluginScript<TResult, TGlobals>;
+
+        public new IScriptResult<TResult> Run(TGlobals globals)
+        {
+            dynamic returnValue = ExecuteCode(globals);
+            return new ScriptResult<TResult>(returnValue, Scope);
         }
     }
 }

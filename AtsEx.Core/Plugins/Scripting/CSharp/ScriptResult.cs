@@ -18,5 +18,16 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
         {
             State = state;
         }
+
+        public T GetVariable<T>(string name) => (T)State.GetVariable(name).Value;
+    }
+
+    internal class ScriptResult<TResult> : ScriptResult, IScriptResult<TResult>
+    {
+        public TResult ReturnValue => (TResult)State.ReturnValue;
+
+        public ScriptResult(ScriptState state) : base(state)
+        {
+        }
     }
 }

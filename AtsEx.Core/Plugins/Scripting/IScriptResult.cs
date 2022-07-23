@@ -8,5 +8,11 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
 {
     internal interface IScriptResult
     {
+        T GetVariable<T>(string name);
+    }
+
+    internal interface IScriptResult<TResult> : IScriptResult
+    {
+        TResult ReturnValue { get; }
     }
 }

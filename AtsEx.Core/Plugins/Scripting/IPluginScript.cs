@@ -12,7 +12,9 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
         IScriptResult Run(TGlobals globals);
     }
 
-    internal interface IPluginScript : IPluginScript<Globals>
+    internal interface IPluginScript<TResult, TGlobals> : IPluginScript<TGlobals> where TGlobals : Globals
     {
+        new IPluginScript<TResult, TGlobals> GetWithCheckErrors();
+        new IScriptResult<TResult> Run(TGlobals globals);
     }
 }
