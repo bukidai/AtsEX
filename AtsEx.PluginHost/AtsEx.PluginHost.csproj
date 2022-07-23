@@ -72,6 +72,7 @@
     <Compile Include="ClassWrappers\Public\CabBase.cs" />
     <Compile Include="ClassWrappers\Public\HendleSet.cs" />
     <Compile Include="ClassWrappers\Public\NotchInfo.cs" />
+    <Compile Include="ClassWrappers\Public\PreTrainObjectList.cs" />
     <Compile Include="ClassWrappers\Public\RepeatedStructure.cs" />
     <Compile Include="ClassWrappers\Public\VehicleInstrumentSet.cs" />
     <Compile Include="DictionaryExtensions.cs" />

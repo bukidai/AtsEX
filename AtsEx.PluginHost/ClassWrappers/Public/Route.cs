@@ -28,6 +28,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
             StationsGetMethod = members.GetSourcePropertyGetterOf(nameof(Stations));
 
+            PreTrainObjectsGetMethod = members.GetSourcePropertyGetterOf(nameof(PreTrainObjects));
+
             SoundsGetMethod = members.GetSourcePropertyGetterOf(nameof(Sounds));
 
             Sounds3DGetMethod = members.GetSourcePropertyGetterOf(nameof(Sounds3D));
@@ -83,6 +85,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// 停車場のリストを取得します。
         /// </summary>
         public StationList Stations => StationList.FromSource(StationsGetMethod.Invoke(Src, null));
+
+        private static MethodInfo PreTrainObjectsGetMethod;
+        /// <summary>
+        /// 先行列車の通過時刻のリストを取得します。
+        /// </summary>
+        public PreTrainObjectList PreTrainObjects => PreTrainObjectList.FromSource(PreTrainObjectsGetMethod.Invoke(Src, null));
 
         private static MethodInfo SoundsGetMethod;
         /// <summary>

@@ -235,6 +235,10 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="PreTrainObjectList" Original="e6">
+		<Method Wrapper="GetPreTrainLocation" WrapperParams="System.Int32" Original="a"/>
+	</Class>
+
 	<Class Wrapper="PutBetweenStructure" Original="df">
 		<Property Wrapper="Model">
 			<Getter Original="d"/>
@@ -281,6 +285,9 @@
 		</Property>
 		<Property Wrapper="Stations">
 			<Getter Original="f"/>
+		</Property>
+		<Property Wrapper="PreTrainObjects">
+			<Getter Original="p"/>
 		</Property>
 		<Property Wrapper="Sounds">
 			<Getter Original="t"/>
