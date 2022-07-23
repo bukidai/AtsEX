@@ -44,6 +44,16 @@ namespace Automatic9045.AtsEx.PluginHost.Handles
         int EmergencyBrakeNotch { get; }
 
         /// <summary>
+        /// ATS 確認扱いで必要な最小ブレーキノッチを取得します。
+        /// </summary>
+        int AtsCancelNotch { get; }
+
+        /// <summary>
+        /// ブレーキ弁 67 度に相当するノッチを取得します。
+        /// </summary>
+        int B67Notch { get; }
+
+        /// <summary>
         /// ノッチをニュートラル (ゼロ) に変更するコマンドを取得します。
         /// </summary>
         /// <returns>ノッチをニュートラルに変更する <see cref="NotchCommandBase"/>。</returns>

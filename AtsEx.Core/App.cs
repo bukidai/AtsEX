@@ -32,7 +32,7 @@ namespace Automatic9045.AtsEx
 
             VehicleSpec = vehicleSpec;
 
-            BrakeHandle brake = new BrakeHandle(VehicleSpec.BrakeNotches, false);
+            BrakeHandle brake = new BrakeHandle(vehicleSpec.BrakeNotches, vehicleSpec.AtsNotch, vehicleSpec.B67Notch, false);
             PowerHandle power = new PowerHandle(VehicleSpec.PowerNotches);
             Reverser reverser = new Reverser();
             Handles = new HandleSet(brake, power, reverser);
