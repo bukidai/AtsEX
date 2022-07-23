@@ -67,13 +67,13 @@ Copyright (c) 2021 zbx1425
 
 Copyright (c) 2017  Andreas Pardeike
 
-#### [SlimDX](https://www.nuget.org/packages/SlimDX/) (MIT)
-
-Copyright (c) 2013  exDreamDuck
-
 #### [Octokit](https://github.com/octokit/octokit.net) (MIT)
 
 Copyright 2017 GitHub, Inc.
+
+#### [SlimDX](https://www.nuget.org/packages/SlimDX/) (MIT)
+
+Copyright (c) 2013  exDreamDuck
 
 ### サンプルシナリオにのみ含まれるもの
 
