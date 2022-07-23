@@ -18,12 +18,12 @@ obj
 /_SampleScenarios/Automatic9045/Maps/AtsExSampleMap/MapPlugins/*.dll.config
 /_SampleScenarios/Automatic9045/Maps/AtsExSampleMap/MapPlugins/*.xml
 
-/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/*.dll
-/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/*.pdb
-/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/*.dll.config
-/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/*.xml
-/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/AtsEXPlugins/*.dll
-/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/AtsEXPlugins/*.pdb
-/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/AtsEXPlugins/*.dll.config
-/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/AtsEXPlugins/*.xml
-/_SampleScenarios/Automatic9045/Trains/AtsExSampleTrain/Ats/.AtsExBackup
+/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/*.dll
+/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/*.pdb
+/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/*.dll.config
+/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/*.xml
+/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/AtsEXPlugins/*.dll
+/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/AtsEXPlugins/*.pdb
+/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/AtsEXPlugins/*.dll.config
+/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/AtsEXPlugins/*.xml
+/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/.AtsExBackup

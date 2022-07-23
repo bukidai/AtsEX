@@ -3,7 +3,7 @@ BveTs Scenario 2.00 : UTF-8
 Title = 普通 一橋→六合 / 快速 六合→一橋
 Route = Automatic9045\Maps\AtsExSampleMap\Map.txt
 RouteTitle = ★AtsEXサンプル
-Vehicle = Automatic9045\Trains\AtsExSampleTrain\Vehicle.txt
+Vehicle = Automatic9045\Vehicles\AtsExSampleVehicle\Vehicle.txt
 VehicleTitle = サンプル車両（AtsEX搭載）
 Author = おーとま (automatic9045)
 ;Image = 
