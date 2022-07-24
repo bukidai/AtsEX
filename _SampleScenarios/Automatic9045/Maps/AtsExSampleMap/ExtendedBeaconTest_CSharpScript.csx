@@ -37,11 +37,11 @@ string trainName = e.SenderTrainName;
 string trainTrack = e.SenderTrain.TrainInfo.TrackKey;
 Direction trainDirection = e.Direction;
 
-MessageBox.Show($"他列車の通過を検知しました。\n" +
+MessageBox.Show("他列車の通過を検知しました。\n" +
 	"\n" +
-	"拡張地上子の名前: {beaconName}\n" +
-	"拡張地上子の設置先軌道: {beaconTrack}\n" +
+	$"拡張地上子の名前: {beaconName}\n" +
+	$"拡張地上子の設置先軌道: {beaconTrack}\n" +
 	"\n" +
-	"他列車の名前: {trainName}\n" +
-	"他列車の走行軌道: {trainTrack}\n" +
-	"他列車の進行方向: {trainDirection}", "C# スクリプトによる拡張地上子のサンプル");
+	$"他列車の名前: {trainName}\n" +
+	$"他列車の走行軌道: {trainTrack}\n" +
+	$"他列車の進行方向: {trainDirection}", "C# スクリプトによる拡張地上子のサンプル");
