@@ -69,7 +69,7 @@ namespace Automatic9045.AtsEx
                             }
                             else
                             {
-                                string includeRelativePath = includePath.Substring(MapPluginUsingHeader.Length);
+                                string includeRelativePath = includePath;
                                 string includeAbsolutePath = Path.Combine(Path.GetDirectoryName(filePath), includeRelativePath);
                                 
                                 Map includedMap = Load(includeAbsolutePath, pluginLoader);
