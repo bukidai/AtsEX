@@ -90,7 +90,6 @@ namespace Automatic9045.AtsEx
             }
             catch
             {
-                throw;
             }
         }
 
