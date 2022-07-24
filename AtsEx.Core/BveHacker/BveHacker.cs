@@ -119,7 +119,10 @@ namespace Automatic9045.AtsEx
         [UnderConstruction]
         public void Tick(TimeSpan elapsed)
         {
-            _ExtendedBeacons?.Tick(Scenario.LocationManager.Location, 0); // TODO: 先行列車の位置
+            double location = Scenario.LocationManager.Location;
+            int time = Scenario.TimeManager.TimeMilliseconds;
+            double preTrainLocation = Scenario.Route.PreTrainObjects.GetPreTrainLocation(time);
+            _ExtendedBeacons?.Tick(location, preTrainLocation);
         }
     }
 }
