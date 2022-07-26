@@ -184,6 +184,8 @@
     <Content Include="Resources\ExtendedBeacons\MapStatementIdentifiers.resx" />
     <Content Include="Resources\Handles\BrakeHandle.ja.resx" />
     <Content Include="Resources\Handles\BrakeHandle.resx" />
+    <Content Include="Resources\BveHacker.ja.resx" />
+    <Content Include="Resources\BveHacker.resx" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <EmbeddedResource Include="Plugins\AtsExPluginUsingXmlSchema.xsd">

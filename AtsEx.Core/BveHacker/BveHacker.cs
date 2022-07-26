@@ -16,12 +16,14 @@ using Automatic9045.AtsEx.Handles;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
-using Automatic9045.AtsEx.PluginHost.Handles;
+using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
 {
     internal sealed class BveHacker : IBveHacker
     {
+        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<BveHacker>("Core");
+
         public BveHacker(Process targetProcess, Action<Exception> resolveBeaconCreationExceptionAction)
         {
             Process = targetProcess;
@@ -109,7 +111,7 @@ namespace Automatic9045.AtsEx
 
         public Scenario Scenario
         {
-            get => ScenarioHacker.CurrentScenario ?? throw new InvalidOperationException();
+            get => ScenarioHacker.CurrentScenario ?? throw new InvalidOperationException(string.Format(Resources.GetString("CannotGetScenario").Value, nameof(Scenario)));
             internal set => ScenarioHacker.CurrentScenario = value;
         }
 
