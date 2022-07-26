@@ -83,6 +83,21 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="Direct3DProvider" Original="d9">
+		<Property Wrapper="Instance" IsWrapperStatic="true">
+			<Getter Original="d" IsOriginalStatic="true"/>
+		</Property>
+		<Property Wrapper="Device">
+			<Getter Original="e"/>
+		</Property>
+		<Property Wrapper="PresentParameters">
+			<Getter Original="g"/>
+		</Property>
+		<Property Wrapper="Direct3D">
+			<Getter Original="f"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="HandleSet" Original="a2">
 		<Property Wrapper="NotchInfo">
 			<Getter Original="e"/>

@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="ClassWrappers\Public\AssistantTextDrawer.cs" />
     <Compile Include="ClassWrappers\Public\CabBase.cs" />
+    <Compile Include="ClassWrappers\Public\Direct3DProvider.cs" />
     <Compile Include="ClassWrappers\Public\HendleSet.cs" />
     <Compile Include="ClassWrappers\Public\NotchInfo.cs" />
     <Compile Include="ClassWrappers\Public\PreTrainObjectList.cs" />
