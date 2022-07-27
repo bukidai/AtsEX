@@ -12,6 +12,7 @@ using System.Xml.Schema;
 
 using Automatic9045.AtsEx.Plugins.Scripting;
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx.Plugins
