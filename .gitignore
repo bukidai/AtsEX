@@ -22,6 +22,7 @@ obj
 /_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/*.pdb
 /_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/*.dll.config
 /_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/*.xml
+!/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/*.VehiclePluginUsing.xml
 /_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/AtsEXPlugins/*.dll
 /_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/AtsEXPlugins/*.pdb
 /_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/AtsEXPlugins/*.dll.config
