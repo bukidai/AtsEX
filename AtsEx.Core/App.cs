@@ -23,10 +23,9 @@ namespace Automatic9045.AtsEx
 
         public static App Instance { get; private set; }
 
-        private App(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly, VehicleSpec vehicleSpec)
+        private App(Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly, VehicleSpec vehicleSpec)
         {
             BveAssembly = bveAssembly;
-            AtsExCallerAssembly = callerAssembly;
             AtsExAssembly = atsExAssembly;
             AtsExPluginHostAssembly = atsExPluginHostAssembly;
 
@@ -38,13 +37,12 @@ namespace Automatic9045.AtsEx
             Handles = new HandleSet(brake, power, reverser);
         }
 
-        public static void CreateInstance(Assembly bveAssembly, Assembly callerAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly, VehicleSpec vehicleSpec)
-            => Instance = new App(bveAssembly, callerAssembly, atsExAssembly, atsExPluginHostAssembly, vehicleSpec);
+        public static void CreateInstance(Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly, VehicleSpec vehicleSpec)
+            => Instance = new App(bveAssembly, atsExAssembly, atsExPluginHostAssembly, vehicleSpec);
 
         public string ProductName { get; } = Resources.GetString("ProductName").Value;
         public string ProductShortName { get; } = Resources.GetString("ProductShortName").Value;
 
-        public Assembly AtsExCallerAssembly { get; }
         public Assembly AtsExAssembly { get; }
         public Assembly AtsExPluginHostAssembly { get; }
         public Assembly BveAssembly { get; }
