@@ -2,6 +2,7 @@
 .vs
 bin
 obj
+*.tmp
 /DllExport.bat
 /packages
 
