@@ -28,17 +28,9 @@ namespace Automatic9045.AtsEx
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<AtsEx>("Core");
 
-        private readonly Process TargetProcess;
-        private readonly AppDomain TargetAppDomain;
-        private readonly Assembly TargetAssembly;
-        private readonly Assembly CallerAssembly;
-        private readonly Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
-        private readonly Assembly PluginHostAssembly;
-
         private readonly BveHacker BveHacker;
 
         private readonly ContextMenuHacker ContextMenuHacker;
-
         private readonly VersionFormProvider VersionFormProvider;
 
         private readonly List<PluginBase> VehiclePlugins;
@@ -46,13 +38,10 @@ namespace Automatic9045.AtsEx
 
         public AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, Assembly callerAssembly, VehicleSpec vehicleSpec)
         {
-            string pluginHostAssemblyPath = Path.Combine(Path.GetDirectoryName(ExecutingAssembly.Location), "AtsEx.PluginHost.dll");
-            PluginHostAssembly = Assembly.LoadFrom(pluginHostAssemblyPath);
+            Assembly executingAssembly = Assembly.GetExecutingAssembly();
 
-            TargetProcess = targetProcess;
-            TargetAppDomain = targetAppDomain;
-            TargetAssembly = targetAssembly;
-            CallerAssembly = callerAssembly;
+            string pluginHostAssemblyPath = Path.Combine(Path.GetDirectoryName(executingAssembly.Location), "AtsEx.PluginHost.dll");
+            Assembly pluginHostAssembly = Assembly.LoadFrom(pluginHostAssemblyPath);
 
             AppDomain.CurrentDomain.AssemblyResolve += (sender, e) =>
             {
@@ -61,10 +50,10 @@ namespace Automatic9045.AtsEx
                 return File.Exists(path) ? Assembly.LoadFrom(path) : null;
             };
 
-            Version bveVersion = TargetAssembly.GetName().Version;
-            Version profileVersion = BveTypeSet.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly, true);
+            Version bveVersion = targetAssembly.GetName().Version;
+            Version profileVersion = BveTypeSet.CreateInstance(targetAssembly, executingAssembly, pluginHostAssembly, true);
 
-            App.CreateInstance(TargetProcess, TargetAssembly, ExecutingAssembly, PluginHostAssembly, vehicleSpec);
+            App.CreateInstance(targetProcess, targetAssembly, executingAssembly, pluginHostAssembly, vehicleSpec);
             BveHacker = new BveHacker(ResolveLoadExceptions);
 
             ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(App.Instance, BveHacker);
@@ -90,7 +79,7 @@ namespace Automatic9045.AtsEx
             try
             {
                 {
-                    string vehiclePluginUsingPath = Path.Combine(Path.GetDirectoryName(CallerAssembly.Location), Path.GetFileNameWithoutExtension(CallerAssembly.Location) + ".VehiclePluginUsing.xml");
+                    string vehiclePluginUsingPath = Path.Combine(Path.GetDirectoryName(callerAssembly.Location), Path.GetFileNameWithoutExtension(callerAssembly.Location) + ".VehiclePluginUsing.xml");
                     PluginUsing vehiclePluginUsing = PluginUsing.Load(PluginType.VehiclePlugin, vehiclePluginUsingPath);
                     VehiclePlugins = pluginLoader.LoadFromPluginUsing(vehiclePluginUsing).ToList();
                 }
