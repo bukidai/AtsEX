@@ -20,15 +20,13 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
         /// <see cref="BveTypeSet"/> のインスタンスを作成します。
         /// </summary>
         /// <param name="bveAssembly">BVE の <see cref="Assembly"/>。</param>
-        /// <param name="atsExAssembly">AtsEX 本体 (AtsEx.dll) の <see cref="Assembly"/>。</param>
-        /// <param name="atsExPluginHostAssembly">AtsEX プラグインホスト (AtsEx.PluginHost.dll) の <see cref="Assembly"/>。</param>
         /// <param name="allowNotSupportedVersion">実行中の BVE がサポートされないバージョンの場合、他のバージョン向けのプロファイルで代用するか。</param>
         /// <returns>使用するプロファイルが対応する BVE のバージョン。</returns>
         /// <exception cref="InvalidOperationException"></exception>
         /// <exception cref="KeyNotFoundException"></exception>
         /// <exception cref="TypeLoadException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        public static Version CreateInstance(Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly, bool allowNotSupportedVersion)
+        public static Version CreateInstance(Assembly bveAssembly, bool allowNotSupportedVersion)
         {
             if (!(Instance is null))
             {
@@ -50,10 +48,10 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                 }
             }
 
-            IEnumerable<Type> wrapperTypes = atsExPluginHostAssembly.GetTypes().Concat(atsExAssembly.GetTypes()).Where(type => (type.IsClass && type.IsSubclassOf(typeof(ClassWrapperBase))) || type.IsEnum);
+            IEnumerable<Type> wrapperTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => (type.IsClass && type.IsSubclassOf(typeof(ClassWrapperBase))) || type.IsEnum);
             IEnumerable<Type> originalTypes = bveAssembly.GetTypes();
 
-            TypeInfoCreator typeInfoGenerator = new TypeInfoCreator(bveAssembly, atsExAssembly);
+            TypeInfoCreator typeInfoGenerator = new TypeInfoCreator(bveAssembly);
             IEnumerable<TypeInfo> typeInfos = typeInfoGenerator.Create(nameCollection);
 
             IEnumerable<TypeMemberSetBase> types = nameCollection.Select<TypeMemberNameSetBase, TypeMemberSetBase>(src =>

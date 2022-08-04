@@ -11,20 +11,17 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
     internal class TypeInfoCreator
     {
-        private Assembly BveAssembly;
-        private Assembly AtsExAssembly;
-        private Assembly AtsExPluginHostAssembly;
+        private readonly Assembly BveAssembly;
+        private readonly Assembly AtsExPluginHostAssembly = Assembly.GetExecutingAssembly();
 
-        private IEnumerable<Type> WrapperTypes;
-        private IEnumerable<Type> OriginalTypes;
+        private readonly IEnumerable<Type> WrapperTypes;
+        private readonly IEnumerable<Type> OriginalTypes;
 
-        public TypeInfoCreator(Assembly bveAssembly, Assembly atsExAssembly)
+        public TypeInfoCreator(Assembly bveAssembly)
         {
             BveAssembly = bveAssembly;
-            AtsExAssembly = atsExAssembly;
-            AtsExPluginHostAssembly = Assembly.GetExecutingAssembly();
 
-            WrapperTypes = AtsExPluginHostAssembly.GetTypes().Concat(AtsExAssembly.GetTypes()).Where(type => (type.IsClass && type.IsSubclassOf(typeof(ClassWrapperBase))) || type.IsEnum);
+            WrapperTypes = AtsExPluginHostAssembly.GetTypes().Where(type => (type.IsClass && type.IsSubclassOf(typeof(ClassWrapperBase))) || type.IsEnum);
             OriginalTypes = BveAssembly.GetTypes();
         }
 

@@ -51,7 +51,7 @@ namespace Automatic9045.AtsEx
             };
 
             Version bveVersion = targetAssembly.GetName().Version;
-            Version profileVersion = BveTypeSet.CreateInstance(targetAssembly, executingAssembly, pluginHostAssembly, true);
+            Version profileVersion = BveTypeSet.CreateInstance(targetAssembly, true);
 
             App.CreateInstance(targetProcess, targetAssembly, executingAssembly, pluginHostAssembly, vehicleSpec);
             BveHacker = new BveHacker(ResolveLoadExceptions);
