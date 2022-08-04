@@ -24,11 +24,9 @@ namespace Automatic9045.AtsEx
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<BveHacker>("Core");
 
-        public BveHacker(Process targetProcess, Action<Exception> resolveBeaconCreationExceptionAction)
+        public BveHacker(Action<Exception> resolveBeaconCreationExceptionAction)
         {
-            Process = targetProcess;
-
-            MainFormHacker = new MainFormHacker(Process);
+            MainFormHacker = new MainFormHacker(App.Instance.Process);
             ScenarioHacker = new ScenarioHacker(MainFormHacker);
 
             ScenarioHacker.ScenarioCreated += e => PreviewScenarioCreated?.Invoke(e);
@@ -54,9 +52,6 @@ namespace Automatic9045.AtsEx
             };
             ScenarioHacker.ScenarioCreated += e => ScenarioCreated?.Invoke(e);
         }
-
-
-        public Process Process { get; }
 
 
         private readonly MainFormHacker MainFormHacker;

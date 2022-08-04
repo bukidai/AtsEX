@@ -64,8 +64,8 @@ namespace Automatic9045.AtsEx
             Version bveVersion = TargetAssembly.GetName().Version;
             Version profileVersion = BveTypeSet.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly, true);
 
-            App.CreateInstance(TargetAssembly, ExecutingAssembly, PluginHostAssembly, vehicleSpec);
-            BveHacker = new BveHacker(TargetProcess, ResolveLoadExceptions);
+            App.CreateInstance(TargetProcess, TargetAssembly, ExecutingAssembly, PluginHostAssembly, vehicleSpec);
+            BveHacker = new BveHacker(ResolveLoadExceptions);
 
             ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(App.Instance, BveHacker);
             classWrapperInitializer.InitializeAll();

@@ -20,12 +20,6 @@ namespace Automatic9045.AtsEx.PluginHost
     public interface IBveHacker
     {
         /// <summary>
-        /// 制御対象の BVE を実行している <see cref="System.Diagnostics.Process"/> を取得します。
-        /// </summary>
-        Process Process { get; }
-
-
-        /// <summary>
         /// BVE のメインフォームのハンドルを取得します。
         /// </summary>
         IntPtr MainFormHandle { get; }

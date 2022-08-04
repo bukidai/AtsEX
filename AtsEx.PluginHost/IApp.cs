@@ -30,6 +30,11 @@ namespace Automatic9045.AtsEx.PluginHost
 
 
         /// <summary>
+        /// 制御対象の BVE を実行している <see cref="System.Diagnostics.Process"/> を取得します。
+        /// </summary>
+        Process Process { get; }
+
+        /// <summary>
         /// AtsEX の <see cref="Assembly"/> を取得します。
         /// </summary>
         Assembly AtsExAssembly { get; }
