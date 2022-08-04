@@ -174,8 +174,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
 
             public object Create() => Default.Invoke(null);
-            public object Create(IEnumerable collection) => Default.Invoke(new object[] { collection });
-            public object Create(int capacity) => Default.Invoke(new object[] { capacity });
+            public object Create(IEnumerable collection) => WithItems.Invoke(new object[] { collection });
+            public object Create(int capacity) => WithCapacitySpecified.Invoke(new object[] { capacity });
         }
 
         internal sealed class Enumerator : IEnumerator<TWrapper>, IEnumerator
