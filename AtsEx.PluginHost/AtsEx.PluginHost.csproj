@@ -136,7 +136,7 @@
     <Compile Include="DXDynamicTextureHost.cs" />
     <Compile Include="Enums\GameState.cs" />
     <Compile Include="Enums\TiltOptions.cs" />
-    <Compile Include="Helpers\ContextMenuHacker.cs" />
+    <Compile Include="IContextMenuHacker.cs" />
     <Compile Include="Helpers\DiagramUpdater.cs" />
     <Compile Include="ClassInitializer\InitializeHelperAttribute.cs" />
     <Compile Include="Helpers\LoadErrorManager.cs" />

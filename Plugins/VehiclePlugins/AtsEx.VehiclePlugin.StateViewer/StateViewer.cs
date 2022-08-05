@@ -14,8 +14,6 @@ namespace Automatic9045.VehiclePlugins.StateViewer
 {
     public class StateViewer : AssemblyPluginBase, IDisposable
     {
-        private readonly ContextMenuHacker ContextMenuHacker = new ContextMenuHacker();
-
         private readonly StateForm Form;
         private readonly ToolStripMenuItem MenuItem;
 
@@ -23,7 +21,7 @@ namespace Automatic9045.VehiclePlugins.StateViewer
         {
             InstanceStore.Initialize(App, BveHacker);
 
-            MenuItem = ContextMenuHacker.AddCheckableMenuItem("状態ウィンドウを表示", MenuItemCheckedChanged);
+            MenuItem = BveHacker.ContextMenuHacker.AddCheckableMenuItem("状態ウィンドウを表示", MenuItemCheckedChanged);
 
             MenuItem.Checked = false;
 
@@ -65,8 +63,6 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             Form.FormClosing -= FormClosing;
             Form.Close();
             Form.Dispose();
-
-            ContextMenuHacker.Dispose();
         }
     }
 }

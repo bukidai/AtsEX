@@ -64,9 +64,6 @@ namespace Automatic9045.AtsEx
                 LoadErrorManager.Throw(versionWarningText);
             }
 
-            ContextMenuHacker = new ContextMenuHacker();
-            ContextMenuHacker.AddSeparator();
-
             VersionFormProvider = new VersionFormProvider(BveHacker);
 
             PluginLoader pluginLoader = new PluginLoader(BveHacker);
@@ -156,7 +153,7 @@ namespace Automatic9045.AtsEx
             });
 
             VersionFormProvider.Dispose();
-            ContextMenuHacker.Dispose();
+            BveHacker.Dispose();
         }
 
         public void Started(BrakePosition defaultBrakePosition)

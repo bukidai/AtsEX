@@ -22,7 +22,7 @@ using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
 {
-    internal sealed class BveHacker : IBveHacker
+    internal sealed class BveHacker : IBveHacker, IDisposable
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<BveHacker>("Core");
 
@@ -38,6 +38,9 @@ namespace Automatic9045.AtsEx
 
             HelperInitializer helperInitializer = new HelperInitializer(App.Instance, this);
             helperInitializer.InitializeAll();
+
+            _ContextMenuHacker = new ContextMenuHacker(MainForm);
+            _ContextMenuHacker.AddSeparator(true);
 
             ScenarioHacker.ScenarioCreated += e => PreviewScenarioCreated?.Invoke(e);
             ScenarioHacker.ScenarioCreated += e =>
@@ -61,6 +64,11 @@ namespace Automatic9045.AtsEx
                 }
             };
             ScenarioHacker.ScenarioCreated += e => ScenarioCreated?.Invoke(e);
+        }
+
+        public void Dispose()
+        {
+            _ContextMenuHacker.Dispose();
         }
 
 
@@ -98,6 +106,10 @@ namespace Automatic9045.AtsEx
             get => MainForm.KeyProvider;
             set => MainForm.KeyProvider = value;
         }
+
+
+        private readonly ContextMenuHacker _ContextMenuHacker;
+        public IContextMenuHacker ContextMenuHacker => _ContextMenuHacker;
 
 
         public PluginHost.Handles.HandleSet Handles { get; private set; }

@@ -94,6 +94,12 @@ namespace Automatic9045.AtsEx.PluginHost
 
 
         /// <summary>
+        /// メインフォームの右クリックメニューを編集するための機能を提供する <see cref="IContextMenuHacker"/> を取得します。
+        /// </summary>
+        IContextMenuHacker ContextMenuHacker { get; }
+
+
+        /// <summary>
         /// 全てのハンドルのセットを取得します。
         /// </summary>
         /// <remarks>

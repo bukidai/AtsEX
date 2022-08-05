@@ -118,6 +118,7 @@
     <Compile Include="App.cs" />
     <Compile Include="AtsEx.cs" />
     <Compile Include="BveHacker\BveHacker.cs" />
+    <Compile Include="BveHacker\CoreHackServices\ContextMenuHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\MainFormHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\ScenarioHacker.cs" />
     <Compile Include="ExtendedBeacons\Beacon.cs" />

@@ -20,17 +20,16 @@ namespace Automatic9045.AtsEx
 
         private readonly BveHacker BveHacker;
 
-        private ContextMenuHacker ContextMenuHacker = new ContextMenuHacker();
-
-        private VersionForm Form = null;
-        private ToolStripMenuItem MenuItem;
+        private readonly VersionForm Form = null;
+        private readonly ToolStripMenuItem MenuItem;
 
 
         public VersionFormProvider(BveHacker bveHacker)
         {
             BveHacker = bveHacker;
 
-            MenuItem = ContextMenuHacker.AddClickableMenuItem(string.Format(Resources.GetString("VersionInfoMenuItem").Value, App.Instance.ProductShortName), MenuItemClick);
+            ContextMenuHacker contextMenuHacker = BveHacker.ContextMenuHacker as ContextMenuHacker;
+            MenuItem = contextMenuHacker.AddClickableMenuItem(string.Format(Resources.GetString("VersionInfoMenuItem").Value, App.Instance.ProductShortName), MenuItemClick, true);
 
             Form = new VersionForm();
             Form.FormClosing += FormClosing;
@@ -62,8 +61,6 @@ namespace Automatic9045.AtsEx
             Form.FormClosing -= FormClosing;
             Form.Close();
             Form.Dispose();
-
-            ContextMenuHacker.Dispose();
         }
     }
 }
