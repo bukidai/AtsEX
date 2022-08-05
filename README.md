@@ -91,6 +91,10 @@ Copyright (c) .NET Foundation and Contributors
 
 Copyright (c) .NET Foundation and Contributors
 
+#### [Microsoft.CodeAnalysis.Scripting](https://github.com/dotnet/roslyn) (MIT)
+
+Copyright (c) .NET Foundation and Contributors
+
 #### [Microsoft.CodeAnalysis.Scripting.Common](https://github.com/dotnet/roslyn) (MIT)
 
 Copyright (c) .NET Foundation and Contributors
