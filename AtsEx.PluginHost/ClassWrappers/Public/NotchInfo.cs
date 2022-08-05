@@ -15,9 +15,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class NotchInfo : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<NotchInfo>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<NotchInfo>();
 
             PowerNotchCountGetMethod = members.GetSourcePropertyGetterOf(nameof(PowerNotchCount));
             PowerNotchCountSetMethod = members.GetSourcePropertySetterOf(nameof(PowerNotchCount));

@@ -19,15 +19,16 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <seealso cref="SortedList{TKey, TValue}"/>
     public class WrappedList<TWrapper> : ClassWrapperBase, IList<TWrapper>, IReadOnlyList<TWrapper>, IList
     {
-        private static readonly ListConstructorSet ListConstructors;
+        private static BveTypeSet BveTypes = null;
+        private static ListConstructorSet ListConstructors = null;
 
         protected readonly new IList Src;
         protected readonly ITwoWayConverter<object, TWrapper> Converter;
 
 
-        static WrappedList()
+        private static void LoadConstructors()
         {
-            Type originalType = BveTypeSet.Instance.GetTypeInfoOf<TWrapper>().OriginalType;
+            Type originalType = BveTypes.GetTypeInfoOf<TWrapper>().OriginalType;
             Type listType = typeof(List<>).MakeGenericType(originalType);
             ListConstructors = new ListConstructorSet(listType);
         }
@@ -35,6 +36,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         protected WrappedList(IList src, ITwoWayConverter<object, TWrapper> converter) : base(src)
         {
+            if (BveTypes is null)
+            {
+                BveTypes = ClassWrapperInitializer.LazyInitialize();
+                LoadConstructors();
+            }
+
             Src = src;
             if (!IsSubclassOfGeneric(Src.GetType(), typeof(List<>))) throw new ArgumentException();
 

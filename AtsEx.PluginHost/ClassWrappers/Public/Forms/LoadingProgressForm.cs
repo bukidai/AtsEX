@@ -17,9 +17,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public sealed class LoadingProgressForm : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<LoadingProgressForm>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<LoadingProgressForm>();
 
             IsErrorCriticalField = members.GetSourceFieldOf(nameof(IsErrorCritical));
             ErrorCountField = members.GetSourceFieldOf(nameof(ErrorCount));

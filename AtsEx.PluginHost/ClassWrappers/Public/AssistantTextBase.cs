@@ -18,9 +18,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class AssistantTextBase : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<AssistantTextBase>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<AssistantTextBase>();
 
             AssistantSettingsGetMethod = members.GetSourcePropertyGetterOf(nameof(AssistantSettings));
 

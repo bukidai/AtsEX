@@ -16,9 +16,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public sealed class SingleStructureList : MapObjectList
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<SingleStructureList>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<SingleStructureList>();
         }
 
         private SingleStructureList(IList src) : base(src)

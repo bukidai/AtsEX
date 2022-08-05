@@ -20,9 +20,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class ScenarioInfo : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<ScenarioInfo>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<ScenarioInfo>();
 
             FromFileMethod = members.GetSourceMethodOf(nameof(FromFile));
 

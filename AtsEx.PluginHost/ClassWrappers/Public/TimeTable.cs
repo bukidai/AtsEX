@@ -18,9 +18,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class TimeTable : AssistantText
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<TimeTable>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<TimeTable>();
 
             ModelField = members.GetSourceFieldOf(nameof(Model));
             NameTextsField = members.GetSourceFieldOf(nameof(NameTexts));

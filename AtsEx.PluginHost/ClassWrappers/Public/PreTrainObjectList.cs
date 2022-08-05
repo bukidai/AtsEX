@@ -16,9 +16,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public sealed class PreTrainObjectList : MapObjectList
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<PreTrainObjectList>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<PreTrainObjectList>();
 
             GetPreTrainLocationMethod = members.GetSourceMethodOf(nameof(GetPreTrainLocation));
         }

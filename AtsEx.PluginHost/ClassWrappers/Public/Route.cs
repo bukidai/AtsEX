@@ -16,9 +16,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public sealed class Route : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<Route>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<Route>();
 
             DrawLimitLocationGetMethod = members.GetSourcePropertyGetterOf(nameof(DrawLimitLocation));
             DrawLimitLocationSetMethod = members.GetSourcePropertySetterOf(nameof(DrawLimitLocation));

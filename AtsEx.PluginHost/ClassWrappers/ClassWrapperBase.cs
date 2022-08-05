@@ -17,6 +17,14 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ClassWrapperBase>("PluginHost");
 
+        private static BveTypeSet BveTypes;
+
+        [InitializeClassWrapper]
+        private static void Initialize(BveTypeSet bveTypes)
+        {
+            BveTypes = bveTypes;
+        }
+
         /// <summary>
         /// オリジナル オブジェクトから指定したラッパー型のインスタンスを生成します。
         /// </summary>
@@ -60,7 +68,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <exception cref="InvalidOperationException">ラッパー型内に有効なクラスラッパー生成メソッドが定義されていません。</exception>
         public static ClassWrapperBase CreateFromSource(object src)
         {
-            Type wrapperType = BveTypeSet.Instance.GetWrapperTypeOf(src.GetType());
+            Type wrapperType = BveTypes.GetWrapperTypeOf(src.GetType());
             return CreateFromSource(wrapperType, src);
         }
 

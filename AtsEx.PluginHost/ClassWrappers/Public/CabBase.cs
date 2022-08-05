@@ -15,9 +15,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class CabBase : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<CabBase>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<CabBase>();
 
             HandlesGetMethod = members.GetSourcePropertyGetterOf(nameof(Handles));
         }

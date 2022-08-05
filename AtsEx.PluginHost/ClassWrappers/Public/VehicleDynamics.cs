@@ -15,9 +15,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class VehicleDynamics : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<VehicleDynamics>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<VehicleDynamics>();
 
             CurveResistanceFactorGetMethod = members.GetSourcePropertyGetterOf(nameof(CurveResistanceFactor));
             CurveResistanceFactorSetMethod = members.GetSourcePropertySetterOf(nameof(CurveResistanceFactor));

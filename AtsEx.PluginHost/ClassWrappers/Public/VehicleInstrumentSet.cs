@@ -15,9 +15,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class VehicleInstrumentSet : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<VehicleInstrumentSet>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<VehicleInstrumentSet>();
 
             CabGetMethod = members.GetSourcePropertyGetterOf(nameof(Cab));
             CabSetMethod = members.GetSourcePropertySetterOf(nameof(Cab));

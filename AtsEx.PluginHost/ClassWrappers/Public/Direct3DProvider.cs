@@ -17,9 +17,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class Direct3DProvider : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<Direct3DProvider>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<Direct3DProvider>();
 
             InstanceGetMethod = members.GetSourcePropertyGetterOf(nameof(Instance));
 

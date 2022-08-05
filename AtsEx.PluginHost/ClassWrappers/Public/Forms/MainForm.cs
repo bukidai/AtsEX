@@ -19,9 +19,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public sealed class MainForm : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<MainForm>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<MainForm>();
 
             ContextMenuField = members.GetSourceFieldOf(nameof(ContextMenu));
 

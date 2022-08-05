@@ -15,9 +15,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public sealed class Vehicle : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<Vehicle>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<Vehicle>();
 
             InstrumentsGetMethod = members.GetSourcePropertyGetterOf(nameof(Instruments));
             InstrumentsSetMethod = members.GetSourcePropertySetterOf(nameof(Instruments));

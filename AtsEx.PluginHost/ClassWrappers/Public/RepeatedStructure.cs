@@ -12,9 +12,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class RepeatedStructure : Structure
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<RepeatedStructure>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<RepeatedStructure>();
 
             Constructor1 = members.GetSourceConstructor(new Type[] { typeof(double), typeof(string), typeof(double), typeof(double), typeof(double), typeof(double), typeof(double), typeof(double), typeof(int), typeof(double), typeof(double), typeof(WrappedList<Model>) });
             Constructor2 = members.GetSourceConstructor(new Type[] { typeof(double), typeof(string), typeof(int), typeof(double), typeof(double), typeof(WrappedList<Model>) });

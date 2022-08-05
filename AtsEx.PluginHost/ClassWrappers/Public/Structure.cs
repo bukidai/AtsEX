@@ -16,9 +16,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class Structure : LocatableMapObject
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<Structure>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<Structure>();
 
             Constructor1 = members.GetSourceConstructor(new Type[] { typeof(double), typeof(string), typeof(double), typeof(double), typeof(double), typeof(double), typeof(double), typeof(double), typeof(int), typeof(double), typeof(Model) });
             Constructor2 = members.GetSourceConstructor(new Type[] { typeof(double), typeof(string), typeof(int), typeof(double), typeof(Model) });

@@ -15,9 +15,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public sealed class LoadError : ClassWrapperBase
     {
 		[InitializeClassWrapper]
-private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
 		{
-			ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<LoadError>();
+			ClassMemberSet members = bveTypes.GetClassInfoOf<LoadError>();
 
 			Constructor = members.GetSourceConstructor(new Type[] { typeof(string), typeof(string), typeof(int), typeof(int) });
 

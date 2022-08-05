@@ -16,9 +16,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class PutBetweenStructure : MapObjectBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<PutBetweenStructure>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<PutBetweenStructure>();
 
             Constructor = members.GetSourceConstructor();
 

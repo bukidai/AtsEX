@@ -16,9 +16,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class HandleSet : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<HandleSet>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<HandleSet>();
 
             NotchInfoGetMethod = members.GetSourcePropertyGetterOf(nameof(NotchInfo));
             NotchInfoSetMethod = members.GetSourcePropertySetterOf(nameof(NotchInfo));

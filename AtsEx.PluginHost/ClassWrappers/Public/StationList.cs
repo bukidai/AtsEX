@@ -19,9 +19,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         private static new readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<StationList>(@"PluginHost\ClassWrappers");
 
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<StationList>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<StationList>();
 
             InsertMethod = members.GetSourceMethodOf(nameof(Insert));
             GetStandardTimeMethod = members.GetSourceMethodOf(nameof(GetStandardTime));

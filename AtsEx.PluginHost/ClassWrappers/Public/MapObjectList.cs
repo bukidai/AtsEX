@@ -19,7 +19,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class MapObjectList : WrappedList<MapObjectBase>
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
         }
 

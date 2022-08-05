@@ -15,9 +15,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public sealed class Station : MapObjectBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<Station>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<Station>();
 
             Constructor = members.GetSourceConstructor();
 

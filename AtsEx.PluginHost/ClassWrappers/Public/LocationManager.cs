@@ -15,9 +15,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class LocationManager : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<LocationManager>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<LocationManager>();
 
             SpeedMeterPerSecondGetMethod = members.GetSourcePropertyGetterOf(nameof(SpeedMeterPerSecond));
 

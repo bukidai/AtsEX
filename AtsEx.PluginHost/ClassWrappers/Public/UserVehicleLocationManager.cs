@@ -15,9 +15,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class UserVehicleLocationManager : LocationManager
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<UserVehicleLocationManager>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<UserVehicleLocationManager>();
 
             LocationGetMethod = members.GetSourcePropertyGetterOf(nameof(Location));
 

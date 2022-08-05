@@ -15,9 +15,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class Train : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<Train>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<Train>();
 
             TrainInfoField = members.GetSourceFieldOf(nameof(TrainInfo));
             LocationField = members.GetSourceFieldOf(nameof(Location));

@@ -20,9 +20,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public sealed class Scenario : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<Scenario>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<Scenario>();
 
             TimeManagerGetMethod = members.GetSourcePropertyGetterOf(nameof(TimeManager));
             LocationManagerGetMethod = members.GetSourcePropertyGetterOf(nameof(LocationManager));

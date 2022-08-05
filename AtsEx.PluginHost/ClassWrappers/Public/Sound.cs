@@ -15,9 +15,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public sealed class Sound : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<Sound>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<Sound>();
         }
 
         private Sound(object src) : base(src)

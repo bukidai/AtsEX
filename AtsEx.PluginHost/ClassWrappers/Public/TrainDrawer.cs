@@ -18,9 +18,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<TrainDrawer>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<TrainDrawer>();
 
             OriginalMemberSet.SetRouteMethod = members.GetSourceMethodOf(nameof(SetRoute));
         }

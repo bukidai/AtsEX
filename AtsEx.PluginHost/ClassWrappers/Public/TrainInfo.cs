@@ -15,9 +15,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class TrainInfo : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<TrainInfo>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<TrainInfo>();
 
             StructuresGetMethod = members.GetSourcePropertyGetterOf(nameof(Structures));
 

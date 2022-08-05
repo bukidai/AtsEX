@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
@@ -19,6 +20,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public class WrappedSortedList<TKey, TValueWrapper> : IDictionary<TKey, TValueWrapper>, IDictionary, IReadOnlyDictionary<TKey, TValueWrapper>
     {
         protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(WrappedSortedList<,>), @"PluginHost\ClassWrappers");
+
+        private static BveTypeSet BveTypes = null;
 
         protected IDictionary Src;
         protected dynamic SrcAsDynamic;
@@ -41,6 +44,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="valueConverter">オリジナル型とラッパー型を相互に変換するための <see cref="ITwoWayConverter{T1, T2}"/>。</param>
         public WrappedSortedList(IDictionary src, ITwoWayConverter<object, TValueWrapper> valueConverter)
         {
+            if (BveTypes is null)
+            {
+                BveTypes = ClassWrapperInitializer.LazyInitialize();
+            }
+
             Src = src;
             SrcAsDynamic = Src;
             ValueConverter = valueConverter;

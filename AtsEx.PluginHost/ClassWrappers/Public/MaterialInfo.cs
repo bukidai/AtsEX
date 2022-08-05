@@ -17,9 +17,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     public sealed class MaterialInfo : ClassWrapperBase
     {
         [InitializeClassWrapper]
-        private static void Initialize()
+        private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = BveTypeSet.Instance.GetClassInfoOf<MaterialInfo>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<MaterialInfo>();
 
             MaterialGetMethod = members.GetSourcePropertyGetterOf(nameof(Material));
             MaterialSetMethod = members.GetSourcePropertySetterOf(nameof(Material));
