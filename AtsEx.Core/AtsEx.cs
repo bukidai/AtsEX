@@ -50,9 +50,6 @@ namespace Automatic9045.AtsEx
                 return File.Exists(path) ? Assembly.LoadFrom(path) : null;
             };
 
-            Version bveVersion = targetAssembly.GetName().Version;
-            Version profileVersion = BveTypeSet.CreateInstance(targetAssembly, true);
-
             App.CreateInstance(targetProcess, targetAssembly, executingAssembly, pluginHostAssembly, vehicleSpec);
             BveHacker = new BveHacker(ResolveLoadExceptions);
 
@@ -63,6 +60,9 @@ namespace Automatic9045.AtsEx
             helperInitializer.InitializeAll();
 
             //DXDynamicTextureHost = new DXDynamicTextureHost();
+
+            Version bveVersion = App.Instance.BveVersion;
+            Version profileVersion = BveHacker.BveTypes.ProfileVersion;
 
             string versionWarningText = string.Format(Resources.GetString("BveVersionNotSupported").Value, bveVersion, profileVersion, App.Instance.ProductShortName);
             if (profileVersion != bveVersion)
@@ -163,7 +163,6 @@ namespace Automatic9045.AtsEx
 
             VersionFormProvider.Dispose();
             ContextMenuHacker.Dispose();
-            BveTypeSet.Instance.Dispose();
         }
 
         public void Started(BrakePosition defaultBrakePosition)

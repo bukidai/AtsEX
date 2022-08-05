@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 using Mackoy.Bvets;
 
+using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
-using Automatic9045.AtsEx.PluginHost.Handles;
 
 namespace Automatic9045.AtsEx.PluginHost
 {
@@ -33,6 +33,12 @@ namespace Automatic9045.AtsEx.PluginHost
         /// BVE のメインフォームを取得します。
         /// </summary>
         MainForm MainForm { get; }
+
+
+        /// <summary>
+        /// クラスラッパーに対応する BVE の型とメンバーの定義を表す <see cref="BveTypeSet"/> を取得します。
+        /// </summary>
+        BveTypeSet BveTypes { get; }
 
 
         /// <summary>

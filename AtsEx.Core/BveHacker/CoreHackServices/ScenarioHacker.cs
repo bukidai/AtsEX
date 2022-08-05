@@ -19,11 +19,11 @@ namespace Automatic9045.AtsEx
     {
         private MainForm MainForm;
 
-        public ScenarioHacker(MainFormHacker mainFormHacker)
+        public ScenarioHacker(MainFormHacker mainFormHacker, BveTypeSet bveTypes)
         {
             MainForm = mainFormHacker.TargetForm;
 
-            ClassMemberSet scenarioMembers = BveTypeSet.Instance.GetClassInfoOf<Scenario>();
+            ClassMemberSet scenarioMembers = bveTypes.GetClassInfoOf<Scenario>();
 
             MethodInfo initializeTimeAndLocationMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.InitializeTimeAndLocation));
             MethodInfo initializeMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.Initialize));

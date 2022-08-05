@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx.PluginHost.BveTypes
@@ -13,26 +14,34 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
     /// <summary>
     /// クラスラッパーに対応する BVE の型とメンバーの情報を提供します。
     /// </summary>
-    public partial class BveTypeSet
+    public sealed partial class BveTypeSet
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<BveTypeSet>("PluginHost");
 
-        protected SortedList<Type, TypeMemberSetBase> Types { get; }
-        protected SortedList<Type, Type> OriginalAndWrapperTypes { get; }
+        private readonly SortedList<Type, TypeMemberSetBase> Types;
+        private readonly SortedList<Type, Type> OriginalAndWrapperTypes;
 
-        protected BveTypeSet(IEnumerable<TypeMemberSetBase> types, Type classWrapperType)
+        private BveTypeSet(IEnumerable<TypeMemberSetBase> types, Version profileVersion)
         {
-            TypeMemberSetBase illegalType = types.FirstOrDefault(type => !(type.WrapperType.IsClass && type.WrapperType.IsSubclassOf(classWrapperType)) && !type.WrapperType.IsEnum);
+            TypeMemberSetBase illegalType = types.FirstOrDefault(type => !(type.WrapperType.IsClass && type.WrapperType.IsSubclassOf(typeof(ClassWrapperBase))) && !type.WrapperType.IsEnum);
             if (!(illegalType is null))
             {
                 throw new ArgumentException(
                     string.Format(Resources.GetString("TypeNotClassWrapper").Value,
-                    illegalType.WrapperType.FullName, classWrapperType.FullName));
+                    illegalType.WrapperType.FullName, typeof(ClassWrapperBase).FullName));
             }
 
             Types = new SortedList<Type, TypeMemberSetBase>(types.ToDictionary(type => type.WrapperType, type => type), new TypeComparer());
             OriginalAndWrapperTypes = new SortedList<Type, Type>(types.ToDictionary(type => type.OriginalType, type => type.WrapperType), new TypeComparer());
+
+            ProfileVersion = profileVersion;
         }
+
+
+        /// <summary>
+        /// 読み込まれたプロファイルが対応している BVE のバージョンを取得します。
+        /// </summary>
+        public Version ProfileVersion { get; }
 
 
         /// <summary>
@@ -94,10 +103,5 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
         /// <param name="originalType">オリジナル型。</param>
         /// <returns></returns>
         public Type GetWrapperTypeOf(Type originalType) => OriginalAndWrapperTypes[originalType];
-
-        public void Dispose()
-        {
-            Instance = null;
-        }
     }
 }

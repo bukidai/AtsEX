@@ -10,30 +10,23 @@ using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
-    public partial class BveTypeSet : IDisposable
+    public partial class BveTypeSet
     {
-        public static BveTypeSet Instance { get; protected set; } = null;
-
         protected const BindingFlags SearchAllBindingAttribute = BindingFlags.NonPublic | BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance;
 
         /// <summary>
-        /// <see cref="BveTypeSet"/> のインスタンスを作成します。
+        /// BVE のアセンブリを指定して、クラスラッパーに対応する BVE の型とメンバーの定義を読み込みます。
         /// </summary>
         /// <param name="bveAssembly">BVE の <see cref="Assembly"/>。</param>
         /// <param name="allowNotSupportedVersion">実行中の BVE がサポートされないバージョンの場合、他のバージョン向けのプロファイルで代用するか。</param>
-        /// <returns>使用するプロファイルが対応する BVE のバージョン。</returns>
-        /// <exception cref="InvalidOperationException"></exception>
+        /// <returns><see cref="BveTypeSet"/> クラスの新しいインスタンス。</returns>
         /// <exception cref="KeyNotFoundException"></exception>
+        /// <exception cref="NotImplementedException"></exception>
         /// <exception cref="TypeLoadException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        public static Version CreateInstance(Assembly bveAssembly, bool allowNotSupportedVersion)
+        public static BveTypeSet Load(Assembly bveAssembly, bool allowNotSupportedVersion)
         {
-            if (!(Instance is null))
-            {
-                throw new InvalidOperationException(Resources.GetString("AlreadyInstantiated").Value);
-            }
-
-            Assembly executingAssembly = Assembly.GetExecutingAssembly();
+            Assembly pluginHostAssembly = Assembly.GetExecutingAssembly();
 
             ProfileSelector profileSelector = new ProfileSelector(bveAssembly);
             Version profileVersion;
@@ -48,7 +41,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                 }
             }
 
-            IEnumerable<Type> wrapperTypes = Assembly.GetExecutingAssembly().GetTypes().Where(type => (type.IsClass && type.IsSubclassOf(typeof(ClassWrapperBase))) || type.IsEnum);
+            IEnumerable<Type> wrapperTypes = pluginHostAssembly.GetTypes().Where(type => (type.IsClass && type.IsSubclassOf(typeof(ClassWrapperBase))) || type.IsEnum);
             IEnumerable<Type> originalTypes = bveAssembly.GetTypes();
 
             TypeInfoCreator typeInfoGenerator = new TypeInfoCreator(bveAssembly);
@@ -176,9 +169,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                 }
             });
 
-            Instance = new BveTypeSet(types, typeof(ClassWrapperBase));
-
-            return profileVersion;
+            return new BveTypeSet(types, profileVersion);
 
 
             #region メソッド

@@ -18,7 +18,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         public ClassWrapperInitializer(IApp app, IBveHacker bveHacker) : base(app, bveHacker)
         {
-            if (LazyInitializationRequested is null) LazyInitializationRequested = _ => BveTypeSet.Instance;
+            if (LazyInitializationRequested is null) LazyInitializationRequested = _ => BveHacker.BveTypes;
         }
 
         public override void InitializeAll()
@@ -30,7 +30,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             {
                 ParameterInfo[] parameters = method.GetParameters();
                 return parameters.Length == 1 && parameters[0].ParameterType == typeof(BveTypeSet);
-            }, new object[] { BveTypeSet.Instance });
+            }, new object[] { BveHacker.BveTypes });
         }
 
 

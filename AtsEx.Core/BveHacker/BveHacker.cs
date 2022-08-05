@@ -14,8 +14,10 @@ using Mackoy.Bvets;
 using Automatic9045.AtsEx.ExtendedBeacons;
 using Automatic9045.AtsEx.Handles;
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
+using Automatic9045.AtsEx.PluginHost.Helpers;
 using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
@@ -26,8 +28,10 @@ namespace Automatic9045.AtsEx
 
         public BveHacker(Action<Exception> resolveBeaconCreationExceptionAction)
         {
+            BveTypes = BveTypeSet.Load(App.Instance.BveAssembly, true);
+
             MainFormHacker = new MainFormHacker(App.Instance.Process);
-            ScenarioHacker = new ScenarioHacker(MainFormHacker);
+            ScenarioHacker = new ScenarioHacker(MainFormHacker, BveTypes);
 
             ScenarioHacker.ScenarioCreated += e => PreviewScenarioCreated?.Invoke(e);
             ScenarioHacker.ScenarioCreated += e =>
@@ -59,6 +63,9 @@ namespace Automatic9045.AtsEx
         public IntPtr MainFormHandle => MainFormHacker.TargetFormHandle;
         public Form MainFormSource => MainFormHacker.TargetFormSource;
         public MainForm MainForm => MainFormHacker.TargetForm;
+
+
+        public BveTypeSet BveTypes { get; }
 
 
         public Form ScenarioSelectionFormSource => MainForm.ScenarioSelectForm.Src;
