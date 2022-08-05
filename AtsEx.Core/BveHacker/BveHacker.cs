@@ -33,6 +33,12 @@ namespace Automatic9045.AtsEx
             MainFormHacker = new MainFormHacker(App.Instance.Process);
             ScenarioHacker = new ScenarioHacker(MainFormHacker, BveTypes);
 
+            ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(App.Instance, this);
+            classWrapperInitializer.InitializeAll();
+
+            HelperInitializer helperInitializer = new HelperInitializer(App.Instance, this);
+            helperInitializer.InitializeAll();
+
             ScenarioHacker.ScenarioCreated += e => PreviewScenarioCreated?.Invoke(e);
             ScenarioHacker.ScenarioCreated += e =>
             {

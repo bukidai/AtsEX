@@ -53,12 +53,6 @@ namespace Automatic9045.AtsEx
             App.CreateInstance(targetProcess, targetAssembly, executingAssembly, pluginHostAssembly, vehicleSpec);
             BveHacker = new BveHacker(ResolveLoadExceptions);
 
-            ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(App.Instance, BveHacker);
-            classWrapperInitializer.InitializeAll();
-
-            HelperInitializer helperInitializer = new HelperInitializer(App.Instance, BveHacker);
-            helperInitializer.InitializeAll();
-
             //DXDynamicTextureHost = new DXDynamicTextureHost();
 
             Version bveVersion = App.Instance.BveVersion;
