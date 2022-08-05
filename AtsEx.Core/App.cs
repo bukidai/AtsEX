@@ -29,6 +29,7 @@ namespace Automatic9045.AtsEx
             BveAssembly = bveAssembly;
             AtsExAssembly = atsExAssembly;
             AtsExPluginHostAssembly = atsExPluginHostAssembly;
+            BveVersion = BveAssembly.GetName().Version;
 
             VehicleSpec = vehicleSpec;
 
@@ -48,6 +49,7 @@ namespace Automatic9045.AtsEx
         public Assembly AtsExAssembly { get; }
         public Assembly AtsExPluginHostAssembly { get; }
         public Assembly BveAssembly { get; }
+        public Version BveVersion { get; }
 
         private List<PluginBase> _VehiclePlugins = null;
         public List<PluginBase> VehiclePlugins

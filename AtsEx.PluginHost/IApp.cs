@@ -49,6 +49,11 @@ namespace Automatic9045.AtsEx.PluginHost
         /// </summary>
         Assembly BveAssembly { get; }
 
+        /// <summary>
+        /// 実行元の BVE のバージョンを取得します。
+        /// </summary>
+        Version BveVersion { get; }
+
 
         /// <summary>
         /// 読み込まれた AtsEX 車両プラグインのリストを取得します。
