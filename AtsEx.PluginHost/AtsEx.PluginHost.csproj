@@ -209,8 +209,8 @@
     <Content Include="Resources\Files\ProfileSelector.resx" />
     <Content Include="Resources\Files\BveTypeNameDefinitionLoader.resx" />
     <Content Include="Resources\Files\ClassMemberSet.resx" />
-    <Content Include="Resources\Files\ClassWrappers\WrappedSortedList.ja.resx" />
-    <Content Include="Resources\Files\ClassWrappers\WrappedSortedList.resx" />
+    <Content Include="Resources\Files\ClassWrappers\WrappedSortedList`2.ja.resx" />
+    <Content Include="Resources\Files\ClassWrappers\WrappedSortedList`2.resx" />
     <Content Include="Resources\Files\ClassWrappers\MapObjectList.ja.resx" />
     <Content Include="Resources\Files\ClassWrappers\StationList.ja.resx" />
     <Content Include="Resources\Files\ClassWrappers\StationList.resx" />
