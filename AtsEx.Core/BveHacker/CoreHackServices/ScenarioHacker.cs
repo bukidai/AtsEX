@@ -17,8 +17,12 @@ namespace Automatic9045.AtsEx
 {
     internal sealed class ScenarioHacker : IDisposable
     {
+        private static event ScenarioCreatedEventHandler PatchInvoked;
+
         private readonly MainForm MainForm;
         private readonly Harmony Harmony = new Harmony("com.automatic9045.atsex.scenario-hacker");
+
+        private bool IsScenarioCreatedEventInvoked = false;
 
         public ScenarioHacker(MainFormHacker mainFormHacker, BveTypeSet bveTypes)
         {
@@ -33,6 +37,14 @@ namespace Automatic9045.AtsEx
 
             Harmony.Patch(initializeTimeAndLocationMethod, postfix: patch);
             Harmony.Patch(initializeMethod, postfix: patch);
+
+            PatchInvoked += e =>
+            {
+                if (IsScenarioCreatedEventInvoked) return;
+
+                IsScenarioCreatedEventInvoked = true;
+                ScenarioCreated?.Invoke(e);
+            };
         }
 
         public void Dispose()
@@ -40,7 +52,7 @@ namespace Automatic9045.AtsEx
             Harmony.UnpatchAll();
         }
 
-        public static event ScenarioCreatedEventHandler ScenarioCreated;
+        public event ScenarioCreatedEventHandler ScenarioCreated;
 
         public ScenarioInfo CurrentScenarioInfo
         {
@@ -59,7 +71,7 @@ namespace Automatic9045.AtsEx
 #pragma warning restore IDE1006 // 命名スタイル
         {
             Scenario scenario = Scenario.FromSource(__instance);
-            ScenarioCreated?.Invoke(new ScenarioCreatedEventArgs(scenario));
+            PatchInvoked?.Invoke(new ScenarioCreatedEventArgs(scenario));
         }
     }
 }
