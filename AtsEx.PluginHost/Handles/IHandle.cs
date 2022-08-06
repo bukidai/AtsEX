@@ -12,6 +12,11 @@ namespace Automatic9045.AtsEx.PluginHost.Handles
     public interface IHandle
     {
         /// <summary>
+        /// <see cref="MaxNotch"/> を超えたノッチを設定することが許可されているかを取得します。
+        /// </summary>
+        bool CanSetNotchOutOfRange { get; }
+
+        /// <summary>
         /// 最小のノッチを取得します。
         /// </summary>
         int MinNotch { get; }
@@ -25,6 +30,16 @@ namespace Automatic9045.AtsEx.PluginHost.Handles
         /// 現在のノッチを取得します。
         /// </summary>
         int Notch { get; }
+
+        /// <summary>
+        /// <see cref="MaxNotch"/> を超えたノッチを設定することを許可します。
+        /// </summary>
+        /// <remarks>
+        /// TASC プラグインなどを想定しています。<br/>
+        /// AtsEX 以外から読み込まれたプラグインが <see cref="MaxNotch"/> を超えたノッチを設定する場合は、
+        /// 必ず初めて <see cref="Plugins.PluginBase.Tick(TimeSpan)"/> メソッドが実行されるより前に実行してください。
+        /// </remarks>
+        void AllowSetNotchOutOfRange();
 
         /// <summary>
         /// 指定した値にノッチを変更するコマンドを取得します。

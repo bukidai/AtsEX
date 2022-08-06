@@ -53,8 +53,8 @@ namespace Automatic9045.AtsEx
             {
                 NotchInfo notchInfo = e.Scenario.Vehicle.Instruments.Cab.Handles.NotchInfo;
 
-                BrakeHandle brake = BrakeHandle.FromNotchInfo(notchInfo);
-                PowerHandle power = PowerHandle.FromNotchInfo(notchInfo);
+                BrakeHandle brake = BrakeHandle.FromNotchInfo(notchInfo, App.Instance.Handles.Brake.CanSetNotchOutOfRange);
+                PowerHandle power = PowerHandle.FromNotchInfo(notchInfo, App.Instance.Handles.Power.CanSetNotchOutOfRange);
                 Reverser reverser = new Reverser();
 
                 Handles = new PluginHost.Handles.HandleSet(brake, power, reverser);

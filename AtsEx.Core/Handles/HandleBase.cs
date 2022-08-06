@@ -10,6 +10,8 @@ namespace Automatic9045.AtsEx.Handles
 {
     internal abstract class HandleBase : IHandle
     {
+        public bool CanSetNotchOutOfRange { get; protected set; } = false;
+
         public int MinNotch { get; }
         public int MaxNotch { get; }
 
@@ -19,11 +21,14 @@ namespace Automatic9045.AtsEx.Handles
             get => _Notch;
             set
             {
-                _Notch = value < MinNotch ? throw new ArgumentOutOfRangeException(nameof(value))
+                _Notch = CanSetNotchOutOfRange ? value
+                    : value < MinNotch ? throw new ArgumentOutOfRangeException(nameof(value))
                     : MaxNotch < value ? throw new ArgumentOutOfRangeException(nameof(value))
                     : value;
             }
         }
+
+        public void AllowSetNotchOutOfRange() => CanSetNotchOutOfRange = true;
 
         /// <summary>
         /// <see cref="HandleBase"/> クラスの新しいインスタンスを初期化します。
