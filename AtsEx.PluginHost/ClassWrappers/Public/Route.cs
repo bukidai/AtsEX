@@ -66,7 +66,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         private static MethodInfo StructuresGetMethod;
         private static FieldInfo StructuresField;
         /// <summary>
-        /// Structure マップ要素、Repeater マップ要素で設置されたストラクチャーを取得します。
+        /// Structure マップ要素、Repeater マップ要素で設置されたストラクチャーを取得・設定します。
         /// </summary>
         /// <remarks>
         /// Structure.Load ステートメントから読み込まれたストラクチャーの 3D モデルのリストの取得には <see cref="StructureModels"/> を使用してください。
@@ -77,7 +77,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         public StructureSet Structures
         {
             get => StructureSet.FromSource(StructuresGetMethod.Invoke(Src, null));
-            internal set => StructuresField.SetValue(Src, value.Src);
+            set => StructuresField.SetValue(Src, value.Src);
         }
 
         private static MethodInfo StationsGetMethod;

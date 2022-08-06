@@ -141,7 +141,6 @@
     <Compile Include="ClassInitializer\InitializeHelperAttribute.cs" />
     <Compile Include="Helpers\LoadErrorManager.cs" />
     <Compile Include="Helpers\LoadErrorManager.LoadErrorList.cs" />
-    <Compile Include="Helpers\StructureSetLifeProlonger.cs" />
     <Compile Include="Imports\VehicleSpec.cs" />
     <Compile Include="Imports\VehicleState.cs" />
     <Compile Include="ClassWrappers\ClassWrapperBase.cs" />

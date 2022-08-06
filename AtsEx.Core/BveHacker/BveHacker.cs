@@ -27,6 +27,7 @@ namespace Automatic9045.AtsEx
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<BveHacker>("Core");
 
         private readonly VersionFormProvider VersionFormProvider;
+        private readonly StructureSetLifeProlonger StructureSetLifeProlonger;
 
         public BveHacker(Action<Version> profileForDifferentBveVersionLoaded, Action<Exception> beaconCreationExceptionResolver)
         {
@@ -45,6 +46,7 @@ namespace Automatic9045.AtsEx
             _ContextMenuHacker.AddSeparator(true);
 
             VersionFormProvider = new VersionFormProvider(this);
+            StructureSetLifeProlonger = new StructureSetLifeProlonger(this);
 
             ScenarioHacker.ScenarioCreated += e => PreviewScenarioCreated?.Invoke(e);
             ScenarioHacker.ScenarioCreated += e =>
@@ -72,6 +74,7 @@ namespace Automatic9045.AtsEx
 
         public void Dispose()
         {
+            StructureSetLifeProlonger.Dispose();
             VersionFormProvider.Dispose();
             _ContextMenuHacker.Dispose();
             ScenarioHacker.Dispose();

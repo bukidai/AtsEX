@@ -123,6 +123,7 @@
     <Compile Include="BveHacker\CoreHackServices\ContextMenuHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\MainFormHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\ScenarioHacker.cs" />
+    <Compile Include="BveHacker\CoreHackServices\StructureSetLifeProlonger.cs" />
     <Compile Include="ExtendedBeacons\Beacon.cs" />
     <Compile Include="ExtendedBeacons\ExtendedBeaconBase.cs" />
     <Compile Include="ExtendedBeacons\Globals\ExtendedBeaconGlobalsBase.cs" />
