@@ -33,58 +33,25 @@ namespace Automatic9045.AtsEx
             CheckAssembly();
         }
 
-        public void UpdateIfNotLatest()
+        public void CheckUpdates()
         {
             AssemblyResolver.Register(Path.Combine(DirectoryName, "Octokit.dll"));
 
             try
             {
-                AtsExUpdater updater = new AtsExUpdater();
-                {
-                    bool isRolledBack = updater.RollbackIfRequired(DirectoryName);
-                    if (isRolledBack) MessageBox.Show($"前回アップデートの異常終了を検知したため、アップデート前の状態に復元しました。", "AtsEX", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                updater.Connect();
+                AtsExRepositoryHost repositoryHost = new AtsExRepositoryHost();
 
+                Version latestVersion = repositoryHost.GetLatestVersion();
                 Version currentVersion = ExecutingAssembly.GetName().Version;
-                if (currentVersion < updater.LatestVersion)
+
+                if (currentVersion < latestVersion)
                 {
                     DialogResult confirm = MessageBox.Show($"新しいバージョンの AtsEX がリリースされています。" +
-                        $"\n\n現在のバージョン：{currentVersion}\n最新のバージョン：{updater.LatestVersion}\n\n" +
-                        $"アップデートしますか？", "AtsEX", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        $"\n\n現在のバージョン：{currentVersion}\n最新のバージョン：{latestVersion}\n\n" +
+                        $"リリースページを開きますか？", "AtsEX", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (confirm == DialogResult.Yes)
                     {
-                        try
-                        {
-                            updater.Update(DirectoryName);
-                            MessageBox.Show($"アップデートが正常に完了しました。", "AtsEX", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        catch (NotImplementedException ex)
-                        {
-                            ShowErrorDialog($"アップデートに失敗しました。\n\n{ex.Message}", "https://automatic9045.github.io/contents/bve/AtsEX/");
-                            throw;
-                        }
-                        catch (Exception ex)
-                        {
-                            try
-                            {
-                                bool isRolledBack = updater.RollbackIfRequired(DirectoryName);
-                                if (isRolledBack)
-                                {
-                                    ShowErrorDialog($"アップデートに失敗しました。\nAtsEX はアップデート前の状態に復元されました。\n\n\n{ex}");
-                                }
-                                else
-                                {
-                                    ShowErrorDialog($"アップデートに失敗しました。\n\n{ex}");
-                                }
-                            }
-                            catch (Exception ex2)
-                            {
-                                MessageBox.Show($"アップデートに失敗しました。\n\n{ex2}");
-                                throw;
-                            }
-                            throw;
-                        }
+                        Process.Start("https://github.com/automatic9045/AtsEX/releases");
                     }
                 }
             }

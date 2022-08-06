@@ -55,7 +55,7 @@
     <Compile Include="AssemblyResolver.cs" />
     <Compile Include="Export.cs" />
     <Compile Include="AtsExActivator.cs" />
-    <Compile Include="Updater\AtsExUpdater.cs" />
+    <Compile Include="Updater\AtsExRepositoryHost.cs" />
     <Compile Include="AtsMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Updater\AutoUpdatePackageInfo.cs" />

@@ -170,7 +170,7 @@ namespace Automatic9045.AtsEx
 #endif
 
             Activator = new AtsExActivator();
-            Activator.UpdateIfNotLatest();
+            Activator.CheckUpdates();
             Activator.ResolveAssemblies();
         }
 
