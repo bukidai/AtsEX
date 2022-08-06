@@ -42,6 +42,7 @@ namespace Automatic9045.AtsEx
 
         public static void Dispose()
         {
+            AtsExScenarioService?.Dispose();
             AtsExExtensionSet?.Dispose();
         }
 

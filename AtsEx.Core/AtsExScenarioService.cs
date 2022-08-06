@@ -90,6 +90,7 @@ namespace Automatic9045.AtsEx
                 }
             }
         }
+
         public void Dispose()
         {
             VehiclePlugins.ForEach(plugin =>
