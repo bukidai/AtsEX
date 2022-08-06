@@ -116,7 +116,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="AtsEx.cs" />
+    <Compile Include="AtsExExtensionSet.AsAtsPlugin.cs" />
+    <Compile Include="AtsExScenarioService.AsAtsPlugin.cs" />
+    <Compile Include="AtsExScenarioService.cs" />
     <Compile Include="BveHacker\BveHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\ContextMenuHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\MainFormHacker.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="Plugins\Scripting\ScriptPluginPackage.cs" />
     <Compile Include="Plugins\Scripting\ScriptPluginPackage.InformationBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AtsExExtensionSet.cs" />
     <Compile Include="VersionForm\VersionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +190,8 @@
     <Content Include="Resources\Handles\BrakeHandle.resx" />
     <Content Include="Resources\BveHacker.ja.resx" />
     <Content Include="Resources\BveHacker.resx" />
+    <Content Include="Resources\AtsExScenarioService.resx" />
+    <Content Include="Resources\AtsExScenarioService.ja.resx" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <EmbeddedResource Include="Plugins\AtsExPluginUsingXmlSchema.xsd">
@@ -204,8 +209,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\AtsEx.ja.resx" />
-    <Content Include="Resources\AtsEx.resx" />
+    <Content Include="Resources\AtsExExtensionSet.ja.resx" />
+    <Content Include="Resources\AtsExExtensionSet.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\PluginLoader.ja.resx" />

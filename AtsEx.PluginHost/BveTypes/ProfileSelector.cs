@@ -16,13 +16,13 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 
         private static readonly string DefaultNamespace = $"{typeof(BveTypeSet).Namespace}.TypeNameDefinitions";
 
-        private Assembly ExecutingAssembly;
-        private Version BveVersion;
+        private readonly Assembly ExecutingAssembly;
+        private readonly Version BveVersion;
 
-        public ProfileSelector(Assembly bveAssembly)
+        public ProfileSelector(Version bveVersion)
         {
             ExecutingAssembly = Assembly.GetExecutingAssembly();
-            BveVersion = bveAssembly.GetName().Version;
+            BveVersion = bveVersion;
         }
 
         public Profile GetProfileStream(bool allowNotSupportedVersion)

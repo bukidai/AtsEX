@@ -25,7 +25,14 @@ namespace Automatic9045.AtsEx
         private static AtsExActivator Activator;
 
         private static readonly Stopwatch Stopwatch = new Stopwatch();
-        private static AtsEx AtsEx;
+
+        private static AtsExExtensionSet.AsAtsPlugin AtsExExtensionSet;
+        private static AtsExScenarioService.AsAtsPlugin AtsExScenarioService;
+
+        public static void LoadAsInputDevice(Activator activator)
+        {
+
+        }
 
         public static void Load(Assembly callerAssembly, AtsExActivator activator)
         {
@@ -35,19 +42,20 @@ namespace Automatic9045.AtsEx
 
         public static void Dispose()
         {
-            AtsEx?.Dispose();
+            AtsExExtensionSet?.Dispose();
         }
 
         public static void SetVehicleSpec(VehicleSpec vehicleSpec)
         {
             PluginHost.VehicleSpec exVehicleSpec = new PluginHost.VehicleSpec(vehicleSpec.BrakeNotches, vehicleSpec.PowerNotches, vehicleSpec.AtsNotch, vehicleSpec.B67Notch, vehicleSpec.Cars);
 
-            AtsEx = new AtsEx(Activator.TargetProcess, Activator.TargetAppDomain, Activator.TargetAssembly, CallerAssembly, exVehicleSpec);
+            AtsExExtensionSet = new AtsExExtensionSet.AsAtsPlugin(Activator.TargetProcess, Activator.TargetAppDomain, Activator.TargetAssembly);
+            AtsExScenarioService = new AtsExScenarioService.AsAtsPlugin(AtsExExtensionSet, CallerAssembly, exVehicleSpec);
         }
 
         public static void Initialize(int defaultBrakePosition)
         {
-            AtsEx?.Started((BrakePosition)defaultBrakePosition);
+            AtsExScenarioService?.Started((BrakePosition)defaultBrakePosition);
         }
 
         public static AtsHandles Elapse(VehicleState vehicleState, int[] panel, int[] sound)
@@ -56,7 +64,7 @@ namespace Automatic9045.AtsEx
                 vehicleState.Location, vehicleState.Speed,
                 vehicleState.BcPressure, vehicleState.MrPressure, vehicleState.ErPressure, vehicleState.BpPressure, vehicleState.SapPressure, vehicleState.Current);
 
-            HandlePositionSet handlePositionSet = AtsEx?.Tick(Stopwatch.IsRunning ? Stopwatch.Elapsed : TimeSpan.Zero, exVehicleState);
+            HandlePositionSet handlePositionSet = AtsExScenarioService?.Tick(Stopwatch.IsRunning ? Stopwatch.Elapsed : TimeSpan.Zero, exVehicleState);
 
             Stopwatch.Restart();
 
@@ -71,27 +79,27 @@ namespace Automatic9045.AtsEx
 
         public static void SetPower(int notch)
         {
-            AtsEx.SetPower(notch);
+            AtsExScenarioService?.SetPower(notch);
         }
 
         public static void SetBrake(int notch)
         {
-            AtsEx.SetBrake(notch);
+            AtsExScenarioService?.SetBrake(notch);
         }
 
         public static void SetReverser(int position)
         {
-            AtsEx.SetReverser((ReverserPosition)position);
+            AtsExScenarioService?.SetReverser((ReverserPosition)position);
         }
 
         public static void KeyDown(int atsKeyCode)
         {
-            AtsEx.KeyDown((NativeAtsKeyName)atsKeyCode);
+            AtsExScenarioService?.KeyDown((NativeAtsKeyName)atsKeyCode);
         }
 
         public static void KeyUp(int atsKeyCode)
         {
-            AtsEx.KeyUp((NativeAtsKeyName)atsKeyCode);
+            AtsExScenarioService?.KeyUp((NativeAtsKeyName)atsKeyCode);
         }
 
         public static void DoorOpen()

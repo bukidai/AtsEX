@@ -23,7 +23,7 @@ namespace Automatic9045.AtsEx
 
         public static App Instance { get; private set; }
 
-        private App(Process targetProcess, Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly, VehicleSpec vehicleSpec)
+        private App(Process targetProcess, Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
         {
             Process = targetProcess;
             BveAssembly = bveAssembly;
@@ -31,6 +31,14 @@ namespace Automatic9045.AtsEx
             AtsExPluginHostAssembly = atsExPluginHostAssembly;
             BveVersion = BveAssembly.GetName().Version;
 
+            BveVersion = BveAssembly.GetName().Version;
+        }
+
+        public static void CreateInstance(Process targetProcess, Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly)
+            => Instance = new App(targetProcess, bveAssembly, atsExAssembly, atsExPluginHostAssembly);
+
+        public void SetScenario(VehicleSpec vehicleSpec)
+        {
             VehicleSpec = vehicleSpec;
 
             BrakeHandle brake = new BrakeHandle(vehicleSpec.BrakeNotches, vehicleSpec.AtsNotch, vehicleSpec.B67Notch, false);
@@ -39,8 +47,11 @@ namespace Automatic9045.AtsEx
             Handles = new HandleSet(brake, power, reverser);
         }
 
-        public static void CreateInstance(Process targetProcess, Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExPluginHostAssembly, VehicleSpec vehicleSpec)
-            => Instance = new App(targetProcess, bveAssembly, atsExAssembly, atsExPluginHostAssembly, vehicleSpec);
+        public void InvokeStarted(BrakePosition defaultBrakePosition)
+        {
+            StartedEventArgs e = new StartedEventArgs(defaultBrakePosition);
+            Started?.Invoke(e);
+        }
 
         public string ProductName { get; } = Resources.GetString("ProductName").Value;
         public string ProductShortName { get; } = Resources.GetString("ProductShortName").Value;
@@ -73,18 +84,23 @@ namespace Automatic9045.AtsEx
             }
         }
 
-        public HandleSet Handles { get; internal set; }
+        private HandleSet _Handles = null;
+        public HandleSet Handles
+        {
+            get => _Handles ?? throw new InvalidOperationException();
+            set => _Handles = value;
+        }
 
         public INativeKeySet NativeKeys { get; } = new NativeKeySet();
 
-        public VehicleSpec VehicleSpec { get; } = null;
-        public VehicleState VehicleState { get; internal set; } = null;
-
-        public void InvokeStarted(BrakePosition defaultBrakePosition)
+        private VehicleSpec _VehicleSpec = null;
+        public VehicleSpec VehicleSpec
         {
-            StartedEventArgs e = new StartedEventArgs(defaultBrakePosition);
-            Started?.Invoke(e);
+            get => _VehicleSpec ?? throw new InvalidOperationException();
+            private set => _VehicleSpec = value;
         }
+
+        public VehicleState VehicleState { get; set; } = null;
 
         public event AllPluginLoadedEventHandler AllVehiclePluginLoaded;
         public event AllPluginLoadedEventHandler AllMapPluginLoaded;

@@ -26,9 +26,11 @@ namespace Automatic9045.AtsEx
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<BveHacker>("Core");
 
-        public BveHacker(Action<Exception> resolveBeaconCreationExceptionAction)
+        private readonly VersionFormProvider VersionFormProvider;
+
+        public BveHacker(Action<Version> profileForDifferentBveVersionLoaded, Action<Exception> beaconCreationExceptionResolver)
         {
-            BveTypes = BveTypeSet.Load(App.Instance.BveAssembly, true);
+            BveTypes = BveTypeSet.Load(App.Instance.BveAssembly, App.Instance.BveVersion, true, profileForDifferentBveVersionLoaded);
 
             MainFormHacker = new MainFormHacker(App.Instance.Process);
             ScenarioHacker = new ScenarioHacker(MainFormHacker, BveTypes);
@@ -41,6 +43,8 @@ namespace Automatic9045.AtsEx
 
             _ContextMenuHacker = new ContextMenuHacker(MainForm);
             _ContextMenuHacker.AddSeparator(true);
+
+            VersionFormProvider = new VersionFormProvider(this);
 
             ScenarioHacker.ScenarioCreated += e => PreviewScenarioCreated?.Invoke(e);
             ScenarioHacker.ScenarioCreated += e =>
@@ -60,7 +64,7 @@ namespace Automatic9045.AtsEx
                 }
                 catch (Exception ex)
                 {
-                    resolveBeaconCreationExceptionAction(ex);
+                    beaconCreationExceptionResolver(ex);
                 }
             };
             ScenarioHacker.ScenarioCreated += e => ScenarioCreated?.Invoke(e);
@@ -68,7 +72,22 @@ namespace Automatic9045.AtsEx
 
         public void Dispose()
         {
+            VersionFormProvider.Dispose();
             _ContextMenuHacker.Dispose();
+        }
+
+        public void SetScenario()
+        {
+            VersionFormProvider.Intialize(Enumerable.Concat(App.Instance.VehiclePlugins, App.Instance.MapPlugins));
+        }
+
+        [UnderConstruction]
+        public void Tick(TimeSpan elapsed)
+        {
+            double location = Scenario.LocationManager.Location;
+            int time = Scenario.TimeManager.TimeMilliseconds;
+            double preTrainLocation = Scenario.Route.PreTrainObjects.GetPreTrainLocation(time);
+            _ExtendedBeacons?.Tick(location, preTrainLocation);
         }
 
 
@@ -136,15 +155,5 @@ namespace Automatic9045.AtsEx
         }
 
         public bool IsScenarioCreated => !(ScenarioHacker.CurrentScenario is null);
-
-
-        [UnderConstruction]
-        public void Tick(TimeSpan elapsed)
-        {
-            double location = Scenario.LocationManager.Location;
-            int time = Scenario.TimeManager.TimeMilliseconds;
-            double preTrainLocation = Scenario.Route.PreTrainObjects.GetPreTrainLocation(time);
-            _ExtendedBeacons?.Tick(location, preTrainLocation);
-        }
     }
 }

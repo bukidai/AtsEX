@@ -15,25 +15,35 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
         private const BindingFlags SearchAllBindingAttribute = BindingFlags.NonPublic | BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance;
 
         /// <summary>
-        /// BVE のアセンブリを指定して、クラスラッパーに対応する BVE の型とメンバーの定義を読み込みます。
+        /// BVE のアセンブリとバージョンを指定して、クラスラッパーに対応する BVE の型とメンバーの定義を読み込みます。
         /// </summary>
+        /// <remarks>
+        /// このメソッドの実行には時間がかかります。特段の事情が無い限りは <see cref="IBveHacker.BveTypes"/> プロパティを参照してください。
+        /// </remarks>
         /// <param name="bveAssembly">BVE の <see cref="Assembly"/>。</param>
-        /// <param name="allowNotSupportedVersion">実行中の BVE がサポートされないバージョンの場合、他のバージョン向けのプロファイルで代用するか。</param>
+        /// <param name="bveVersion">BVE のバージョン。</param>
+        /// <param name="allowLoadProfileForDifferentBveVersion">実行中の BVE がサポートされないバージョンの場合、他のバージョン向けのプロファイルで代用するか。</param>
+        /// <param name="profileForDifferentBveVersionLoaded">実行中の BVE がサポートされないバージョンであり、他のバージョン向けのプロファイルで代用された時に実行するデリケート。パラメータにはプロファイルのバージョンが渡されます。</param>
         /// <returns><see cref="BveTypeSet"/> クラスの新しいインスタンス。</returns>
         /// <exception cref="KeyNotFoundException"></exception>
         /// <exception cref="NotImplementedException"></exception>
         /// <exception cref="TypeLoadException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        public static BveTypeSet Load(Assembly bveAssembly, bool allowNotSupportedVersion)
+        public static BveTypeSet Load(Assembly bveAssembly, Version bveVersion, bool allowLoadProfileForDifferentBveVersion, Action<Version> profileForDifferentBveVersionLoaded = null)
         {
             Assembly pluginHostAssembly = Assembly.GetExecutingAssembly();
 
-            ProfileSelector profileSelector = new ProfileSelector(bveAssembly);
+            ProfileSelector profileSelector = new ProfileSelector(bveVersion);
             Version profileVersion;
             List<TypeMemberNameSetBase> typeMemberNames;
-            using (Profile profile = profileSelector.GetProfileStream(allowNotSupportedVersion))
+            using (Profile profile = profileSelector.GetProfileStream(allowLoadProfileForDifferentBveVersion))
             {
                 profileVersion = profile.Version;
+
+                if (profileVersion != bveVersion)
+                {
+                    profileForDifferentBveVersionLoaded?.Invoke(profileVersion);
+                }
 
                 using (Stream schema = profileSelector.GetSchemaStream())
                 {
