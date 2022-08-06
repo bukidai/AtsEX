@@ -74,6 +74,7 @@ namespace Automatic9045.AtsEx
         {
             VersionFormProvider.Dispose();
             _ContextMenuHacker.Dispose();
+            ScenarioHacker.Dispose();
         }
 
         public void SetScenario()

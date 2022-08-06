@@ -15,9 +15,10 @@ using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx
 {
-    internal sealed class ScenarioHacker
+    internal sealed class ScenarioHacker : IDisposable
     {
-        private MainForm MainForm;
+        private readonly MainForm MainForm;
+        private readonly Harmony Harmony = new Harmony("com.automatic9045.atsex.scenario-hacker");
 
         public ScenarioHacker(MainFormHacker mainFormHacker, BveTypeSet bveTypes)
         {
@@ -28,11 +29,15 @@ namespace Automatic9045.AtsEx
             MethodInfo initializeTimeAndLocationMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.InitializeTimeAndLocation));
             MethodInfo initializeMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.Initialize));
 
-            Harmony harmony = new Harmony("com.automatic9045.atsex.scenario-hacker");
             HarmonyMethod patch = new HarmonyMethod(typeof(ScenarioHacker), nameof(SetScenario));
 
-            harmony.Patch(initializeTimeAndLocationMethod, postfix: patch);
-            harmony.Patch(initializeMethod, postfix: patch);
+            Harmony.Patch(initializeTimeAndLocationMethod, postfix: patch);
+            Harmony.Patch(initializeMethod, postfix: patch);
+        }
+
+        public void Dispose()
+        {
+            Harmony.UnpatchAll();
         }
 
         public static event ScenarioCreatedEventHandler ScenarioCreated;
