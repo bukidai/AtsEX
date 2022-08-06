@@ -10,9 +10,9 @@ using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
-    public partial class BveTypeSet
+    public sealed partial class BveTypeSet
     {
-        protected const BindingFlags SearchAllBindingAttribute = BindingFlags.NonPublic | BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance;
+        private const BindingFlags SearchAllBindingAttribute = BindingFlags.NonPublic | BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance;
 
         /// <summary>
         /// BVE のアセンブリを指定して、クラスラッパーに対応する BVE の型とメンバーの定義を読み込みます。
@@ -30,24 +30,24 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 
             ProfileSelector profileSelector = new ProfileSelector(bveAssembly);
             Version profileVersion;
-            List<TypeMemberNameSetBase> nameCollection;
+            List<TypeMemberNameSetBase> typeMemberNames;
             using (ProfileInfo profile = profileSelector.GetProfileStream(allowNotSupportedVersion))
             {
                 profileVersion = profile.Version;
 
                 using (Stream schema = profileSelector.GetSchemaStream())
                 {
-                    nameCollection = BveTypeNameDefinitionLoader.LoadFile(profile.Stream, schema);
+                    typeMemberNames = BveTypeNameDefinitionLoader.LoadFile(profile.Stream, schema);
                 }
             }
 
             IEnumerable<Type> wrapperTypes = pluginHostAssembly.GetTypes().Where(type => (type.IsClass && type.IsSubclassOf(typeof(ClassWrapperBase))) || type.IsEnum);
             IEnumerable<Type> originalTypes = bveAssembly.GetTypes();
 
-            TypeInfoCreator typeInfoGenerator = new TypeInfoCreator(bveAssembly);
-            IEnumerable<TypeInfo> typeInfos = typeInfoGenerator.Create(nameCollection);
+            TypeInfoCreator typeInfoCreator = new TypeInfoCreator(bveAssembly);
+            IEnumerable<TypeInfo> typeInfos = typeInfoCreator.Create(typeMemberNames);
 
-            IEnumerable<TypeMemberSetBase> types = nameCollection.Select<TypeMemberNameSetBase, TypeMemberSetBase>(src =>
+            IEnumerable<TypeMemberSetBase> types = typeMemberNames.Select<TypeMemberNameSetBase, TypeMemberSetBase>(src =>
             {
                 TypeInfo typeInfo = typeInfos.First(t => t.Src == src);
 
@@ -57,111 +57,111 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                 switch (src)
                 {
                     case EnumMemberNameSet enumSrc:
-                        {
-                            EnumMemberSet members = new EnumMemberSet(wrapperType, originalType);
-                            return members;
-                        }
+                    {
+                        EnumMemberSet members = new EnumMemberSet(wrapperType, originalType);
+                        return members;
+                    }
 
                     case ClassMemberNameSet classSrc:
+                    {
+                        SortedList<Type[], ConstructorInfo> constructors = new SortedList<Type[], ConstructorInfo>(originalType.GetConstructors(SearchAllBindingAttribute).ToDictionary(
+                            c => c.GetParameters().Select(p => GetWrapperTypeIfOriginal(p.ParameterType)).ToArray(),
+                            c => c),
+                            new TypeArrayComparer());
+
+                        SortedList<string, MethodInfo> propertyGetters = new SortedList<string, MethodInfo>(classSrc.PropertyGetters.Select(getterInfo =>
                         {
-                            SortedList<Type[], ConstructorInfo> constructors = new SortedList<Type[], ConstructorInfo>(originalType.GetConstructors(SearchAllBindingAttribute).ToDictionary(
-                                c => c.GetParameters().Select(p => GetWrapperTypeIfOriginal(p.ParameterType)).ToArray(),
-                                c => c),
-                                new TypeArrayComparer());
-
-                            SortedList<string, MethodInfo> propertyGetters = new SortedList<string, MethodInfo>(classSrc.PropertyGetters.Select(getterInfo =>
+                            PropertyInfo wrapperProperty = wrapperType.GetProperty(getterInfo.WrapperName, CreateBindingAttribute(getterInfo.IsWrapperPrivate, getterInfo.IsWrapperStatic));
+                            if (wrapperProperty is null)
                             {
-                                PropertyInfo wrapperProperty = wrapperType.GetProperty(getterInfo.WrapperName, CreateBindingAttribute(getterInfo.IsWrapperPrivate, getterInfo.IsWrapperStatic));
-                                if (wrapperProperty is null)
-                                {
-                                    throw new KeyNotFoundException(
-                                        string.Format(Resources.GetString("PropertyWrapperNotFound").Value,
-                                        GetAccessibilityDescription(getterInfo.IsWrapperPrivate), getterInfo.WrapperName, classSrc.WrapperTypeName));
-                                }
+                                throw new KeyNotFoundException(
+                                    string.Format(Resources.GetString("PropertyWrapperNotFound").Value,
+                                    GetAccessibilityDescription(getterInfo.IsWrapperPrivate), getterInfo.WrapperName, classSrc.WrapperTypeName));
+                            }
 
-                                MethodInfo originalGetter = originalType.GetMethod(getterInfo.OriginalName, CreateBindingAttribute(getterInfo.IsOriginalPrivate, getterInfo.IsOriginalStatic), null, Type.EmptyTypes, null);
-                                if (originalGetter is null)
-                                {
-                                    throw new KeyNotFoundException(
-                                        string.Format(Resources.GetString("PropertyGetterOriginalNotFound").Value,
-                                        GetAccessibilityDescription(getterInfo.IsOriginalPrivate, getterInfo.IsOriginalStatic), getterInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
-                                }
-
-                                return new KeyValuePair<string, MethodInfo>(wrapperProperty.Name, originalGetter);
-                            }).ToDictionary(x => x.Key, x => x.Value));
-
-                            SortedList<string, MethodInfo> propertySetters = new SortedList<string, MethodInfo>(classSrc.PropertySetters.Select(setterInfo =>
+                            MethodInfo originalGetter = originalType.GetMethod(getterInfo.OriginalName, CreateBindingAttribute(getterInfo.IsOriginalPrivate, getterInfo.IsOriginalStatic), null, Type.EmptyTypes, null);
+                            if (originalGetter is null)
                             {
-                                PropertyInfo wrapperProperty = wrapperType.GetProperty(setterInfo.WrapperName, CreateBindingAttribute(setterInfo.IsWrapperPrivate, setterInfo.IsWrapperStatic));
-                                if (wrapperProperty is null)
-                                {
-                                    throw new KeyNotFoundException(
-                                        string.Format(Resources.GetString("PropertyWrapperNotFound").Value,
-                                        GetAccessibilityDescription(setterInfo.IsWrapperPrivate), setterInfo.WrapperName, classSrc.WrapperTypeName));
-                                }
+                                throw new KeyNotFoundException(
+                                    string.Format(Resources.GetString("PropertyGetterOriginalNotFound").Value,
+                                    GetAccessibilityDescription(getterInfo.IsOriginalPrivate, getterInfo.IsOriginalStatic), getterInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
+                            }
 
-                                Type originalParamType = GetOriginalTypeIfWrapper(wrapperProperty.PropertyType,
-                                    string.Format(Resources.GetString("InvalidPropertyTypeWrapper").Value,
-                                    $"{classSrc.WrapperTypeName}.{setterInfo.WrapperName}", wrapperProperty.PropertyType.Name));
-                                MethodInfo originalSetter = originalType.GetMethod(setterInfo.OriginalName, CreateBindingAttribute(setterInfo.IsOriginalPrivate, setterInfo.IsOriginalStatic), null, new Type[] { originalParamType }, null);
-                                if (originalSetter is null)
-                                {
-                                    throw new KeyNotFoundException(
-                                        string.Format(Resources.GetString("PropertySetterOriginalNotFound").Value,
-                                        GetAccessibilityDescription(setterInfo.IsOriginalPrivate, setterInfo.IsOriginalStatic), setterInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
-                                }
+                            return new KeyValuePair<string, MethodInfo>(wrapperProperty.Name, originalGetter);
+                        }).ToDictionary(x => x.Key, x => x.Value));
 
-                                return new KeyValuePair<string, MethodInfo>(wrapperProperty.Name, originalSetter);
-                            }).ToDictionary(x => x.Key, x => x.Value));
-
-                            SortedList<string, FieldInfo> fields = new SortedList<string, FieldInfo>(classSrc.Fields.Select(fieldInfo =>
+                        SortedList<string, MethodInfo> propertySetters = new SortedList<string, MethodInfo>(classSrc.PropertySetters.Select(setterInfo =>
+                        {
+                            PropertyInfo wrapperProperty = wrapperType.GetProperty(setterInfo.WrapperName, CreateBindingAttribute(setterInfo.IsWrapperPrivate, setterInfo.IsWrapperStatic));
+                            if (wrapperProperty is null)
                             {
-                                PropertyInfo wrapperProperty = wrapperType.GetProperty(fieldInfo.WrapperName, CreateBindingAttribute(fieldInfo.IsWrapperPrivate, fieldInfo.IsWrapperStatic));
-                                if (wrapperProperty is null)
-                                {
-                                    throw new KeyNotFoundException(
-                                        string.Format(Resources.GetString("FieldWrapperPropertyNotFound").Value,
-                                        GetAccessibilityDescription(fieldInfo.IsWrapperPrivate), fieldInfo.WrapperName, classSrc.WrapperTypeName));
-                                }
+                                throw new KeyNotFoundException(
+                                    string.Format(Resources.GetString("PropertyWrapperNotFound").Value,
+                                    GetAccessibilityDescription(setterInfo.IsWrapperPrivate), setterInfo.WrapperName, classSrc.WrapperTypeName));
+                            }
 
-                                FieldInfo originalField = originalType.GetField(fieldInfo.OriginalName, CreateBindingAttribute(fieldInfo.IsOriginalPrivate, fieldInfo.IsOriginalStatic));
-                                if (originalField is null)
-                                {
-                                    throw new KeyNotFoundException(
-                                        string.Format(Resources.GetString("FieldOriginalNotFound").Value,
-                                        GetAccessibilityDescription(fieldInfo.IsOriginalPrivate, fieldInfo.IsOriginalStatic), fieldInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
-                                }
-
-                                return new KeyValuePair<string, FieldInfo>(wrapperProperty.Name, originalField);
-                            }).ToDictionary(x => x.Key, x => x.Value));
-
-                            SortedList<(string, Type[]), MethodInfo> methods = new SortedList<(string, Type[]), MethodInfo>(classSrc.Methods.Select(methodInfo =>
+                            Type originalParamType = GetOriginalTypeIfWrapper(wrapperProperty.PropertyType,
+                                string.Format(Resources.GetString("InvalidPropertyTypeWrapper").Value,
+                                $"{classSrc.WrapperTypeName}.{setterInfo.WrapperName}", wrapperProperty.PropertyType.Name));
+                            MethodInfo originalSetter = originalType.GetMethod(setterInfo.OriginalName, CreateBindingAttribute(setterInfo.IsOriginalPrivate, setterInfo.IsOriginalStatic), null, new Type[] { originalParamType }, null);
+                            if (originalSetter is null)
                             {
-                                Type[] wrapperMethodParams = methodInfo.WrapperParamNames.Select(p => ParseTypeName(p, false)).ToArray();
-                                MethodInfo wrapperMethod = wrapperType.GetMethod(methodInfo.WrapperName, CreateBindingAttribute(methodInfo.IsWrapperPrivate, methodInfo.IsWrapperStatic), null, wrapperMethodParams, null);
-                                if (wrapperMethod is null)
-                                {
-                                    throw new KeyNotFoundException(
-                                        string.Format(Resources.GetString("MethodWrapperNotFound").Value,
-                                        string.Join(", ", wrapperMethodParams.Select(GetTypeFullName)), GetAccessibilityDescription(methodInfo.IsWrapperPrivate), methodInfo.WrapperName, classSrc.WrapperTypeName));
-                                }
+                                throw new KeyNotFoundException(
+                                    string.Format(Resources.GetString("PropertySetterOriginalNotFound").Value,
+                                    GetAccessibilityDescription(setterInfo.IsOriginalPrivate, setterInfo.IsOriginalStatic), setterInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
+                            }
 
-                                Type[] originalMethodParams = methodInfo.WrapperParamNames.Select(p => ParseTypeName(p, true)).ToArray();
-                                MethodInfo originalMethod = originalType.GetMethod(methodInfo.OriginalName, CreateBindingAttribute(methodInfo.IsOriginalPrivate, methodInfo.IsOriginalStatic), null, originalMethodParams, null);
-                                if (originalMethod is null)
-                                {
-                                    throw new KeyNotFoundException(
-                                        string.Format(Resources.GetString("MethodOriginalNotFound").Value,
-                                        string.Join(", ", originalMethodParams.Select(GetTypeFullName)), GetAccessibilityDescription(methodInfo.IsOriginalPrivate, methodInfo.IsOriginalStatic), methodInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
-                                }
+                            return new KeyValuePair<string, MethodInfo>(wrapperProperty.Name, originalSetter);
+                        }).ToDictionary(x => x.Key, x => x.Value));
 
-                                return new KeyValuePair<(string, Type[]), MethodInfo>((wrapperMethod.Name, wrapperMethodParams), originalMethod);
-                            }).ToDictionary(x => x.Key, x => x.Value), new StringTypeArrayTupleComparer());
+                        SortedList<string, FieldInfo> fields = new SortedList<string, FieldInfo>(classSrc.Fields.Select(fieldInfo =>
+                        {
+                            PropertyInfo wrapperProperty = wrapperType.GetProperty(fieldInfo.WrapperName, CreateBindingAttribute(fieldInfo.IsWrapperPrivate, fieldInfo.IsWrapperStatic));
+                            if (wrapperProperty is null)
+                            {
+                                throw new KeyNotFoundException(
+                                    string.Format(Resources.GetString("FieldWrapperPropertyNotFound").Value,
+                                    GetAccessibilityDescription(fieldInfo.IsWrapperPrivate), fieldInfo.WrapperName, classSrc.WrapperTypeName));
+                            }
+
+                            FieldInfo originalField = originalType.GetField(fieldInfo.OriginalName, CreateBindingAttribute(fieldInfo.IsOriginalPrivate, fieldInfo.IsOriginalStatic));
+                            if (originalField is null)
+                            {
+                                throw new KeyNotFoundException(
+                                    string.Format(Resources.GetString("FieldOriginalNotFound").Value,
+                                    GetAccessibilityDescription(fieldInfo.IsOriginalPrivate, fieldInfo.IsOriginalStatic), fieldInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
+                            }
+
+                            return new KeyValuePair<string, FieldInfo>(wrapperProperty.Name, originalField);
+                        }).ToDictionary(x => x.Key, x => x.Value));
+
+                        SortedList<(string, Type[]), MethodInfo> methods = new SortedList<(string, Type[]), MethodInfo>(classSrc.Methods.Select(methodInfo =>
+                        {
+                            Type[] wrapperMethodParams = methodInfo.WrapperParamNames.Select(p => ParseTypeName(p, false)).ToArray();
+                            MethodInfo wrapperMethod = wrapperType.GetMethod(methodInfo.WrapperName, CreateBindingAttribute(methodInfo.IsWrapperPrivate, methodInfo.IsWrapperStatic), null, wrapperMethodParams, null);
+                            if (wrapperMethod is null)
+                            {
+                                throw new KeyNotFoundException(
+                                    string.Format(Resources.GetString("MethodWrapperNotFound").Value,
+                                    string.Join(", ", wrapperMethodParams.Select(GetTypeFullName)), GetAccessibilityDescription(methodInfo.IsWrapperPrivate), methodInfo.WrapperName, classSrc.WrapperTypeName));
+                            }
+
+                            Type[] originalMethodParams = methodInfo.WrapperParamNames.Select(p => ParseTypeName(p, true)).ToArray();
+                            MethodInfo originalMethod = originalType.GetMethod(methodInfo.OriginalName, CreateBindingAttribute(methodInfo.IsOriginalPrivate, methodInfo.IsOriginalStatic), null, originalMethodParams, null);
+                            if (originalMethod is null)
+                            {
+                                throw new KeyNotFoundException(
+                                    string.Format(Resources.GetString("MethodOriginalNotFound").Value,
+                                    string.Join(", ", originalMethodParams.Select(GetTypeFullName)), GetAccessibilityDescription(methodInfo.IsOriginalPrivate, methodInfo.IsOriginalStatic), methodInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
+                            }
+
+                            return new KeyValuePair<(string, Type[]), MethodInfo>((wrapperMethod.Name, wrapperMethodParams), originalMethod);
+                        }).ToDictionary(x => x.Key, x => x.Value), new StringTypeArrayTupleComparer());
 
 
-                            ClassMemberSet members = new ClassMemberSet(wrapperType, originalType, constructors, propertyGetters, propertySetters, fields, methods);
-                            return members;
-                        }
+                        ClassMemberSet members = new ClassMemberSet(wrapperType, originalType, constructors, propertyGetters, propertySetters, fields, methods);
+                        return members;
+                    }
 
                     default:
                         throw new NotImplementedException(string.Format(Resources.GetString("CollectionTypeNotRecognized").Value, nameof(TypeMemberNameSetBase), src.GetType().Name));
