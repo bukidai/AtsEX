@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
-    internal struct ProfileInfo : IDisposable
+    internal struct Profile : IDisposable
     {
         public Stream Stream { get; }
         public Version Version { get; }
 
-        public ProfileInfo(Stream stream, Version version)
+        public Profile(Stream stream, Version version)
         {
             Stream = stream;
             Version = version;

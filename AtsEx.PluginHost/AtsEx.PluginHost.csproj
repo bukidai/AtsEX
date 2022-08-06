@@ -97,7 +97,7 @@
     <Compile Include="Plugins\PluginBuilder.cs" />
     <Compile Include="BveTypes\BveTypeSet.cs" />
     <Compile Include="BveTypes\BveTypeSet.InstanceCreator.cs" />
-    <Compile Include="BveTypes\ProfileInfo.cs" />
+    <Compile Include="BveTypes\Profile.cs" />
     <Compile Include="BveTypes\ProfileSelector.cs" />
     <Compile Include="BveTypes\TypeInfo\TypeInfo.cs" />
     <Compile Include="BveTypes\TypeInfo\TypeInfoCreator.cs" />

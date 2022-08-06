@@ -31,7 +31,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
             ProfileSelector profileSelector = new ProfileSelector(bveAssembly);
             Version profileVersion;
             List<TypeMemberNameSetBase> typeMemberNames;
-            using (ProfileInfo profile = profileSelector.GetProfileStream(allowNotSupportedVersion))
+            using (Profile profile = profileSelector.GetProfileStream(allowNotSupportedVersion))
             {
                 profileVersion = profile.Version;
 

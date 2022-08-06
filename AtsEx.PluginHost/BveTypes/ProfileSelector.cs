@@ -25,11 +25,11 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
             BveVersion = bveAssembly.GetName().Version;
         }
 
-        public ProfileInfo GetProfileStream(bool allowNotSupportedVersion)
+        public Profile GetProfileStream(bool allowNotSupportedVersion)
         {
             Version version = GetVersion(allowNotSupportedVersion);
             Stream stream = ExecutingAssembly.GetManifestResourceStream($"{DefaultNamespace}.{version}.xml");
-            return new ProfileInfo(stream, version);
+            return new Profile(stream, version);
         }
 
         private Version GetVersion(bool allowNotSupportedVersion)
