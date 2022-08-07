@@ -29,7 +29,7 @@ namespace Automatic9045.AtsEx
         private readonly VersionFormProvider VersionFormProvider;
         private readonly StructureSetLifeProlonger StructureSetLifeProlonger;
 
-        public BveHacker(Action<Version> profileForDifferentBveVersionLoaded, Action<Exception> beaconCreationExceptionResolver)
+        public BveHacker(Action<Version> profileForDifferentBveVersionLoaded, ILoadErrorResolver beaconCreationExceptionResolver)
         {
             BveTypes = BveTypeSet.Load(App.Instance.BveAssembly, App.Instance.BveVersion, true, profileForDifferentBveVersionLoaded);
 
@@ -66,7 +66,7 @@ namespace Automatic9045.AtsEx
                 }
                 catch (Exception ex)
                 {
-                    beaconCreationExceptionResolver(ex);
+                    beaconCreationExceptionResolver.Resolve(ex);
                 }
             };
             ScenarioHacker.ScenarioCreated += e => ScenarioCreated?.Invoke(e);

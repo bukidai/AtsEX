@@ -19,7 +19,7 @@ namespace Automatic9045.AtsEx
         {
             internal string VersionWarningText { get; private set; }
 
-            public AsAtsPlugin(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly) : base(targetProcess, targetAppDomain, targetAssembly)
+            public AsAtsPlugin(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly) : base(targetProcess, targetAppDomain, targetAssembly, new LoadErrorResolver())
             {
             }
 
@@ -29,16 +29,20 @@ namespace Automatic9045.AtsEx
                 LoadErrorManager.Throw(VersionWarningText);
             }
 
-            private protected override void ResolveLoadException(Exception exception)
+
+            private class LoadErrorResolver : ILoadErrorResolver
             {
-                if (exception is BveFileLoadException fe)
+                public void Resolve(Exception exception)
                 {
-                    LoadErrorManager.Throw(fe.Message, fe.SenderFileName, fe.LineIndex, fe.CharIndex);
-                }
-                else
-                {
-                    LoadErrorManager.Throw(exception.Message);
-                    MessageBox.Show(exception.ToString(), string.Format(Resources.GetString("UnhandledExceptionCaption").Value, App.Instance.ProductShortName));
+                    if (exception is BveFileLoadException fe)
+                    {
+                        LoadErrorManager.Throw(fe.Message, fe.SenderFileName, fe.LineIndex, fe.CharIndex);
+                    }
+                    else
+                    {
+                        LoadErrorManager.Throw(exception.Message);
+                        MessageBox.Show(exception.ToString(), string.Format(Resources.GetString("UnhandledExceptionCaption").Value, App.Instance.ProductShortName));
+                    }
                 }
             }
         }

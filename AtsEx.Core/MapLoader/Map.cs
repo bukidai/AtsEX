@@ -28,7 +28,7 @@ namespace Automatic9045.AtsEx
             MapPluginUsingErrors = mapPluginUsingErrors;
         }
 
-        public static Map Load(string filePath, PluginLoader pluginLoader)
+        public static Map Load(string filePath, PluginLoader pluginLoader, ILoadErrorResolver loadErrorResolver)
         {
             List<PluginBase> loadedPlugins = new List<PluginBase>();
             List<LoadError> mapPluginUsingErrors = new List<LoadError>();
@@ -58,7 +58,7 @@ namespace Automatic9045.AtsEx
                                 }
                                 catch (CompilationException ex)
                                 {
-                                    ex.ThrowAsLoadError();
+                                    loadErrorResolver.Resolve(ex);
                                 }
 
                                 mapPluginUsingErrors.Add(new LoadError(null, fileName, i + 1, s.CharIndex + 1));
@@ -72,7 +72,7 @@ namespace Automatic9045.AtsEx
                                 string includeRelativePath = includePath;
                                 string includeAbsolutePath = Path.Combine(Path.GetDirectoryName(filePath), includeRelativePath);
                                 
-                                Map includedMap = Load(includeAbsolutePath, pluginLoader);
+                                Map includedMap = Load(includeAbsolutePath, pluginLoader, loadErrorResolver);
 
                                 loadedPlugins.AddRange(includedMap.LoadedPlugins);
                                 mapPluginUsingErrors.AddRange(includedMap.MapPluginUsingErrors);

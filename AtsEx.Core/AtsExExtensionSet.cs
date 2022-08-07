@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.Helpers;
@@ -20,7 +21,7 @@ namespace Automatic9045.AtsEx
 
         internal BveHacker BveHacker { get; }
 
-        private protected AtsExExtensionSet(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly)
+        private protected AtsExExtensionSet(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, ILoadErrorResolver loadErrorResolver)
         {
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
 
@@ -35,13 +36,12 @@ namespace Automatic9045.AtsEx
             };
 
             App.CreateInstance(targetProcess, targetAssembly, executingAssembly, pluginHostAssembly);
-            BveHacker = new BveHacker(ProfileForDifferentBveVersionLoaded, ResolveLoadException);
+            BveHacker = new BveHacker(ProfileForDifferentBveVersionLoaded, loadErrorResolver);
 
             //DXDynamicTextureHost = new DXDynamicTextureHost();
         }
 
         private protected abstract void ProfileForDifferentBveVersionLoaded(Version profileVersion);
-        private protected abstract void ResolveLoadException(Exception exception);
 
         public void Dispose()
         {

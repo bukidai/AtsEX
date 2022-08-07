@@ -33,6 +33,8 @@ namespace Automatic9045.AtsEx
         {
             BveHacker = atsExExtensionSet.BveHacker;
 
+            LoadErrorResolver loadErrorResolver = new LoadErrorResolver();
+
             PluginLoader pluginLoader = new PluginLoader(BveHacker);
             try
             {
@@ -41,7 +43,7 @@ namespace Automatic9045.AtsEx
                 }
 
                 {
-                    Map map = Map.Load(BveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path, pluginLoader);
+                    Map map = Map.Load(BveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path, pluginLoader, loadErrorResolver);
                     MapPlugins = map.LoadedPlugins;
 
                     IEnumerable<LoadError> removeTargetErrors = LoadErrorManager.Errors.Where(error =>
@@ -59,7 +61,7 @@ namespace Automatic9045.AtsEx
             }
             catch (Exception ex)
             {
-                ResolveLoadExceptions(ex);
+                loadErrorResolver.Resolve(ex);
             }
             finally
             {
@@ -72,23 +74,6 @@ namespace Automatic9045.AtsEx
 
             App.Instance.SetScenario(vehicleSpec);
             BveHacker.SetScenario();
-
-            void ResolveLoadExceptions(Exception exception)
-            {
-                if (exception is CompilationException ce)
-                {
-                    ce.ThrowAsLoadError();
-                }
-                else if (exception is BveFileLoadException fe)
-                {
-                    LoadErrorManager.Throw(fe.Message, fe.SenderFileName, fe.LineIndex, fe.CharIndex);
-                }
-                else
-                {
-                    LoadErrorManager.Throw(exception.Message);
-                    MessageBox.Show(exception.ToString(), string.Format(Resources.GetString("UnhandledExceptionCaption").Value, App.Instance.ProductShortName));
-                }
-            }
         }
 
         public void Dispose()
@@ -179,7 +164,28 @@ namespace Automatic9045.AtsEx
         }
 
 
-        class LoadErrorEqualityComparer : IEqualityComparer<LoadError>
+        private class LoadErrorResolver : ILoadErrorResolver
+        {
+            public void Resolve(Exception exception)
+            {
+                if (exception is CompilationException ce)
+                {
+                    ce.ThrowAsLoadError();
+                }
+                else if (exception is BveFileLoadException fe)
+                {
+                    LoadErrorManager.Throw(fe.Message, fe.SenderFileName, fe.LineIndex, fe.CharIndex);
+                }
+                else
+                {
+                    LoadErrorManager.Throw(exception.Message);
+                    MessageBox.Show(exception.ToString(), string.Format(Resources.GetString("UnhandledExceptionCaption").Value, App.Instance.ProductShortName));
+                }
+            }
+        }
+
+
+        private class LoadErrorEqualityComparer : IEqualityComparer<LoadError>
         {
             public bool Equals(LoadError x, LoadError y) => x.SenderFileName == y.SenderFileName && x.LineIndex == y.LineIndex && x.CharIndex == y.CharIndex;
             public int GetHashCode(LoadError obj) => obj.GetHashCode();
