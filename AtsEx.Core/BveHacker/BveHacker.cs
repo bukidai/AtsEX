@@ -32,11 +32,11 @@ namespace Automatic9045.AtsEx
         {
             BveTypes = BveTypeSet.Load(App.Instance.BveAssembly, App.Instance.BveVersion, true, profileForDifferentBveVersionLoaded);
 
-            MainFormHacker = new MainFormHacker(App.Instance.Process);
-            ScenarioHacker = new ScenarioHacker(MainFormHacker, BveTypes);
-
             ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(App.Instance, this);
             classWrapperInitializer.InitializeAll();
+
+            MainFormHacker = new MainFormHacker(App.Instance.Process);
+            ScenarioHacker = new ScenarioHacker(MainFormHacker, BveTypes);
 
             LoadErrorManager = new LoadErrorManager(LoadingProgressForm);
 
