@@ -113,7 +113,6 @@
     <Compile Include="BveTypes\TypeMemberNameSet\ClassMemberNameSet.cs" />
     <Compile Include="ClassInitializer\ClassInitializerBase.cs" />
     <Compile Include="ClassInitializer\ClassWrapperInitializer.cs" />
-    <Compile Include="ClassInitializer\HelperInitializer.cs" />
     <Compile Include="ClassInitializer\InitializeClassWrapperAttribute.cs" />
     <Compile Include="ClassWrappers\ClassWrapperConverter.cs" />
     <Compile Include="ClassWrappers\CreateClassWrapperFromSourceAttribute.cs" />
@@ -139,7 +138,6 @@
     <Compile Include="Enums\TiltOptions.cs" />
     <Compile Include="IContextMenuHacker.cs" />
     <Compile Include="Extensions\DiagramUpdater.cs" />
-    <Compile Include="ClassInitializer\InitializeHelperAttribute.cs" />
     <Compile Include="LoadErrorManager.cs" />
     <Compile Include="LoadErrorManager.LoadErrorList.cs" />
     <Compile Include="Imports\VehicleSpec.cs" />
@@ -238,7 +236,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ClassWrappers\UnidentifiedClasses\" />
-    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

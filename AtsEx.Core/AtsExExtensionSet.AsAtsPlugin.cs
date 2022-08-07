@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
-using Automatic9045.AtsEx.PluginHost.Helpers;
 
 namespace Automatic9045.AtsEx
 {

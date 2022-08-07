@@ -17,7 +17,6 @@ using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
-using Automatic9045.AtsEx.PluginHost.Helpers;
 using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
@@ -38,9 +37,6 @@ namespace Automatic9045.AtsEx
 
             ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(App.Instance, this);
             classWrapperInitializer.InitializeAll();
-
-            HelperInitializer helperInitializer = new HelperInitializer(App.Instance, this);
-            helperInitializer.InitializeAll();
 
             LoadErrorManager = new LoadErrorManager(LoadingProgressForm);
 

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost.BveTypes;
-using Automatic9045.AtsEx.PluginHost.Helpers;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
