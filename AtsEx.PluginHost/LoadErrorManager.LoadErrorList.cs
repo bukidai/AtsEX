@@ -9,39 +9,25 @@ using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx.PluginHost.Helpers
+namespace Automatic9045.AtsEx.PluginHost
 {
-    public static partial class LoadErrorManager
+    public partial class LoadErrorManager
     {
         /// <summary>
-        /// <see cref="LoadErrorList"/> のリストを表します。
+        /// <see cref="LoadError"/> のリストを表します。
         /// </summary>
-        public class LoadErrorList : IList<LoadError>
+        public sealed class LoadErrorList : IList<LoadError>
         {
-            protected static IApp App;
-            protected static IBveHacker BveHacker;
+            private readonly LoadingProgressForm Form;
+            private readonly Form FormSource;
 
-            internal static void Initialize(IApp app, IBveHacker bveHacker)
+            internal LoadErrorList(LoadingProgressForm loadingProgressForm)
             {
-                App = app;
-                BveHacker = bveHacker;
+                Form = loadingProgressForm;
+                FormSource = loadingProgressForm.Src;
             }
 
-
-            protected LoadingProgressForm Form;
-            protected Form FormSource;
-
-            /// <summary>
-            /// <see cref="LoadErrorList"/> クラスの新しいインスタンスを初期化します。
-            /// </summary>
-            public LoadErrorList()
-            {
-                Form = BveHacker.LoadingProgressForm;
-                FormSource = BveHacker.LoadingProgressFormSource;
-            }
-
-
-            protected static ListViewItem ToListViewItem(LoadError loadError, int index)
+            private static ListViewItem ToListViewItem(LoadError loadError, int index)
             {
                 ListViewItem item = new ListViewItem(new string[] {
                     index.ToString(),
@@ -53,7 +39,7 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
                 return item;
             }
 
-            protected static LoadError ToLoadError(ListViewItem item)
+            private static LoadError ToLoadError(ListViewItem item)
             {
                 string text = item.SubItems[1].Text;
                 string senderFileName = item.SubItems[2].Text;
@@ -71,7 +57,7 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
             }
 
             [UnderConstruction]
-            protected void Update()
+            private void Update()
             {
                 Form.ErrorCount = Count;
 
@@ -88,31 +74,37 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
                 Application.DoEvents();
             }
 
-
+            /// <inheritdoc/>
             public LoadError this[int index]
             {
                 get => ToLoadError(Form.ErrorListView.Items[index]);
                 set => Form.ErrorListView.Items[index] = ToListViewItem(value, index + 1);
             }
 
+            /// <inheritdoc/>
             public int Count => Form.ErrorListView.Items.Count;
 
+            /// <inheritdoc/>
             public bool IsReadOnly => false;
 
+            /// <inheritdoc/>
             public void Add(LoadError item)
             {
                 Form.ErrorListView.Items.Add(ToListViewItem(item, Count + 1));
                 Update();
             }
 
+            /// <inheritdoc/>
             public void Clear()
             {
                 Form.ErrorListView.Items.Clear();
                 Update();
             }
 
+            /// <inheritdoc/>
             public bool Contains(LoadError item) => IndexOf(item) >= 0;
 
+            /// <inheritdoc/>
             public void CopyTo(LoadError[] array, int arrayIndex)
             {
                 LoadError[] items = new LoadError[Count];
@@ -125,8 +117,10 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
                 items.CopyTo(array, arrayIndex);
             }
 
+            /// <inheritdoc/>
             public IEnumerator<LoadError> GetEnumerator() => new Enumerator(Form);
 
+            /// <inheritdoc/>
             public int IndexOf(LoadError item)
             {
                 for (int i = 0; i < Form.ErrorListView.Items.Count; i++)
@@ -164,6 +158,7 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
                 return -1;
             }
 
+            /// <inheritdoc/>
             public void Insert(int index, LoadError item)
             {
                 ListViewItem listViewItem = ToListViewItem(item, index);
@@ -177,6 +172,7 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
                 Update();
             }
 
+            /// <inheritdoc/>
             public bool Remove(LoadError item)
             {
                 int targetIndex = IndexOf(item);
@@ -191,6 +187,7 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
                 }
             }
 
+            /// <inheritdoc/>
             public void RemoveAt(int index)
             {
                 Form.ErrorListView.Items.RemoveAt(index);
@@ -200,7 +197,7 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
             IEnumerator IEnumerable.GetEnumerator() => new Enumerator(Form);
 
 
-            protected class Enumerator : IEnumerator<LoadError>
+            private class Enumerator : IEnumerator<LoadError>
             {
                 protected IEnumerator ListViewItemEnumerator;
 

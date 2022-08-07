@@ -33,7 +33,7 @@ namespace Automatic9045.AtsEx
         {
             BveHacker = atsExExtensionSet.BveHacker;
 
-            LoadErrorResolver loadErrorResolver = new LoadErrorResolver();
+            LoadErrorResolver loadErrorResolver = new LoadErrorResolver(BveHacker);
 
             PluginLoader pluginLoader = new PluginLoader(BveHacker);
             try
@@ -46,7 +46,7 @@ namespace Automatic9045.AtsEx
                     Map map = Map.Load(BveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path, pluginLoader, loadErrorResolver);
                     MapPlugins = map.LoadedPlugins;
 
-                    IEnumerable<LoadError> removeTargetErrors = LoadErrorManager.Errors.Where(error =>
+                    IEnumerable<LoadError> removeTargetErrors = BveHacker.LoadErrorManager.Errors.Where(error =>
                     {
                         if (error.Text.Contains("[[NOMPI]]")) return true;
 
@@ -55,7 +55,7 @@ namespace Automatic9045.AtsEx
                     });
                     foreach (LoadError error in removeTargetErrors)
                     {
-                        LoadErrorManager.Errors.Remove(error);
+                        BveHacker.LoadErrorManager.Errors.Remove(error);
                     }
                 }
             }
@@ -166,19 +166,26 @@ namespace Automatic9045.AtsEx
 
         private class LoadErrorResolver : ILoadErrorResolver
         {
+            private readonly BveHacker BveHacker;
+
+            public LoadErrorResolver(BveHacker bveHacker)
+            {
+                BveHacker = bveHacker;
+            }
+
             public void Resolve(Exception exception)
             {
                 if (exception is CompilationException ce)
                 {
-                    ce.ThrowAsLoadError();
+                    ce.ThrowAsLoadError(BveHacker.LoadErrorManager);
                 }
                 else if (exception is BveFileLoadException fe)
                 {
-                    LoadErrorManager.Throw(fe.Message, fe.SenderFileName, fe.LineIndex, fe.CharIndex);
+                    BveHacker.LoadErrorManager.Throw(fe.Message, fe.SenderFileName, fe.LineIndex, fe.CharIndex);
                 }
                 else
                 {
-                    LoadErrorManager.Throw(exception.Message);
+                    BveHacker.LoadErrorManager.Throw(exception.Message);
                     MessageBox.Show(exception.ToString(), string.Format(Resources.GetString("UnhandledExceptionCaption").Value, App.Instance.ProductShortName));
                 }
             }

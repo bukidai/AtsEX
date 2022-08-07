@@ -21,17 +21,24 @@ namespace Automatic9045.AtsEx
 
             public AsAtsPlugin(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly) : base(targetProcess, targetAppDomain, targetAssembly, new LoadErrorResolver())
             {
+                (base.LoadErrorResolver as LoadErrorResolver).LoadErrorManager = BveHacker.LoadErrorManager;
             }
 
             private protected override void ProfileForDifferentBveVersionLoaded(Version profileVersion)
             {
                 VersionWarningText = string.Format(Resources.GetString("BveVersionNotSupported").Value, App.Instance.BveVersion, profileVersion, App.Instance.ProductShortName);
-                LoadErrorManager.Throw(VersionWarningText);
+                BveHacker.LoadErrorManager.Throw(VersionWarningText);
             }
 
 
-            private class LoadErrorResolver : ILoadErrorResolver
+            private new class LoadErrorResolver : ILoadErrorResolver
             {
+                public LoadErrorManager LoadErrorManager { get; set; }
+
+                public LoadErrorResolver()
+                {
+                }
+
                 public void Resolve(Exception exception)
                 {
                     if (exception is BveFileLoadException fe)

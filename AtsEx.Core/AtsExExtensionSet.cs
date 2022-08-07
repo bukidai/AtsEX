@@ -19,10 +19,14 @@ namespace Automatic9045.AtsEx
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<AtsExExtensionSet>("Core");
 
+        private readonly ILoadErrorResolver LoadErrorResolver;
+
         internal BveHacker BveHacker { get; }
 
         private protected AtsExExtensionSet(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, ILoadErrorResolver loadErrorResolver)
         {
+            LoadErrorResolver = loadErrorResolver;
+
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
 
             string pluginHostAssemblyPath = Path.Combine(Path.GetDirectoryName(executingAssembly.Location), "AtsEx.PluginHost.dll");

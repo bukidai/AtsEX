@@ -42,6 +42,8 @@ namespace Automatic9045.AtsEx
             HelperInitializer helperInitializer = new HelperInitializer(App.Instance, this);
             helperInitializer.InitializeAll();
 
+            LoadErrorManager = new LoadErrorManager(LoadingProgressForm);
+
             _ContextMenuHacker = new ContextMenuHacker(MainForm);
             _ContextMenuHacker.AddSeparator(true);
 
@@ -129,6 +131,9 @@ namespace Automatic9045.AtsEx
             get => MainForm.KeyProvider;
             set => MainForm.KeyProvider = value;
         }
+
+
+        public LoadErrorManager LoadErrorManager { get; }
 
 
         private readonly ContextMenuHacker _ContextMenuHacker;

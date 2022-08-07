@@ -94,6 +94,12 @@ namespace Automatic9045.AtsEx.PluginHost
 
 
         /// <summary>
+        /// シナリオ読込時のエラーを編集するための機能を提供する <see cref="PluginHost.LoadErrorManager"/> を取得します。
+        /// </summary>
+        LoadErrorManager LoadErrorManager { get; }
+
+
+        /// <summary>
         /// メインフォームの右クリックメニューを編集するための機能を提供する <see cref="IContextMenuHacker"/> を取得します。
         /// </summary>
         IContextMenuHacker ContextMenuHacker { get; }

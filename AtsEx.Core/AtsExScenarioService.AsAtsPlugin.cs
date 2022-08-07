@@ -23,10 +23,10 @@ namespace Automatic9045.AtsEx
             {
                 if (BveHacker.BveTypes.ProfileVersion != App.Instance.BveVersion && VehiclePlugins.All(plugin => !plugin.UseAtsExExtensions))
                 {
-                    LoadError removeTargetError = LoadErrorManager.Errors.FirstOrDefault(error => error.Text == atsExExtensionSet.VersionWarningText);
+                    LoadError removeTargetError = BveHacker.LoadErrorManager.Errors.FirstOrDefault(error => error.Text == atsExExtensionSet.VersionWarningText);
                     if (!(removeTargetError is null))
                     {
-                        LoadErrorManager.Errors.Remove(removeTargetError);
+                        BveHacker.LoadErrorManager.Errors.Remove(removeTargetError);
                     }
                 }
             }

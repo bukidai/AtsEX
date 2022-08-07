@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
-using Automatic9045.AtsEx.PluginHost.Helpers;
+using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
@@ -26,12 +26,12 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
             CompilationErrors = compilationErrors;
         }
 
-        public void ThrowAsLoadError()
+        public void ThrowAsLoadError(LoadErrorManager loadErrorManager)
         {
             foreach (Diagnostic error in CompilationErrors)
             {
                 LinePosition linePosition = error.Location.GetLineSpan().StartLinePosition;
-                LoadErrorManager.Throw(error.GetMessage(System.Globalization.CultureInfo.CurrentUICulture), SenderName, linePosition.Line, linePosition.Character + 1);
+                loadErrorManager.Throw(error.GetMessage(System.Globalization.CultureInfo.CurrentUICulture), SenderName, linePosition.Line, linePosition.Character + 1);
             }
         }
     }

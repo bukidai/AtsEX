@@ -6,33 +6,25 @@ using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx.PluginHost.Helpers
+namespace Automatic9045.AtsEx.PluginHost
 {
     /// <summary>
     /// シナリオ読込時のエラーを編集するための機能を提供します。
     /// </summary>
-    public static partial class LoadErrorManager
+    public sealed partial class LoadErrorManager
     {
-        private static IApp App;
-        private static IBveHacker BveHacker;
+        private readonly LoadingProgressForm LoadingProgressForm;
 
-        [InitializeHelper]
-        private static void Initialize(IApp app, IBveHacker bveHacker)
+        public LoadErrorManager(LoadingProgressForm loadingProgressForm)
         {
-            App = app;
-            BveHacker = bveHacker;
-
-            LoadErrorList.Initialize(App, BveHacker);
-
-            Errors = new LoadErrorList();
+            LoadingProgressForm = loadingProgressForm;
+            Errors = new LoadErrorList(LoadingProgressForm);
         }
-
 
         /// <summary>
         /// エラーの一覧を取得します。
         /// </summary>
-        public static LoadErrorList Errors { get; private set; }
-
+        public LoadErrorList Errors { get; private set; }
 
         /// <summary>
         /// エラーをスローします。
@@ -41,9 +33,9 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
         /// <param name="senderFileName">エラーの発生元となるファイルのファイル名。</param>
         /// <param name="lineIndex">エラーの発生元となる行番号。</param>
         /// <param name="charIndex">エラーの発生元となる列番号。</param>
-        public static void Throw(string text, string senderFileName, int lineIndex, int charIndex)
+        public void Throw(string text, string senderFileName, int lineIndex, int charIndex)
         {
-            BveHacker.LoadingProgressForm.ThrowError(text, senderFileName, lineIndex, charIndex);
+            LoadingProgressForm.ThrowError(text, senderFileName, lineIndex, charIndex);
         }
 
         /// <summary>
@@ -52,28 +44,28 @@ namespace Automatic9045.AtsEx.PluginHost.Helpers
         /// <param name="text">エラーの内容を表すテキスト。</param>
         /// <param name="senderFileName">エラーの発生元となるファイルのファイル名。</param>
         /// <param name="lineIndex">エラーの発生元となる行番号。</param>
-        public static void Throw(string text, string senderFileName, int lineIndex) => Throw(text, senderFileName, lineIndex, 0);
+        public void Throw(string text, string senderFileName, int lineIndex) => Throw(text, senderFileName, lineIndex, 0);
 
         /// <summary>
         /// エラーをスローします。
         /// </summary>
         /// <param name="text">エラーの内容を表すテキスト。</param>
         /// <param name="senderFileName">エラーの発生元となるファイルのファイル名。</param>
-        public static void Throw(string text, string senderFileName) => Throw(text, senderFileName, 0);
+        public void Throw(string text, string senderFileName) => Throw(text, senderFileName, 0);
 
         /// <summary>
         /// エラーをスローします。
         /// </summary>
         /// <param name="text">エラーの内容を表すテキスト。</param>
-        public static void Throw(string text) => Throw(text, "");
+        public void Throw(string text) => Throw(text, "");
 
         /// <summary>
         /// エラーをスローします。
         /// </summary>
         /// <param name="error">スローするエラー。</param>
-        public static void Throw(LoadError error)
+        public void Throw(LoadError error)
         {
-            BveHacker.LoadingProgressForm.ThrowError(error);
+            LoadingProgressForm.ThrowError(error);
         }
     }
 }

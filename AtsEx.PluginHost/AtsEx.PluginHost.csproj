@@ -140,8 +140,8 @@
     <Compile Include="IContextMenuHacker.cs" />
     <Compile Include="Extensions\DiagramUpdater.cs" />
     <Compile Include="ClassInitializer\InitializeHelperAttribute.cs" />
-    <Compile Include="Helpers\LoadErrorManager.cs" />
-    <Compile Include="Helpers\LoadErrorManager.LoadErrorList.cs" />
+    <Compile Include="LoadErrorManager.cs" />
+    <Compile Include="LoadErrorManager.LoadErrorList.cs" />
     <Compile Include="Imports\VehicleSpec.cs" />
     <Compile Include="Imports\VehicleState.cs" />
     <Compile Include="ClassWrappers\ClassWrapperBase.cs" />
@@ -238,6 +238,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ClassWrappers\UnidentifiedClasses\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
