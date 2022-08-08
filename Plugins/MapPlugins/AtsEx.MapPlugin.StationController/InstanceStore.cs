@@ -13,16 +13,16 @@ namespace Automatic9045.MapPlugins.StationController
         public static InstanceStore Instance { get; private set; } = null;
         public static bool IsInitialized => !(Instance is null);
 
-        public static void Initialize(IApp app, IBveHacker bveHacker)
+        public static void Initialize(IApp app, BveHacker bveHacker)
         {
             Instance = new InstanceStore(app, bveHacker);
         }
 
 
         public IApp App { get; }
-        public IBveHacker BveHacker { get; }
+        public BveHacker BveHacker { get; }
 
-        private InstanceStore(IApp app, IBveHacker bveHacker)
+        private InstanceStore(IApp app, BveHacker bveHacker)
         {
             App = app;
             BveHacker = bveHacker;

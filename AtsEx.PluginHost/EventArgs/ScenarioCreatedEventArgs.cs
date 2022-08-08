@@ -15,7 +15,7 @@ namespace Automatic9045.AtsEx.PluginHost
     {
         public Scenario Scenario { get; }
 
-        public ScenarioCreatedEventArgs(Scenario scenario) : base()
+        internal ScenarioCreatedEventArgs(Scenario scenario) : base()
         {
             Scenario = scenario;
         }

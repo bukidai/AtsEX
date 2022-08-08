@@ -19,8 +19,8 @@ namespace Automatic9045.AtsEx.PluginHost.Plugins
         public bool UseAtsExExtensions { get; }
         protected IApp App { get; }
 
-        private IBveHacker _BveHacker = null;
-        protected IBveHacker BveHacker => UseAtsExExtensions ? _BveHacker : throw new InvalidOperationException($"{nameof(UseAtsExExtensions)} が {false} に設定されています。");
+        private BveHacker _BveHacker = null;
+        protected BveHacker BveHacker => UseAtsExExtensions ? _BveHacker : throw new InvalidOperationException($"{nameof(UseAtsExExtensions)} が {false} に設定されています。");
 
         /// <summary>
         /// AtsEX プラグインのファイルの完全パスを取得します。

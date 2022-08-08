@@ -9,11 +9,10 @@ using System.Windows.Forms;
 
 using HarmonyLib;
 
-using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx
+namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
 {
     internal sealed class ScenarioHacker : IDisposable
     {

@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost
 {
-    public abstract class ClassInitializerBase
+    internal abstract class ClassInitializerBase
     {
         protected readonly IApp App;
-        protected readonly IBveHacker BveHacker;
+        protected readonly BveHacker BveHacker;
 
         protected readonly object[] Parameters;
 
-        public ClassInitializerBase(IApp app, IBveHacker bveHacker)
+        public ClassInitializerBase(IApp app, BveHacker bveHacker)
         {
             App = app;
             BveHacker = bveHacker;

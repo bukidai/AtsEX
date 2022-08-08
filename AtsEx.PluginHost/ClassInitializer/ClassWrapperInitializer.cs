@@ -9,14 +9,14 @@ using Automatic9045.AtsEx.PluginHost.BveTypes;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
-    public sealed class ClassWrapperInitializer : ClassInitializerBase
+    internal sealed class ClassWrapperInitializer : ClassInitializerBase
     {
         private static event LazyInitializationRequestedEventHandler LazyInitializationRequested;
 
         public static BveTypeSet LazyInitialize() => LazyInitializationRequested.Invoke(EventArgs.Empty);
 
 
-        public ClassWrapperInitializer(IApp app, IBveHacker bveHacker) : base(app, bveHacker)
+        public ClassWrapperInitializer(IApp app, BveHacker bveHacker) : base(app, bveHacker)
         {
             if (LazyInitializationRequested is null) LazyInitializationRequested = _ => BveHacker.BveTypes;
         }

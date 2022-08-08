@@ -18,7 +18,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
         /// BVE のアセンブリとバージョンを指定して、クラスラッパーに対応する BVE の型とメンバーの定義を読み込みます。
         /// </summary>
         /// <remarks>
-        /// このメソッドの実行には時間がかかります。特段の事情が無い限りは <see cref="IBveHacker.BveTypes"/> プロパティを参照してください。
+        /// このメソッドの実行には時間がかかります。特段の事情が無い限りは <see cref="BveHacker.BveTypes"/> プロパティを参照してください。
         /// </remarks>
         /// <param name="bveAssembly">BVE の <see cref="Assembly"/>。</param>
         /// <param name="bveVersion">BVE のバージョン。</param>
@@ -29,7 +29,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
         /// <exception cref="NotImplementedException"></exception>
         /// <exception cref="TypeLoadException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        public static BveTypeSet Load(Assembly bveAssembly, Version bveVersion, bool allowLoadProfileForDifferentBveVersion, Action<Version> profileForDifferentBveVersionLoaded = null)
+        internal static BveTypeSet Load(Assembly bveAssembly, Version bveVersion, bool allowLoadProfileForDifferentBveVersion, Action<Version> profileForDifferentBveVersionLoaded = null)
         {
             Assembly pluginHostAssembly = Assembly.GetExecutingAssembly();
 

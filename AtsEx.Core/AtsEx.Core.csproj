@@ -121,9 +121,6 @@
     <Compile Include="AtsExScenarioService.cs" />
     <Compile Include="BveHacker\BveHacker.cs" />
     <Compile Include="BveHacker\CoreHackServices\ContextMenuHacker.cs" />
-    <Compile Include="BveHacker\CoreHackServices\MainFormHacker.cs" />
-    <Compile Include="BveHacker\CoreHackServices\ScenarioHacker.cs" />
-    <Compile Include="BveHacker\CoreHackServices\StructureSetLifeProlonger.cs" />
     <Compile Include="ExtendedBeacons\Beacon.cs" />
     <Compile Include="ExtendedBeacons\ExtendedBeaconBase.cs" />
     <Compile Include="ExtendedBeacons\Globals\ExtendedBeaconGlobalsBase.cs" />
@@ -189,8 +186,6 @@
     <Content Include="Resources\ExtendedBeacons\MapStatementIdentifiers.resx" />
     <Content Include="Resources\Handles\BrakeHandle.ja.resx" />
     <Content Include="Resources\Handles\BrakeHandle.resx" />
-    <Content Include="Resources\BveHacker.ja.resx" />
-    <Content Include="Resources\BveHacker.resx" />
     <Content Include="Resources\AtsExScenarioService.resx" />
     <Content Include="Resources\AtsExScenarioService.ja.resx" />
     <None Include="app.config" />

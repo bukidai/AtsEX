@@ -20,8 +20,8 @@ namespace Automatic9045.AtsEx.PluginHost.Extensions
         /// <summary>
         /// 時刻表と「時刻と位置」フォーム内のダイヤグラムの表示を最新の設定に更新します。
         /// </summary>
-        /// <param name="bveHacker">更新に使用する <see cref="IBveHacker"/>。</param>
-        public static void UpdateDiagram(this IBveHacker bveHacker)
+        /// <param name="bveHacker">更新に使用する <see cref="BveHacker"/>。</param>
+        public static void UpdateDiagram(this BveHacker bveHacker)
         {
             StationList stations = bveHacker.Scenario.Route.Stations;
             TimeTable timeTable = bveHacker.Scenario.TimeTable;

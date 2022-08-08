@@ -12,7 +12,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
 {
     internal class TrainPassedGlobals : ExtendedBeaconGlobalsBase<TrainPassedEventArgs>
     {
-        public TrainPassedGlobals(IBveHacker bveHacker, PluginHost.ExtendedBeacons.ExtendedBeaconBase<TrainPassedEventArgs> sender, TrainPassedEventArgs eventArgs) : base(bveHacker, sender, eventArgs)
+        public TrainPassedGlobals(PluginHost.BveHacker bveHacker, PluginHost.ExtendedBeacons.ExtendedBeaconBase<TrainPassedEventArgs> sender, TrainPassedEventArgs eventArgs) : base(bveHacker, sender, eventArgs)
         {
         }
 

@@ -15,7 +15,7 @@ namespace Automatic9045.AtsEx.PluginHost
     {
         private readonly LoadingProgressForm LoadingProgressForm;
 
-        public LoadErrorManager(LoadingProgressForm loadingProgressForm)
+        internal LoadErrorManager(LoadingProgressForm loadingProgressForm)
         {
             LoadingProgressForm = loadingProgressForm;
             Errors = new LoadErrorList(LoadingProgressForm);

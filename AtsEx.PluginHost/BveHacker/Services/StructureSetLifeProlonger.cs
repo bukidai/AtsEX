@@ -9,9 +9,9 @@ using HarmonyLib;
 
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx
+namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
 {
-    internal class StructureSetLifeProlonger : IDisposable
+    internal sealed class StructureSetLifeProlonger : IDisposable
     {
         private static event EventHandler<PatchInvokedEventArgs> PatchInvoked;
 

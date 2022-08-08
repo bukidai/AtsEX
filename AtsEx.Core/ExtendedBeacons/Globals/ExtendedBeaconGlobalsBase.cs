@@ -18,7 +18,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
         public readonly TPassedEventArgs e;
 #pragma warning restore IDE1006 // 命名スタイル
 
-        public ExtendedBeaconGlobalsBase(IBveHacker bveHacker, PluginHost.ExtendedBeacons.ExtendedBeaconBase<TPassedEventArgs> sender, TPassedEventArgs eventArgs) : base(bveHacker)
+        public ExtendedBeaconGlobalsBase(PluginHost.BveHacker bveHacker, PluginHost.ExtendedBeacons.ExtendedBeaconBase<TPassedEventArgs> sender, TPassedEventArgs eventArgs) : base(bveHacker)
         {
             this.sender = sender;
             e = eventArgs;

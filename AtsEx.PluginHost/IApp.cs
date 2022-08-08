@@ -72,10 +72,10 @@ namespace Automatic9045.AtsEx.PluginHost
         /// 全てのハンドルのセットを取得します。
         /// </summary>
         /// <remarks>
-        /// <see cref="IBveHacker"/> が利用できない場合、このプロパティに設定されている値は力行ハンドルの抑速ノッチ、ブレーキハンドルの抑速ブレーキノッチを無視したものになります。<br/>
-        /// 正確な値を確実に取得したい場合は <see cref="IBveHacker.Handles"/> プロパティを使用してください。
+        /// <see cref="BveHacker"/> が利用できない場合、このプロパティに設定されている値は力行ハンドルの抑速ノッチ、ブレーキハンドルの抑速ブレーキノッチを無視したものになります。<br/>
+        /// 正確な値を確実に取得したい場合は <see cref="BveHacker.Handles"/> プロパティを使用してください。
         /// </remarks>
-        /// <seealso cref="IBveHacker.Handles"/>
+        /// <seealso cref="BveHacker.Handles"/>
         HandleSet Handles { get; }
 
 
