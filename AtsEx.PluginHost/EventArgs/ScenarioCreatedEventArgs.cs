@@ -11,8 +11,14 @@ using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.PluginHost
 {
+    /// <summary>
+    /// <see cref="BveHacker.PreviewScenarioCreated"/>、<see cref="BveHacker.ScenarioCreated"/> イベントのデータを提供します。
+    /// </summary>
     public class ScenarioCreatedEventArgs : EventArgs
     {
+        /// <summary>
+        /// 生成された <see cref="ClassWrappers.Scenario"/> クラスのインスタンス。
+        /// </summary>
         public Scenario Scenario { get; }
 
         internal ScenarioCreatedEventArgs(Scenario scenario) : base()
