@@ -8,13 +8,27 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost.Plugins
 {
+    /// <summary>
+    /// アセンブリ (.dll) 形式の AtsEX プラグインを表します。
+    /// </summary>
     public abstract class AssemblyPluginBase : PluginBase
     {
+        /// <inheritdoc/>
         public override string Location { get; }
+
+        /// <inheritdoc/>
         public override string Name { get; }
+
+        /// <inheritdoc/>
         public override string Title { get; }
+
+        /// <inheritdoc/>
         public override string Version { get; }
+
+        /// <inheritdoc/>
         public override string Description { get; }
+
+        /// <inheritdoc/>
         public override string Copyright { get; }
 
         /// <summary>
