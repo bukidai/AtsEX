@@ -10,17 +10,20 @@ namespace Automatic9045.AtsEx.PluginHost.Plugins
     {
         internal protected IApp App { get; }
         internal protected BveHacker BveHacker { get; }
+        internal protected string Identifier { get; }
 
-        public PluginBuilder(IApp app, BveHacker bveHacker)
+        public PluginBuilder(IApp app, BveHacker bveHacker, string identifier)
         {
             App = app;
             BveHacker = bveHacker;
+            Identifier = identifier;
         }
 
         protected PluginBuilder(PluginBuilder pluginBuilder)
         {
             App = pluginBuilder.App;
             BveHacker = pluginBuilder.BveHacker;
+            Identifier = pluginBuilder.Identifier;
         }
     }
 }

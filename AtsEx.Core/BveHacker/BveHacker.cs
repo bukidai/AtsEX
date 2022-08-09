@@ -65,7 +65,7 @@ namespace Automatic9045.AtsEx
 
         public void SetScenario()
         {
-            VersionFormProvider.Intialize(Enumerable.Concat(App.Instance.VehiclePlugins, App.Instance.MapPlugins));
+            VersionFormProvider.Intialize(Enumerable.Concat(App.Instance.VehiclePlugins.Values, App.Instance.MapPlugins.Values));
         }
 
         [UnderConstruction]

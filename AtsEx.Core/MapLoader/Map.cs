@@ -19,10 +19,10 @@ namespace Automatic9045.AtsEx
         protected const string NoMapPluginHeader = "[[nompi]]";
         protected const string MapPluginUsingHeader = "<mpiusing>";
 
-        public List<PluginBase> LoadedPlugins { get; } = new List<PluginBase>();
+        public SortedList<string, PluginBase> LoadedPlugins { get; } = new SortedList<string, PluginBase>();
         public List<LoadError> MapPluginUsingErrors { get; } = new List<LoadError>();
 
-        protected Map(List<PluginBase> loadedPlugins, List<LoadError> mapPluginUsingErrors)
+        protected Map(SortedList<string, PluginBase> loadedPlugins, List<LoadError> mapPluginUsingErrors)
         {
             LoadedPlugins = loadedPlugins;
             MapPluginUsingErrors = mapPluginUsingErrors;
@@ -30,7 +30,7 @@ namespace Automatic9045.AtsEx
 
         public static Map Load(string filePath, PluginLoader pluginLoader, ILoadErrorResolver loadErrorResolver)
         {
-            List<PluginBase> loadedPlugins = new List<PluginBase>();
+            SortedList<string, PluginBase> loadedPlugins = new SortedList<string, PluginBase>();
             List<LoadError> mapPluginUsingErrors = new List<LoadError>();
 
             string fileName = Path.GetFileName(filePath);
@@ -53,8 +53,8 @@ namespace Automatic9045.AtsEx
                                 try
                                 {
                                     PluginUsing mapPluginUsing = PluginUsing.Load(PluginType.MapPlugin, mapPluginUsingAbsolutePath);
-                                    IEnumerable<PluginBase> loadedMapPlugins = pluginLoader.LoadFromPluginUsing(mapPluginUsing);
-                                    loadedPlugins.AddRange(loadedMapPlugins);
+                                    SortedList<string, PluginBase> loadedMapPlugins = pluginLoader.LoadFromPluginUsing(mapPluginUsing);
+                                    AddRangeToLoadedPlugins(loadedMapPlugins);
                                 }
                                 catch (CompilationException ex)
                                 {
@@ -74,7 +74,7 @@ namespace Automatic9045.AtsEx
                                 
                                 Map includedMap = Load(includeAbsolutePath, pluginLoader, loadErrorResolver);
 
-                                loadedPlugins.AddRange(includedMap.LoadedPlugins);
+                                AddRangeToLoadedPlugins(includedMap.LoadedPlugins);
                                 mapPluginUsingErrors.AddRange(includedMap.MapPluginUsingErrors);
                             }
                         }
@@ -83,6 +83,15 @@ namespace Automatic9045.AtsEx
             }
 
             return new Map(loadedPlugins, mapPluginUsingErrors);
+
+
+            void AddRangeToLoadedPlugins(IDictionary<string, PluginBase> plugins)
+            {
+                foreach (KeyValuePair<string, PluginBase> item in plugins)
+                {
+                    loadedPlugins.Add(item.Key, item.Value);
+                }
+            }
         }
 
         protected static List<TextWithCharIndex> GetStatementsFromLine(string line)

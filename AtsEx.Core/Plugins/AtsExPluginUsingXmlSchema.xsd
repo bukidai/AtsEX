@@ -17,18 +17,21 @@
 
 	<xs:element name="Assembly">
 		<xs:complexType>
+			<xs:attribute name="Identifier" type="xs:string" use="optional" />
 			<xs:attribute name="Path" type="xs:string" use="required" />
 		</xs:complexType>
 	</xs:element>
 
 	<xs:element name="CSharpScript">
 		<xs:complexType>
+			<xs:attribute name="Identifier" type="xs:string" use="optional" />
 			<xs:attribute name="PackageManifestPath" type="xs:string" use="required" />
 		</xs:complexType>
 	</xs:element>
 
 	<xs:element name="IronPython2">
 		<xs:complexType>
+			<xs:attribute name="Identifier" type="xs:string" use="optional" />
 			<xs:attribute name="PackageManifestPath" type="xs:string" use="required" />
 		</xs:complexType>
 	</xs:element>

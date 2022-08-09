@@ -25,8 +25,8 @@ namespace Automatic9045.AtsEx
 
         private readonly BveHacker BveHacker;
 
-        private readonly List<PluginBase> VehiclePlugins;
-        private readonly List<PluginBase> MapPlugins;
+        private readonly SortedList<string, PluginBase> VehiclePlugins;
+        private readonly SortedList<string, PluginBase> MapPlugins;
 
         private protected AtsExScenarioService(AtsEx atsEx, PluginUsing vehiclePluginUsing, VehicleSpec vehicleSpec)
         {
@@ -38,7 +38,7 @@ namespace Automatic9045.AtsEx
             try
             {
                 {
-                    VehiclePlugins = pluginLoader.LoadFromPluginUsing(vehiclePluginUsing).ToList();
+                    VehiclePlugins = pluginLoader.LoadFromPluginUsing(vehiclePluginUsing);
                 }
 
                 {
@@ -64,8 +64,8 @@ namespace Automatic9045.AtsEx
             }
             finally
             {
-                if (VehiclePlugins is null) VehiclePlugins = new List<PluginBase>();
-                if (MapPlugins is null) MapPlugins = new List<PluginBase>();
+                if (VehiclePlugins is null) VehiclePlugins = new SortedList<string, PluginBase>();
+                if (MapPlugins is null) MapPlugins = new SortedList<string, PluginBase>();
 
                 App.Instance.VehiclePlugins = VehiclePlugins;
                 App.Instance.MapPlugins = MapPlugins;
@@ -77,21 +77,21 @@ namespace Automatic9045.AtsEx
 
         public void Dispose()
         {
-            VehiclePlugins.ForEach(plugin =>
+            foreach (PluginBase plugin in VehiclePlugins.Values)
             {
                 if (plugin is IDisposable disposable)
                 {
                     disposable.Dispose();
                 }
-            });
+            }
 
-            MapPlugins.ForEach(plugin =>
+            foreach (PluginBase plugin in MapPlugins.Values)
             {
                 if (plugin is IDisposable disposable)
                 {
                     disposable.Dispose();
                 }
-            });
+            }
 
             BveHacker.Dispose();
         }
@@ -117,7 +117,7 @@ namespace Automatic9045.AtsEx
             ReverserPosition? atsReverserPosition = null;
             ConstantSpeedCommand? atsConstantSpeedCommand = null;
 
-            VehiclePlugins.ForEach(plugin =>
+            foreach (PluginBase plugin in VehiclePlugins.Values)
             {
                 TickResult tickResult = plugin.Tick(elapsed);
                 if (!(tickResult is VehiclePluginTickResult vehiclePluginTickResult))
@@ -132,9 +132,9 @@ namespace Automatic9045.AtsEx
                 if (atsBrakeNotch is null) atsBrakeNotch = commandSet.BrakeCommand.GetOverridenNotch(brakeNotch);
                 if (atsReverserPosition is null) atsReverserPosition = commandSet.ReverserCommand.GetOverridenPosition(reverserPosition);
                 if (atsConstantSpeedCommand is null) atsConstantSpeedCommand = commandSet.ConstantSpeedCommand;
-            });
+            }
 
-            MapPlugins.ForEach(plugin =>
+            foreach (PluginBase plugin in MapPlugins.Values)
             {
                 TickResult tickResult = plugin.Tick(elapsed);
                 if (!(tickResult is MapPluginTickResult))
@@ -142,7 +142,7 @@ namespace Automatic9045.AtsEx
                     throw new InvalidOperationException(string.Format(Resources.GetString("MapPluginTickResultTypeInvalid").Value,
                        $"{nameof(PluginBase)}.{nameof(PluginBase.Tick)}", nameof(MapPluginTickResult)));
                 }
-            });
+            }
 
             return new HandlePositionSet(atsPowerNotch ?? powerNotch, atsBrakeNotch ?? brakeNotch, atsReverserPosition ?? reverserPosition, atsConstantSpeedCommand ?? ConstantSpeedCommand.Continue);
         }

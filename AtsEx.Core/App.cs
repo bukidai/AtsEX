@@ -64,8 +64,8 @@ namespace Automatic9045.AtsEx
         public Assembly BveAssembly { get; }
         public Version BveVersion { get; }
 
-        private List<PluginBase> _VehiclePlugins = null;
-        public List<PluginBase> VehiclePlugins
+        private SortedList<string, PluginBase> _VehiclePlugins = null;
+        public SortedList<string, PluginBase> VehiclePlugins
         {
             get => _VehiclePlugins is null ? throw new PropertyNotInitializedException(nameof(VehiclePlugins)) : _VehiclePlugins;
             set
@@ -75,8 +75,8 @@ namespace Automatic9045.AtsEx
             }
         }
 
-        private List<PluginBase> _MapPlugins = null;
-        public List<PluginBase> MapPlugins
+        private SortedList<string, PluginBase> _MapPlugins = null;
+        public SortedList<string, PluginBase> MapPlugins
         {
             get => _MapPlugins is null ? throw new PropertyNotInitializedException(nameof(MapPlugins)) : _MapPlugins;
             set

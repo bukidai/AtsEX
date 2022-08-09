@@ -24,16 +24,18 @@ namespace Automatic9045.AtsEx.Plugins
         protected static XmlSchemaSet SchemaSet = new XmlSchemaSet();
         protected static string TargetNamespace;
 
+        public string Name { get; }
+
         public PluginType PluginType { get; }
 
-        protected readonly List<Assembly> _Assemblies;
-        public ReadOnlyCollection<Assembly> Assemblies { get; }
+        protected readonly SortedList<Identifier, Assembly> _Assemblies;
+        public ReadOnlyDictionary<Identifier, Assembly> Assemblies { get; }
 
-        protected readonly List<ScriptPluginPackage> _CSharpScriptPackages;
-        public ReadOnlyCollection<ScriptPluginPackage> CSharpScriptPackages { get; }
+        protected readonly SortedList<Identifier, ScriptPluginPackage> _CSharpScriptPackages;
+        public ReadOnlyDictionary<Identifier, ScriptPluginPackage> CSharpScriptPackages { get; }
 
-        protected readonly List<ScriptPluginPackage> _IronPython2Packages;
-        public ReadOnlyCollection<ScriptPluginPackage> IronPython2Packages { get; }
+        protected readonly SortedList<Identifier, ScriptPluginPackage> _IronPython2Packages;
+        public ReadOnlyDictionary<Identifier, ScriptPluginPackage> IronPython2Packages { get; }
 
         static PluginUsing()
         {
@@ -45,17 +47,19 @@ namespace Automatic9045.AtsEx.Plugins
             }
         }
 
-        protected PluginUsing(PluginType pluginType, IEnumerable<Assembly> assemblies, IEnumerable<ScriptPluginPackage> csharpScriptPackages, IEnumerable<ScriptPluginPackage> ironPython2Packages)
+        protected PluginUsing(string name, PluginType pluginType,
+            IDictionary<Identifier, Assembly> assemblies, IDictionary<Identifier, ScriptPluginPackage> csharpScriptPackages, IDictionary<Identifier, ScriptPluginPackage> ironPython2Packages)
         {
+            Name = name;
             PluginType = pluginType;
 
-            _Assemblies = assemblies.ToList();
-            _CSharpScriptPackages = csharpScriptPackages.ToList();
-            _IronPython2Packages = ironPython2Packages.ToList();
+            _Assemblies = new SortedList<Identifier, Assembly>(assemblies);
+            _CSharpScriptPackages = new SortedList<Identifier, ScriptPluginPackage>(csharpScriptPackages);
+            _IronPython2Packages = new SortedList<Identifier, ScriptPluginPackage>(ironPython2Packages);
 
-            Assemblies = _Assemblies.AsReadOnly();
-            CSharpScriptPackages = _CSharpScriptPackages.AsReadOnly();
-            IronPython2Packages = _IronPython2Packages.AsReadOnly();
+            Assemblies = new ReadOnlyDictionary<Identifier, Assembly>(_Assemblies);
+            CSharpScriptPackages = new ReadOnlyDictionary<Identifier, ScriptPluginPackage>(_CSharpScriptPackages);
+            IronPython2Packages = new ReadOnlyDictionary<Identifier, ScriptPluginPackage>(_IronPython2Packages);
         }
 
         public static PluginUsing Load(PluginType pluginType, string listPath)
@@ -65,16 +69,23 @@ namespace Automatic9045.AtsEx.Plugins
 
             XElement root = doc.Element(TargetNamespace + "AtsExPluginUsing");
 
-            IEnumerable<Assembly> assemblies = root.Elements(TargetNamespace + "Assembly").
-                Select(element => LoadAssembly(element, listPath));
+            Dictionary<Identifier, Assembly> assemblies = root.Elements(TargetNamespace + "Assembly").
+                ToDictionary(GetIdentifier, element => LoadAssembly(element, listPath));
 
-            IEnumerable<ScriptPluginPackage> cSharpScriptPackages = root.Elements(TargetNamespace + "CSharpScript").
-                Select(element => LoadScriptPluginPackage(element, Path.GetDirectoryName(listPath)));
+            Dictionary<Identifier, ScriptPluginPackage> cSharpScriptPackages = root.Elements(TargetNamespace + "CSharpScript").
+                ToDictionary(GetIdentifier, element => LoadScriptPluginPackage(element, Path.GetDirectoryName(listPath)));
 
-            IEnumerable<ScriptPluginPackage> ironPython2Packages = root.Elements(TargetNamespace + "IronPython2").
-                Select(element => LoadScriptPluginPackage(element, Path.GetDirectoryName(listPath)));
+            Dictionary<Identifier, ScriptPluginPackage> ironPython2Packages = root.Elements(TargetNamespace + "IronPython2").
+                ToDictionary(GetIdentifier, element => LoadScriptPluginPackage(element, Path.GetDirectoryName(listPath)));
 
-            return new PluginUsing(pluginType, assemblies, cSharpScriptPackages, ironPython2Packages);
+            return new PluginUsing(Path.GetFileName(listPath), pluginType, assemblies, cSharpScriptPackages, ironPython2Packages);
+
+
+            Identifier GetIdentifier(XElement element)
+            {
+                string identifierText = (string)element.Attribute("Identifier");
+                return identifierText is null ? new RandomIdentifier() : new Identifier(identifierText);
+            }
         }
 
         private static Assembly LoadAssembly(XElement element, string listPath)

@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.Plugins.Scripting;
 using Automatic9045.AtsEx.Plugins.Scripting.CSharp;
 using Automatic9045.AtsEx.Plugins.Scripting.IronPython2;
 using Automatic9045.AtsEx.PluginHost;
@@ -19,41 +20,41 @@ namespace Automatic9045.AtsEx.Plugins
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(PluginLoader), "Core");
 
         protected readonly BveHacker BveHacker;
-        protected readonly PluginBuilder PluginBuilder;
 
         public PluginLoader(BveHacker bveHacker)
         {
             BveHacker = bveHacker;
-
-            PluginBuilder = new PluginBuilder(App.Instance, BveHacker);
         }
 
         [UnderConstruction]
-        public IEnumerable<PluginBase> LoadFromPluginUsing(PluginUsing pluginUsing)
+        public SortedList<string, PluginBase> LoadFromPluginUsing(PluginUsing pluginUsing)
         {
-            IEnumerable<PluginBase> assemblyPlugins = pluginUsing.Assemblies.
-                Select(assembly => LoadFromAssembly(assembly, pluginUsing.PluginType)).
-                SelectMany(x => x);
+            SortedList<string, PluginBase> plugins = new SortedList<string, PluginBase>();
 
-            IEnumerable<PluginBase> cSharpScriptPlugins = pluginUsing.CSharpScriptPackages.
-                Select(package => CSharpScriptPlugin.FromPackage(PluginBuilder, pluginUsing.PluginType, package));
+            foreach (KeyValuePair<Identifier, Assembly> item in pluginUsing.Assemblies)
+            {
+                List<PluginBase> loadedPlugins = LoadFromAssembly(item.Key, item.Value, pluginUsing.PluginType, pluginUsing.Name);
+                loadedPlugins.ForEach(plugin => plugins[plugin.Identifier] = plugin);
+            }
 
-            IEnumerable<PluginBase> ironPython2Plugins = pluginUsing.IronPython2Packages.
-                Select(package => IronPython2Plugin.FromPackage(PluginBuilder, pluginUsing.PluginType, package));
+            foreach (KeyValuePair<Identifier, ScriptPluginPackage> item in pluginUsing.CSharpScriptPackages)
+            {
+                PluginBuilder pluginBuilder = new PluginBuilder(App.Instance, BveHacker, item.Key.Text);
+                plugins[item.Key.Text] = CSharpScriptPlugin.FromPackage(pluginBuilder, pluginUsing.PluginType, item.Value);
+            }
+
+            foreach (KeyValuePair<Identifier, ScriptPluginPackage> item in pluginUsing.IronPython2Packages)
+            {
+                PluginBuilder pluginBuilder = new PluginBuilder(App.Instance, BveHacker, item.Key.Text);
+                plugins[item.Key.Text] = IronPython2Plugin.FromPackage(pluginBuilder, pluginUsing.PluginType, item.Value);
+            }
 
             // TODO: ここで他の種類のプラグイン（スクリプト、ネイティブなど）を読み込む
-
-            IEnumerable<PluginBase> plugins = new[]
-            {
-                assemblyPlugins,
-                cSharpScriptPlugins,
-                ironPython2Plugins,
-            }.SelectMany(x => x);
 
             return plugins;
         }
 
-        protected IEnumerable<PluginBase> LoadFromAssembly(Assembly assembly, PluginType pluginType)
+        protected List<PluginBase> LoadFromAssembly(Identifier identifier, Assembly assembly, PluginType pluginType, string pluginUsingName)
         {
             string fileName = Path.GetFileName(assembly.Location);
 
@@ -64,12 +65,35 @@ namespace Automatic9045.AtsEx.Plugins
                 throw new BveFileLoadException(string.Format(Resources.GetString("PluginClassNotFound").Value, fileName, nameof(PluginBase), App.Instance.ProductShortName));
             }
 
-            IEnumerable<PluginBase> plugins = pluginTypes.Select(t =>
+            List<(Type, ConstructorInfo)> constructors = new List<(Type, ConstructorInfo)>();
+            foreach (Type type in pluginTypes)
             {
-                ConstructorInfo constructorInfo = t.GetConstructor(new Type[] { typeof(PluginBuilder) });
-                if (constructorInfo is null) return null;
+                ConstructorInfo constructor = type.GetConstructor(new Type[] { typeof(PluginBuilder) });
+                if (constructor is null) continue;
 
-                PluginBase pluginInstance = constructorInfo.Invoke(new object[] { PluginBuilder }) as PluginBase;
+                constructors.Add((type, constructor));
+            }
+
+            switch (constructors.Count)
+            {
+                case 0:
+                    throw new BveFileLoadException(string.Format(Resources.GetString("ConstructorNotFound").Value, fileName, nameof(PluginBase), typeof(PluginBuilder)));
+
+                case 1:
+                    break;
+
+                default:
+                    if (!(identifier is RandomIdentifier))
+                    {
+                        throw new BveFileLoadException(string.Format(Resources.GetString("CannotSetIdentifier").Value, fileName), pluginUsingName);
+                    }
+                    break;
+            }
+
+            List<PluginBase> plugins = new List<PluginBase>();
+            foreach ((Type type, ConstructorInfo constructorInfo) in constructors)
+            {
+                PluginBase pluginInstance = constructorInfo.Invoke(new object[] { new PluginBuilder(App.Instance, BveHacker, GenerateIdentifier()) }) as PluginBase;
                 if (pluginInstance.PluginType != pluginType)
                 {
                     throw new InvalidOperationException(string.Format(Resources.GetString("WrongPluginType").Value, pluginType.GetTypeString(), pluginInstance.PluginType.GetTypeString()));
@@ -79,12 +103,13 @@ namespace Automatic9045.AtsEx.Plugins
                     throw new NotSupportedException(string.Format(Resources.GetString("MustUseExtensions").Value, pluginInstance.PluginType.GetTypeString(), App.Instance.ProductShortName));
                 }
 
-                return pluginInstance;
-            }).Where(plugin => !(plugin is null)).ToArray();
+                plugins.Add(pluginInstance);
+            }
 
-            return plugins.Any()
-                ? plugins
-                : throw new BveFileLoadException(string.Format(Resources.GetString("ConstructorNotFound").Value, fileName, nameof(PluginBase), typeof(PluginBuilder)));
+            return plugins;
+
+
+            string GenerateIdentifier() => constructors.Count == 1 ? identifier.Text : Guid.NewGuid().ToString();
         }
     }
 }

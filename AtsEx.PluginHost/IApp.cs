@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -64,13 +65,13 @@ namespace Automatic9045.AtsEx.PluginHost
         /// 読み込まれた AtsEX 車両プラグインのリストを取得します。
         /// <see cref="PluginBase"/> のコンストラクタ内など、<see cref="AllVehiclePluginLoaded"/> イベントが発生するより前には取得できないので注意してください。
         /// </summary>
-        List<PluginBase> VehiclePlugins { get; }
+        SortedList<string, PluginBase> VehiclePlugins { get; }
 
         /// <summary>
         /// 読み込まれた AtsEX 路線プラグインのリストを取得します。
         /// <see cref="PluginBase"/> のコンストラクタ内など、<see cref="AllMapPluginLoaded"/> イベントが発生するより前には取得できないので注意してください。
         /// </summary>
-        List<PluginBase> MapPlugins { get; }
+        SortedList<string, PluginBase> MapPlugins { get; }
 
 
         /// <summary>

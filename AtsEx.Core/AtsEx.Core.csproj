@@ -137,6 +137,7 @@
     <Compile Include="Input\NativeKeySet.cs" />
     <Compile Include="MapLoader\Map.cs" />
     <Compile Include="ExtendedBeacons\ExtendedBeaconSet.cs" />
+    <Compile Include="Plugins\Identifier.cs" />
     <Compile Include="Plugins\PluginLoader.cs" />
     <Compile Include="Plugins\PluginUsing.cs" />
     <Compile Include="Plugins\Scripting\CSharp\CompilationException.cs" />

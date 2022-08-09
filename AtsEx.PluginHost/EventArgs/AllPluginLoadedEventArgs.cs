@@ -11,9 +11,9 @@ namespace Automatic9045.AtsEx.PluginHost.Plugins
 {
     public class AllPluginLoadedEventArgs : EventArgs
     {
-        public List<PluginBase> Plugins { get; }
+        public SortedList<string, PluginBase> Plugins { get; }
 
-        public AllPluginLoadedEventArgs(List<PluginBase> plugins) : base()
+        public AllPluginLoadedEventArgs(SortedList<string, PluginBase> plugins) : base()
         {
             Plugins = plugins;
         }

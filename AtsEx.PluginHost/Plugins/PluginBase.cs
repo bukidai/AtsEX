@@ -23,6 +23,11 @@ namespace Automatic9045.AtsEx.PluginHost.Plugins
         protected BveHacker BveHacker => UseAtsExExtensions ? _BveHacker : throw new InvalidOperationException($"{nameof(UseAtsExExtensions)} が {false} に設定されています。");
 
         /// <summary>
+        /// PluginUsing ファイルで指定した AtsEX プラグインの識別子を取得します。このプロパティの値は全プラグインにおいて一意であることが保証されています。
+        /// </summary>
+        public string Identifier { get; }
+
+        /// <summary>
         /// AtsEX プラグインのファイルの完全パスを取得します。
         /// </summary>
         public abstract string Location { get; }
@@ -78,9 +83,9 @@ namespace Automatic9045.AtsEx.PluginHost.Plugins
             PluginType = pluginType;
             UseAtsExExtensions = useAtsExExtensions;
             App = builder.App;
+            Identifier = builder.Identifier;
 
             if (!UseAtsExExtensions) return;
-
             _BveHacker = builder.BveHacker;
         }
 
