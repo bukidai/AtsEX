@@ -118,7 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AtsExAssemblyLocationIllegal" xml:space="preserve">
-    <value>{0} のメインアセンブリの配置先 '{1}' は不正です。\n\n{0} 本体を最新のバージョンに維持するため、車両・マップ毎に組み込むことは推奨されません。{0} ATS プラグイン版をご利用の場合は 1 つのシナリオフォルダに 1 つのみ配置してください。\n正しい配置先は '{2}' です。</value>
+    <value>{0} のメインアセンブリの配置先 '{1}' は不正です。
+
+{0} 本体を最新のバージョンに維持するため、車両・マップ毎に組み込むことは推奨されません。{0} ATS プラグイン版をご利用の場合は 1 つのシナリオフォルダに 1 つのみ配置してください。
+正しい配置先は '{2}' です。</value>
   </data>
   <data name="BveVersionNotSupported" xml:space="preserve">
     <value>BVE バージョン {0} には対応していません。{1} 向けのプロファイルで代用しますが、{2} による拡張機能は正常に動作しない可能性があります。</value>
