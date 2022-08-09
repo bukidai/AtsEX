@@ -20,7 +20,7 @@ namespace Automatic9045.AtsEx
 
             public AsAtsPlugin(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly) : base(targetProcess, targetAppDomain, targetAssembly, new LoadErrorResolver())
             {
-                (base.LoadErrorResolver as LoadErrorResolver).LoadErrorManager = BveHacker.LoadErrorManager;
+                (BeaconCreationExceptionResolver as LoadErrorResolver).LoadErrorManager = BveHacker.LoadErrorManager;
             }
 
             private protected override void ProfileForDifferentBveVersionLoaded(Version profileVersion)
@@ -30,7 +30,7 @@ namespace Automatic9045.AtsEx
             }
 
 
-            private new class LoadErrorResolver : ILoadErrorResolver
+            private class LoadErrorResolver : ILoadErrorResolver
             {
                 public LoadErrorManager LoadErrorManager { get; set; }
 

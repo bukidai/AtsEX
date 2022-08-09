@@ -18,13 +18,13 @@ namespace Automatic9045.AtsEx
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<AtsEx>("Core");
 
-        private readonly ILoadErrorResolver LoadErrorResolver;
+        private readonly ILoadErrorResolver BeaconCreationExceptionResolver;
 
         internal BveHacker BveHacker { get; }
 
-        private protected AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, ILoadErrorResolver loadErrorResolver)
+        private protected AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, ILoadErrorResolver beaconCreationExceptionResolver)
         {
-            LoadErrorResolver = loadErrorResolver;
+            BeaconCreationExceptionResolver = beaconCreationExceptionResolver;
 
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
 
@@ -39,7 +39,7 @@ namespace Automatic9045.AtsEx
             };
 
             App.CreateInstance(targetProcess, targetAssembly, executingAssembly, pluginHostAssembly);
-            BveHacker = new BveHacker(ProfileForDifferentBveVersionLoaded, loadErrorResolver);
+            BveHacker = new BveHacker(ProfileForDifferentBveVersionLoaded, beaconCreationExceptionResolver);
 
             //DXDynamicTextureHost = new DXDynamicTextureHost();
         }
