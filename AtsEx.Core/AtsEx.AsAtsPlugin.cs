@@ -18,7 +18,8 @@ namespace Automatic9045.AtsEx
         {
             internal string VersionWarningText { get; private set; }
 
-            public AsAtsPlugin(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly) : base(targetProcess, targetAppDomain, targetAssembly, new LoadErrorResolver())
+            public AsAtsPlugin(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, Assembly atsExAssembly)
+                : base(targetProcess, targetAppDomain, targetAssembly, atsExAssembly, new LoadErrorResolver())
             {
                 (BeaconCreationExceptionResolver as LoadErrorResolver).LoadErrorManager = BveHacker.LoadErrorManager;
             }

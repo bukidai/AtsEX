@@ -22,7 +22,7 @@ namespace Automatic9045.AtsEx
 
         internal BveHacker BveHacker { get; }
 
-        private protected AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, ILoadErrorResolver beaconCreationExceptionResolver)
+        private protected AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, Assembly atsExAssembly, ILoadErrorResolver beaconCreationExceptionResolver)
         {
             BeaconCreationExceptionResolver = beaconCreationExceptionResolver;
 
@@ -38,7 +38,7 @@ namespace Automatic9045.AtsEx
                 return File.Exists(path) ? Assembly.LoadFrom(path) : null;
             };
 
-            App.CreateInstance(targetProcess, targetAssembly, executingAssembly, pluginHostAssembly);
+            App.CreateInstance(targetProcess, targetAssembly, atsExAssembly, executingAssembly, pluginHostAssembly);
             BveHacker = new BveHacker(ProfileForDifferentBveVersionLoaded, beaconCreationExceptionResolver);
 
             //DXDynamicTextureHost = new DXDynamicTextureHost();

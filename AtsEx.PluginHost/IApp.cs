@@ -35,6 +35,11 @@ namespace Automatic9045.AtsEx.PluginHost
         Process Process { get; }
 
         /// <summary>
+        /// AtsEX の <see cref="Assembly"/> を取得します。
+        /// </summary>
+        Assembly AtsExAssembly { get; }
+
+        /// <summary>
         /// AtsEX コアの <see cref="Assembly"/> を取得します。
         /// </summary>
         Assembly AtsExCoreAssembly { get; }

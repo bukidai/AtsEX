@@ -23,10 +23,11 @@ namespace Automatic9045.AtsEx
 
         public static App Instance { get; private set; }
 
-        private App(Process targetProcess, Assembly bveAssembly, Assembly atsExCoreAssembly, Assembly atsExPluginHostAssembly)
+        private App(Process targetProcess, Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExCoreAssembly, Assembly atsExPluginHostAssembly)
         {
             Process = targetProcess;
             BveAssembly = bveAssembly;
+            AtsExAssembly = atsExAssembly;
             AtsExCoreAssembly = atsExCoreAssembly;
             AtsExPluginHostAssembly = atsExPluginHostAssembly;
             BveVersion = BveAssembly.GetName().Version;
@@ -34,8 +35,8 @@ namespace Automatic9045.AtsEx
             BveVersion = BveAssembly.GetName().Version;
         }
 
-        public static void CreateInstance(Process targetProcess, Assembly bveAssembly, Assembly atsExCoreAssembly, Assembly atsExPluginHostAssembly)
-            => Instance = new App(targetProcess, bveAssembly, atsExCoreAssembly, atsExPluginHostAssembly);
+        public static void CreateInstance(Process targetProcess, Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExCoreAssembly, Assembly atsExPluginHostAssembly)
+            => Instance = new App(targetProcess, bveAssembly, atsExAssembly, atsExCoreAssembly, atsExPluginHostAssembly);
 
         public void SetScenario(VehicleSpec vehicleSpec)
         {
@@ -57,6 +58,7 @@ namespace Automatic9045.AtsEx
         public string ProductShortName { get; } = Resources.GetString("ProductShortName").Value;
 
         public Process Process { get; }
+        public Assembly AtsExAssembly { get; }
         public Assembly AtsExCoreAssembly { get; }
         public Assembly AtsExPluginHostAssembly { get; }
         public Assembly BveAssembly { get; }
