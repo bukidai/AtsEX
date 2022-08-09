@@ -24,9 +24,9 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
     {
         public TResult ReturnValue { get; }
 
-        public ScriptResult(TResult returnValue, ScriptScope scope) : base(scope)
+        public ScriptResult(ScriptScope scope) : base(scope)
         {
-            ReturnValue = returnValue;
+            ReturnValue = scope.GetVariable<TResult>("__return__");
         }
     }
 }

@@ -67,14 +67,12 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
             return new ScriptResult(Scope);
         }
 
-        protected dynamic ExecuteCode(TGlobals globals)
+        protected void ExecuteCode(TGlobals globals)
         {
             if (!CompilationTask.IsCompleted) GetWithCheckErrors();
 
             Scope.SetVariable("g", globals);
-            dynamic returnValue = CompiledCode.Execute(Scope);
-
-            return returnValue;
+            CompiledCode.Execute(Scope);
         }
     }
 
@@ -98,8 +96,8 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
 
         public new IScriptResult<TResult> Run(TGlobals globals)
         {
-            dynamic returnValue = ExecuteCode(globals);
-            return new ScriptResult<TResult>(returnValue, Scope);
+            ExecuteCode(globals);
+            return new ScriptResult<TResult>(Scope);
         }
     }
 }
