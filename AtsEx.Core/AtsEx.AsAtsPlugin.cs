@@ -12,9 +12,9 @@ using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx
 {
-    public abstract partial class AtsExExtensionSet
+    public abstract partial class AtsEx
     {
-        public sealed class AsAtsPlugin : AtsExExtensionSet
+        public sealed class AsAtsPlugin : AtsEx
         {
             internal string VersionWarningText { get; private set; }
 

@@ -116,7 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="AtsExExtensionSet.AsAtsPlugin.cs" />
+    <Compile Include="AtsEx.AsAtsPlugin.cs" />
     <Compile Include="AtsExScenarioService.AsAtsPlugin.cs" />
     <Compile Include="AtsExScenarioService.cs" />
     <Compile Include="BveHacker\BveHacker.cs" />
@@ -162,7 +162,7 @@
     <Compile Include="Plugins\Scripting\ScriptPluginPackage.cs" />
     <Compile Include="Plugins\Scripting\ScriptPluginPackage.InformationBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AtsExExtensionSet.cs" />
+    <Compile Include="AtsEx.cs" />
     <Compile Include="VersionForm\VersionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,8 +205,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\AtsExExtensionSet.ja.resx" />
-    <Content Include="Resources\AtsExExtensionSet.resx" />
+    <Content Include="Resources\AtsEx.ja.resx" />
+    <Content Include="Resources\AtsEx.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\PluginLoader.ja.resx" />

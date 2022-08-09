@@ -17,12 +17,12 @@ namespace Automatic9045.AtsEx
     {
         public sealed class AsAtsPlugin : AtsExScenarioService
         {
-            public AsAtsPlugin(AtsExExtensionSet.AsAtsPlugin atsExExtensionSet, Assembly callerAssembly, VehicleSpec vehicleSpec)
-                : base(atsExExtensionSet, LoadVehiclePluginUsing(callerAssembly), vehicleSpec)
+            public AsAtsPlugin(AtsEx.AsAtsPlugin atsEx, Assembly callerAssembly, VehicleSpec vehicleSpec)
+                : base(atsEx, LoadVehiclePluginUsing(callerAssembly), vehicleSpec)
             {
                 if (BveHacker.BveTypes.ProfileVersion != App.Instance.BveVersion && VehiclePlugins.All(plugin => !plugin.UseAtsExExtensions))
                 {
-                    LoadError removeTargetError = BveHacker.LoadErrorManager.Errors.FirstOrDefault(error => error.Text == atsExExtensionSet.VersionWarningText);
+                    LoadError removeTargetError = BveHacker.LoadErrorManager.Errors.FirstOrDefault(error => error.Text == atsEx.VersionWarningText);
                     if (!(removeTargetError is null))
                     {
                         BveHacker.LoadErrorManager.Errors.Remove(removeTargetError);

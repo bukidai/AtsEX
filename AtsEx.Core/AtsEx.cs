@@ -14,15 +14,15 @@ using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
 {
-    public abstract partial class AtsExExtensionSet : IDisposable
+    public abstract partial class AtsEx : IDisposable
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<AtsExExtensionSet>("Core");
+        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<AtsEx>("Core");
 
         private readonly ILoadErrorResolver LoadErrorResolver;
 
         internal BveHacker BveHacker { get; }
 
-        private protected AtsExExtensionSet(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, ILoadErrorResolver loadErrorResolver)
+        private protected AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, ILoadErrorResolver loadErrorResolver)
         {
             LoadErrorResolver = loadErrorResolver;
 

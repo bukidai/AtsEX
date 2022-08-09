@@ -28,9 +28,9 @@ namespace Automatic9045.AtsEx
         private readonly List<PluginBase> VehiclePlugins;
         private readonly List<PluginBase> MapPlugins;
 
-        private protected AtsExScenarioService(AtsExExtensionSet atsExExtensionSet, PluginUsing vehiclePluginUsing, VehicleSpec vehicleSpec)
+        private protected AtsExScenarioService(AtsEx atsEx, PluginUsing vehiclePluginUsing, VehicleSpec vehicleSpec)
         {
-            BveHacker = atsExExtensionSet.BveHacker;
+            BveHacker = atsEx.BveHacker;
 
             LoadErrorResolver loadErrorResolver = new LoadErrorResolver(BveHacker);
 

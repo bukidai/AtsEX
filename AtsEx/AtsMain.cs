@@ -26,7 +26,7 @@ namespace Automatic9045.AtsEx
 
         private static readonly Stopwatch Stopwatch = new Stopwatch();
 
-        private static AtsExExtensionSet.AsAtsPlugin AtsExExtensionSet;
+        private static AtsEx.AsAtsPlugin AtsEx;
         private static AtsExScenarioService.AsAtsPlugin AtsExScenarioService;
 
         public static void LoadAsInputDevice(Activator activator)
@@ -43,15 +43,15 @@ namespace Automatic9045.AtsEx
         public static void Dispose()
         {
             AtsExScenarioService?.Dispose();
-            AtsExExtensionSet?.Dispose();
+            AtsEx?.Dispose();
         }
 
         public static void SetVehicleSpec(VehicleSpec vehicleSpec)
         {
             PluginHost.VehicleSpec exVehicleSpec = new PluginHost.VehicleSpec(vehicleSpec.BrakeNotches, vehicleSpec.PowerNotches, vehicleSpec.AtsNotch, vehicleSpec.B67Notch, vehicleSpec.Cars);
 
-            AtsExExtensionSet = new AtsExExtensionSet.AsAtsPlugin(Activator.TargetProcess, Activator.TargetAppDomain, Activator.TargetAssembly);
-            AtsExScenarioService = new AtsExScenarioService.AsAtsPlugin(AtsExExtensionSet, CallerAssembly, exVehicleSpec);
+            AtsEx = new AtsEx.AsAtsPlugin(Activator.TargetProcess, Activator.TargetAppDomain, Activator.TargetAssembly);
+            AtsExScenarioService = new AtsExScenarioService.AsAtsPlugin(AtsEx, CallerAssembly, exVehicleSpec);
         }
 
         public static void Initialize(int defaultBrakePosition)

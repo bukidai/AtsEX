@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AtsExAssemblyLocationIllegal" xml:space="preserve">
+    <value>The location of the {0} main assembly '{1}' is illegal.\n\nDue to keeping your {1} always in the latest version, you should place only one {1} package in each Scenarios directory; you should not embed {1} in each map or vehicle.\nThe legal location to place is '{2}'.</value>
+  </data>
   <data name="BveVersionNotSupported" xml:space="preserve">
     <value>Loaded the profile for BVE version {1} instead of current version {0}, which is not supported. It may cause some extensions of {2} not to work well.</value>
+  </data>
+  <data name="IgnoreAndContinue" xml:space="preserve">
+    <value>Ignore and continue loading?</value>
   </data>
   <data name="UnhandledExceptionCaption" xml:space="preserve">
     <value>Unhandled exception - {0}</value>
