@@ -119,8 +119,14 @@ namespace Automatic9045.AtsEx
 
             VehiclePlugins.ForEach(plugin =>
             {
-                HandleCommandSet commandSet = plugin.Tick(elapsed);
-                if (commandSet is null) throw new InvalidOperationException(string.Format(Resources.GetString("VehiclePluginCannotReturnNullNotchCommand").Value, $"{nameof(PluginBase)}.{nameof(PluginBase.Tick)}"));
+                TickResult tickResult = plugin.Tick(elapsed);
+                if (!(tickResult is VehiclePluginTickResult vehiclePluginTickResult))
+                {
+                    throw new InvalidOperationException(string.Format(Resources.GetString("VehiclePluginTickResultTypeInvalid").Value,
+                       $"{nameof(PluginBase)}.{nameof(PluginBase.Tick)}", nameof(VehiclePluginTickResult)));
+                }
+
+                HandleCommandSet commandSet = vehiclePluginTickResult.HandleCommandSet;
 
                 if (atsPowerNotch is null) atsPowerNotch = commandSet.PowerCommand.GetOverridenNotch(powerNotch);
                 if (atsBrakeNotch is null) atsBrakeNotch = commandSet.BrakeCommand.GetOverridenNotch(brakeNotch);
@@ -130,8 +136,12 @@ namespace Automatic9045.AtsEx
 
             MapPlugins.ForEach(plugin =>
             {
-                HandleCommandSet commandSet = plugin.Tick(elapsed);
-                if (!(commandSet is null)) throw new InvalidOperationException(string.Format(Resources.GetString("MapPluginCannotReturnNotchCommand").Value, $"{nameof(PluginBase)}.{nameof(PluginBase.Tick)}"));
+                TickResult tickResult = plugin.Tick(elapsed);
+                if (!(tickResult is MapPluginTickResult))
+                {
+                    throw new InvalidOperationException(string.Format(Resources.GetString("MapPluginTickResultTypeInvalid").Value,
+                       $"{nameof(PluginBase)}.{nameof(PluginBase.Tick)}", nameof(MapPluginTickResult)));
+                }
             });
 
             return new HandlePositionSet(atsPowerNotch ?? powerNotch, atsBrakeNotch ?? brakeNotch, atsReverserPosition ?? reverserPosition, atsConstantSpeedCommand ?? ConstantSpeedCommand.Continue);

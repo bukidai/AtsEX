@@ -89,9 +89,9 @@ namespace Automatic9045.AtsEx.PluginHost.Plugins
         /// </summary>
         /// <param name="elapsed">前フレームから経過した時間。</param>
         /// <returns>
-        /// 力行・ブレーキノッチの出力を編集するためのコマンド。<br/>
-        /// 何もしないことを表すには <see cref="HandleCommandSet.DoNothing"/> を返してください。マッププラグインでは戻り値を使用しないため、<see langword="null"/> を返してください。
+        /// このメソッドの実行結果を表す <see cref="TickResult"/>。<br/>
+        /// 車両プラグインでは <see cref="VehiclePluginTickResult"/> を、マッププラグインでは <see cref="MapPluginTickResult"/> を返してください。
         /// </returns>
-        public abstract HandleCommandSet Tick(TimeSpan elapsed);
+        public abstract TickResult Tick(TimeSpan elapsed);
     }
 }

@@ -32,11 +32,11 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             BveHacker.MainFormSource.Focus();
         }
 
-        public override HandleCommandSet Tick(TimeSpan elapsed)
+        public override TickResult Tick(TimeSpan elapsed)
         {
             Form?.Tick();
 
-            return HandleCommandSet.DoNothing;
+            return new VehiclePluginTickResult(HandleCommandSet.DoNothing);
         }
 
         private void MenuItemCheckedChanged(object sender, EventArgs e)

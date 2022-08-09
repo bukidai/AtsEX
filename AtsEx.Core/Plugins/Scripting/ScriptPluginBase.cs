@@ -28,7 +28,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
         private readonly IPluginScript<Globals> DisposeScript;
         private readonly IPluginScript<ScenarioCreatedGlobals> OnScenarioCreatedScript;
         private readonly IPluginScript<StartedGlobals> OnStartedScript;
-        private readonly IPluginScript<HandleCommandSet, TickGlobals> TickScript;
+        private readonly IPluginScript<TickResult, TickGlobals> TickScript;
 
         static ScriptPluginBase()
         {
@@ -71,22 +71,22 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
             OnStartedScript?.Run(globals);
         }
 
-        public override HandleCommandSet Tick(TimeSpan elapsed)
+        public override TickResult Tick(TimeSpan elapsed)
         {
             if (TickScript is null)
             {
                 switch (PluginType)
                 {
                     case PluginType.VehiclePlugin:
-                        return HandleCommandSet.DoNothing;
+                        return new VehiclePluginTickResult(HandleCommandSet.DoNothing);
 
                     case PluginType.MapPlugin:
-                        return null;
+                        return new MapPluginTickResult();
                 }
             }
 
             TickGlobals globals = new TickGlobals(Globals, elapsed);
-            IScriptResult<HandleCommandSet> result = TickScript.Run(globals) ?? throw new InvalidOperationException(string.Format(Resources.GetString("NoReturnValue").Value, Title, nameof(Tick)));
+            IScriptResult<TickResult> result = TickScript.Run(globals) ?? throw new InvalidOperationException(string.Format(Resources.GetString("NoReturnValue").Value, Title, nameof(Tick)));
 
             return result.ReturnValue;
         }

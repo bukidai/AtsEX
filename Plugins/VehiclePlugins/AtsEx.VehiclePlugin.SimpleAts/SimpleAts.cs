@@ -18,7 +18,7 @@ namespace Automatic9045.VehiclePlugins.SimpleAts
         {
         }
 
-        public override HandleCommandSet Tick(TimeSpan elapsed)
+        public override TickResult Tick(TimeSpan elapsed)
         {
             UserVehicleLocationManager locationManager = BveHacker.Scenario.LocationManager;
             AtsEx.PluginHost.Handles.HandleSet handleSet = App.Handles;
@@ -35,11 +35,12 @@ namespace Automatic9045.VehiclePlugins.SimpleAts
                 ReverserPositionCommandBase reverserCommand = ReverserPositionCommandBase.Continue;
                 ConstantSpeedCommand? constantSpeedCommand = ConstantSpeedCommand.Disable;
 
-                return new HandleCommandSet(powerCommand, brakeCommand, reverserCommand, constantSpeedCommand);
+                HandleCommandSet handleCommandSet = new HandleCommandSet(powerCommand, brakeCommand, reverserCommand, constantSpeedCommand);
+                return new VehiclePluginTickResult(handleCommandSet);
             }
             else
             {
-                return HandleCommandSet.DoNothing;
+                return new VehiclePluginTickResult(HandleCommandSet.DoNothing);
             }
         }
     }

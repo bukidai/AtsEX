@@ -34,7 +34,7 @@ namespace Automatic9045.MapPlugins.TrainController
             App.NativeKeys.AtsKeys[NativeAtsKeyName.E].Pressed -= OnEPressed;
         }
 
-        public override HandleCommandSet Tick(TimeSpan elapsed)
+        public override TickResult Tick(TimeSpan elapsed)
         {
             if (App.NativeKeys.AtsKeys[NativeAtsKeyName.F].IsPressed) Speed -= 10.0 * elapsed.Ticks / TimeSpan.TicksPerMillisecond / 1000;
             if (App.NativeKeys.AtsKeys[NativeAtsKeyName.G].IsPressed) Speed += 10.0 * elapsed.Ticks / TimeSpan.TicksPerMillisecond / 1000;
@@ -53,7 +53,7 @@ namespace Automatic9045.MapPlugins.TrainController
             Train.Location += Speed * elapsed.Ticks / TimeSpan.TicksPerMillisecond / 1000;
             Train.Speed = Speed;
 
-            return null;
+            return new MapPluginTickResult();
         }
     }
 }

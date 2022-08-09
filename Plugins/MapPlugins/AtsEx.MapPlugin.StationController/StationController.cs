@@ -32,9 +32,9 @@ namespace Automatic9045.MapPlugins.StationController
             BveHacker.MainFormSource.Focus();
         }
 
-        public override HandleCommandSet Tick(TimeSpan elapsed)
+        public override TickResult Tick(TimeSpan elapsed)
         {
-            return null;
+            return new MapPluginTickResult();
         }
 
         private void MenuItemCheckedChanged(object sender, EventArgs e)

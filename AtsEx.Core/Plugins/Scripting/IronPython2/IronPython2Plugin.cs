@@ -38,7 +38,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
                 DisposeScript = package.DisposeScriptPath is null ? null : PluginScript<Globals>.LoadFrom(package.DisposeScriptPath, engine, scope),
                 OnScenarioCreatedScript = package.OnScenarioCreatedScriptPath is null ? null : PluginScript<ScenarioCreatedGlobals>.LoadFrom(package.OnScenarioCreatedScriptPath, engine, scope),
                 OnStartedScript = package.OnStartedScriptPath is null ? null : PluginScript<StartedGlobals>.LoadFrom(package.OnStartedScriptPath, engine, scope),
-                TickScript = package.TickScriptPath is null ? null : PluginScript<HandleCommandSet, TickGlobals>.LoadFrom(package.TickScriptPath, engine, scope),
+                TickScript = package.TickScriptPath is null ? null : PluginScript<TickResult, TickGlobals>.LoadFrom(package.TickScriptPath, engine, scope),
             };
 
             return new IronPython2Plugin(newBuilder, pluginType);

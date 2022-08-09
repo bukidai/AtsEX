@@ -117,13 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MapPluginCannotReturnNotchCommand" xml:space="preserve">
-    <value>マッププラグインの {0} メソッドは null を返さなければなりません。</value>
+  <data name="MapPluginTickResultTypeInvalid" xml:space="preserve">
+    <value>マッププラグインの {0} メソッドは {1} を返さなければなりません。</value>
   </data>
   <data name="UnhandledExceptionCaption" xml:space="preserve">
     <value>ハンドルされていない例外 - {0}</value>
   </data>
-  <data name="VehiclePluginCannotReturnNullNotchCommand" xml:space="preserve">
-    <value>車両プラグインの {0} メソッドは null を返せません。</value>
+  <data name="VehiclePluginTickResultTypeInvalid" xml:space="preserve">
+    <value>車両プラグインの {0} メソッドは {1} を返さなければなりません。</value>
   </data>
 </root>

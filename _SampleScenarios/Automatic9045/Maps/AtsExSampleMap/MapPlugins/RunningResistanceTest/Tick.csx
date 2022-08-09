@@ -12,3 +12,5 @@ else
 	BveHacker.Scenario.Vehicle.Dynamics.RunningResistanceFactorB = GetVariable<double>("DefaultFactorB");
 	BveHacker.Scenario.Vehicle.Dynamics.RunningResistanceFactorC = GetVariable<double>("DefaultFactorC");
 }
+
+return new MapPluginTickResult();
