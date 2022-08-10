@@ -56,7 +56,7 @@ Track['1'].X.Interpolate(-3.8);
 
 	Repeater[$script].Begin0('0', 0, 0, 0, // スクリプトはリピーターキーに指定します。また、連続ストラクチャーの設置先軌道は地上子の設置先軌道としてそのまま使用されます。
 		'AtsEx.ExtendedBeacon', // 拡張地上子であることを表す文字列。
-		'BeaconName.1', // 拡張地上子の任意の名前。この名前はプラグインから地上子を参照する（BveHacker クラスの ExtendedBeacons プロパティから）際に使用します。省略する場合は AtsEx.Null を指定します。
+		'Beacon.Hoge', // 拡張地上子の任意の名前。この名前はプラグインから地上子を参照する（BveHacker クラスの ExtendedBeacons プロパティから）際に使用します。省略する場合は AtsEx.Null を指定します。
 		'AtsEx.ScriptLanguage.CSharpScript', // スクリプトの記述言語を指定する文字列。
 		'AtsEx.ExtendedBeacon.ObservingTargetTrack.AllTracks', // 拡張地上子の検知対象の軌道を指定する文字列。
 		'AtsEx.ExtendedBeacon.ObservingTargetTrain.Trains'); // 拡張地上子の検知対象の列車を指定する文字列。複数指定可能です。
@@ -71,7 +71,7 @@ Track['1'].X.Interpolate(-3.8);
 
 	Repeater[$script].Begin0('0', 0, 0, 0,
 		'AtsEx.ExtendedBeacon',
-		'BeaconName.2',
+		'Beacon.Fuga',
 		'AtsEx.ScriptLanguage.IronPython2',
 		'AtsEx.ExtendedBeacon.ObservingTargetTrack.AllTracks',
 		'AtsEx.ExtendedBeacon.ObservingTargetTrain.Myself', 'AtsEx.ExtendedBeacon.ObservingTargetTrain.Trains'); // 複数指定した例。

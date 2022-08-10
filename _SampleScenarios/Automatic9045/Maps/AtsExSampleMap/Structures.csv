@@ -2,8 +2,8 @@ BveTs Structure List 2.00,
 Info,Structures_Original\Info\HowToDriveOtherTrain.x
 ,
 #拡張地上子の名前用,
-BeaconName.1,Structures_Original\Null.x
-BeaconName.2,Structures_Original\Null.x
+Beacon.Hoge,Structures_Original\Null.x
+Beacon.Fuga,Structures_Original\Null.x
 ,
 #AtsEX識別子（全般）,
 AtsEx.Null,Structures_Original\Null.x
