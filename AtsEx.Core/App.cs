@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -71,6 +72,7 @@ namespace Automatic9045.AtsEx
             set
             {
                 _VehiclePlugins = value;
+                _Plugins[PluginType.VehiclePlugin] = new ReadOnlyDictionary<string, PluginBase>(value);
                 AllVehiclePluginLoaded?.Invoke(new AllPluginLoadedEventArgs(_VehiclePlugins));
             }
         }
@@ -82,9 +84,13 @@ namespace Automatic9045.AtsEx
             set
             {
                 _MapPlugins = value;
+                _Plugins[PluginType.MapPlugin] = new ReadOnlyDictionary<string, PluginBase>(value);
                 AllMapPluginLoaded?.Invoke(new AllPluginLoadedEventArgs(_MapPlugins));
             }
         }
+
+        private Dictionary<PluginType, ReadOnlyDictionary<string, PluginBase>> _Plugins = new Dictionary<PluginType, ReadOnlyDictionary<string, PluginBase>>();
+        public ReadOnlyDictionary<PluginType, ReadOnlyDictionary<string, PluginBase>> Plugins => new ReadOnlyDictionary<PluginType, ReadOnlyDictionary<string, PluginBase>>(_Plugins);
 
         private HandleSet _Handles = null;
         public HandleSet Handles
