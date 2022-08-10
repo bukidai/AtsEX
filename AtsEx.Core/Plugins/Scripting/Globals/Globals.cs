@@ -10,6 +10,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
 {
     public class Globals
     {
+        public IApp App { get; } = Automatic9045.AtsEx.App.Instance;
         public PluginHost.BveHacker BveHacker { get; }
 
         protected SortedList<string, dynamic> Variables;
