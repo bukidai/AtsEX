@@ -127,6 +127,7 @@
     <Compile Include="ExtendedBeacons\Globals\PassedGlobals.cs" />
     <Compile Include="ExtendedBeacons\Globals\TrainPassedGlobals.cs" />
     <Compile Include="ExtendedBeacons\MapStatementIdentifiers.cs" />
+    <Compile Include="ExtendedBeacons\PluginVariableCollection.cs" />
     <Compile Include="ExtendedBeacons\TrainObservingBeacon.cs" />
     <Compile Include="Handles\BrakeHandle.cs" />
     <Compile Include="Handles\HandleBase.cs" />
@@ -189,6 +190,8 @@
     <Content Include="Resources\Handles\BrakeHandle.resx" />
     <Content Include="Resources\AtsExScenarioService.resx" />
     <Content Include="Resources\AtsExScenarioService.ja.resx" />
+    <Content Include="Resources\ExtendedBeacons\PluginVariableCollection.resx" />
+    <Content Include="Resources\ExtendedBeacons\PluginVariableCollection.ja.resx" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <EmbeddedResource Include="Plugins\AtsExPluginUsingXmlSchema.xsd">

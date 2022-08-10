@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Automatic9045.AtsEx.Plugins.Scripting;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.AtsEx.ExtendedBeacons
 {
@@ -18,11 +18,23 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
         public readonly TPassedEventArgs e;
 #pragma warning restore IDE1006 // 命名スタイル
 
-        public ExtendedBeaconGlobalsBase(PluginHost.BveHacker bveHacker, PluginHost.ExtendedBeacons.ExtendedBeaconBase<TPassedEventArgs> sender, TPassedEventArgs eventArgs) : base(bveHacker)
+        private protected readonly IReadOnlyDictionary<PluginType, PluginVariableCollection> PluginVariables;
+
+        public ExtendedBeaconGlobalsBase(PluginHost.BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
+            PluginHost.ExtendedBeacons.ExtendedBeaconBase<TPassedEventArgs> sender, TPassedEventArgs eventArgs)
+            : base(bveHacker)
         {
+            PluginVariables = pluginVariables;
+
             this.sender = sender;
             e = eventArgs;
         }
+
+        public T GetPluginVariable<T>(PluginType pluginType, string pluginIdentifier, string name)
+            => PluginVariables[pluginType].GetPluginVariable<T>(pluginIdentifier, name);
+
+        public void SetPluginVariable<T>(PluginType pluginType, string pluginIdentifier, string name, T value)
+            => PluginVariables[pluginType].SetPluginVariable(pluginIdentifier, name, value);
 
         internal abstract TPassedEventArgs GetEventArgsWithScriptVariables();
     }

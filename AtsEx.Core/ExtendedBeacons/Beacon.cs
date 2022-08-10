@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Automatic9045.AtsEx.Plugins.Scripting;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.AtsEx.ExtendedBeacons
 {
@@ -14,8 +15,10 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
     {
         private double OldLocation = 0d;
 
-        public Beacon(BveHacker bveHacker, string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain, IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script)
-            : base(bveHacker, name, definedStructure, observingTargetTrack, observingTargetTrain, script)
+        public Beacon(BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
+            string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain,
+            IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script)
+            : base(bveHacker, pluginVariables, name, definedStructure, observingTargetTrack, observingTargetTrain, script)
         {
         }
 
@@ -36,7 +39,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             void NotifyPassed(Direction direction)
             {
                 PassedEventArgs eventArgs = new PassedEventArgs(direction);
-                PassedGlobals globals = new PassedGlobals(BveHacker, this, eventArgs);
+                PassedGlobals globals = new PassedGlobals(BveHacker, PluginVariables, this, eventArgs);
                 Script.Run(globals);
                 base.NotifyPassed(globals.GetEventArgsWithScriptVariables());
             }

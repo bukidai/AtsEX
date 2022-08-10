@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Automatic9045.AtsEx.Plugins.Scripting;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.AtsEx.ExtendedBeacons
 {
@@ -14,8 +15,10 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
     {
         private readonly List<TrainInfo> TargetTrains;
 
-        public TrainObservingBeacon(BveHacker bveHacker, string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, IDictionary<string, Train> targetTrains, IPluginScript<ExtendedBeaconGlobalsBase<TrainPassedEventArgs>> script)
-            : base(bveHacker, name, definedStructure, observingTargetTrack, ObservingTargetTrain.Trains, script)
+        public TrainObservingBeacon(BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
+            string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, IDictionary<string, Train> targetTrains,
+            IPluginScript<ExtendedBeaconGlobalsBase<TrainPassedEventArgs>> script)
+            : base(bveHacker, pluginVariables, name, definedStructure, observingTargetTrack, ObservingTargetTrain.Trains, script)
         {
             TargetTrains = targetTrains.Select(train => new TrainInfo(train.Key, train.Value)).ToList();
         }
@@ -42,7 +45,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             void NotifyPassed(TrainInfo senderTrain, Direction direction)
             {
                 TrainPassedEventArgs eventArgs = new TrainPassedEventArgs(senderTrain.Name, senderTrain.Train, direction);
-                TrainPassedGlobals globals = new TrainPassedGlobals(BveHacker, this, eventArgs);
+                TrainPassedGlobals globals = new TrainPassedGlobals(BveHacker, PluginVariables, this, eventArgs);
                 Script.Run(globals);
                 base.NotifyPassed(globals.GetEventArgsWithScriptVariables());
             }

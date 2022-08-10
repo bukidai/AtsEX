@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Automatic9045.AtsEx.Plugins.Scripting;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.AtsEx.ExtendedBeacons
 {
@@ -14,12 +15,18 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
         where TPassedEventArgs : PassedEventArgs
     {
         protected readonly BveHacker BveHacker;
+        protected IReadOnlyDictionary<PluginType, PluginVariableCollection> PluginVariables;
+
         protected readonly IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> Script;
 
-        public ExtendedBeaconBase(BveHacker bveHacker, string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain, IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> script) 
+        public ExtendedBeaconBase(BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
+            string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain,
+            IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> script)
             : base(name, definedStructure, observingTargetTrack, observingTargetTrain)
         {
             BveHacker = bveHacker;
+            PluginVariables = pluginVariables;
+
             Script = script;
         }
 
