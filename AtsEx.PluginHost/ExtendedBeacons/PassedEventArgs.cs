@@ -19,17 +19,17 @@ namespace Automatic9045.AtsEx.PluginHost.ExtendedBeacons
         /// </summary>
         public Direction Direction { get; }
 
-        protected readonly IReadOnlyDictionary<string, dynamic> ScriptVariables;
+        private readonly IReadOnlyDictionary<string, dynamic> Variables;
 
         public PassedEventArgs(Direction direction)
         {
             Direction = direction;
         }
 
-        public PassedEventArgs(PassedEventArgs original, IReadOnlyDictionary<string, dynamic> scriptVariables)
+        public PassedEventArgs(PassedEventArgs original, IReadOnlyDictionary<string, dynamic> variables)
         {
             Direction = original.Direction;
-            ScriptVariables = scriptVariables;
+            Variables = variables;
         }
 
         /// <summary>
@@ -39,6 +39,6 @@ namespace Automatic9045.AtsEx.PluginHost.ExtendedBeacons
         /// <param name="name">変数名。</param>
         /// <returns>指定した変数の値。</returns>
         /// <exception cref="InvalidOperationException">拡張地上子スクリプト内など、変数が未設定の状態で呼び出そうとしました。</exception>
-        public T GetScriptVariable<T>(string name) => ScriptVariables is null ? throw new InvalidOperationException() : (T)ScriptVariables[name];
+        public T GetVariable<T>(string name) => Variables is null ? throw new InvalidOperationException() : (T)Variables[name];
     }
 }

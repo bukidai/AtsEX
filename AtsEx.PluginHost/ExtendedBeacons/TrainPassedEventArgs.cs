@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.AtsEx.PluginHost.ExtendedBeacons
 {
@@ -30,7 +32,7 @@ namespace Automatic9045.AtsEx.PluginHost.ExtendedBeacons
             SenderTrain = senderTrain;
         }
 
-        public TrainPassedEventArgs(TrainPassedEventArgs original, IReadOnlyDictionary<string, dynamic> scriptVariables) : base(original, scriptVariables)
+        public TrainPassedEventArgs(TrainPassedEventArgs original, IReadOnlyDictionary<string, dynamic> variables) : base(original, variables)
         {
             SenderTrainName = original.SenderTrainName;
             SenderTrain = original.SenderTrain;
