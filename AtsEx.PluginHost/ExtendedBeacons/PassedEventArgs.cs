@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
 using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.AtsEx.PluginHost.ExtendedBeacons
@@ -29,12 +30,16 @@ namespace Automatic9045.AtsEx.PluginHost.ExtendedBeacons
         public PassedEventArgs(PassedEventArgs original, IReadOnlyDictionary<string, dynamic> variables)
         {
             Direction = original.Direction;
+
             Variables = variables;
         }
 
         /// <summary>
         /// 拡張地上子スクリプト内で設定された変数の値を取得します。
         /// </summary>
+        /// <remarks>
+        /// 拡張地上子スクリプト内など、変数が未設定の状態で呼び出した場合は <see cref="InvalidOperationException"/> をスローします。
+        /// </remarks>
         /// <typeparam name="T">変数の型。</typeparam>
         /// <param name="name">変数名。</param>
         /// <returns>指定した変数の値。</returns>
