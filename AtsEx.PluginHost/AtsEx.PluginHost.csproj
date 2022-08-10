@@ -83,7 +83,7 @@
     <Compile Include="ExtendedBeacons\ObservingTargetTrain.cs" />
     <Compile Include="ExtendedBeacons\ExtendedBeaconBase.cs" />
     <Compile Include="Direction.cs" />
-    <Compile Include="ExtendedBeacons\IExtendedBeaconSet.cs" />
+    <Compile Include="ExtendedBeacons\ExtendedBeaconSet.cs" />
     <Compile Include="ExtendedBeacons\ObservingTargetTrack.cs" />
     <Compile Include="ExtendedBeacons\PassedEventArgs.cs" />
     <Compile Include="ExtendedBeacons\TrainPassedEventArgs.cs" />

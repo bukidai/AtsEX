@@ -48,7 +48,7 @@ namespace Automatic9045.AtsEx
 
             try
             {
-                _ExtendedBeacons = ExtendedBeaconSet.Load(this, e.Scenario.Route.Structures.Repeated, e.Scenario.Route.StructureModels, e.Scenario.Trains);
+                _ExtendedBeacons = Automatic9045.AtsEx.ExtendedBeacons.ExtendedBeaconSet.Load(this, e.Scenario.Route.Structures.Repeated, e.Scenario.Route.StructureModels, e.Scenario.Trains);
             }
             catch (Exception ex)
             {
@@ -86,7 +86,7 @@ namespace Automatic9045.AtsEx
         public override PluginHost.Handles.HandleSet Handles => _Handles;
 
 
-        private ExtendedBeaconSet _ExtendedBeacons;
-        public override IExtendedBeaconSet ExtendedBeacons => _ExtendedBeacons;
+        private ExtendedBeacons.ExtendedBeaconSet _ExtendedBeacons;
+        public override PluginHost.ExtendedBeacons.ExtendedBeaconSet ExtendedBeacons => _ExtendedBeacons;
     }
 }

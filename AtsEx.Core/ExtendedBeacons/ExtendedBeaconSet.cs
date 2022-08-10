@@ -24,13 +24,13 @@ using TrainObservingBeaconBase = Automatic9045.AtsEx.PluginHost.ExtendedBeacons.
 
 namespace Automatic9045.AtsEx.ExtendedBeacons
 {
-    internal partial class ExtendedBeaconSet : IExtendedBeaconSet
+    internal partial class ExtendedBeaconSet : PluginHost.ExtendedBeacons.ExtendedBeaconSet
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ExtendedBeaconSet>(@"Core\ExtendedBeacons");
 
-        public ReadOnlyDictionary<string, BeaconBase> Beacons { get; }
-        public ReadOnlyDictionary<string, TrainObservingBeaconBase> TrainObservingBeacons { get; }
-        public ReadOnlyDictionary<string, BeaconBase> PreTrainObservingBeacons { get; }
+        public override ReadOnlyDictionary<string, BeaconBase> Beacons { get; }
+        public override ReadOnlyDictionary<string, TrainObservingBeaconBase> TrainObservingBeacons { get; }
+        public override ReadOnlyDictionary<string, BeaconBase> PreTrainObservingBeacons { get; }
 
         protected ExtendedBeaconSet(IDictionary<string, BeaconBase> beacons, IDictionary<string, TrainObservingBeaconBase> trainObservingBeacons, IDictionary<string, BeaconBase> preTrainObservingBeacons)
         {

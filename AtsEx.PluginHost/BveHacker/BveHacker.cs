@@ -163,7 +163,7 @@ namespace Automatic9045.AtsEx.PluginHost
         /// <summary>
         /// 拡張地上子の一覧を取得します。
         /// </summary>
-        public abstract IExtendedBeaconSet ExtendedBeacons { get; }
+        public abstract ExtendedBeaconSet ExtendedBeacons { get; }
 
 
         private readonly ScenarioHacker ScenarioHacker;
