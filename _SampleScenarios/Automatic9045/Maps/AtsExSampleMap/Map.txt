@@ -84,7 +84,7 @@ Track['1'].X.Interpolate(-3.8);
 		'AtsEx.ExtendedBeacon',
 		'AtsEx.Null',
 		'AtsEx.ScriptLanguage.CSharpScript',
-		'AtsEx.ExtendedBeacon.ObservingTargetTrack.SpecifiedTrackOnly', // 地上子の設置先軌道（= '1'）のみを検知対象とした例。
+		'AtsEx.ExtendedBeacon.ObservingTargetTrack.SpecifiedTrackOnly', // 地上子の設置先軌道（= '0'）のみを検知対象とした例。
 		'AtsEx.ExtendedBeacon.ObservingTargetTrain.Trains');
 
 1365;
