@@ -33,10 +33,6 @@ BVE本体（`BveTs.exe`）と同じフォルダ内にある`Mackoy.IInputDevice.
 
 BVE本体（`BveTs.exe`）と同じフォルダ内にある`Mackoy.XmlInterfaces.DLL`を`AtsEx.PluginHost\LocalReferences\BveTs`内にコピーしてください。
 
-#### Zbx1425.DXDynamicTexture-net48.dll・Zbx1425.DXDynamicTexture-net35.dll (zbx1425氏)
-
-[GitHubのリリースページ](https://github.com/zbx1425/DXDynamicTexture/releases)からダウンロードし、`AtsEx.PluginHost\LocalReferences\DXDynamicTexture`内にコピーしてください。
-
 ### 3. （既にソリューションをVisual Studioで開いている場合は）Visual Studioを再起動する
 
 ### 4. NuGet経由で参照しているアセンブリをダウンロードする

@@ -40,8 +40,6 @@ namespace Automatic9045.AtsEx
 
             App.CreateInstance(targetProcess, targetAssembly, atsExAssembly, executingAssembly, pluginHostAssembly);
             BveHacker = new BveHacker(ProfileForDifferentBveVersionLoaded, beaconCreationExceptionResolver);
-
-            //DXDynamicTextureHost = new DXDynamicTextureHost();
         }
 
         private protected abstract void ProfileForDifferentBveVersionLoaded(Version profileVersion);
