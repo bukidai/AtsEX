@@ -8,7 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
+
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.Plugins.Scripting.CSharp;
 
 namespace Automatic9045.AtsEx
 {
@@ -68,14 +72,30 @@ namespace Automatic9045.AtsEx
 
                 public void Resolve(Exception exception)
                 {
-                    if (exception is BveFileLoadException fe)
+                    switch (exception)
                     {
-                        LoadErrorManager.Throw(fe.Message, fe.SenderFileName, fe.LineIndex, fe.CharIndex);
-                    }
-                    else
-                    {
-                        LoadErrorManager.Throw(exception.Message);
-                        MessageBox.Show(exception.ToString(), string.Format(Resources.GetString("UnhandledExceptionCaption").Value, App.Instance.ProductShortName));
+                        case BveFileLoadException ex:
+                            LoadErrorManager.Throw(ex.Message, ex.SenderFileName, ex.LineIndex, ex.CharIndex);
+                            break;
+
+                        case CompilationException ex:
+                            foreach (Diagnostic diagnostic in ex.CompilationErrors)
+                            {
+                                string message = diagnostic.GetMessage();
+                                string fileName = Path.GetFileName(diagnostic.Location.SourceTree.FilePath);
+
+                                LinePosition position = diagnostic.Location.GetLineSpan().StartLinePosition;
+                                int lineIndex = position.Line;
+                                int charIndex = position.Character;
+
+                                LoadErrorManager.Throw(message, fileName, lineIndex, charIndex);
+                            }
+                            break;
+
+                        default:
+                            LoadErrorManager.Throw(exception.Message);
+                            MessageBox.Show(exception.ToString(), string.Format(Resources.GetString("UnhandledExceptionCaption").Value, App.Instance.ProductShortName));
+                            break;
                     }
                 }
             }
