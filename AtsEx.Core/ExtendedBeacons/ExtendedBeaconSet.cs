@@ -108,7 +108,9 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                         case ObservingTargetTrain.Myself:
                         {
                             IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script = CreateScript<PassedEventArgs>(code, scriptLanguage);
-                            Beacon beacon = new Beacon(bveHacker, pluginVariables, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
+                            Beacon beacon = repeatedStructure.Location < 0
+                                ? new InitializerBeacon(bveHacker, pluginVariables, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script)
+                                : new Beacon(bveHacker, pluginVariables, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
 
                             beacons[name] = beacon;
                             errorCheckList.Add(beacon);

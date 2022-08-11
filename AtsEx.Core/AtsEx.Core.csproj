@@ -126,6 +126,7 @@
     <Compile Include="ExtendedBeacons\Globals\ExtendedBeaconGlobalsBase.cs" />
     <Compile Include="ExtendedBeacons\Globals\PassedGlobals.cs" />
     <Compile Include="ExtendedBeacons\Globals\TrainPassedGlobals.cs" />
+    <Compile Include="ExtendedBeacons\InitializerBeacon.cs" />
     <Compile Include="ExtendedBeacons\MapStatementIdentifiers.cs" />
     <Compile Include="ExtendedBeacons\PluginVariableCollection.cs" />
     <Compile Include="ExtendedBeacons\TrainObservingBeacon.cs" />

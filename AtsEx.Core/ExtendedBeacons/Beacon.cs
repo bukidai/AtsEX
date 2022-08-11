@@ -22,7 +22,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
         {
         }
 
-        internal void Tick(double currentLocation)
+        internal virtual void Tick(double currentLocation)
         {
             if (OldLocation < Location && Location <= currentLocation)
             {
@@ -34,15 +34,14 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             }
 
             OldLocation = currentLocation;
+        }
 
-
-            void NotifyPassed(Direction direction)
-            {
-                PassedEventArgs eventArgs = new PassedEventArgs(direction);
-                PassedGlobals globals = new PassedGlobals(BveHacker, PluginVariables, this, eventArgs);
-                Script.Run(globals);
-                base.NotifyPassed(globals.GetEventArgsWithScriptVariables());
-            }
+        protected void NotifyPassed(Direction direction)
+        {
+            PassedEventArgs eventArgs = new PassedEventArgs(direction);
+            PassedGlobals globals = new PassedGlobals(BveHacker, PluginVariables, this, eventArgs);
+            Script.Run(globals);
+            base.NotifyPassed(globals.GetEventArgsWithScriptVariables());
         }
     }
 }
