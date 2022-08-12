@@ -24,17 +24,21 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
         public string Name { get; } = null;
 
         private Task<ImmutableArray<Diagnostic>> CompilationTask;
+        private readonly bool SkipCompile;
+
         protected readonly Script Script;
 
-        protected PluginScript(Script script, string name)
+        protected PluginScript(Script script, string name, bool skipCompile)
         {
             Script = script;
             Name = name;
-            BeginCompile();
+            SkipCompile = skipCompile;
+
+            if (!SkipCompile) BeginCompile();
         }
 
         public PluginScript(string code, ScriptSourceResolver scriptSourceResolver, string name)
-            : this(CSharpScript.Create(code, ScriptOptions.WithSourceResolver(scriptSourceResolver), typeof(TGlobals)), name)
+            : this(CSharpScript.Create(code, ScriptOptions.WithSourceResolver(scriptSourceResolver), typeof(TGlobals)), name, false)
         {
         }
 
@@ -47,7 +51,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
         {
         }
 
-        protected PluginScript(Stream code, ScriptOptions scriptOptions, string name) : this(CSharpScript.Create(code, scriptOptions, typeof(TGlobals)), name)
+        protected PluginScript(Stream code, ScriptOptions scriptOptions, string name) : this(CSharpScript.Create(code, scriptOptions, typeof(TGlobals)), name, false)
         {
         }
 
@@ -69,6 +73,8 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
             return (scriptOptions, Path.GetFileName(path));
         }
 
+        public virtual object Clone() => new PluginScript<TGlobals>(Script, Name, true);
+
         private void BeginCompile()
         {
             CompilationTask = Task.Run(() =>
@@ -80,6 +86,8 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
 
         public IPluginScript<TGlobals> GetWithCheckErrors()
         {
+            if (SkipCompile) return this;
+
             ImmutableArray<Diagnostic> compilationErrors = CompilationTask.Result;
             return compilationErrors.Any() ? throw new CompilationException(Name, compilationErrors) : this;
         }
@@ -92,7 +100,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
 
         protected ScriptState ExecuteCode(TGlobals globals)
         {
-            if (!CompilationTask.IsCompleted) GetWithCheckErrors();
+            if (!SkipCompile && !CompilationTask.IsCompleted) GetWithCheckErrors();
 
             ScriptState state = Script.RunAsync(globals).Result;
             return state;
@@ -101,7 +109,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
 
     internal class PluginScript<TResult, TGlobals> : PluginScript<TGlobals>, IPluginScript<TResult, TGlobals> where TGlobals : Globals
     {
-        protected PluginScript(Script script, string name) : base(script, name)
+        protected PluginScript(Script script, string name, bool skipCompile) : base(script, name, skipCompile)
         {
         }
 
@@ -130,6 +138,8 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
                 return new PluginScript<TResult, TGlobals>(stream, scriptOptions, name);
             }
         }
+
+        public override object Clone() => new PluginScript<TResult, TGlobals>(Script, Name, true);
 
         public new IPluginScript<TResult, TGlobals> GetWithCheckErrors() => base.GetWithCheckErrors() as PluginScript<TResult, TGlobals>;
 

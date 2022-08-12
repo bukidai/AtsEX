@@ -63,6 +63,8 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                 Select(item => item.Value.Select(obj => new KeyValuePair<string, RepeatedStructure>(item.Key, obj as RepeatedStructure))).
                 SelectMany(item => item);
 
+            Dictionary<Type, SortedList<ScriptLanguage, SortedList<string, dynamic>>> cachedScripts = new Dictionary<Type, SortedList<ScriptLanguage, SortedList<string, dynamic>>>();
+
             foreach (KeyValuePair<string, RepeatedStructure> repeater in flattenRepeatedStructures)
             {
                 string repeaterKey = repeater.Key;
@@ -149,6 +151,15 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             {
                 string mainMapDirectory = Path.GetDirectoryName(bveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path);
 
+                if (!cachedScripts.ContainsKey(typeof(TPassedEventArgs))) cachedScripts[typeof(TPassedEventArgs)] = new SortedList<ScriptLanguage, SortedList<string, dynamic>>();
+                if (!cachedScripts[typeof(TPassedEventArgs)].ContainsKey(language)) cachedScripts[typeof(TPassedEventArgs)][language] = new SortedList<string, dynamic>();
+
+                if (cachedScripts[typeof(TPassedEventArgs)][language].ContainsKey(code))
+                {
+                    IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> cachedScript = cachedScripts[typeof(TPassedEventArgs)][language][code] as IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>>;
+                    return cachedScript.Clone() as IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>>;
+                }
+
                 IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> script;
                 switch (language)
                 {
@@ -166,6 +177,8 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                     default:
                         throw new DevelopException(string.Format(Resources.GetString("ScriptLanguageNotRecognized").Value, language));
                 }
+
+                cachedScripts[typeof(TPassedEventArgs)][language][code] = script;
 
                 return script;
             }

@@ -14,6 +14,8 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
         public string Name { get; } = null;
 
         private Task<CompiledCode> CompilationTask;
+        private readonly bool SkipCompile;
+
         protected readonly ScriptScope Scope;
         protected readonly ScriptSource Source;
         protected CompiledCode CompiledCode;
@@ -23,8 +25,18 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
             Source = source;
             Scope = scope;
             Name = name;
-
+            
+            SkipCompile = false;
             BeginCompile();
+        }
+
+        protected PluginScript(CompiledCode compiledCode, ScriptScope scope, string name)
+        {
+            CompiledCode = compiledCode;
+            Scope = scope;
+            Name = name;
+
+            SkipCompile = true;
         }
 
         public PluginScript(string code, ScriptEngine engine, ScriptScope scope, string name) : this(engine.CreateScriptSourceFromString(code), scope, name)
@@ -39,6 +51,12 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
 
         protected static ScriptSource LoadSource(string path, ScriptEngine engine) => engine.CreateScriptSourceFromFile(path, Encoding.UTF8);
 
+        public virtual object Clone()
+        {
+            _ = GetWithCheckErrors();
+            return new PluginScript<TGlobals>(CompiledCode, Scope, Name);
+        }
+
         private void BeginCompile()
         {
             CompilationTask = Task.Run(() =>
@@ -50,6 +68,8 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
 
         public IPluginScript<TGlobals> GetWithCheckErrors()
         {
+            if (SkipCompile) return this;
+
             try
             {
                 CompiledCode = CompilationTask.Result;
@@ -82,6 +102,10 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
         {
         }
 
+        protected PluginScript(CompiledCode compiledCode, ScriptScope scope, string name) : base(compiledCode, scope, name)
+        {
+        }
+
         public PluginScript(string code, ScriptEngine engine, ScriptScope scope, string name) : base(engine.CreateScriptSourceFromString(code), scope, name)
         {
         }
@@ -90,6 +114,12 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
         {
             ScriptSource source = LoadSource(path, engine);
             return new PluginScript<TResult, TGlobals>(source, scope, Path.GetFileName(path));
+        }
+
+        public override object Clone()
+        {
+            _ = GetWithCheckErrors();
+            return new PluginScript<TResult, TGlobals>(CompiledCode, Scope, Name);
         }
 
         public new IPluginScript<TResult, TGlobals> GetWithCheckErrors() => base.GetWithCheckErrors() as PluginScript<TResult, TGlobals>;

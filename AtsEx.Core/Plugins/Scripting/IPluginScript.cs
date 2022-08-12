@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.Plugins.Scripting
 {
-    internal interface IPluginScript<TGlobals> where TGlobals : Globals
+    internal interface IPluginScript<TGlobals> : ICloneable where TGlobals : Globals
     {
         IPluginScript<TGlobals> GetWithCheckErrors();
         IScriptResult Run(TGlobals globals);
