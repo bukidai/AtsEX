@@ -59,84 +59,82 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
 
             List<ICompilationErrorCheckable> errorCheckList = new List<ICompilationErrorCheckable>();
 
-            IEnumerable<KeyValuePair<string, RepeatedStructure>> flattenRepeatedStructures = repeatedStructures.
-                Select(item => item.Value.Select(obj => new KeyValuePair<string, RepeatedStructure>(item.Key, obj as RepeatedStructure))).
-                SelectMany(item => item);
-
             Dictionary<Type, SortedList<ScriptLanguage, SortedList<string, dynamic>>> cachedScripts = new Dictionary<Type, SortedList<ScriptLanguage, SortedList<string, dynamic>>>();
 
-            foreach (KeyValuePair<string, RepeatedStructure> repeater in flattenRepeatedStructures)
+            foreach (KeyValuePair<string, MapObjectList> sameKeyRepeaters in repeatedStructures)
             {
-                string repeaterKey = repeater.Key;
-                RepeatedStructure repeatedStructure = repeater.Value;
+                string repeaterKey = sameKeyRepeaters.Key;
 
-                if (repeatedStructure.Models is null) continue;
-                if (!repeatedStructure.Models.Any()) continue;
-
+                foreach (RepeatedStructure repeatedStructure in sameKeyRepeaters.Value)
                 {
-                    string definerText = structureModels.TryGetKey(repeatedStructure.Models[0]);
-                    if (definerText != Identifiers.Definer) continue;
-                }
+                    if (repeatedStructure.Models is null) continue;
+                    if (!repeatedStructure.Models.Any()) continue;
 
-                if (repeatedStructure.Models.Count <= 4) throw new BveFileLoadException(Resources.GetString("ArgumentMissing").Value, Resources.GetString("ItemName").Value);
-
-                string name = structureModels.TryGetKey(repeatedStructure.Models[1]);
-                if (name == "atsex.null") name = Guid.NewGuid().ToString();
-
-                string scriptLanguageText = structureModels.TryGetKey(repeatedStructure.Models[2]);
-                if (!ScriptIdentifiers.ScriptLanguages.TryGetKey(scriptLanguageText, out ScriptLanguage scriptLanguage))
-                {
-                    throw new BveFileLoadException(ScriptIdentifiers.ErrorTexts.InvalidScriptLanguage(scriptLanguageText), Resources.GetString("ItemName").Value);
-                }
-
-                string trackObservingTypeText = structureModels.TryGetKey(repeatedStructure.Models[3]);
-                if (!Identifiers.ObservingTargetTracks.TryGetKey(trackObservingTypeText, out ObservingTargetTrack observingTargetTrack))
-                {
-                    throw new BveFileLoadException(Identifiers.ErrorTexts.InvalidObservingTargetTrack(trackObservingTypeText), Resources.GetString("ItemName").Value);
-                }
-
-                for (int i = 4; i < repeatedStructure.Models.Count; i++)
-                {
-                    string observeTargetText = structureModels.TryGetKey(repeatedStructure.Models[i]);
-                    if (!Identifiers.ObservingTargetTrains.TryGetKey(observeTargetText, out ObservingTargetTrain observingTargetTrain))
                     {
-                        throw new BveFileLoadException(Identifiers.ErrorTexts.InvalidObservingTargetTrain(observeTargetText), Resources.GetString("ItemName").Value);
+                        string definerText = structureModels.TryGetKey(repeatedStructure.Models[0]);
+                        if (definerText != Identifiers.Definer) continue;
                     }
 
-                    string code = Regex.Unescape(repeaterKey).Replace('`', '\"');
+                    if (repeatedStructure.Models.Count <= 4) throw new BveFileLoadException(Resources.GetString("ArgumentMissing").Value, Resources.GetString("ItemName").Value);
 
-                    switch (observingTargetTrain)
+                    string name = structureModels.TryGetKey(repeatedStructure.Models[1]);
+                    if (name == "atsex.null") name = Guid.NewGuid().ToString();
+
+                    string scriptLanguageText = structureModels.TryGetKey(repeatedStructure.Models[2]);
+                    if (!ScriptIdentifiers.ScriptLanguages.TryGetKey(scriptLanguageText, out ScriptLanguage scriptLanguage))
                     {
-                        case ObservingTargetTrain.Myself:
-                        {
-                            IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script = CreateScript<PassedEventArgs>(code, scriptLanguage);
-                            Beacon beacon = repeatedStructure.Location < 0
-                                ? new InitializerBeacon(bveHacker, pluginVariables, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script)
-                                : new Beacon(bveHacker, pluginVariables, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
+                        throw new BveFileLoadException(ScriptIdentifiers.ErrorTexts.InvalidScriptLanguage(scriptLanguageText), Resources.GetString("ItemName").Value);
+                    }
 
-                            beacons[name] = beacon;
-                            errorCheckList.Add(beacon);
-                            break;
+                    string trackObservingTypeText = structureModels.TryGetKey(repeatedStructure.Models[3]);
+                    if (!Identifiers.ObservingTargetTracks.TryGetKey(trackObservingTypeText, out ObservingTargetTrack observingTargetTrack))
+                    {
+                        throw new BveFileLoadException(Identifiers.ErrorTexts.InvalidObservingTargetTrack(trackObservingTypeText), Resources.GetString("ItemName").Value);
+                    }
+
+                    for (int i = 4; i < repeatedStructure.Models.Count; i++)
+                    {
+                        string observeTargetText = structureModels.TryGetKey(repeatedStructure.Models[i]);
+                        if (!Identifiers.ObservingTargetTrains.TryGetKey(observeTargetText, out ObservingTargetTrain observingTargetTrain))
+                        {
+                            throw new BveFileLoadException(Identifiers.ErrorTexts.InvalidObservingTargetTrain(observeTargetText), Resources.GetString("ItemName").Value);
                         }
 
-                        case ObservingTargetTrain.Trains:
+                        string code = Regex.Unescape(repeaterKey).Replace('`', '\"');
+
+                        switch (observingTargetTrain)
                         {
-                            IPluginScript<ExtendedBeaconGlobalsBase<TrainPassedEventArgs>> script = CreateScript<TrainPassedEventArgs>(code, scriptLanguage);
-                            TrainObservingBeacon beacon = new TrainObservingBeacon(bveHacker, pluginVariables, name, repeatedStructure, observingTargetTrack, trains, script);
+                            case ObservingTargetTrain.Myself:
+                            {
+                                IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script = CreateScript<PassedEventArgs>(code, scriptLanguage);
+                                Beacon beacon = repeatedStructure.Location < 0
+                                    ? new InitializerBeacon(bveHacker, pluginVariables, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script)
+                                    : new Beacon(bveHacker, pluginVariables, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
 
-                            trainObservingBeacons[name] = beacon;
-                            errorCheckList.Add(beacon);
-                            break;
-                        }
+                                beacons[name] = beacon;
+                                errorCheckList.Add(beacon);
+                                break;
+                            }
 
-                        case ObservingTargetTrain.PreTrain:
-                        {
-                            IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script = CreateScript<PassedEventArgs>(code, scriptLanguage);
-                            Beacon beacon = new Beacon(bveHacker, pluginVariables, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
+                            case ObservingTargetTrain.Trains:
+                            {
+                                IPluginScript<ExtendedBeaconGlobalsBase<TrainPassedEventArgs>> script = CreateScript<TrainPassedEventArgs>(code, scriptLanguage);
+                                TrainObservingBeacon beacon = new TrainObservingBeacon(bveHacker, pluginVariables, name, repeatedStructure, observingTargetTrack, trains, script);
 
-                            preTrainObservingBeacons[name] = beacon;
-                            errorCheckList.Add(beacon);
-                            break;
+                                trainObservingBeacons[name] = beacon;
+                                errorCheckList.Add(beacon);
+                                break;
+                            }
+
+                            case ObservingTargetTrain.PreTrain:
+                            {
+                                IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script = CreateScript<PassedEventArgs>(code, scriptLanguage);
+                                Beacon beacon = new Beacon(bveHacker, pluginVariables, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
+
+                                preTrainObservingBeacons[name] = beacon;
+                                errorCheckList.Add(beacon);
+                                break;
+                            }
                         }
                     }
                 }
