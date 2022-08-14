@@ -52,7 +52,7 @@ namespace Automatic9045.AtsEx.Native
         {
             PluginHost.VehicleSpec exVehicleSpec = new PluginHost.VehicleSpec(vehicleSpec.BrakeNotches, vehicleSpec.PowerNotches, vehicleSpec.AtsNotch, vehicleSpec.B67Notch, vehicleSpec.Cars);
 
-            AtsEx = new AtsEx.AsAtsPlugin(Activator.TargetProcess, Activator.TargetAppDomain, Activator.TargetAssembly, Assembly.GetExecutingAssembly());
+            AtsEx = new AtsEx.AsAtsPlugin(Activator.TargetProcess, Activator.TargetAppDomain, Activator.TargetAssembly);
             AtsExScenarioService = new AtsExScenarioService.AsAtsPlugin(AtsEx, CallerAssembly, exVehicleSpec);
         }
 
