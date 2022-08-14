@@ -19,7 +19,7 @@ using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
 {
-    public abstract partial class AtsExScenarioService : IDisposable
+    internal abstract partial class AtsExScenarioService : IDisposable
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<AtsExScenarioService>("Core");
 
@@ -28,7 +28,7 @@ namespace Automatic9045.AtsEx
         private readonly SortedList<string, PluginBase> VehiclePlugins;
         private readonly SortedList<string, PluginBase> MapPlugins;
 
-        private protected AtsExScenarioService(AtsEx atsEx, PluginUsing vehiclePluginUsing, VehicleSpec vehicleSpec)
+        protected AtsExScenarioService(AtsEx atsEx, PluginUsing vehiclePluginUsing, VehicleSpec vehicleSpec)
         {
             BveHacker = atsEx.BveHacker;
 

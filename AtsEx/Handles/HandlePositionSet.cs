@@ -8,7 +8,7 @@ using Automatic9045.AtsEx.PluginHost.Handles;
 
 namespace Automatic9045.AtsEx.Handles
 {
-    public class HandlePositionSet
+    internal class HandlePositionSet
     {
         public int Power { get; }
         public int Brake { get; }

@@ -14,15 +14,15 @@ using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
 {
-    public abstract partial class AtsEx : IDisposable
+    internal abstract partial class AtsEx : IDisposable
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<AtsEx>("Core");
 
         private readonly ILoadErrorResolver BeaconCreationExceptionResolver;
 
-        internal BveHacker BveHacker { get; }
+        public BveHacker BveHacker { get; }
 
-        private protected AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, ILoadErrorResolver beaconCreationExceptionResolver)
+        protected AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly, ILoadErrorResolver beaconCreationExceptionResolver)
         {
             BeaconCreationExceptionResolver = beaconCreationExceptionResolver;
 
@@ -44,7 +44,7 @@ namespace Automatic9045.AtsEx
             //DXDynamicTextureHost = new DXDynamicTextureHost();
         }
 
-        private protected abstract void ProfileForDifferentBveVersionLoaded(Version profileVersion);
+        protected abstract void ProfileForDifferentBveVersionLoaded(Version profileVersion);
 
         public void Dispose()
         {

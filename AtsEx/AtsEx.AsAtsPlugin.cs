@@ -16,13 +16,13 @@ using Automatic9045.AtsEx.Plugins.Scripting.CSharp;
 
 namespace Automatic9045.AtsEx
 {
-    public abstract partial class AtsEx
+    internal abstract partial class AtsEx
     {
-        public sealed class AsAtsPlugin : AtsEx
+        internal sealed class AsAtsPlugin : AtsEx
         {
             private const string LegalAtsExAssemblyRelativeLocation = @"Automatic9045\AtsEx\AtsEx.dll";
 
-            internal string VersionWarningText { get; private set; }
+            public string VersionWarningText { get; private set; }
 
             public AsAtsPlugin(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly)
                 : base(targetProcess, targetAppDomain, targetAssembly, new LoadErrorResolver())
@@ -55,7 +55,7 @@ namespace Automatic9045.AtsEx
                 string GetNormalizedPath(string abdolutePath) => Path.GetFullPath(abdolutePath).ToLower();
             }
 
-            private protected override void ProfileForDifferentBveVersionLoaded(Version profileVersion)
+            protected override void ProfileForDifferentBveVersionLoaded(Version profileVersion)
             {
                 VersionWarningText = string.Format(Resources.GetString("BveVersionNotSupported").Value, App.Instance.BveVersion, profileVersion, App.Instance.ProductShortName);
                 BveHacker.LoadErrorManager.Throw(VersionWarningText);

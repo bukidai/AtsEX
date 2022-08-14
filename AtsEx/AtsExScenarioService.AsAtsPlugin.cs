@@ -13,9 +13,9 @@ using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.AtsEx
 {
-    public partial class AtsExScenarioService
+    internal partial class AtsExScenarioService
     {
-        public sealed class AsAtsPlugin : AtsExScenarioService
+        internal sealed class AsAtsPlugin : AtsExScenarioService
         {
             public AsAtsPlugin(AtsEx.AsAtsPlugin atsEx, Assembly callerAssembly, VehicleSpec vehicleSpec)
                 : base(atsEx, LoadVehiclePluginUsing(callerAssembly), vehicleSpec)
