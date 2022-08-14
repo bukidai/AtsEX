@@ -10,13 +10,10 @@ using Automatic9045.AtsEx.PluginHost.Input.Native;
 
 namespace Automatic9045.AtsEx.Input
 {
-    public class NativeKeySet : INativeKeySet
+    internal class NativeKeySet : INativeKeySet
     {
         public ReadOnlyDictionary<NativeAtsKeyName, KeyBase> AtsKeys { get; }
 
-        /// <summary>
-        /// <see cref="NativeKeySet"/> クラスの新しいインスタンスを初期化します。
-        /// </summary>
         public NativeKeySet()
         {
             {

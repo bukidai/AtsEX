@@ -19,7 +19,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
             { ScriptLanguage.IronPython2, (ScriptLanguagesBase + "IronPython2").ToLower() },
         });
 
-        public static class ErrorTexts
+        internal static class ErrorTexts
         {
             private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(MapStatementIdentifiers), @"Core\Plugins");
 

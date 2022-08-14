@@ -29,7 +29,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             { PluginHost.ExtendedBeacons.ObservingTargetTrain.PreTrain, (ObservingTargetTrainBase + "PreTrain").ToLower() },
         });
 
-        public static class ErrorTexts
+        internal static class ErrorTexts
         {
             private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(MapStatementIdentifiers), @"Core\ExtendedBeacons");
 

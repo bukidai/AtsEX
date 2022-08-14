@@ -8,7 +8,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
 {
     internal partial class ScriptPluginPackage
     {
-        public class ScriptsBuilder
+        internal class ScriptsBuilder
         {
             public string ConstructorScriptPath { get; set; }
             public string DisposeScriptPath { get; set; }

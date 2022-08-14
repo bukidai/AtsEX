@@ -8,7 +8,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
 {
     internal partial class ScriptPluginPackage
     {
-        public sealed class InformationBuilder
+        internal sealed class InformationBuilder
         {
             public string Location { get; }
             public string Title { get; }
