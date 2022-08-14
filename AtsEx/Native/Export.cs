@@ -8,9 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Automatic9045.AtsEx
-{
+using Automatic9045.AtsEx.Hosting;
 
+namespace Automatic9045.AtsEx.Native
+{
     /// <summary>列車のスペックに関する構造体</summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct VehicleSpec

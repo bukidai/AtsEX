@@ -6,12 +6,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.Hosting;
+
 using Automatic9045.AtsEx.Handles;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.Handles;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
 
-namespace Automatic9045.AtsEx
+namespace Automatic9045.AtsEx.Native
 {
     /// <summary>メインの機能をここに実装する。</summary>
     internal static class AtsMain

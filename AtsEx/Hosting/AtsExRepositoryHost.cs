@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 using Octokit;
 
-namespace Automatic9045.AtsEx
+namespace Automatic9045.AtsEx.Hosting
 {
     internal sealed class AtsExRepositoryHost
     {
