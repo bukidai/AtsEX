@@ -53,9 +53,9 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                 pluginVariables[pluginType] = new PluginVariableCollection(App.Instance.Plugins[pluginType].Keys, pluginType);
             }
 
-            SortedList<string, BeaconBase> beacons = new SortedList<string, BeaconBase>();
-            SortedList<string, TrainObservingBeaconBase> trainObservingBeacons = new SortedList<string, TrainObservingBeaconBase>();
-            SortedList<string, BeaconBase> preTrainObservingBeacons = new SortedList<string, BeaconBase>();
+            Dictionary<string, BeaconBase> beacons = new Dictionary<string, BeaconBase>();
+            Dictionary<string, TrainObservingBeaconBase> trainObservingBeacons = new Dictionary<string, TrainObservingBeaconBase>();
+            Dictionary<string, BeaconBase> preTrainObservingBeacons = new Dictionary<string, BeaconBase>();
 
             List<ICompilationErrorCheckable> errorCheckList = new List<ICompilationErrorCheckable>();
 
@@ -142,7 +142,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
 
             errorCheckList.ForEach(beacon => beacon.CheckCompilationErrors());
 
-            return new ExtendedBeaconSet(pluginVariables, beacons, trainObservingBeacons, preTrainObservingBeacons);
+            return new ExtendedBeaconSet(pluginVariables, OrderBeacons(beacons), OrderBeacons(trainObservingBeacons), OrderBeacons(preTrainObservingBeacons));
 
 
             IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> CreateScript<TPassedEventArgs>(string code, ScriptLanguage language) where TPassedEventArgs : PassedEventArgs
@@ -180,6 +180,9 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
 
                 return script;
             }
+
+            Dictionary<string, TBeacon> OrderBeacons<TBeacon>(Dictionary<string, TBeacon> source) where TBeacon : IExtendedBeacon
+                => source.OrderBy(item => item.Value).ToDictionary(x => x.Key, x => x.Value);
         }
 
         protected override T GetPluginVariable<T>(PluginBase target, string name) => PluginVariables[target.PluginType].GetPluginVariable<T>(target.Identifier, name);
