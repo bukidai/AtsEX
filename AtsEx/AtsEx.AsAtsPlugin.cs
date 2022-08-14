@@ -8,12 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Text;
-
-using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.Plugins.Scripting.CSharp;
-
 namespace Automatic9045.AtsEx
 {
     internal abstract partial class AtsEx
@@ -25,10 +19,8 @@ namespace Automatic9045.AtsEx
             public string VersionWarningText { get; private set; }
 
             public AsAtsPlugin(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly)
-                : base(targetProcess, targetAppDomain, targetAssembly, new LoadErrorResolver())
+                : base(targetProcess, targetAppDomain, targetAssembly)
             {
-                (BeaconCreationExceptionResolver as LoadErrorResolver).LoadErrorManager = BveHacker.LoadErrorManager;
-
                 CheckAtsExAssemblyLocation();
             }
 
@@ -59,45 +51,6 @@ namespace Automatic9045.AtsEx
             {
                 VersionWarningText = string.Format(Resources.GetString("BveVersionNotSupported").Value, App.Instance.BveVersion, profileVersion, App.Instance.ProductShortName);
                 BveHacker.LoadErrorManager.Throw(VersionWarningText);
-            }
-
-
-            private class LoadErrorResolver : ILoadErrorResolver
-            {
-                public LoadErrorManager LoadErrorManager { get; set; }
-
-                public LoadErrorResolver()
-                {
-                }
-
-                public void Resolve(Exception exception)
-                {
-                    switch (exception)
-                    {
-                        case BveFileLoadException ex:
-                            LoadErrorManager.Throw(ex.Message, ex.SenderFileName, ex.LineIndex, ex.CharIndex);
-                            break;
-
-                        case CompilationException ex:
-                            foreach (Diagnostic diagnostic in ex.CompilationErrors)
-                            {
-                                string message = diagnostic.GetMessage();
-                                string fileName = Path.GetFileName(diagnostic.Location.SourceTree.FilePath);
-
-                                LinePosition position = diagnostic.Location.GetLineSpan().StartLinePosition;
-                                int lineIndex = position.Line;
-                                int charIndex = position.Character;
-
-                                LoadErrorManager.Throw(message, fileName, lineIndex, charIndex);
-                            }
-                            break;
-
-                        default:
-                            LoadErrorManager.Throw(exception.Message);
-                            MessageBox.Show(exception.ToString(), string.Format(Resources.GetString("UnhandledExceptionCaption").Value, App.Instance.ProductShortName));
-                            break;
-                    }
-                }
             }
         }
     }

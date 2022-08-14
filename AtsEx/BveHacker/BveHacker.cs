@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -11,8 +12,12 @@ using HarmonyLib;
 
 using Mackoy.Bvets;
 
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
+
 using Automatic9045.AtsEx.ExtendedBeacons;
 using Automatic9045.AtsEx.Handles;
+using Automatic9045.AtsEx.Plugins.Scripting.CSharp;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
@@ -22,13 +27,10 @@ namespace Automatic9045.AtsEx
 {
     internal sealed class BveHacker : PluginHost.BveHacker, IDisposable
     {
-        private readonly ILoadErrorResolver BeaconCreationExceptionResolver;
         private readonly VersionFormProvider VersionFormProvider;
 
-        public BveHacker(Action<Version> profileForDifferentBveVersionLoaded, ILoadErrorResolver beaconCreationExceptionResolver) : base(App.Instance, profileForDifferentBveVersionLoaded)
+        public BveHacker(Action<Version> profileForDifferentBveVersionLoaded) : base(App.Instance, profileForDifferentBveVersionLoaded)
         {
-            BeaconCreationExceptionResolver = beaconCreationExceptionResolver;
-
             _ContextMenuHacker = new ContextMenuHacker(MainForm);
             _ContextMenuHacker.AddSeparator(true);
 
@@ -52,7 +54,31 @@ namespace Automatic9045.AtsEx
             }
             catch (Exception ex)
             {
-                BeaconCreationExceptionResolver.Resolve(ex);
+                switch (ex)
+                {
+                    case BveFileLoadException exception:
+                        LoadErrorManager.Throw(exception.Message, exception.SenderFileName, exception.LineIndex, exception.CharIndex);
+                        break;
+
+                    case CompilationException exception:
+                        foreach (Diagnostic diagnostic in exception.CompilationErrors)
+                        {
+                            string message = diagnostic.GetMessage();
+                            string fileName = Path.GetFileName(diagnostic.Location.SourceTree.FilePath);
+
+                            LinePosition position = diagnostic.Location.GetLineSpan().StartLinePosition;
+                            int lineIndex = position.Line;
+                            int charIndex = position.Character;
+
+                            LoadErrorManager.Throw(message, fileName, lineIndex, charIndex);
+                        }
+                        break;
+
+                    default:
+                        LoadErrorManager.Throw(ex.Message);
+                        MessageBox.Show(ex.ToString(), App.Instance.ProductName);
+                        break;
+                }
             }
         }
 
