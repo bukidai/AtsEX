@@ -5,58 +5,40 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using HarmonyLib;
-
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using Automatic9045.AtsEx.PluginHost.Harmony;
 
 namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
 {
     internal sealed class StructureSetLifeProlonger : IDisposable
     {
-        private static event EventHandler<PatchInvokedEventArgs> PatchInvoked;
+        private readonly ObjectiveHarmonyPatch SetRouteMethodPatch;
 
         private readonly BveHacker BveHacker;
-        private readonly Harmony Harmony = new Harmony("com.automatic9045.atsex.classwrappers.structureset-life-prolonger");
 
         public StructureSetLifeProlonger(BveHacker bveHacker)
         {
             BveHacker = bveHacker;
 
-            ClassMemberSet scenarioMembers = BveHacker.BveTypes.GetClassInfoOf<Scenario>();
-            MethodInfo setRouteMethod = scenarioMembers.GetSourceMethodOf(nameof(TrainDrawer.SetRoute));
+            ClassMemberSet trainDrawerMembers = BveHacker.BveTypes.GetClassInfoOf<TrainDrawer>();
+            MethodInfo setRouteMethod = trainDrawerMembers.GetSourceMethodOf(nameof(TrainDrawer.SetRoute));
 
-            Harmony.Patch(setRouteMethod, new HarmonyMethod(typeof(StructureSetLifeProlonger), nameof(SetRoutePrefix)));
-
-            PatchInvoked += (_, e) =>
+            SetRouteMethodPatch = ObjectiveHarmonyPatch.Patch(setRouteMethod);
+            SetRouteMethodPatch.Prefix += (_, e) =>
             {
-                StructureSet structures = e.Route.Structures;
+                Route route = Route.FromSource(e.Args[0]);
+                StructureSet structures = route.Structures;
+
                 BveHacker.PreviewScenarioCreated += e2 => e2.Scenario.Route.Structures = structures;
+
+                return new PatchInvokationResult();
             };
         }
 
         public void Dispose()
         {
-            Harmony.UnpatchAll();
-        }
-
-#pragma warning disable IDE1006 // 命名スタイル
-        private static void SetRoutePrefix(object[] __args)
-#pragma warning restore IDE1006 // 命名スタイル
-        {
-            Route route = Route.FromSource(__args[0]);
-            PatchInvoked?.Invoke(null, new PatchInvokedEventArgs(route));
-        }
-
-
-        private class PatchInvokedEventArgs : EventArgs
-        {
-            public Route Route { get; }
-
-            public PatchInvokedEventArgs(Route route)
-            {
-                Route = route;
-            }
+            SetRouteMethodPatch.Dispose();
         }
     }
 }

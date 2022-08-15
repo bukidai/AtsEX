@@ -95,6 +95,11 @@
     <Compile Include="Handles\HandleCommandSet.cs" />
     <Compile Include="Handles\IPowerHandle.cs" />
     <Compile Include="Handles\ReverserPositionCommandBase.cs" />
+    <Compile Include="Harmony\ObjectiveHarmonyPatch.cs" />
+    <Compile Include="Harmony\ObjectiveHarmonyPatch.MethodComparer.cs" />
+    <Compile Include="Harmony\PatchInvokationResult.cs" />
+    <Compile Include="Harmony\PatchInvokedEventArgs.cs" />
+    <Compile Include="Harmony\PatchInvokedEventHandler.cs" />
     <Compile Include="ILoadErrorResolver.cs" />
     <Compile Include="Plugins\AssemblyPluginBase.cs" />
     <Compile Include="Handles\NotchCommandBase.cs" />
