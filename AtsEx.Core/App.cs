@@ -32,8 +32,6 @@ namespace Automatic9045.AtsEx
             AtsExCoreAssembly = atsExCoreAssembly;
             AtsExPluginHostAssembly = atsExPluginHostAssembly;
             BveVersion = BveAssembly.GetName().Version;
-
-            BveVersion = BveAssembly.GetName().Version;
         }
 
         public static void CreateInstance(Process targetProcess, Assembly bveAssembly, Assembly atsExAssembly, Assembly atsExCoreAssembly, Assembly atsExPluginHostAssembly)
