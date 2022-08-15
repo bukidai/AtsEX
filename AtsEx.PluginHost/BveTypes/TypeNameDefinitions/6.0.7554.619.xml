@@ -546,7 +546,7 @@
 	</Class>
 
 	<Class Wrapper="TrainDrawer" Original="cz">
-		<Method Wrapper="SetRoute" WrapperParams="Route" IsWrapperPrivate="true" Original="a"/>
+		<Method Wrapper="SetRoute" WrapperParams="Route" Original="a"/>
 	</Class>
 
 	<Class Wrapper="TrainInfo" Original="fc">

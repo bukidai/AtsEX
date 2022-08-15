@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using HarmonyLib;
 
+using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
@@ -21,7 +22,11 @@ namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
         public StructureSetLifeProlonger(BveHacker bveHacker)
         {
             BveHacker = bveHacker;
-            Harmony.Patch(TrainDrawer.OriginalMemberSet.SetRouteMethod, new HarmonyMethod(typeof(StructureSetLifeProlonger), nameof(SetRoutePrefix)));
+
+            ClassMemberSet scenarioMembers = BveHacker.BveTypes.GetClassInfoOf<Scenario>();
+            MethodInfo setRouteMethod = scenarioMembers.GetSourceMethodOf(nameof(TrainDrawer.SetRoute));
+
+            Harmony.Patch(setRouteMethod, new HarmonyMethod(typeof(StructureSetLifeProlonger), nameof(SetRoutePrefix)));
 
             PatchInvoked += (_, e) =>
             {
