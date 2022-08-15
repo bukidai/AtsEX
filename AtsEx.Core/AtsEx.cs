@@ -7,6 +7,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Zbx1425.DXDynamicTexture;
+
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
@@ -40,12 +42,16 @@ namespace Automatic9045.AtsEx
 
             App.CreateInstance(targetProcess, targetAssembly, atsExAssembly, executingAssembly, pluginHostAssembly);
             BveHacker = new BveHacker(ProfileForDifferentBveVersionLoaded, beaconCreationExceptionResolver);
+
+            TextureManager.Initialize();
         }
 
         private protected abstract void ProfileForDifferentBveVersionLoaded(Version profileVersion);
 
         public void Dispose()
         {
+            TextureManager.Clear();
+
             BveHacker.Dispose();
         }
     }
