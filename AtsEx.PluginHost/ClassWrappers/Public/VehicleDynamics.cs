@@ -30,6 +30,13 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
             RunningResistanceFactorCGetMethod = members.GetSourcePropertyGetterOf(nameof(RunningResistanceFactorC));
             RunningResistanceFactorCSetMethod = members.GetSourcePropertySetterOf(nameof(RunningResistanceFactorC));
+
+            TrailerCarGetMethod = members.GetSourcePropertyGetterOf(nameof(TrailerCar));
+
+            MotorCarGetMethod = members.GetSourcePropertyGetterOf(nameof(MotorCar));
+
+            FirstCarGetMethod = members.GetSourcePropertyGetterOf(nameof(FirstCar));
+            FirstCarSetMethod = members.GetSourcePropertySetterOf(nameof(FirstCar));
         }
 
         protected VehicleDynamics(object src) : base(src)
@@ -94,6 +101,29 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             get => RunningResistanceFactorCGetMethod.Invoke(Src, null);
             set => RunningResistanceFactorCSetMethod.Invoke(Src, new object[] { value });
+        }
+
+        private static MethodInfo TrailerCarGetMethod;
+        /// <summary>
+        /// 付随車の情報を提供する <see cref="CarInfo"/> を取得します。
+        /// </summary>
+        public CarInfo TrailerCar => CarInfo.FromSource(TrailerCarGetMethod.Invoke(Src, null));
+
+        private static MethodInfo MotorCarGetMethod;
+        /// <summary>
+        /// 動力車の情報を提供する <see cref="CarInfo"/> を取得します。
+        /// </summary>
+        public CarInfo MotorCar => CarInfo.FromSource(MotorCarGetMethod.Invoke(Src, null));
+
+        private static MethodInfo FirstCarGetMethod;
+        private static MethodInfo FirstCarSetMethod;
+        /// <summary>
+        /// 先頭車両の情報を提供する <see cref="CarInfo"/> を取得します。
+        /// </summary>
+        public CarInfo FirstCar
+        {
+            get => CarInfo.FromSource(FirstCarGetMethod.Invoke(Src, null));
+            set => FirstCarSetMethod.Invoke(Src, new object[] { value.Src });
         }
     }
 }

@@ -83,6 +83,33 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="CarInfo" Original="bd">
+		<Property Wrapper="Weight">
+			<Getter Original="g"/>
+			<Setter Original="g"/>
+		</Property>
+		<Property Wrapper="Count">
+			<Getter Original="f"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="InertiaFactor">
+			<Getter Original="e"/>
+			<Setter Original="h"/>
+		</Property>
+		<Property Wrapper="ShoeFrictionA">
+			<Getter Original="h"/>
+			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="ShoeFrictionB">
+			<Getter Original="j"/>
+			<Setter Original="f"/>
+		</Property>
+		<Property Wrapper="ShoeFrictionC">
+			<Getter Original="i"/>
+			<Setter Original="e"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="Direct3DProvider" Original="d9">
 		<Property Wrapper="Instance" IsWrapperStatic="true">
 			<Getter Original="d" IsOriginalStatic="true"/>
@@ -593,6 +620,16 @@
 		<Property Wrapper="RunningResistanceFactorC">
 			<Getter Original="e"/>
 			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="TrailerCar">
+			<Getter Original="d"/>
+		</Property>
+		<Property Wrapper="MotorCar">
+			<Getter Original="j"/>
+		</Property>
+		<Property Wrapper="FirstCar">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
 		</Property>
 	</Class>
 
