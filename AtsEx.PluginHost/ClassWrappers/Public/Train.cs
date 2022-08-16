@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using SlimDX;
+
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
@@ -22,6 +24,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             TrainInfoField = members.GetSourceFieldOf(nameof(TrainInfo));
             LocationField = members.GetSourceFieldOf(nameof(Location));
             SpeedField = members.GetSourceFieldOf(nameof(Speed));
+
+            DrawCarsMethod = members.GetSourceMethodOf(nameof(DrawCars));
         }
 
         protected Train(object src) : base(src)
@@ -72,5 +76,14 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get => (double)SpeedField.GetValue(Src);
             set => SpeedField.SetValue(Src, value);
         }
+
+        private static MethodInfo DrawCarsMethod;
+        /// <summary>
+        /// この他列車を構成する車両オブジェクトを描画します。
+        /// </summary>
+        /// <param name="direct3DProvider">描画に使用する <see cref="Direct3DProvider"/>。</param>
+        /// <param name="additionalWorldMatrix">ワールド変換行列の後に追加で掛ける行列。</param>
+        public void DrawCars(Direct3DProvider direct3DProvider, Matrix additionalWorldMatrix)
+            => DrawCarsMethod.Invoke(Src, new object[] { direct3DProvider.Src, additionalWorldMatrix });
     }
 }

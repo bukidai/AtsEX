@@ -604,6 +604,8 @@
 		<Field WrapperProperty="TrainInfo" Original="d" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="Location" Original="g" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="Speed" Original="h" IsOriginalPrivate="true"/>
+
+		<Method Wrapper="DrawCars" WrapperParams="Direct3DProvider, SlimDX.Matrix" Original="a"/>
 	</Class>
 
 	<Class Wrapper="TrainInfo" Original="fc">
