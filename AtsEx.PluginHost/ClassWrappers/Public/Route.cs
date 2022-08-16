@@ -30,6 +30,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
             PreTrainObjectsGetMethod = members.GetSourcePropertyGetterOf(nameof(PreTrainObjects));
 
+            SectionsGetMethod = members.GetSourcePropertyGetterOf(nameof(Sections));
+
             SoundsGetMethod = members.GetSourcePropertyGetterOf(nameof(Sounds));
 
             Sounds3DGetMethod = members.GetSourcePropertyGetterOf(nameof(Sounds3D));
@@ -91,6 +93,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// 先行列車の通過時刻のリストを取得します。
         /// </summary>
         public PreTrainObjectList PreTrainObjects => PreTrainObjectList.FromSource(PreTrainObjectsGetMethod.Invoke(Src, null));
+
+        private static MethodInfo SectionsGetMethod;
+        /// <summary>
+        /// 閉塞の一覧を取得します。
+        /// </summary>
+        public MapFunctionList Sections => MapFunctionList.FromSource(SectionsGetMethod.Invoke(Src, null));
 
         private static MethodInfo SoundsGetMethod;
         /// <summary>

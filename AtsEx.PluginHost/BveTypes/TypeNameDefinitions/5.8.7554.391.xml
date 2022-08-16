@@ -206,6 +206,9 @@
 		<Method Wrapper="SetSpeed" WrapperParams="System.Double" Original="d"/>
 	</Class>
 
+	<Class Wrapper="MapFunctionList" Original="dh">
+	</Class>
+
 	<Class Wrapper="MapObjectBase" Original="db">
 		<Property Wrapper="Location">
 			<Getter Original="v"/>
@@ -334,6 +337,9 @@
 		<Property Wrapper="PreTrainObjects">
 			<Getter Original="p"/>
 		</Property>
+		<Property Wrapper="Sections">
+			<Getter Original="n"/>
+		</Property>
 		<Property Wrapper="Sounds">
 			<Getter Original="t"/>
 		</Property>
@@ -362,6 +368,9 @@
 		</Property>
 		<Property Wrapper="Trains">
 			<Getter Original="g"/>
+		</Property>
+		<Property Wrapper="SectionManager">
+			<Getter Original="e"/>
 		</Property>
 		<Property Wrapper="TimeTable">
 			<Getter Original="d"/>
@@ -421,6 +430,24 @@
 		</Property>
 
 		<Method Wrapper="FromFile" WrapperParams="System.String" Original="a" IsWrapperStatic="true" IsOriginalStatic="true"/>
+	</Class>
+
+	<Class Wrapper="Section" Original="o">
+		<Property Wrapper="CurrentSignalIndex">
+			<Getter Original="c"/>
+		</Property>
+		<Property Wrapper="SignalIndexes">
+			<Getter Original="d"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="SectionManager" Original="fe">
+		<Property Wrapper="Sections">
+			<Getter Original="i"/>
+		</Property>
+
+		<Field WrapperProperty="SectionIndexesTrainOn" Original="k" IsOriginalPrivate="true"/>
 	</Class>
 
 	<Class Wrapper="SingleStructureList" Original="bg">

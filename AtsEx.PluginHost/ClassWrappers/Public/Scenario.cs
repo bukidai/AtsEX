@@ -29,6 +29,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             RouteGetMethod = members.GetSourcePropertyGetterOf(nameof(Route));
             VehicleGetMethod = members.GetSourcePropertyGetterOf(nameof(Vehicle));
             TrainsGetMethod = members.GetSourcePropertyGetterOf(nameof(Trains));
+            SectionManagerGetMethod = members.GetSourcePropertyGetterOf(nameof(SectionManager));
             TimeTableGetMethod = members.GetSourcePropertyGetterOf(nameof(TimeTable));
 
             InitializeTimeAndLocationMethod = members.GetSourceMethodOf(nameof(InitializeTimeAndLocation));
@@ -84,6 +85,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 return new WrappedSortedList<string, Train>(dictionarySrc);
             }
         }
+
+        private static MethodInfo SectionManagerGetMethod;
+        /// <summary>
+        /// このシナリオに関連付けられた <see cref="SectionManager"/> のインスタンスを取得します。
+        /// </summary>
+        public SectionManager SectionManager => ClassWrappers.SectionManager.FromSource(SectionManagerGetMethod.Invoke(Src, null));
 
         private static MethodInfo TimeTableGetMethod;
         /// <summary>
