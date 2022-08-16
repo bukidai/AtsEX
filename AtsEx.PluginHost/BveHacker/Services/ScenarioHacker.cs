@@ -37,7 +37,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
 
             ObjectiveHarmonyPatch CreateAndSetupPatch(MethodBase original)
             {
-                ObjectiveHarmonyPatch patch = ObjectiveHarmonyPatch.Patch(initializeMethod);
+                ObjectiveHarmonyPatch patch = ObjectiveHarmonyPatch.Patch(original);
                 patch.Postfix += OnPatchInvoked;
 
                 return patch;
