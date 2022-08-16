@@ -7,6 +7,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
+using Automatic9045.AtsEx.Native;
+
 namespace Automatic9045.AtsEx.Caller
 {
     /// <summary>処理を実装するクラス</summary>

@@ -7,19 +7,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using HarmonyLib;
-
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using Automatic9045.AtsEx.PluginHost.Harmony;
 
 namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
 {
     internal sealed class ScenarioHacker : IDisposable
     {
-        private static event ScenarioCreatedEventHandler PatchInvoked;
-
         private readonly MainForm MainForm;
-        private readonly Harmony Harmony = new Harmony("com.automatic9045.atsex.scenario-hacker");
+
+        private readonly ObjectiveHarmonyPatch InitializeTimeAndLocationMethodPatch;
+        private readonly ObjectiveHarmonyPatch InitializeMethodPatch;
 
         private bool IsScenarioCreatedEventInvoked = false;
 
@@ -32,23 +31,37 @@ namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
             MethodInfo initializeTimeAndLocationMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.InitializeTimeAndLocation));
             MethodInfo initializeMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.Initialize));
 
-            HarmonyMethod patch = new HarmonyMethod(typeof(ScenarioHacker), nameof(SetScenario));
+            InitializeTimeAndLocationMethodPatch = CreateAndSetupPatch(initializeTimeAndLocationMethod);
+            InitializeMethodPatch = CreateAndSetupPatch(initializeMethod);
 
-            Harmony.Patch(initializeTimeAndLocationMethod, postfix: patch);
-            Harmony.Patch(initializeMethod, postfix: patch);
 
-            PatchInvoked += e =>
+            ObjectiveHarmonyPatch CreateAndSetupPatch(MethodBase original)
             {
-                if (IsScenarioCreatedEventInvoked) return;
+                ObjectiveHarmonyPatch patch = ObjectiveHarmonyPatch.Patch(initializeMethod);
+                patch.Postfix += OnPatchInvoked;
 
-                IsScenarioCreatedEventInvoked = true;
-                ScenarioCreated?.Invoke(e);
-            };
+                return patch;
+
+
+                PatchInvokationResult OnPatchInvoked(object sender, PatchInvokedEventArgs e)
+                {
+                    if (IsScenarioCreatedEventInvoked) return new PatchInvokationResult();
+
+                    IsScenarioCreatedEventInvoked = true;
+
+                    Scenario scenario = Scenario.FromSource(e.Instance);
+                    ScenarioCreatedEventArgs scenarioCreatedEventArgs = new ScenarioCreatedEventArgs(scenario);
+                    ScenarioCreated?.Invoke(scenarioCreatedEventArgs);
+
+                    return new PatchInvokationResult();
+                }
+            }
         }
 
         public void Dispose()
         {
-            Harmony.UnpatchAll();
+            InitializeTimeAndLocationMethodPatch.Dispose();
+            InitializeMethodPatch.Dispose();
         }
 
         public event ScenarioCreatedEventHandler ScenarioCreated;
@@ -63,14 +76,6 @@ namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
         {
             get => MainForm.CurrentScenario;
             set => MainForm.CurrentScenario = value;
-        }
-
-#pragma warning disable IDE1006 // 命名スタイル
-        private static void SetScenario(object __instance)
-#pragma warning restore IDE1006 // 命名スタイル
-        {
-            Scenario scenario = Scenario.FromSource(__instance);
-            PatchInvoked?.Invoke(new ScenarioCreatedEventArgs(scenario));
         }
     }
 }

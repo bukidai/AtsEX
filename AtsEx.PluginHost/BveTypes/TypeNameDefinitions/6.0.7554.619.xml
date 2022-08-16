@@ -28,6 +28,9 @@
 		<Field WrapperProperty="CurrentScenario" Original="n" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="Preferences" Original="w" IsOriginalStatic="true"/>
 		<Field WrapperProperty="KeyProvider" Original="m" IsOriginalPrivate="true"/>
+
+		<Method Wrapper="LoadScenario" WrapperParams="ScenarioInfo, System.Boolean" Original="a" IsOriginalPrivate="true"/>
+		<Method Wrapper="UnloadScenario" WrapperParams="void" Original="b" IsOriginalPrivate="true"/>
 	</Class>
 	
 	<Class Wrapper="ScenarioSelectionForm" Original="da">
@@ -573,7 +576,7 @@
 	</Class>
 
 	<Class Wrapper="TrainDrawer" Original="cz">
-		<Method Wrapper="SetRoute" WrapperParams="Route" IsWrapperPrivate="true" Original="a"/>
+		<Method Wrapper="SetRoute" WrapperParams="Route" Original="a"/>
 	</Class>
 
 	<Class Wrapper="TrainInfo" Original="fc">

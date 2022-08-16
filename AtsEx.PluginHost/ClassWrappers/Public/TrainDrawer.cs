@@ -12,26 +12,19 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
     public class TrainDrawer : ClassWrapperBase
     {
-        public static class OriginalMemberSet
-        {
-            public static MethodInfo SetRouteMethod { get; internal set; }
-        }
-
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<TrainDrawer>();
 
-            OriginalMemberSet.SetRouteMethod = members.GetSourceMethodOf(nameof(SetRoute));
+            SetRouteMethod = members.GetSourceMethodOf(nameof(SetRoute));
         }
 
         private TrainDrawer(object src) : base(src)
         {
         }
 
-        private void SetRoute(Route route)
-        {
-            throw new NotImplementedException();
-        }
+        private static MethodInfo SetRouteMethod;
+        public void SetRoute(Route route) => SetRouteMethod.Invoke(Src, new object[] { route.Src });
     }
 }

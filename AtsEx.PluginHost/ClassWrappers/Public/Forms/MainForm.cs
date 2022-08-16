@@ -33,6 +33,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             LoadingProgressFormField = members.GetSourceFieldOf(nameof(LoadingProgressForm));
             TimePosFormField = members.GetSourceFieldOf(nameof(TimePosForm));
             ChartFormField = members.GetSourceFieldOf(nameof(ChartForm));
+
+            LoadScenarioMethod = members.GetSourceMethodOf(nameof(LoadScenario));
+            UnloadScenarioMethod = members.GetSourceMethodOf(nameof(UnloadScenario));
         }
 
         private MainForm(object src) : base(src)
@@ -125,5 +128,20 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get => KeyProvider.FromSource(KeyProviderField.GetValue(Src));
             set => KeyProviderField.SetValue(Src, value.Src);
         }
+
+
+        private static MethodInfo LoadScenarioMethod;
+        /// <summary>
+        /// シナリオを読み込みます。
+        /// </summary>
+        /// <param name="scenarioInfo">シナリオを指定する <see cref="ScenarioInfo"/>。</param>
+        /// <param name="reload">同一のシナリオの再読込であるか。<see langword="true"/> を指定した場合、現時点で読み込まれているストラクチャーを流用します。</param>
+        public void LoadScenario(ScenarioInfo scenarioInfo, bool reload) => LoadScenarioMethod.Invoke(Src, new object[] { scenarioInfo, reload });
+
+        private static MethodInfo UnloadScenarioMethod;
+        /// <summary>
+        /// シナリオを閉じます。
+        /// </summary>
+        public void UnloadScenario() => UnloadScenarioMethod.Invoke(Src, null);
     }
 }
