@@ -21,8 +21,8 @@ namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
         {
             BveHacker = bveHacker;
 
-            ClassMemberSet trainDrawerMembers = BveHacker.BveTypes.GetClassInfoOf<TrainDrawer>();
-            MethodInfo setRouteMethod = trainDrawerMembers.GetSourceMethodOf(nameof(TrainDrawer.SetRoute));
+            ClassMemberSet trainDrawerMembers = BveHacker.BveTypes.GetClassInfoOf<ObjectDrawer>();
+            MethodInfo setRouteMethod = trainDrawerMembers.GetSourceMethodOf(nameof(ObjectDrawer.SetRoute));
 
             SetRouteMethodPatch = ObjectiveHarmonyPatch.Patch(setRouteMethod);
             SetRouteMethodPatch.Prefix += (_, e) =>
