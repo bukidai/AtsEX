@@ -73,6 +73,7 @@
     <Compile Include="ClassWrappers\Public\CabBase.cs" />
     <Compile Include="ClassWrappers\Public\CarInfo.cs" />
     <Compile Include="ClassWrappers\Public\Direct3DProvider.cs" />
+    <Compile Include="ClassWrappers\Public\DrawDistanceManager.cs" />
     <Compile Include="ClassWrappers\Public\HendleSet.cs" />
     <Compile Include="ClassWrappers\Public\MapFunctionList.cs" />
     <Compile Include="ClassWrappers\Public\NotchInfo.cs" />

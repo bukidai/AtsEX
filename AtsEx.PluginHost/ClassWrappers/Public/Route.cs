@@ -37,6 +37,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             Sounds3DGetMethod = members.GetSourcePropertyGetterOf(nameof(Sounds3D));
 
             StructureModelsGetMethod = members.GetSourcePropertyGetterOf(nameof(StructureModels));
+
+            DrawDistanceObjectsGetMethod = members.GetSourcePropertyGetterOf(nameof(DrawDistanceObjects));
         }
 
         private Route(object src) : base(src)
@@ -153,6 +155,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 return new WrappedSortedList<string, Model>(dictionarySrc);
             }
         }
+
+        private static MethodInfo DrawDistanceObjectsGetMethod;
+        /// <summary>
+        /// DrawDistance.Change ステートメントにより設置された、最長描画距離を指定するためのオブジェクトを取得します。
+        /// </summary>
+        public MapFunctionList DrawDistanceObjects => MapFunctionList.FromSource(DrawDistanceObjectsGetMethod.Invoke(Src, null));
 
         private class Sounds3DConverter : ITwoWayConverter<object, Sound[]>
         {

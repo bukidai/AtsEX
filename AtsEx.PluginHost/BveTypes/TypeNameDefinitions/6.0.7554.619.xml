@@ -128,6 +128,21 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="DrawDistanceManager" Original="et">
+		<Property Wrapper="FrontDrawDistance">
+			<Getter Original="d"/>
+		</Property>
+		<Property Wrapper="BackDrawDistance">
+			<Getter Original="f"/>
+		</Property>
+		<Property Wrapper="DrawDistance">
+			<Getter Original="c"/>
+		</Property>
+		<Property Wrapper="DrawDistanceObjects">
+			<Getter Original="e"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="HandleSet" Original="a2">
 		<Property Wrapper="NotchInfo">
 			<Getter Original="e"/>
@@ -284,6 +299,8 @@
 	</Class>
 
 	<Class Wrapper="ObjectDrawer" Original="cz">
+		<Field WrapperProperty="DrawDistanceManager" Original="g" IsOriginalPrivate="true"/>
+
 		<Method Wrapper="SetRoute" WrapperParams="Route" Original="a"/>
 	</Class>
 
@@ -354,6 +371,10 @@
 			<Getter Original="s"/>
 			<Setter Original="a"/>
 		</Property>
+		<Property Wrapper="DrawDistanceObjects">
+			<Getter Original="j"/>
+		</Property>
+
 		<Field WrapperProperty="Structures" Original="d" IsOriginalPrivate="true"/>
 	</Class>
 

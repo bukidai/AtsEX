@@ -17,12 +17,20 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<ObjectDrawer>();
 
+            DrawDistanceManagerField = members.GetSourceFieldOf(nameof(DrawDistanceManager));
+
             SetRouteMethod = members.GetSourceMethodOf(nameof(SetRoute));
         }
 
         private ObjectDrawer(object src) : base(src)
         {
         }
+
+        private static FieldInfo DrawDistanceManagerField;
+        /// <summary>
+        /// ストラクチャーを描画する範囲を算出するための機能を提供する <see cref="ClassWrappers.DrawDistanceManager"/> を取得します。
+        /// </summary>
+        public DrawDistanceManager DrawDistanceManager => ClassWrappers.DrawDistanceManager.FromSource(DrawDistanceManagerField.GetValue(Src));
 
         private static MethodInfo SetRouteMethod;
         public void SetRoute(Route route) => SetRouteMethod.Invoke(Src, new object[] { route.Src });
