@@ -32,6 +32,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             SectionManagerGetMethod = members.GetSourcePropertyGetterOf(nameof(SectionManager));
             TimeTableGetMethod = members.GetSourcePropertyGetterOf(nameof(TimeTable));
 
+            ObjectDrawerField = members.GetSourceFieldOf(nameof(ObjectDrawer));
+
             InitializeTimeAndLocationMethod = members.GetSourceMethodOf(nameof(InitializeTimeAndLocation));
             InitializeMethod = members.GetSourceMethodOf(nameof(Initialize));
         }
@@ -97,6 +99,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// このシナリオに関連付けられた <see cref="ClassWrappers.TimeTable"/> のインスタンスを取得します。
         /// </summary>
         public TimeTable TimeTable => ClassWrappers.TimeTable.FromSource(TimeTableGetMethod.Invoke(Src, null));
+
+        private static FieldInfo ObjectDrawerField;
+        /// <summary>
+        /// このシナリオに関連付けられた <see cref="ClassWrappers.ObjectDrawer"/> のインスタンスを取得します。
+        /// </summary>
+        public ObjectDrawer ObjectDrawer => ClassWrappers.ObjectDrawer.FromSource(ObjectDrawerField.GetValue(Src));
 
         private static MethodInfo InitializeTimeAndLocationMethod;
         public void InitializeTimeAndLocation(double location, int timeMilliseconds) => InitializeTimeAndLocationMethod.Invoke(Src, new object[] { location, timeMilliseconds });

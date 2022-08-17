@@ -10,6 +10,9 @@ using Automatic9045.AtsEx.PluginHost.BveTypes;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
+    /// <summary>
+    /// BVE によって読み込まれた全ての 3D モデルを描画するための機能を提供します。
+    /// </summary>
     public class ObjectDrawer : ClassWrapperBase
     {
         [InitializeClassWrapper]
@@ -22,9 +25,17 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             SetRouteMethod = members.GetSourceMethodOf(nameof(SetRoute));
         }
 
-        private ObjectDrawer(object src) : base(src)
+        protected ObjectDrawer(object src) : base(src)
         {
         }
+
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="ObjectDrawer"/> クラスのインスタンス。</returns>
+        [CreateClassWrapperFromSource]
+        public static ObjectDrawer FromSource(object src) => src is null ? null : new ObjectDrawer(src);
 
         private static FieldInfo DrawDistanceManagerField;
         /// <summary>

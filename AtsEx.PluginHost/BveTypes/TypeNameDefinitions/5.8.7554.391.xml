@@ -400,6 +400,9 @@
 		<Property Wrapper="TimeTable">
 			<Getter Original="d"/>
 		</Property>
+
+		<Field WrapperProperty="ObjectDrawer" Original="j" IsOriginalPrivate="true"/>
+
 		<Method Wrapper="InitializeTimeAndLocation" WrapperParams="System.Double, System.Int32" Original="a" IsOriginalPrivate="true"/>
 		<Method Wrapper="Initialize" WrapperParams="System.Int32" Original="a"/>
 	</Class>
