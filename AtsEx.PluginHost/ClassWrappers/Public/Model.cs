@@ -38,11 +38,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="Model"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
-        public static Model FromSource(object src)
-        {
-            if (src is null) return null;
-            return new Model(src);
-        }
+        public static Model FromSource(object src) => src is null ? null : new Model(src);
 
         private static MethodInfo MeshGetMethod;
         private static MethodInfo MeshSetMethod;
