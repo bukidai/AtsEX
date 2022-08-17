@@ -258,6 +258,8 @@
 			<Getter Original="a"/>
 			<Setter Original="a"/>
 		</Property>
+
+		<Method Wrapper="Draw" WrapperParams="Direct3DProvider, System.Boolean" Original="a"/>
 	</Class>
 
 	<Class Wrapper="NotchInfo" Original="e9">

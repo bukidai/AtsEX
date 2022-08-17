@@ -26,6 +26,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
             MaterialsGetMethod = members.GetSourcePropertyGetterOf(nameof(Materials));
             MaterialsSetMethod = members.GetSourcePropertySetterOf(nameof(Materials));
+
+            DrawMethod = members.GetSourceMethodOf(nameof(Draw));
         }
 
         private Model(object src) : base(src)
@@ -83,5 +85,14 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get => MaterialsParserToWrapper(MaterialsGetMethod.Invoke(Src, null));
             set => MaterialsSetMethod.Invoke(Src, new object[] { MaterialsParserToSource(value) });
         }
+
+        private static MethodInfo DrawMethod;
+        /// <summary>
+        /// モデルを描画します。
+        /// </summary>
+        /// <param name="direct3DProvider">描画に使用する <see cref="Direct3DProvider"/>。</param>
+        /// <param name="skipZWrite">深度バッファーへの書き込みをスキップするか。</param>
+        public void Draw(Direct3DProvider direct3DProvider, bool skipZWrite)
+            => DrawMethod.Invoke(Src, new object[] { direct3DProvider.Src, skipZWrite });
     }
 }
