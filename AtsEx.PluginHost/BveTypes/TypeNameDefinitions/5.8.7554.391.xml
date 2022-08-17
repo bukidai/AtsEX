@@ -625,7 +625,10 @@
 	</Class>
 
 	<Class Wrapper="Train" Original="e4">
+		<Field WrapperProperty="UserVehicleLocationManager" Original="b" IsWrapperPrivate="true" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="Route" Original="c" IsWrapperPrivate="true" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="TrainInfo" Original="d" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="DrawDistanceManager" Original="e" IsWrapperPrivate="true" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="Location" Original="g" IsOriginalPrivate="true"/>
 		<Field WrapperProperty="Speed" Original="h" IsOriginalPrivate="true"/>
 

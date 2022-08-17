@@ -21,7 +21,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<Train>();
 
+            UserVehicleLocationManagerField = members.GetSourceFieldOf(nameof(UserVehicleLocationManager));
+            RouteField = members.GetSourceFieldOf(nameof(Route));
             TrainInfoField = members.GetSourceFieldOf(nameof(TrainInfo));
+            DrawDistanceManagerField = members.GetSourceFieldOf(nameof(DrawDistanceManager));
             LocationField = members.GetSourceFieldOf(nameof(Location));
             SpeedField = members.GetSourceFieldOf(nameof(Speed));
 
@@ -40,6 +43,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static Train FromSource(object src) => src is null ? null : new Train(src);
 
+        private static FieldInfo UserVehicleLocationManagerField;
+        internal UserVehicleLocationManager UserVehicleLocationManager => ClassWrappers.UserVehicleLocationManager.FromSource(UserVehicleLocationManagerField.GetValue(Src));
+
+        private static FieldInfo RouteField;
+        internal Route Route => ClassWrappers.Route.FromSource(RouteField.GetValue(Src));
+
         private static FieldInfo TrainInfoField;
         /// <summary>
         /// この他列車の情報を提供する <see cref="ClassWrappers.TrainInfo"/> を取得・設定します。
@@ -49,6 +58,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get => ClassWrappers.TrainInfo.FromSource(TrainInfoField.GetValue(Src));
             set => TrainInfoField.SetValue(Src, value.Src);
         }
+
+        private static FieldInfo DrawDistanceManagerField;
+        internal DrawDistanceManager DrawDistanceManager => ClassWrappers.DrawDistanceManager.FromSource(DrawDistanceManagerField.GetValue(Src));
 
         private static FieldInfo LocationField;
         /// <summary>
