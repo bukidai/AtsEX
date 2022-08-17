@@ -34,11 +34,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="UserVehicleLocationManager"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
-        public static new UserVehicleLocationManager FromSource(object src)
-        {
-            if (src is null) return null;
-            return new UserVehicleLocationManager(src);
-        }
+        public static new UserVehicleLocationManager FromSource(object src) => src is null ? null : new UserVehicleLocationManager(src);
 
         private static MethodInfo LocationGetMethod;
         /// <summary>
@@ -48,10 +44,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// 自車両の位置を設定するには <see cref="SetLocation(double, bool)"/> メソッドを使用してください。
         /// </remarks>
         /// <seealso cref="SetLocation(double, bool)"/>
-        public double Location
-        {
-            get => LocationGetMethod.Invoke(Src, null);
-        }
+        public double Location => LocationGetMethod.Invoke(Src, null);
 
         private static MethodInfo SetLocationMethod;
         /// <summary>
