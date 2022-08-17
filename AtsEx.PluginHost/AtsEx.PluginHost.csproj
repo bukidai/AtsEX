@@ -98,6 +98,8 @@
     <Compile Include="ExtendedBeacons\ObservingTargetTrack.cs" />
     <Compile Include="ExtendedBeacons\PassedEventArgs.cs" />
     <Compile Include="ExtendedBeacons\TrainPassedEventArgs.cs" />
+    <Compile Include="IMatrixConverter.cs" />
+    <Compile Include="Extensions\TrainDrawPatch.cs" />
     <Compile Include="Handles\ConstantSpeedCommand.cs" />
     <Compile Include="Handles\IBrakeHandle.cs" />
     <Compile Include="Handles\IHandle.cs" />
