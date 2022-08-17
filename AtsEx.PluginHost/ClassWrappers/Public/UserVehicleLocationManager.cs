@@ -21,6 +21,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
             LocationGetMethod = members.GetSourcePropertyGetterOf(nameof(Location));
 
+            BlockIndexGetMethod = members.GetSourcePropertyGetterOf(nameof(BlockIndex));
+
             SetLocationMethod = members.GetSourceMethodOf(nameof(SetLocation));
         }
 
@@ -45,6 +47,16 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </remarks>
         /// <seealso cref="SetLocation(double, bool)"/>
         public double Location => LocationGetMethod.Invoke(Src, null);
+
+        private static MethodInfo BlockIndexGetMethod;
+        /// <summary>
+        /// 現在の自車両の位置が含まれるストラクチャー描画ブロックのインデックスを取得します。
+        /// </summary>
+        /// <remarks>
+        /// 25m 毎に 1 つの描画ブロックが定義されており、全てのストラクチャーは設置された距離程が含まれるブロックに登録されます。<br/>
+        /// 各ストラクチャーが描画距離内に入っているかどうかを描画ブロック単位で判定することで、ストラクチャーの描画処理を高速化しています。
+        /// </remarks>
+        public double BlockIndex => BlockIndexGetMethod.Invoke(Src, null);
 
         private static MethodInfo SetLocationMethod;
         /// <summary>

@@ -646,6 +646,10 @@
 		<Property Wrapper="Location">
 			<Getter Original="c"/>
 		</Property>
+		<Property Wrapper="BlockIndex">
+			<Getter Original="d"/>
+		</Property>
+
 		<Method Wrapper="SetLocation" WrapperParams="System.Double, System.Boolean" Original="a"/>
 	</Class>
 
