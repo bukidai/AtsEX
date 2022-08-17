@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using SlimDX;
+
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
@@ -39,6 +41,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             StructureModelsGetMethod = members.GetSourcePropertyGetterOf(nameof(StructureModels));
 
             DrawDistanceObjectsGetMethod = members.GetSourcePropertyGetterOf(nameof(DrawDistanceObjects));
+
+            GetTrackMatrixMethod = members.GetSourceMethodOf(nameof(GetTrackMatrix));
         }
 
         private Route(object src) : base(src)
@@ -161,6 +165,17 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// DrawDistance.Change ステートメントにより設置された、最長描画距離を指定するためのオブジェクトを取得します。
         /// </summary>
         public MapFunctionList DrawDistanceObjects => MapFunctionList.FromSource(DrawDistanceObjectsGetMethod.Invoke(Src, null));
+
+        private static MethodInfo GetTrackMatrixMethod;
+        /// <summary>
+        /// ストラクチャーを軌道上の指定した距離程へ配置するためのワールド変換行列を取得します。
+        /// </summary>
+        /// <param name="mapObject">配置するストラクチャーを表す <see cref="LocatableMapObject"/>。</param>
+        /// <param name="location">配置先の距離程 [m]。</param>
+        /// <param name="targetBlockLocation">配置先のストラクチャー描画ブロックの距離程 [m]。</param>
+        /// <returns>ワールド変換行列を表す <see cref="Matrix"/>。</returns>
+        public Matrix GetTrackMatrix(LocatableMapObject mapObject, double location, double targetBlockLocation)
+            => GetTrackMatrixMethod.Invoke(Src, new object[] { mapObject.Src, location, targetBlockLocation });
 
         private class Sounds3DConverter : ITwoWayConverter<object, Sound[]>
         {

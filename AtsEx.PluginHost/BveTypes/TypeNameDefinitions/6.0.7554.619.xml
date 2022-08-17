@@ -376,6 +376,8 @@
 		</Property>
 
 		<Field WrapperProperty="Structures" Original="d" IsOriginalPrivate="true"/>
+
+		<Method Wrapper="GetTrackMatrix" WrapperParams="LocatableMapObject, System.Double, System.Double" Original="a"/>
 	</Class>
 
 	<Class Wrapper="Scenario" Original="er">
