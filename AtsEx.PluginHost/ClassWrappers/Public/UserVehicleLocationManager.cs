@@ -58,11 +58,11 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// 自車両の位置を設定します。
         /// </summary>
         /// <param name="location">設定する自車両の位置 [m]。</param>
-        /// <param name="arg1">2 番目のパラメータ。詳細は不明です。</param>
+        /// <param name="skipIfNoChange">指定された位置が現在と変わらない場合、処理をスキップするか。</param>
         /// <remarks>
         /// 自車両の位置を取得するには <see cref="Location"/> プロパティを使用してください。
         /// </remarks>
         /// <seealso cref="Location"/>
-        public void SetLocation(double location, bool arg1) => SetLocationMethod.Invoke(Src, new object[] { location, arg1 });
+        public void SetLocation(double location, bool skipIfNoChange) => SetLocationMethod.Invoke(Src, new object[] { location, skipIfNoChange });
     }
 }
