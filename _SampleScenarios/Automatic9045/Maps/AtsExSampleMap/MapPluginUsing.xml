@@ -2,6 +2,7 @@
 <AtsExPluginUsing xmlns="http://automatic9045.github.io/ns/xmlschemas/AtsExPluginUsingXmlSchema.xsd">
 	<Assembly Path="MapPlugins\StationController.dll" />
 	<Assembly Path="MapPlugins\TrainController.dll" />
+	<Assembly Path="MapPlugins\TrainControllerEx.dll" />
 	<CSharpScript PackageManifestPath="MapPlugins\Empty.CSharpScript\Package.xml" />
 	<CSharpScript PackageManifestPath="MapPlugins\RunningResistanceTest\Package.xml" />
 	<IronPython2 PackageManifestPath="MapPlugins\Empty.IronPython\Package.xml" />

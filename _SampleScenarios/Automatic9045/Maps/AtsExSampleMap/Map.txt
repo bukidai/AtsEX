@@ -36,11 +36,13 @@ Track['1'].X.Interpolate(-3.8);
 	Station['1-1'].Put(-1, -5, 5);
 	structure['Stop6'].Put('0', -2, 0, 0, 0, 0, 0, 0, 0);
 	
-	Train['test'].Load('TestTrain.txt', '1', '1');
+	Train['test'].Load('TestTrain.txt', '1', 1);
+	Train['test_ex'].Load('Bus.txt', '0', 1);
+
+12.5;
+	structure['Info'].Put('1', -0.7, 4, 0, 0, -10, 0, 0, 0);
 
 15;
-	structure['Info'].Put('1', -1, 4, 0, 0, -10, 0, 0, 0);
-
 	Repeater['Form0R'].End();
 	Repeater['Form0CR'].End();
 	Repeater['Form0WallR'].End();
