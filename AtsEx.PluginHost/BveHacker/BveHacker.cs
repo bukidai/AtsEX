@@ -36,6 +36,9 @@ namespace Automatic9045.AtsEx.PluginHost
             ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(app, this);
             classWrapperInitializer.InitializeAll();
 
+            BveTypesSetter bveTypesSetter = new BveTypesSetter(app, this);
+            bveTypesSetter.InitializeAll();
+
             MainFormHacker = new MainFormHacker(app.Process);
             ScenarioHacker = new ScenarioHacker(MainFormHacker, BveTypes);
 
