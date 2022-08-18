@@ -19,7 +19,15 @@ namespace Automatic9045.MapPlugins.TrainController
 
         public TrainController(PluginBuilder builder) : base(builder, PluginType.MapPlugin)
         {
-            BveHacker.ScenarioCreated += e => Train = e.Scenario.Trains["test"];
+            BveHacker.ScenarioCreated += e =>
+            {
+                if (!e.Scenario.Trains.ContainsKey("test"))
+                {
+                    throw new BveFileLoadException("キーが 'test' の他列車が見つかりませんでした。", "TrainController");
+                }
+
+                Train = e.Scenario.Trains["test"];
+            };
 
             App.NativeKeys.AtsKeys[NativeAtsKeyName.D].Pressed += OnDPressed;
             App.NativeKeys.AtsKeys[NativeAtsKeyName.E].Pressed += OnEPressed;
