@@ -17,7 +17,8 @@ using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
 using Automatic9045.AtsEx.PluginHost.Plugins;
 using Automatic9045.AtsEx.PluginHost.Resources;
 
-using Identifiers = Automatic9045.AtsEx.ExtendedBeacons.MapStatementIdentifiers;
+using Identifiers = Automatic9045.AtsEx.MapStatementIdentifiers;
+using ExtendedBeaconIdentifiers = Automatic9045.AtsEx.ExtendedBeacons.MapStatementIdentifiers;
 using ScriptIdentifiers = Automatic9045.AtsEx.Plugins.Scripting.MapStatementIdentifiers;
 
 using BeaconBase = Automatic9045.AtsEx.PluginHost.ExtendedBeacons.ExtendedBeaconBase<Automatic9045.AtsEx.PluginHost.ExtendedBeacons.PassedEventArgs>;
@@ -72,13 +73,13 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
 
                     {
                         string definerText = structureModels.TryGetKey(repeatedStructure.Models[0]);
-                        if (definerText != Identifiers.Definer) continue;
+                        if (definerText != ExtendedBeaconIdentifiers.Definer) continue;
                     }
 
                     if (repeatedStructure.Models.Count <= 4) throw new BveFileLoadException(Resources.GetString("ArgumentMissing").Value, Resources.GetString("ItemName").Value);
 
                     string name = structureModels.TryGetKey(repeatedStructure.Models[1]);
-                    if (name == "atsex.null") name = Guid.NewGuid().ToString();
+                    if (name == Identifiers.Null) name = Guid.NewGuid().ToString();
 
                     string scriptLanguageText = structureModels.TryGetKey(repeatedStructure.Models[2]);
                     if (!ScriptIdentifiers.ScriptLanguages.TryGetKey(scriptLanguageText, out ScriptLanguage scriptLanguage))
@@ -87,17 +88,17 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                     }
 
                     string trackObservingTypeText = structureModels.TryGetKey(repeatedStructure.Models[3]);
-                    if (!Identifiers.ObservingTargetTracks.TryGetKey(trackObservingTypeText, out ObservingTargetTrack observingTargetTrack))
+                    if (!ExtendedBeaconIdentifiers.ObservingTargetTracks.TryGetKey(trackObservingTypeText, out ObservingTargetTrack observingTargetTrack))
                     {
-                        throw new BveFileLoadException(Identifiers.ErrorTexts.InvalidObservingTargetTrack(trackObservingTypeText), Resources.GetString("ItemName").Value);
+                        throw new BveFileLoadException(ExtendedBeaconIdentifiers.ErrorTexts.InvalidObservingTargetTrack(trackObservingTypeText), Resources.GetString("ItemName").Value);
                     }
 
                     for (int i = 4; i < repeatedStructure.Models.Count; i++)
                     {
                         string observeTargetText = structureModels.TryGetKey(repeatedStructure.Models[i]);
-                        if (!Identifiers.ObservingTargetTrains.TryGetKey(observeTargetText, out ObservingTargetTrain observingTargetTrain))
+                        if (!ExtendedBeaconIdentifiers.ObservingTargetTrains.TryGetKey(observeTargetText, out ObservingTargetTrain observingTargetTrain))
                         {
-                            throw new BveFileLoadException(Identifiers.ErrorTexts.InvalidObservingTargetTrain(observeTargetText), Resources.GetString("ItemName").Value);
+                            throw new BveFileLoadException(ExtendedBeaconIdentifiers.ErrorTexts.InvalidObservingTargetTrain(observeTargetText), Resources.GetString("ItemName").Value);
                         }
 
                         string code = Regex.Unescape(repeaterKey).Replace('`', '\"');
