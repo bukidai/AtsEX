@@ -27,19 +27,30 @@ namespace Automatic9045.AtsEx.PluginHost
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<BveHacker>("PluginHost");
 
+        private readonly IApp App;
         private readonly StructureSetLifeProlonger StructureSetLifeProlonger;
 
         protected BveHacker(IApp app, Action<Version> profileForDifferentBveVersionLoaded)
         {
-            BveTypes = BveTypeSet.Load(app.BveAssembly, app.BveVersion, true, profileForDifferentBveVersionLoaded);
+            App = app;
 
-            ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(app, this);
+            try
+            {
+                BveTypes = BveTypeSet.Load(App.BveAssembly, App.BveVersion, true, profileForDifferentBveVersionLoaded);
+            }
+            catch (KeyNotFoundException)
+            {
+                CheckSlimDX();
+                throw;
+            }
+
+            ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(App, this);
             classWrapperInitializer.InitializeAll();
 
-            BveTypesSetter bveTypesSetter = new BveTypesSetter(app, this);
+            BveTypesSetter bveTypesSetter = new BveTypesSetter(App, this);
             bveTypesSetter.InitializeAll();
 
-            MainFormHacker = new MainFormHacker(app.Process);
+            MainFormHacker = new MainFormHacker(App.Process);
             ScenarioHacker = new ScenarioHacker(MainFormHacker, BveTypes);
 
             StructureSetLifeProlonger = new StructureSetLifeProlonger(this);
@@ -50,6 +61,17 @@ namespace Automatic9045.AtsEx.PluginHost
             ScenarioHacker.ScenarioCreated += e => PreviewScenarioCreated?.Invoke(e);
             ScenarioHacker.ScenarioCreated += OnScenarioCreated;
             ScenarioHacker.ScenarioCreated += e => ScenarioCreated?.Invoke(e);
+        }
+
+        private void CheckSlimDX()
+        {
+            IEnumerable<Assembly> slimDXAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where(asm => asm.GetName().Name == "SlimDX");
+
+            if (slimDXAssemblies.Count() > 1)
+            {
+                string locationText = string.Join("\n", slimDXAssemblies.Select(assembly => "・" + assembly.Location));
+                MessageBox.Show(string.Format(Resources.GetString("IllegalSlimDXDetected").Value, locationText), App.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         /// <summary>
