@@ -49,8 +49,9 @@ namespace Automatic9045.MapPlugins.StationController
 
         private void AddButtonClicked(object sender, EventArgs e)
         {
-            StationList stations = InstanceStore.Instance.BveHacker.Scenario.Route.Stations;
+            BveHacker bveHacker = InstanceStore.Instance.BveHacker;
 
+            StationList stations = bveHacker.Scenario.Route.Stations;
             try
             {
                 Station newStation = new Station(NameValue.Text)
@@ -71,12 +72,14 @@ namespace Automatic9045.MapPlugins.StationController
                 return;
             }
 
-            InstanceStore.Instance.BveHacker.UpdateDiagram();
+            DiagramUpdater.UpdateDiagram(bveHacker.Scenario, bveHacker.TimePosForm);
             ResetInput();
         }
 
         private void RemoveButtonClicked(object sender, EventArgs e)
         {
+            BveHacker bveHacker = InstanceStore.Instance.BveHacker;
+
             StationList stations = InstanceStore.Instance.BveHacker.Scenario.Route.Stations;
             if (stations.Count == 0) return;
             stations.RemoveAt(stations.Count - 1);
@@ -90,7 +93,7 @@ namespace Automatic9045.MapPlugins.StationController
                 Station lastStation = stations.Last() as Station;
             }
 
-            InstanceStore.Instance.BveHacker.UpdateDiagram();
+            DiagramUpdater.UpdateDiagram(bveHacker.Scenario, bveHacker.TimePosForm);
         }
     }
 }

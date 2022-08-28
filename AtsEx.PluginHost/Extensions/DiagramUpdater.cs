@@ -20,11 +20,12 @@ namespace Automatic9045.AtsEx.PluginHost.Extensions
         /// <summary>
         /// 時刻表と「時刻と位置」フォーム内のダイヤグラムの表示を最新の設定に更新します。
         /// </summary>
-        /// <param name="bveHacker">更新に使用する <see cref="BveHacker"/>。</param>
-        public static void UpdateDiagram(this BveHacker bveHacker)
+        /// <param name="scenario">更新に使用する <see cref="Scenario"/>。</param>
+        /// <param name="timePosForm">ダイヤグラムを描画する対象の <see cref="TimePosForm"/>。</param>
+        public static void UpdateDiagram(Scenario scenario, TimePosForm timePosForm)
         {
-            StationList stations = bveHacker.Scenario.Route.Stations;
-            TimeTable timeTable = bveHacker.Scenario.TimeTable;
+            StationList stations = scenario.Route.Stations;
+            TimeTable timeTable = scenario.TimeTable;
 
             timeTable.NameTexts = new string[stations.Count + 1];
             timeTable.NameTextWidths = new int[stations.Count + 1];
@@ -34,7 +35,7 @@ namespace Automatic9045.AtsEx.PluginHost.Extensions
             timeTable.DepertureTimeTextWidths = new int[stations.Count + 1];
             timeTable.Update();
 
-            bveHacker.TimePosForm.SetScenario(bveHacker.Scenario);
+            timePosForm.SetScenario(scenario);
         }
     }
 }
