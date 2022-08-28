@@ -2,6 +2,8 @@ BveTs Structure List 2.00,
 Info,Structures_Original\Info\HowToDriveOtherTrain.x
 Bus,Structures_Original\Bus\Bus.x
 ,
+dxdt-test,structures\Station\Stop6.x
+,
 #拡張地上子の名前用,
 Beacon.Hoge,Structures_Original\Null.x
 Beacon.Fuga,Structures_Original\Null.x

@@ -42,6 +42,9 @@ Track['1'].X.Interpolate(-3.8);
 12.5;
 	structure['Info'].Put('1', -0.7, 4, 0, 0, -10, 0, 0, 0);
 
+14;
+	structure['dxdt-test'].Put('1', -3.5, 0, 0, 0, 0, 0, 0, 0);
+
 15;
 	Repeater['Form0R'].End();
 	Repeater['Form0CR'].End();

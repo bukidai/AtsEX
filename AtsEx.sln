@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.VehiclePlugin.SimpleA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.MapPlugin.TrainControllerEx", "Plugins\MapPlugins\AtsEx.MapPlugin.TrainControllerEx\AtsEx.MapPlugin.TrainControllerEx.csproj", "{9E5A6C98-1F14-460A-AC42-8138196AA3AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.MapPlugin.DXDynamicTextureTest", "Plugins\MapPlugins\AtsEx.MapPlugin.DXDynamicTextureTest\AtsEx.MapPlugin.DXDynamicTextureTest.csproj", "{C84BDF1C-D390-4A77-A3ED-35FBAAB2ED6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{9E5A6C98-1F14-460A-AC42-8138196AA3AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E5A6C98-1F14-460A-AC42-8138196AA3AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E5A6C98-1F14-460A-AC42-8138196AA3AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C84BDF1C-D390-4A77-A3ED-35FBAAB2ED6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C84BDF1C-D390-4A77-A3ED-35FBAAB2ED6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C84BDF1C-D390-4A77-A3ED-35FBAAB2ED6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C84BDF1C-D390-4A77-A3ED-35FBAAB2ED6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{C737B63B-E1DC-4960-82C1-A6D885B26694} = {FCA108F3-EC46-4DD5-962E-3ECCBC2100AE}
 		{68D8C868-7775-42DB-A696-CF8DEF486A89} = {31284256-F435-4CDC-B1B6-FCB71C97D6EF}
 		{9E5A6C98-1F14-460A-AC42-8138196AA3AE} = {FCA108F3-EC46-4DD5-962E-3ECCBC2100AE}
+		{C84BDF1C-D390-4A77-A3ED-35FBAAB2ED6F} = {FCA108F3-EC46-4DD5-962E-3ECCBC2100AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434AD268-BAE2-48A7-8AE5-2AB6B982F843}
