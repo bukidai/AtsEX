@@ -13,7 +13,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// 単独で設置された <see cref="Structure"/> のリストを表します。
     /// </summary>
-    public sealed class SingleStructureList : MapObjectList
+    public class SingleStructureList : MapObjectList
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)

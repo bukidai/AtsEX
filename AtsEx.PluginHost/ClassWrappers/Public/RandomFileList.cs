@@ -13,7 +13,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// ランダムに 1 つの項目が選ばれる <see cref="BveFile"/> のリストを表します。
     /// </summary>
-    public sealed class RandomFileList : ClassWrapperBase, IList<BveFile>
+    public class RandomFileList : ClassWrapperBase, IList<BveFile>
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)

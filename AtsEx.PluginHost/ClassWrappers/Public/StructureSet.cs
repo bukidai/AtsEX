@@ -13,7 +13,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// Structure マップ要素、Repeater マップ要素で設置されたストラクチャーの情報を提供します。
     /// </summary>
-    public sealed class StructureSet : ClassWrapperBase
+    public class StructureSet : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)

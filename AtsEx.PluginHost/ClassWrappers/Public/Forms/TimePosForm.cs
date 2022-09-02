@@ -12,7 +12,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// 「時刻と位置」フォームを表します。
     /// </summary>
-    public sealed class TimePosForm : ClassWrapperBase
+    public class TimePosForm : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)

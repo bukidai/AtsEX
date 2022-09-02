@@ -15,7 +15,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// マップに関する情報にアクセスするための機能を提供します。
     /// </summary>
-    public sealed class Route : ClassWrapperBase
+    public class Route : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)

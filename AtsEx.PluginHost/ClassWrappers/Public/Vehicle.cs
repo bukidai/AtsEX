@@ -12,7 +12,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// 自車両に関する情報にアクセスするための機能を提供します。
     /// </summary>
-    public sealed class Vehicle : ClassWrapperBase
+    public class Vehicle : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)

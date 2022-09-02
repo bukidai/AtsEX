@@ -13,7 +13,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// 先行列車の通過時刻のリストを表します。
     /// </summary>
-    public sealed class PreTrainObjectList : MapObjectList
+    public class PreTrainObjectList : MapObjectList
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)

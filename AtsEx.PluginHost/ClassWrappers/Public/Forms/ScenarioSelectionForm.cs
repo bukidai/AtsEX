@@ -9,7 +9,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// 「シナリオの選択」フォームを表します。
     /// </summary>
-    public sealed class ScenarioSelectionForm : ClassWrapperBase
+    public class ScenarioSelectionForm : ClassWrapperBase
     {
         private ScenarioSelectionForm(object src) : base(src)
         {

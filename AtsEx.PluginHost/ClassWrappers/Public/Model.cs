@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// SlimDX で表示するための 2D および 3D モデルを表します。
     /// </summary>
-    public sealed class Model : ClassWrapperBase
+    public class Model : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)

@@ -12,7 +12,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 	/// <summary>
 	/// シナリオの読込中に発生したエラーを表します。
 	/// </summary>
-    public sealed class LoadError : ClassWrapperBase
+    public class LoadError : ClassWrapperBase
     {
 		[InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)

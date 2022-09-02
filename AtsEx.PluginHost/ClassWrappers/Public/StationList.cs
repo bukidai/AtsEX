@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// 停車場のリストを表します。
     /// </summary>
-    public sealed class StationList : MapObjectList
+    public class StationList : MapObjectList
     {
         private static new readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<StationList>(@"PluginHost\ClassWrappers");
 

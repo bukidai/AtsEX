@@ -12,7 +12,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// 時間に関する処理を行います。
     /// </summary>
-    public sealed class TimeManager : ClassWrapperBase
+    public class TimeManager : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)

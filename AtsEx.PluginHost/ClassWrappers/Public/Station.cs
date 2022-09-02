@@ -12,7 +12,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// 停車場を表します。
     /// </summary>
-    public sealed class Station : MapObjectBase
+    public class Station : MapObjectBase
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
