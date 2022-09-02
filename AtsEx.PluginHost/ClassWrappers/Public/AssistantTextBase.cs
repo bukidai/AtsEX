@@ -48,7 +48,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             return new AssistantTextBase(src);
         }
 
-        protected static MethodInfo AssistantSettingsGetMethod;
+        private static MethodInfo AssistantSettingsGetMethod;
         /// <summary>
         /// 補助表示の設定を取得します。
         /// </summary>
@@ -57,8 +57,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get => AssistantSettingsGetMethod.Invoke(Src, null);
         }
 
-        protected static MethodInfo BackgroundColorGetMethod;
-        protected static MethodInfo BackgroundColorSetMethod;
+        private static MethodInfo BackgroundColorGetMethod;
+        private static MethodInfo BackgroundColorSetMethod;
         /// <summary>
         /// 補助表示の背景色を取得・設定します。
         /// </summary>
@@ -68,7 +68,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => BackgroundColorSetMethod.Invoke(Src, new object[] { value });
         }
 
-        protected static MethodInfo DisplayAreaGetMethod;
+        private static MethodInfo DisplayAreaGetMethod;
         /// <summary>
         /// 表示する位置とサイズを表す <see cref="Rectangle"/> を取得します。
         /// </summary>
@@ -77,7 +77,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get => DisplayAreaGetMethod.Invoke(Src, null);
         }
 
-        protected static MethodInfo DrawMethod;
+        private static MethodInfo DrawMethod;
         /// <summary>
         /// 補助表示を描画します。
         /// </summary>

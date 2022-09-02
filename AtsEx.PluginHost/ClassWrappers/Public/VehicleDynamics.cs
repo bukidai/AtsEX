@@ -51,8 +51,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static VehicleDynamics FromSource(object src) => src is null ? null : new VehicleDynamics(src);
 
-        protected static MethodInfo CurveResistanceFactorGetMethod;
-        protected static MethodInfo CurveResistanceFactorSetMethod;
+        private static MethodInfo CurveResistanceFactorGetMethod;
+        private static MethodInfo CurveResistanceFactorSetMethod;
         /// <summary>
         /// 曲線抵抗の係数を取得・設定します。
         /// </summary>
@@ -62,8 +62,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => CurveResistanceFactorSetMethod.Invoke(Src, new object[] { value });
         }
 
-        protected static MethodInfo RunningResistanceFactorAGetMethod;
-        protected static MethodInfo RunningResistanceFactorASetMethod;
+        private static MethodInfo RunningResistanceFactorAGetMethod;
+        private static MethodInfo RunningResistanceFactorASetMethod;
         /// <summary>
         /// 速度の単位を [m/s] としたときの走行抵抗の係数 a を取得・設定します。
         /// </summary>
@@ -77,8 +77,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => RunningResistanceFactorASetMethod.Invoke(Src, new object[] { value });
         }
 
-        protected static MethodInfo RunningResistanceFactorBGetMethod;
-        protected static MethodInfo RunningResistanceFactorBSetMethod;
+        private static MethodInfo RunningResistanceFactorBGetMethod;
+        private static MethodInfo RunningResistanceFactorBSetMethod;
         /// <summary>
         /// 速度の単位を [m/s] としたときの走行抵抗の係数 b を取得・設定します。
         /// </summary>
@@ -92,8 +92,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => RunningResistanceFactorBSetMethod.Invoke(Src, new object[] { value });
         }
 
-        protected static MethodInfo RunningResistanceFactorCGetMethod;
-        protected static MethodInfo RunningResistanceFactorCSetMethod;
+        private static MethodInfo RunningResistanceFactorCGetMethod;
+        private static MethodInfo RunningResistanceFactorCSetMethod;
         /// <summary>
         /// 走行抵抗の係数 c を取得・設定します。
         /// </summary>
