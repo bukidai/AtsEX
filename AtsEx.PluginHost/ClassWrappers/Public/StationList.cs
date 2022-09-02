@@ -27,7 +27,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             GetStandardTimeMethod = members.GetSourceMethodOf(nameof(GetStandardTime));
         }
 
-        private StationList(IList src) : base(src)
+        protected StationList(IList src) : base(src)
         {
         }
 

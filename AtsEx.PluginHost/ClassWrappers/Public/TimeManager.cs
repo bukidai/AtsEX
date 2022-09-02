@@ -27,7 +27,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             SetTimeMethod = members.GetSourceMethodOf(nameof(SetTime));
         }
 
-        private TimeManager(object src) : base(src)
+        protected TimeManager(object src) : base(src)
         {
         }
 

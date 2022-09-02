@@ -21,7 +21,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             ClassMemberSet members = bveTypes.GetClassInfoOf<SingleStructureList>();
         }
 
-        private SingleStructureList(IList src) : base(src)
+        protected SingleStructureList(IList src) : base(src)
         {
         }
 

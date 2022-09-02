@@ -30,7 +30,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             DrawMethod = members.GetSourceMethodOf(nameof(Draw));
         }
 
-        private Model(object src) : base(src)
+        protected Model(object src) : base(src)
         {
         }
 

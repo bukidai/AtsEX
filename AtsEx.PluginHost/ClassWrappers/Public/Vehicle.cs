@@ -26,7 +26,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             DynamicsSetMethod = members.GetSourcePropertySetterOf(nameof(Dynamics));
         }
 
-        private Vehicle(object src) : base(src)
+        protected Vehicle(object src) : base(src)
         {
         }
 

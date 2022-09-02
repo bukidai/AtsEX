@@ -34,7 +34,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 			CharIndexSetMethod = members.GetSourcePropertySetterOf(nameof(CharIndex));
 		}
 
-        private LoadError(object src) : base(src)
+        protected LoadError(object src) : base(src)
         {
 		}
 

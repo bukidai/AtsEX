@@ -20,7 +20,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             ClassMemberSet members = bveTypes.GetClassInfoOf<Sound>();
         }
 
-        private Sound(object src) : base(src)
+        protected Sound(object src) : base(src)
         {
         }
 

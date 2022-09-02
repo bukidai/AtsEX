@@ -24,7 +24,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             SelectedFileSetMethod = members.GetSourcePropertySetterOf(nameof(SelectedFile));
         }
 
-        private RandomFileList(object src) : base(src)
+        protected RandomFileList(object src) : base(src)
         {
         }
 

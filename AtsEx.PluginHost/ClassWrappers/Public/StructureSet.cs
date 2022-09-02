@@ -32,7 +32,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             SignalsGetMethod = members.GetSourcePropertyGetterOf(nameof(Signals));
         }
 
-        private StructureSet(object src) : base(src)
+        protected StructureSet(object src) : base(src)
         {
         }
 

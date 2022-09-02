@@ -31,7 +31,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             Is2DSetMethod = members.GetSourcePropertySetterOf(nameof(Is2D));
         }
 
-        private MaterialInfo(object src) : base(src)
+        protected MaterialInfo(object src) : base(src)
         {
         }
 

@@ -11,7 +11,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// </summary>
     public class ScenarioSelectionForm : ClassWrapperBase
     {
-        private ScenarioSelectionForm(object src) : base(src)
+        protected ScenarioSelectionForm(object src) : base(src)
         {
         }
 

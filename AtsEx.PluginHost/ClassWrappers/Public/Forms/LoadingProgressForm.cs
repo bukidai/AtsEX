@@ -30,7 +30,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             ThrowErrorsMethod = members.GetSourceMethodOf(nameof(ThrowErrors), new Type[] { typeof(IEnumerable<LoadError>) });
         }
 
-        private LoadingProgressForm(object src) : base(src)
+        protected LoadingProgressForm(object src) : base(src)
         {
         }
 

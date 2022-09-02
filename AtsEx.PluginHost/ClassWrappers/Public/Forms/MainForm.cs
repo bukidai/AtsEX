@@ -38,7 +38,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             UnloadScenarioMethod = members.GetSourceMethodOf(nameof(UnloadScenario));
         }
 
-        private MainForm(object src) : base(src)
+        protected MainForm(object src) : base(src)
         {
         }
 

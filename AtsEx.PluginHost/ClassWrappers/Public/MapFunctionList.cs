@@ -21,7 +21,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             ClassMemberSet members = bveTypes.GetClassInfoOf<MapFunctionList>();
         }
 
-        private MapFunctionList(IList src) : base(src)
+        protected MapFunctionList(IList src) : base(src)
         {
         }
 

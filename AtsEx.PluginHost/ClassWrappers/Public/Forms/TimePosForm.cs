@@ -24,7 +24,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             DrawMethod = members.GetSourceMethodOf(nameof(Draw));
         }
 
-        private TimePosForm(object src) : base(src)
+        protected TimePosForm(object src) : base(src)
         {
         }
 

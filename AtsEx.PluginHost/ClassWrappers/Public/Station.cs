@@ -83,7 +83,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             StuckInDoorSetMethod = members.GetSourcePropertySetterOf(nameof(StuckInDoorMilliseconds));
         }
 
-        private Station(object src) : base(src)
+        protected Station(object src) : base(src)
         {
         }
 

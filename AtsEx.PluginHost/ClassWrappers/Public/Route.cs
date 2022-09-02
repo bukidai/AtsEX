@@ -45,7 +45,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             GetTrackMatrixMethod = members.GetSourceMethodOf(nameof(GetTrackMatrix));
         }
 
-        private Route(object src) : base(src)
+        protected Route(object src) : base(src)
         {
         }
 

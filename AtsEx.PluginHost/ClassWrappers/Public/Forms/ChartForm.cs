@@ -11,7 +11,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// </summary>
     public class ChartForm : ClassWrapperBase
     {
-        private ChartForm(object src) : base(src)
+        protected ChartForm(object src) : base(src)
         {
         }
 

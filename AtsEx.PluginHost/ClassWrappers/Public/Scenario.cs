@@ -38,7 +38,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             InitializeMethod = members.GetSourceMethodOf(nameof(Initialize));
         }
 
-        private Scenario(object src) : base(src)
+        protected Scenario(object src) : base(src)
         {
         }
 

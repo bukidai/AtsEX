@@ -23,7 +23,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             GetPreTrainLocationMethod = members.GetSourceMethodOf(nameof(GetPreTrainLocation));
         }
 
-        private PreTrainObjectList(IList src) : base(src)
+        protected PreTrainObjectList(IList src) : base(src)
         {
         }
 
