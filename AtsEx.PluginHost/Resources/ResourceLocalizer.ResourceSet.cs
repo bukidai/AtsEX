@@ -12,7 +12,7 @@ namespace Automatic9045.AtsEx.PluginHost.Resources
 {
     public partial class ResourceLocalizer
     {
-        public class ResourceSet : Dictionary<string, object>
+        private class ResourceSet : Dictionary<string, object>
         {
             public static ResourceSet FromResX(string filePath)
             {
