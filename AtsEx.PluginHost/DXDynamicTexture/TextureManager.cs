@@ -11,6 +11,7 @@ using SlimDX.Direct3D9;
 
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
+#pragma warning disable CS1591 // 公開されている型またはメンバーの XML コメントがありません
 namespace Zbx1425.DXDynamicTexture
 {
     public static class TextureManager

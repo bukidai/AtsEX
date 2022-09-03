@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+#pragma warning disable CS1591 // 公開されている型またはメンバーの XML コメントがありません
 namespace Zbx1425.DXDynamicTexture
 {
     public class TouchEventArgs : EventArgs

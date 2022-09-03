@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
+#pragma warning disable CS1591 // 公開されている型またはメンバーの XML コメントがありません
 namespace Zbx1425.DXDynamicTexture
 {
     public class GDIHelper : IDisposable

@@ -8,6 +8,7 @@ using System.Text;
 
 using SlimDX.Direct3D9;
 
+#pragma warning disable CS1591 // 公開されている型またはメンバーの XML コメントがありません
 namespace Zbx1425.DXDynamicTexture
 {
     public class TextureHandle : IDisposable

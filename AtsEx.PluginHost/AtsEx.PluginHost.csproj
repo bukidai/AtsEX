@@ -239,6 +239,7 @@
     <Content Include="Resources\Files\ClassWrapperBase.resx" />
     <Content Include="Resources\Files\BveHacker.resx" />
     <Content Include="Resources\Files\BveHacker.ja.resx" />
+    <None Include="DXDynamicTexture\.editorconfig" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
