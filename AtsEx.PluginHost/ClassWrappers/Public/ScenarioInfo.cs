@@ -77,11 +77,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="ScenarioInfo"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
-        public static ScenarioInfo FromSource(object src)
-        {
-            if (src is null) return null;
-            return new ScenarioInfo(src);
-        }
+        public static ScenarioInfo FromSource(object src) => src is null ? null : new ScenarioInfo(src);
 
         private static MethodInfo FromFileMethod;
         /// <summary>

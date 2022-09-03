@@ -25,10 +25,6 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="ChartForm"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
-        public static ChartForm FromSource(object src)
-        {
-            if (src is null) return null;
-            return new ChartForm(src);
-        }
+        public static ChartForm FromSource(object src) => src is null ? null : new ChartForm(src);
     }
 }

@@ -38,11 +38,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="TimePosForm"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
-        public static TimePosForm FromSource(object src)
-        {
-            if (src is null) return null;
-            return new TimePosForm(src);
-        }
+        public static TimePosForm FromSource(object src) => src is null ? null : new TimePosForm(src);
 
         private static MethodInfo SetScenarioMethod;
         /// <summary>

@@ -41,11 +41,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="TimeManager"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
-        public static TimeManager FromSource(object src)
-        {
-            if (src is null) return null;
-            return new TimeManager(src);
-        }
+        public static TimeManager FromSource(object src) => src is null ? null : new TimeManager(src);
 
         private static MethodInfo GameStateGetMethod;
         private static MethodInfo GameStateSetMethod;

@@ -45,11 +45,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="MaterialInfo"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
-        public static MaterialInfo FromSource(object src)
-        {
-            if (src is null) return null;
-            return new MaterialInfo(src);
-        }
+        public static MaterialInfo FromSource(object src) => src is null ? null : new MaterialInfo(src);
 
         private static MethodInfo MaterialGetMethod;
         private static MethodInfo MaterialSetMethod;

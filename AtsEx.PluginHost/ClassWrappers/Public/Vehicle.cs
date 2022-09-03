@@ -40,11 +40,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="Vehicle"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
-        public static Vehicle FromSource(object src)
-        {
-            if (src is null) return null;
-            return new Vehicle(src);
-        }
+        public static Vehicle FromSource(object src) => src is null ? null : new Vehicle(src);
 
         private static MethodInfo InstrumentsGetMethod;
         private static MethodInfo InstrumentsSetMethod;

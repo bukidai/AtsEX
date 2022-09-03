@@ -41,11 +41,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="StationList"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
-        public static new StationList FromSource(object src)
-        {
-            if (src is null) return null;
-            return new StationList((IList)src);
-        }
+        public static new StationList FromSource(object src) => src is null ? null : new StationList((IList)src);
 
         /// <summary>
         /// <see cref="StationList"/> に項目を追加します。

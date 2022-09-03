@@ -41,11 +41,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="Structure"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
-        public static Structure FromSource(object src)
-        {
-            if (src is null) return null;
-            return new Structure(src);
-        }
+        public static Structure FromSource(object src) => src is null ? null : new Structure(src);
 
         private static ConstructorInfo Constructor1;
         private Structure(double location, string trackKey, double x, double y, double z, double dx, double dy, double dz, int tilt, double span, Model model)

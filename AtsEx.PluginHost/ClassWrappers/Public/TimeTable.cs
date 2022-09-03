@@ -47,11 +47,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="TimeTable"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
-        public static new TimeTable FromSource(object src)
-        {
-            if (src is null) return null;
-            return new TimeTable(src);
-        }
+        public static new TimeTable FromSource(object src) => src is null ? null : new TimeTable(src);
 
         private static FieldInfo ModelField;
         /// <summary>

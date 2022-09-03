@@ -25,10 +25,6 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="ScenarioSelectionForm"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
-        public static ScenarioSelectionForm FromSource(object src)
-        {
-            if (src is null) return null;
-            return new ScenarioSelectionForm(src);
-        }
+        public static ScenarioSelectionForm FromSource(object src) => src is null ? null : new ScenarioSelectionForm(src);
     }
 }

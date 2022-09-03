@@ -46,11 +46,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="AssistantTextBase"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
-        public static AssistantTextBase FromSource(object src)
-        {
-            if (src is null) return null;
-            return new AssistantTextBase(src);
-        }
+        public static AssistantTextBase FromSource(object src) => src is null ? null : new AssistantTextBase(src);
 
         private static MethodInfo AssistantSettingsGetMethod;
         /// <summary>
