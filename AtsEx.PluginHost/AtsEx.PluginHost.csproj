@@ -210,7 +210,6 @@
     <Compile Include="Resources\ResourceInfo.cs" />
     <Compile Include="Resources\ResourceLocalizer.cs" />
     <Compile Include="Resources\ResourceLocalizer.ResourceSet.cs" />
-    <Compile Include="TextPosition.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BveTypes\TypeNameDefinitions\BveTypesXmlSchema.xsd">
