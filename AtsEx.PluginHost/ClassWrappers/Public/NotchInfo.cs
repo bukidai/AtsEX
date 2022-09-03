@@ -140,7 +140,6 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         private static MethodInfo EmergencyBrakeNotchGetMethod;
-        private static MethodInfo EmergencyBrakeNotchSetMethod;
         /// <summary>
         /// 電気ブレーキが立ち上がる最小ブレーキノッチを取得します。
         /// </summary>
