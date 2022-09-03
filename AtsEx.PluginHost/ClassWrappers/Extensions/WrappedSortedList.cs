@@ -19,23 +19,23 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <seealso cref="SortedList{TKey, TValue}"/>
     public class WrappedSortedList<TKey, TValueWrapper> : IDictionary<TKey, TValueWrapper>, IDictionary, IReadOnlyDictionary<TKey, TValueWrapper>
     {
-        protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(WrappedSortedList<,>), @"PluginHost\ClassWrappers");
+        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(WrappedSortedList<,>), @"PluginHost\ClassWrappers");
 
         private static BveTypeSet BveTypes = null;
 
-        protected IDictionary Src;
-        protected dynamic SrcAsDynamic;
-        protected ITwoWayConverter<object, TValueWrapper> ValueConverter;
+        private readonly IDictionary Src;
+        private readonly dynamic SrcAsDynamic;
+        private readonly ITwoWayConverter<object, TValueWrapper> ValueConverter;
 
-        protected Type SrcType;
+        private readonly Type SrcType;
 
-        protected FieldInfo VersionField;
-        protected FieldInfo KeysField;
-        protected FieldInfo ValuesField;
+        private readonly FieldInfo VersionField;
+        private readonly FieldInfo KeysField;
+        private readonly FieldInfo ValuesField;
 
-        protected int Version => (int)VersionField.GetValue(Src);
-        protected TKey[] KeyArray => KeysField.GetValue(Src) as TKey[];
-        protected Array ValueArray => ValuesField.GetValue(Src) as Array;
+        private int Version => (int)VersionField.GetValue(Src);
+        private TKey[] KeyArray => KeysField.GetValue(Src) as TKey[];
+        private Array ValueArray => ValuesField.GetValue(Src) as Array;
 
         /// <summary>
         /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
@@ -120,9 +120,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <inheritdoc/>
         public object SyncRoot => Src.SyncRoot;
 
-        protected WrappedValueList __Values;
+        private WrappedValueList __Values;
 #pragma warning disable IDE1006 // 命名スタイル
-        protected WrappedValueList _Values => __Values = __Values ?? new WrappedValueList(this);
+        private ICollection<TValueWrapper> _Values => __Values = __Values ?? new WrappedValueList(this);
 #pragma warning restore IDE1006 // 命名スタイル
 
         /// <inheritdoc/>
@@ -130,7 +130,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
         IEnumerable<TValueWrapper> IReadOnlyDictionary<TKey, TValueWrapper>.Values => _Values;
 
-        ICollection IDictionary.Values => _Values;
+        ICollection IDictionary.Values => (ICollection)_Values;
 
 
 
@@ -247,7 +247,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
         }
 
-        protected sealed class WrappedValueList : ICollection<TValueWrapper>, ICollection
+        internal sealed class WrappedValueList : ICollection<TValueWrapper>, ICollection
         {
             private readonly WrappedSortedList<TKey, TValueWrapper> SortedList;
 
@@ -261,28 +261,20 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 SortedList = sortedList;
             }
 
-            /// <inheritdoc/>
             public int Count => SortedList.Count;
 
-            /// <inheritdoc/>
             public bool IsReadOnly => true;
 
-            /// <inheritdoc/>
             public object SyncRoot => SortedList.SyncRoot;
 
-            /// <inheritdoc/>
             public bool IsSynchronized => false;
 
-            /// <inheritdoc/>
             public void Add(TValueWrapper item) => throw new NotSupportedException();
 
-            /// <inheritdoc/>
             public void Clear() => throw new NotSupportedException();
 
-            /// <inheritdoc/>
             public bool Contains(TValueWrapper item) => SortedList.ContainsValue(item);
 
-            /// <inheritdoc/>
             public void CopyTo(TValueWrapper[] array, int arrayIndex)
             {
                 if (!(array is null) && array.Rank != 1)
@@ -300,25 +292,22 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 }
             }
 
-            /// <inheritdoc/>
             public void CopyTo(Array array, int index) => CopyTo(array as TValueWrapper[], index);
 
-            /// <inheritdoc/>
             public IEnumerator<TValueWrapper> GetEnumerator() => new WrappedValueEnumerator(SortedList);
 
-            /// <inheritdoc/>
             public bool Remove(TValueWrapper item) => throw new NotSupportedException();
 
             IEnumerator IEnumerable.GetEnumerator() => new WrappedValueEnumerator(SortedList);
         }
 
-        protected enum EnumeratorType
+        internal enum EnumeratorType
         {
             Enumerator,
             DictionaryEnumerator,
         }
 
-        protected sealed class Enumerator : IEnumerator<KeyValuePair<TKey, TValueWrapper>>, IDisposable, IEnumerator, IDictionaryEnumerator
+        internal sealed class Enumerator : IEnumerator<KeyValuePair<TKey, TValueWrapper>>, IDisposable, IEnumerator, IDictionaryEnumerator
         {
             private readonly WrappedSortedList<TKey, TValueWrapper> SortedList;
             private readonly EnumeratorType Type;
@@ -335,16 +324,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 ValueEnumerator = SortedList.Values.GetEnumerator();
             }
 
-            /// <inheritdoc/>
             public KeyValuePair<TKey, TValueWrapper> Current => new KeyValuePair<TKey, TValueWrapper>(KeyEnumerator.Current, ValueEnumerator.Current);
 
-            /// <inheritdoc/>
             public object Key => KeyEnumerator.Current;
 
-            /// <inheritdoc/>
             public object Value => ValueEnumerator.Current;
 
-            /// <inheritdoc/>
             public DictionaryEntry Entry => new DictionaryEntry(KeyEnumerator.Current, ValueEnumerator.Current);
 
             object IEnumerator.Current
@@ -363,14 +348,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 }
             }
 
-            /// <inheritdoc/>
             public void Dispose()
             {
                 KeyEnumerator.Dispose();
                 ValueEnumerator.Dispose();
             }
 
-            /// <inheritdoc/>
             public bool MoveNext()
             {
                 bool keyEnumeratorResult = KeyEnumerator.MoveNext();
@@ -379,7 +362,6 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 return keyEnumeratorResult != valueEnumeratorResult ? throw new AccessViolationException() : keyEnumeratorResult;
             }
 
-            /// <inheritdoc/>
             public void Reset()
             {
                 KeyEnumerator.Reset();
@@ -387,7 +369,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
         }
 
-        protected sealed class WrappedValueEnumerator : IEnumerator<TValueWrapper>, IDisposable, IEnumerator
+        internal sealed class WrappedValueEnumerator : IEnumerator<TValueWrapper>, IDisposable, IEnumerator
         {
             private readonly WrappedSortedList<TKey, TValueWrapper> SortedList;
             private readonly int Version;
@@ -400,19 +382,16 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 Version = SortedList.Version;
             }
 
-            /// <inheritdoc/>
             public TValueWrapper Current { get; private set; }
 
             object IEnumerator.Current => Index == 0 || Index == SortedList.Count + 1 ? throw new InvalidOperationException() : Current;
 
-            /// <inheritdoc/>
             public void Dispose()
             {
                 Index = 0;
                 Current = default;
             }
 
-            /// <inheritdoc/>
             public bool MoveNext()
             {
                 if (Version != SortedList.Version)
@@ -433,7 +412,6 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 return false;
             }
 
-            /// <inheritdoc/>
             public void Reset()
             {
                 if (Version != SortedList.Version)
