@@ -24,6 +24,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             SetSpeedMethod = members.GetSourceMethodOf(nameof(SetSpeed));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="LocationManager"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected LocationManager(object src) : base(src)
         {
         }

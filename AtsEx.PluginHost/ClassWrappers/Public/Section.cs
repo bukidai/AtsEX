@@ -25,6 +25,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             SignalIndexesSetMethod = members.GetSourcePropertySetterOf(nameof(SignalIndexes));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="Section"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected Section(object src) : base(src)
         {
         }

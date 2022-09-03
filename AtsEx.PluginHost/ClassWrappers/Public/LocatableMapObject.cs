@@ -42,6 +42,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             TiltsAlongGradientSetMethod = members.GetSourcePropertySetterOf(nameof(TiltsAlongGradient));
         }
 
+        /// <summary>
+        /// <see cref="LocatableMapObject"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected LocatableMapObject(object src) : base(src)
         {
         }

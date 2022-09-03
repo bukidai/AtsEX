@@ -20,6 +20,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             ClassMemberSet members = bveTypes.GetClassInfoOf<Sound>();
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="Sound"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected Sound(object src) : base(src)
         {
         }

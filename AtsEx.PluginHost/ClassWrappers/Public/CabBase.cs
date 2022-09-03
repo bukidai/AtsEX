@@ -22,6 +22,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             HandlesGetMethod = members.GetSourcePropertyGetterOf(nameof(Handles));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="CabBase"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected CabBase(object src) : base(src)
         {
         }

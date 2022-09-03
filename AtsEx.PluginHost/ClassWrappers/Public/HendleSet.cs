@@ -36,6 +36,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             ConstantSpeedSetMethod = members.GetSourcePropertySetterOf(nameof(ConstantSpeed));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="HandleSet"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected HandleSet(object src) : base(src)
         {
         }

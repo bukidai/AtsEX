@@ -23,6 +23,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             CabSetMethod = members.GetSourcePropertySetterOf(nameof(Cab));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="VehicleInstrumentSet"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected VehicleInstrumentSet(object src) : base(src)
         {
         }

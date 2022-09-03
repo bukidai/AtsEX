@@ -27,6 +27,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             GetStandardTimeMethod = members.GetSourceMethodOf(nameof(GetStandardTime));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="StationList"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected StationList(IList src) : base(src)
         {
         }

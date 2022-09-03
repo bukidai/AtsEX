@@ -26,6 +26,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             IntervalSetMethod = members.GetSourcePropertySetterOf(nameof(Interval));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="RepeatedStructure"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected RepeatedStructure(object src) : base(src)
         {
         }

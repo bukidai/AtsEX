@@ -24,6 +24,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             PathSetMethod = members.GetSourcePropertySetterOf(nameof(Path));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="BveFile"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected BveFile(object src) : base(src)
         {
         }

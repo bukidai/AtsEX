@@ -24,6 +24,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             DrawMethod = members.GetSourceMethodOf(nameof(Draw));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="TimePosForm"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected TimePosForm(object src) : base(src)
         {
         }

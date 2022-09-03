@@ -34,6 +34,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             CharIndexSetMethod = members.GetSourcePropertySetterOf(nameof(CharIndex));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="LoadError"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected LoadError(object src) : base(src)
         {
         }

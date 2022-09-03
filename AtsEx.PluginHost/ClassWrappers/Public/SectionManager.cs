@@ -24,6 +24,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             SectionIndexesTrainOnField = members.GetSourceFieldOf(nameof(SectionIndexesTrainOn));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="SectionManager"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected SectionManager(object src) : base(src)
         {
         }

@@ -31,6 +31,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             DrawCarsMethod = members.GetSourceMethodOf(nameof(DrawCars));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="Train"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected Train(object src) : base(src)
         {
         }

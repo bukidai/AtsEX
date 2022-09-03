@@ -21,6 +21,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             ClassMemberSet members = bveTypes.GetClassInfoOf<SingleStructureList>();
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="SingleStructureList"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected SingleStructureList(IList src) : base(src)
         {
         }

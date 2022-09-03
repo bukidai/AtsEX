@@ -30,6 +30,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             DrawDistanceObjectsGetMethod = members.GetSourcePropertyGetterOf(nameof(DrawDistanceObjects));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="DrawDistanceManager"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected DrawDistanceManager(object src) : base(src)
         {
         }

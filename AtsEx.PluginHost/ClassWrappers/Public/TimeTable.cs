@@ -33,6 +33,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             UpdateMethod = members.GetSourceMethodOf(nameof(Update));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="TimeTable"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected TimeTable(object src) : base(src)
         {
         }

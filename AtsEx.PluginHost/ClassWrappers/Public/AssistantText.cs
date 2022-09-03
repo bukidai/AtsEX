@@ -27,6 +27,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             TextSetMethod = members.GetSourcePropertySetterOf(nameof(Text));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="AssistantText"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected AssistantText(object src) : base(src)
         {
         }

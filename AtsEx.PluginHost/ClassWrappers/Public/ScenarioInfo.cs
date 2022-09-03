@@ -63,6 +63,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             ScenarioFileLoadErrorsSetMethod = members.GetSourcePropertySetterOf(nameof(ScenarioFileLoadErrors));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="ScenarioInfo"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected ScenarioInfo(object src) : base(src)
         {
         }

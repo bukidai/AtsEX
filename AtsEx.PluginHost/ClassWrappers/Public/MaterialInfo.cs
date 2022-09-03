@@ -31,6 +31,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             Is2DSetMethod = members.GetSourcePropertySetterOf(nameof(Is2D));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="MaterialInfo"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected MaterialInfo(object src) : base(src)
         {
         }

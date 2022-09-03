@@ -34,6 +34,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             TransformOnlyXGetMethod = members.GetSourcePropertyGetterOf(nameof(TransformOnlyX));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="PutBetweenStructure"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected PutBetweenStructure(object src) : base(src)
         {
         }

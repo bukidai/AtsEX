@@ -27,6 +27,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             SetTimeMethod = members.GetSourceMethodOf(nameof(SetTime));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="TimeManager"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected TimeManager(object src) : base(src)
         {
         }

@@ -11,6 +11,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// </summary>
     public class ChartForm : ClassWrapperBase
     {
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="ChartForm"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected ChartForm(object src) : base(src)
         {
         }

@@ -11,6 +11,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// </summary>
     public class ScenarioSelectionForm : ClassWrapperBase
     {
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="ScenarioSelectionForm"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected ScenarioSelectionForm(object src) : base(src)
         {
         }

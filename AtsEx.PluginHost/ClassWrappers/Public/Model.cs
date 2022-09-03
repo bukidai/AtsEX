@@ -30,6 +30,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             DrawMethod = members.GetSourceMethodOf(nameof(Draw));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="Model"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected Model(object src) : base(src)
         {
         }

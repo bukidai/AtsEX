@@ -38,6 +38,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             UnloadScenarioMethod = members.GetSourceMethodOf(nameof(UnloadScenario));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="MainForm"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected MainForm(object src) : base(src)
         {
         }

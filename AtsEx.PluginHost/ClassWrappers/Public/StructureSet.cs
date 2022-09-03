@@ -32,6 +32,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             SignalsGetMethod = members.GetSourcePropertyGetterOf(nameof(Signals));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="StructureSet"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected StructureSet(object src) : base(src)
         {
         }

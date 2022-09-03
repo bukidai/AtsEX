@@ -23,6 +23,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             AssistantTextsGetMethod = members.GetSourcePropertyGetterOf(nameof(AssistantTexts));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="AssistantTextDrawer"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected AssistantTextDrawer(object src) : base(src)
         {
         }

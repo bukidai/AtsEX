@@ -21,6 +21,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             ClassMemberSet members = bveTypes.GetClassInfoOf<MapFunctionList>();
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="MapFunctionList"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected MapFunctionList(IList src) : base(src)
         {
         }

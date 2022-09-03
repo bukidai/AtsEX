@@ -23,6 +23,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             GetPreTrainLocationMethod = members.GetSourceMethodOf(nameof(GetPreTrainLocation));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="PreTrainObjectList"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected PreTrainObjectList(IList src) : base(src)
         {
         }

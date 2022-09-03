@@ -26,6 +26,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             SetLocationMethod = members.GetSourceMethodOf(nameof(SetLocation));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="UserVehicleLocationManager"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected UserVehicleLocationManager(object src) : base(src)
         {
         }

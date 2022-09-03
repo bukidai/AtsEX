@@ -26,6 +26,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             DynamicsSetMethod = members.GetSourcePropertySetterOf(nameof(Dynamics));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="Vehicle"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected Vehicle(object src) : base(src)
         {
         }

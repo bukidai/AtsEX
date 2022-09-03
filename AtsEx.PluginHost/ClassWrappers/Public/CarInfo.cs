@@ -38,6 +38,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             ShoeFrictionCSetMethod = members.GetSourcePropertySetterOf(nameof(ShoeFrictionC));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="CarInfo"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected CarInfo(object src) : base(src)
         {
         }

@@ -30,6 +30,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             ThrowErrorsMethod = members.GetSourceMethodOf(nameof(ThrowErrors), new Type[] { typeof(IEnumerable<LoadError>) });
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="LoadingProgressForm"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected LoadingProgressForm(object src) : base(src)
         {
         }

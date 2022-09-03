@@ -33,6 +33,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             LocationSetMethod = members.GetSourcePropertySetterOf(nameof(Location));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="MapObjectBase"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected MapObjectBase(object src) : base(src)
         {
         }

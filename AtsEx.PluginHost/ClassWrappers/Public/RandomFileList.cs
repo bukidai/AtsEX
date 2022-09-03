@@ -24,6 +24,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             SelectedFileSetMethod = members.GetSourcePropertySetterOf(nameof(SelectedFile));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="RandomFileList"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected RandomFileList(IList src) : base(src)
         {
         }

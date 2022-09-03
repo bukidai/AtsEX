@@ -24,6 +24,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             InputDevicesGetMethod = members.GetSourcePropertyGetterOf(nameof(InputDevices));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="KeyProvider"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected KeyProvider(object src) : base(src)
         {
         }

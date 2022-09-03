@@ -27,6 +27,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             ModelSetMethod = members.GetSourcePropertySetterOf(nameof(Model));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="Structure"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected Structure(object src) : base(src)
         {
         }

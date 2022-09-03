@@ -45,6 +45,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             GetTrackMatrixMethod = members.GetSourceMethodOf(nameof(GetTrackMatrix));
         }
 
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="Route"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected Route(object src) : base(src)
         {
         }
