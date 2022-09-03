@@ -56,6 +56,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => LocationSetMethod.Invoke(Src, new object[] { value });
         }
 
+        /// <inheritdoc/>
         public int CompareTo(object obj)
         {
             if (obj is MapObjectBase mapObject)

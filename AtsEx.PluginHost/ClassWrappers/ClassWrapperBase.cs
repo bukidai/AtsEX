@@ -89,16 +89,19 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             Src = src;
         }
 
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             return obj is ClassWrapperBase classWrapper && (bool)(Src as object).Equals(classWrapper.Src);
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             return (Src as object).GetHashCode();
         }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             return (Src as object).ToString();

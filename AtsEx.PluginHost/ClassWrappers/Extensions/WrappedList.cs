@@ -14,8 +14,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// オリジナル型の <see cref="List{T}"/> のラッパーを表します。
     /// </summary>
-    /// <typeparam name="TKey">キーの型。</typeparam>
-    /// <typeparam name="TValueWrapper">値のオリジナル型に対応するラッパー型。</typeparam>
+    /// <typeparam name="TWrapper">値のオリジナル型に対応するラッパー型。</typeparam>
     /// <seealso cref="SortedList{TKey, TValue}"/>
     public class WrappedList<TWrapper> : ClassWrapperBase, IList<TWrapper>, IReadOnlyList<TWrapper>, IList
     {
@@ -92,26 +91,33 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
 
+        /// <inheritdoc/>
         public TWrapper this[int index]
         {
             get => Converter.Convert(Src[index]);
             set => Src[index] = Converter.ConvertBack(value);
         }
 
+        /// <inheritdoc/>
         public int Count => Src.Count;
 
+        /// <inheritdoc/>
         public bool IsReadOnly => Src.IsReadOnly;
 
         bool IList.IsFixedSize => Src.IsFixedSize;
         object ICollection.SyncRoot => Src.SyncRoot;
         bool ICollection.IsSynchronized => Src.IsSynchronized;
 
+        /// <inheritdoc/>
         public virtual void Add(TWrapper item) => Src.Add(Converter.ConvertBack(item));
 
+        /// <inheritdoc/>
         public void Clear() => Src.Clear();
 
+        /// <inheritdoc/>
         public bool Contains(TWrapper item) => Src.Contains(Converter.ConvertBack(item));
 
+        /// <inheritdoc/>
         public void CopyTo(TWrapper[] array, int arrayIndex)
         {
             if (!(array is null) && array.Rank != 1)
@@ -129,12 +135,16 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
         }
 
+        /// <inheritdoc/>
         public IEnumerator<TWrapper> GetEnumerator() => new Enumerator(Src.GetEnumerator(), Converter);
 
+        /// <inheritdoc/>
         public int IndexOf(TWrapper item) => Src.IndexOf(Converter.ConvertBack(item));
 
+        /// <inheritdoc/>
         public void Insert(int index, TWrapper item) => Src.Insert(index, Converter.ConvertBack(item));
 
+        /// <inheritdoc/>
         public bool Remove(TWrapper item)
         {
             object original = Converter.ConvertBack(item);
@@ -149,6 +159,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
         }
 
+        /// <inheritdoc/>
         public void RemoveAt(int index) => Src.RemoveAt(index);
 
         object IList.this[int index] { get => this[index]; set => this[index] = (TWrapper)value; }

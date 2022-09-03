@@ -113,7 +113,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <remarks>
         /// Sound3D.Load ステートメントから読み込まれたサウンドのリストの取得には <see cref="Sounds3D"/> プロパティを使用してください。
         /// </remarks>
-        /// <value>キーがサウンド名、値がサウンドを表す <see cref="Sound"/> の <see cref="WrappedSortedList{string, Sound}"/>。</value>
+        /// <value>キーがサウンド名、値がサウンドを表す <see cref="Sound"/> の <see cref="WrappedSortedList{TKey, TValue}"/>。</value>
         /// <seealso cref="Sounds3D"/>
         public WrappedSortedList<string, Sound> Sounds
         {
@@ -131,7 +131,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <remarks>
         /// Sound.Load ステートメントから読み込まれたサウンドのリストの取得には <see cref="Sounds"/> プロパティを使用してください。
         /// </remarks>
-        /// <value>キーがサウンド名、値がサウンドを表す <see cref="Sound"/> の <see cref="WrappedSortedList{string, Sound}"/>。</value>
+        /// <value>キーがサウンド名、値がサウンドを表す <see cref="Sound"/> の <see cref="WrappedSortedList{TKey, TValue}"/>。</value>
         /// <seealso cref="Sounds"/>
         public WrappedSortedList<string, Sound[]> Sounds3D
         {
@@ -149,7 +149,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <remarks>
         /// 設置されたストラクチャーのリストの取得には <see cref="Structures"/> を使用してください。
         /// </remarks>
-        /// <value>キーがストラクチャー名、値がストラクチャーの 3D モデルを表す <see cref="Model"/> の <see cref="WrappedSortedList{string, Model}"/>。</value>
+        /// <value>キーがストラクチャー名、値がストラクチャーの 3D モデルを表す <see cref="Model"/> の <see cref="WrappedSortedList{TKey, TValue}"/>。</value>
         /// <seealso cref="Structures"/>
         public WrappedSortedList<string, Model> StructureModels
         {

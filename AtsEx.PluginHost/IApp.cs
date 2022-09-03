@@ -96,13 +96,13 @@ namespace Automatic9045.AtsEx.PluginHost
 
 
         /// <summary>
-        /// 全ての AtsEX 車両プラグインの読込が完了し、<see cref="VehiclePlugins"/> が取得可能になると発生します。
-        /// <see cref="MapPlugins"/> は発生時点では読み込めないので注意してください。
+        /// 全ての AtsEX 車両プラグインの読込が完了し、車両プラグインの一覧が <see cref="Plugins"/> から取得可能になると発生します。
+        /// マッププラグインは発生時点では読み込めないので注意してください。
         /// </summary>
         event AllPluginLoadedEventHandler AllVehiclePluginLoaded;
 
         /// <summary>
-        /// 全ての AtsEX 路線プラグインの読込が完了し、<see cref="MapPlugins"/> が取得可能になると発生します。
+        /// 全ての AtsEX マッププラグインの読込が完了し、マッププラグインの一覧が <see cref="Plugins"/> から取得可能になると発生します。
         /// </summary>
         event AllPluginLoadedEventHandler AllMapPluginLoaded;
 

@@ -62,7 +62,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <summary>
         /// Repeater マップ要素で設置されたストラクチャーを取得します。
         /// </summary>
-        /// <value>キーが RepeaterKey で指定した連続ストラクチャーー名、値が設置するストラクチャーのリストを表す <see cref="MapObjectList"/> の <see cref="WrappedSortedList{string, MapObjectList}"/>。</value>
+        /// <value>キーが RepeaterKey で指定した連続ストラクチャーー名、値が設置するストラクチャーのリストを表す <see cref="MapObjectList"/> の <see cref="WrappedSortedList{TKey, TValueWrapper}"/>。</value>
         public WrappedSortedList<string, MapObjectList> Repeated
         {
             get

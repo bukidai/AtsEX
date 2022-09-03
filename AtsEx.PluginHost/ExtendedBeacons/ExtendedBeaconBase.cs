@@ -52,6 +52,7 @@ namespace Automatic9045.AtsEx.PluginHost.ExtendedBeacons
         /// <param name="name">地上子の名前。</param>
         /// <param name="definedStructure">地上子の定義に使用する連続ストラクチャー。</param>
         /// <param name="observingTargetTrack">検知対象の軌道。</param>
+        /// <param name="observingTargetTrain">検知対象の列車。</param>
         public ExtendedBeaconBase(string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
@@ -61,13 +62,14 @@ namespace Automatic9045.AtsEx.PluginHost.ExtendedBeacons
         }
 
         /// <summary>
-        /// 検知対象の列車が通過したことをこの <see cref="ExtendedBeaconBase"/> オブジェクトに通知します。
+        /// 検知対象の列車が通過したことをこの <see cref="ExtendedBeaconBase{TPassedEventArgs}"/> オブジェクトに通知します。
         /// </summary>
         protected void NotifyPassed(TPassedEventArgs eventArgs)
         {
             Passed?.Invoke(this, eventArgs);
         }
 
+        /// <inheritdoc/>
         public int CompareTo(IExtendedBeacon other) => (int)(Location - other.Location);
     }
 

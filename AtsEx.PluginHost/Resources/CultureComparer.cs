@@ -9,6 +9,7 @@ namespace Automatic9045.AtsEx.PluginHost.Resources
 {
     public class CultureComparer : IComparer<CultureInfo>
     {
+        /// <inheritdoc/>
         public int Compare(CultureInfo x, CultureInfo y) => x.LCID.CompareTo(y.LCID);
     }
 }

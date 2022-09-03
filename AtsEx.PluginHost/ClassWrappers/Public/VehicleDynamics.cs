@@ -47,7 +47,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
-        /// <returns>オリジナル オブジェクトをラップした <see cref="VehicleParameterSet"/> クラスのインスタンス。</returns>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="VehicleDynamics"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
         public static VehicleDynamics FromSource(object src) => src is null ? null : new VehicleDynamics(src);
 
