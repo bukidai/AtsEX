@@ -16,7 +16,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// </summary>
     public class StationList : MapObjectList
     {
-        private static new readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<StationList>(@"PluginHost\ClassWrappers");
+        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<StationList>(@"PluginHost\ClassWrappers");
 
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
