@@ -52,10 +52,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <summary>
         /// 補助表示の設定を取得します。
         /// </summary>
-        public AssistantSettings AssistantSettings
-        {
-            get => AssistantSettingsGetMethod.Invoke(Src, null);
-        }
+        public AssistantSettings AssistantSettings => AssistantSettingsGetMethod.Invoke(Src, null);
 
         private static MethodInfo BackgroundColorGetMethod;
         private static MethodInfo BackgroundColorSetMethod;
@@ -72,10 +69,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <summary>
         /// 表示する位置とサイズを表す <see cref="Rectangle"/> を取得します。
         /// </summary>
-        public Rectangle DisplayArea
-        {
-            get => DisplayAreaGetMethod.Invoke(Src, null);
-        }
+        public Rectangle DisplayArea => DisplayAreaGetMethod.Invoke(Src, null);
 
         private static MethodInfo DrawMethod;
         /// <summary>

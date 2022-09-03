@@ -61,16 +61,6 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         /// <inheritdoc/>
-        public int CompareTo(object obj)
-        {
-            if (obj is MapObjectBase mapObject)
-            {
-                return (Src as IComparable).CompareTo(mapObject.Src);
-            }
-            else
-            {
-                throw new ArgumentException();
-            }
-        }
+        public int CompareTo(object obj) => obj is MapObjectBase mapObject ? (int)(Src as IComparable).CompareTo(mapObject.Src) : throw new ArgumentException();
     }
 }

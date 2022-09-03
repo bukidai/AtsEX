@@ -42,9 +42,6 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <summary>
         /// 操作可能なハンドルのセットを表す <see cref="HandleSet"/> を取得します。
         /// </summary>
-        public HandleSet Handles
-        {
-            get => HandleSet.FromSource(HandlesGetMethod.Invoke(Src, null));
-        }
+        public HandleSet Handles => HandleSet.FromSource(HandlesGetMethod.Invoke(Src, null));
     }
 }

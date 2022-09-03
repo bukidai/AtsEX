@@ -101,9 +101,6 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <summary>
         /// X 方向のみに変形するかを取得・設定します。
         /// </summary>
-        public bool TransformOnlyX
-        {
-            get => TransformOnlyXGetMethod.Invoke(Src, null);
-        }
+        public bool TransformOnlyX => TransformOnlyXGetMethod.Invoke(Src, null);
     }
 }

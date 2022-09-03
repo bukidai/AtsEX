@@ -48,10 +48,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// 車両の速度の変更には <see cref="SetSpeed(double)"/> メソッドを使用してください。
         /// </remarks>
         /// <seealso cref="SetSpeed(double)"/>
-        public double SpeedMeterPerSecond
-        {
-            get => SpeedMeterPerSecondGetMethod.Invoke(Src, null);
-        }
+        public double SpeedMeterPerSecond => SpeedMeterPerSecondGetMethod.Invoke(Src, null);
 
         private static MethodInfo SetSpeedMethod;
         /// <summary>

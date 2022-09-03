@@ -320,19 +320,13 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <summary>
         /// 停止位置誤差の下限の距離程 [m] を取得します。
         /// </summary>
-        public double MinStopPosition
-        {
-            get => MinStopPositionGetMethod.Invoke(Src, null);
-        }
+        public double MinStopPosition => MinStopPositionGetMethod.Invoke(Src, null);
 
         private static MethodInfo MaxStopPositionGetMethod;
         /// <summary>
         /// 停止位置誤差の上限の距離程 [m] を取得します。
         /// </summary>
-        public double MaxStopPosition
-        {
-            get => MaxStopPositionGetMethod.Invoke(Src, null);
-        }
+        public double MaxStopPosition => MaxStopPositionGetMethod.Invoke(Src, null);
 
         private static MethodInfo AlightingTimeGetMethod;
         private static MethodInfo AlightingTimeSetMethod;

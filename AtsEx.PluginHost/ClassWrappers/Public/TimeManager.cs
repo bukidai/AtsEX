@@ -64,10 +64,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <seealso cref="Time"/>
         /// <seealso cref="SetTime(int)"/>
         /// <seealso cref="SetTime(TimeSpan)"/>
-        public int TimeMilliseconds
-        {
-            get => TimeMillisecondsGetMethod.Invoke(Src, null);
-        }
+        public int TimeMilliseconds => TimeMillisecondsGetMethod.Invoke(Src, null);
 
         /// <summary>
         /// 0 時丁度から現在までに経過した時間を表す <see cref="TimeSpan"/> を取得します。
