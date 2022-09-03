@@ -12,7 +12,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
 {
     internal sealed class CSharpScriptPlugin : ScriptPluginBase
     {
-        protected CSharpScriptPlugin(ScriptPluginBuilder builder, PluginType pluginType) : base(builder, pluginType, true)
+        private CSharpScriptPlugin(ScriptPluginBuilder builder, PluginType pluginType) : base(builder, pluginType, true)
         {
         }
 
