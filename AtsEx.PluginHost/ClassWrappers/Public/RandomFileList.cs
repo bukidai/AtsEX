@@ -13,7 +13,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// ランダムに 1 つの項目が選ばれる <see cref="BveFile"/> のリストを表します。
     /// </summary>
-    public class RandomFileList : ClassWrapperBase, IList<BveFile>
+    public class RandomFileList : WrappedList<BveFile>
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
@@ -24,7 +24,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             SelectedFileSetMethod = members.GetSourcePropertySetterOf(nameof(SelectedFile));
         }
 
-        protected RandomFileList(object src) : base(src)
+        protected RandomFileList(IList src) : base(src)
         {
         }
 
@@ -34,11 +34,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="RandomFileList"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
-        public static RandomFileList FromSource(object src)
-        {
-            if (src is null) return null;
-            return new RandomFileList(src);
-        }
+        public static RandomFileList FromSource(object src) => src is null ? null : new RandomFileList((IList)src);
 
         private static MethodInfo SelectedFileGetMethod;
         private static MethodInfo SelectedFileSetMethod;
@@ -50,22 +46,5 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             get => BveFile.FromSource(SelectedFileGetMethod.Invoke(Src, null));
             set => SelectedFileGetMethod.Invoke(Src, new object[] { value.Src });
         }
-
-        // 以下IList<IBveFile>の実装
-
-        public BveFile this[int index] { get => Src[index]; set => Src[index] = value; }
-        public int Count => Src.Count;
-        public bool IsReadOnly => Src.IsReadOnly;
-
-        public void Add(BveFile item) => Src.Add(item);
-        public void Clear() => Src.Clear();
-        public bool Contains(BveFile item) => Src.Contains(item);
-        public void CopyTo(BveFile[] array, int arrayIndex) => Src.CopyTo(array, arrayIndex);
-        public IEnumerator<BveFile> GetEnumerator() => Src.GetEnumerator();
-        public int IndexOf(BveFile item) => Src.IndexOf(item);
-        public void Insert(int index, BveFile item) => Src.Insert(index, item);
-        public bool Remove(BveFile item) => Src.Remove(item);
-        public void RemoveAt(int index) => Src.RemoveAt(index);
-        IEnumerator IEnumerable.GetEnumerator() => Src.GetEnumerator();
     }
 }
