@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost.Resources
 {
+    /// <summary>
+    /// <see cref="CultureInfo"/> を、そのカルチャの LCID によって比較します。
+    /// </summary>
     public class CultureComparer : IComparer<CultureInfo>
     {
         /// <inheritdoc/>
