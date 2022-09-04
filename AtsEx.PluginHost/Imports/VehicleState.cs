@@ -8,10 +8,11 @@ namespace Automatic9045.AtsEx.PluginHost
 {
     public class VehicleState
     {
-        public VehicleState(double location, float speed, float bcPressure, float mrPressure, float erPressure, float bpPressure, float sapPressure, float current)
+        public VehicleState(double location, float speed, TimeSpan time, float bcPressure, float mrPressure, float erPressure, float bpPressure, float sapPressure, float current)
         {
             Location = location;
             Speed = speed;
+            Time = time;
 
             BcPressure = bcPressure;
             MrPressure = mrPressure;
@@ -23,6 +24,7 @@ namespace Automatic9045.AtsEx.PluginHost
 
         public double Location { get; }
         public float Speed { get; }
+        public TimeSpan Time { get; }
 
         public float BcPressure { get; }
         public float MrPressure { get; }

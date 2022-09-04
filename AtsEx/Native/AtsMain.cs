@@ -64,7 +64,7 @@ namespace Automatic9045.AtsEx.Native
         public static AtsHandles Elapse(VehicleState vehicleState, int[] panel, int[] sound)
         {
             PluginHost.VehicleState exVehicleState = new PluginHost.VehicleState(
-                vehicleState.Location, vehicleState.Speed,
+                vehicleState.Location, vehicleState.Speed, TimeSpan.FromMilliseconds(vehicleState.Time),
                 vehicleState.BcPressure, vehicleState.MrPressure, vehicleState.ErPressure, vehicleState.BpPressure, vehicleState.SapPressure, vehicleState.Current);
 
             HandlePositionSet handlePositionSet = AtsExScenarioService?.Tick(Stopwatch.IsRunning ? Stopwatch.Elapsed : TimeSpan.Zero, exVehicleState);
