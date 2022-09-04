@@ -14,6 +14,7 @@ using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.Handles;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
+using Automatic9045.AtsEx.PluginHost.Native;
 using Automatic9045.AtsEx.PluginHost.Plugins;
 using Automatic9045.AtsEx.PluginHost.Resources;
 

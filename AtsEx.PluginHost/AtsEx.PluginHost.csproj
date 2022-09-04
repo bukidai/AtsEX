@@ -160,8 +160,8 @@
     <Compile Include="Extensions\DiagramUpdater.cs" />
     <Compile Include="LoadErrorManager.cs" />
     <Compile Include="LoadErrorManager.LoadErrorList.cs" />
-    <Compile Include="Imports\VehicleSpec.cs" />
-    <Compile Include="Imports\VehicleState.cs" />
+    <Compile Include="Native\VehicleSpec.cs" />
+    <Compile Include="Native\VehicleState.cs" />
     <Compile Include="ClassWrappers\ClassWrapperBase.cs" />
     <Compile Include="ClassWrappers\Extensions\WrappedSortedList.cs" />
     <Compile Include="ClassWrappers\Public\AssistantText.cs" />

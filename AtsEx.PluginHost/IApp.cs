@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using Automatic9045.AtsEx.PluginHost.Handles;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
+using Automatic9045.AtsEx.PluginHost.Native;
 using Automatic9045.AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.AtsEx.PluginHost

@@ -50,7 +50,8 @@ namespace Automatic9045.AtsEx.Native
 
         public static void SetVehicleSpec(VehicleSpec vehicleSpec)
         {
-            PluginHost.VehicleSpec exVehicleSpec = new PluginHost.VehicleSpec(vehicleSpec.BrakeNotches, vehicleSpec.PowerNotches, vehicleSpec.AtsNotch, vehicleSpec.B67Notch, vehicleSpec.Cars);
+            PluginHost.Native.VehicleSpec exVehicleSpec = new PluginHost.Native.VehicleSpec(
+                vehicleSpec.BrakeNotches, vehicleSpec.PowerNotches, vehicleSpec.AtsNotch, vehicleSpec.B67Notch, vehicleSpec.Cars);
 
             AtsEx = new AtsEx.AsAtsPlugin(Activator.TargetProcess, Activator.TargetAppDomain, Activator.TargetAssembly);
             AtsExScenarioService = new AtsExScenarioService.AsAtsPlugin(AtsEx, CallerAssembly, exVehicleSpec);
@@ -63,7 +64,7 @@ namespace Automatic9045.AtsEx.Native
 
         public static AtsHandles Elapse(VehicleState vehicleState, int[] panel, int[] sound)
         {
-            PluginHost.VehicleState exVehicleState = new PluginHost.VehicleState(
+            PluginHost.Native.VehicleState exVehicleState = new PluginHost.Native.VehicleState(
                 vehicleState.Location, vehicleState.Speed, TimeSpan.FromMilliseconds(vehicleState.Time),
                 vehicleState.BcPressure, vehicleState.MrPressure, vehicleState.ErPressure, vehicleState.BpPressure, vehicleState.SapPressure, vehicleState.Current);
 

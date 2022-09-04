@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost
+namespace Automatic9045.AtsEx.PluginHost.Native
 {
     /// <summary>
     /// 車両諸元情報を提供します。
