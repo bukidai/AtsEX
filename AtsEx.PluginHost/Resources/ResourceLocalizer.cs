@@ -78,17 +78,17 @@ namespace Automatic9045.AtsEx.PluginHost.Resources
         }
 
 
-        public ResourceInfo<T> Get<T>(string key)
+        public Resource<T> Get<T>(string key)
         {
             SortedList<CultureInfo, object> valueList = Resources[key];
             CultureInfo culture = ResolveCulture(GetCurrentCultureFunc(), valueList.Keys);
 
-            return new ResourceInfo<T>(culture, (T)valueList[culture]);
+            return new Resource<T>(culture, (T)valueList[culture]);
         }
 
-        public ResourceInfo<string> GetString(string key) => Get<string>(key);
+        public Resource<string> GetString(string key) => Get<string>(key);
 
-        public ResourceInfo<int> GetInt32(string key) => Get<int>(key);
+        public Resource<int> GetInt32(string key) => Get<int>(key);
 
         protected static CultureInfo ResolveCulture(CultureInfo culture, IEnumerable<CultureInfo> candidates)
         {

@@ -29,7 +29,7 @@ namespace Automatic9045.AtsEx
             {
                 Assembly pluginAssembly = plugin.GetType().Assembly;
 
-                ResourceInfo<string> typeResource = plugin.PluginType.GetTypeStringResource();
+                Resource<string> typeResource = plugin.PluginType.GetTypeStringResource();
                 string type = typeResource.Culture.TextInfo.ToTitleCase(typeResource.Value);
                 Color typeColor = plugin.PluginType.GetTypeColor();
 

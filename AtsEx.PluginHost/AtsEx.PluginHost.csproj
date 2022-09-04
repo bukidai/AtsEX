@@ -207,7 +207,7 @@
     <Compile Include="Plugins\TickResult\VehiclePluginTickResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\CultureComparer.cs" />
-    <Compile Include="Resources\ResourceInfo.cs" />
+    <Compile Include="Resources\Resource.cs" />
     <Compile Include="Resources\ResourceLocalizer.cs" />
     <Compile Include="Resources\ResourceLocalizer.ResourceSet.cs" />
   </ItemGroup>

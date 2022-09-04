@@ -26,7 +26,7 @@ namespace Automatic9045.AtsEx.PluginHost.Plugins
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(PluginTypeConverter), "PluginHost");
 
-        public static ResourceInfo<string> GetTypeStringResource(this PluginType pluginType)
+        public static Resource<string> GetTypeStringResource(this PluginType pluginType)
         {
             switch (pluginType)
             {
