@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 using Automatic9045.AtsEx.Native;
 
@@ -20,13 +21,21 @@ namespace Automatic9045.AtsEx.Caller
 
         static AtsCore()
         {
-            string configLocation = Path.Combine(Path.GetDirectoryName(Assembly.Location), "AtsEx.Caller.txt");
-            using (StreamReader sr = new StreamReader(configLocation))
+            try
             {
-                string atsExLocation = Path.Combine(Path.GetDirectoryName(Assembly.Location), sr.ReadLine());
+                string configLocation = Path.Combine(Path.GetDirectoryName(Assembly.Location), "AtsEx.Caller.txt");
+                using (StreamReader sr = new StreamReader(configLocation))
+                {
+                    string atsExLocation = Path.Combine(Path.GetDirectoryName(Assembly.Location), sr.ReadLine());
 
-                AssemblyResolver assemblyResolver = new AssemblyResolver(AppDomain.CurrentDomain);
-                assemblyResolver.Register(atsExLocation);
+                    AssemblyResolver assemblyResolver = new AssemblyResolver(AppDomain.CurrentDomain);
+                    assemblyResolver.Register(atsExLocation);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Failed to initialize AtsEX Caller.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
             }
         }
 
