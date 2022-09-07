@@ -152,6 +152,7 @@
     <Compile Include="Input\NativeKeySet.cs" />
     <Compile Include="MapLoader\Map.cs" />
     <Compile Include="MapStatementIdentifiers.cs" />
+    <Compile Include="Native\CallerCompatibilityInfo.cs" />
     <Compile Include="Native\Export.cs" />
     <Compile Include="Native\AtsMain.cs" />
     <Compile Include="Plugins\Identifier.cs" />

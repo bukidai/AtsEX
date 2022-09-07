@@ -18,24 +18,44 @@ namespace Automatic9045.AtsEx.Caller
         private const int Version = 0x00020000;
 
         private static Assembly Assembly = Assembly.GetExecutingAssembly();
+        private const int CallerVersion = 1;
 
         static AtsCore()
         {
             try
             {
-                string configLocation = Path.Combine(Path.GetDirectoryName(Assembly.Location), "AtsEx.Caller.txt");
-                using (StreamReader sr = new StreamReader(configLocation))
-                {
-                    string atsExLocation = Path.Combine(Path.GetDirectoryName(Assembly.Location), sr.ReadLine());
-
-                    AssemblyResolver assemblyResolver = new AssemblyResolver(AppDomain.CurrentDomain);
-                    assemblyResolver.Register(atsExLocation);
-                }
+                LoadAtsExAssembly();
+                CheckCompability();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Failed to initialize AtsEX Caller.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw;
+            }
+
+
+            void LoadAtsExAssembly()
+            {
+                string configLocation = Path.Combine(Path.GetDirectoryName(Assembly.Location), "AtsEx.Caller.txt");
+                string atsExLocation;
+                using (StreamReader sr = new StreamReader(configLocation))
+                {
+                    atsExLocation = Path.Combine(Path.GetDirectoryName(Assembly.Location), sr.ReadLine());
+                }
+
+                AssemblyResolver assemblyResolver = new AssemblyResolver(AppDomain.CurrentDomain);
+                assemblyResolver.Register(atsExLocation);
+            }
+
+            void CheckCompability()
+            {
+                if (CallerCompatibilityInfo.CompatibilityVersion != CallerVersion)
+                {
+                    Version assemblyVersion = Assembly.GetName().Version;
+                    throw new NotSupportedException(
+                        $"読み込まれた AtsEX Caller (バージョン {assemblyVersion}) は現在の AtsEX ではサポートされていません。" +
+                        "互換性情報は https://automatic9045.github.io をご参照ください。");
+                }
             }
         }
 
