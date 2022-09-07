@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 using Automatic9045.AtsEx.Hosting;
 
@@ -40,6 +41,14 @@ namespace Automatic9045.AtsEx.Native
         {
             CallerAssembly = callerAssembly;
             Activator = activator;
+
+            Version callerVersion = callerAssembly.GetName().Version;
+            if (callerVersion < new Version(0, 16))
+            {
+                string errorMessage = $"読み込まれた AtsEX Caller (バージョン {callerVersion}) は現在の AtsEX ではサポートされていません。\nbeta0.16 (バージョン 0.16) 以降の Ats Caller をご利用下さい。";
+                MessageBox.Show(errorMessage, "AtsEX Caller バージョンエラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw new NotSupportedException(errorMessage.Replace("\n", ""));
+            }
         }
 
         public static void Dispose()
