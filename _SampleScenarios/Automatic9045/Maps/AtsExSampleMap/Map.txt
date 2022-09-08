@@ -66,6 +66,8 @@ Track['1'].X.Interpolate(-3.8);
 		'AtsEx::ExtendedBeacon.ObservingTargetTrack.AllTracks', // 拡張地上子の検知対象の軌道を指定する文字列。
 		'AtsEx::ExtendedBeacon.ObservingTargetTrain.Trains'); // 拡張地上子の検知対象の列車を指定する文字列。複数指定可能です。
 
+	Repeater[$script].End();
+
 100;
 	Station['ExtendedBeacon2'].Put(-1, 0.1, 0);
 
@@ -81,6 +83,8 @@ Track['1'].X.Interpolate(-3.8);
 		'AtsEx::ExtendedBeacon.ObservingTargetTrack.AllTracks',
 		'AtsEx::ExtendedBeacon.ObservingTargetTrain.Myself', 'AtsEx::ExtendedBeacon.ObservingTargetTrain.Trains'); // 複数指定した例。
 
+	Repeater[$script].End();
+
 200;
 	Station['ExtendedBeacon3'].Put(-1, 0.1, 0);
 
@@ -91,6 +95,8 @@ Track['1'].X.Interpolate(-3.8);
 		'AtsEx::ScriptLanguage.CSharpScript',
 		'AtsEx::ExtendedBeacon.ObservingTargetTrack.SpecifiedTrackOnly', // 地上子の設置先軌道（= '0'）のみを検知対象とした例。
 		'AtsEx::ExtendedBeacon.ObservingTargetTrain.Trains');
+
+	Repeater[$script].End();
 
 1365;
 	Repeater['Form0R'].Begin0('0', 1, 5, 5, 'FormR');
