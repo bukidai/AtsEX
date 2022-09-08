@@ -120,6 +120,9 @@
   <data name="ArgumentMissing" xml:space="preserve">
     <value>拡張地上子を定義するための引数が不足しています。</value>
   </data>
+  <data name="BeaconRepeaterNotEnded" xml:space="preserve">
+    <value>拡張地上子の定義に使用している連続ストラクチャーで、同一距離程にて連続配置を終了していないものがあります。拡張地上子の動作に支障はありませんが、読込に必要な時間が大幅に増加する場合があります。</value>
+  </data>
   <data name="ItemName" xml:space="preserve">
     <value>(拡張地上子)</value>
   </data>

@@ -120,6 +120,9 @@
   <data name="ArgumentMissing" xml:space="preserve">
     <value>Some of the arguments to define an extended beacon are missing.</value>
   </data>
+  <data name="BeaconRepeaterNotEnded" xml:space="preserve">
+    <value>Some repeaters for extended beacon definitions do not end in the same place. That does not block the feature of extended beacons but may cause loading to take much longer.</value>
+  </data>
   <data name="ItemName" xml:space="preserve">
     <value>(Extended Beacon)</value>
   </data>

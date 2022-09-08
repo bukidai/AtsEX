@@ -66,14 +66,29 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             {
                 string repeaterKey = sameKeyRepeaters.Key;
 
+                (RepeatedStructure Structure, bool IsBeacon) previous = default;
+                bool isFirst = true;
                 foreach (RepeatedStructure repeatedStructure in sameKeyRepeaters.Value)
                 {
+                    if (!isFirst && previous.IsBeacon)
+                    {
+                        if (!(repeatedStructure.Models is null) || repeatedStructure.Location != previous.Structure.Location)
+                        {
+                            bveHacker.LoadErrorManager.Throw(Resources.GetString("BeaconRepeaterNotEnded").Value);
+                        }
+                    }
+
+                    previous = (repeatedStructure, false);
+                    isFirst = false;
+
                     if (repeatedStructure.Models is null) continue;
                     if (!repeatedStructure.Models.Any()) continue;
 
                     {
                         string definerText = structureModels.TryGetKey(repeatedStructure.Models[0]);
                         if (definerText != ExtendedBeaconIdentifiers.Definer) continue;
+
+                        previous.IsBeacon = true;
                     }
 
                     if (repeatedStructure.Models.Count <= 4) throw new BveFileLoadException(Resources.GetString("ArgumentMissing").Value, Resources.GetString("ItemName").Value);
