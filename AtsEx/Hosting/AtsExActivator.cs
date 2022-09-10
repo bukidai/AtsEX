@@ -63,7 +63,6 @@ namespace Automatic9045.AtsEx.Hosting
         public void ResolveAssemblies()
         {
             AssemblyResolver.Register(Path.Combine(DirectoryName, "AtsEx.PluginHost.dll"));
-            AssemblyResolver.Register(Path.Combine(DirectoryName, "0Harmony.dll"));
         }
 
         private void CheckAssembly()
