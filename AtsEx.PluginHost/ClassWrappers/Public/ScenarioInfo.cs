@@ -217,22 +217,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <summary>
         /// シナリオファイルの読込時に発生した、継続不能となる深刻なエラーを取得します。
         /// </summary>
-        /// <remarks>
-        /// このプロパティは正常に動作しません。
-        /// </remarks>
-        [UnderConstruction]
-        public List<LoadError> ScenarioFileLoadErrors
+        public WrappedList<LoadError> ScenarioFileLoadErrors
         {
-            get
-            {
-                dynamic list = ScenarioFileLoadErrorsGetMethod.Invoke(Src, null);
-                return list.ConvertAll<LoadError>(new Converter<dynamic, LoadError>(item => LoadError.FromSource(item)));
-            }
-            internal set
-            {
-                List<dynamic> list = value.ConvertAll(item => item.Src);
-                ScenarioFileLoadErrorsSetMethod.Invoke(Src, new object[] { list });
-            }
+            get => WrappedList<LoadError>.FromSource((IList)ScenarioFileLoadErrorsGetMethod.Invoke(Src, null));
+            internal set => ScenarioFileLoadErrorsSetMethod.Invoke(Src, value.Src);
         }
     }
 }
