@@ -94,7 +94,6 @@ namespace Automatic9045.AtsEx
             VersionFormProvider.Intialize(Enumerable.Concat(App.Instance.VehiclePlugins.Values, App.Instance.MapPlugins.Values));
         }
 
-        [UnderConstruction]
         public void Tick(TimeSpan elapsed)
         {
             double location = Scenario.LocationManager.Location;

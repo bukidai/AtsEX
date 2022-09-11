@@ -194,8 +194,6 @@
     <Compile Include="Exceptions\PropertyNotInitializedException.cs" />
     <Compile Include="IApp.cs" />
     <Compile Include="Plugins\PluginInfo.cs" />
-    <Compile Include="Attributes\UnderConstructionAttribute.cs" />
-    <Compile Include="Attributes\WillRefactorAttribute.cs" />
     <Compile Include="Handles\ReverserPosition.cs" />
     <Compile Include="BveHacker\BveHacker.cs" />
     <Compile Include="Plugins\PluginBase.cs" />

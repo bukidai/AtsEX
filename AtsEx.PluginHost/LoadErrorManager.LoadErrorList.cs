@@ -56,7 +56,6 @@ namespace Automatic9045.AtsEx.PluginHost
                 return loadError;
             }
 
-            [UnderConstruction]
             private void Update()
             {
                 Form.ErrorCount = Count;
@@ -64,7 +63,6 @@ namespace Automatic9045.AtsEx.PluginHost
                 if (Count == 0)
                 {
                     Form.IsErrorCritical = false;
-                    // TODO: タイトルの書きかえ
                 }
 
                 FormSource.ClientSize = new Size(800, Count == 0 ? Form.Panel.Height : 500);

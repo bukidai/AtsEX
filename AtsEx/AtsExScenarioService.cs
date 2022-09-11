@@ -102,7 +102,6 @@ namespace Automatic9045.AtsEx
             App.Instance.InvokeStarted(defaultBrakePosition);
         }
 
-        [WillRefactor]
         public HandlePositionSet Tick(TimeSpan elapsed, VehicleState vehicleState)
         {
             App.Instance.VehicleState = vehicleState;

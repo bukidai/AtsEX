@@ -26,7 +26,6 @@ namespace Automatic9045.AtsEx.Plugins
             BveHacker = bveHacker;
         }
 
-        [UnderConstruction]
         public SortedList<string, PluginBase> LoadFromPluginUsing(PluginUsing pluginUsing)
         {
             SortedList<string, PluginBase> plugins = new SortedList<string, PluginBase>();
@@ -49,7 +48,7 @@ namespace Automatic9045.AtsEx.Plugins
                 plugins[item.Key.Text] = IronPython2Plugin.FromPackage(pluginBuilder, pluginUsing.PluginType, item.Value);
             }
 
-            // TODO: ここで他の種類のプラグイン（スクリプト、ネイティブなど）を読み込む
+            // TODO: ここで他の種類のプラグイン（ネイティブなど）を読み込む
 
             return plugins;
         }
