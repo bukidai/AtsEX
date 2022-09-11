@@ -11,14 +11,14 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
     public class ClassMemberSet : TypeMemberSetBase
     {
-        protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ClassMemberSet>("PluginHost");
+        private protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ClassMemberSet>("PluginHost");
 
-        protected SortedList<Type[], ConstructorInfo> Constructors { get; }
+        private protected SortedList<Type[], ConstructorInfo> Constructors { get; }
 
-        protected SortedList<string, MethodInfo> PropertyGetters { get; }
-        protected SortedList<string, MethodInfo> PropertySetters { get; }
-        protected SortedList<string, FieldInfo> Fields { get; }
-        protected SortedList<(string, Type[]), MethodInfo> Methods { get; }
+        private protected SortedList<string, MethodInfo> PropertyGetters { get; }
+        private protected SortedList<string, MethodInfo> PropertySetters { get; }
+        private protected SortedList<string, FieldInfo> Fields { get; }
+        private protected SortedList<(string, Type[]), MethodInfo> Methods { get; }
 
         internal ClassMemberSet(Type wrapperType, Type originalType, SortedList<Type[], ConstructorInfo> constructors,
             SortedList<string, MethodInfo> propertyGetters, SortedList<string, MethodInfo> propertySetters, SortedList<string, FieldInfo> fields, SortedList<(string, Type[]), MethodInfo> methods)
