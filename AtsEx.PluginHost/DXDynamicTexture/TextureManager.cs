@@ -21,8 +21,6 @@ namespace Zbx1425.DXDynamicTexture
         internal static Harmony Harmony;
         internal static Dictionary<string, TextureHandle> Handles = new Dictionary<string, TextureHandle>();
 
-        internal static string DllDir;
-
         internal static Device DXDevice;
 
         public static void Initialize()
