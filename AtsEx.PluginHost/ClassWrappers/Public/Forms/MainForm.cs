@@ -129,7 +129,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </summary>
         public KeyProvider KeyProvider
         {
-            get => KeyProvider.FromSource(KeyProviderField.GetValue(Src));
+            get => ClassWrappers.KeyProvider.FromSource(KeyProviderField.GetValue(Src));
             set => KeyProviderField.SetValue(Src, value.Src);
         }
 
