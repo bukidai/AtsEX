@@ -18,6 +18,7 @@ namespace Automatic9045.AtsEx.Plugins
     internal class PluginLoader
     {
         private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(PluginLoader), "Core");
+        private static readonly Version SupportedMinVersion = new Version(0, 12);
 
         protected readonly BveHacker BveHacker;
 
@@ -57,58 +58,85 @@ namespace Automatic9045.AtsEx.Plugins
         {
             string fileName = Path.GetFileName(assembly.Location);
 
-            Type[] allTypes = assembly.GetTypes();
-            IEnumerable<Type> pluginTypes = allTypes.Where(t => t.IsClass && t.IsPublic && !t.IsAbstract && t.IsSubclassOf(typeof(PluginBase)));
-            if (!pluginTypes.Any())
+            Version pluginHostVersion = App.Instance.AtsExPluginHostAssembly.GetName().Version;
+
+            AssemblyName[] referencedAssemblies = assembly.GetReferencedAssemblies();
+            AssemblyName referencedPluginHostAssembly = referencedAssemblies.FirstOrDefault(asm => asm.Name == "AtsEx.PluginHost");
+            if (referencedPluginHostAssembly is null)
             {
                 throw new BveFileLoadException(string.Format(Resources.GetString("PluginClassNotFound").Value, fileName, nameof(PluginBase), App.Instance.ProductShortName));
             }
-
-            List<(Type, ConstructorInfo)> constructors = new List<(Type, ConstructorInfo)>();
-            foreach (Type type in pluginTypes)
+            else if (referencedPluginHostAssembly.Version < SupportedMinVersion)
             {
-                ConstructorInfo constructor = type.GetConstructor(new Type[] { typeof(PluginBuilder) });
-                if (constructor is null) continue;
-
-                constructors.Add((type, constructor));
+                throw new BveFileLoadException(string.Format(
+                    Resources.GetString("PluginVersionNotSupported").Value,
+                    fileName, referencedPluginHostAssembly.Version, App.Instance.ProductShortName, pluginHostVersion, SupportedMinVersion.ToString(2)));
             }
 
-            switch (constructors.Count)
+            bool isBuiltForDifferentVersion = referencedPluginHostAssembly.Version != pluginHostVersion;
+
+            try
             {
-                case 0:
-                    throw new BveFileLoadException(string.Format(Resources.GetString("ConstructorNotFound").Value, fileName, nameof(PluginBase), typeof(PluginBuilder)));
+                Type[] allTypes = assembly.GetTypes();
+                IEnumerable<Type> pluginTypes = allTypes.Where(t => t.IsClass && t.IsPublic && !t.IsAbstract && t.IsSubclassOf(typeof(PluginBase)));
+                if (!pluginTypes.Any())
+                {
+                    throw new BveFileLoadException(string.Format(Resources.GetString("PluginClassNotFound").Value, fileName, nameof(PluginBase), App.Instance.ProductShortName));
+                }
 
-                case 1:
-                    break;
+                List<(Type, ConstructorInfo)> constructors = new List<(Type, ConstructorInfo)>();
+                foreach (Type type in pluginTypes)
+                {
+                    ConstructorInfo constructor = type.GetConstructor(new Type[] { typeof(PluginBuilder) });
+                    if (constructor is null) continue;
 
-                default:
-                    if (!(identifier is RandomIdentifier))
+                    constructors.Add((type, constructor));
+                }
+
+                switch (constructors.Count)
+                {
+                    case 0:
+                        throw new BveFileLoadException(string.Format(Resources.GetString("ConstructorNotFound").Value, fileName, nameof(PluginBase), typeof(PluginBuilder)));
+
+                    case 1:
+                        break;
+
+                    default:
+                        if (!(identifier is RandomIdentifier))
+                        {
+                            throw new BveFileLoadException(string.Format(Resources.GetString("CannotSetIdentifier").Value, fileName), pluginUsingName);
+                        }
+                        break;
+                }
+
+                List<PluginBase> plugins = new List<PluginBase>();
+                foreach ((Type type, ConstructorInfo constructorInfo) in constructors)
+                {
+                    PluginBase pluginInstance = constructorInfo.Invoke(new object[] { new PluginBuilder(App.Instance, BveHacker, GenerateIdentifier()) }) as PluginBase;
+                    if (pluginInstance.PluginType != pluginType)
                     {
-                        throw new BveFileLoadException(string.Format(Resources.GetString("CannotSetIdentifier").Value, fileName), pluginUsingName);
+                        throw new InvalidOperationException(string.Format(Resources.GetString("WrongPluginType").Value, pluginType.GetTypeString(), pluginInstance.PluginType.GetTypeString()));
                     }
-                    break;
-            }
+                    else if (pluginInstance.PluginType == PluginType.MapPlugin && !pluginInstance.UseAtsExExtensions)
+                    {
+                        throw new NotSupportedException(string.Format(Resources.GetString("MustUseExtensions").Value, pluginInstance.PluginType.GetTypeString(), App.Instance.ProductShortName));
+                    }
 
-            List<PluginBase> plugins = new List<PluginBase>();
-            foreach ((Type type, ConstructorInfo constructorInfo) in constructors)
+                    plugins.Add(pluginInstance);
+                }
+
+                return plugins;
+
+
+                string GenerateIdentifier() => constructors.Count == 1 ? identifier.Text : Guid.NewGuid().ToString();
+            }
+            catch
             {
-                PluginBase pluginInstance = constructorInfo.Invoke(new object[] { new PluginBuilder(App.Instance, BveHacker, GenerateIdentifier()) }) as PluginBase;
-                if (pluginInstance.PluginType != pluginType)
-                {
-                    throw new InvalidOperationException(string.Format(Resources.GetString("WrongPluginType").Value, pluginType.GetTypeString(), pluginInstance.PluginType.GetTypeString()));
-                }
-                else if (pluginInstance.PluginType == PluginType.MapPlugin && !pluginInstance.UseAtsExExtensions)
-                {
-                    throw new NotSupportedException(string.Format(Resources.GetString("MustUseExtensions").Value, pluginInstance.PluginType.GetTypeString(), App.Instance.ProductShortName));
-                }
-
-                plugins.Add(pluginInstance);
+                BveHacker.LoadErrorManager.Throw(string.Format(
+                    Resources.GetString("MaybeBecauseBuiltForDifferentVersion").Value,
+                    fileName, pluginHostVersion, App.Instance.ProductShortName));
+                throw;
             }
-
-            return plugins;
-
-
-            string GenerateIdentifier() => constructors.Count == 1 ? identifier.Text : Guid.NewGuid().ToString();
         }
     }
 }

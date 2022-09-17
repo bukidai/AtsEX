@@ -123,11 +123,17 @@
   <data name="ConstructorNotFound" xml:space="preserve">
     <value>'{0}' で {1} を継承しているクラスは見つかりましたが、パラメータ {2} を持つコンストラクタが見つかりませんでした。</value>
   </data>
+  <data name="MaybeBecauseBuiltForDifferentVersion" xml:space="preserve">
+    <value>アセンブリ '{0}' 内のクラスの初期化に失敗しました。古いバージョン (バージョン {1}) の {2} に準拠していることが原因の可能性があります。</value>
+  </data>
   <data name="MustUseExtensions" xml:space="preserve">
     <value>{0}では {1} の拡張機能を使用しないプラグインを開発することはできません。</value>
   </data>
   <data name="PluginClassNotFound" xml:space="preserve">
     <value>'{0}' で {1} を継承しているクラスが見つかりませんでした。{2} プラグインではない可能性があります。{2} プラグインとして認識されるには、{1} を継承しているクラスが必要です。</value>
+  </data>
+  <data name="PluginVersionNotSupported" xml:space="preserve">
+    <value>'{0}' は古いバージョン (バージョン {1}) の {2} に準拠していますが、現在の {2} (バージョン {3}) はバージョン {4} より前の {2} 向けのプラグインには対応しておらず、読み込めません。</value>
   </data>
   <data name="WrongPluginType" xml:space="preserve">
     <value>{0}として{1}を読み込もうとしました。</value>
