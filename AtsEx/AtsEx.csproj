@@ -193,7 +193,7 @@
       <Name>AtsEx.PluginHost</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Libraries\UnembeddedResources\UnembeddedResources.csproj">
+    <ProjectReference Include="..\Libs\UnembeddedResources\UnembeddedResources.csproj">
       <Project>{97512546-8929-4c0b-983d-5347197a3862}</Project>
       <Name>UnembeddedResources</Name>
     </ProjectReference>

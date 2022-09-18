@@ -246,11 +246,11 @@
     <Folder Include="ClassWrappers\UnidentifiedClasses\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Libraries\ObjectiveHarmonyPatch\ObjectiveHarmonyPatch.csproj">
+    <ProjectReference Include="..\Libs\ObjectiveHarmonyPatch\ObjectiveHarmonyPatch.csproj">
       <Project>{9a22c1b4-6edf-46ad-a03e-71847594e6e3}</Project>
       <Name>ObjectiveHarmonyPatch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Libraries\UnembeddedResources\UnembeddedResources.csproj">
+    <ProjectReference Include="..\Libs\UnembeddedResources\UnembeddedResources.csproj">
       <Project>{97512546-8929-4c0b-983d-5347197a3862}</Project>
       <Name>UnembeddedResources</Name>
       <Private>False</Private>

@@ -27,11 +27,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.MapPlugin.TrainContro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.MapPlugin.DXDynamicTextureTest", "Plugins\MapPlugins\AtsEx.MapPlugin.DXDynamicTextureTest\AtsEx.MapPlugin.DXDynamicTextureTest.csproj", "{C84BDF1C-D390-4A77-A3ED-35FBAAB2ED6F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{B3D0DA09-BB5C-4FF7-9844-80A381655B5C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{B3D0DA09-BB5C-4FF7-9844-80A381655B5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnembeddedResources", "Libraries\UnembeddedResources\UnembeddedResources.csproj", "{97512546-8929-4C0B-983D-5347197A3862}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnembeddedResources", "Libs\UnembeddedResources\UnembeddedResources.csproj", "{97512546-8929-4C0B-983D-5347197A3862}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectiveHarmonyPatch", "Libraries\ObjectiveHarmonyPatch\ObjectiveHarmonyPatch.csproj", "{9A22C1B4-6EDF-46AD-A03E-71847594E6E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectiveHarmonyPatch", "Libs\ObjectiveHarmonyPatch\ObjectiveHarmonyPatch.csproj", "{9A22C1B4-6EDF-46AD-A03E-71847594E6E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
