@@ -9,11 +9,12 @@ using System.Windows.Forms;
 
 using Mackoy.Bvets;
 
+using UnembeddedResources;
+
 using Automatic9045.AtsEx.PluginHost.BveHackerServices;
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
-using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx.PluginHost
 {

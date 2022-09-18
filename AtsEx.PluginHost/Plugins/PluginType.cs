@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.PluginHost.Resources;
+using UnembeddedResources;
 
 namespace Automatic9045.AtsEx.PluginHost.Plugins
 {

@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
+using UnembeddedResources;
+
 using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
 {

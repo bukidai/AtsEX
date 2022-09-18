@@ -15,13 +15,14 @@ using Mackoy.Bvets;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
+using UnembeddedResources;
+
 using Automatic9045.AtsEx.ExtendedBeacons;
 using Automatic9045.AtsEx.Handles;
 using Automatic9045.AtsEx.Plugins.Scripting.CSharp;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
-using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
 {

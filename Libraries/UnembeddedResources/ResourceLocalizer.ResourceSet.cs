@@ -8,7 +8,7 @@ using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.Resources
+namespace UnembeddedResources
 {
     public partial class ResourceLocalizer
     {

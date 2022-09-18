@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using UnembeddedResources;
+
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.Handles;
 using Automatic9045.AtsEx.PluginHost.Plugins;
-using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx.Plugins.Scripting
 {

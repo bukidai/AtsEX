@@ -6,12 +6,13 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using UnembeddedResources;
+
 using Automatic9045.AtsEx.Plugins.Scripting;
 using Automatic9045.AtsEx.Plugins.Scripting.CSharp;
 using Automatic9045.AtsEx.Plugins.Scripting.IronPython2;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.Plugins;
-using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx.Plugins
 {

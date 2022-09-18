@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using UnembeddedResources;
+
 using Automatic9045.AtsEx.Handles;
 using Automatic9045.AtsEx.Input;
 using Automatic9045.AtsEx.Plugins;
@@ -16,7 +18,6 @@ using Automatic9045.AtsEx.PluginHost.Handles;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
 using Automatic9045.AtsEx.PluginHost.Native;
 using Automatic9045.AtsEx.PluginHost.Plugins;
-using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx
 {

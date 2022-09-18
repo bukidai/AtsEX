@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.Resources
+namespace UnembeddedResources
 {
     /// <summary>
     /// カルチャに紐付けられた、任意の型のリソースを表します。

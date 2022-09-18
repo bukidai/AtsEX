@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.Resources
+namespace UnembeddedResources
 {
     /// <summary>
     /// <see cref="CultureInfo"/> を、そのカルチャの LCID によって比較します。

@@ -7,7 +7,7 @@ using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.Resources
+namespace UnembeddedResources
 {
     /// <summary>
     /// 外部のリソースファイルを利用して複数の言語に対応するための機能を提供します。
@@ -38,8 +38,8 @@ namespace Automatic9045.AtsEx.PluginHost.Resources
         /// リソース (.resx) ファイルから新しい <see cref="ResourceLocalizer"/> を作成します。
         /// </summary>
         /// <remarks>
-        /// <paramref name="neutralResourcePath"/> へ指定した URI を基に、各カルチャ向けのリソースファイルの URI を推測して読み込みます
-        /// (例: <c>A\B.resx</c> を指定した場合、<c>A\B.ja.resx</c> がカルチャ ja 向け、<c>A\B.ja-JP.resx</c> がカルチャ ja-JP 向けのリソースとして認識されます)。
+        /// <paramref name="neutralResourcePath"/> へ指定した URI を基に、各カルチャ向けのリソースファイルの URI を推測して読み込みます。<br/>
+        /// 例えば、<c>A\B.resx</c> を指定した場合、<c>A\B.ja.resx</c> がカルチャ ja 向け、<c>A\B.ja-JP.resx</c> がカルチャ ja-JP 向けのリソースとして認識されます。
         /// </remarks>
         /// <param name="neutralResourcePath">ニュートラル カルチャのリソースファイルを参照している URI 文字列。</param>
         /// <param name="getCurrentCultureFunc">現在のカルチャを取得するデリケート。</param>

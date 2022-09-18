@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 
 using Microsoft.Scripting.Hosting;
 
+using UnembeddedResources;
+
 using Automatic9045.AtsEx.Plugins.Scripting;
 using Automatic9045.AtsEx.Plugins.Scripting.IronPython2;
 using Automatic9045.AtsEx.PluginHost;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
 using Automatic9045.AtsEx.PluginHost.Plugins;
-using Automatic9045.AtsEx.PluginHost.Resources;
 
 using Identifiers = Automatic9045.AtsEx.MapStatementIdentifiers;
 using ExtendedBeaconIdentifiers = Automatic9045.AtsEx.ExtendedBeacons.MapStatementIdentifiers;

@@ -205,39 +205,35 @@
     <Compile Include="Plugins\TickResult\TickResult.cs" />
     <Compile Include="Plugins\TickResult\VehiclePluginTickResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\CultureComparer.cs" />
-    <Compile Include="Resources\Resource.cs" />
-    <Compile Include="Resources\ResourceLocalizer.cs" />
-    <Compile Include="Resources\ResourceLocalizer.ResourceSet.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BveTypes\TypeNameDefinitions\BveTypesXmlSchema.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Content Include="Resources\Files\PropertyNotInitializedException.resx" />
-    <Content Include="Resources\Files\PropertyNotInitializedException.ja.resx" />
-    <Content Include="Resources\Files\PluginTypeConverter.ja.resx" />
-    <Content Include="Resources\Files\PluginTypeConverter.resx" />
-    <Content Include="Resources\Files\TypeTextParser.resx" />
-    <Content Include="Resources\Files\TypeTextParser.ja.resx" />
-    <Content Include="Resources\Files\BveTypeSet.resx" />
-    <Content Include="Resources\Files\BveTypeSet.ja.resx" />
-    <Content Include="Resources\Files\ClassMemberSet.ja.resx" />
-    <Content Include="Resources\Files\ProfileSelector.ja.resx" />
-    <Content Include="Resources\Files\BveTypeNameDefinitionLoader.ja.resx" />
-    <Content Include="Resources\Files\ProfileSelector.resx" />
-    <Content Include="Resources\Files\BveTypeNameDefinitionLoader.resx" />
-    <Content Include="Resources\Files\ClassMemberSet.resx" />
-    <Content Include="Resources\Files\ClassWrappers\WrappedSortedList`2.ja.resx" />
-    <Content Include="Resources\Files\ClassWrappers\WrappedSortedList`2.resx" />
-    <Content Include="Resources\Files\ClassWrappers\MapObjectList.ja.resx" />
-    <Content Include="Resources\Files\ClassWrappers\StationList.ja.resx" />
-    <Content Include="Resources\Files\ClassWrappers\StationList.resx" />
-    <Content Include="Resources\Files\ClassWrappers\MapObjectList.resx" />
-    <Content Include="Resources\Files\ClassWrapperBase.ja.resx" />
-    <Content Include="Resources\Files\ClassWrapperBase.resx" />
-    <Content Include="Resources\Files\BveHacker.resx" />
-    <Content Include="Resources\Files\BveHacker.ja.resx" />
+    <Content Include="Resources\PropertyNotInitializedException.resx" />
+    <Content Include="Resources\PropertyNotInitializedException.ja.resx" />
+    <Content Include="Resources\PluginTypeConverter.ja.resx" />
+    <Content Include="Resources\PluginTypeConverter.resx" />
+    <Content Include="Resources\TypeTextParser.resx" />
+    <Content Include="Resources\TypeTextParser.ja.resx" />
+    <Content Include="Resources\BveTypeSet.resx" />
+    <Content Include="Resources\BveTypeSet.ja.resx" />
+    <Content Include="Resources\ClassMemberSet.ja.resx" />
+    <Content Include="Resources\ProfileSelector.ja.resx" />
+    <Content Include="Resources\BveTypeNameDefinitionLoader.ja.resx" />
+    <Content Include="Resources\ProfileSelector.resx" />
+    <Content Include="Resources\BveTypeNameDefinitionLoader.resx" />
+    <Content Include="Resources\ClassMemberSet.resx" />
+    <Content Include="Resources\ClassWrappers\WrappedSortedList`2.ja.resx" />
+    <Content Include="Resources\ClassWrappers\WrappedSortedList`2.resx" />
+    <Content Include="Resources\ClassWrappers\MapObjectList.ja.resx" />
+    <Content Include="Resources\ClassWrappers\StationList.ja.resx" />
+    <Content Include="Resources\ClassWrappers\StationList.resx" />
+    <Content Include="Resources\ClassWrappers\MapObjectList.resx" />
+    <Content Include="Resources\ClassWrapperBase.ja.resx" />
+    <Content Include="Resources\ClassWrapperBase.resx" />
+    <Content Include="Resources\BveHacker.resx" />
+    <Content Include="Resources\BveHacker.ja.resx" />
     <None Include="DXDynamicTexture\.editorconfig" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -254,9 +250,16 @@
   <ItemGroup>
     <Folder Include="ClassWrappers\UnidentifiedClasses\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Libraries\UnembeddedResources\UnembeddedResources.csproj">
+      <Project>{97512546-8929-4c0b-983d-5347197a3862}</Project>
+      <Name>UnembeddedResources</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /y /i "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
-xcopy /e /y /i "$(ProjectDir)Resources\Files\" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\Resources\PluginHost\"</PostBuildEvent>
+xcopy /e /y /i "$(ProjectDir)Resources\" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\Resources\PluginHost\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

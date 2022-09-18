@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using UnembeddedResources;
+
 using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
-using Automatic9045.AtsEx.PluginHost.Resources;
 
 namespace Automatic9045.AtsEx.ExtendedBeacons
 {

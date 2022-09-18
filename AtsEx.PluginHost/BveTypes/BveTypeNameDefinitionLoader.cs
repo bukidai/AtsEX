@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Schema;
 
-using Automatic9045.AtsEx.PluginHost.Resources;
+using UnembeddedResources;
 
 namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
