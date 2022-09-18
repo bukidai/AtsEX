@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 using HarmonyLib;
 
-namespace Automatic9045.AtsEx.PluginHost.Harmony
+namespace ObjectiveHarmonyPatch
 {
     /// <summary>
-    /// <see cref="ObjectiveHarmonyPatch.Prefix"/>、<see cref="ObjectiveHarmonyPatch.Postfix"/> イベントの結果を表します。
+    /// <see cref="HarmonyPatch.Prefix"/>、<see cref="HarmonyPatch.Postfix"/> イベントの結果を表します。
     /// </summary>
     public class PatchInvokationResult
     {

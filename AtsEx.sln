@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnembeddedResources", "Libraries\UnembeddedResources\UnembeddedResources.csproj", "{97512546-8929-4C0B-983D-5347197A3862}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectiveHarmonyPatch", "Libraries\ObjectiveHarmonyPatch\ObjectiveHarmonyPatch.csproj", "{9A22C1B4-6EDF-46AD-A03E-71847594E6E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{97512546-8929-4C0B-983D-5347197A3862}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97512546-8929-4C0B-983D-5347197A3862}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97512546-8929-4C0B-983D-5347197A3862}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A22C1B4-6EDF-46AD-A03E-71847594E6E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A22C1B4-6EDF-46AD-A03E-71847594E6E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A22C1B4-6EDF-46AD-A03E-71847594E6E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A22C1B4-6EDF-46AD-A03E-71847594E6E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +97,7 @@ Global
 		{9E5A6C98-1F14-460A-AC42-8138196AA3AE} = {FCA108F3-EC46-4DD5-962E-3ECCBC2100AE}
 		{C84BDF1C-D390-4A77-A3ED-35FBAAB2ED6F} = {FCA108F3-EC46-4DD5-962E-3ECCBC2100AE}
 		{97512546-8929-4C0B-983D-5347197A3862} = {B3D0DA09-BB5C-4FF7-9844-80A381655B5C}
+		{9A22C1B4-6EDF-46AD-A03E-71847594E6E3} = {B3D0DA09-BB5C-4FF7-9844-80A381655B5C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434AD268-BAE2-48A7-8AE5-2AB6B982F843}

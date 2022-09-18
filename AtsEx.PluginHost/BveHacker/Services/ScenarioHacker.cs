@@ -7,9 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using ObjectiveHarmonyPatch;
+
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
-using Automatic9045.AtsEx.PluginHost.Harmony;
 
 namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
 {
@@ -17,8 +18,8 @@ namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
     {
         private readonly MainForm MainForm;
 
-        private readonly ObjectiveHarmonyPatch InitializeTimeAndLocationMethodPatch;
-        private readonly ObjectiveHarmonyPatch InitializeMethodPatch;
+        private readonly HarmonyPatch InitializeTimeAndLocationMethodPatch;
+        private readonly HarmonyPatch InitializeMethodPatch;
 
         private bool IsScenarioCreatedEventInvoked = false;
 
@@ -35,9 +36,9 @@ namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
             InitializeMethodPatch = CreateAndSetupPatch(initializeMethod);
 
 
-            ObjectiveHarmonyPatch CreateAndSetupPatch(MethodBase original)
+            HarmonyPatch CreateAndSetupPatch(MethodBase original)
             {
-                ObjectiveHarmonyPatch patch = ObjectiveHarmonyPatch.Patch(original);
+                HarmonyPatch patch = HarmonyPatch.Patch(original);
                 patch.Postfix += OnPatchInvoked;
 
                 return patch;

@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.Harmony
+namespace ObjectiveHarmonyPatch
 {
-    public sealed partial class ObjectiveHarmonyPatch
+    public sealed partial class HarmonyPatch
     {
         private class MethodComaparer : IComparer<MethodBase>
         {

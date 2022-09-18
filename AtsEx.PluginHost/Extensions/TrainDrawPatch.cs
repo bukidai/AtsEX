@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 using SlimDX;
 using SlimDX.Direct3D9;
 
+using ObjectiveHarmonyPatch;
+
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
-using Automatic9045.AtsEx.PluginHost.Harmony;
 
 namespace Automatic9045.AtsEx.PluginHost.Extensions
 {
@@ -22,7 +23,7 @@ namespace Automatic9045.AtsEx.PluginHost.Extensions
         private static MethodInfo DrawCarsMethod;
 
         private readonly Train Target;
-        private readonly ObjectiveHarmonyPatch HarmonyPatch;
+        private readonly HarmonyPatch HarmonyPatch;
 
         [SetBveTypes]
         private static void Initialize(BveTypeSet bveTypes)
@@ -35,7 +36,7 @@ namespace Automatic9045.AtsEx.PluginHost.Extensions
         {
             Target = target;
 
-            HarmonyPatch = ObjectiveHarmonyPatch.Patch(DrawCarsMethod);
+            HarmonyPatch = HarmonyPatch.Patch(DrawCarsMethod);
             HarmonyPatch.Prefix += Prefix;
 
 

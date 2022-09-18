@@ -5,15 +5,16 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using ObjectiveHarmonyPatch;
+
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
-using Automatic9045.AtsEx.PluginHost.Harmony;
 
 namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
 {
     internal sealed class StructureSetLifeProlonger : IDisposable
     {
-        private readonly ObjectiveHarmonyPatch SetRouteMethodPatch;
+        private readonly HarmonyPatch SetRouteMethodPatch;
 
         private readonly BveHacker BveHacker;
 
@@ -24,7 +25,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
             ClassMemberSet trainDrawerMembers = BveHacker.BveTypes.GetClassInfoOf<ObjectDrawer>();
             MethodInfo setRouteMethod = trainDrawerMembers.GetSourceMethodOf(nameof(ObjectDrawer.SetRoute));
 
-            SetRouteMethodPatch = ObjectiveHarmonyPatch.Patch(setRouteMethod);
+            SetRouteMethodPatch = HarmonyPatch.Patch(setRouteMethod);
             SetRouteMethodPatch.Prefix += (_, e) =>
             {
                 Route route = Route.FromSource(e.Args[0]);

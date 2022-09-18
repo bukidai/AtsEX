@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.Harmony
+namespace ObjectiveHarmonyPatch
 {
     /// <summary>
     /// <see cref="PatchInvokedEventHandler"/> イベントのデータを提供します。

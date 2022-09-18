@@ -38,8 +38,8 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Lib.Harmony.2.2.1\lib\net48\0Harmony.dll</HintPath>
+    <Reference Include="0Harmony, Version=2.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lib.Harmony.2.2.2\lib\net48\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Mackoy.IInputDevice">
       <HintPath>LocalReferences\BveTs\Mackoy.IInputDevice.DLL</HintPath>
@@ -109,11 +109,6 @@
     <Compile Include="Handles\HandleCommandSet.cs" />
     <Compile Include="Handles\IPowerHandle.cs" />
     <Compile Include="Handles\ReverserPositionCommandBase.cs" />
-    <Compile Include="Harmony\ObjectiveHarmonyPatch.cs" />
-    <Compile Include="Harmony\ObjectiveHarmonyPatch.MethodComparer.cs" />
-    <Compile Include="Harmony\PatchInvokationResult.cs" />
-    <Compile Include="Harmony\PatchInvokedEventArgs.cs" />
-    <Compile Include="Harmony\PatchInvokedEventHandler.cs" />
     <Compile Include="ILoadErrorResolver.cs" />
     <Compile Include="Plugins\AssemblyPluginBase.cs" />
     <Compile Include="Handles\NotchCommandBase.cs" />
@@ -251,6 +246,10 @@
     <Folder Include="ClassWrappers\UnidentifiedClasses\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Libraries\ObjectiveHarmonyPatch\ObjectiveHarmonyPatch.csproj">
+      <Project>{9a22c1b4-6edf-46ad-a03e-71847594e6e3}</Project>
+      <Name>ObjectiveHarmonyPatch</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\UnembeddedResources\UnembeddedResources.csproj">
       <Project>{97512546-8929-4c0b-983d-5347197a3862}</Project>
       <Name>UnembeddedResources</Name>
