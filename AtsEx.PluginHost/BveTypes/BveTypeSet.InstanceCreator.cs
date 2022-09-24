@@ -47,7 +47,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 
                 using (Stream schema = profileSelector.GetSchemaStream())
                 {
-                    typeMemberNames = BveTypeNameDefinitionLoader.LoadFile(profile.Stream, schema);
+                    typeMemberNames = WrapTypesXmlLoader.LoadFile(profile.Stream, schema);
                 }
             }
 

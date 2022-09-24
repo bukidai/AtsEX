@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="BveTypesXmlSchema"
-    targetNamespace="http://automatic9045.github.io/ns/xmlschemas/BveTypesXmlSchema.xsd"
+<xs:schema id="WrapTypesXmlSchema"
+    targetNamespace="http://automatic9045.github.io/ns/xmlschemas/WrapTypesXmlSchema.xsd"
     elementFormDefault="qualified"
-    xmlns="http://automatic9045.github.io/ns/xmlschemas/BveTypesXmlSchema.xsd"
+    xmlns="http://automatic9045.github.io/ns/xmlschemas/WrapTypesXmlSchema.xsd"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
-	<xs:element name="BveTypeNameDefinitions">
+	<xs:element name="WrapTypes">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="Enum" minOccurs="0" maxOccurs="unbounded"/>

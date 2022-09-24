@@ -14,7 +14,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
     {
         protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ProfileSelector>("PluginHost");
 
-        private static readonly string DefaultNamespace = $"{typeof(BveTypeSet).Namespace}.TypeNameDefinitions";
+        private static readonly string DefaultNamespace = $"{typeof(BveTypeSet).Namespace}.WrapTypes";
 
         private readonly Assembly ExecutingAssembly;
         private readonly Version BveVersion;
@@ -98,7 +98,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 
         public Stream GetSchemaStream()
         {
-            Stream stream = ExecutingAssembly.GetManifestResourceStream($"{DefaultNamespace}.BveTypesXmlSchema.xsd");
+            Stream stream = ExecutingAssembly.GetManifestResourceStream($"{DefaultNamespace}.WrapTypesXmlSchema.xsd");
             return stream;
         }
     }

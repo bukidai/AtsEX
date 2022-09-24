@@ -12,9 +12,9 @@ using UnembeddedResources;
 
 namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
-    internal static class BveTypeNameDefinitionLoader
+    internal static class WrapTypesXmlLoader
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(BveTypeNameDefinitionLoader), "PluginHost");
+        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(WrapTypesXmlLoader), "PluginHost");
 
         public static List<TypeMemberNameSetBase> LoadFile(Stream docStream, Stream schemaStream)
         {
@@ -27,7 +27,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 
             string targetNamespace = $"{{{schema.TargetNamespace}}}";
 
-            XElement root = doc.Element(targetNamespace + "BveTypeNameDefinitions");
+            XElement root = doc.Element(targetNamespace + "WrapTypes");
             return LoadChildTypes(root);
 
 

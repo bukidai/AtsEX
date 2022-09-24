@@ -122,7 +122,7 @@
     <Compile Include="BveTypes\TypeMemberSet\EnumMemberSet.cs" />
     <Compile Include="BveTypes\TypeMemberSet\TypeMemberSetBase.cs" />
     <Compile Include="BveTypes\TypeMemberSet\ClassMemberSet.cs" />
-    <Compile Include="BveTypes\BveTypeNameDefinitionLoader.cs" />
+    <Compile Include="BveTypes\WrapTypesXmlLoader.cs" />
     <Compile Include="BveTypes\Comparer.cs" />
     <Compile Include="BveTypes\TypeMemberNameSet\EnumMemberNameSet.cs" />
     <Compile Include="BveTypes\TypeMemberNameSet\TypeMemberNameSetBase.cs" />
@@ -202,7 +202,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BveTypes\TypeNameDefinitions\BveTypesXmlSchema.xsd">
+    <EmbeddedResource Include="BveTypes\WrapTypes\WrapTypesXmlSchema.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="Resources\PropertyNotInitializedException.resx" />
@@ -215,9 +215,9 @@
     <Content Include="Resources\BveTypeSet.ja.resx" />
     <Content Include="Resources\ClassMemberSet.ja.resx" />
     <Content Include="Resources\ProfileSelector.ja.resx" />
-    <Content Include="Resources\BveTypeNameDefinitionLoader.ja.resx" />
+    <Content Include="Resources\WrapTypesXmlLoader.ja.resx" />
     <Content Include="Resources\ProfileSelector.resx" />
-    <Content Include="Resources\BveTypeNameDefinitionLoader.resx" />
+    <Content Include="Resources\WrapTypesXmlLoader.resx" />
     <Content Include="Resources\ClassMemberSet.resx" />
     <Content Include="Resources\ClassWrappers\WrappedSortedList`2.ja.resx" />
     <Content Include="Resources\ClassWrappers\WrappedSortedList`2.resx" />
@@ -233,10 +233,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BveTypes\TypeNameDefinitions\5.8.7554.391.xml" />
+    <EmbeddedResource Include="BveTypes\WrapTypes\5.8.7554.391.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BveTypes\TypeNameDefinitions\6.0.7554.619.xml" />
+    <EmbeddedResource Include="BveTypes\WrapTypes\6.0.7554.619.xml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="LocalReferences\.gitignore" />
