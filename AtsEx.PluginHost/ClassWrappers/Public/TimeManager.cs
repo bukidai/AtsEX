@@ -12,15 +12,15 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// 時間に関する処理を行います。
     /// </summary>
-    public class TimeManager : ClassWrapperBase
+    public partial class TimeManager : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<TimeManager>();
 
-            GameStateGetMethod = members.GetSourcePropertyGetterOf(nameof(GameState));
-            GameStateSetMethod = members.GetSourcePropertySetterOf(nameof(GameState));
+            StateGetMethod = members.GetSourcePropertyGetterOf(nameof(State));
+            StateSetMethod = members.GetSourcePropertySetterOf(nameof(State));
 
             TimeMillisecondsGetMethod = members.GetSourcePropertyGetterOf(nameof(TimeMilliseconds));
 
@@ -43,15 +43,15 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static TimeManager FromSource(object src) => src is null ? null : new TimeManager(src);
 
-        private static MethodInfo GameStateGetMethod;
-        private static MethodInfo GameStateSetMethod;
+        private static MethodInfo StateGetMethod;
+        private static MethodInfo StateSetMethod;
         /// <summary>
         /// 時間進行の設定を取得・設定します。
         /// </summary>
-        public GameState GameState
+        public GameState State
         {
-            get => GameStateGetMethod.Invoke(Src, null);
-            set => GameStateSetMethod.Invoke(Src, new object[] { value });
+            get => StateGetMethod.Invoke(Src, null);
+            set => StateSetMethod.Invoke(Src, new object[] { value });
         }
 
         private static MethodInfo TimeMillisecondsGetMethod;

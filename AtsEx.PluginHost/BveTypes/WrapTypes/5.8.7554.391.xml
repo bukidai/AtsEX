@@ -607,7 +607,7 @@
 	<Class Wrapper="TimeManager" Original="cn">
 		<Enum Wrapper="GameState" Original="a"/>
 
-		<Property Wrapper="GameState">
+		<Property Wrapper="State">
 			<Getter Original="g"/>
 			<Setter Original="a"/>
 		</Property>
