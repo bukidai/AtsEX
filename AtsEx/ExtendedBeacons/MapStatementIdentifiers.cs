@@ -32,10 +32,23 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
 
         internal static class ErrorTexts
         {
-            private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(MapStatementIdentifiers), @"Core\ExtendedBeacons");
+            private class ResourceSet
+            {
+                private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType(typeof(MapStatementIdentifiers), @"Core\ExtendedBeacons");
 
-            public static string InvalidObservingTargetTrack(string invalidText) => string.Format(Resources.GetString("InvalidObservingTargetTrack").Value, invalidText);
-            public static string InvalidObservingTargetTrain(string invalidText) => string.Format(Resources.GetString("InvalidObservingTargetTrain").Value, invalidText);
+                [ResourceStringHolder(nameof(Localizer))] public Resource<string> InvalidObservingTargetTrack { get; private set; }
+                [ResourceStringHolder(nameof(Localizer))] public Resource<string> InvalidObservingTargetTrain { get; private set; }
+
+                public ResourceSet()
+                {
+                    ResourceLoader.LoadAndSetAll(this);
+                }
+            }
+
+            private static readonly ResourceSet Resources = new ResourceSet();
+
+            public static string InvalidObservingTargetTrack(string invalidText) => string.Format(Resources.InvalidObservingTargetTrack.Value, invalidText);
+            public static string InvalidObservingTargetTrain(string invalidText) => string.Format(Resources.InvalidObservingTargetTrain.Value, invalidText);
         }
     }
 }

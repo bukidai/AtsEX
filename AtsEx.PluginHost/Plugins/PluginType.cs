@@ -24,17 +24,30 @@ namespace Automatic9045.AtsEx.PluginHost.Plugins
 
     public static class PluginTypeConverter
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(PluginTypeConverter), "PluginHost");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType(typeof(PluginTypeConverter), "PluginHost");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> VehiclePlugin { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> MapPlugin { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         public static Resource<string> GetTypeStringResource(this PluginType pluginType)
         {
             switch (pluginType)
             {
                 case PluginType.VehiclePlugin:
-                    return Resources.GetString("VehiclePlugin");
+                    return Resources.VehiclePlugin;
 
                 case PluginType.MapPlugin:
-                    return Resources.GetString("MapPlugin");
+                    return Resources.MapPlugin;
 
                 default:
                     throw new ArgumentOutOfRangeException();

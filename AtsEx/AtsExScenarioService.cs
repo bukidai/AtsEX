@@ -23,7 +23,21 @@ namespace Automatic9045.AtsEx
 {
     internal abstract partial class AtsExScenarioService : IDisposable
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<AtsExScenarioService>("Core");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<AtsExScenarioService>("Core");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> VehiclePluginTickResultTypeInvalid { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> MapPluginTickResultTypeInvalid { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> UnhandledExceptionCaption { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         private readonly BveHacker BveHacker;
 
@@ -123,7 +137,7 @@ namespace Automatic9045.AtsEx
                 TickResult tickResult = plugin.Tick(elapsed);
                 if (!(tickResult is VehiclePluginTickResult vehiclePluginTickResult))
                 {
-                    throw new InvalidOperationException(string.Format(Resources.GetString("VehiclePluginTickResultTypeInvalid").Value,
+                    throw new InvalidOperationException(string.Format(Resources.VehiclePluginTickResultTypeInvalid.Value,
                        $"{nameof(PluginBase)}.{nameof(PluginBase.Tick)}", nameof(VehiclePluginTickResult)));
                 }
 
@@ -140,7 +154,7 @@ namespace Automatic9045.AtsEx
                 TickResult tickResult = plugin.Tick(elapsed);
                 if (!(tickResult is MapPluginTickResult))
                 {
-                    throw new InvalidOperationException(string.Format(Resources.GetString("MapPluginTickResultTypeInvalid").Value,
+                    throw new InvalidOperationException(string.Format(Resources.MapPluginTickResultTypeInvalid.Value,
                        $"{nameof(PluginBase)}.{nameof(PluginBase.Tick)}", nameof(MapPluginTickResult)));
                 }
             }
@@ -196,7 +210,7 @@ namespace Automatic9045.AtsEx
                 else
                 {
                     BveHacker.LoadErrorManager.Throw(exception.Message);
-                    MessageBox.Show(exception.ToString(), string.Format(Resources.GetString("UnhandledExceptionCaption").Value, App.Instance.ProductShortName));
+                    MessageBox.Show(exception.ToString(), string.Format(Resources.UnhandledExceptionCaption.Value, App.Instance.ProductShortName));
                 }
             }
         }

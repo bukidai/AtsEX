@@ -6,12 +6,34 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using UnembeddedResources;
+
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
     public sealed partial class BveTypeSet
     {
+        private partial class ResourceSet
+        {
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> PropertyWrapperNotFound { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> PropertyGetterOriginalNotFound { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> InvalidPropertyTypeWrapper { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> PropertySetterOriginalNotFound { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> FieldWrapperPropertyNotFound { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> FieldOriginalNotFound { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> MethodWrapperNotFound { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> MethodOriginalNotFound { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> CollectionTypeNotRecognized { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> OriginalTypeNotFound { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> GenericWrapperTypeNotFound { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> WrapperTypeNotFound { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> Public { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> NonPublic { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> Instance { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> Static { get; private set; }
+        }
+
         private const BindingFlags SearchAllBindingAttribute = BindingFlags.NonPublic | BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance;
 
         /// <summary>
@@ -85,7 +107,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                             if (wrapperProperty is null)
                             {
                                 throw new KeyNotFoundException(
-                                    string.Format(Resources.GetString("PropertyWrapperNotFound").Value,
+                                    string.Format(Resources.PropertyWrapperNotFound.Value,
                                     GetAccessibilityDescription(getterInfo.IsWrapperPrivate), getterInfo.WrapperName, classSrc.WrapperTypeName));
                             }
 
@@ -93,7 +115,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                             if (originalGetter is null)
                             {
                                 throw new KeyNotFoundException(
-                                    string.Format(Resources.GetString("PropertyGetterOriginalNotFound").Value,
+                                    string.Format(Resources.PropertyGetterOriginalNotFound.Value,
                                     GetAccessibilityDescription(getterInfo.IsOriginalPrivate, getterInfo.IsOriginalStatic), getterInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
                             }
 
@@ -106,18 +128,18 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                             if (wrapperProperty is null)
                             {
                                 throw new KeyNotFoundException(
-                                    string.Format(Resources.GetString("PropertyWrapperNotFound").Value,
+                                    string.Format(Resources.PropertyWrapperNotFound.Value,
                                     GetAccessibilityDescription(setterInfo.IsWrapperPrivate), setterInfo.WrapperName, classSrc.WrapperTypeName));
                             }
 
                             Type originalParamType = GetOriginalTypeIfWrapper(wrapperProperty.PropertyType,
-                                string.Format(Resources.GetString("InvalidPropertyTypeWrapper").Value,
+                                string.Format(Resources.InvalidPropertyTypeWrapper.Value,
                                 $"{classSrc.WrapperTypeName}.{setterInfo.WrapperName}", wrapperProperty.PropertyType.Name));
                             MethodInfo originalSetter = originalType.GetMethod(setterInfo.OriginalName, CreateBindingAttribute(setterInfo.IsOriginalPrivate, setterInfo.IsOriginalStatic), null, new Type[] { originalParamType }, null);
                             if (originalSetter is null)
                             {
                                 throw new KeyNotFoundException(
-                                    string.Format(Resources.GetString("PropertySetterOriginalNotFound").Value,
+                                    string.Format(Resources.PropertySetterOriginalNotFound.Value,
                                     GetAccessibilityDescription(setterInfo.IsOriginalPrivate, setterInfo.IsOriginalStatic), setterInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
                             }
 
@@ -130,7 +152,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                             if (wrapperProperty is null)
                             {
                                 throw new KeyNotFoundException(
-                                    string.Format(Resources.GetString("FieldWrapperPropertyNotFound").Value,
+                                    string.Format(Resources.FieldWrapperPropertyNotFound.Value,
                                     GetAccessibilityDescription(fieldInfo.IsWrapperPrivate), fieldInfo.WrapperName, classSrc.WrapperTypeName));
                             }
 
@@ -138,7 +160,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                             if (originalField is null)
                             {
                                 throw new KeyNotFoundException(
-                                    string.Format(Resources.GetString("FieldOriginalNotFound").Value,
+                                    string.Format(Resources.FieldOriginalNotFound.Value,
                                     GetAccessibilityDescription(fieldInfo.IsOriginalPrivate, fieldInfo.IsOriginalStatic), fieldInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
                             }
 
@@ -152,7 +174,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                             if (wrapperMethod is null)
                             {
                                 throw new KeyNotFoundException(
-                                    string.Format(Resources.GetString("MethodWrapperNotFound").Value,
+                                    string.Format(Resources.MethodWrapperNotFound.Value,
                                     string.Join(", ", wrapperMethodParams.Select(GetTypeFullName)), GetAccessibilityDescription(methodInfo.IsWrapperPrivate), methodInfo.WrapperName, classSrc.WrapperTypeName));
                             }
 
@@ -161,7 +183,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                             if (originalMethod is null)
                             {
                                 throw new KeyNotFoundException(
-                                    string.Format(Resources.GetString("MethodOriginalNotFound").Value,
+                                    string.Format(Resources.MethodOriginalNotFound.Value,
                                     string.Join(", ", originalMethodParams.Select(GetTypeFullName)), GetAccessibilityDescription(methodInfo.IsOriginalPrivate, methodInfo.IsOriginalStatic), methodInfo.OriginalName, classSrc.WrapperTypeName, classSrc.OriginalTypeName));
                             }
 
@@ -174,7 +196,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                     }
 
                     default:
-                        throw new NotImplementedException(string.Format(Resources.GetString("CollectionTypeNotRecognized").Value, nameof(TypeMemberNameSetBase), src.GetType().Name));
+                        throw new NotImplementedException(string.Format(Resources.CollectionTypeNotRecognized.Value, nameof(TypeMemberNameSetBase), src.GetType().Name));
 
                 }
             });
@@ -216,7 +238,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                     {
                         if (typeLoadExceptionMessage is null)
                         {
-                            typeLoadExceptionMessage = string.Format(Resources.GetString("OriginalTypeNotFound").Value, type.Name);
+                            typeLoadExceptionMessage = string.Format(Resources.OriginalTypeNotFound.Value, type.Name);
                         }
 
                         throw new TypeLoadException(typeLoadExceptionMessage);
@@ -292,7 +314,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                         type = wrapperTypes.FirstOrDefault(t => t.Name == genericTypeInfo.TypeName && t.GenericTypeArguments.Length == paramTypes.Length);
                         if (type is null)
                         {
-                            throw new ArgumentException(string.Format(Resources.GetString("GenericWrapperTypeNotFound").Value, genericTypeInfo.TypeName, paramTypes.Length));
+                            throw new ArgumentException(string.Format(Resources.GenericWrapperTypeNotFound.Value, genericTypeInfo.TypeName, paramTypes.Length));
                         }
 
                         break;
@@ -306,7 +328,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                             type = wrapperTypes.FirstOrDefault(t => t.Name == basicTypeInfo.TypeName);
                             if (type is null)
                             {
-                                throw new ArgumentException(string.Format(Resources.GetString("WrapperTypeNotFound").Value, basicTypeInfo.TypeName));
+                                throw new ArgumentException(string.Format(Resources.WrapperTypeNotFound.Value, basicTypeInfo.TypeName));
                             }
                         }
 
@@ -371,7 +393,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 
             string GetAccessibilityDescription(bool isNonPublic = false, bool isStatic = false)
             {
-                return Resources.GetString(isNonPublic ? "NonPublic" : "Public").Value + Resources.GetString(isStatic ? "Static" : "Instance").Value;
+                return (isNonPublic ? Resources.NonPublic : Resources.Public).Value + (isStatic ? Resources.Static : Resources.Instance).Value;
             }
             #endregion
         }

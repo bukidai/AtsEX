@@ -16,10 +16,22 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
 {
     internal partial class ScriptPluginPackage
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(ScriptPluginPackage), "Core");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<ScriptPluginPackage>("Core");
 
-        protected static XmlSchemaSet SchemaSet = new XmlSchemaSet();
-        protected static string TargetNamespace;
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> XmlSchemaValidation { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
+
+        protected static readonly XmlSchemaSet SchemaSet = new XmlSchemaSet();
+        protected static readonly string TargetNamespace;
 
         public bool UseAtsExExtensions { get; }
 
@@ -115,7 +127,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
             }
         }
 
-        private static void SchemaValidation(object sender, ValidationEventArgs e) => throw new FormatException(Resources.GetString("XmlSchemaValidation").Value, e.Exception);
+        private static void SchemaValidation(object sender, ValidationEventArgs e) => throw new FormatException(Resources.XmlSchemaValidation.Value, e.Exception);
 
         private static void DocumentValidation(object sender, ValidationEventArgs e) => throw e.Exception;
     }

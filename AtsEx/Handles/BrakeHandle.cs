@@ -13,10 +13,22 @@ namespace Automatic9045.AtsEx.Handles
 {
     internal class BrakeHandle : HandleBase, IBrakeHandle
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<BrakeHandle>(@"Core\Handles");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<BrakeHandle>(@"Core\Handles");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> NoHoldingSpeedBrake { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
         
         public bool HasHoldingSpeedBrake { get; }
-        public int HoldingSpeedBrakeNotch => HasHoldingSpeedBrake ? 1 : throw new InvalidOperationException(Resources.GetString("NoHoldingSpeedBrake").Value);
+        public int HoldingSpeedBrakeNotch => HasHoldingSpeedBrake ? 1 : throw new InvalidOperationException(Resources.NoHoldingSpeedBrake.Value);
         public int ServiceBrakeNotchCount => MaxNotch - 1 - (HasHoldingSpeedBrake ? 1 : 0);
         public int MinServiceBrakeNotch => HasHoldingSpeedBrake ? 2 : 1;
         public int MaxServiceBrakeNotch => MaxNotch - 1;

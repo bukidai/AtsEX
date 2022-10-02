@@ -26,7 +26,20 @@ namespace Automatic9045.AtsEx.PluginHost
 
     public abstract class BveHacker : IDisposable
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<BveHacker>("PluginHost");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<BveHacker>("PluginHost");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> IllegalSlimDXDetected { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> CannotGetScenario { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         private readonly IApp App;
         private readonly StructureSetLifeProlonger StructureSetLifeProlonger;
@@ -71,7 +84,7 @@ namespace Automatic9045.AtsEx.PluginHost
             if (slimDXAssemblies.Count() > 1)
             {
                 string locationText = string.Join("\n", slimDXAssemblies.Select(assembly => "・" + assembly.Location));
-                MessageBox.Show(string.Format(Resources.GetString("IllegalSlimDXDetected").Value, locationText), App.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(string.Format(Resources.IllegalSlimDXDetected.Value, locationText), App.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -217,7 +230,7 @@ namespace Automatic9045.AtsEx.PluginHost
         /// 現在実行中のシナリオを取得します。シナリオの読込中は <see cref="InvalidOperationException"/> をスローします。
         /// シナリオの読込中に <see cref="ClassWrappers.Scenario"/> を取得するには <see cref="ScenarioCreated"/> イベントを購読してください。
         /// </summary>
-        public Scenario Scenario => ScenarioHacker.CurrentScenario ?? throw new InvalidOperationException(string.Format(Resources.GetString("CannotGetScenario").Value, nameof(Scenario)));
+        public Scenario Scenario => ScenarioHacker.CurrentScenario ?? throw new InvalidOperationException(string.Format(Resources.CannotGetScenario.Value, nameof(Scenario)));
 
         /// <summary>
         /// <see cref="Scenario"/> が取得可能かどうかを取得します。

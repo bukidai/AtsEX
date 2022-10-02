@@ -22,7 +22,20 @@ namespace Automatic9045.AtsEx
 {
     internal sealed class App : IApp
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<App>("Core");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<App>("Core");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> ProductName { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> ProductShortName { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         public static App Instance { get; private set; }
 
@@ -54,8 +67,8 @@ namespace Automatic9045.AtsEx
             Started?.Invoke(e);
         }
 
-        public string ProductName { get; } = Resources.GetString("ProductName").Value;
-        public string ProductShortName { get; } = Resources.GetString("ProductShortName").Value;
+        public string ProductName { get; } = Resources.ProductName.Value;
+        public string ProductShortName { get; } = Resources.ProductShortName.Value;
 
         public Process Process { get; }
         public Assembly AtsExAssembly { get; }

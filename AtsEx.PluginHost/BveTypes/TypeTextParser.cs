@@ -12,7 +12,19 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
     internal sealed class TypeTextParser
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<TypeTextParser>("PluginHost");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<TypeTextParser>("PluginHost");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> InvalidFormat { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         public static TypeMemberNameSetBase.TypeInfoBase Parse(string text)
         {
@@ -86,7 +98,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
             }
             catch (Exception ex)
             {
-                throw new FormatException(Resources.GetString("InvalidFormat").Value, ex);
+                throw new FormatException(Resources.InvalidFormat.Value, ex);
             }
         }
 

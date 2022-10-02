@@ -29,7 +29,22 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
 {
     internal partial class ExtendedBeaconSet : PluginHost.ExtendedBeacons.ExtendedBeaconSet
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ExtendedBeaconSet>(@"Core\ExtendedBeacons");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<ExtendedBeaconSet>(@"Core\ExtendedBeacons");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> BeaconRepeaterNotEnded { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> ArgumentMissing { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> ItemName { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> ScriptLanguageNotRecognized { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         public override ReadOnlyDictionary<string, BeaconBase> Beacons { get; }
         public override ReadOnlyDictionary<string, TrainObservingBeaconBase> TrainObservingBeacons { get; }
@@ -75,7 +90,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                     {
                         if (!(repeatedStructure.Models is null) || repeatedStructure.Location != previous.Structure.Location)
                         {
-                            bveHacker.LoadErrorManager.Throw(Resources.GetString("BeaconRepeaterNotEnded").Value);
+                            bveHacker.LoadErrorManager.Throw(Resources.BeaconRepeaterNotEnded.Value);
                         }
                     }
 
@@ -92,7 +107,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                         previous.IsBeacon = true;
                     }
 
-                    if (repeatedStructure.Models.Count <= 4) throw new BveFileLoadException(Resources.GetString("ArgumentMissing").Value, Resources.GetString("ItemName").Value);
+                    if (repeatedStructure.Models.Count <= 4) throw new BveFileLoadException(Resources.ArgumentMissing.Value, Resources.ItemName.Value);
 
                     string name = structureModels.TryGetKey(repeatedStructure.Models[1]);
                     if (name == Identifiers.Null) name = Guid.NewGuid().ToString();
@@ -100,13 +115,13 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                     string scriptLanguageText = structureModels.TryGetKey(repeatedStructure.Models[2]);
                     if (!ScriptIdentifiers.ScriptLanguages.TryGetKey(scriptLanguageText, out ScriptLanguage scriptLanguage))
                     {
-                        throw new BveFileLoadException(ScriptIdentifiers.ErrorTexts.InvalidScriptLanguage(scriptLanguageText), Resources.GetString("ItemName").Value);
+                        throw new BveFileLoadException(ScriptIdentifiers.ErrorTexts.InvalidScriptLanguage(scriptLanguageText), Resources.ItemName.Value);
                     }
 
                     string trackObservingTypeText = structureModels.TryGetKey(repeatedStructure.Models[3]);
                     if (!ExtendedBeaconIdentifiers.ObservingTargetTracks.TryGetKey(trackObservingTypeText, out ObservingTargetTrack observingTargetTrack))
                     {
-                        throw new BveFileLoadException(ExtendedBeaconIdentifiers.ErrorTexts.InvalidObservingTargetTrack(trackObservingTypeText), Resources.GetString("ItemName").Value);
+                        throw new BveFileLoadException(ExtendedBeaconIdentifiers.ErrorTexts.InvalidObservingTargetTrack(trackObservingTypeText), Resources.ItemName.Value);
                     }
 
                     for (int i = 4; i < repeatedStructure.Models.Count; i++)
@@ -114,7 +129,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                         string observeTargetText = structureModels.TryGetKey(repeatedStructure.Models[i]);
                         if (!ExtendedBeaconIdentifiers.ObservingTargetTrains.TryGetKey(observeTargetText, out ObservingTargetTrain observingTargetTrain))
                         {
-                            throw new BveFileLoadException(ExtendedBeaconIdentifiers.ErrorTexts.InvalidObservingTargetTrain(observeTargetText), Resources.GetString("ItemName").Value);
+                            throw new BveFileLoadException(ExtendedBeaconIdentifiers.ErrorTexts.InvalidObservingTargetTrain(observeTargetText), Resources.ItemName.Value);
                         }
 
                         string code = Regex.Unescape(repeaterKey).Replace('`', '\"');
@@ -179,18 +194,18 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                 switch (language)
                 {
                     case ScriptLanguage.CSharpScript:
-                        script = new Plugins.Scripting.CSharp.PluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>>(code, mainMapDirectory, Resources.GetString("ItemName").Value);
+                        script = new Plugins.Scripting.CSharp.PluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>>(code, mainMapDirectory, Resources.ItemName.Value);
                         break;
 
                     case ScriptLanguage.IronPython2:
                         ScriptEngine scriptEngine = ScriptEngineProvider.CreateEngine(mainMapDirectory);
                         ScriptScope scriptScope = ScriptEngineProvider.CreateScope(scriptEngine);
 
-                        script = new Plugins.Scripting.IronPython2.PluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>>(code, scriptEngine, scriptScope, Resources.GetString("ItemName").Value);
+                        script = new Plugins.Scripting.IronPython2.PluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>>(code, scriptEngine, scriptScope, Resources.ItemName.Value);
                         break;
 
                     default:
-                        throw new DevelopException(string.Format(Resources.GetString("ScriptLanguageNotRecognized").Value, language));
+                        throw new DevelopException(string.Format(Resources.ScriptLanguageNotRecognized.Value, language));
                 }
 
                 cachedScripts[typeof(TPassedEventArgs)][language][code] = script;

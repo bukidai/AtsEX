@@ -12,9 +12,21 @@ namespace Automatic9045.AtsEx.PluginHost
 {
     public class PropertyNotInitializedException : Exception
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<PropertyNotInitializedException>("PluginHost");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<PropertyNotInitializedException>("PluginHost");
 
-        public PropertyNotInitializedException(string propertyName) : base(string.Format(Resources.GetString("Message").Value, propertyName))
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> Message { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
+
+        public PropertyNotInitializedException(string propertyName) : base(string.Format(Resources.Message.Value, propertyName))
         {
         }
     }

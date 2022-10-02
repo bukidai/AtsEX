@@ -19,7 +19,21 @@ namespace Automatic9045.AtsEx
 {
     internal abstract partial class AtsEx : IDisposable
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<AtsEx>("Core");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<AtsEx>("Core");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> AtsExAssemblyLocationIllegal { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> IgnoreAndContinue { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> BveVersionNotSupported { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         public BveHacker BveHacker { get; }
 

@@ -12,7 +12,22 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
     internal class ProfileSelector
     {
-        protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ProfileSelector>("PluginHost");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<ProfileSelector>("PluginHost");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> VersionTooOld { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> InvalidVersion { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> MajorVersionTooOld { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> VersionNotSupported { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         private static readonly string DefaultNamespace = $"{typeof(BveTypeSet).Namespace}.WrapTypes";
 
@@ -66,11 +81,11 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                         {
                             if (BveVersion < oldestVersion)
                             {
-                                throw new NotSupportedException(string.Format(Resources.GetString("VersionTooOld").Value, BveVersion, oldestVersion));
+                                throw new NotSupportedException(string.Format(Resources.VersionTooOld.Value, BveVersion, oldestVersion));
                             }
                             else
                             {
-                                throw new NotSupportedException(string.Format(Resources.GetString("InvalidVersion").Value, BveVersion));
+                                throw new NotSupportedException(string.Format(Resources.InvalidVersion.Value, BveVersion));
                             }
                         }
 
@@ -85,13 +100,13 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                         }
                         else
                         {
-                            throw new NotSupportedException(string.Format(Resources.GetString("MajorVersionTooOld").Value, BveVersion, supportedAllVersions.Min().Major));
+                            throw new NotSupportedException(string.Format(Resources.MajorVersionTooOld.Value, BveVersion, supportedAllVersions.Min().Major));
                         }
                     }
                 }
                 else
                 {
-                    throw new NotSupportedException(string.Format(Resources.GetString("VersionNotSupported").Value, BveVersion));
+                    throw new NotSupportedException(string.Format(Resources.VersionNotSupported.Value, BveVersion));
                 }
             }
         }

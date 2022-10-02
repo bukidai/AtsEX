@@ -17,7 +17,19 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
     /// </summary>
     public sealed partial class BveTypeSet
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<BveTypeSet>("PluginHost");
+        private partial class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<BveTypeSet>("PluginHost");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> TypeNotClassWrapper { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         private readonly SortedList<Type, TypeMemberSetBase> Types;
         private readonly SortedList<Type, Type> OriginalAndWrapperTypes;
@@ -28,7 +40,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
             if (!(illegalType is null))
             {
                 throw new ArgumentException(
-                    string.Format(Resources.GetString("TypeNotClassWrapper").Value,
+                    string.Format(Resources.TypeNotClassWrapper.Value,
                     illegalType.WrapperType.FullName, typeof(ClassWrapperBase).FullName));
             }
 

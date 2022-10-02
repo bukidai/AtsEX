@@ -16,7 +16,20 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// </summary>
     public abstract class ClassWrapperBase
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ClassWrapperBase>("PluginHost");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<ClassWrapperBase>("PluginHost");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> TypeNotClassWrapper { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> FromSourceMethodNotFound { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         private static BveTypeSet BveTypes;
 
@@ -43,7 +56,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
             else if (!wrapperType.IsSubclassOf(typeof(ClassWrapperBase)))
             {
-                throw new ArgumentException(string.Format(Resources.GetString("TypeNotClassWrapper").Value, wrapperType.FullName, typeof(ClassWrapperBase).Name), nameof(wrapperType));
+                throw new ArgumentException(string.Format(Resources.TypeNotClassWrapper.Value, wrapperType.FullName, typeof(ClassWrapperBase).Name), nameof(wrapperType));
             }
 
             MethodInfo fromSourceMethod = wrapperType.
@@ -56,7 +69,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                     return parameters.Length == 1 && parameters[0].ParameterType == typeof(object) && method.ReturnType == wrapperType;
                 });
             return fromSourceMethod is null
-                ? throw new InvalidOperationException(string.Format(Resources.GetString("FromSourceMethodNotFound").Value, wrapperType.FullName))
+                ? throw new InvalidOperationException(string.Format(Resources.FromSourceMethodNotFound.Value, wrapperType.FullName))
                 : (ClassWrapperBase)fromSourceMethod.Invoke(null, new object[] { src });
         }
 

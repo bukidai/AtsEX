@@ -14,7 +14,21 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
 {
     internal abstract class ScriptPluginBase : PluginBase, IDisposable
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ScriptPluginBase>("Core");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<ScriptPluginBase>("Core");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> Name { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> NoReturnValue { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
+
         private static readonly string NameText;
 
         public override string Location { get; } = "";
@@ -33,7 +47,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
 
         static ScriptPluginBase()
         {
-            NameText = Resources.GetString("Name").Value;
+            NameText = Resources.Name.Value;
         }
 
         protected ScriptPluginBase(ScriptPluginBuilder builder, PluginType pluginType, bool useAtsExExtensions) : base(builder, pluginType, useAtsExExtensions)
@@ -87,7 +101,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
             }
 
             TickGlobals globals = new TickGlobals(Globals, elapsed);
-            IScriptResult<TickResult> result = TickScript.Run(globals) ?? throw new InvalidOperationException(string.Format(Resources.GetString("NoReturnValue").Value, Title, nameof(Tick)));
+            IScriptResult<TickResult> result = TickScript.Run(globals) ?? throw new InvalidOperationException(string.Format(Resources.NoReturnValue.Value, Title, nameof(Tick)));
 
             return result.ReturnValue;
         }

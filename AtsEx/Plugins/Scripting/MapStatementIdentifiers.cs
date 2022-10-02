@@ -20,9 +20,21 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
 
         internal static class ErrorTexts
         {
-            private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(MapStatementIdentifiers), @"Core\Plugins");
+            private class ResourceSet
+            {
+                private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType(typeof(MapStatementIdentifiers), @"Core\Plugins");
 
-            public static string InvalidScriptLanguage(string invalidText) => string.Format(Resources.GetString("InvalidScriptLanguage").Value, invalidText);
+                [ResourceStringHolder(nameof(Localizer))] public Resource<string> InvalidScriptLanguage { get; private set; }
+
+                public ResourceSet()
+                {
+                    ResourceLoader.LoadAndSetAll(this);
+                }
+            }
+
+            private static readonly ResourceSet Resources = new ResourceSet();
+
+            public static string InvalidScriptLanguage(string invalidText) => string.Format(Resources.InvalidScriptLanguage.Value, invalidText);
         }
     }
 }

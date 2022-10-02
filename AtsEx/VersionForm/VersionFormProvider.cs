@@ -15,7 +15,19 @@ namespace Automatic9045.AtsEx
 {
     internal sealed class VersionFormProvider : IDisposable
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<VersionFormProvider>("Core");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<VersionFormProvider>("Core");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> VersionInfoMenuItem { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         private readonly BveHacker BveHacker;
 
@@ -28,7 +40,7 @@ namespace Automatic9045.AtsEx
             BveHacker = bveHacker;
 
             ContextMenuHacker contextMenuHacker = BveHacker.ContextMenuHacker as ContextMenuHacker;
-            MenuItem = contextMenuHacker.AddClickableMenuItem(string.Format(Resources.GetString("VersionInfoMenuItem").Value, App.Instance.ProductShortName), MenuItemClick, true);
+            MenuItem = contextMenuHacker.AddClickableMenuItem(string.Format(Resources.VersionInfoMenuItem.Value, App.Instance.ProductShortName), MenuItemClick, true);
 
             Form = new VersionForm();
             Form.FormClosing += FormClosing;

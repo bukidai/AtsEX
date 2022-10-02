@@ -16,7 +16,31 @@ namespace Automatic9045.AtsEx
 {
     internal partial class VersionForm : Form
     {
-        protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<VersionForm>("Core");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<VersionForm>("Core");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> Caption { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> Description { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> License { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> Website { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> Repository { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> PluginListHeader { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> PluginListColumnFileName { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> PluginListColumnName { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> PluginListColumnType { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> PluginListColumnVersion { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> PluginListColumnDescription { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> OK { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
+
 
         public VersionForm()
         {

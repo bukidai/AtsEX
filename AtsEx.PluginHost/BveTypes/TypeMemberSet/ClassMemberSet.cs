@@ -11,7 +11,22 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
     public class ClassMemberSet : TypeMemberSetBase
     {
-        private protected static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<ClassMemberSet>("PluginHost");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<ClassMemberSet>("PluginHost");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> OriginalPropertyNotFound { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> OriginalFieldNotFound { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> OriginalConstructorNotFound { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> OriginalMethodNotFound { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         private protected SortedList<Type[], ConstructorInfo> Constructors { get; }
 
@@ -42,7 +57,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
         {
             if (!PropertyGetters.Keys.Contains(wrapperName))
             {
-                throw new KeyNotFoundException(string.Format(Resources.GetString("OriginalPropertyNotFound").Value, nameof(wrapperName), wrapperName));
+                throw new KeyNotFoundException(string.Format(Resources.OriginalPropertyNotFound.Value, nameof(wrapperName), wrapperName));
             }
 
             return PropertyGetters[wrapperName];
@@ -52,7 +67,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
         {
             if (!PropertySetters.Keys.Contains(wrapperName))
             {
-                throw new KeyNotFoundException(string.Format(Resources.GetString("OriginalPropertyNotFound").Value, nameof(wrapperName), wrapperName));
+                throw new KeyNotFoundException(string.Format(Resources.OriginalPropertyNotFound.Value, nameof(wrapperName), wrapperName));
             }
 
             return PropertySetters[wrapperName];
@@ -62,7 +77,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
         {
             if (!Fields.Keys.Contains(wrapperName))
             {
-                throw new KeyNotFoundException(string.Format(Resources.GetString("OriginalFieldNotFound").Value, nameof(wrapperName), wrapperName));
+                throw new KeyNotFoundException(string.Format(Resources.OriginalFieldNotFound.Value, nameof(wrapperName), wrapperName));
             }
 
             return Fields[wrapperName];
@@ -73,7 +88,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
             ConstructorInfo matchConstructor = Constructors.FirstOrDefault(x => parameters is null || x.Key.SequenceEqual(parameters)).Value;
             if (matchConstructor is null)
             {
-                throw new KeyNotFoundException(string.Format(Resources.GetString("OriginalConstructorNotFound").Value, nameof(parameters), parameters));
+                throw new KeyNotFoundException(string.Format(Resources.OriginalConstructorNotFound.Value, nameof(parameters), parameters));
             }
 
             return matchConstructor;
@@ -84,7 +99,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
             MethodInfo matchMethod = Methods.FirstOrDefault(x => x.Key.Item1 == wrapperName && (parameters is null || x.Key.Item2.SequenceEqual(parameters))).Value;
             if (matchMethod is null)
             {
-                throw new KeyNotFoundException(string.Format(Resources.GetString("OriginalMethodNotFound").Value, nameof(wrapperName), wrapperName, nameof(parameters), parameters));
+                throw new KeyNotFoundException(string.Format(Resources.OriginalMethodNotFound.Value, nameof(wrapperName), wrapperName, nameof(parameters), parameters));
             }
 
             return matchMethod;

@@ -20,7 +20,20 @@ namespace Automatic9045.AtsEx.Plugins
 {
     internal class PluginUsing
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(PluginUsing), "Core");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<PluginUsing>("Core");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> BadImageFormat { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> XmlSchemaValidation { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         protected static XmlSchemaSet SchemaSet = new XmlSchemaSet();
         protected static string TargetNamespace;
@@ -103,7 +116,7 @@ namespace Automatic9045.AtsEx.Plugins
                 int currentBveVersion = App.Instance.BveAssembly.GetName().Version.Major;
                 int otherBveVersion = currentBveVersion == 6 ? 5 : 6;
                 throw new BveFileLoadException(
-                    string.Format(Resources.GetString("BadImageFormat").Value, Path.GetDirectoryName(assemblyPath), otherBveVersion, App.Instance.ProductShortName, currentBveVersion),
+                    string.Format(Resources.BadImageFormat.Value, Path.GetDirectoryName(assemblyPath), otherBveVersion, App.Instance.ProductShortName, currentBveVersion),
                     Path.GetFileName(listPath), lineInfo.LineNumber, lineInfo.LinePosition);;
             }
         }
@@ -114,7 +127,7 @@ namespace Automatic9045.AtsEx.Plugins
             return ScriptPluginPackage.Load(Path.Combine(baseDirectory, packageManifestPath));
         }
 
-        private static void SchemaValidation(object sender, ValidationEventArgs e) => throw new FormatException(Resources.GetString("XmlSchemaValidation").Value, e.Exception);
+        private static void SchemaValidation(object sender, ValidationEventArgs e) => throw new FormatException(Resources.XmlSchemaValidation.Value, e.Exception);
 
         private static void DocumentValidation(object sender, ValidationEventArgs e) => throw e.Exception;
     }

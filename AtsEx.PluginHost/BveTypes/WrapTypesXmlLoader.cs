@@ -14,7 +14,20 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
     internal static class WrapTypesXmlLoader
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(WrapTypesXmlLoader), "PluginHost");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType(typeof(WrapTypesXmlLoader), "PluginHost");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> PropertyImplementationInvalid { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> XmlSchemaValidation { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         public static List<TypeMemberNameSetBase> LoadFile(Stream docStream, Stream schemaStream)
         {
@@ -111,7 +124,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 
                             if (getter is null && setter is null)
                             {
-                                throw new FormatException(string.Format(Resources.GetString("PropertyImplementationInvalid").Value, $"{typeWrapperName}.{wrapperName}"));
+                                throw new FormatException(string.Format(Resources.PropertyImplementationInvalid.Value, $"{typeWrapperName}.{wrapperName}"));
                             }
                         }
                     }
@@ -178,7 +191,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 
         static void SchemaValidation(object sender, ValidationEventArgs e)
         {
-            throw new FormatException(Resources.GetString("XmlSchemaValidation").Value, e.Exception);
+            throw new FormatException(Resources.XmlSchemaValidation.Value, e.Exception);
         }
 
         static void DocumentValidation(object sender, ValidationEventArgs e)

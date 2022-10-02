@@ -17,7 +17,19 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// </summary>
     public class StationList : MapObjectList
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<StationList>(@"PluginHost\ClassWrappers");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<StationList>(@"PluginHost\ClassWrappers");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> SameLocation { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
@@ -59,7 +71,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             if (Count > 0 && this[0].Location == item.Location)
             {
-                throw new NotSupportedException(Resources.GetString("SameLocation").Value);
+                throw new NotSupportedException(Resources.SameLocation.Value);
             }
 
             base.Add(item);
@@ -75,7 +87,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             if (Count > 0 && this[0].Location == item.Location)
             {
-                throw new NotSupportedException(Resources.GetString("SameLocation").Value);
+                throw new NotSupportedException(Resources.SameLocation.Value);
             }
             
             InsertMethod.Invoke(Src, new object[] { item.Src });

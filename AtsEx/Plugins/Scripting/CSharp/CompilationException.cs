@@ -16,12 +16,24 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
 {
     internal sealed class CompilationException : Exception
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<CompilationException>("Core");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<CompilationException>("Core");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> Message { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         public IEnumerable<Diagnostic> CompilationErrors { get; }
         public string SenderName { get; }
 
-        public CompilationException(string senderName, IEnumerable<Diagnostic> compilationErrors) : base(Resources.GetString("Message").Value)
+        public CompilationException(string senderName, IEnumerable<Diagnostic> compilationErrors) : base(Resources.Message.Value)
         {
             SenderName = senderName;
             CompilationErrors = compilationErrors;

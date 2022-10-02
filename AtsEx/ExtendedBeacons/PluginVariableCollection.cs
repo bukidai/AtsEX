@@ -12,7 +12,19 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
 {
     public sealed class PluginVariableCollection
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType<PluginVariableCollection>(@"Core\ExtendedBeacons");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<PluginVariableCollection>(@"Core\ExtendedBeacons");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> PluginIdentifierNotFound { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         private readonly IEnumerable<string> PluginIdentifiers;
         private readonly PluginType PluginType;
@@ -33,7 +45,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             {
                 if (!PluginIdentifiers.Contains(pluginIdentifier))
                 {
-                    throw new KeyNotFoundException(string.Format(Resources.GetString("PluginIdentifierNotFound").Value, PluginType.GetTypeString(), pluginIdentifier));
+                    throw new KeyNotFoundException(string.Format(Resources.PluginIdentifierNotFound.Value, PluginType.GetTypeString(), pluginIdentifier));
                 }
 
                 Variables[pluginIdentifier] = new SortedList<string, dynamic>();

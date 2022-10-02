@@ -20,7 +20,20 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <seealso cref="SortedList{TKey, TValue}"/>
     public class WrappedSortedList<TKey, TValueWrapper> : IDictionary<TKey, TValueWrapper>, IDictionary, IReadOnlyDictionary<TKey, TValueWrapper>
     {
-        private static readonly ResourceLocalizer Resources = ResourceLocalizer.FromResXOfType(typeof(WrappedSortedList<,>), @"PluginHost\ClassWrappers");
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType(typeof(WrappedSortedList<,>), @"PluginHost\ClassWrappers");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> CannotOmitParameter { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> TypeNotSupported { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly ResourceSet Resources = new ResourceSet();
 
         private static BveTypeSet BveTypes = null;
 
@@ -70,7 +83,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 #if DEBUG
             if (!typeof(TValueWrapper).IsSubclassOf(typeof(ClassWrapperBase)))
             {
-                throw new ArgumentException(string.Format(Resources.GetString("CannotOmitParameter").Value, nameof(TValueWrapper), nameof(ClassWrapperBase)));
+                throw new ArgumentException(string.Format(Resources.CannotOmitParameter.Value, nameof(TValueWrapper), nameof(ClassWrapperBase)));
             }
 #endif
         }
@@ -344,7 +357,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                         case EnumeratorType.DictionaryEnumerator:
                             return Entry;
                         default:
-                            throw new NotSupportedException(string.Format(Resources.GetString("TypeNotSupported").Value, nameof(Type), Type));
+                            throw new NotSupportedException(string.Format(Resources.TypeNotSupported.Value, nameof(Type), Type));
                     }
                 }
             }
