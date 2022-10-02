@@ -27,7 +27,7 @@ namespace UnembeddedResources
         /// <summary>
         /// リソースの一覧を取得します。
         /// </summary>
-        protected readonly SortedList<string, SortedList<CultureInfo, object>> Resources;
+        internal protected Dictionary<string, Dictionary<CultureInfo, object>> Resources { get; }
 
         /// <summary>
         /// 現在のカルチャを取得するデリケートを取得します。
@@ -50,9 +50,8 @@ namespace UnembeddedResources
 
             ResourceSet neutralResource = ResourceSet.FromResX(neutralResourcePath);
 
-            Dictionary<string, SortedList<CultureInfo, object>> _allResources = neutralResource.
-                ToDictionary(x => x.Key, x => new SortedList<CultureInfo, object>(new CultureComparer()) { { CultureInfo.InvariantCulture, x.Value } });
-            SortedList<string, SortedList<CultureInfo, object>> allResources = new SortedList<string, SortedList<CultureInfo, object>>(_allResources);
+            Dictionary<string, Dictionary<CultureInfo, object>> allResources = neutralResource.
+                ToDictionary(x => x.Key, x => new Dictionary<CultureInfo, object>() { { CultureInfo.InvariantCulture, x.Value } });
 
             string directoryName = Path.GetDirectoryName(neutralResourcePath);
             string neutralFileName = Path.GetFileNameWithoutExtension(neutralResourcePath);
@@ -155,7 +154,7 @@ namespace UnembeddedResources
         /// </summary>
         /// <param name="resources">リソースの一覧。</param>
         /// <param name="getCurrentCultureFunc">現在のカルチャを取得するデリゲート。</param>
-        protected ResourceLocalizer(SortedList<string, SortedList<CultureInfo, object>> resources, Func<CultureInfo> getCurrentCultureFunc)
+        protected ResourceLocalizer(Dictionary<string, Dictionary<CultureInfo, object>> resources, Func<CultureInfo> getCurrentCultureFunc)
         {
             Resources = resources;
             GetCurrentCultureFunc = getCurrentCultureFunc;
@@ -165,7 +164,7 @@ namespace UnembeddedResources
         /// リソースの一覧を指定して、<see cref="ResourceLocalizer"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
         /// <param name="resources">リソースの一覧。</param>
-        protected ResourceLocalizer(SortedList<string, SortedList<CultureInfo, object>> resources) : this(resources, DefaultGetCurrentCultureFunc)
+        protected ResourceLocalizer(Dictionary<string, Dictionary<CultureInfo, object>> resources) : this(resources, DefaultGetCurrentCultureFunc)
         {
         }
 
@@ -178,7 +177,7 @@ namespace UnembeddedResources
         /// <returns>指定されたキーに紐付けられたリソース。</returns>
         public Resource<T> Get<T>(string key)
         {
-            SortedList<CultureInfo, object> valueList = Resources[key];
+            Dictionary<CultureInfo, object> valueList = Resources[key];
             CultureInfo culture = ResolveCulture(GetCurrentCultureFunc(), valueList.Keys);
 
             return new Resource<T>(culture, (T)valueList[culture]);

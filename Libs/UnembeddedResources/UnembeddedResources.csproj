@@ -45,8 +45,10 @@
     <Compile Include="CultureComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.cs" />
+    <Compile Include="ResourceLoader.cs" />
     <Compile Include="ResourceLocalizer.cs" />
     <Compile Include="ResourceLocalizer.ResourceSet.cs" />
+    <Compile Include="ResourceStringHolderAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
