@@ -12,10 +12,5 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
         public EnumMemberSet(Type wrapperType, Type originalType) : base(wrapperType, originalType)
         {
         }
-
-        internal static EnumMemberSet FromTypeCollection(TypeInfo src)
-        {
-            return new EnumMemberSet(src.WrapperType, src.OriginalType);
-        }
     }
 }

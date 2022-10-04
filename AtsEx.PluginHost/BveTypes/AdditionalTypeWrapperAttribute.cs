@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
-    internal class EnumMemberNameSet : TypeMemberNameSetBase
+    internal class AdditionalTypeWrapperAttribute : Attribute
     {
-        public EnumMemberNameSet(string wrapperTypeName, string originalTypeName) : base(wrapperTypeName, originalTypeName)
+        public Type Original { get; }
+
+        public AdditionalTypeWrapperAttribute(Type original)
         {
+            Original = original;
         }
     }
 }

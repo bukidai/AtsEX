@@ -8,37 +8,37 @@
 	</Class>
 
 	<Class Wrapper="LoadingProgressForm" Original="dt">
-		<Field WrapperProperty="IsErrorCritical" Original="a" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="ErrorCount" IsWrapperPrivate="true" Original="b" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="Panel" IsWrapperPrivate="true" Original="e" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="ErrorListView" IsWrapperPrivate="true" Original="p" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="IsErrorCritical" Original="a" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="ErrorCount" IsWrapperNonPublic="true" Original="b" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="Panel" IsWrapperNonPublic="true" Original="e" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="ErrorListView" IsWrapperNonPublic="true" Original="p" IsOriginalNonPublic="true"/>
 
-		<Method Wrapper="ThrowError" WrapperParams="System.String, System.String, System.Int32, System.Int32" Original="a"/>
-		<Method Wrapper="ThrowError" WrapperParams="LoadError" Original="a"/>
-		<Method Wrapper="ThrowErrors" WrapperParams="System.Collections.Generic.IEnumerable`1[LoadError]" Original="a"/>
+		<Method Wrapper="ThrowError" WrapperParams="System.String; System.String; System.Int32; System.Int32" Original="a"/>
+		<Method Wrapper="ThrowError" WrapperParams="atsex:LoadError" Original="a"/>
+		<Method Wrapper="ThrowErrors" WrapperParams="System.Collections.Generic.IEnumerable`1[atsex:LoadError]" Original="a"/>
 	</Class>
 
 	<Class Wrapper="MainForm" Original="bz">
-		<Field WrapperProperty="ScenarioSelectForm" Original="c" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="LoadingProgressForm" Original="k" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="TimePosForm" Original="d" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="ChartForm" Original="e" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="ContextMenu" Original="y" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="CurrentScenarioInfo" Original="q" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="CurrentScenario" Original="n" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="ScenarioSelectForm" Original="c" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="LoadingProgressForm" Original="k" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="TimePosForm" Original="d" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="ChartForm" Original="e" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="ContextMenu" Original="y" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="CurrentScenarioInfo" Original="q" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="CurrentScenario" Original="n" IsOriginalNonPublic="true"/>
 		<Field WrapperProperty="Preferences" Original="w" IsOriginalStatic="true"/>
-		<Field WrapperProperty="KeyProvider" Original="m" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="KeyProvider" Original="m" IsOriginalNonPublic="true"/>
 
-		<Method Wrapper="LoadScenario" WrapperParams="ScenarioInfo, System.Boolean" Original="a" IsOriginalPrivate="true"/>
-		<Method Wrapper="UnloadScenario" WrapperParams="void" Original="b" IsOriginalPrivate="true"/>
+		<Method Wrapper="LoadScenario" WrapperParams="atsex:ScenarioInfo; System.Boolean" Original="a" IsOriginalNonPublic="true"/>
+		<Method Wrapper="UnloadScenario" WrapperParams="void" Original="b" IsOriginalNonPublic="true"/>
 	</Class>
 
 	<Class Wrapper="ScenarioSelectionForm" Original="da">
 	</Class>
 
 	<Class Wrapper="TimePosForm" Original="aj">
-		<Method Wrapper="SetScenario" WrapperParams="Scenario" Original="a"/>
-		<Method Wrapper="Draw" WrapperParams="void" Original="d" IsOriginalPrivate="true"/>
+		<Method Wrapper="SetScenario" WrapperParams="atsex:Scenario" Original="a"/>
+		<Method Wrapper="Draw" WrapperParams="void" Original="d" IsOriginalNonPublic="true"/>
 	</Class>
 	<!-- Forms END -->
 
@@ -64,6 +64,7 @@
 		<Property Wrapper="DisplayArea">
 			<Getter Original="g"/>
 		</Property>
+
 		<Method Wrapper="Draw" WrapperParams="void" Original="o"/>
 	</Class>
 
@@ -156,11 +157,11 @@
 			<Getter Original="c"/>
 			<Setter Original="c"/>
 		</Property>
-		<Property Wrapper="_ReverserPosition" IsWrapperPrivate="true">
+		<Property Wrapper="_ReverserPosition" IsWrapperNonPublic="true">
 			<Getter Original="b"/>
 			<Setter Original="a"/>
 		</Property>
-		<Property Wrapper="ConstantSpeed" IsWrapperPrivate="true">
+		<Property Wrapper="ConstantSpeed" IsWrapperNonPublic="true">
 			<Getter Original="g"/>
 			<Setter Original="d"/>
 		</Property>
@@ -218,6 +219,7 @@
 		<Property Wrapper="SpeedMeterPerSecond">
 			<Getter Original="g"/>
 		</Property>
+
 		<Method Wrapper="SetSpeed" WrapperParams="System.Double" Original="d"/>
 	</Class>
 
@@ -259,7 +261,7 @@
 			<Setter Original="a"/>
 		</Property>
 
-		<Method Wrapper="Draw" WrapperParams="Direct3DProvider, System.Boolean" Original="a"/>
+		<Method Wrapper="Draw" WrapperParams="atsex:Direct3DProvider; System.Boolean" Original="a"/>
 	</Class>
 
 	<Class Wrapper="NotchInfo" Original="e9">
@@ -301,9 +303,9 @@
 	</Class>
 
 	<Class Wrapper="ObjectDrawer" Original="cz">
-		<Field WrapperProperty="DrawDistanceManager" Original="g" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="DrawDistanceManager" Original="g" IsOriginalNonPublic="true"/>
 
-		<Method Wrapper="SetRoute" WrapperParams="Route" Original="a"/>
+		<Method Wrapper="SetRoute" WrapperParams="atsex:Route" Original="a"/>
 	</Class>
 
 	<Class Wrapper="PreTrainObjectList" Original="e6">
@@ -331,7 +333,7 @@
 	<Class Wrapper="RandomFileList" Original="dr">
 		<Property Wrapper="SelectedFile">
 			<Getter Original="a"/>
-			<Setter Original="a" IsOriginalPrivate="true"/>
+			<Setter Original="a" IsOriginalNonPublic="true"/>
 		</Property>
 	</Class>
 
@@ -377,9 +379,9 @@
 			<Getter Original="j"/>
 		</Property>
 
-		<Field WrapperProperty="Structures" Original="d" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="Structures" Original="d" IsOriginalNonPublic="true"/>
 
-		<Method Wrapper="GetTrackMatrix" WrapperParams="LocatableMapObject, System.Double, System.Double" Original="a"/>
+		<Method Wrapper="GetTrackMatrix" WrapperParams="atsex:LocatableMapObject; System.Double; System.Double" Original="a"/>
 	</Class>
 
 	<Class Wrapper="Scenario" Original="er">
@@ -405,9 +407,9 @@
 			<Getter Original="d"/>
 		</Property>
 
-		<Field WrapperProperty="ObjectDrawer" Original="j" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="ObjectDrawer" Original="j" IsOriginalNonPublic="true"/>
 
-		<Method Wrapper="InitializeTimeAndLocation" WrapperParams="System.Double, System.Int32" Original="a" IsOriginalPrivate="true"/>
+		<Method Wrapper="InitializeTimeAndLocation" WrapperParams="System.Double; System.Int32" Original="a" IsOriginalNonPublic="true"/>
 		<Method Wrapper="Initialize" WrapperParams="System.Int32" Original="a"/>
 	</Class>
 
@@ -479,7 +481,7 @@
 			<Getter Original="i"/>
 		</Property>
 
-		<Field WrapperProperty="SectionIndexesTrainOn" Original="k" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="SectionIndexesTrainOn" Original="k" IsOriginalNonPublic="true"/>
 	</Class>
 
 	<Class Wrapper="SingleStructureList" Original="bg">
@@ -491,15 +493,15 @@
 	<Class Wrapper="Station" Original="ef">
 		<Property Wrapper="Name">
 			<Getter Original="a"/>
-			<Setter Original="a" IsOriginalPrivate="true"/>
+			<Setter Original="a" IsOriginalNonPublic="true"/>
 		</Property>
 		<Property Wrapper="ArrivalTimeMilliseconds">
 			<Getter Original="g"/>
-			<Setter Original="c" IsOriginalPrivate="true"/>
+			<Setter Original="c" IsOriginalNonPublic="true"/>
 		</Property>
 		<Property Wrapper="DepertureTimeMilliseconds">
 			<Getter Original="m"/>
-			<Setter Original="b" IsOriginalPrivate="true"/>
+			<Setter Original="b" IsOriginalNonPublic="true"/>
 		</Property>
 		<Property Wrapper="DoorCloseTimeMilliseconds">
 			<Getter Original="n"/>
@@ -511,15 +513,15 @@
 		</Property>
 		<Property Wrapper="Pass">
 			<Getter Original="p"/>
-			<Setter Original="b" IsOriginalPrivate="true"/>
+			<Setter Original="b" IsOriginalNonPublic="true"/>
 		</Property>
 		<Property Wrapper="IsTerminal">
 			<Getter Original="l"/>
-			<Setter Original="a" IsOriginalPrivate="true"/>
+			<Setter Original="a" IsOriginalNonPublic="true"/>
 		</Property>
 		<Property Wrapper="StoppageTimeMilliseconds">
 			<Getter Original="c"/>
-			<Setter Original="a" IsOriginalPrivate="true"/>
+			<Setter Original="a" IsOriginalNonPublic="true"/>
 		</Property>
 		<Property Wrapper="DoorSide">
 			<Getter Original="o"/>
@@ -574,7 +576,7 @@
 	</Class>
 
 	<Class Wrapper="StationList" Original="dp">
-		<Method Wrapper="Insert" WrapperParams="Station" Original="a"/>
+		<Method Wrapper="Insert" WrapperParams="atsex:Station" Original="a"/>
 		<Method Wrapper="GetStandardTime" WrapperParams="System.Double" Original="a"/>
 	</Class>
 
@@ -605,7 +607,9 @@
 	</Class>
 
 	<Class Wrapper="TimeManager" Original="cn">
-		<Enum Wrapper="GameState" Original="a"/>
+		<Children>
+			<Enum Wrapper="GameState" Original="a"/>
+		</Children>
 
 		<Property Wrapper="State">
 			<Getter Original="g"/>
@@ -618,25 +622,25 @@
 	</Class>
 
 	<Class Wrapper="TimeTable" Original="aw">
-		<Field WrapperProperty="Model" Original="j" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="NameTexts" Original="b" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="ArrivalTimeTexts" Original="c" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="DepertureTimeTexts" Original="d" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="NameTextWidths" Original="e" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="ArrivalTimeTextWidths" Original="f" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="DepertureTimeTextWidths" Original="g" IsOriginalPrivate="true"/>
-		<Method Wrapper="Update" WrapperParams="void" Original="a" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="Model" Original="j" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="NameTexts" Original="b" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="ArrivalTimeTexts" Original="c" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="DepertureTimeTexts" Original="d" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="NameTextWidths" Original="e" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="ArrivalTimeTextWidths" Original="f" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="DepertureTimeTextWidths" Original="g" IsOriginalNonPublic="true"/>
+		<Method Wrapper="Update" WrapperParams="void" Original="a" IsOriginalNonPublic="true"/>
 	</Class>
 
 	<Class Wrapper="Train" Original="e4">
-		<Field WrapperProperty="UserVehicleLocationManager" Original="b" IsWrapperPrivate="true" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="Route" Original="c" IsWrapperPrivate="true" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="TrainInfo" Original="d" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="DrawDistanceManager" Original="e" IsWrapperPrivate="true" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="Location" Original="g" IsOriginalPrivate="true"/>
-		<Field WrapperProperty="Speed" Original="h" IsOriginalPrivate="true"/>
+		<Field WrapperProperty="UserVehicleLocationManager" Original="b" IsWrapperNonPublic="true" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="Route" Original="c" IsWrapperNonPublic="true" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="TrainInfo" Original="d" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="DrawDistanceManager" Original="e" IsWrapperNonPublic="true" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="Location" Original="g" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="Speed" Original="h" IsOriginalNonPublic="true"/>
 
-		<Method Wrapper="DrawCars" WrapperParams="Direct3DProvider, SlimDX.Matrix" Original="a"/>
+		<Method Wrapper="DrawCars" WrapperParams="atsex:Direct3DProvider; SlimDX.Matrix, SlimDX" Original="a"/>
 	</Class>
 
 	<Class Wrapper="TrainInfo" Original="fc">
@@ -657,7 +661,7 @@
 			<Getter Original="d"/>
 		</Property>
 
-		<Method Wrapper="SetLocation" WrapperParams="System.Double, System.Boolean" Original="a"/>
+		<Method Wrapper="SetLocation" WrapperParams="System.Double; System.Boolean" Original="a"/>
 	</Class>
 
 	<Class Wrapper="Vehicle" Original="f">

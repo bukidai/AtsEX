@@ -17,6 +17,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// </summary>
     /// <typeparam name="TWrapper">値のオリジナル型に対応するラッパー型。</typeparam>
     /// <seealso cref="SortedList{TKey, TValue}"/>
+    [AdditionalTypeWrapper(typeof(List<>))]
     public class WrappedList<TWrapper> : ClassWrapperBase, IList<TWrapper>, IReadOnlyList<TWrapper>, IList
     {
         private static BveTypeSet BveTypes = null;

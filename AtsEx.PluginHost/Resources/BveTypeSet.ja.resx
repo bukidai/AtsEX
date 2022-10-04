@@ -117,55 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CollectionTypeNotRecognized" xml:space="preserve">
-    <value>{0} の派生クラス {1} は認識されていません。</value>
-  </data>
-  <data name="FieldOriginalNotFound" xml:space="preserve">
-    <value>{0}フィールド '{1}' はラッパー型 '{2}' のオリジナル型 '{3}' に存在しません。</value>
-  </data>
-  <data name="FieldWrapperPropertyNotFound" xml:space="preserve">
-    <value>フィールドのラッパー{0}プロパティ '{1}' はラッパー型 '{2}' に存在しません。</value>
-  </data>
-  <data name="GenericWrapperTypeNotFound" xml:space="preserve">
-    <value>型名が '{0}'、型パラメータが {1} 個のジェネリック型は存在しません。</value>
-  </data>
-  <data name="Instance" xml:space="preserve">
-    <value>インスタンス</value>
-  </data>
-  <data name="InvalidPropertyTypeWrapper" xml:space="preserve">
-    <value>ラッパープロパティ '{0}' の型 '{1}' のオリジナル型が見つかりませんでした。</value>
-  </data>
-  <data name="MethodOriginalNotFound" xml:space="preserve">
-    <value>パラメータ '{0}' をもつ{1}メソッド '{2}' はラッパー型 '{3}' のオリジナル型 '{4}' に存在しません。</value>
-  </data>
-  <data name="MethodWrapperNotFound" xml:space="preserve">
-    <value>パラメータ '{0}' をもつ{1}メソッド '{2}' はラッパー型 '{3}' に存在しません。</value>
-  </data>
-  <data name="NonPublic" xml:space="preserve">
-    <value>パブリックでない</value>
-  </data>
-  <data name="OriginalTypeNotFound" xml:space="preserve">
-    <value>型 '{0}' のオリジナル型が見つかりませんでした。</value>
-  </data>
-  <data name="PropertyGetterOriginalNotFound" xml:space="preserve">
-    <value>{0}プロパティ get アクセサ '{1}' はラッパー型 '{2}' のオリジナル型 '{3}' に存在しません。</value>
-  </data>
-  <data name="PropertySetterOriginalNotFound" xml:space="preserve">
-    <value>{0}プロパティ set アクセサ '{1}' はラッパー型 '{2}' のオリジナル型 '{3}' に存在しません。</value>
-  </data>
-  <data name="PropertyWrapperNotFound" xml:space="preserve">
-    <value>{0}プロパティ '{1}' はラッパー型 '{2}' に存在しません。</value>
-  </data>
-  <data name="Public" xml:space="preserve">
-    <value>パブリック</value>
-  </data>
-  <data name="Static" xml:space="preserve">
-    <value>静的</value>
-  </data>
   <data name="TypeNotClassWrapper" xml:space="preserve">
     <value>型 '{0}' は {1} を継承していません。</value>
-  </data>
-  <data name="WrapperTypeNotFound" xml:space="preserve">
-    <value>型 '{0}' は存在しません。</value>
   </data>
 </root>

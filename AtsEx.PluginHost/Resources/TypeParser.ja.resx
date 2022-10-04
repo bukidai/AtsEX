@@ -117,7 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TypeNotClassWrapper" xml:space="preserve">
-    <value>The type '{0}' is not a subclass of {1}.</value>
+  <data name="IllegalCharacterDetectedInAlias" xml:space="preserve">
+    <value>半角英数字以外を使用することはできません。</value>
+  </data>
+  <data name="IllegalTypeDetected" xml:space="preserve">
+    <value>配列型か構築ジェネリック型が含まれています。</value>
+  </data>
+  <data name="TypeNotFound" xml:space="preserve">
+    <value>型 '{0}' が見つかりませんでした。</value>
   </data>
 </root>

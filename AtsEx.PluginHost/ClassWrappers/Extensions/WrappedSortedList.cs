@@ -18,6 +18,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <typeparam name="TKey">キーの型。</typeparam>
     /// <typeparam name="TValueWrapper">値のオリジナル型に対応するラッパー型。</typeparam>
     /// <seealso cref="SortedList{TKey, TValue}"/>
+    [AdditionalTypeWrapper(typeof(SortedList<,>))]
     public class WrappedSortedList<TKey, TValueWrapper> : IDictionary<TKey, TValueWrapper>, IDictionary, IReadOnlyDictionary<TKey, TValueWrapper>
     {
         private class ResourceSet

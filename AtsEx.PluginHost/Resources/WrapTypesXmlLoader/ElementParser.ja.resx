@@ -117,7 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TypeNotClassWrapper" xml:space="preserve">
-    <value>The type '{0}' is not a subclass of {1}.</value>
+  <data name="FieldWrapperPropertyNotFound" xml:space="preserve">
+    <value>フィールドのラッパー{0}プロパティ '{1}' はラッパー型 '{2}' に存在しません。</value>
+  </data>
+  <data name="Instance" xml:space="preserve">
+    <value>インスタンス</value>
+  </data>
+  <data name="NonPublic" xml:space="preserve">
+    <value>パブリックでない</value>
+  </data>
+  <data name="OriginalFieldNotFound" xml:space="preserve">
+    <value>{0}フィールド '{1}' はラッパー型 '{2}' のオリジナル型 '{3}' に存在しません。</value>
+  </data>
+  <data name="OriginalMethodNotFound" xml:space="preserve">
+    <value>パラメータ '{0}' をもつ{1}メソッド '{2}' はラッパー型 '{3}' のオリジナル型 '{4}' に存在しません。</value>
+  </data>
+  <data name="Public" xml:space="preserve">
+    <value>パブリック</value>
+  </data>
+  <data name="Static" xml:space="preserve">
+    <value>静的</value>
+  </data>
+  <data name="WrapperMethodNotFound" xml:space="preserve">
+    <value>パラメータ '{0}' をもつ{1}メソッド '{2}' はラッパー型 '{3}' に存在しません。</value>
+  </data>
+  <data name="WrapperPropertyNotFound" xml:space="preserve">
+    <value>{0}プロパティ '{1}' はラッパー型 '{2}' に存在しません。</value>
   </data>
 </root>

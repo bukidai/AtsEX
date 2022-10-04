@@ -117,7 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TypeNotClassWrapper" xml:space="preserve">
-    <value>The type '{0}' is not a subclass of {1}.</value>
+  <data name="IllegalCharacterDetectedInAlias" xml:space="preserve">
+    <value>Cannot use characters but half-width alphanumeric ones for the alias.</value>
+  </data>
+  <data name="IllegalTypeDetected" xml:space="preserve">
+    <value>Includes some array types or constructed generic types, which cannot be registered.</value>
+  </data>
+  <data name="TypeNotFound" xml:space="preserve">
+    <value>The type '{0}' is not found.</value>
   </data>
 </root>

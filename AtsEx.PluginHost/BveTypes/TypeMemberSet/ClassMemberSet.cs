@@ -28,15 +28,15 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 
         private static readonly ResourceSet Resources = new ResourceSet();
 
-        private protected SortedList<Type[], ConstructorInfo> Constructors { get; }
+        private readonly IReadOnlyDictionary<string, MethodInfo> PropertyGetters;
+        private readonly IReadOnlyDictionary<string, MethodInfo> PropertySetters;
+        private readonly IReadOnlyDictionary<string, FieldInfo> Fields;
+        private readonly IReadOnlyDictionary<Type[], ConstructorInfo> Constructors;
+        private readonly IReadOnlyDictionary<(string Name, Type[] Parameters), MethodInfo> Methods;
 
-        private protected SortedList<string, MethodInfo> PropertyGetters { get; }
-        private protected SortedList<string, MethodInfo> PropertySetters { get; }
-        private protected SortedList<string, FieldInfo> Fields { get; }
-        private protected SortedList<(string, Type[]), MethodInfo> Methods { get; }
-
-        internal ClassMemberSet(Type wrapperType, Type originalType, SortedList<Type[], ConstructorInfo> constructors,
-            SortedList<string, MethodInfo> propertyGetters, SortedList<string, MethodInfo> propertySetters, SortedList<string, FieldInfo> fields, SortedList<(string, Type[]), MethodInfo> methods)
+        internal ClassMemberSet(Type wrapperType, Type originalType,
+            IReadOnlyDictionary<string, MethodInfo> propertyGetters, IReadOnlyDictionary<string, MethodInfo> propertySetters, IReadOnlyDictionary<string, FieldInfo> fields,
+            IReadOnlyDictionary<Type[], ConstructorInfo> constructors, IReadOnlyDictionary<(string, Type[]), MethodInfo> methods)
             : base(wrapperType, originalType)
         {
             Constructors = constructors;
@@ -47,62 +47,43 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
             Methods = methods;
         }
 
-        internal static ClassMemberSet FromTypeCollection(TypeInfo src, SortedList<Type[], ConstructorInfo> constructors,
-            SortedList<string, MethodInfo> propertyGetters, SortedList<string, MethodInfo> propertySetters, SortedList<string, FieldInfo> fields, SortedList<(string, Type[]), MethodInfo> methods)
-        {
-            return new ClassMemberSet(src.WrapperType, src.OriginalType, constructors, propertyGetters, propertySetters, fields, methods);
-        }
-
         public MethodInfo GetSourcePropertyGetterOf(string wrapperName)
         {
-            if (!PropertyGetters.Keys.Contains(wrapperName))
-            {
-                throw new KeyNotFoundException(string.Format(Resources.OriginalPropertyNotFound.Value, nameof(wrapperName), wrapperName));
-            }
-
-            return PropertyGetters[wrapperName];
+            return PropertyGetters.TryGetValue(wrapperName, out MethodInfo method)
+                ? method
+                : throw new KeyNotFoundException(string.Format(Resources.OriginalPropertyNotFound.Value, nameof(wrapperName), wrapperName));
         }
 
         public MethodInfo GetSourcePropertySetterOf(string wrapperName)
         {
-            if (!PropertySetters.Keys.Contains(wrapperName))
-            {
-                throw new KeyNotFoundException(string.Format(Resources.OriginalPropertyNotFound.Value, nameof(wrapperName), wrapperName));
-            }
-
-            return PropertySetters[wrapperName];
+            return PropertySetters.TryGetValue(wrapperName, out MethodInfo method)
+                ? method
+                : throw new KeyNotFoundException(string.Format(Resources.OriginalPropertyNotFound.Value, nameof(wrapperName), wrapperName));
         }
 
         public FieldInfo GetSourceFieldOf(string wrapperName)
         {
-            if (!Fields.Keys.Contains(wrapperName))
-            {
-                throw new KeyNotFoundException(string.Format(Resources.OriginalFieldNotFound.Value, nameof(wrapperName), wrapperName));
-            }
-
-            return Fields[wrapperName];
+            return Fields.TryGetValue(wrapperName, out FieldInfo field)
+                ? field
+                : throw new KeyNotFoundException(string.Format(Resources.OriginalFieldNotFound.Value, nameof(wrapperName), wrapperName));
         }
 
         public ConstructorInfo GetSourceConstructor(Type[] parameters = null)
         {
             ConstructorInfo matchConstructor = Constructors.FirstOrDefault(x => parameters is null || x.Key.SequenceEqual(parameters)).Value;
-            if (matchConstructor is null)
-            {
-                throw new KeyNotFoundException(string.Format(Resources.OriginalConstructorNotFound.Value, nameof(parameters), parameters));
-            }
 
-            return matchConstructor;
+            return matchConstructor is null
+                ? throw new KeyNotFoundException(string.Format(Resources.OriginalConstructorNotFound.Value, nameof(parameters), parameters))
+                : matchConstructor;
         }
 
         public MethodInfo GetSourceMethodOf(string wrapperName, Type[] parameters = null)
         {
-            MethodInfo matchMethod = Methods.FirstOrDefault(x => x.Key.Item1 == wrapperName && (parameters is null || x.Key.Item2.SequenceEqual(parameters))).Value;
-            if (matchMethod is null)
-            {
-                throw new KeyNotFoundException(string.Format(Resources.OriginalMethodNotFound.Value, nameof(wrapperName), wrapperName, nameof(parameters), parameters));
-            }
+            MethodInfo matchMethod = Methods.FirstOrDefault(x => x.Key.Name == wrapperName && (parameters is null || x.Key.Parameters.SequenceEqual(parameters))).Value;
 
-            return matchMethod;
+            return matchMethod is null
+                ? throw new KeyNotFoundException(string.Format(Resources.OriginalMethodNotFound.Value, nameof(wrapperName), wrapperName, nameof(parameters), parameters))
+                : matchMethod;
         }
     }
 }

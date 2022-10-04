@@ -120,7 +120,4 @@
   <data name="PropertyImplementationInvalid" xml:space="preserve">
     <value>プロパティ '{0}' について、set / get いずれのアクセサも定義されていません。</value>
   </data>
-  <data name="XmlSchemaValidation" xml:space="preserve">
-    <value>BVE 型・メンバー名定義 XML のスキーマが不正なフォーマットです。</value>
-  </data>
 </root>
