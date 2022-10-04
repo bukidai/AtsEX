@@ -39,8 +39,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static VehicleInstrumentSet FromSource(object src) => src is null ? null : new VehicleInstrumentSet(src);
 
-        private static MethodInfo CabGetMethod;
-        private static MethodInfo CabSetMethod;
+        private static FastMethod CabGetMethod;
+        private static FastMethod CabSetMethod;
         /// <summary>
         /// 運転台のハンドルを表す <see cref="CabBase"/> を取得します。
         /// </summary>

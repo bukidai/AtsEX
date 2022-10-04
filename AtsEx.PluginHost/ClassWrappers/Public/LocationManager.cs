@@ -40,7 +40,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static LocationManager FromSource(object src) => src is null ? null : new LocationManager(src);
 
-        private static MethodInfo SpeedMeterPerSecondGetMethod;
+        private static FastMethod SpeedMeterPerSecondGetMethod;
         /// <summary>
         /// 車両の速度 [m/s] を取得します。
         /// </summary>
@@ -50,7 +50,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <seealso cref="SetSpeed(double)"/>
         public double SpeedMeterPerSecond => SpeedMeterPerSecondGetMethod.Invoke(Src, null);
 
-        private static MethodInfo SetSpeedMethod;
+        private static FastMethod SetSpeedMethod;
         /// <summary>
         /// 車両の速度を設定します。
         /// </summary>

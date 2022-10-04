@@ -39,8 +39,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        private static MethodInfo LocationGetMethod;
-        private static MethodInfo LocationSetMethod;
+        private static FastMethod LocationGetMethod;
+        private static FastMethod LocationSetMethod;
         /// <summary>
         /// 設置された距離程を取得・設定します。
         /// </summary>

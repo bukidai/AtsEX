@@ -61,8 +61,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static Route FromSource(object src) => src is null ? null : new Route(src);
 
-        private static MethodInfo DrawLimitLocationGetMethod;
-        private static MethodInfo DrawLimitLocationSetMethod;
+        private static FastMethod DrawLimitLocationGetMethod;
+        private static FastMethod DrawLimitLocationSetMethod;
         /// <summary>
         /// ストラクチャーが設置される限界の距離程 [m] を取得・設定します。通常は最後の駅の 10km 先の位置になります。
         /// </summary>
@@ -75,8 +75,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => DrawLimitLocationSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo StructuresGetMethod;
-        private static FieldInfo StructuresField;
+        private static FastMethod StructuresGetMethod;
+        private static FastField StructuresField;
         /// <summary>
         /// Structure マップ要素、Repeater マップ要素で設置されたストラクチャーを取得します。
         /// </summary>
@@ -92,25 +92,25 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => StructuresField.SetValue(Src, value.Src);
         }
 
-        private static MethodInfo StationsGetMethod;
+        private static FastMethod StationsGetMethod;
         /// <summary>
         /// 停車場のリストを取得します。
         /// </summary>
         public StationList Stations => StationList.FromSource(StationsGetMethod.Invoke(Src, null));
 
-        private static MethodInfo PreTrainObjectsGetMethod;
+        private static FastMethod PreTrainObjectsGetMethod;
         /// <summary>
         /// 先行列車の通過時刻のリストを取得します。
         /// </summary>
         public PreTrainObjectList PreTrainObjects => PreTrainObjectList.FromSource(PreTrainObjectsGetMethod.Invoke(Src, null));
 
-        private static MethodInfo SectionsGetMethod;
+        private static FastMethod SectionsGetMethod;
         /// <summary>
         /// 閉塞の一覧を取得します。
         /// </summary>
         public MapFunctionList Sections => MapFunctionList.FromSource(SectionsGetMethod.Invoke(Src, null));
 
-        private static MethodInfo SoundsGetMethod;
+        private static FastMethod SoundsGetMethod;
         /// <summary>
         /// Sound.Load ステートメントから読み込まれたサウンドのリストを取得します。
         /// </summary>
@@ -128,7 +128,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
         }
 
-        private static MethodInfo Sounds3DGetMethod;
+        private static FastMethod Sounds3DGetMethod;
         /// <summary>
         /// Sound3D.Load ステートメントから読み込まれたサウンドのリストを取得します。
         /// </summary>
@@ -146,7 +146,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
         }
 
-        private static MethodInfo StructureModelsGetMethod;
+        private static FastMethod StructureModelsGetMethod;
         /// <summary>
         /// Structure.Load ステートメントから読み込まれたストラクチャーの 3D モデルのリストを取得します。
         /// </summary>
@@ -164,13 +164,13 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
         }
 
-        private static MethodInfo DrawDistanceObjectsGetMethod;
+        private static FastMethod DrawDistanceObjectsGetMethod;
         /// <summary>
         /// DrawDistance.Change ステートメントにより設置された、最長描画距離を指定するためのオブジェクトを取得します。
         /// </summary>
         public MapFunctionList DrawDistanceObjects => MapFunctionList.FromSource(DrawDistanceObjectsGetMethod.Invoke(Src, null));
 
-        private static MethodInfo GetTrackMatrixMethod;
+        private static FastMethod GetTrackMatrixMethod;
         /// <summary>
         /// ストラクチャーを軌道上の指定した距離程へ配置するためのワールド変換行列を取得します。
         /// </summary>

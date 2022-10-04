@@ -54,8 +54,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static CarInfo FromSource(object src) => src is null ? null : new CarInfo(src);
 
-        private static MethodInfo WeightGetMethod;
-        private static MethodInfo WeightSetMethod;
+        private static FastMethod WeightGetMethod;
+        private static FastMethod WeightSetMethod;
         /// <summary>
         /// 1 両当たりの重量 [kg] を取得・設定します。
         /// </summary>
@@ -65,8 +65,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => WeightSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo CountGetMethod;
-        private static MethodInfo CountSetMethod;
+        private static FastMethod CountGetMethod;
+        private static FastMethod CountSetMethod;
         /// <summary>
         /// 両数を取得・設定します。
         /// </summary>
@@ -76,8 +76,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => CountSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo InertiaFactorGetMethod;
-        private static MethodInfo InertiaFactorSetMethod;
+        private static FastMethod InertiaFactorGetMethod;
+        private static FastMethod InertiaFactorSetMethod;
         /// <summary>
         /// 慣性係数を取得・設定します。
         /// </summary>
@@ -87,8 +87,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => InertiaFactorSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo ShoeFrictionAGetMethod;
-        private static MethodInfo ShoeFrictionASetMethod;
+        private static FastMethod ShoeFrictionAGetMethod;
+        private static FastMethod ShoeFrictionASetMethod;
         /// <summary>
         /// 制輪子摩擦係数式の係数 a を取得・設定します。
         /// </summary>
@@ -98,8 +98,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => ShoeFrictionASetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo ShoeFrictionBGetMethod;
-        private static MethodInfo ShoeFrictionBSetMethod;
+        private static FastMethod ShoeFrictionBGetMethod;
+        private static FastMethod ShoeFrictionBSetMethod;
         /// <summary>
         /// 制輪子摩擦係数式の係数 b を取得・設定します。
         /// </summary>
@@ -109,8 +109,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => ShoeFrictionBSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo ShoeFrictionCGetMethod;
-        private static MethodInfo ShoeFrictionCSetMethod;
+        private static FastMethod ShoeFrictionCGetMethod;
+        private static FastMethod ShoeFrictionCSetMethod;
         /// <summary>
         /// 制輪子摩擦係数式の係数 c を取得・設定します。
         /// </summary>

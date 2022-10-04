@@ -41,14 +41,14 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static Section FromSource(object src) => src is null ? null : new Section(src);
 
-        private static MethodInfo CurrentSignalIndexGetMethod;
+        private static FastMethod CurrentSignalIndexGetMethod;
         /// <summary>
         /// 現在の信号現示のインデックスを取得します。
         /// </summary>
         public int CurrentSignalIndex => CurrentSignalIndexGetMethod.Invoke(Src, null);
 
-        private static MethodInfo SignalIndexesGetMethod;
-        private static MethodInfo SignalIndexesSetMethod;
+        private static FastMethod SignalIndexesGetMethod;
+        private static FastMethod SignalIndexesSetMethod;
         /// <summary>
         /// 信号現示インデックスの一覧を取得・設定します。
         /// </summary>

@@ -50,7 +50,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static PutBetweenStructure FromSource(object src) => src is null ? null : new PutBetweenStructure(src);
 
-        private static ConstructorInfo Constructor;
+        private static FastConstructor Constructor;
         /// <summary>
         /// 距離程、設置位置の計算の基となる 2 軌道、モデル、変形方向を指定して <see cref="PutBetweenStructure"/> の新しいインスタンスを初期化します。
         /// </summary>
@@ -64,8 +64,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        private static MethodInfo ModelGetMethod;
-        private static MethodInfo ModelSetMethod;
+        private static FastMethod ModelGetMethod;
+        private static FastMethod ModelSetMethod;
         /// <summary>
         /// ストラクチャーの 3D モデルを表す <see cref="ClassWrappers.Model"/> を取得・設定します。
         /// </summary>
@@ -75,8 +75,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => ModelSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo TrackKey1GetMethod;
-        private static MethodInfo TrackKey1SetMethod;
+        private static FastMethod TrackKey1GetMethod;
+        private static FastMethod TrackKey1SetMethod;
         /// <summary>
         /// 一方の軌道の軌道名を取得・設定します。
         /// </summary>
@@ -86,8 +86,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => TrackKey1SetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo TrackKey2GetMethod;
-        private static MethodInfo TrackKey2SetMethod;
+        private static FastMethod TrackKey2GetMethod;
+        private static FastMethod TrackKey2SetMethod;
         /// <summary>
         /// 他方の軌道の軌道名を取得・設定します。
         /// </summary>
@@ -97,7 +97,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => TrackKey2SetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo TransformOnlyXGetMethod;
+        private static FastMethod TransformOnlyXGetMethod;
         /// <summary>
         /// X 方向のみに変形するかを取得・設定します。
         /// </summary>

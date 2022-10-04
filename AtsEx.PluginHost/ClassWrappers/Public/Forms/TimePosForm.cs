@@ -40,14 +40,14 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static TimePosForm FromSource(object src) => src is null ? null : new TimePosForm(src);
 
-        private static MethodInfo SetScenarioMethod;
+        private static FastMethod SetScenarioMethod;
         /// <summary>
         /// 指定したシナリオに基づいてダイヤグラムの表示を初期化します。
         /// </summary>
         /// <param name="scenario">シナリオを表す <see cref="Scenario"/>。</param>
         public void SetScenario(Scenario scenario) => SetScenarioMethod.Invoke(Src, new object[] { scenario.Src });
 
-        private static MethodInfo DrawMethod;
+        private static FastMethod DrawMethod;
         /// <summary>
         /// ダイヤグラムを描画します。
         /// </summary>

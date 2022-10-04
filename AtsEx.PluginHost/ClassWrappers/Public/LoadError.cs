@@ -50,7 +50,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static LoadError FromSource(object src) => src is null ? null : new LoadError(src);
 
-        private static ConstructorInfo Constructor;
+        private static FastConstructor Constructor;
         /// <summary>
         /// エラーの内容を指定して <see cref="LoadError"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
@@ -62,8 +62,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        private static MethodInfo TextGetMethod;
-        private static MethodInfo TextSetMethod;
+        private static FastMethod TextGetMethod;
+        private static FastMethod TextSetMethod;
         /// <summary>
         /// エラーの内容を表すテキストを取得します。
         /// </summary>
@@ -73,8 +73,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => TextSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo SenderFileNameGetMethod;
-        private static MethodInfo SenderFileNameSetMethod;
+        private static FastMethod SenderFileNameGetMethod;
+        private static FastMethod SenderFileNameSetMethod;
         /// <summary>
         /// エラーの発生元となるファイルのファイル名を取得します。
         /// </summary>
@@ -84,8 +84,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => SenderFileNameSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo LineIndexGetMethod;
-        private static MethodInfo LineIndexSetMethod;
+        private static FastMethod LineIndexGetMethod;
+        private static FastMethod LineIndexSetMethod;
         /// <summary>
         /// エラーの発生元となる行番号を取得します。
         /// </summary>
@@ -95,8 +95,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => LineIndexSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo CharIndexGetMethod;
-        private static MethodInfo CharIndexSetMethod;
+        private static FastMethod CharIndexGetMethod;
+        private static FastMethod CharIndexSetMethod;
         /// <summary>
         /// エラーの発生元となる列番号を取得します。
         /// </summary>

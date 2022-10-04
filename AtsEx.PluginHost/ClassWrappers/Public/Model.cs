@@ -46,8 +46,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static Model FromSource(object src) => src is null ? null : new Model(src);
 
-        private static MethodInfo MeshGetMethod;
-        private static MethodInfo MeshSetMethod;
+        private static FastMethod MeshGetMethod;
+        private static FastMethod MeshSetMethod;
         /// <summary>
         /// モデルを構成する <see cref="Mesh"/> を取得・設定します。
         /// </summary>
@@ -57,8 +57,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => MeshSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo MaterialsGetMethod;
-        private static MethodInfo MaterialsSetMethod;
+        private static FastMethod MaterialsGetMethod;
+        private static FastMethod MaterialsSetMethod;
         private static readonly Func<object, MaterialInfo[]> MaterialsParserToWrapper = src =>
         {
             Array srcArray = src as Array;
@@ -90,7 +90,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => MaterialsSetMethod.Invoke(Src, new object[] { MaterialsParserToSource(value) });
         }
 
-        private static MethodInfo DrawMethod;
+        private static FastMethod DrawMethod;
         /// <summary>
         /// モデルを描画します。
         /// </summary>

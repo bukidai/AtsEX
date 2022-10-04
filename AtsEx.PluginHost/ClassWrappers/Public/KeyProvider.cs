@@ -39,7 +39,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <returns>オリジナル オブジェクトをラップした <see cref="KeyProvider"/> クラスのインスタンス。</returns>
         public static KeyProvider FromSource(object src) => src is null ? null : new KeyProvider(src);
 
-        private static MethodInfo InputDevicesGetMethod;
+        private static FastMethod InputDevicesGetMethod;
         /// <summary>
         /// 読み込まれている入力デバイスプラグインを取得します。
         /// </summary>

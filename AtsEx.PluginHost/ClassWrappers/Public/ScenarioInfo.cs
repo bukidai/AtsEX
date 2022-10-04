@@ -79,7 +79,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static ScenarioInfo FromSource(object src) => src is null ? null : new ScenarioInfo(src);
 
-        private static MethodInfo FromFileMethod;
+        private static FastMethod FromFileMethod;
         /// <summary>
         /// 読み込むシナリオファイルを指定して <see cref="ScenarioInfo"/> クラスのインスタンスを生成します。
         /// </summary>
@@ -91,8 +91,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             return new ScenarioInfo(src);
         }
 
-        private static MethodInfo PathGetMethod;
-        private static MethodInfo PathSetMethod;
+        private static FastMethod PathGetMethod;
+        private static FastMethod PathSetMethod;
         /// <summary>
         /// シナリオファイルのパスを取得します。
         /// </summary>
@@ -102,8 +102,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => PathSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo FileNameGetMethod;
-        private static MethodInfo FileNameSetMethod;
+        private static FastMethod FileNameGetMethod;
+        private static FastMethod FileNameSetMethod;
         /// <summary>
         /// シナリオファイルのファイル名を取得します。
         /// </summary>
@@ -113,8 +113,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => FileNameSetMethod.Invoke(Src, new object[] { value } );
         }
 
-        private static MethodInfo DirectoryNameGetMethod;
-        private static MethodInfo DirectoryNameSetMethod;
+        private static FastMethod DirectoryNameGetMethod;
+        private static FastMethod DirectoryNameSetMethod;
         /// <summary>
         /// シナリオファイルのディレクトリ情報を取得します。
         /// </summary>
@@ -124,8 +124,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => DirectoryNameSetMethod.Invoke(Src, new object[] { value } );
         }
 
-        private static MethodInfo TitleGetMethod;
-        private static MethodInfo TitleSetMethod;
+        private static FastMethod TitleGetMethod;
+        private static FastMethod TitleSetMethod;
         /// <summary>
         /// シナリオのタイトルを取得します。
         /// </summary>
@@ -135,8 +135,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => TitleSetMethod.Invoke(Src, new object[] { value } );
         }
 
-        private static MethodInfo ImagePathGetMethod;
-        private static MethodInfo ImagePathSetMethod;
+        private static FastMethod ImagePathGetMethod;
+        private static FastMethod ImagePathSetMethod;
         /// <summary>
         /// シナリオのサムネイル画像のパスを取得します。
         /// </summary>
@@ -146,8 +146,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => ImagePathSetMethod.Invoke(Src, new object[] { value } );
         }
 
-        private static MethodInfo AuthorGetMethod;
-        private static MethodInfo AuthorSetMethod;
+        private static FastMethod AuthorGetMethod;
+        private static FastMethod AuthorSetMethod;
         /// <summary>
         /// シナリオの作者を取得します。
         /// </summary>
@@ -157,8 +157,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => AuthorSetMethod.Invoke(Src, new object[] { value } );
         }
 
-        private static MethodInfo CommentGetMethod;
-        private static MethodInfo CommentSetMethod;
+        private static FastMethod CommentGetMethod;
+        private static FastMethod CommentSetMethod;
         /// <summary>
         /// シナリオの説明を取得します。
         /// </summary>
@@ -168,8 +168,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => CommentSetMethod.Invoke(Src, new object[] { value } );
         }
 
-        private static MethodInfo RouteFilesGetMethod;
-        private static MethodInfo RouteFilesSetMethod;
+        private static FastMethod RouteFilesGetMethod;
+        private static FastMethod RouteFilesSetMethod;
         /// <summary>
         /// 選択されうるマップファイルのリストを取得します。
         /// </summary>
@@ -179,8 +179,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => RouteFilesSetMethod.Invoke(Src, new object[] { value.Src } );
         }
 
-        private static MethodInfo VehicleFilesGetMethod;
-        private static MethodInfo VehicleFilesSetMethod;
+        private static FastMethod VehicleFilesGetMethod;
+        private static FastMethod VehicleFilesSetMethod;
         /// <summary>
         /// 選択されうる車両ファイルのリストを取得します。
         /// </summary>
@@ -190,8 +190,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => VehicleFilesSetMethod.Invoke(Src, new object[] { value.Src } );
         }
 
-        private static MethodInfo RouteTitleGetMethod;
-        private static MethodInfo RouteTitleSetMethod;
+        private static FastMethod RouteTitleGetMethod;
+        private static FastMethod RouteTitleSetMethod;
         /// <summary>
         /// 路線名を取得します。
         /// </summary>
@@ -201,8 +201,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => RouteTitleSetMethod.Invoke(Src, new object[] { value } );
         }
 
-        private static MethodInfo VehicleTitleGetMethod;
-        private static MethodInfo VehicleTitleSetMethod;
+        private static FastMethod VehicleTitleGetMethod;
+        private static FastMethod VehicleTitleSetMethod;
         /// <summary>
         /// 車両名を取得します。
         /// </summary>
@@ -212,8 +212,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => VehicleTitleSetMethod.Invoke(Src, new object[] { value } );
         }
 
-        private static MethodInfo ScenarioFileLoadErrorsGetMethod;
-        private static MethodInfo ScenarioFileLoadErrorsSetMethod;
+        private static FastMethod ScenarioFileLoadErrorsGetMethod;
+        private static FastMethod ScenarioFileLoadErrorsSetMethod;
         /// <summary>
         /// シナリオファイルの読込時に発生した、継続不能となる深刻なエラーを取得します。
         /// </summary>

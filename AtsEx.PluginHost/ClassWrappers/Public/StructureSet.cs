@@ -48,8 +48,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static StructureSet FromSource(object src) => src is null ? null : new StructureSet(src);
 
-        private static MethodInfo DrawLimitLocationGetMethod;
-        private static MethodInfo DrawLimitLocationSetMethod;
+        private static FastMethod DrawLimitLocationGetMethod;
+        private static FastMethod DrawLimitLocationSetMethod;
         /// <summary>
         /// ストラクチャーが設置される限界の距離程 [m] を取得・設定します。通常は最後の駅の 10km 先の位置になります。
         /// </summary>
@@ -62,7 +62,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => DrawLimitLocationSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo RepeatedGetMethod;
+        private static FastMethod RepeatedGetMethod;
         /// <summary>
         /// Repeater マップ要素で設置されたストラクチャーを取得します。
         /// </summary>
@@ -76,19 +76,19 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
         }
 
-        private static MethodInfo PutGetMethod;
+        private static FastMethod PutGetMethod;
         /// <summary>
         /// Structure[].Put ステートメント、Structure[].Put0 ステートメントで設置されたストラクチャーを取得します。
         /// </summary>
         public SingleStructureList Put => SingleStructureList.FromSource(PutGetMethod.Invoke(Src, null));
 
-        private static MethodInfo PutBetweenGetMethod;
+        private static FastMethod PutBetweenGetMethod;
         /// <summary>
         /// Structure[].PutBetween ステートメントで設置されたストラクチャーを取得します。
         /// </summary>
         public SingleStructureList PutBetween => SingleStructureList.FromSource(PutBetweenGetMethod.Invoke(Src, null));
 
-        private static MethodInfo SignalsGetMethod;
+        private static FastMethod SignalsGetMethod;
         /// <summary>
         /// Signal[].Put ステートメントで設置された信号ストラクチャーを取得します。
         /// </summary>

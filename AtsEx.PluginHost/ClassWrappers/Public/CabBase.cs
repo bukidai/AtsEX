@@ -38,7 +38,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static CabBase FromSource(object src) => src is null ? null : new CabBase(src);
 
-        private static MethodInfo HandlesGetMethod;
+        private static FastMethod HandlesGetMethod;
         /// <summary>
         /// 操作可能なハンドルのセットを表す <see cref="HandleSet"/> を取得します。
         /// </summary>

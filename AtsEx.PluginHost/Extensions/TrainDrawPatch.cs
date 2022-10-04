@@ -20,7 +20,7 @@ namespace Automatic9045.AtsEx.PluginHost.Extensions
     /// </summary>
     public sealed class TrainDrawPatch : IDisposable
     {
-        private static MethodInfo DrawCarsMethod;
+        private static FastMethod DrawCarsMethod;
 
         private readonly Train Target;
         private readonly HarmonyPatch HarmonyPatch;
@@ -36,7 +36,7 @@ namespace Automatic9045.AtsEx.PluginHost.Extensions
         {
             Target = target;
 
-            HarmonyPatch = HarmonyPatch.Patch(DrawCarsMethod);
+            HarmonyPatch = HarmonyPatch.Patch(DrawCarsMethod.Source);
             HarmonyPatch.Prefix += Prefix;
 
 

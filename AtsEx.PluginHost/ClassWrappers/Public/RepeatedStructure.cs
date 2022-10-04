@@ -42,7 +42,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static new RepeatedStructure FromSource(object src) => src is null ? null : new RepeatedStructure(src);
 
-        private static ConstructorInfo Constructor1;
+        private static FastConstructor Constructor1;
         private RepeatedStructure(double location, string trackKey, double x, double y, double z, double dx, double dy, double dz, int tilt, double span, double interval, WrappedList<Model> models)
             : this(Constructor1.Invoke(new object[] { location, trackKey, x, y, z, dx, dy, dz, tilt, span, interval, models }))
         {
@@ -68,7 +68,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        private static ConstructorInfo Constructor2;
+        private static FastConstructor Constructor2;
         private RepeatedStructure(double location, string trackKey, int tilt, double span, double interval, WrappedList<Model> models)
             : this(Constructor2.Invoke(new object[] { location, trackKey, tilt, span, interval, models }))
         {
@@ -88,8 +88,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        private static MethodInfo ModelsGetMethod;
-        private static MethodInfo ModelsSetMethod;
+        private static FastMethod ModelsGetMethod;
+        private static FastMethod ModelsSetMethod;
         /// <summary>
         /// ストラクチャーの 3D モデルを表す <see cref="Model"/> のリストを取得・設定します。
         /// </summary>
@@ -99,8 +99,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => ModelsSetMethod.Invoke(Src, new object[] { value.Src });
         }
 
-        private static MethodInfo IntervalGetMethod;
-        private static MethodInfo IntervalSetMethod;
+        private static FastMethod IntervalGetMethod;
+        private static FastMethod IntervalSetMethod;
         /// <summary>
         /// 設置間隔 [m] を取得・設定します。
         /// </summary>

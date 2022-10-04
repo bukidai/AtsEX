@@ -29,11 +29,11 @@ namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
 
             ClassMemberSet scenarioMembers = bveTypes.GetClassInfoOf<Scenario>();
 
-            MethodInfo initializeTimeAndLocationMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.InitializeTimeAndLocation));
-            MethodInfo initializeMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.Initialize));
+            FastMethod initializeTimeAndLocationMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.InitializeTimeAndLocation));
+            FastMethod initializeMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.Initialize));
 
-            InitializeTimeAndLocationMethodPatch = CreateAndSetupPatch(initializeTimeAndLocationMethod);
-            InitializeMethodPatch = CreateAndSetupPatch(initializeMethod);
+            InitializeTimeAndLocationMethodPatch = CreateAndSetupPatch(initializeTimeAndLocationMethod.Source);
+            InitializeMethodPatch = CreateAndSetupPatch(initializeMethod.Source);
 
 
             HarmonyPatch CreateAndSetupPatch(MethodBase original)

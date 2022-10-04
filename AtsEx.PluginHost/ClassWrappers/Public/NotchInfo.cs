@@ -62,8 +62,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static NotchInfo FromSource(object src) => src is null ? null : new NotchInfo(src);
 
-        private static MethodInfo PowerNotchCountGetMethod;
-        private static MethodInfo PowerNotchCountSetMethod;
+        private static FastMethod PowerNotchCountGetMethod;
+        private static FastMethod PowerNotchCountSetMethod;
         /// <summary>
         /// 力行ノッチ数を取得します。
         /// </summary>
@@ -73,8 +73,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => PowerNotchCountSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo HoldingSpeedNotchCountGetMethod;
-        private static MethodInfo HoldingSpeedNotchCountSetMethod;
+        private static FastMethod HoldingSpeedNotchCountGetMethod;
+        private static FastMethod HoldingSpeedNotchCountSetMethod;
         /// <summary>
         /// 抑速ノッチ数を取得します。
         /// </summary>
@@ -84,8 +84,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => HoldingSpeedNotchCountSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo BrakeNotchCountGetMethod;
-        private static MethodInfo BrakeNotchCountSetMethod;
+        private static FastMethod BrakeNotchCountGetMethod;
+        private static FastMethod BrakeNotchCountSetMethod;
         /// <summary>
         /// ブレーキノッチ数を取得します。
         /// </summary>
@@ -95,8 +95,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => BrakeNotchCountSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo B67NotchGetMethod;
-        private static MethodInfo B67NotchSetMethod;
+        private static FastMethod B67NotchGetMethod;
+        private static FastMethod B67NotchSetMethod;
         /// <summary>
         /// ブレーキ弁 67 度に相当するノッチを取得します。
         /// </summary>
@@ -106,8 +106,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => B67NotchSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo AtsCancelNotchGetMethod;
-        private static MethodInfo AtsCancelNotchSetMethod;
+        private static FastMethod AtsCancelNotchGetMethod;
+        private static FastMethod AtsCancelNotchSetMethod;
         /// <summary>
         /// ATS 確認扱いで必要な最小ブレーキノッチを取得します。
         /// </summary>
@@ -117,8 +117,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => AtsCancelNotchSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo MotorBrakeNotchGetMethod;
-        private static MethodInfo MotorBrakeNotchSetMethod;
+        private static FastMethod MotorBrakeNotchGetMethod;
+        private static FastMethod MotorBrakeNotchSetMethod;
         /// <summary>
         /// 電気ブレーキが立ち上がる最小ブレーキノッチを取得します。
         /// </summary>
@@ -128,8 +128,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => MotorBrakeNotchSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo HasHoldingSpeedBrakeGetMethod;
-        private static MethodInfo HasHoldingSpeedBrakeSetMethod;
+        private static FastMethod HasHoldingSpeedBrakeGetMethod;
+        private static FastMethod HasHoldingSpeedBrakeSetMethod;
         /// <summary>
         /// ブレーキノッチ 1 段目が抑速ブレーキかどうかを取得します。
         /// </summary>
@@ -139,14 +139,14 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => HasHoldingSpeedBrakeSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo EmergencyBrakeNotchGetMethod;
+        private static FastMethod EmergencyBrakeNotchGetMethod;
         /// <summary>
         /// 電気ブレーキが立ち上がる最小ブレーキノッチを取得します。
         /// </summary>
         public int EmergencyBrakeNotch => EmergencyBrakeNotchGetMethod.Invoke(Src, null);
 
-        private static MethodInfo PrioritizeBrakeGetMethod;
-        private static MethodInfo PrioritizeBrakeSetMethod;
+        private static FastMethod PrioritizeBrakeGetMethod;
+        private static FastMethod PrioritizeBrakeSetMethod;
         /// <summary>
         /// 力行指令よりも電気ブレーキ指令を優先するかどうかを取得します。
         /// </summary>

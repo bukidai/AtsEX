@@ -28,15 +28,15 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 
         private static readonly ResourceSet Resources = new ResourceSet();
 
-        private readonly IReadOnlyDictionary<string, MethodInfo> PropertyGetters;
-        private readonly IReadOnlyDictionary<string, MethodInfo> PropertySetters;
-        private readonly IReadOnlyDictionary<string, FieldInfo> Fields;
-        private readonly IReadOnlyDictionary<Type[], ConstructorInfo> Constructors;
-        private readonly IReadOnlyDictionary<(string Name, Type[] Parameters), MethodInfo> Methods;
+        private readonly IReadOnlyDictionary<string, FastMethod> PropertyGetters;
+        private readonly IReadOnlyDictionary<string, FastMethod> PropertySetters;
+        private readonly IReadOnlyDictionary<string, FastField> Fields;
+        private readonly IReadOnlyDictionary<Type[], FastConstructor> Constructors;
+        private readonly IReadOnlyDictionary<(string Name, Type[] Parameters), FastMethod> Methods;
 
         internal ClassMemberSet(Type wrapperType, Type originalType,
-            IReadOnlyDictionary<string, MethodInfo> propertyGetters, IReadOnlyDictionary<string, MethodInfo> propertySetters, IReadOnlyDictionary<string, FieldInfo> fields,
-            IReadOnlyDictionary<Type[], ConstructorInfo> constructors, IReadOnlyDictionary<(string, Type[]), MethodInfo> methods)
+            IReadOnlyDictionary<string, FastMethod> propertyGetters, IReadOnlyDictionary<string, FastMethod> propertySetters, IReadOnlyDictionary<string, FastField> fields,
+            IReadOnlyDictionary<Type[], FastConstructor> constructors, IReadOnlyDictionary<(string, Type[]), FastMethod> methods)
             : base(wrapperType, originalType)
         {
             Constructors = constructors;
@@ -47,39 +47,39 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
             Methods = methods;
         }
 
-        public MethodInfo GetSourcePropertyGetterOf(string wrapperName)
+        public FastMethod GetSourcePropertyGetterOf(string wrapperName)
         {
-            return PropertyGetters.TryGetValue(wrapperName, out MethodInfo method)
+            return PropertyGetters.TryGetValue(wrapperName, out FastMethod method)
                 ? method
                 : throw new KeyNotFoundException(string.Format(Resources.OriginalPropertyNotFound.Value, nameof(wrapperName), wrapperName));
         }
 
-        public MethodInfo GetSourcePropertySetterOf(string wrapperName)
+        public FastMethod GetSourcePropertySetterOf(string wrapperName)
         {
-            return PropertySetters.TryGetValue(wrapperName, out MethodInfo method)
+            return PropertySetters.TryGetValue(wrapperName, out FastMethod method)
                 ? method
                 : throw new KeyNotFoundException(string.Format(Resources.OriginalPropertyNotFound.Value, nameof(wrapperName), wrapperName));
         }
 
-        public FieldInfo GetSourceFieldOf(string wrapperName)
+        public FastField GetSourceFieldOf(string wrapperName)
         {
-            return Fields.TryGetValue(wrapperName, out FieldInfo field)
+            return Fields.TryGetValue(wrapperName, out FastField field)
                 ? field
                 : throw new KeyNotFoundException(string.Format(Resources.OriginalFieldNotFound.Value, nameof(wrapperName), wrapperName));
         }
 
-        public ConstructorInfo GetSourceConstructor(Type[] parameters = null)
+        public FastConstructor GetSourceConstructor(Type[] parameters = null)
         {
-            ConstructorInfo matchConstructor = Constructors.FirstOrDefault(x => parameters is null || x.Key.SequenceEqual(parameters)).Value;
+            FastConstructor matchConstructor = Constructors.FirstOrDefault(x => parameters is null || x.Key.SequenceEqual(parameters)).Value;
 
             return matchConstructor is null
                 ? throw new KeyNotFoundException(string.Format(Resources.OriginalConstructorNotFound.Value, nameof(parameters), parameters))
                 : matchConstructor;
         }
 
-        public MethodInfo GetSourceMethodOf(string wrapperName, Type[] parameters = null)
+        public FastMethod GetSourceMethodOf(string wrapperName, Type[] parameters = null)
         {
-            MethodInfo matchMethod = Methods.FirstOrDefault(x => x.Key.Name == wrapperName && (parameters is null || x.Key.Parameters.SequenceEqual(parameters))).Value;
+            FastMethod matchMethod = Methods.FirstOrDefault(x => x.Key.Name == wrapperName && (parameters is null || x.Key.Parameters.SequenceEqual(parameters))).Value;
 
             return matchMethod is null
                 ? throw new KeyNotFoundException(string.Format(Resources.OriginalMethodNotFound.Value, nameof(wrapperName), wrapperName, nameof(parameters), parameters))

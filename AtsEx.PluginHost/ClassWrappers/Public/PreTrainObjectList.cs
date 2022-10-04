@@ -39,7 +39,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static new PreTrainObjectList FromSource(object src) => src is null ? null : new PreTrainObjectList((IList)src);
 
-        private static MethodInfo GetPreTrainLocationMethod;
+        private static FastMethod GetPreTrainLocationMethod;
         /// <summary>
         /// 指定した時刻における先行列車の位置 [m] を取得します。
         /// </summary>

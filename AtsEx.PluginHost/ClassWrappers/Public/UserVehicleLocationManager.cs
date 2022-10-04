@@ -42,7 +42,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static new UserVehicleLocationManager FromSource(object src) => src is null ? null : new UserVehicleLocationManager(src);
 
-        private static MethodInfo LocationGetMethod;
+        private static FastMethod LocationGetMethod;
         /// <summary>
         /// 自車両の位置を取得します。
         /// </summary>
@@ -52,7 +52,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <seealso cref="SetLocation(double, bool)"/>
         public double Location => LocationGetMethod.Invoke(Src, null);
 
-        private static MethodInfo BlockIndexGetMethod;
+        private static FastMethod BlockIndexGetMethod;
         /// <summary>
         /// 現在の自車両の位置が含まれるストラクチャー描画ブロックのインデックスを取得します。
         /// </summary>
@@ -62,7 +62,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </remarks>
         public double BlockIndex => BlockIndexGetMethod.Invoke(Src, null);
 
-        private static MethodInfo SetLocationMethod;
+        private static FastMethod SetLocationMethod;
         /// <summary>
         /// 自車両の位置を設定します。
         /// </summary>

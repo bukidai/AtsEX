@@ -46,7 +46,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static DrawDistanceManager FromSource(object src) => src is null ? null : new DrawDistanceManager(src);
 
-        private static MethodInfo FrontDrawDistanceGetMethod;
+        private static FastMethod FrontDrawDistanceGetMethod;
         /// <summary>
         /// 前方の描画距離 [m] を取得します。
         /// </summary>
@@ -55,7 +55,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </remarks>
         public double FrontDrawDistance => FrontDrawDistanceGetMethod.Invoke(Src, null);
 
-        private static MethodInfo BackDrawDistanceGetMethod;
+        private static FastMethod BackDrawDistanceGetMethod;
         /// <summary>
         /// 後方の描画距離 [m] を取得します。
         /// </summary>
@@ -64,13 +64,13 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </remarks>
         public double BackDrawDistance => BackDrawDistanceGetMethod.Invoke(Src, null);
 
-        private static MethodInfo DrawDistanceGetMethod;
+        private static FastMethod DrawDistanceGetMethod;
         /// <summary>
         /// マップファイル内での最長描画距離指定とユーザー設定から算出された描画距離 [m] を取得します。
         /// </summary>
         public double DrawDistance => DrawDistanceGetMethod.Invoke(Src, null);
 
-        private static MethodInfo DrawDistanceObjectsGetMethod;
+        private static FastMethod DrawDistanceObjectsGetMethod;
         /// <summary>
         /// マップファイルで DrawDistance.Change ステートメントにより設置された、最長描画距離を指定するためのオブジェクトを取得します。
         /// </summary>

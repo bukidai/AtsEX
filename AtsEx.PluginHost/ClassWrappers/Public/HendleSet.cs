@@ -52,8 +52,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static HandleSet FromSource(object src) => src is null ? null : new HandleSet(src);
 
-        private static MethodInfo NotchInfoGetMethod;
-        private static MethodInfo NotchInfoSetMethod;
+        private static FastMethod NotchInfoGetMethod;
+        private static FastMethod NotchInfoSetMethod;
         /// <summary>
         /// ノッチの情報を表す <see cref="ClassWrappers.NotchInfo"/> を取得します。
         /// </summary>
@@ -63,8 +63,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             internal set => NotchInfoSetMethod.Invoke(Src, new object[] { value.Src });
         }
 
-        private static MethodInfo BrakeNotchGetMethod;
-        private static MethodInfo BrakeNotchSetMethod;
+        private static FastMethod BrakeNotchGetMethod;
+        private static FastMethod BrakeNotchSetMethod;
         /// <summary>
         /// ブレーキノッチを取得・設定します。
         /// </summary>
@@ -74,8 +74,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => BrakeNotchSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo PowerNotchGetMethod;
-        private static MethodInfo PowerNotchSetMethod;
+        private static FastMethod PowerNotchGetMethod;
+        private static FastMethod PowerNotchSetMethod;
         /// <summary>
         /// 力行ノッチを取得・設定します。
         /// </summary>
@@ -85,8 +85,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => PowerNotchSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo ReverserPositionGetMethod;
-        private static MethodInfo ReverserPositionSetMethod;
+        private static FastMethod ReverserPositionGetMethod;
+        private static FastMethod ReverserPositionSetMethod;
 #pragma warning disable IDE1006 // 命名スタイル
         private int _ReverserPosition
 #pragma warning restore IDE1006 // 命名スタイル
@@ -104,8 +104,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => _ReverserPosition = (int)value;
         }
 
-        private static MethodInfo ConstantSpeedGetMethod;
-        private static MethodInfo ConstantSpeedSetMethod;
+        private static FastMethod ConstantSpeedGetMethod;
+        private static FastMethod ConstantSpeedSetMethod;
         private int ConstantSpeed
         {
             get => ConstantSpeedGetMethod.Invoke(Src, null);

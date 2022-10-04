@@ -54,32 +54,32 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static MainForm FromSource(object src) => src is null ? null : new MainForm(src);
 
-        private static FieldInfo ScenarioSelectFormField;
+        private static FastField ScenarioSelectFormField;
         /// <summary>
         /// 「シナリオの選択」フォームを取得します。
         /// </summary>
         public ScenarioSelectionForm ScenarioSelectForm => ClassWrappers.ScenarioSelectionForm.FromSource(ScenarioSelectFormField.GetValue(Src));
 
-        private static FieldInfo LoadingProgressFormField;
+        private static FastField LoadingProgressFormField;
         /// <summary>
         /// 「シナリオを読み込んでいます...」フォームを取得します。
         /// </summary>
         public LoadingProgressForm LoadingProgressForm => ClassWrappers.LoadingProgressForm.FromSource(LoadingProgressFormField.GetValue(Src));
 
-        private static FieldInfo TimePosFormField;
+        private static FastField TimePosFormField;
         /// <summary>
         /// 「時刻と位置」フォームを取得します。
         /// </summary>
         public TimePosForm TimePosForm => ClassWrappers.TimePosForm.FromSource(TimePosFormField.GetValue(Src));
 
-        private static FieldInfo ChartFormField;
+        private static FastField ChartFormField;
         /// <summary>
         /// 「車両物理量」フォームを取得します。
         /// </summary>
         public ChartForm ChartForm => ClassWrappers.ChartForm.FromSource(ChartFormField.GetValue(Src));
 
 
-        private static FieldInfo ContextMenuField;
+        private static FastField ContextMenuField;
         /// <summary>
         /// 右クリックで表示されるショートカット メニューを取得・設定します。
         /// </summary>
@@ -93,7 +93,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
 
-        private static FieldInfo CurrentScenarioInfoField;
+        private static FastField CurrentScenarioInfoField;
         /// <summary>
         /// 現在のシナリオの <see cref="ScenarioInfo"/> を取得・設定します。
         /// </summary>
@@ -103,7 +103,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => CurrentScenarioInfoField.SetValue(Src, value.Src);
         }
 
-        private static FieldInfo CurrentScenarioField;
+        private static FastField CurrentScenarioField;
         /// <summary>
         /// 現在のシナリオのインスタンスを取得・設定します。
         /// </summary>
@@ -113,7 +113,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => CurrentScenarioField.SetValue(Src, value.Src);
         }
 
-        private static FieldInfo PreferencesField;
+        private static FastField PreferencesField;
         /// <summary>
         /// BVE の設定が格納された <see cref="Mackoy.Bvets.Preferences"/> を取得・設定します。
         /// </summary>
@@ -123,7 +123,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => PreferencesField.SetValue(Src, value);
         }
 
-        private static FieldInfo KeyProviderField;
+        private static FastField KeyProviderField;
         /// <summary>
         /// キー入力を管理する <see cref="ClassWrappers.KeyProvider"/> を取得・設定します。
         /// </summary>
@@ -134,7 +134,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
 
-        private static MethodInfo LoadScenarioMethod;
+        private static FastMethod LoadScenarioMethod;
         /// <summary>
         /// シナリオを読み込みます。
         /// </summary>
@@ -142,7 +142,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <param name="reload">同一のシナリオの再読込であるか。<see langword="true"/> を指定した場合、現時点で読み込まれているストラクチャーを流用します。</param>
         public void LoadScenario(ScenarioInfo scenarioInfo, bool reload) => LoadScenarioMethod.Invoke(Src, new object[] { scenarioInfo, reload });
 
-        private static MethodInfo UnloadScenarioMethod;
+        private static FastMethod UnloadScenarioMethod;
         /// <summary>
         /// シナリオを閉じます。
         /// </summary>

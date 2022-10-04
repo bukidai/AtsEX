@@ -64,11 +64,11 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                     (Type wrapperType, Type originalType) = Resolver.Resolve(classElement, parentClassElements);
                     ElementParser elementParser = new ElementParser(wrapperType, originalType);
 
-                    Dictionary<string, MethodInfo> propertyGetters = new Dictionary<string, MethodInfo>();
-                    Dictionary<string, MethodInfo> propertySetters = new Dictionary<string, MethodInfo>();
-                    Dictionary<string, FieldInfo> fields = new Dictionary<string, FieldInfo>();
-                    Dictionary<Type[], ConstructorInfo> constructors = new Dictionary<Type[], ConstructorInfo>();
-                    Dictionary<(string, Type[]), MethodInfo> methods = new Dictionary<(string, Type[]), MethodInfo>();
+                    Dictionary<string, FastMethod> propertyGetters = new Dictionary<string, FastMethod>();
+                    Dictionary<string, FastMethod> propertySetters = new Dictionary<string, FastMethod>();
+                    Dictionary<string, FastField> fields = new Dictionary<string, FastField>();
+                    Dictionary<Type[], FastConstructor> constructors = new Dictionary<Type[], FastConstructor>();
+                    Dictionary<(string, Type[]), FastMethod> methods = new Dictionary<(string, Type[]), FastMethod>();
 
                     {
                         IEnumerable<XElement> propertyElements = classElement.Elements(TargetNamespace + "Property");
@@ -80,14 +80,14 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                             if (!(getter is null))
                             {
                                 MethodInfo originalGetter = elementParser.GetOriginalMethod(getter, Type.EmptyTypes);
-                                propertyGetters.Add(wrapperProperty.Name, originalGetter);
+                                propertyGetters.Add(wrapperProperty.Name, FastMethod.Create(originalGetter));
                             }
 
                             XElement setter = propertyElement.Element(TargetNamespace + "Setter");
                             if (!(setter is null))
                             {
                                 MethodInfo originalSetter = elementParser.GetOriginalMethod(setter, new Type[] { Resolver.GetOriginal(wrapperProperty.PropertyType) });
-                                propertySetters.Add(wrapperProperty.Name, originalSetter);
+                                propertySetters.Add(wrapperProperty.Name, FastMethod.Create(originalSetter));
                             }
 
                             if (getter is null && setter is null)
@@ -97,6 +97,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                         }
                     }
 
+                    if (!originalType.IsAbstract)
                     {
                         BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.InvokeMethod;
                         ConstructorInfo[] wrapperConstructors = wrapperType.GetConstructors(bindingFlags);
@@ -108,7 +109,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                             ConstructorInfo originalConstructor = originalType.GetConstructor(originalParamTypes);
                             if (originalConstructor is null) continue;
 
-                            constructors.Add(wrapperParamTypes, originalConstructor);
+                            constructors.Add(wrapperParamTypes, FastConstructor.Create(originalConstructor));
                         }
                     }
 
@@ -124,7 +125,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                             MethodInfo wrapperMethod = elementParser.GetWrapperMethod(methodElement, wrapperParamTypes);
                             MethodInfo originalMethod = elementParser.GetOriginalMethod(methodElement, originalParamTypes);
 
-                            methods.Add((wrapperMethod.Name, wrapperParamTypes), originalMethod);
+                            methods.Add((wrapperMethod.Name, wrapperParamTypes), FastMethod.Create(originalMethod));
                         }
                     }
 
@@ -135,7 +136,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                             PropertyInfo fieldWrapperProperty = elementParser.GetFieldWrapperProperty(fieldElement);
                             FieldInfo originalField = elementParser.GetOriginalField(fieldElement);
 
-                            fields.Add(fieldWrapperProperty.Name, originalField);
+                            fields.Add(fieldWrapperProperty.Name, FastField.Create(originalField));
                         }
                     }
 

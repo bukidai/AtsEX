@@ -47,7 +47,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         public static LoadingProgressForm FromSource(object src) => src is null ? null : new LoadingProgressForm(src);
 
 
-        private static FieldInfo IsErrorCriticalField;
+        private static FastField IsErrorCriticalField;
         /// <summary>
         /// 読み込みの強制継続が不可能なエラーが発生しているかどうかを取得・設定します。
         /// </summary>
@@ -57,21 +57,21 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => IsErrorCriticalField.SetValue(Src, value);
         }
 
-        private static FieldInfo ErrorCountField;
+        private static FastField ErrorCountField;
         internal int ErrorCount
         {
             get => ErrorCountField.GetValue(Src);
             set => ErrorCountField.SetValue(Src, value);
         }
 
-        private static FieldInfo PanelField;
+        private static FastField PanelField;
         internal Panel Panel => PanelField.GetValue(Src);
 
-        private static FieldInfo ErrorListViewField;
+        private static FastField ErrorListViewField;
         internal ListView ErrorListView => ErrorListViewField.GetValue(Src);
 
 
-        private static MethodInfo ThrowErrorMethod1;
+        private static FastMethod ThrowErrorMethod1;
         /// <summary>
         /// エラーをエラー一覧に追加します。
         /// </summary>
@@ -86,7 +86,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         public void ThrowError(string text, string senderFileName, int lineIndex, int charIndex)
             => ThrowErrorMethod1.Invoke(Src, new object[] { text, senderFileName, lineIndex, charIndex });
 
-        private static MethodInfo ThrowErrorMethod2;
+        private static FastMethod ThrowErrorMethod2;
         /// <summary>
         /// エラーをエラー一覧に追加します。
         /// </summary>
@@ -96,7 +96,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </remarks>
         public void ThrowError(LoadError error) => ThrowErrorMethod2.Invoke(Src, new object[] { error.Src });
 
-        private static MethodInfo ThrowErrorsMethod;
+        private static FastMethod ThrowErrorsMethod;
         /// <summary>
         /// 複数のエラーをエラー一覧に追加します。
         /// </summary>

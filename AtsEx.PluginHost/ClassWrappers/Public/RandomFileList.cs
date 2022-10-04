@@ -40,8 +40,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static RandomFileList FromSource(object src) => src is null ? null : new RandomFileList((IList)src);
 
-        private static MethodInfo SelectedFileGetMethod;
-        private static MethodInfo SelectedFileSetMethod;
+        private static FastMethod SelectedFileGetMethod;
+        private static FastMethod SelectedFileSetMethod;
         /// <summary>
         /// ランダムに選ばれた項目を取得・設定します。
         /// </summary>

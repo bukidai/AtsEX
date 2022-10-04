@@ -99,7 +99,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static Station FromSource(object src) => src is null ? null : new Station(src);
 
-        private static ConstructorInfo Constructor;
+        private static FastConstructor Constructor;
         /// <summary>
         /// 停車場の名前を指定して <see cref="Station"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
@@ -111,8 +111,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        private static MethodInfo NameGetMethod;
-        private static MethodInfo NameSetMethod;
+        private static FastMethod NameGetMethod;
+        private static FastMethod NameSetMethod;
         /// <summary>
         /// 停車場の名前を取得・設定します。
         /// </summary>
@@ -125,8 +125,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => NameSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo ArrivalTimeGetMethod;
-        private static MethodInfo ArrivalTimeSetMethod;
+        private static FastMethod ArrivalTimeGetMethod;
+        private static FastMethod ArrivalTimeSetMethod;
         /// <summary>
         /// 到着時刻をミリ秒単位で取得・設定します。
         /// </summary>
@@ -146,8 +146,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => ArrivalTimeMilliseconds = (int)value.TotalMilliseconds;
         }
 
-        private static MethodInfo DepertureTimeGetMethod;
-        private static MethodInfo DepertureTimeSetMethod;
+        private static FastMethod DepertureTimeGetMethod;
+        private static FastMethod DepertureTimeSetMethod;
         /// <summary>
         /// 発車時刻または通過時刻をミリ秒単位で取得・設定します。
         /// </summary>
@@ -167,8 +167,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => DepertureTimeMilliseconds = (int)value.TotalMilliseconds;
         }
 
-        private static MethodInfo DoorCloseTimeGetMethod;
-        private static MethodInfo DoorCloseTimeSetMethod;
+        private static FastMethod DoorCloseTimeGetMethod;
+        private static FastMethod DoorCloseTimeSetMethod;
         /// <summary>
         /// ドアが閉まるのに要する時間をミリ秒単位で取得・設定します。
         /// </summary>
@@ -187,8 +187,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => DoorCloseTimeMilliseconds = (int)value.TotalMilliseconds;
         }
 
-        private static MethodInfo DefaultTimeGetMethod;
-        private static MethodInfo DefaultTimeSetMethod;
+        private static FastMethod DefaultTimeGetMethod;
+        private static FastMethod DefaultTimeSetMethod;
         /// <summary>
         /// 駅にジャンプしたときの時刻をミリ秒単位で取得・設定します。
         /// </summary>
@@ -208,8 +208,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => DefaultTimeMilliseconds = (int)value.TotalMilliseconds;
         }
 
-        private static MethodInfo PassGetMethod;
-        private static MethodInfo PassSetMethod;
+        private static FastMethod PassGetMethod;
+        private static FastMethod PassSetMethod;
         /// <summary>
         /// この停車場を通過するかどうかを取得・設定します。
         /// </summary>
@@ -219,8 +219,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => PassSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo IsTerminalGetMethod;
-        private static MethodInfo IsTerminalSetMethod;
+        private static FastMethod IsTerminalGetMethod;
+        private static FastMethod IsTerminalSetMethod;
         /// <summary>
         /// この停車場が終点かどうかを取得・設定します。
         /// </summary>
@@ -230,8 +230,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => IsTerminalSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo StoppageTimeGetMethod;
-        private static MethodInfo StoppageTimeSetMethod;
+        private static FastMethod StoppageTimeGetMethod;
+        private static FastMethod StoppageTimeSetMethod;
         /// <summary>
         /// 標準停車時間をミリ秒単位で取得・設定します。
         /// </summary>
@@ -250,8 +250,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => StoppageTimeMilliseconds = (int)value.TotalMilliseconds;
         }
 
-        private static MethodInfo DoorSideGetMethod;
-        private static MethodInfo DoorSideSetMethod;
+        private static FastMethod DoorSideGetMethod;
+        private static FastMethod DoorSideSetMethod;
         /// <summary>
         /// 開くドアの方向を取得・設定します。
         /// </summary>
@@ -261,8 +261,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => DoorSideSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo DepertureSoundGetMethod;
-        private static MethodInfo DepertureSoundSetMethod;
+        private static FastMethod DepertureSoundGetMethod;
+        private static FastMethod DepertureSoundSetMethod;
         /// <summary>
         /// <see cref="DepertureTime"/> の <see cref="StoppageTime"/> 前の時刻に再生されるサウンドを取得・設定します。
         /// </summary>
@@ -272,8 +272,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => DepertureSoundSetMethod.Invoke(Src, new object[] { value.Src });
         }
 
-        private static MethodInfo ArrivalSoundGetMethod;
-        private static MethodInfo ArrivalSoundSetMethod;
+        private static FastMethod ArrivalSoundGetMethod;
+        private static FastMethod ArrivalSoundSetMethod;
         /// <summary>
         /// ドアが開いたときに再生されるサウンドを取得・設定します。
         /// </summary>
@@ -283,8 +283,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => ArrivalSoundSetMethod.Invoke(Src, new object[] { value.Src });
         }
 
-        private static MethodInfo SignalFlagGetMethod;
-        private static MethodInfo SignalFlagSetMethod;
+        private static FastMethod SignalFlagGetMethod;
+        private static FastMethod SignalFlagSetMethod;
         /// <summary>
         /// <see cref="DepertureTime"/> の <see cref="StoppageTime"/> 前の時刻まで出発信号が停止を現示するかどうかを取得・設定します。
         /// </summary>
@@ -294,8 +294,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => SignalFlagSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo MarginMaxGetMethod;
-        private static MethodInfo MarginMaxSetMethod;
+        private static FastMethod MarginMaxGetMethod;
+        private static FastMethod MarginMaxSetMethod;
         /// <summary>
         /// 停止位置誤差の前方許容範囲 [m] を取得・設定します。
         /// </summary>
@@ -305,8 +305,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => MarginMaxSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo MarginMinGetMethod;
-        private static MethodInfo MarginMinSetMethod;
+        private static FastMethod MarginMinGetMethod;
+        private static FastMethod MarginMinSetMethod;
         /// <summary>
         /// 停止位置誤差の後方許容範囲 [m] を負の値で取得・設定します。
         /// </summary>
@@ -316,20 +316,20 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => MarginMinSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo MinStopPositionGetMethod;
+        private static FastMethod MinStopPositionGetMethod;
         /// <summary>
         /// 停止位置誤差の下限の距離程 [m] を取得します。
         /// </summary>
         public double MinStopPosition => MinStopPositionGetMethod.Invoke(Src, null);
 
-        private static MethodInfo MaxStopPositionGetMethod;
+        private static FastMethod MaxStopPositionGetMethod;
         /// <summary>
         /// 停止位置誤差の上限の距離程 [m] を取得します。
         /// </summary>
         public double MaxStopPosition => MaxStopPositionGetMethod.Invoke(Src, null);
 
-        private static MethodInfo AlightingTimeGetMethod;
-        private static MethodInfo AlightingTimeSetMethod;
+        private static FastMethod AlightingTimeGetMethod;
+        private static FastMethod AlightingTimeSetMethod;
         /// <summary>
         /// 降車時間をミリ秒単位で取得・設定します。
         /// </summary>
@@ -348,8 +348,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => AlightingTimeMilliseconds = (int)value.TotalMilliseconds;
         }
 
-        private static MethodInfo TargetLoadFactorGetMethod;
-        private static MethodInfo TargetLoadFactorSetMethod;
+        private static FastMethod TargetLoadFactorGetMethod;
+        private static FastMethod TargetLoadFactorSetMethod;
         /// <summary>
         /// 出発時の乗車率を取得・設定します。
         /// </summary>
@@ -359,8 +359,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => TargetLoadFactorSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo CurrentLoadFactorGetMethod;
-        private static MethodInfo CurrentLoadFactorSetMethod;
+        private static FastMethod CurrentLoadFactorGetMethod;
+        private static FastMethod CurrentLoadFactorSetMethod;
         /// <summary>
         /// 到着時の乗車率を取得・設定します。
         /// </summary>
@@ -370,8 +370,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => CurrentLoadFactorSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo DoorReopenGetMethod;
-        private static MethodInfo DoorReopenSetMethod;
+        private static FastMethod DoorReopenGetMethod;
+        private static FastMethod DoorReopenSetMethod;
         /// <summary>
         /// ドアが再開閉される確率を取得・設定します。
         /// </summary>
@@ -381,8 +381,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => DoorReopenSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo StuckInDoorGetMethod;
-        private static MethodInfo StuckInDoorSetMethod;
+        private static FastMethod StuckInDoorGetMethod;
+        private static FastMethod StuckInDoorSetMethod;
         /// <summary>
         /// 旅客がドアに挟まる時間をミリ秒単位で取得・設定します。
         /// </summary>

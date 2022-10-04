@@ -43,7 +43,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static Structure FromSource(object src) => src is null ? null : new Structure(src);
 
-        private static ConstructorInfo Constructor1;
+        private static FastConstructor Constructor1;
         private Structure(double location, string trackKey, double x, double y, double z, double dx, double dy, double dz, int tilt, double span, Model model)
             : this(Constructor1.Invoke(new object[] { location, trackKey, x, y, z, dx, dy, dz, tilt, span, model }))
         {
@@ -68,7 +68,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        private static ConstructorInfo Constructor2;
+        private static FastConstructor Constructor2;
         private Structure(double location, string trackKey, int tilt, double span, Model model)
             : this(Constructor2.Invoke(new object[] { location, trackKey, tilt, span, model }))
         {
@@ -87,8 +87,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        private static MethodInfo ModelGetMethod;
-        private static MethodInfo ModelSetMethod;
+        private static FastMethod ModelGetMethod;
+        private static FastMethod ModelSetMethod;
         /// <summary>
         /// ストラクチャーの 3D モデルを表す <see cref="ClassWrappers.Model"/> を取得・設定します。
         /// </summary>

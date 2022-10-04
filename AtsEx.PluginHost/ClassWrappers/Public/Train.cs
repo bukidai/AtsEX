@@ -47,13 +47,13 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static Train FromSource(object src) => src is null ? null : new Train(src);
 
-        private static FieldInfo UserVehicleLocationManagerField;
+        private static FastField UserVehicleLocationManagerField;
         internal UserVehicleLocationManager UserVehicleLocationManager => ClassWrappers.UserVehicleLocationManager.FromSource(UserVehicleLocationManagerField.GetValue(Src));
 
-        private static FieldInfo RouteField;
+        private static FastField RouteField;
         internal Route Route => ClassWrappers.Route.FromSource(RouteField.GetValue(Src));
 
-        private static FieldInfo TrainInfoField;
+        private static FastField TrainInfoField;
         /// <summary>
         /// この他列車の情報を提供する <see cref="ClassWrappers.TrainInfo"/> を取得・設定します。
         /// </summary>
@@ -63,10 +63,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => TrainInfoField.SetValue(Src, value.Src);
         }
 
-        private static FieldInfo DrawDistanceManagerField;
+        private static FastField DrawDistanceManagerField;
         internal DrawDistanceManager DrawDistanceManager => ClassWrappers.DrawDistanceManager.FromSource(DrawDistanceManagerField.GetValue(Src));
 
-        private static FieldInfo LocationField;
+        private static FastField LocationField;
         /// <summary>
         /// この他列車の現在位置 [m] を取得・設定します。
         /// </summary>
@@ -79,7 +79,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => LocationField.SetValue(Src, value);
         }
 
-        private static FieldInfo SpeedField;
+        private static FastField SpeedField;
         /// <summary>
         /// この他列車の速度 [m/s] を取得・設定します。
         /// </summary>
@@ -93,7 +93,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => SpeedField.SetValue(Src, value);
         }
 
-        private static MethodInfo DrawCarsMethod;
+        private static FastMethod DrawCarsMethod;
         /// <summary>
         /// この他列車を構成する車両オブジェクトを描画します。
         /// </summary>

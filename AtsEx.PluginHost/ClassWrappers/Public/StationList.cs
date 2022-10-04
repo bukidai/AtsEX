@@ -77,7 +77,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             base.Add(item);
         }
 
-        private static MethodInfo InsertMethod;
+        private static FastMethod InsertMethod;
         /// <summary>
         /// <see cref="StationList"/> に項目を追加します。
         /// </summary>
@@ -93,7 +93,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             InsertMethod.Invoke(Src, new object[] { item.Src });
         }
 
-        private static MethodInfo GetStandardTimeMethod;
+        private static FastMethod GetStandardTimeMethod;
         /// <summary>
         /// 指定した距離程における標準通過時刻を停車場の発着時刻から計算します。
         /// </summary>

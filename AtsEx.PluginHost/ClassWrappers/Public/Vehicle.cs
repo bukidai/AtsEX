@@ -42,8 +42,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static Vehicle FromSource(object src) => src is null ? null : new Vehicle(src);
 
-        private static MethodInfo InstrumentsGetMethod;
-        private static MethodInfo InstrumentsSetMethod;
+        private static FastMethod InstrumentsGetMethod;
+        private static FastMethod InstrumentsSetMethod;
         /// <summary>
         /// 自列車を構成する機器を表す <see cref="VehicleInstrumentSet"/> を取得・設定します。
         /// </summary>
@@ -53,8 +53,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => InstrumentsSetMethod.Invoke(Src, new object[] { value.Src });
         }
 
-        private static MethodInfo DynamicsGetMethod;
-        private static MethodInfo DynamicsSetMethod;
+        private static FastMethod DynamicsGetMethod;
+        private static FastMethod DynamicsSetMethod;
         /// <summary>
         /// 曲線抵抗の係数を取得・設定します。
         /// </summary>

@@ -41,13 +41,13 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static ObjectDrawer FromSource(object src) => src is null ? null : new ObjectDrawer(src);
 
-        private static FieldInfo DrawDistanceManagerField;
+        private static FastField DrawDistanceManagerField;
         /// <summary>
         /// ストラクチャーを描画する範囲を算出するための機能を提供する <see cref="ClassWrappers.DrawDistanceManager"/> を取得します。
         /// </summary>
         public DrawDistanceManager DrawDistanceManager => ClassWrappers.DrawDistanceManager.FromSource(DrawDistanceManagerField.GetValue(Src));
 
-        private static MethodInfo SetRouteMethod;
+        private static FastMethod SetRouteMethod;
         public void SetRoute(Route route) => SetRouteMethod.Invoke(Src, new object[] { route.Src });
     }
 }

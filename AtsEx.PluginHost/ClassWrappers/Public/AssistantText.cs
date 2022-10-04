@@ -43,8 +43,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static new AssistantText FromSource(object src) => src is null ? null : new AssistantText(src);
 
-        private static MethodInfo ColorGetMethod;
-        private static MethodInfo ColorSetMethod;
+        private static FastMethod ColorGetMethod;
+        private static FastMethod ColorSetMethod;
         /// <summary>
         /// 表示するテキストの文字色を取得・設定します。
         /// </summary>
@@ -54,8 +54,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => ColorSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo TextGetMethod;
-        private static MethodInfo TextSetMethod;
+        private static FastMethod TextGetMethod;
+        private static FastMethod TextSetMethod;
         /// <summary>
         /// 表示するテキストを取得・設定します。
         /// </summary>

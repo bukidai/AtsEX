@@ -43,8 +43,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static TimeManager FromSource(object src) => src is null ? null : new TimeManager(src);
 
-        private static MethodInfo StateGetMethod;
-        private static MethodInfo StateSetMethod;
+        private static FastMethod StateGetMethod;
+        private static FastMethod StateSetMethod;
         /// <summary>
         /// 時間進行の設定を取得・設定します。
         /// </summary>
@@ -54,7 +54,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => StateSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo TimeMillisecondsGetMethod;
+        private static FastMethod TimeMillisecondsGetMethod;
         /// <summary>
         /// 0 時丁度から現在までに経過した時間をミリ秒単位で取得します。
         /// </summary>
@@ -77,7 +77,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <seealso cref="SetTime(TimeSpan)"/>
         public TimeSpan Time => TimeSpan.FromMilliseconds(TimeMilliseconds);
 
-        private static MethodInfo SetTimeMethod;
+        private static FastMethod SetTimeMethod;
         /// <summary>
         /// 現在時刻を変更します。
         /// </summary>

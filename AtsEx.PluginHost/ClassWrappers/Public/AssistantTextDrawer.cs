@@ -39,7 +39,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static AssistantTextDrawer FromSource(object src) => src is null ? null : new AssistantTextDrawer(src);
 
-        private static MethodInfo AssistantTextsGetMethod;
+        private static FastMethod AssistantTextsGetMethod;
         /// <summary>
         /// 補助表示の一覧を取得します。
         /// </summary>

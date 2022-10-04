@@ -41,7 +41,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static TrainInfo FromSource(object src) => src is null ? null : new TrainInfo(src);
 
-        private static MethodInfo StructuresGetMethod;
+        private static FastMethod StructuresGetMethod;
         /// <summary>
         /// この他列車に紐づけるストラクチャーの一覧を取得・設定します。
         /// </summary>
@@ -55,8 +55,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         public WrappedList<Sound3DObject> Sounds => WrappedList<Sound3DObject>.FromSource(SoundsGetMethod.Invoke(Src, null));
         */
 
-        private static MethodInfo TrackKeyGetMethod;
-        private static MethodInfo TrackKeySetMethod;
+        private static FastMethod TrackKeyGetMethod;
+        private static FastMethod TrackKeySetMethod;
         /// <summary>
         /// この他列車が走行する軌道を取得・設定します。
         /// </summary>

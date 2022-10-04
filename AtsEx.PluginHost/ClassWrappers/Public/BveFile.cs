@@ -39,8 +39,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static BveFile FromSource(object src) => src is null ? null : new BveFile(src);
 
-        private static MethodInfo PathGetMethod;
-        private static MethodInfo PathSetMethod;
+        private static FastMethod PathGetMethod;
+        private static FastMethod PathSetMethod;
         /// <summary>
         /// ファイルのパスを取得します。
         /// </summary>

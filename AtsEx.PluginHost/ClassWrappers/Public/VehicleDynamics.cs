@@ -55,8 +55,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static VehicleDynamics FromSource(object src) => src is null ? null : new VehicleDynamics(src);
 
-        private static MethodInfo CurveResistanceFactorGetMethod;
-        private static MethodInfo CurveResistanceFactorSetMethod;
+        private static FastMethod CurveResistanceFactorGetMethod;
+        private static FastMethod CurveResistanceFactorSetMethod;
         /// <summary>
         /// 曲線抵抗の係数を取得・設定します。
         /// </summary>
@@ -66,8 +66,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => CurveResistanceFactorSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo RunningResistanceFactorAGetMethod;
-        private static MethodInfo RunningResistanceFactorASetMethod;
+        private static FastMethod RunningResistanceFactorAGetMethod;
+        private static FastMethod RunningResistanceFactorASetMethod;
         /// <summary>
         /// 速度の単位を [m/s] としたときの走行抵抗の係数 a を取得・設定します。
         /// </summary>
@@ -81,8 +81,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => RunningResistanceFactorASetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo RunningResistanceFactorBGetMethod;
-        private static MethodInfo RunningResistanceFactorBSetMethod;
+        private static FastMethod RunningResistanceFactorBGetMethod;
+        private static FastMethod RunningResistanceFactorBSetMethod;
         /// <summary>
         /// 速度の単位を [m/s] としたときの走行抵抗の係数 b を取得・設定します。
         /// </summary>
@@ -96,8 +96,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => RunningResistanceFactorBSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo RunningResistanceFactorCGetMethod;
-        private static MethodInfo RunningResistanceFactorCSetMethod;
+        private static FastMethod RunningResistanceFactorCGetMethod;
+        private static FastMethod RunningResistanceFactorCSetMethod;
         /// <summary>
         /// 走行抵抗の係数 c を取得・設定します。
         /// </summary>
@@ -107,20 +107,20 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => RunningResistanceFactorCSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo TrailerCarGetMethod;
+        private static FastMethod TrailerCarGetMethod;
         /// <summary>
         /// 付随車の情報を提供する <see cref="CarInfo"/> を取得します。
         /// </summary>
         public CarInfo TrailerCar => CarInfo.FromSource(TrailerCarGetMethod.Invoke(Src, null));
 
-        private static MethodInfo MotorCarGetMethod;
+        private static FastMethod MotorCarGetMethod;
         /// <summary>
         /// 動力車の情報を提供する <see cref="CarInfo"/> を取得します。
         /// </summary>
         public CarInfo MotorCar => CarInfo.FromSource(MotorCarGetMethod.Invoke(Src, null));
 
-        private static MethodInfo FirstCarGetMethod;
-        private static MethodInfo FirstCarSetMethod;
+        private static FastMethod FirstCarGetMethod;
+        private static FastMethod FirstCarSetMethod;
         /// <summary>
         /// 先頭車両の情報を提供する <see cref="CarInfo"/> を取得します。
         /// </summary>

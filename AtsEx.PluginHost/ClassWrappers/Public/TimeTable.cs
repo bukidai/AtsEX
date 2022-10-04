@@ -49,7 +49,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static new TimeTable FromSource(object src) => src is null ? null : new TimeTable(src);
 
-        private static FieldInfo ModelField;
+        private static FastField ModelField;
         /// <summary>
         /// 時刻表を表示するための 2D モデルを表す <see cref="ClassWrappers.Model"/> を取得・設定します。
         /// </summary>
@@ -59,7 +59,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => ModelField.SetValue(Src, value);
         }
 
-        private static FieldInfo NameTextsField;
+        private static FastField NameTextsField;
         /// <summary>
         /// 表示する停車場名の配列を取得・設定します。
         /// </summary>
@@ -73,7 +73,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => NameTextsField.SetValue(Src, value);
         }
 
-        private static FieldInfo ArrivalTimeTextsField;
+        private static FastField ArrivalTimeTextsField;
         /// <summary>
         /// 表示する到着時刻の配列を取得・設定します。
         /// </summary>
@@ -87,7 +87,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => ArrivalTimeTextsField.SetValue(Src, value);
         }
 
-        private static FieldInfo DepertureTimeTextsField;
+        private static FastField DepertureTimeTextsField;
         /// <summary>
         /// 表示する発車時刻または通過時刻の配列を取得・設定します。
         /// </summary>
@@ -101,7 +101,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => DepertureTimeTextsField.SetValue(Src, value);
         }
 
-        private static FieldInfo NameTextWidthsField;
+        private static FastField NameTextWidthsField;
         /// <summary>
         /// 停車場名の表示幅の配列を取得・設定します。ここで設定した数値を基に、列全体の幅が決定されます。
         /// </summary>
@@ -115,7 +115,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => NameTextWidthsField.SetValue(Src, value);
         }
 
-        private static FieldInfo ArrivalTimeTextWidthsField;
+        private static FastField ArrivalTimeTextWidthsField;
         /// <summary>
         /// 到着時刻の表示幅の配列を取得・設定します。ここで設定した数値を基に、列全体の幅が決定されます。
         /// </summary>
@@ -129,7 +129,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => ArrivalTimeTextWidthsField.SetValue(Src, value);
         }
 
-        private static FieldInfo DepertureTimeTextWidthsField;
+        private static FastField DepertureTimeTextWidthsField;
         /// <summary>
         /// 発車時刻または通過時刻の表示幅の配列を取得・設定します。ここで設定した数値を基に、列全体の幅が決定されます。
         /// </summary>
@@ -143,7 +143,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => DepertureTimeTextWidthsField.SetValue(Src, value);
         }
 
-        private static MethodInfo UpdateMethod;
+        private static FastMethod UpdateMethod;
         /// <summary>
         /// 時刻表の表示を最新の状態に更新します。
         /// </summary>

@@ -50,7 +50,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        private static ConstructorInfo Constructor1;
+        private static FastConstructor Constructor1;
         private LocatableMapObject(double location, string trackKey, double x, double y, double z, double dx, double dy, double dz, int tilt, double span)
             : this(Constructor1.Invoke(new object[] { location, trackKey, x, y, z, dx, dy, dz, tilt, span }))
         {
@@ -74,7 +74,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        private static ConstructorInfo Constructor2;
+        private static FastConstructor Constructor2;
         private LocatableMapObject(double location, string trackKey, int tilt, double span)
             : this(Constructor2.Invoke(new object[] { location, trackKey, tilt, span }))
         {
@@ -92,8 +92,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
         }
 
-        private static MethodInfo MatrixGetMethod;
-        private static MethodInfo MatrixSetMethod;
+        private static FastMethod MatrixGetMethod;
+        private static FastMethod MatrixSetMethod;
         /// <summary>
         /// 軌道からの変位を表す <see cref="SlimDX.Matrix"/> を取得・設定します。<see cref="SlimDX.Matrix"/> の単位は [m] です。
         /// </summary>
@@ -103,8 +103,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => MatrixSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo TrackKeyGetMethod;
-        private static MethodInfo TrackKeySetMethod;
+        private static FastMethod TrackKeyGetMethod;
+        private static FastMethod TrackKeySetMethod;
         /// <summary>
         /// 設置先の軌道名を取得・設定します。
         /// </summary>
@@ -114,8 +114,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => TrackKeySetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo SpanGetMethod;
-        private static MethodInfo SpanSetMethod;
+        private static FastMethod SpanGetMethod;
+        private static FastMethod SpanSetMethod;
         /// <summary>
         /// 曲線における弦の長さ [m] を取得・設定します。
         /// </summary>
@@ -125,8 +125,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => SpanSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo TiltsAlongCantGetMethod;
-        private static MethodInfo TiltsAlongCantSetMethod;
+        private static FastMethod TiltsAlongCantGetMethod;
+        private static FastMethod TiltsAlongCantSetMethod;
         /// <summary>
         /// カントに連動して傾斜させるかどうかを取得・設定します。
         /// </summary>
@@ -136,8 +136,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => TiltsAlongCantSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo TiltsAlongGradientGetMethod;
-        private static MethodInfo TiltsAlongGradientSetMethod;
+        private static FastMethod TiltsAlongGradientGetMethod;
+        private static FastMethod TiltsAlongGradientSetMethod;
         /// <summary>
         /// 勾配に連動して傾斜させるかどうかを取得・設定します。
         /// </summary>

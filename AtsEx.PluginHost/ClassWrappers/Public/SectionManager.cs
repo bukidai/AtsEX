@@ -40,13 +40,13 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static SectionManager FromSource(object src) => src is null ? null : new SectionManager(src);
 
-        private static MethodInfo SectionsGetMethod;
+        private static FastMethod SectionsGetMethod;
         /// <summary>
         /// 閉塞の一覧を取得します。
         /// </summary>
         public MapFunctionList Sections => MapFunctionList.FromSource(SectionsGetMethod.Invoke(Src, null));
 
-        private static FieldInfo SectionIndexesTrainOnField;
+        private static FastField SectionIndexesTrainOnField;
         /// <summary>
         /// 列車が走行している閉塞のインデックスの一覧を取得・設定します。
         /// </summary>

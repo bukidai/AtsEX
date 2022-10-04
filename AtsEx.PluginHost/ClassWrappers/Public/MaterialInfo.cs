@@ -47,8 +47,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         [CreateClassWrapperFromSource]
         public static MaterialInfo FromSource(object src) => src is null ? null : new MaterialInfo(src);
 
-        private static MethodInfo MaterialGetMethod;
-        private static MethodInfo MaterialSetMethod;
+        private static FastMethod MaterialGetMethod;
+        private static FastMethod MaterialSetMethod;
         /// <summary>
         /// マテリアルを取得・設定します。
         /// </summary>
@@ -58,8 +58,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => MaterialSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo TextureGetMethod;
-        private static MethodInfo TextureSetMethod;
+        private static FastMethod TextureGetMethod;
+        private static FastMethod TextureSetMethod;
         /// <summary>
         /// <see cref="Material"/> に関連付けるテクスチャを取得・設定します。
         /// </summary>
@@ -69,8 +69,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             set => TextureSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static MethodInfo Is2DGetMethod;
-        private static MethodInfo Is2DSetMethod;
+        private static FastMethod Is2DGetMethod;
+        private static FastMethod Is2DSetMethod;
         /// <summary>
         /// 2D モデルであるか (Z 座標を使用しないかどうか) を取得・設定します。
         /// </summary>
