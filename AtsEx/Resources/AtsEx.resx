@@ -129,7 +129,4 @@ The legal location to place is '{2}'.</value>
   <data name="IgnoreAndContinue" xml:space="preserve">
     <value>Ignore and continue loading?</value>
   </data>
-  <data name="UnhandledExceptionCaption" xml:space="preserve">
-    <value>Unhandled exception - {0}</value>
-  </data>
 </root>

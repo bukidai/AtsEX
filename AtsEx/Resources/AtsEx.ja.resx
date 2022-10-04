@@ -129,7 +129,4 @@
   <data name="IgnoreAndContinue" xml:space="preserve">
     <value>無視して読込を続行しますか？</value>
   </data>
-  <data name="UnhandledExceptionCaption" xml:space="preserve">
-    <value>ハンドルされていない例外 - {0}</value>
-  </data>
 </root>
