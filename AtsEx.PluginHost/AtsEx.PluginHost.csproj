@@ -71,7 +71,12 @@
     <Compile Include="BveHacker\Services\ScenarioHacker.cs" />
     <Compile Include="BveHacker\Services\StructureSetLifeProlonger.cs" />
     <Compile Include="BveTypes\AdditionalTypeWrapperAttribute.cs" />
+    <Compile Include="BveTypes\FastMember\FastConstructor.cs" />
+    <Compile Include="BveTypes\FastMember\FastField.cs" />
+    <Compile Include="BveTypes\FastMember\FastMethod.cs" />
+    <Compile Include="BveTypes\FastMember\FastProperty.cs" />
     <Compile Include="BveTypes\WrapTypes\Loader\MemberParser.cs" />
+    <Compile Include="BveTypes\ReflectionExpressionGenerator.cs" />
     <Compile Include="BveTypes\WrapTypes\Loader\TypeParser.cs" />
     <Compile Include="BveTypes\WrapTypes\Loader\WrapTypesXmlLoader.MemberLoader.ElementParser.cs" />
     <Compile Include="BveTypes\WrapTypes\Loader\WrapTypesXmlLoader.MemberLoader.cs" />
