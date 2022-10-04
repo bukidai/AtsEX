@@ -27,8 +27,6 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<MapObjectBase>();
 
-            Constructor = members.GetSourceConstructor();
-
             LocationGetMethod = members.GetSourcePropertyGetterOf(nameof(Location));
             LocationSetMethod = members.GetSourcePropertySetterOf(nameof(Location));
         }
@@ -38,11 +36,6 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected MapObjectBase(object src) : base(src)
-        {
-        }
-
-        private static ConstructorInfo Constructor;
-        protected MapObjectBase(double location) : this(Constructor.Invoke(new object[] { location }))
         {
         }
 
