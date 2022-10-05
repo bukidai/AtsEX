@@ -14,8 +14,6 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 {
     public sealed partial class BveTypeSet
     {
-        private static readonly BindingFlags SearchAllBindingAttribute = BindingFlags.NonPublic | BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance;
-
         /// <summary>
         /// BVE のアセンブリとバージョンを指定して、クラスラッパーに対応する BVE の型とメンバーの定義を読み込みます。
         /// </summary>
