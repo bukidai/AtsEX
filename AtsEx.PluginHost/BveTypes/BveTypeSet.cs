@@ -36,6 +36,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 
         private BveTypeSet(IEnumerable<TypeMemberSetBase> types, Version profileVersion)
         {
+#if DEBUG
             TypeMemberSetBase illegalType = types.FirstOrDefault(type => !(type.WrapperType.IsClass && type.WrapperType.IsSubclassOf(typeof(ClassWrapperBase))) && !type.WrapperType.IsEnum);
             if (!(illegalType is null))
             {
@@ -43,6 +44,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                     string.Format(Resources.TypeNotClassWrapper.Value,
                     illegalType.WrapperType.FullName, typeof(ClassWrapperBase).FullName));
             }
+#endif
 
             Types = new SortedList<Type, TypeMemberSetBase>(types.ToDictionary(type => type.WrapperType, type => type), new TypeComparer());
             OriginalAndWrapperTypes = new SortedList<Type, Type>(types.ToDictionary(type => type.OriginalType, type => type.WrapperType), new TypeComparer());
