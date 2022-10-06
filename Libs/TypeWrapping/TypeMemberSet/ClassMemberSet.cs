@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 using FastMember;
 using UnembeddedResources;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypes
+namespace TypeWrapping
 {
     public class ClassMemberSet : TypeMemberSetBase
     {
         private class ResourceSet
         {
-            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<ClassMemberSet>("PluginHost");
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<ClassMemberSet>("TypeWrapping");
 
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> OriginalPropertyNotFound { get; private set; }
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> OriginalFieldNotFound { get; private set; }

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 using UnembeddedResources;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypes
+namespace TypeWrapping
 {
     internal class TypeParser
     {
         private class ResourceSet
         {
-            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<TypeParser>("PluginHost");
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<TypeParser>("TypeWrapping");
 
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> IllegalCharacterDetectedInAlias { get; private set; }
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> IllegalTypeDetected { get; private set; }

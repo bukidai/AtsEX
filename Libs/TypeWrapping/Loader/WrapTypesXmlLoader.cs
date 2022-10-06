@@ -10,13 +10,13 @@ using System.Xml.Schema;
 
 using UnembeddedResources;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypes
+namespace TypeWrapping
 {
-    internal static partial class WrapTypesXmlLoader
+    public static partial class WrapTypesXmlLoader
     {
         private class ResourceSet
         {
-            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType(typeof(WrapTypesXmlLoader), @"PluginHost\WrapTypesXmlLoader");
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType(typeof(WrapTypesXmlLoader), @"TypeWrapping\WrapTypesXmlLoader");
 
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> XmlSchemaValidation { get; private set; }
 

@@ -10,6 +10,7 @@ using SlimDX.Direct3D9;
 
 using FastMember;
 using ObjectiveHarmonyPatch;
+using TypeWrapping;
 
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;

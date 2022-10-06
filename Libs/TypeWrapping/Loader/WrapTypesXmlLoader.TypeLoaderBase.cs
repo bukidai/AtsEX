@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypes
+namespace TypeWrapping
 {
-    internal static partial class WrapTypesXmlLoader
+    public static partial class WrapTypesXmlLoader
     {
         private abstract class TypeLoaderBase
         {

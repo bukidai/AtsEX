@@ -71,12 +71,6 @@
     <Compile Include="BveHacker\Services\ScenarioHacker.cs" />
     <Compile Include="BveHacker\Services\StructureSetLifeProlonger.cs" />
     <Compile Include="BveTypes\AdditionalTypeWrapperAttribute.cs" />
-    <Compile Include="BveTypes\WrapTypes\Loader\MemberParser.cs" />
-    <Compile Include="BveTypes\WrapTypes\Loader\TypeParser.cs" />
-    <Compile Include="BveTypes\WrapTypes\Loader\WrapTypesXmlLoader.MemberLoader.ElementParser.cs" />
-    <Compile Include="BveTypes\WrapTypes\Loader\WrapTypesXmlLoader.MemberLoader.cs" />
-    <Compile Include="BveTypes\WrapTypes\Loader\WrapTypesXmlLoader.MemberLoader.WrappedTypeResolver.cs" />
-    <Compile Include="BveTypes\WrapTypes\Loader\WrapTypesXmlLoader.TypeLoaderBase.cs" />
     <Compile Include="ClassInitializer\BveTypesSetter.cs" />
     <Compile Include="ClassInitializer\SetBveTypesAttribute.cs" />
     <Compile Include="ClassWrappers\Public\AssistantTextDrawer.cs" />
@@ -124,10 +118,6 @@
     <Compile Include="BveTypes\BveTypeSet.InstanceCreator.cs" />
     <Compile Include="BveTypes\Profile.cs" />
     <Compile Include="BveTypes\ProfileSelector.cs" />
-    <Compile Include="BveTypes\TypeMemberSet\EnumMemberSet.cs" />
-    <Compile Include="BveTypes\TypeMemberSet\TypeMemberSetBase.cs" />
-    <Compile Include="BveTypes\TypeMemberSet\ClassMemberSet.cs" />
-    <Compile Include="BveTypes\WrapTypes\Loader\WrapTypesXmlLoader.cs" />
     <Compile Include="BveTypes\Comparer.cs" />
     <Compile Include="ClassInitializer\ClassInitializerBase.cs" />
     <Compile Include="ClassInitializer\ClassWrapperInitializer.cs" />
@@ -203,19 +193,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BveTypes\WrapTypes\WrapTypesXmlSchema.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <Content Include="Resources\PropertyNotInitializedException.resx" />
     <Content Include="Resources\PropertyNotInitializedException.ja.resx" />
     <Content Include="Resources\PluginTypeConverter.ja.resx" />
     <Content Include="Resources\PluginTypeConverter.resx" />
     <Content Include="Resources\BveTypeSet.resx" />
     <Content Include="Resources\BveTypeSet.ja.resx" />
-    <Content Include="Resources\ClassMemberSet.ja.resx" />
     <Content Include="Resources\ProfileSelector.ja.resx" />
     <Content Include="Resources\ProfileSelector.resx" />
-    <Content Include="Resources\ClassMemberSet.resx" />
     <Content Include="Resources\ClassWrappers\WrappedSortedList`2.ja.resx" />
     <Content Include="Resources\ClassWrappers\WrappedSortedList`2.resx" />
     <Content Include="Resources\ClassWrappers\MapObjectList.ja.resx" />
@@ -226,16 +211,6 @@
     <Content Include="Resources\ClassWrapperBase.resx" />
     <Content Include="Resources\BveHacker.resx" />
     <Content Include="Resources\BveHacker.ja.resx" />
-    <Content Include="Resources\WrapTypesXmlLoader\WrapTypesXmlLoader.resx" />
-    <Content Include="Resources\WrapTypesXmlLoader\WrapTypesXmlLoader.ja.resx" />
-    <Content Include="Resources\WrapTypesXmlLoader\MemberLoader.ja.resx" />
-    <Content Include="Resources\WrapTypesXmlLoader\MemberLoader.resx" />
-    <Content Include="Resources\WrapTypesXmlLoader\ElementParser.ja.resx" />
-    <Content Include="Resources\WrapTypesXmlLoader\ElementParser.resx" />
-    <Content Include="Resources\TypeParser.ja.resx" />
-    <Content Include="Resources\TypeParser.resx" />
-    <Content Include="Resources\WrapTypesXmlLoader\WrappedTypeResolver.ja.resx" />
-    <Content Include="Resources\WrapTypesXmlLoader\WrappedTypeResolver.resx" />
     <None Include="DXDynamicTexture\.editorconfig" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -260,6 +235,10 @@
     <ProjectReference Include="..\Libs\ObjectiveHarmonyPatch\ObjectiveHarmonyPatch.csproj">
       <Project>{9a22c1b4-6edf-46ad-a03e-71847594e6e3}</Project>
       <Name>ObjectiveHarmonyPatch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libs\TypeWrapping\TypeWrapping.csproj">
+      <Project>{28fc1147-db95-42f0-aeb3-ae8ae93f0179}</Project>
+      <Name>TypeWrapping</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libs\UnembeddedResources\UnembeddedResources.csproj">
       <Project>{97512546-8929-4c0b-983d-5347197a3862}</Project>

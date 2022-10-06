@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using FastMember;
+using TypeWrapping;
 using ObjectiveHarmonyPatch;
 
 using Automatic9045.AtsEx.PluginHost.BveTypes;

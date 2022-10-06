@@ -8,9 +8,9 @@ using System.Xml.Linq;
 
 using UnembeddedResources;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypes
+namespace TypeWrapping
 {
-    internal static partial class WrapTypesXmlLoader
+    public static partial class WrapTypesXmlLoader
     {
         private partial class MemberLoader
         {
@@ -18,7 +18,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
             {
                 private class ResourceSet
                 {
-                    private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<WrappedTypeResolver>(@"PluginHost\WrapTypesXmlLoader");
+                    private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<WrappedTypeResolver>(@"TypeWrapping\WrapTypesXmlLoader");
 
                     [ResourceStringHolder(nameof(Localizer))] public Resource<string> ElementTypesButArrayNotSupported { get; private set; }
 

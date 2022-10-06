@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using SlimDX;
 
 using FastMember;
+using TypeWrapping;
 
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 

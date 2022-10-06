@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using SlimDX;
-using SlimDX.Direct3D9;
 
 using FastMember;
+using TypeWrapping;
 
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 

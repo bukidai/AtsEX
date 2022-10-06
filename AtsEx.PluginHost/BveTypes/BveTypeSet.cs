@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using TypeWrapping;
 using UnembeddedResources;
 
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;

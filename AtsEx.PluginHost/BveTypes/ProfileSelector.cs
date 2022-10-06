@@ -110,11 +110,5 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                 }
             }
         }
-
-        public Stream GetSchemaStream()
-        {
-            Stream stream = ExecutingAssembly.GetManifestResourceStream($"{DefaultNamespace}.WrapTypesXmlSchema.xsd");
-            return stream;
-        }
     }
 }

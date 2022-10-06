@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using UnembeddedResources;
+using TypeWrapping;
 
 using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 
@@ -57,7 +57,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                     profileForDifferentBveVersionLoaded?.Invoke(profileVersion);
                 }
 
-                using (Stream schema = profileSelector.GetSchemaStream())
+                using (Stream schema = SchemaProvider.GetSchemaStream())
                 {
                     types = WrapTypesXmlLoader.LoadFile(profile.Stream, schema, classWrapperTypes, bveTypes, additionalWrapTypes);
                 }

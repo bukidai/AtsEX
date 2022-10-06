@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Mackoy.Bvets;
 
 using FastMember;
+using TypeWrapping;
 
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using FastMember;
+using TypeWrapping;
 
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 
