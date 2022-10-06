@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using SlimDX;
 using SlimDX.Direct3D9;
 
+using FastMember;
 using ObjectiveHarmonyPatch;
 
 using Automatic9045.AtsEx.PluginHost.BveTypes;

@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnembeddedResources", "Libs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectiveHarmonyPatch", "Libs\ObjectiveHarmonyPatch\ObjectiveHarmonyPatch.csproj", "{9A22C1B4-6EDF-46AD-A03E-71847594E6E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastMember", "Libs\FastMember\FastMember.csproj", "{B63ADEF8-3BF9-48E1-8B61-8FA042B19F89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{9A22C1B4-6EDF-46AD-A03E-71847594E6E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A22C1B4-6EDF-46AD-A03E-71847594E6E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A22C1B4-6EDF-46AD-A03E-71847594E6E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B63ADEF8-3BF9-48E1-8B61-8FA042B19F89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B63ADEF8-3BF9-48E1-8B61-8FA042B19F89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B63ADEF8-3BF9-48E1-8B61-8FA042B19F89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B63ADEF8-3BF9-48E1-8B61-8FA042B19F89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,6 +104,7 @@ Global
 		{C84BDF1C-D390-4A77-A3ED-35FBAAB2ED6F} = {FCA108F3-EC46-4DD5-962E-3ECCBC2100AE}
 		{97512546-8929-4C0B-983D-5347197A3862} = {B3D0DA09-BB5C-4FF7-9844-80A381655B5C}
 		{9A22C1B4-6EDF-46AD-A03E-71847594E6E3} = {B3D0DA09-BB5C-4FF7-9844-80A381655B5C}
+		{B63ADEF8-3BF9-48E1-8B61-8FA042B19F89} = {B3D0DA09-BB5C-4FF7-9844-80A381655B5C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434AD268-BAE2-48A7-8AE5-2AB6B982F843}

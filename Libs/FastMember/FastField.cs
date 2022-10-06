@@ -5,7 +5,7 @@ using System.Text;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypes
+namespace FastMember
 {
     public class FastField
     {

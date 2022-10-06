@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using FastMember;
 using UnembeddedResources;
 
 namespace Automatic9045.AtsEx.PluginHost.BveTypes

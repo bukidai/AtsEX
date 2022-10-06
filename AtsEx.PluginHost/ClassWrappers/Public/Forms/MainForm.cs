@@ -8,6 +8,8 @@ using System.Windows.Forms;
 
 using Mackoy.Bvets;
 
+using FastMember;
+
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 
 namespace Automatic9045.AtsEx.PluginHost.ClassWrappers

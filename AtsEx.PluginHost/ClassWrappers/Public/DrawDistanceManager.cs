@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using SlimDX;
+using FastMember;
 
 using Automatic9045.AtsEx.PluginHost.BveTypes;
 
