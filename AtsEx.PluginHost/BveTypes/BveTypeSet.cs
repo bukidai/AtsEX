@@ -39,8 +39,8 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 #endif
         }
 
-        private readonly SortedList<Type, TypeMemberSetBase> Types;
-        private readonly SortedList<Type, Type> OriginalAndWrapperTypes;
+        private readonly Dictionary<Type, TypeMemberSetBase> Types;
+        private readonly Dictionary<Type, Type> OriginalAndWrapperTypes;
 
         private BveTypeSet(IEnumerable<TypeMemberSetBase> types, Version profileVersion)
         {
@@ -54,8 +54,8 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
             }
 #endif
 
-            Types = new SortedList<Type, TypeMemberSetBase>(types.ToDictionary(type => type.WrapperType, type => type), new TypeComparer());
-            OriginalAndWrapperTypes = new SortedList<Type, Type>(types.ToDictionary(type => type.OriginalType, type => type.WrapperType), new TypeComparer());
+            Types = types.ToDictionary(type => type.WrapperType, type => type);
+            OriginalAndWrapperTypes = types.ToDictionary(type => type.OriginalType, type => type.WrapperType);
 
             ProfileVersion = profileVersion;
         }
