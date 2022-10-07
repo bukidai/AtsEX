@@ -25,10 +25,17 @@ namespace Automatic9045.AtsEx.Handles
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
-        
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+        static BrakeHandle()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
+
         public bool HasHoldingSpeedBrake { get; }
-        public int HoldingSpeedBrakeNotch => HasHoldingSpeedBrake ? 1 : throw new InvalidOperationException(Resources.NoHoldingSpeedBrake.Value);
+        public int HoldingSpeedBrakeNotch => HasHoldingSpeedBrake ? 1 : throw new InvalidOperationException(Resources.Value.NoHoldingSpeedBrake.Value);
         public int ServiceBrakeNotchCount => MaxNotch - 1 - (HasHoldingSpeedBrake ? 1 : 0);
         public int MinServiceBrakeNotch => HasHoldingSpeedBrake ? 2 : 1;
         public int MaxServiceBrakeNotch => MaxNotch - 1;

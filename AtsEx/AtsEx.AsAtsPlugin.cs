@@ -33,11 +33,11 @@ namespace Automatic9045.AtsEx
 
                 if (GetNormalizedPath(atsExAssemblyLocation) != GetNormalizedPath(legalAtsExAssemblyLocation))
                 {
-                    string warningText = string.Format(Resources.AtsExAssemblyLocationIllegal.Value,
+                    string warningText = string.Format(Resources.Value.AtsExAssemblyLocationIllegal.Value,
                         App.Instance.ProductShortName, atsExAssemblyLocation, legalAtsExAssemblyLocation);
 
                     BveHacker.LoadErrorManager.Throw(warningText.Replace("\n", ""), Path.GetFileName(atsExAssemblyLocation));
-                    if (MessageBox.Show($"{warningText}\n\n{Resources.IgnoreAndContinue.Value}", App.Instance.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                    if (MessageBox.Show($"{warningText}\n\n{Resources.Value.IgnoreAndContinue.Value}", App.Instance.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                     {
                         Environment.Exit(0);
                     }
@@ -49,7 +49,7 @@ namespace Automatic9045.AtsEx
 
             protected override void ProfileForDifferentBveVersionLoaded(Version profileVersion)
             {
-                VersionWarningText = string.Format(Resources.BveVersionNotSupported.Value, App.Instance.BveVersion, profileVersion, App.Instance.ProductShortName);
+                VersionWarningText = string.Format(Resources.Value.BveVersionNotSupported.Value, App.Instance.BveVersion, profileVersion, App.Instance.ProductShortName);
                 BveHacker.LoadErrorManager.Throw(VersionWarningText);
             }
         }

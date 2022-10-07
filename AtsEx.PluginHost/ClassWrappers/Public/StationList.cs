@@ -31,7 +31,14 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+        static StationList()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
 
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
@@ -73,7 +80,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             if (Count > 0 && this[0].Location == item.Location)
             {
-                throw new NotSupportedException(Resources.SameLocation.Value);
+                throw new NotSupportedException(Resources.Value.SameLocation.Value);
             }
 
             base.Add(item);
@@ -89,7 +96,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             if (Count > 0 && this[0].Location == item.Location)
             {
-                throw new NotSupportedException(Resources.SameLocation.Value);
+                throw new NotSupportedException(Resources.Value.SameLocation.Value);
             }
             
             InsertMethod.Invoke(Src, new object[] { item.Src });

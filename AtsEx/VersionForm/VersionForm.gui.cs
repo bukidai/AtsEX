@@ -33,7 +33,7 @@ namespace Automatic9045.AtsEx
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(800, 480);
             Font = new Font("Yu Gothic UI", 9);
-            Text = string.Format(Resources.Caption.Value, App.Instance.ProductShortName);
+            Text = string.Format(Resources.Value.Caption.Value, App.Instance.ProductShortName);
 
 
             Title = new Label()
@@ -54,7 +54,7 @@ namespace Automatic9045.AtsEx
                 Top = 88,
                 Width = 480,
                 UseMnemonic = false,
-                Text = string.Format(Resources.Description.Value, App.Instance.ProductName, App.Instance.AtsExAssembly.GetName().Version),
+                Text = string.Format(Resources.Value.Description.Value, App.Instance.ProductName, App.Instance.AtsExAssembly.GetName().Version),
             };
             Controls.Add(Description);
 
@@ -75,7 +75,7 @@ namespace Automatic9045.AtsEx
                 Left = 16,
                 Top = 148,
                 Width = 56,
-                Text = Resources.License.Value,
+                Text = Resources.Value.License.Value,
             };
             LicenseLink.LinkClicked += LinkClicked;
             Controls.Add(LicenseLink);
@@ -86,7 +86,7 @@ namespace Automatic9045.AtsEx
                 Left = 96,
                 Top = 148,
                 Width = 176,
-                Text = string.Format(Resources.Website.Value, App.Instance.ProductShortName),
+                Text = string.Format(Resources.Value.Website.Value, App.Instance.ProductShortName),
             };
             HomepageLink.LinkClicked += LinkClicked;
             Controls.Add(HomepageLink);
@@ -97,7 +97,7 @@ namespace Automatic9045.AtsEx
                 Left = 296,
                 Top = 148,
                 Width = 128,
-                Text = Resources.Repository.Value,
+                Text = Resources.Value.Repository.Value,
             };
             RepositoryLink.LinkClicked += LinkClicked;
             Controls.Add(RepositoryLink);
@@ -108,7 +108,7 @@ namespace Automatic9045.AtsEx
                 Left = 16,
                 Top = 192,
                 Width = 400,
-                Text = Resources.PluginListHeader.Value,
+                Text = Resources.Value.PluginListHeader.Value,
             };
             Controls.Add(PluginListHeader);
 
@@ -121,11 +121,11 @@ namespace Automatic9045.AtsEx
                 Width = 768,
                 Height = 224,
             };
-            PluginList.Columns.Add(Resources.PluginListColumnFileName.Value, 128);
-            PluginList.Columns.Add(Resources.PluginListColumnName.Value, 192);
-            PluginList.Columns.Add(Resources.PluginListColumnType.Value, 96);
-            PluginList.Columns.Add(Resources.PluginListColumnVersion.Value, 96);
-            PluginList.Columns.Add(Resources.PluginListColumnDescription.Value, 224);
+            PluginList.Columns.Add(Resources.Value.PluginListColumnFileName.Value, 128);
+            PluginList.Columns.Add(Resources.Value.PluginListColumnName.Value, 192);
+            PluginList.Columns.Add(Resources.Value.PluginListColumnType.Value, 96);
+            PluginList.Columns.Add(Resources.Value.PluginListColumnVersion.Value, 96);
+            PluginList.Columns.Add(Resources.Value.PluginListColumnDescription.Value, 224);
             Controls.Add(PluginList);
 
 
@@ -133,7 +133,7 @@ namespace Automatic9045.AtsEx
             {
                 Left = 704,
                 Top = 448,
-                Text = Resources.OK.Value,
+                Text = Resources.Value.OK.Value,
             };
             OK.Click += (sender, e) => Hide();
             Controls.Add(OK);

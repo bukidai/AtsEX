@@ -27,8 +27,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
-
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
         private static readonly string NameText;
 
         public override string Location { get; } = "";
@@ -47,7 +46,11 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
 
         static ScriptPluginBase()
         {
-            NameText = Resources.Name.Value;
+#if DEBUG
+            _ = Resources.Value;
+#endif
+
+            NameText = Resources.Value.Name.Value;
         }
 
         protected ScriptPluginBase(ScriptPluginBuilder builder, PluginType pluginType, bool useAtsExExtensions) : base(builder, pluginType, useAtsExExtensions)
@@ -101,7 +104,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
             }
 
             TickGlobals globals = new TickGlobals(Globals, elapsed);
-            IScriptResult<TickResult> result = TickScript.Run(globals) ?? throw new InvalidOperationException(string.Format(Resources.NoReturnValue.Value, Title, nameof(Tick)));
+            IScriptResult<TickResult> result = TickScript.Run(globals) ?? throw new InvalidOperationException(string.Format(Resources.Value.NoReturnValue.Value, Title, nameof(Tick)));
 
             return result.ReturnValue;
         }

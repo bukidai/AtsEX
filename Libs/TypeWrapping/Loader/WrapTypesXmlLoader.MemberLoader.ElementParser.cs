@@ -36,7 +36,14 @@ namespace TypeWrapping
                     }
                 }
 
-                private static readonly ResourceSet Resources = new ResourceSet();
+                private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+                static ElementParser()
+                {
+#if DEBUG
+                    _ = Resources.Value;
+#endif
+                }
 
                 private readonly Type WrapperType;
                 private readonly Type OriginalType;
@@ -58,7 +65,7 @@ namespace TypeWrapping
                     (string name, bool isNonPublic, bool isStatic) = GetOriginalInfo(source);
                     FieldInfo field = OriginalMemberParser.GetField(name, isNonPublic, isStatic);
 
-                    return field ?? throw CreateNotFoundException(Resources.OriginalFieldNotFound, name, isNonPublic, isStatic);
+                    return field ?? throw CreateNotFoundException(Resources.Value.OriginalFieldNotFound, name, isNonPublic, isStatic);
                 }
 
                 public PropertyInfo GetWrapperProperty(XElement source)
@@ -66,7 +73,7 @@ namespace TypeWrapping
                     (string name, bool isNonPublic, bool isStatic) = GetWrapperInfo(source);
                     PropertyInfo property = WrapperMemberParser.GetProperty(name, isNonPublic, isStatic);
 
-                    return property ?? throw CreateNotFoundException(Resources.WrapperPropertyNotFound, name, isNonPublic, isStatic);
+                    return property ?? throw CreateNotFoundException(Resources.Value.WrapperPropertyNotFound, name, isNonPublic, isStatic);
                 }
 
                 public PropertyInfo GetFieldWrapperProperty(XElement source)
@@ -74,7 +81,7 @@ namespace TypeWrapping
                     (string name, bool isNonPublic, bool isStatic) = GetInfo(source, "WrapperProperty", "IsWrapperNonPublic", "IsWrapperStatic");
                     PropertyInfo property = WrapperMemberParser.GetProperty(name, isNonPublic, isStatic);
 
-                    return property ?? throw CreateNotFoundException(Resources.FieldWrapperPropertyNotFound, name, isNonPublic, isStatic);
+                    return property ?? throw CreateNotFoundException(Resources.Value.FieldWrapperPropertyNotFound, name, isNonPublic, isStatic);
                 }
 
                 public MethodInfo GetWrapperMethod(XElement source, Type[] types)
@@ -82,7 +89,7 @@ namespace TypeWrapping
                     (string name, bool isNonPublic, bool isStatic) = GetWrapperInfo(source);
                     MethodInfo method = WrapperMemberParser.GetMethod(name, types, isNonPublic, isStatic);
 
-                    return method ?? throw CreateNotFoundException(Resources.WrapperMethodNotFound, name, isNonPublic, isStatic);
+                    return method ?? throw CreateNotFoundException(Resources.Value.WrapperMethodNotFound, name, isNonPublic, isStatic);
                 }
 
                 public MethodInfo GetOriginalMethod(XElement source, Type[] types)
@@ -90,7 +97,7 @@ namespace TypeWrapping
                     (string name, bool isNonPublic, bool isStatic) = GetOriginalInfo(source);
                     MethodInfo method = OriginalMemberParser.GetMethod(name, types, isNonPublic, isStatic);
 
-                    return method ?? throw CreateNotFoundException(Resources.OriginalMethodNotFound, name, isNonPublic, isStatic);
+                    return method ?? throw CreateNotFoundException(Resources.Value.OriginalMethodNotFound, name, isNonPublic, isStatic);
                 }
 
                 private KeyNotFoundException CreateNotFoundException(Resource<string> exceptionTextResource, string name, bool isNonPublic, bool isStatic)
@@ -98,7 +105,7 @@ namespace TypeWrapping
                     throw new KeyNotFoundException(string.Format(exceptionTextResource.Value, GetAccessibilityDescription(), name, WrapperType.Name));
 
                     string GetAccessibilityDescription()
-                        => (isNonPublic ? Resources.NonPublic : Resources.Public).Value + (isStatic ? Resources.Static : Resources.Instance).Value;
+                        => (isNonPublic ? Resources.Value.NonPublic : Resources.Value.Public).Value + (isStatic ? Resources.Value.Static : Resources.Value.Instance).Value;
                 }
 
 

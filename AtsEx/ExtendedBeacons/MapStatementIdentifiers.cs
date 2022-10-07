@@ -45,10 +45,17 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
                 }
             }
 
-            private static readonly ResourceSet Resources = new ResourceSet();
+            private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
 
-            public static string InvalidObservingTargetTrack(string invalidText) => string.Format(Resources.InvalidObservingTargetTrack.Value, invalidText);
-            public static string InvalidObservingTargetTrain(string invalidText) => string.Format(Resources.InvalidObservingTargetTrain.Value, invalidText);
+            static ErrorTexts()
+            {
+#if DEBUG
+                _ = Resources.Value;
+#endif
+            }
+
+            public static string InvalidObservingTargetTrack(string invalidText) => string.Format(Resources.Value.InvalidObservingTargetTrack.Value, invalidText);
+            public static string InvalidObservingTargetTrain(string invalidText) => string.Format(Resources.Value.InvalidObservingTargetTrain.Value, invalidText);
         }
     }
 }

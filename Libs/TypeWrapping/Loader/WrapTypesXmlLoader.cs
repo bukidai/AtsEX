@@ -26,7 +26,14 @@ namespace TypeWrapping
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+        static WrapTypesXmlLoader()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
 
         public static List<TypeMemberSetBase> LoadFile(Stream docStream, Stream schemaStream,
             IEnumerable<Type> wrapperTypes, IEnumerable<Type> originalTypes, IDictionary<Type, Type> additionalWrapperToOriginal)
@@ -52,7 +59,7 @@ namespace TypeWrapping
 
         private static void SchemaValidation(object sender, ValidationEventArgs e)
         {
-            throw new FormatException(Resources.XmlSchemaValidation.Value, e.Exception);
+            throw new FormatException(Resources.Value.XmlSchemaValidation.Value, e.Exception);
         }
 
         private static void DocumentValidation(object sender, ValidationEventArgs e)

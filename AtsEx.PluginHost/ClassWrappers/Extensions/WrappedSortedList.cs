@@ -34,7 +34,14 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+        static WrappedSortedList()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
 
         private static BveTypeSet BveTypes = null;
 
@@ -84,7 +91,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 #if DEBUG
             if (!typeof(TValueWrapper).IsSubclassOf(typeof(ClassWrapperBase)))
             {
-                throw new ArgumentException(string.Format(Resources.CannotOmitParameter.Value, nameof(TValueWrapper), nameof(ClassWrapperBase)));
+                throw new ArgumentException(string.Format(Resources.Value.CannotOmitParameter.Value, nameof(TValueWrapper), nameof(ClassWrapperBase)));
             }
 #endif
         }
@@ -358,7 +365,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                         case EnumeratorType.DictionaryEnumerator:
                             return Entry;
                         default:
-                            throw new NotSupportedException(string.Format(Resources.TypeNotSupported.Value, nameof(Type), Type));
+                            throw new NotSupportedException(string.Format(Resources.Value.TypeNotSupported.Value, nameof(Type), Type));
                     }
                 }
             }

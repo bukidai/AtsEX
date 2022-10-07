@@ -28,7 +28,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
 
         protected static readonly XmlSchemaSet SchemaSet = new XmlSchemaSet();
         protected static readonly string TargetNamespace;
@@ -49,6 +49,10 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
 
         static ScriptPluginPackage()
         {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+
             using (Stream schemaStream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"{typeof(ScriptPluginPackage).Namespace}.AtsExScriptPluginPackageManifestXmlSchema.xsd"))
             {
                 XmlSchema schema = XmlSchema.Read(schemaStream, SchemaValidation);
@@ -127,7 +131,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
             }
         }
 
-        private static void SchemaValidation(object sender, ValidationEventArgs e) => throw new FormatException(Resources.XmlSchemaValidation.Value, e.Exception);
+        private static void SchemaValidation(object sender, ValidationEventArgs e) => throw new FormatException(Resources.Value.XmlSchemaValidation.Value, e.Exception);
 
         private static void DocumentValidation(object sender, ValidationEventArgs e) => throw e.Exception;
     }

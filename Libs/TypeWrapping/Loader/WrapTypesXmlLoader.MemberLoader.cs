@@ -27,7 +27,14 @@ namespace TypeWrapping
                 }
             }
 
-            private static readonly ResourceSet Resources = new ResourceSet();
+            private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+            static MemberLoader()
+            {
+#if DEBUG
+                _ = Resources.Value;
+#endif
+            }
 
             public List<TypeMemberSetBase> Types { get; }
 
@@ -93,7 +100,7 @@ namespace TypeWrapping
 
                             if (getter is null && setter is null)
                             {
-                                throw new FormatException(string.Format(Resources.PropertyImplementationInvalid.Value, $"{wrapperType.Name}.{wrapperProperty.Name}"));
+                                throw new FormatException(string.Format(Resources.Value.PropertyImplementationInvalid.Value, $"{wrapperType.Name}.{wrapperProperty.Name}"));
                             }
                         }
                     }

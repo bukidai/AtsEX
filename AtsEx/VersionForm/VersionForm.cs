@@ -39,7 +39,14 @@ namespace Automatic9045.AtsEx
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+        static VersionForm()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
 
 
         public VersionForm()

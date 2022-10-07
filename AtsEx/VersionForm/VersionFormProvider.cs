@@ -27,7 +27,14 @@ namespace Automatic9045.AtsEx
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+        static VersionFormProvider()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
 
         private readonly BveHacker BveHacker;
 
@@ -40,7 +47,7 @@ namespace Automatic9045.AtsEx
             BveHacker = bveHacker;
 
             ContextMenuHacker contextMenuHacker = BveHacker.ContextMenuHacker as ContextMenuHacker;
-            MenuItem = contextMenuHacker.AddClickableMenuItem(string.Format(Resources.VersionInfoMenuItem.Value, App.Instance.ProductShortName), MenuItemClick, true);
+            MenuItem = contextMenuHacker.AddClickableMenuItem(string.Format(Resources.Value.VersionInfoMenuItem.Value, App.Instance.ProductShortName), MenuItemClick, true);
 
             Form = new VersionForm();
             Form.FormClosing += FormClosing;

@@ -32,9 +32,16 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
                 }
             }
 
-            private static readonly ResourceSet Resources = new ResourceSet();
+            private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
 
-            public static string InvalidScriptLanguage(string invalidText) => string.Format(Resources.InvalidScriptLanguage.Value, invalidText);
+            static ErrorTexts()
+            {
+#if DEBUG
+                _ = Resources.Value;
+#endif
+            }
+
+            public static string InvalidScriptLanguage(string invalidText) => string.Format(Resources.Value.InvalidScriptLanguage.Value, invalidText);
         }
     }
 }

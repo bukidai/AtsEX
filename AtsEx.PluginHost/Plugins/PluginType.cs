@@ -37,17 +37,24 @@ namespace Automatic9045.AtsEx.PluginHost.Plugins
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+        static PluginTypeConverter()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
 
         public static Resource<string> GetTypeStringResource(this PluginType pluginType)
         {
             switch (pluginType)
             {
                 case PluginType.VehiclePlugin:
-                    return Resources.VehiclePlugin;
+                    return Resources.Value.VehiclePlugin;
 
                 case PluginType.MapPlugin:
-                    return Resources.MapPlugin;
+                    return Resources.Value.MapPlugin;
 
                 default:
                     throw new ArgumentOutOfRangeException();

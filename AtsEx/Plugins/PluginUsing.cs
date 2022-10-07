@@ -33,7 +33,7 @@ namespace Automatic9045.AtsEx.Plugins
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
 
         protected static XmlSchemaSet SchemaSet = new XmlSchemaSet();
         protected static string TargetNamespace;
@@ -53,6 +53,10 @@ namespace Automatic9045.AtsEx.Plugins
 
         static PluginUsing()
         {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+
             using (Stream schemaStream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"{typeof(PluginUsing).Namespace}.AtsExPluginUsingXmlSchema.xsd"))
             {
                 XmlSchema schema = XmlSchema.Read(schemaStream, SchemaValidation);
@@ -116,7 +120,7 @@ namespace Automatic9045.AtsEx.Plugins
                 int currentBveVersion = App.Instance.BveAssembly.GetName().Version.Major;
                 int otherBveVersion = currentBveVersion == 6 ? 5 : 6;
                 throw new BveFileLoadException(
-                    string.Format(Resources.BadImageFormat.Value, Path.GetDirectoryName(assemblyPath), otherBveVersion, App.Instance.ProductShortName, currentBveVersion),
+                    string.Format(Resources.Value.BadImageFormat.Value, Path.GetDirectoryName(assemblyPath), otherBveVersion, App.Instance.ProductShortName, currentBveVersion),
                     Path.GetFileName(listPath), lineInfo.LineNumber, lineInfo.LinePosition);;
             }
         }
@@ -127,7 +131,7 @@ namespace Automatic9045.AtsEx.Plugins
             return ScriptPluginPackage.Load(Path.Combine(baseDirectory, packageManifestPath));
         }
 
-        private static void SchemaValidation(object sender, ValidationEventArgs e) => throw new FormatException(Resources.XmlSchemaValidation.Value, e.Exception);
+        private static void SchemaValidation(object sender, ValidationEventArgs e) => throw new FormatException(Resources.Value.XmlSchemaValidation.Value, e.Exception);
 
         private static void DocumentValidation(object sender, ValidationEventArgs e) => throw e.Exception;
     }

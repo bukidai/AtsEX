@@ -28,7 +28,15 @@ namespace TypeWrapping
                     }
                 }
 
-                private static readonly ResourceSet Resources = new ResourceSet();
+                private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+                static WrappedTypeResolver()
+                {
+#if DEBUG
+                    _ = Resources.Value;
+#endif
+                }
+
                 private readonly Dictionary<Type, Type> WrapperToOriginal = new Dictionary<Type, Type>();
 
                 private readonly TypeParser WrapperTypeParser;
@@ -88,7 +96,7 @@ namespace TypeWrapping
                     }
                     else if (wrapper.HasElementType)
                     {
-                        if (!wrapper.IsArray || wrapper.Name.Contains("*")) throw new NotSupportedException(Resources.ElementTypesButArrayNotSupported.Value);
+                        if (!wrapper.IsArray || wrapper.Name.Contains("*")) throw new NotSupportedException(Resources.Value.ElementTypesButArrayNotSupported.Value);
 
                         Type wrapperElement = wrapper.GetElementType();
                         WrapperToOriginal.TryGetValue(wrapperElement, out Type originalElement);

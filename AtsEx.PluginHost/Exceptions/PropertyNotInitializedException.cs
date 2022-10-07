@@ -24,9 +24,16 @@ namespace Automatic9045.AtsEx.PluginHost
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
 
-        public PropertyNotInitializedException(string propertyName) : base(string.Format(Resources.Message.Value, propertyName))
+        static PropertyNotInitializedException()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
+
+        public PropertyNotInitializedException(string propertyName) : base(string.Format(Resources.Value.Message.Value, propertyName))
         {
         }
     }

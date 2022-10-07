@@ -28,12 +28,19 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+        static CompilationException()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
 
         public IEnumerable<Diagnostic> CompilationErrors { get; }
         public string SenderName { get; }
 
-        public CompilationException(string senderName, IEnumerable<Diagnostic> compilationErrors) : base(Resources.Message.Value)
+        public CompilationException(string senderName, IEnumerable<Diagnostic> compilationErrors) : base(Resources.Value.Message.Value)
         {
             SenderName = senderName;
             CompilationErrors = compilationErrors;

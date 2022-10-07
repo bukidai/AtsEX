@@ -27,9 +27,15 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
-
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
         private static readonly string DefaultNamespace = $"{typeof(BveTypeSet).Namespace}.WrapTypes";
+
+        static ProfileSelector()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
 
         private readonly Assembly ExecutingAssembly;
         private readonly Version BveVersion;
@@ -81,11 +87,11 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                         {
                             if (BveVersion < oldestVersion)
                             {
-                                throw new NotSupportedException(string.Format(Resources.VersionTooOld.Value, BveVersion, oldestVersion));
+                                throw new NotSupportedException(string.Format(Resources.Value.VersionTooOld.Value, BveVersion, oldestVersion));
                             }
                             else
                             {
-                                throw new NotSupportedException(string.Format(Resources.InvalidVersion.Value, BveVersion));
+                                throw new NotSupportedException(string.Format(Resources.Value.InvalidVersion.Value, BveVersion));
                             }
                         }
 
@@ -100,13 +106,13 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
                         }
                         else
                         {
-                            throw new NotSupportedException(string.Format(Resources.MajorVersionTooOld.Value, BveVersion, supportedAllVersions.Min().Major));
+                            throw new NotSupportedException(string.Format(Resources.Value.MajorVersionTooOld.Value, BveVersion, supportedAllVersions.Min().Major));
                         }
                     }
                 }
                 else
                 {
-                    throw new NotSupportedException(string.Format(Resources.VersionNotSupported.Value, BveVersion));
+                    throw new NotSupportedException(string.Format(Resources.Value.VersionNotSupported.Value, BveVersion));
                 }
             }
         }

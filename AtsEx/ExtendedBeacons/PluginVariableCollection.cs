@@ -24,7 +24,14 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+        static PluginVariableCollection()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
 
         private readonly IEnumerable<string> PluginIdentifiers;
         private readonly PluginType PluginType;
@@ -45,7 +52,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             {
                 if (!PluginIdentifiers.Contains(pluginIdentifier))
                 {
-                    throw new KeyNotFoundException(string.Format(Resources.PluginIdentifierNotFound.Value, PluginType.GetTypeString(), pluginIdentifier));
+                    throw new KeyNotFoundException(string.Format(Resources.Value.PluginIdentifierNotFound.Value, PluginType.GetTypeString(), pluginIdentifier));
                 }
 
                 Variables[pluginIdentifier] = new SortedList<string, dynamic>();

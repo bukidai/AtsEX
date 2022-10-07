@@ -25,8 +25,16 @@ namespace TypeWrapping
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
         private const char Separator = ';';
+
+        static TypeParser()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
 
         private readonly Dictionary<string, Type> Cache = new Dictionary<string, Type>();
         private readonly Dictionary<string, Type> SpecializedTypes;
@@ -43,11 +51,11 @@ namespace TypeWrapping
 #if DEBUG
             if (!Regex.IsMatch(specializedTypeAlias, @"^[0-9a-zA-Z]+$"))
             {
-                throw new ArgumentException(Resources.IllegalCharacterDetectedInAlias.Value, specializedTypeAlias);
+                throw new ArgumentException(Resources.Value.IllegalCharacterDetectedInAlias.Value, specializedTypeAlias);
             }
             else if (specializeTypes.Any(t => t.IsArray || t.IsConstructedGenericType))
             {
-                throw new ArgumentException(Resources.IllegalTypeDetected.Value, nameof(specializeTypes));
+                throw new ArgumentException(Resources.Value.IllegalTypeDetected.Value, nameof(specializeTypes));
             }
 #endif
 
@@ -86,7 +94,7 @@ namespace TypeWrapping
 
             if (result is null)
             {
-                throw new ArgumentException(Resources.TypeNotFound.Value, nameof(text));
+                throw new ArgumentException(Resources.Value.TypeNotFound.Value, nameof(text));
             }
 
             Cache.Add(text, result);

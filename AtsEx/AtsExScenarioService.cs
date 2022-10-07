@@ -37,7 +37,14 @@ namespace Automatic9045.AtsEx
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+        static AtsExScenarioService()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
 
         private readonly BveHacker BveHacker;
 
@@ -137,7 +144,7 @@ namespace Automatic9045.AtsEx
                 TickResult tickResult = plugin.Tick(elapsed);
                 if (!(tickResult is VehiclePluginTickResult vehiclePluginTickResult))
                 {
-                    throw new InvalidOperationException(string.Format(Resources.VehiclePluginTickResultTypeInvalid.Value,
+                    throw new InvalidOperationException(string.Format(Resources.Value.VehiclePluginTickResultTypeInvalid.Value,
                        $"{nameof(PluginBase)}.{nameof(PluginBase.Tick)}", nameof(VehiclePluginTickResult)));
                 }
 
@@ -154,7 +161,7 @@ namespace Automatic9045.AtsEx
                 TickResult tickResult = plugin.Tick(elapsed);
                 if (!(tickResult is MapPluginTickResult))
                 {
-                    throw new InvalidOperationException(string.Format(Resources.MapPluginTickResultTypeInvalid.Value,
+                    throw new InvalidOperationException(string.Format(Resources.Value.MapPluginTickResultTypeInvalid.Value,
                        $"{nameof(PluginBase)}.{nameof(PluginBase.Tick)}", nameof(MapPluginTickResult)));
                 }
             }
@@ -210,7 +217,7 @@ namespace Automatic9045.AtsEx
                 else
                 {
                     BveHacker.LoadErrorManager.Throw(exception.Message);
-                    MessageBox.Show(exception.ToString(), string.Format(Resources.UnhandledExceptionCaption.Value, App.Instance.ProductShortName));
+                    MessageBox.Show(exception.ToString(), string.Format(Resources.Value.UnhandledExceptionCaption.Value, App.Instance.ProductShortName));
                 }
             }
         }

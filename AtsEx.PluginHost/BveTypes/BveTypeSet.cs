@@ -30,7 +30,14 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+        static BveTypeSet()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
 
         private readonly SortedList<Type, TypeMemberSetBase> Types;
         private readonly SortedList<Type, Type> OriginalAndWrapperTypes;
@@ -42,7 +49,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
             if (!(illegalType is null))
             {
                 throw new ArgumentException(
-                    string.Format(Resources.TypeNotClassWrapper.Value,
+                    string.Format(Resources.Value.TypeNotClassWrapper.Value,
                     illegalType.WrapperType.FullName, typeof(ClassWrapperBase).FullName));
             }
 #endif

@@ -27,7 +27,14 @@ namespace TypeWrapping
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+        static ClassMemberSet()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
 
         private readonly IReadOnlyDictionary<string, FastMethod> PropertyGetters;
         private readonly IReadOnlyDictionary<string, FastMethod> PropertySetters;
@@ -52,21 +59,21 @@ namespace TypeWrapping
         {
             return PropertyGetters.TryGetValue(wrapperName, out FastMethod method)
                 ? method
-                : throw new KeyNotFoundException(string.Format(Resources.OriginalPropertyNotFound.Value, nameof(wrapperName), wrapperName));
+                : throw new KeyNotFoundException(string.Format(Resources.Value.OriginalPropertyNotFound.Value, nameof(wrapperName), wrapperName));
         }
 
         public FastMethod GetSourcePropertySetterOf(string wrapperName)
         {
             return PropertySetters.TryGetValue(wrapperName, out FastMethod method)
                 ? method
-                : throw new KeyNotFoundException(string.Format(Resources.OriginalPropertyNotFound.Value, nameof(wrapperName), wrapperName));
+                : throw new KeyNotFoundException(string.Format(Resources.Value.OriginalPropertyNotFound.Value, nameof(wrapperName), wrapperName));
         }
 
         public FastField GetSourceFieldOf(string wrapperName)
         {
             return Fields.TryGetValue(wrapperName, out FastField field)
                 ? field
-                : throw new KeyNotFoundException(string.Format(Resources.OriginalFieldNotFound.Value, nameof(wrapperName), wrapperName));
+                : throw new KeyNotFoundException(string.Format(Resources.Value.OriginalFieldNotFound.Value, nameof(wrapperName), wrapperName));
         }
 
         public FastConstructor GetSourceConstructor(Type[] parameters = null)
@@ -74,7 +81,7 @@ namespace TypeWrapping
             FastConstructor matchConstructor = Constructors.FirstOrDefault(x => parameters is null || x.Key.SequenceEqual(parameters)).Value;
 
             return matchConstructor is null
-                ? throw new KeyNotFoundException(string.Format(Resources.OriginalConstructorNotFound.Value, nameof(parameters), parameters))
+                ? throw new KeyNotFoundException(string.Format(Resources.Value.OriginalConstructorNotFound.Value, nameof(parameters), parameters))
                 : matchConstructor;
         }
 
@@ -83,7 +90,7 @@ namespace TypeWrapping
             FastMethod matchMethod = Methods.FirstOrDefault(x => x.Key.Name == wrapperName && (parameters is null || x.Key.Parameters.SequenceEqual(parameters))).Value;
 
             return matchMethod is null
-                ? throw new KeyNotFoundException(string.Format(Resources.OriginalMethodNotFound.Value, nameof(wrapperName), wrapperName, nameof(parameters), parameters))
+                ? throw new KeyNotFoundException(string.Format(Resources.Value.OriginalMethodNotFound.Value, nameof(wrapperName), wrapperName, nameof(parameters), parameters))
                 : matchMethod;
         }
     }

@@ -29,9 +29,15 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
-
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
         private static BveTypeSet BveTypes;
+
+        static ClassWrapperBase()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
 
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
@@ -56,7 +62,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
             }
             else if (!wrapperType.IsSubclassOf(typeof(ClassWrapperBase)))
             {
-                throw new ArgumentException(string.Format(Resources.TypeNotClassWrapper.Value, wrapperType.FullName, typeof(ClassWrapperBase).Name), nameof(wrapperType));
+                throw new ArgumentException(string.Format(Resources.Value.TypeNotClassWrapper.Value, wrapperType.FullName, typeof(ClassWrapperBase).Name), nameof(wrapperType));
             }
 
             MethodInfo fromSourceMethod = wrapperType.
@@ -69,7 +75,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                     return parameters.Length == 1 && parameters[0].ParameterType == typeof(object) && method.ReturnType == wrapperType;
                 });
             return fromSourceMethod is null
-                ? throw new InvalidOperationException(string.Format(Resources.FromSourceMethodNotFound.Value, wrapperType.FullName))
+                ? throw new InvalidOperationException(string.Format(Resources.Value.FromSourceMethodNotFound.Value, wrapperType.FullName))
                 : (ClassWrapperBase)fromSourceMethod.Invoke(null, new object[] { src });
         }
 

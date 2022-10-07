@@ -35,9 +35,16 @@ namespace Automatic9045.AtsEx
             }
         }
 
-        private static readonly ResourceSet Resources = new ResourceSet();
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
 
         public static App Instance { get; private set; }
+
+        static App()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
 
         private App(Process targetProcess, Assembly bveAssembly, Assembly atsExPluginHostAssembly)
         {
@@ -67,8 +74,8 @@ namespace Automatic9045.AtsEx
             Started?.Invoke(e);
         }
 
-        public string ProductName { get; } = Resources.ProductName.Value;
-        public string ProductShortName { get; } = Resources.ProductShortName.Value;
+        public string ProductName { get; } = Resources.Value.ProductName.Value;
+        public string ProductShortName { get; } = Resources.Value.ProductShortName.Value;
 
         public Process Process { get; }
         public Assembly AtsExAssembly { get; }
