@@ -15,7 +15,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
     /// <summary>
     /// 閉塞を表します。
     /// </summary>
-    public class Section : ClassWrapperBase
+    public class Section : MapObjectBase
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
