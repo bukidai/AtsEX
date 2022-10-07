@@ -135,9 +135,10 @@ namespace Automatic9045.AtsEx.Plugins
                             break;
                     }
 
-                    List<PluginBase> constructedPlugins = new List<PluginBase>();
-                    foreach ((Type type, ConstructorInfo constructorInfo) in constructors)
+                    List<PluginBase> constructedPlugins = constructors.ConvertAll(constructor =>
                     {
+                        (Type type, ConstructorInfo constructorInfo) = constructor;
+
                         PluginBase pluginInstance = constructorInfo.Invoke(new object[] { new PluginBuilder(App.Instance, BveHacker, GenerateIdentifier()) }) as PluginBase;
                         if (pluginInstance.PluginType != pluginType)
                         {
@@ -148,8 +149,8 @@ namespace Automatic9045.AtsEx.Plugins
                             throw new NotSupportedException(string.Format(Resources.Value.MustUseExtensions.Value, pluginInstance.PluginType.GetTypeString(), App.Instance.ProductShortName));
                         }
 
-                        constructedPlugins.Add(pluginInstance);
-                    }
+                        return pluginInstance;
+                    });
 
                     return constructedPlugins;
 
