@@ -22,6 +22,8 @@ namespace Automatic9045.AtsEx.PluginHost
             Parameters = new object[] { App, BveHacker };
         }
 
+        public async Task InitializeAllAsync() => await Task.Run(InitializeAll).ConfigureAwait(false);
+
         public abstract void InitializeAll();
 
         protected void Initialize<TTargetAttribute>(IEnumerable<Type> targetTypes, Func<MethodInfo, bool> methodSelector, object[] parameters) where TTargetAttribute : Attribute

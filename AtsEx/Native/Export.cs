@@ -171,7 +171,7 @@ namespace Automatic9045.AtsEx.Native
 #endif
 
             Activator = new AtsExActivator();
-            Activator.CheckUpdates();
+            Activator.CheckUpdatesAsync().Wait();
             Activator.ResolveAssemblies();
         }
 

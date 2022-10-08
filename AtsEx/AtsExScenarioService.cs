@@ -61,11 +61,11 @@ namespace Automatic9045.AtsEx
             try
             {
                 {
-                    VehiclePlugins = pluginLoader.LoadFromPluginUsing(vehiclePluginUsing);
+                    VehiclePlugins = pluginLoader.LoadFromPluginUsingAsync(vehiclePluginUsing).Result;
                 }
 
                 {
-                    Map map = Map.Load(BveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path, pluginLoader, loadErrorResolver);
+                    Map map = Map.LoadAsync(BveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path, pluginLoader, loadErrorResolver).Result;
                     MapPlugins = map.LoadedPlugins;
 
                     IEnumerable<LoadError> removeTargetErrors = BveHacker.LoadErrorManager.Errors.Where(error =>

@@ -40,7 +40,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
 
             HarmonyPatch CreateAndSetupPatch(MethodBase original)
             {
-                HarmonyPatch patch = HarmonyPatch.Patch(original, PatchTypes.Postfix);
+                HarmonyPatch patch = HarmonyPatch.PatchAsync(original, PatchTypes.Postfix).Result;
                 patch.Postfix += OnPatchInvoked;
 
                 return patch;

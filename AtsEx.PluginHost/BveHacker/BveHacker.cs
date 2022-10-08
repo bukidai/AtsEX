@@ -57,7 +57,7 @@ namespace Automatic9045.AtsEx.PluginHost
 
             try
             {
-                BveTypes = BveTypeSet.Load(App.BveAssembly, App.BveVersion, true, profileForDifferentBveVersionLoaded);
+                BveTypes = BveTypeSet.LoadAsync(App.BveAssembly, App.BveVersion, true, profileForDifferentBveVersionLoaded).Result;
             }
             catch (KeyNotFoundException)
             {
@@ -66,10 +66,10 @@ namespace Automatic9045.AtsEx.PluginHost
             }
 
             ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(App, this);
-            classWrapperInitializer.InitializeAll();
+            classWrapperInitializer.InitializeAllAsync().Wait();
 
             BveTypesSetter bveTypesSetter = new BveTypesSetter(App, this);
-            bveTypesSetter.InitializeAll();
+            bveTypesSetter.InitializeAllAsync().Wait();
 
             MainFormHacker = new MainFormHacker(App.Process);
             ScenarioHacker = new ScenarioHacker(MainFormHacker, BveTypes);

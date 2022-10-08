@@ -29,7 +29,10 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
         /// <exception cref="NotImplementedException"></exception>
         /// <exception cref="TypeLoadException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        internal static BveTypeSet Load(Assembly bveAssembly, Version bveVersion, bool allowLoadProfileForDifferentBveVersion, Action<Version> profileForDifferentBveVersionLoaded = null)
+        internal static async Task<BveTypeSet> LoadAsync(Assembly bveAssembly, Version bveVersion, bool allowLoadProfileForDifferentBveVersion, Action<Version> profileForDifferentBveVersionLoaded = null)
+            => await Task.Run(() => Load(bveAssembly, bveVersion, allowLoadProfileForDifferentBveVersion, profileForDifferentBveVersionLoaded)).ConfigureAwait(false);
+
+        private static BveTypeSet Load(Assembly bveAssembly, Version bveVersion, bool allowLoadProfileForDifferentBveVersion, Action<Version> profileForDifferentBveVersionLoaded = null)
         {
             Assembly pluginHostAssembly = Assembly.GetExecutingAssembly();
 

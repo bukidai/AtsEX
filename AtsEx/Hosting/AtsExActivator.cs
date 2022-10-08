@@ -33,7 +33,7 @@ namespace Automatic9045.AtsEx.Hosting
             CheckAssembly();
         }
 
-        public void CheckUpdates()
+        public async Task CheckUpdatesAsync()
         {
             AssemblyResolver.Register(Path.Combine(DirectoryName, "Octokit.dll"));
 
@@ -41,7 +41,7 @@ namespace Automatic9045.AtsEx.Hosting
             {
                 AtsExRepositoryHost repositoryHost = new AtsExRepositoryHost();
 
-                Version latestVersion = repositoryHost.GetLatestVersion();
+                Version latestVersion = await repositoryHost.GetLatestVersionAsync().ConfigureAwait(false);
                 Version currentVersion = ExecutingAssembly.GetName().Version;
 
                 if (currentVersion < latestVersion)

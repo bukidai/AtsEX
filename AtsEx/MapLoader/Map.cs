@@ -28,7 +28,10 @@ namespace Automatic9045.AtsEx
             MapPluginUsingErrors = mapPluginUsingErrors;
         }
 
-        public static Map Load(string filePath, PluginLoader pluginLoader, ILoadErrorResolver loadErrorResolver)
+        public static async Task<Map> LoadAsync(string filePath, PluginLoader pluginLoader, ILoadErrorResolver loadErrorResolver)
+            => await Task.Run(() => Load(filePath, pluginLoader, loadErrorResolver)).ConfigureAwait(false);
+
+        private static Map Load(string filePath, PluginLoader pluginLoader, ILoadErrorResolver loadErrorResolver)
         {
             Dictionary<string, PluginBase> loadedPlugins = new Dictionary<string, PluginBase>();
             List<LoadError> mapPluginUsingErrors = new List<LoadError>();
@@ -53,7 +56,7 @@ namespace Automatic9045.AtsEx
                                 try
                                 {
                                     PluginUsing mapPluginUsing = PluginUsing.Load(PluginType.MapPlugin, mapPluginUsingAbsolutePath);
-                                    Dictionary<string, PluginBase> loadedMapPlugins = pluginLoader.LoadFromPluginUsing(mapPluginUsing);
+                                    Dictionary<string, PluginBase> loadedMapPlugins = pluginLoader.LoadFromPluginUsingAsync(mapPluginUsing).Result;
                                     AddRangeToLoadedPlugins(loadedMapPlugins);
                                 }
                                 catch (CompilationException ex)

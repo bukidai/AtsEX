@@ -21,10 +21,10 @@ namespace Automatic9045.AtsEx.Hosting
         {
         }
 
-        public Version GetLatestVersion()
+        public async Task<Version> GetLatestVersionAsync()
         {
             GitHubClient client = new GitHubClient(new ProductHeaderValue("atsex"));
-            IReadOnlyList<Release> releases = client.Repository.Release.GetAll(RepositoryOwner, RepositoryName).Result;
+            IReadOnlyList<Release> releases = await client.Repository.Release.GetAll(RepositoryOwner, RepositoryName).ConfigureAwait(false);
 
             if (releases.Count == 0) throw new Exception("リリースが見つかりません。");
 

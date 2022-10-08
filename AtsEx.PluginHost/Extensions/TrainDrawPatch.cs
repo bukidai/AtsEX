@@ -38,7 +38,7 @@ namespace Automatic9045.AtsEx.PluginHost.Extensions
         {
             Target = target;
 
-            HarmonyPatch = HarmonyPatch.Patch(DrawCarsMethod.Source, PatchTypes.Prefix);
+            HarmonyPatch = HarmonyPatch.PatchAsync(DrawCarsMethod.Source, PatchTypes.Prefix).Result;
             HarmonyPatch.Prefix += Prefix;
 
 
