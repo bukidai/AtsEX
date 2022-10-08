@@ -130,6 +130,15 @@ namespace ObjectiveHarmonyPatch
         /// <param name="original">パッチを適用するメソッド。</param>
         /// <param name="patchTypes">使用するパッチの種類。ここで指定されていないパッチを参照しようとした場合、例外が発生します。</param>
         /// <returns>パッチを表す <see cref="HarmonyPatch"/>。</returns>
+        public static async Task<HarmonyPatch> PatchAsync(MethodBase original, PatchTypes patchTypes)
+            => await Task.Run(() => Patch(original, patchTypes)).ConfigureAwait(false);
+
+        /// <summary>
+        /// 指定したメソッドに Harmony パッチを適用します。
+        /// </summary>
+        /// <param name="original">パッチを適用するメソッド。</param>
+        /// <param name="patchTypes">使用するパッチの種類。ここで指定されていないパッチを参照しようとした場合、例外が発生します。</param>
+        /// <returns>パッチを表す <see cref="HarmonyPatch"/>。</returns>
         public static HarmonyPatch Patch(MethodBase original, PatchTypes patchTypes) => new HarmonyPatch(original, patchTypes);
 
         /// <inheritdoc/>
