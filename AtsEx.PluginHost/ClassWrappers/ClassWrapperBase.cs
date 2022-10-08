@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using FastMember;
 using UnembeddedResources;
 
 using Automatic9045.AtsEx.PluginHost.BveTypes;
@@ -65,18 +66,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 throw new ArgumentException(string.Format(Resources.Value.TypeNotClassWrapper.Value, wrapperType.FullName, typeof(ClassWrapperBase).Name), nameof(wrapperType));
             }
 
-            MethodInfo fromSourceMethod = wrapperType.
-                GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.InvokeMethod).
-                FirstOrDefault(method =>
-                {
-                    if (method.GetCustomAttribute<CreateClassWrapperFromSourceAttribute>() is null) return false;
-
-                    ParameterInfo[] parameters = method.GetParameters();
-                    return parameters.Length == 1 && parameters[0].ParameterType == typeof(object) && method.ReturnType == wrapperType;
-                });
-            return fromSourceMethod is null
+            FastMethod method = BveTypes.GetCreateFromSourceMethod(wrapperType);
+            return method is null
                 ? throw new InvalidOperationException(string.Format(Resources.Value.FromSourceMethodNotFound.Value, wrapperType.FullName))
-                : (ClassWrapperBase)fromSourceMethod.Invoke(null, new object[] { src });
+                : method.Invoke(null, new object[] { src }) as ClassWrapperBase;
         }
 
         /// <summary>

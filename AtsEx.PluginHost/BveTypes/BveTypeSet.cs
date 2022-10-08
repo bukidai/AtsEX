@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using FastMember;
 using TypeWrapping;
 using UnembeddedResources;
 
@@ -41,6 +43,7 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
 
         private readonly Dictionary<Type, TypeMemberSetBase> Types;
         private readonly Dictionary<Type, Type> OriginalAndWrapperTypes;
+        private readonly ConcurrentDictionary<Type, FastMethod> FromSourceMethods = new ConcurrentDictionary<Type, FastMethod>();
 
         private BveTypeSet(IEnumerable<TypeMemberSetBase> types, Version profileVersion)
         {
@@ -126,5 +129,27 @@ namespace Automatic9045.AtsEx.PluginHost.BveTypes
         /// <param name="originalType">オリジナル型。</param>
         /// <returns></returns>
         public Type GetWrapperTypeOf(Type originalType) => OriginalAndWrapperTypes[originalType];
+
+
+        internal FastMethod GetCreateFromSourceMethod(Type wrapperType)
+        {
+            if (wrapperType is null) throw new ArgumentNullException(nameof(wrapperType));
+
+            FastMethod result = FromSourceMethods.GetOrAdd(wrapperType, type =>
+            {
+                MethodInfo fromSourceMethod = wrapperType.
+                    GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.InvokeMethod).
+                    FirstOrDefault(method =>
+                    {
+                        if (method.GetCustomAttribute<CreateClassWrapperFromSourceAttribute>() is null) return false;
+
+                        ParameterInfo[] parameters = method.GetParameters();
+                        return parameters.Length == 1 && parameters[0].ParameterType == typeof(object) && method.ReturnType == wrapperType;
+                    });
+
+                return fromSourceMethod is null ? null : FastMethod.Create(fromSourceMethod);
+            });
+            return result;
+        }
     }
 }
