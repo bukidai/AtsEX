@@ -19,10 +19,10 @@ namespace Automatic9045.AtsEx
         protected const string NoMapPluginHeader = "[[nompi]]";
         protected const string MapPluginUsingHeader = "<mpiusing>";
 
-        public SortedList<string, PluginBase> LoadedPlugins { get; } = new SortedList<string, PluginBase>();
-        public List<LoadError> MapPluginUsingErrors { get; } = new List<LoadError>();
+        public Dictionary<string, PluginBase> LoadedPlugins { get; }
+        public List<LoadError> MapPluginUsingErrors { get; }
 
-        protected Map(SortedList<string, PluginBase> loadedPlugins, List<LoadError> mapPluginUsingErrors)
+        protected Map(Dictionary<string, PluginBase> loadedPlugins, List<LoadError> mapPluginUsingErrors)
         {
             LoadedPlugins = loadedPlugins;
             MapPluginUsingErrors = mapPluginUsingErrors;
@@ -30,7 +30,7 @@ namespace Automatic9045.AtsEx
 
         public static Map Load(string filePath, PluginLoader pluginLoader, ILoadErrorResolver loadErrorResolver)
         {
-            SortedList<string, PluginBase> loadedPlugins = new SortedList<string, PluginBase>();
+            Dictionary<string, PluginBase> loadedPlugins = new Dictionary<string, PluginBase>();
             List<LoadError> mapPluginUsingErrors = new List<LoadError>();
 
             string fileName = Path.GetFileName(filePath);
@@ -53,7 +53,7 @@ namespace Automatic9045.AtsEx
                                 try
                                 {
                                     PluginUsing mapPluginUsing = PluginUsing.Load(PluginType.MapPlugin, mapPluginUsingAbsolutePath);
-                                    SortedList<string, PluginBase> loadedMapPlugins = pluginLoader.LoadFromPluginUsing(mapPluginUsing);
+                                    Dictionary<string, PluginBase> loadedMapPlugins = pluginLoader.LoadFromPluginUsing(mapPluginUsing);
                                     AddRangeToLoadedPlugins(loadedMapPlugins);
                                 }
                                 catch (CompilationException ex)
@@ -85,7 +85,7 @@ namespace Automatic9045.AtsEx
             return new Map(loadedPlugins, mapPluginUsingErrors);
 
 
-            void AddRangeToLoadedPlugins(IDictionary<string, PluginBase> plugins)
+            void AddRangeToLoadedPlugins(IReadOnlyDictionary<string, PluginBase> plugins)
             {
                 foreach (KeyValuePair<string, PluginBase> item in plugins)
                 {

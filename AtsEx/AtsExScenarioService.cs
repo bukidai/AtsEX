@@ -48,8 +48,8 @@ namespace Automatic9045.AtsEx
 
         private readonly BveHacker BveHacker;
 
-        private readonly SortedList<string, PluginBase> VehiclePlugins;
-        private readonly SortedList<string, PluginBase> MapPlugins;
+        private readonly Dictionary<string, PluginBase> VehiclePlugins;
+        private readonly Dictionary<string, PluginBase> MapPlugins;
 
         protected AtsExScenarioService(AtsEx atsEx, PluginUsing vehiclePluginUsing, VehicleSpec vehicleSpec)
         {
@@ -87,8 +87,8 @@ namespace Automatic9045.AtsEx
             }
             finally
             {
-                if (VehiclePlugins is null) VehiclePlugins = new SortedList<string, PluginBase>();
-                if (MapPlugins is null) MapPlugins = new SortedList<string, PluginBase>();
+                if (VehiclePlugins is null) VehiclePlugins = new Dictionary<string, PluginBase>();
+                if (MapPlugins is null) MapPlugins = new Dictionary<string, PluginBase>();
 
                 App.Instance.VehiclePlugins = VehiclePlugins;
                 App.Instance.MapPlugins = MapPlugins;

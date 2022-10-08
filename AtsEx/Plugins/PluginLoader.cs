@@ -53,9 +53,9 @@ namespace Automatic9045.AtsEx.Plugins
             BveHacker = bveHacker;
         }
 
-        public SortedList<string, PluginBase> LoadFromPluginUsing(PluginUsing pluginUsing)
+        public Dictionary<string, PluginBase> LoadFromPluginUsing(PluginUsing pluginUsing)
         {
-            SortedList<string, PluginBase> plugins = new SortedList<string, PluginBase>();
+            Dictionary<string, PluginBase> plugins = new Dictionary<string, PluginBase>();
 
             foreach (KeyValuePair<Identifier, Assembly> item in pluginUsing.Assemblies)
             {

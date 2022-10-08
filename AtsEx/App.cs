@@ -83,27 +83,31 @@ namespace Automatic9045.AtsEx
         public Assembly BveAssembly { get; }
         public Version BveVersion { get; }
 
-        private SortedList<string, PluginBase> _VehiclePlugins = null;
-        public SortedList<string, PluginBase> VehiclePlugins
+        private Dictionary<string, PluginBase> _VehiclePlugins = null;
+        public Dictionary<string, PluginBase> VehiclePlugins
         {
             get => _VehiclePlugins is null ? throw new PropertyNotInitializedException(nameof(VehiclePlugins)) : _VehiclePlugins;
             set
             {
                 _VehiclePlugins = value;
-                _Plugins[PluginType.VehiclePlugin] = new ReadOnlyDictionary<string, PluginBase>(value);
-                AllVehiclePluginLoaded?.Invoke(new AllPluginLoadedEventArgs(_VehiclePlugins));
+                ReadOnlyDictionary<string, PluginBase> readonlyDictionary = new ReadOnlyDictionary<string, PluginBase>(value);
+
+                _Plugins[PluginType.VehiclePlugin] = readonlyDictionary;
+                AllVehiclePluginLoaded?.Invoke(new AllPluginLoadedEventArgs(readonlyDictionary));
             }
         }
 
-        private SortedList<string, PluginBase> _MapPlugins = null;
-        public SortedList<string, PluginBase> MapPlugins
+        private Dictionary<string, PluginBase> _MapPlugins = null;
+        public Dictionary<string, PluginBase> MapPlugins
         {
             get => _MapPlugins is null ? throw new PropertyNotInitializedException(nameof(MapPlugins)) : _MapPlugins;
             set
             {
                 _MapPlugins = value;
-                _Plugins[PluginType.MapPlugin] = new ReadOnlyDictionary<string, PluginBase>(value);
-                AllMapPluginLoaded?.Invoke(new AllPluginLoadedEventArgs(_MapPlugins));
+                ReadOnlyDictionary<string, PluginBase> readonlyDictionary = new ReadOnlyDictionary<string, PluginBase>(value);
+
+                _Plugins[PluginType.MapPlugin] = readonlyDictionary;
+                AllMapPluginLoaded?.Invoke(new AllPluginLoadedEventArgs(readonlyDictionary));
             }
         }
 

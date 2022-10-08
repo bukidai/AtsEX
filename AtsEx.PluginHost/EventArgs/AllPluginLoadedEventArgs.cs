@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -11,9 +12,9 @@ namespace Automatic9045.AtsEx.PluginHost.Plugins
 {
     public class AllPluginLoadedEventArgs : EventArgs
     {
-        public SortedList<string, PluginBase> Plugins { get; }
+        public ReadOnlyDictionary<string, PluginBase> Plugins { get; }
 
-        public AllPluginLoadedEventArgs(SortedList<string, PluginBase> plugins) : base()
+        public AllPluginLoadedEventArgs(ReadOnlyDictionary<string, PluginBase> plugins) : base()
         {
             Plugins = plugins;
         }
