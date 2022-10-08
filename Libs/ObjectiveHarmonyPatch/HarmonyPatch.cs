@@ -15,7 +15,7 @@ namespace ObjectiveHarmonyPatch
     /// </summary>
     public sealed partial class HarmonyPatch : IDisposable
     {
-        private static readonly Harmony Harmony = new Harmony("com.automatic9045.atsex.dynamic-harmony-host");
+        private static readonly Harmony Harmony = new Harmony("com.objective-harmony-patch");
         private static readonly SortedList<MethodBase, List<HarmonyPatch>> Patches = new SortedList<MethodBase, List<HarmonyPatch>>(new MethodComaparer());
 
         private readonly MethodBase Original;
