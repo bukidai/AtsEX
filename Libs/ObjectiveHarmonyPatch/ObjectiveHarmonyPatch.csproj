@@ -49,6 +49,7 @@
     <Compile Include="PatchInvokationResult.cs" />
     <Compile Include="PatchInvokedEventArgs.cs" />
     <Compile Include="PatchInvokedEventHandler.cs" />
+    <Compile Include="PatchTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
