@@ -27,10 +27,12 @@ namespace Automatic9045.AtsEx.Caller
             };
         }
 
-        public void Register(string absolutePath)
+        public Assembly Register(string absolutePath)
         {
             Assembly assembly = Assembly.LoadFrom(absolutePath);
             Register(assembly);
+
+            return assembly;
         }
     }
 }

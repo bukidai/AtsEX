@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Automatic9045.AtsEx.Native;
+using AtsEx.Native;
 
 namespace Automatic9045.AtsEx.Caller
 {
@@ -24,8 +25,8 @@ namespace Automatic9045.AtsEx.Caller
         {
             try
             {
-                LoadAtsExAssembly();
-                CheckCompability();
+                Assembly atsExAssembly = LoadAtsExAssembly();
+                CheckCompability(atsExAssembly);
             }
             catch (Exception ex)
             {
@@ -34,7 +35,7 @@ namespace Automatic9045.AtsEx.Caller
             }
 
 
-            void LoadAtsExAssembly()
+            Assembly LoadAtsExAssembly()
             {
                 string configLocation = Path.Combine(Path.GetDirectoryName(Assembly.Location), "AtsEx.Caller.txt");
                 string atsExLocation;
@@ -44,12 +45,15 @@ namespace Automatic9045.AtsEx.Caller
                 }
 
                 AssemblyResolver assemblyResolver = new AssemblyResolver(AppDomain.CurrentDomain);
-                assemblyResolver.Register(atsExLocation);
+                Assembly atsExAssembly = assemblyResolver.Register(atsExLocation);
+
+                return atsExAssembly;
             }
 
-            void CheckCompability()
+            void CheckCompability(Assembly atsExAssembly)
             {
-                if (CallerCompatibilityInfo.CompatibilityVersion != CallerVersion)
+                CallerCompatibilityVersionAttribute compatibilityVersionAttribute = atsExAssembly.GetCustomAttribute<CallerCompatibilityVersionAttribute>();
+                if (compatibilityVersionAttribute.Version != CallerVersion)
                 {
                     Version assemblyVersion = Assembly.GetName().Version;
                     throw new NotSupportedException(

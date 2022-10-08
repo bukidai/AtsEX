@@ -2,6 +2,8 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
+using AtsEx.Native;
+
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // 制御されます。アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
@@ -33,3 +35,8 @@ using System.Runtime.InteropServices;
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("0.15.20828.1")]
+
+// 互換性バージョンの履歴
+// ==============================
+// 1: beta0.16 (0.16.x.x) - 
+[assembly: CallerCompatibilityVersion(1)]
