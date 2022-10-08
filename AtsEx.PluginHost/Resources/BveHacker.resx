@@ -126,6 +126,6 @@ SlimDX.dlls loaded are the following:
 
 {0}
 
-Please delete all but the one in the BVE, as loading multiple SlimDX.dlls will cause some problems.</value>
+If plugins include some SlimDX.dll(s), please delete them, as loading multiple SlimDX.dlls will cause some problems.</value>
   </data>
 </root>
