@@ -65,6 +65,20 @@ namespace ObjectiveHarmonyPatch
             return args.ToArray();
         }
 
+        /// <summary>
+        /// 指定したメソッドに Harmony パッチを適用します。
+        /// </summary>
+        /// <param name="original">パッチを適用するメソッド。</param>
+        /// <returns>パッチを表す <see cref="HarmonyPatch"/>。</returns>
+        public static HarmonyPatch Patch(MethodBase original) => new HarmonyPatch(original);
+
+        /// <inheritdoc/>
+        public void Dispose()
+        {
+            if (!(PrefixHarmonyMethod is null)) Harmony.Unpatch(Original, PrefixHarmonyMethod.method);
+            if (!(PostfixHarmonyMethod is null)) Harmony.Unpatch(Original, PostfixHarmonyMethod.method);
+        }
+
 #pragma warning disable IDE1006 // 命名スタイル
         private static bool PrefixMethod(object __instance, ref object __result, object[] __args, MethodBase __originalMethod, bool __runOriginal)
             => InvokePatches(__instance, ref __result, __args, __originalMethod, __runOriginal, patch => patch.Prefix);
@@ -120,19 +134,5 @@ namespace ObjectiveHarmonyPatch
             return !cancel;
         }
 #pragma warning restore IDE1006 // 命名スタイル
-
-        /// <summary>
-        /// 指定したメソッドに Harmony パッチを適用します。
-        /// </summary>
-        /// <param name="original">パッチを適用するメソッド。</param>
-        /// <returns>パッチを表す <see cref="HarmonyPatch"/>。</returns>
-        public static HarmonyPatch Patch(MethodBase original) => new HarmonyPatch(original);
-
-        /// <inheritdoc/>
-        public void Dispose()
-        {
-            if (!(PrefixHarmonyMethod is null)) Harmony.Unpatch(Original, PrefixHarmonyMethod.method);
-            if (!(PostfixHarmonyMethod is null)) Harmony.Unpatch(Original, PostfixHarmonyMethod.method);
-        }
     }
 }
