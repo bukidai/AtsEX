@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("AtsEX 車両プラグイン：状態取得・設定サンプル")]
 [assembly: AssemblyDescription("AtsEX で車両・路線の状態を取得・設定するサンプル")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("AtsEX Project")]
 [assembly: AssemblyProduct("AtsEX")]
 [assembly: AssemblyCopyright("Copyright © 2022 automatic9045")]
 [assembly: AssemblyTrademark("")]

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("AtsEX 車両プラグイン：シンプルな ATS サンプル")]
 [assembly: AssemblyDescription("速度が 100km/h 以上になると減速するサンプル")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("AtsEX Project")]
 [assembly: AssemblyProduct("AtsEX")]
 [assembly: AssemblyCopyright("Copyright © 2022 automatic9045")]
 [assembly: AssemblyTrademark("")]

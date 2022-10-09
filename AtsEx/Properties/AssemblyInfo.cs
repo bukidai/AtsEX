@@ -10,7 +10,7 @@ using AtsEx.Native;
 [assembly: AssemblyTitle("AtsEX")]
 [assembly: AssemblyDescription("ATSプラグイン拡張キット for BVE 5 & 6")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("AtsEX Project")]
 [assembly: AssemblyProduct("AtsEX")]
 [assembly: AssemblyCopyright("Copyright © 2022 automatic9045")]
 [assembly: AssemblyTrademark("")]

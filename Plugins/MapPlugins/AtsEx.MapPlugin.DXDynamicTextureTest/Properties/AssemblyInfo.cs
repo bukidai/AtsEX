@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("AtsEX マッププラグイン：DXDynamicTexture 連携サンプル")]
 [assembly: AssemblyDescription("AtsEX から DXDynamicTexture と連携するサンプル")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("AtsEX Project")]
 [assembly: AssemblyProduct("AtsEX")]
 [assembly: AssemblyCopyright("Copyright © 2022 automatic9045")]
 [assembly: AssemblyTrademark("")]

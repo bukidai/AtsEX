@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Unembedded Resources")]
 [assembly: AssemblyDescription("アセンブリに埋め込まれていないそのままのリソース (.resx) ファイルを参照して、多言語表示に対応するための機能を提供します。")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("automatic9045")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("Copyright © 2022 automatic9045")]
 [assembly: AssemblyTrademark("")]

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("AtsEX マッププラグイン：他列車操作サンプル")]
 [assembly: AssemblyDescription("AtsEX で他列車をプラグインから動作させるサンプル")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("AtsEX Project")]
 [assembly: AssemblyProduct("AtsEX")]
 [assembly: AssemblyCopyright("Copyright © 2022 automatic9045")]
 [assembly: AssemblyTrademark("")]

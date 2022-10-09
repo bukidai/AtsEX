@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("TypeWrapping")]
 [assembly: AssemblyDescription("型をラップして、コードから扱いやすくするための機能を提供します。")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("automatic9045")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("Copyright © 2022 automatic9045")]
 [assembly: AssemblyTrademark("")]
