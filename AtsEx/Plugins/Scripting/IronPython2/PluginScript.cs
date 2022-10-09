@@ -81,9 +81,9 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
             }
         }
 
-        public IScriptResult Run(TGlobals globals)
+        public async Task<IScriptResult> RunAsync(TGlobals globals)
         {
-            ExecuteCode(globals);
+            await Task.Run(() => ExecuteCode(globals)).ConfigureAwait(false);
             return new ScriptResult(Scope);
         }
 
@@ -124,9 +124,9 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
 
         public new IPluginScript<TResult, TGlobals> GetWithCheckErrors() => base.GetWithCheckErrors() as PluginScript<TResult, TGlobals>;
 
-        public new IScriptResult<TResult> Run(TGlobals globals)
+        public async new Task<IScriptResult<TResult>> RunAsync(TGlobals globals)
         {
-            ExecuteCode(globals);
+            await Task.Run(() => ExecuteCode(globals)).ConfigureAwait(false);
             return new ScriptResult<TResult>(Scope);
         }
     }

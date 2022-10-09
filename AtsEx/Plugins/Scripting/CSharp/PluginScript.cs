@@ -92,17 +92,17 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
             return compilationErrors.Any() ? throw new CompilationException(Name, compilationErrors) : this;
         }
 
-        public IScriptResult Run(TGlobals globals)
+        public async Task<IScriptResult> RunAsync(TGlobals globals)
         {
-            ScriptState state = ExecuteCode(globals);
+            ScriptState state = await ExecuteCodeAsync(globals).ConfigureAwait(false);
             return new ScriptResult(state);
         }
 
-        protected ScriptState ExecuteCode(TGlobals globals)
+        protected async Task<ScriptState> ExecuteCodeAsync(TGlobals globals)
         {
             if (!SkipCompile && !CompilationTask.IsCompleted) GetWithCheckErrors();
 
-            ScriptState state = Script.RunAsync(globals).Result;
+            ScriptState state = await Script.RunAsync(globals).ConfigureAwait(false);
             return state;
         }
     }
@@ -143,9 +143,9 @@ namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
 
         public new IPluginScript<TResult, TGlobals> GetWithCheckErrors() => base.GetWithCheckErrors() as PluginScript<TResult, TGlobals>;
 
-        public new IScriptResult<TResult> Run(TGlobals globals)
+        public async new Task<IScriptResult<TResult>> RunAsync(TGlobals globals)
         {
-            ScriptState state = ExecuteCode(globals);
+            ScriptState state = await ExecuteCodeAsync(globals).ConfigureAwait(false);
             return new ScriptResult<TResult>(state);
         }
     }

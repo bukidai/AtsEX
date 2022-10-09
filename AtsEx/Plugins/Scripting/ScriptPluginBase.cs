@@ -69,24 +69,24 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
             TickScript = builder.TickScript?.GetWithCheckErrors();
 
             IPluginScript<Globals> constructorScript = builder.ConstructorScript?.GetWithCheckErrors();
-            constructorScript?.Run(Globals);
+            constructorScript?.RunAsync(Globals).Wait();
 
             BveHacker.ScenarioCreated += OnScenarioCreated;
             App.Started += OnStarted;
         }
 
-        public void Dispose() => DisposeScript?.Run(Globals);
+        public void Dispose() => DisposeScript?.RunAsync(Globals).Wait();
 
         private void OnScenarioCreated(ScenarioCreatedEventArgs e)
         {
             ScenarioCreatedGlobals globals = new ScenarioCreatedGlobals(Globals, e);
-            OnScenarioCreatedScript?.Run(globals);
+            OnScenarioCreatedScript?.RunAsync(globals).Wait();
         }
 
         private void OnStarted(StartedEventArgs e)
         {
             StartedGlobals globals = new StartedGlobals(Globals, e);
-            OnStartedScript?.Run(globals);
+            OnStartedScript?.RunAsync(globals).Wait();
         }
 
         public override TickResult Tick(TimeSpan elapsed)
@@ -104,7 +104,7 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
             }
 
             TickGlobals globals = new TickGlobals(Globals, elapsed);
-            IScriptResult<TickResult> result = TickScript.Run(globals) ?? throw new InvalidOperationException(string.Format(Resources.Value.NoReturnValue.Value, Title, nameof(Tick)));
+            IScriptResult<TickResult> result = TickScript.RunAsync(globals).Result ?? throw new InvalidOperationException(string.Format(Resources.Value.NoReturnValue.Value, Title, nameof(Tick)));
 
             return result.ReturnValue;
         }
