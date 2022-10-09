@@ -59,7 +59,7 @@ namespace Automatic9045.AtsEx
 
         protected abstract void ProfileForDifferentBveVersionLoaded(Version profileVersion);
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             TextureManager.Clear();
 

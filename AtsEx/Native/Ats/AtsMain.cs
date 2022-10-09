@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using Automatic9045.AtsEx.Hosting;
 
 using Automatic9045.AtsEx.Handles;
-using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.Handles;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
 
@@ -31,11 +31,6 @@ namespace Automatic9045.AtsEx.Native
 
         private static AtsEx.AsAtsPlugin AtsEx;
         private static AtsExScenarioService.AsAtsPlugin AtsExScenarioService;
-
-        public static void LoadAsInputDevice(Activator activator)
-        {
-
-        }
 
         public static void Load(Assembly callerAssembly, AtsExActivator activator)
         {

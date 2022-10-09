@@ -49,6 +49,10 @@
     <Reference Include="IronPython.Wpf, Version=2.7.12.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
       <HintPath>..\packages\IronPython.2.7.12\lib\net45\IronPython.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Mackoy.IInputDevice">
+      <HintPath>..\AtsEx.PluginHost\LocalReferences\BveTs\Mackoy.IInputDevice.DLL</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Mackoy.XmlInterfaces">
       <HintPath>..\AtsEx.PluginHost\LocalReferences\BveTs\Mackoy.XmlInterfaces.DLL</HintPath>
       <Private>False</Private>
@@ -121,6 +125,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AtsEx.AsInputDevice.cs" />
+    <Compile Include="AtsExScenarioService.AsInputDevice.cs" />
     <Compile Include="Hosting\AssemblyResolver.cs" />
     <Compile Include="Hosting\AtsExActivator.cs" />
     <Compile Include="Hosting\AtsExRepositoryHost.cs" />
@@ -146,13 +152,14 @@
     <Compile Include="Handles\HandlePositionSet.cs" />
     <Compile Include="Handles\PowerHandle.cs" />
     <Compile Include="Handles\Reverser.cs" />
+    <Compile Include="Native\InputDevice\InputDevice.cs" />
     <Compile Include="Input\NativeAtsKey.cs" />
     <Compile Include="Input\NativeKeySet.cs" />
     <Compile Include="MapLoader\Map.cs" />
     <Compile Include="MapStatementIdentifiers.cs" />
-    <Compile Include="Native\CallerCompatibilityVersionAttribute.cs" />
-    <Compile Include="Native\Export.cs" />
-    <Compile Include="Native\AtsMain.cs" />
+    <Compile Include="Native\Ats\CallerCompatibilityVersionAttribute.cs" />
+    <Compile Include="Native\Ats\Export.cs" />
+    <Compile Include="Native\Ats\AtsMain.cs" />
     <Compile Include="Plugins\Identifier.cs" />
     <Compile Include="Plugins\PluginLoader.cs" />
     <Compile Include="Plugins\PluginUsing.cs" />
@@ -192,6 +199,18 @@
       <Project>{ac6ebf16-d22b-4da8-a0be-5afb729ea2e4}</Project>
       <Name>AtsEx.PluginHost</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Libs\FastMember\FastMember.csproj">
+      <Project>{b63adef8-3bf9-48e1-8b61-8fa042b19f89}</Project>
+      <Name>FastMember</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libs\ObjectiveHarmonyPatch\ObjectiveHarmonyPatch.csproj">
+      <Project>{9a22c1b4-6edf-46ad-a03e-71847594e6e3}</Project>
+      <Name>ObjectiveHarmonyPatch</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libs\TypeWrapping\TypeWrapping.csproj">
+      <Project>{28fc1147-db95-42f0-aeb3-ae8ae93f0179}</Project>
+      <Name>TypeWrapping</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libs\UnembeddedResources\UnembeddedResources.csproj">
       <Project>{97512546-8929-4c0b-983d-5347197a3862}</Project>
@@ -241,10 +260,14 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /e /y /i "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
-xcopy /e /y /i "$(ProjectDir)Resources\" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\Resources\Core\"</PostBuildEvent>
+xcopy /e /y /i "$(ProjectDir)Resources\" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\Resources\Core\"
+
+xcopy /e /y /i "$(TargetDir)" "$(SolutionDir)_InputDevices\AtsEx\"
+xcopy /e /y /i "$(ProjectDir)Resources\" "$(SolutionDir)_InputDevices\AtsEx\Resources\Core\"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PlatformTarget>AnyCPU</PlatformTarget>
