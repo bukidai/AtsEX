@@ -308,6 +308,26 @@
 		<Method Wrapper="SetRoute" WrapperParams="atsex:Route" Original="a"/>
 	</Class>
 
+	<Class Wrapper="ObjectPassedEventArgs" Original="e5">
+		<Property Wrapper="MapObject">
+			<Getter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="PluginLoader" Original="aa">
+		<Method Wrapper="OnSetBeaconData" WrapperParams="System.Object; atsex:ObjectPassedEventArgs" Original="a" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnKeyDown" WrapperParams="System.Object; Mackoy.Bvets.InputEventArgs, Mackoy.IInputDevice" Original="b" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnKeyUp" WrapperParams="System.Object; Mackoy.Bvets.InputEventArgs, Mackoy.IInputDevice" Original="a" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnDoorStateChanged" WrapperParams="System.Object; System.EventArgs" Original="c" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnSetSignal" WrapperParams="System.Object; System.EventArgs" Original="b" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnSetReverser" WrapperParams="System.Object; System.EventArgs" Original="a" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnSetBrake" WrapperParams="System.Object; atsex:ValueEventArgs`1[System.Int32]" Original="b" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnSetPower" WrapperParams="System.Object; atsex:ValueEventArgs`1[System.Int32]" Original="a" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnSetVehicleSpec" WrapperParams="atsex:NotchInfo; System.Int32" Original="a"/>
+		<Method Wrapper="OnInitialize" WrapperParams="atsex:BrakePosition" Original="a"/>
+		<Method Wrapper="OnElapse" WrapperParams="System.Int32" Original="a"/>
+	</Class>
+
 	<Class Wrapper="PreTrainObjectList" Original="e6">
 		<Method Wrapper="GetPreTrainLocation" WrapperParams="System.Int32" Original="a"/>
 	</Class>
@@ -664,6 +684,12 @@
 		<Method Wrapper="SetLocation" WrapperParams="System.Double; System.Boolean" Original="a"/>
 	</Class>
 
+	<Class Wrapper="ValueEventArgs`1" Original="ValueEventArgs`1">
+		<Property Wrapper="Value">
+			<Getter Original="a"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="Vehicle" Original="f">
 		<Property Wrapper="Instruments">
 			<Getter Original="f"/>
@@ -707,6 +733,10 @@
 	<Class Wrapper="VehicleInstrumentSet" Original="ck">
 		<Property Wrapper="Cab">
 			<Getter Original="e"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="PluginLoader">
+			<Getter Original="f"/>
 			<Setter Original="a"/>
 		</Property>
 	</Class>

@@ -57,7 +57,7 @@ namespace Automatic9045.AtsEx
 
             LoadErrorResolver loadErrorResolver = new LoadErrorResolver(BveHacker);
 
-            PluginLoader pluginLoader = new PluginLoader(BveHacker);
+            Plugins.PluginLoader pluginLoader = new Plugins.PluginLoader(BveHacker);
             try
             {
                 {

@@ -81,9 +81,12 @@
     <Compile Include="ClassWrappers\Public\HendleSet.cs" />
     <Compile Include="ClassWrappers\Public\MapFunctionList.cs" />
     <Compile Include="ClassWrappers\Public\NotchInfo.cs" />
+    <Compile Include="ClassWrappers\Public\ObjectPassedEventArgs.cs" />
+    <Compile Include="ClassWrappers\Public\PluginLoader.cs" />
     <Compile Include="ClassWrappers\Public\PreTrainObjectList.cs" />
     <Compile Include="ClassWrappers\Public\RepeatedStructure.cs" />
     <Compile Include="ClassWrappers\Public\Section.cs" />
+    <Compile Include="ClassWrappers\Public\ValueEventArgs.cs" />
     <Compile Include="ClassWrappers\Public\VehicleInstrumentSet.cs" />
     <Compile Include="ClassWrappers\Public\SectionManager.cs" />
     <Compile Include="DictionaryExtensions.cs" />

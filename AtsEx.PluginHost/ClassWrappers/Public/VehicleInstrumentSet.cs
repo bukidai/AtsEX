@@ -24,6 +24,9 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
             CabGetMethod = members.GetSourcePropertyGetterOf(nameof(Cab));
             CabSetMethod = members.GetSourcePropertySetterOf(nameof(Cab));
+
+            PluginLoaderGetMethod = members.GetSourcePropertyGetterOf(nameof(PluginLoader));
+            PluginLoaderSetMethod = members.GetSourcePropertySetterOf(nameof(PluginLoader));
         }
 
         /// <summary>
@@ -51,6 +54,17 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             get => CabBase.FromSource(CabGetMethod.Invoke(Src, null));
             internal set => CabSetMethod.Invoke(Src, new object[] { value.Src });
+        }
+
+        private static FastMethod PluginLoaderGetMethod;
+        private static FastMethod PluginLoaderSetMethod;
+        /// <summary>
+        /// プラグインの読込機能を提供する <see cref="ClassWrappers.PluginLoader"/> を取得します。
+        /// </summary>
+        public PluginLoader PluginLoader
+        {
+            get => ClassWrappers.PluginLoader.FromSource(PluginLoaderGetMethod.Invoke(Src, null));
+            internal set => PluginLoaderSetMethod.Invoke(Src, new object[] { value.Src });
         }
     }
 }
