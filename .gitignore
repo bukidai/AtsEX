@@ -6,6 +6,8 @@ obj
 /DllExport.bat
 /packages
 
+/_InputDevices
+
 /_SampleScenarios/Automatic9045/AtsEx/*.dll
 /_SampleScenarios/Automatic9045/AtsEx/*.pdb
 /_SampleScenarios/Automatic9045/AtsEx/*.dll.config
