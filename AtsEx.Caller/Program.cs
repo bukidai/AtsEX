@@ -44,10 +44,14 @@ namespace Automatic9045.AtsEx.Caller
                     atsExLocation = Path.Combine(Path.GetDirectoryName(Assembly.Location), sr.ReadLine());
                 }
 
-                AssemblyResolver assemblyResolver = new AssemblyResolver(AppDomain.CurrentDomain);
-                Assembly atsExAssembly = assemblyResolver.Register(atsExLocation);
+                AppDomain.CurrentDomain.AssemblyResolve += (sender, e) =>
+                {
+                    AssemblyName assemblyName = new AssemblyName(e.Name);
+                    string path = Path.Combine(Path.GetDirectoryName(atsExLocation), assemblyName.Name + ".dll");
+                    return File.Exists(path) ? Assembly.LoadFrom(path) : null;
+                };
 
-                return atsExAssembly;
+                return Assembly.LoadFrom(atsExLocation);
             }
 
             void CheckCompatibility(Assembly atsExAssembly)

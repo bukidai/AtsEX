@@ -18,25 +18,17 @@ namespace Automatic9045.AtsEx.Hosting
 
         private readonly Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
 
-        private readonly AssemblyResolver AssemblyResolver;
-        private readonly string DirectoryName;
-
         public AtsExActivator()
         {
             TargetProcess = Process.GetCurrentProcess();
             TargetAppDomain = AppDomain.CurrentDomain;
             TargetAssembly = Assembly.GetEntryAssembly();
 
-            AssemblyResolver = new AssemblyResolver(TargetAppDomain);
-            DirectoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
             CheckAssembly();
         }
 
         public async Task CheckUpdatesAsync()
         {
-            AssemblyResolver.Register(Path.Combine(DirectoryName, "Octokit.dll"));
-
             try
             {
                 AtsExRepositoryHost repositoryHost = new AtsExRepositoryHost();
@@ -58,11 +50,6 @@ namespace Automatic9045.AtsEx.Hosting
             catch
             {
             }
-        }
-
-        public void ResolveAssemblies()
-        {
-            AssemblyResolver.Register(Path.Combine(DirectoryName, "AtsEx.PluginHost.dll"));
         }
 
         private void CheckAssembly()

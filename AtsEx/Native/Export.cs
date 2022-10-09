@@ -172,7 +172,6 @@ namespace Automatic9045.AtsEx.Native
 
             Activator = new AtsExActivator();
             Activator.CheckUpdatesAsync().Wait();
-            Activator.ResolveAssemblies();
         }
 
         public static void Load(Assembly callerAssembly) => AtsMain.Load(callerAssembly, Activator);
