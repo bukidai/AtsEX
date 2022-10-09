@@ -7,25 +7,13 @@ using System.Threading.Tasks;
 
 namespace FastMember
 {
-    public class FastMethod
+    public abstract partial class FastMethod
     {
-        private readonly Func<object, object[], object> Invoker;
-
-        public MethodInfo Source { get; }
-
-        protected FastMethod(MethodInfo source, Func<object, object[], object> invoker)
-        {
-            Source = source;
-            Invoker = invoker;
-        }
+        public abstract MethodInfo Source { get; }
 
         public static FastMethod Create(MethodInfo source)
-        {
-            Func<object, object[], object> invoker = ReflectionExpressionGenerator.GenerateMethodInvoker(source);
+            => source.DeclaringType.IsGenericTypeDefinition ? new Generic(source) : new NonGeneric(source) as FastMethod;
 
-            return new FastMethod(source, invoker);
-        }
-
-        public object Invoke(object instance, object[] args) => Invoker(instance, args);
+        public abstract object Invoke(object instance, object[] args);
     }
 }

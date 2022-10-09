@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,8 @@ namespace TypeWrapping
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> IllegalCharacterDetectedInAlias { get; private set; }
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> IllegalTypeDetected { get; private set; }
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> TypeNotFound { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> TypeNameFormatNotSupported { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> BracketPairMissing { get; private set; }
 
             public ResourceSet()
             {
@@ -36,8 +39,8 @@ namespace TypeWrapping
 #endif
         }
 
-        private readonly Dictionary<string, Type> Cache = new Dictionary<string, Type>();
-        private readonly Dictionary<string, Type> SpecializedTypes;
+        private readonly ConcurrentDictionary<string, Type> Cache = new ConcurrentDictionary<string, Type>();
+        private readonly ConcurrentDictionary<string, Type> SpecializedTypes;
 
         private readonly string SpecializedTypeAlias;
 
@@ -60,58 +63,109 @@ namespace TypeWrapping
 #endif
 
             SpecializedTypeAlias = specializedTypeAlias + ":";
-            SpecializedTypes = new Dictionary<string, Type>(specializeTypes.ToDictionary(t => t.FullName.Split('.').Last(), t => t));
+            SpecializedTypes = new ConcurrentDictionary<string, Type>(specializeTypes.ToDictionary(t => t.FullName.Split('.').Last(), t => t));
         }
 
         public Type Parse(string text, Converter<Type, Type> specializedTypeConverter = null)
         {
             text = text.Trim();
 
-            if (Cache.TryGetValue(text, out Type cachedType)) return cachedType;
-
-            int specializedTypeAliasIndex = text.IndexOf(SpecializedTypeAlias);
-            if (specializedTypeAliasIndex != -1)
+            Type type = Cache.GetOrAdd(text, key =>
             {
-                int beginIndex = specializedTypeAliasIndex + SpecializedTypeAlias.Length;
-
-                int openBracketIndex = text.IndexOf('[', beginIndex);
-                int closeBracketIndex = text.IndexOf(']', beginIndex);
-                int separatorIndex = text.IndexOf(Separator, beginIndex);
-                int endIndex = GetMinIndex(text.Length, openBracketIndex, closeBracketIndex, separatorIndex);
-
-                string specializedTypeName = text.Substring(beginIndex, endIndex - beginIndex);
-                Type parsedType = ParseSingleSpecializedTypeName(specializedTypeName);
-                Type convertedType = specializedTypeConverter is null ? parsedType : specializedTypeConverter(parsedType);
-
-                string replaceTo = specializedTypeAliasIndex > 0 && text[specializedTypeAliasIndex - 1] == '[' && endIndex == closeBracketIndex
-                    ? $"[{convertedType.AssemblyQualifiedName}]" : convertedType.AssemblyQualifiedName;
-
-                string replacedText = text.Replace(SpecializedTypeAlias + specializedTypeName, replaceTo);
-                return Parse(replacedText, specializedTypeConverter);
-            }
-
-            Type result = Type.GetType(text);
-
-            if (result is null)
-            {
-                throw new ArgumentException(Resources.Value.TypeNotFound.Value, nameof(text));
-            }
-
-            Cache.Add(text, result);
-            return result;
-
-
-            int GetMinIndex(int defaultIndex, params int[] indices)
-            {
-                int? min = null;
-                foreach (int index in indices)
+                int specializedTypeAliasIndex = text.IndexOf(SpecializedTypeAlias);
+                if (specializedTypeAliasIndex != -1)
                 {
-                    if (index == -1) continue;
-                    if (min is null || index < min) min = index;
+                    int startIndex = specializedTypeAliasIndex + SpecializedTypeAlias.Length;
+                    (int nodeEndIndex, string specializedTypeName, string childText) = AnalyzeNode(text, startIndex);
+
+                    Type parsedType = ParseSingleSpecializedTypeName(specializedTypeName);
+                    Type convertedType = specializedTypeConverter is null ? parsedType : specializedTypeConverter(parsedType);
+
+                    if (!convertedType.AssemblyQualifiedName.StartsWith(convertedType.FullName)) throw new FormatException(string.Format(Resources.Value.TypeNameFormatNotSupported.Value, text));
+                    string replaceTo = $"[{convertedType.FullName}{childText ?? ""}{convertedType.AssemblyQualifiedName.Substring(convertedType.FullName.Length)}]";
+
+                    string replacedText = text.Replace(SpecializedTypeAlias + specializedTypeName + childText, replaceTo);
+                    return Parse(replacedText, specializedTypeConverter);
                 }
 
-                return min ?? defaultIndex;
+                if (text.StartsWith("["))
+                {
+                    text = text.Substring(1);
+                    if (text.EndsWith("]"))
+                    {
+                        text = text.Substring(0, text.Length - 1);
+                    }
+                    else
+                    {
+                        throw new FormatException(Resources.Value.BracketPairMissing.Value);
+                    }
+                }
+
+                Type result = Type.GetType(text);
+                return result;
+
+                if (result is null)
+                {
+                    throw new ArgumentException(string.Format(Resources.Value.TypeNotFound.Value, text));
+                }
+            });
+            return type;
+        }
+
+        private (int NodeEndIndex, string TypeName, string NestedText) AnalyzeNode(string text, int startIndex)
+        {
+            string typeName = null;
+            string nestedText = null;
+
+            int nestCount = 0;
+            int nestStartIndex = -1;
+            int nestEndIndex = -2;
+            for (int i = startIndex; i < text.Length; i++)
+            {
+                switch (text[i])
+                {
+                    case ',':
+                        if (nestCount == 0)
+                        {
+                            if (typeName is null) typeName = text.Substring(startIndex, i - startIndex);
+                            return (i, typeName, nestedText);
+                        }
+                        break;
+
+                    case '[':
+                        if (nestCount == 0)
+                        {
+                            typeName = text.Substring(startIndex, i - startIndex);
+                            nestStartIndex = i;
+                        }
+                        nestCount++;
+                        break;
+
+                    case ']':
+                        if (nestCount == 0)
+                        {
+                            if (typeName is null) typeName = text.Substring(startIndex, i - startIndex);
+                            return (i, typeName, nestedText);
+                        }
+                        else if (nestCount == 1)
+                        {
+                            nestedText = text.Substring(nestStartIndex, i - nestStartIndex + 1);
+                            nestEndIndex = i;
+                        }
+                        nestCount--;
+                        break;
+                }
+
+                if (i == nestEndIndex + 1)
+                {
+                    throw new FormatException(string.Format(Resources.Value.TypeNameFormatNotSupported.Value, text));
+                }
             }
+
+            if (nestCount != 0) throw new FormatException(Resources.Value.BracketPairMissing.Value);
+
+            if (typeName is null) typeName = text.Substring(startIndex);
+            return (text.Length, typeName, nestedText);
         }
 
         public Type ParseSingleSpecializedTypeName(string typeName)

@@ -117,19 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BracketPairMissing" xml:space="preserve">
-    <value>Some of the brackets are not paired.</value>
-  </data>
-  <data name="IllegalCharacterDetectedInAlias" xml:space="preserve">
-    <value>Cannot use characters but half-width alphanumeric ones for the alias.</value>
-  </data>
-  <data name="IllegalTypeDetected" xml:space="preserve">
-    <value>Includes some array types or constructed generic types, which cannot be registered.</value>
-  </data>
-  <data name="TypeNameFormatNotSupported" xml:space="preserve">
-    <value>The format of the type name '{0}' is not supported.</value>
-  </data>
-  <data name="TypeNotFound" xml:space="preserve">
-    <value>The type '{0}' is not found.</value>
+  <data name="InstanceTypeMismatch" xml:space="preserve">
+    <value>Object does not match target type.</value>
   </data>
 </root>

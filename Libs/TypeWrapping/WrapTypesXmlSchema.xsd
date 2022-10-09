@@ -14,10 +14,16 @@
 		</xs:complexType>
 	</xs:element>
 
+	<xs:simpleType name="DotNetName">
+		<xs:restriction base="xs:string" id="bb">
+			<xs:pattern value="[0-9a-zA-Z_`]+" />
+		</xs:restriction>
+	</xs:simpleType>
+
 	<xs:element name="Enum">
 		<xs:complexType>
-			<xs:attribute name="Wrapper" type="xs:Name" use="required" />
-			<xs:attribute name="Original" type="xs:Name" use="required" />
+			<xs:attribute name="Wrapper" type="DotNetName" use="required" />
+			<xs:attribute name="Original" type="DotNetName" use="required" />
 		</xs:complexType>
 	</xs:element>
 	
@@ -38,20 +44,20 @@
 						<xs:all>
 							<xs:element name="Getter" minOccurs="0">
 								<xs:complexType>
-									<xs:attribute name="Original" type="xs:Name" use="required" />
+									<xs:attribute name="Original" type="DotNetName" use="required" />
 									<xs:attribute name="IsOriginalNonPublic" type="xs:boolean" default="false" />
 									<xs:attribute name="IsOriginalStatic" type="xs:boolean" default="false" />
 								</xs:complexType>
 							</xs:element>
 							<xs:element name="Setter" minOccurs="0">
 								<xs:complexType>
-									<xs:attribute name="Original" type="xs:Name" use="required" />
+									<xs:attribute name="Original" type="DotNetName" use="required" />
 									<xs:attribute name="IsOriginalNonPublic" type="xs:boolean" default="false" />
 									<xs:attribute name="IsOriginalStatic" type="xs:boolean" default="false" />
 								</xs:complexType>
 							</xs:element>
 						</xs:all>
-						<xs:attribute name="Wrapper" type="xs:Name" use="required" />
+						<xs:attribute name="Wrapper" type="DotNetName" use="required" />
 						<xs:attribute name="IsWrapperNonPublic" type="xs:boolean" default="false" />
 						<xs:attribute name="IsWrapperStatic" type="xs:boolean" default="false" />
 					</xs:complexType>
@@ -59,10 +65,10 @@
 
 				<xs:element name="Field" minOccurs="0" maxOccurs="unbounded">
 					<xs:complexType>
-						<xs:attribute name="WrapperProperty" type="xs:Name" use="required" />
+						<xs:attribute name="WrapperProperty" type="DotNetName" use="required" />
 						<xs:attribute name="IsWrapperNonPublic" type="xs:boolean" default="false" />
 						<xs:attribute name="IsWrapperStatic" type="xs:boolean" default="false" />
-						<xs:attribute name="Original" type="xs:Name" use="required" />
+						<xs:attribute name="Original" type="DotNetName" use="required" />
 						<xs:attribute name="IsOriginalNonPublic" type="xs:boolean" default="false" />
 						<xs:attribute name="IsOriginalStatic" type="xs:boolean" default="false" />
 					</xs:complexType>
@@ -70,7 +76,7 @@
 
 				<xs:element name="Method" minOccurs="0" maxOccurs="unbounded">
 					<xs:complexType>
-						<xs:attribute name="Wrapper" type="xs:Name" use="required" />
+						<xs:attribute name="Wrapper" type="DotNetName" use="required" />
 						<xs:attribute name="WrapperParams" use="required">
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
@@ -80,15 +86,15 @@
 						</xs:attribute>
 						<xs:attribute name="IsWrapperNonPublic" type="xs:boolean" default="false" />
 						<xs:attribute name="IsWrapperStatic" type="xs:boolean" default="false" />
-						<xs:attribute name="Original" type="xs:Name" use="required" />
+						<xs:attribute name="Original" type="DotNetName" use="required" />
 						<xs:attribute name="IsOriginalNonPublic" type="xs:boolean" default="false" />
 						<xs:attribute name="IsOriginalStatic" type="xs:boolean" default="false" />
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
 
-			<xs:attribute name="Wrapper" type="xs:Name" use="required" />
-			<xs:attribute name="Original" type="xs:Name" use="required" />
+			<xs:attribute name="Wrapper" type="DotNetName" use="required" />
+			<xs:attribute name="Original" type="DotNetName" use="required" />
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

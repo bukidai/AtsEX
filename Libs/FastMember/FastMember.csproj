@@ -43,10 +43,25 @@
   <ItemGroup>
     <Compile Include="FastConstructor.cs" />
     <Compile Include="FastField.cs" />
+    <Compile Include="FastMethod.NonGeneric.cs" />
+    <Compile Include="FastMethod.Generic.cs" />
     <Compile Include="FastMethod.cs" />
     <Compile Include="FastProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionExpressionGenerator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UnembeddedResources\UnembeddedResources.csproj">
+      <Project>{97512546-8929-4c0b-983d-5347197a3862}</Project>
+      <Name>UnembeddedResources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\FastMethod\Generic.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\FastMethod\Generic.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

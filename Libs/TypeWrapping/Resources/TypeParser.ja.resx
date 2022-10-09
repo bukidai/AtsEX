@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BracketPairMissing" xml:space="preserve">
+    <value>開き括弧、閉じ括弧の個数が一致しません。</value>
+  </data>
   <data name="IllegalCharacterDetectedInAlias" xml:space="preserve">
     <value>半角英数字以外を使用することはできません。</value>
   </data>
   <data name="IllegalTypeDetected" xml:space="preserve">
     <value>配列型か構築ジェネリック型が含まれています。</value>
+  </data>
+  <data name="TypeNameFormatNotSupported" xml:space="preserve">
+    <value>型名 '{0}' のフォーマットはサポートされていません。</value>
   </data>
   <data name="TypeNotFound" xml:space="preserve">
     <value>型 '{0}' が見つかりませんでした。</value>
