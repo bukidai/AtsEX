@@ -26,7 +26,7 @@ namespace Automatic9045.AtsEx.Caller
             try
             {
                 Assembly atsExAssembly = LoadAtsExAssembly();
-                CheckCompability(atsExAssembly);
+                CheckCompatibility(atsExAssembly);
             }
             catch (Exception ex)
             {
@@ -50,7 +50,7 @@ namespace Automatic9045.AtsEx.Caller
                 return atsExAssembly;
             }
 
-            void CheckCompability(Assembly atsExAssembly)
+            void CheckCompatibility(Assembly atsExAssembly)
             {
                 CallerCompatibilityVersionAttribute compatibilityVersionAttribute = atsExAssembly.GetCustomAttribute<CallerCompatibilityVersionAttribute>();
                 if (compatibilityVersionAttribute.Version != CallerVersion)
