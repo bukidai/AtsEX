@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <WrapTypes xmlns="http://automatic9045.github.io/ns/xmlschemas/WrapTypesXmlSchema.xsd">
+	<Enum Wrapper="BrakePosition" Original="ds"/>
+
 	<!-- Unidentified classes -->
 	<!-- Unidentified classes END -->
 

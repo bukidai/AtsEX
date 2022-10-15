@@ -173,7 +173,7 @@
     <Compile Include="ClassWrappers\Public\StructureSet.cs" />
     <Compile Include="ClassWrappers\Public\TimeTable.cs" />
     <Compile Include="ClassWrappers\Public\Vehicle.cs" />
-    <Compile Include="Enums\BrakePosition.cs" />
+    <Compile Include="ClassWrappers\Public\BrakePosition.cs" />
     <Compile Include="Plugins\PluginType.cs" />
     <Compile Include="EventArgs\ScenarioCreatedEventArgs.cs" />
     <Compile Include="EventArgs\StartedEventArgs.cs" />

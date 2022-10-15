@@ -13,6 +13,7 @@ using UnembeddedResources;
 using Automatic9045.AtsEx.Handles;
 using Automatic9045.AtsEx.Input;
 using Automatic9045.AtsEx.PluginHost;
+using Automatic9045.AtsEx.PluginHost.ClassWrappers;
 using Automatic9045.AtsEx.PluginHost.Handles;
 using Automatic9045.AtsEx.PluginHost.Input.Native;
 using Automatic9045.AtsEx.PluginHost.Native;
@@ -65,7 +66,7 @@ namespace Automatic9045.AtsEx
             BrakeHandle brake = new BrakeHandle(vehicleSpec.BrakeNotches, vehicleSpec.AtsNotch, vehicleSpec.B67Notch, false);
             PowerHandle power = new PowerHandle(VehicleSpec.PowerNotches);
             Reverser reverser = new Reverser();
-            Handles = new HandleSet(brake, power, reverser);
+            Handles = new PluginHost.Handles.HandleSet(brake, power, reverser);
         }
 
         public void InvokeStarted(BrakePosition defaultBrakePosition)
@@ -114,8 +115,8 @@ namespace Automatic9045.AtsEx
         private readonly Dictionary<PluginType, ReadOnlyDictionary<string, PluginBase>> _Plugins = new Dictionary<PluginType, ReadOnlyDictionary<string, PluginBase>>();
         public ReadOnlyDictionary<PluginType, ReadOnlyDictionary<string, PluginBase>> Plugins => new ReadOnlyDictionary<PluginType, ReadOnlyDictionary<string, PluginBase>>(_Plugins);
 
-        private HandleSet _Handles = null;
-        public HandleSet Handles
+        private PluginHost.Handles.HandleSet _Handles = null;
+        public PluginHost.Handles.HandleSet Handles
         {
             get => _Handles ?? throw new InvalidOperationException();
             set => _Handles = value;
