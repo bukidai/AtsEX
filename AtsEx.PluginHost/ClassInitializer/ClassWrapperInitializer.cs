@@ -11,14 +11,13 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 {
     internal sealed class ClassWrapperInitializer : ClassInitializerBase
     {
-        private static event LazyInitializationRequestedEventHandler LazyInitializationRequested;
+        private static new BveHacker BveHacker = null;
 
-        public static BveTypeSet LazyInitialize() => LazyInitializationRequested.Invoke(EventArgs.Empty);
-
+        public static BveTypeSet LazyInitialize() => BveHacker.BveTypes;
 
         public ClassWrapperInitializer(IApp app, BveHacker bveHacker) : base(app, bveHacker)
         {
-            if (LazyInitializationRequested is null) LazyInitializationRequested = _ => BveHacker.BveTypes;
+            BveHacker = BveHacker ?? bveHacker;
         }
 
         public override void InitializeAll()
@@ -32,8 +31,5 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
                 return parameters.Length == 1 && parameters[0].ParameterType == typeof(BveTypeSet);
             }, new object[] { BveHacker.BveTypes });
         }
-
-
-        private delegate BveTypeSet LazyInitializationRequestedEventHandler(EventArgs e);
     }
 }
