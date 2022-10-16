@@ -65,7 +65,9 @@ namespace TypeWrapping
                     (string name, bool isNonPublic, bool isStatic) = GetOriginalInfo(source);
                     FieldInfo field = OriginalMemberParser.GetField(name, isNonPublic, isStatic);
 
-                    return field ?? throw CreateNotFoundException(Resources.Value.OriginalFieldNotFound, name, isNonPublic, isStatic);
+                    return field ?? throw new KeyNotFoundException(
+                        string.Format(Resources.Value.OriginalFieldNotFound.Value,
+                        GetAccessibilityDescription(isNonPublic, isStatic), name, WrapperType.Name, OriginalType.Name));
                 }
 
                 public PropertyInfo GetWrapperProperty(XElement source)
@@ -73,7 +75,9 @@ namespace TypeWrapping
                     (string name, bool isNonPublic, bool isStatic) = GetWrapperInfo(source);
                     PropertyInfo property = WrapperMemberParser.GetProperty(name, isNonPublic, isStatic);
 
-                    return property ?? throw CreateNotFoundException(Resources.Value.WrapperPropertyNotFound, name, isNonPublic, isStatic);
+                    return property ?? throw new KeyNotFoundException(
+                        string.Format(Resources.Value.WrapperPropertyNotFound.Value,
+                        GetAccessibilityDescription(isNonPublic, isStatic), name, WrapperType.Name));
                 }
 
                 public PropertyInfo GetFieldWrapperProperty(XElement source)
@@ -81,7 +85,9 @@ namespace TypeWrapping
                     (string name, bool isNonPublic, bool isStatic) = GetInfo(source, "WrapperProperty", "IsWrapperNonPublic", "IsWrapperStatic");
                     PropertyInfo property = WrapperMemberParser.GetProperty(name, isNonPublic, isStatic);
 
-                    return property ?? throw CreateNotFoundException(Resources.Value.FieldWrapperPropertyNotFound, name, isNonPublic, isStatic);
+                    return property ?? throw new KeyNotFoundException(
+                        string.Format(Resources.Value.FieldWrapperPropertyNotFound.Value,
+                        GetAccessibilityDescription(isNonPublic, isStatic), name, WrapperType.Name));
                 }
 
                 public MethodInfo GetWrapperMethod(XElement source, Type[] types)
@@ -89,7 +95,9 @@ namespace TypeWrapping
                     (string name, bool isNonPublic, bool isStatic) = GetWrapperInfo(source);
                     MethodInfo method = WrapperMemberParser.GetMethod(name, types, isNonPublic, isStatic);
 
-                    return method ?? throw CreateNotFoundException(Resources.Value.WrapperMethodNotFound, name, isNonPublic, isStatic);
+                    return method ?? throw new KeyNotFoundException(
+                        string.Format(Resources.Value.WrapperMethodNotFound.Value,
+                        string.Join(", ", types.Select(t => t.Name)), GetAccessibilityDescription(isNonPublic, isStatic), name, WrapperType.Name));
                 }
 
                 public MethodInfo GetOriginalMethod(XElement source, Type[] types)
@@ -97,16 +105,13 @@ namespace TypeWrapping
                     (string name, bool isNonPublic, bool isStatic) = GetOriginalInfo(source);
                     MethodInfo method = OriginalMemberParser.GetMethod(name, types, isNonPublic, isStatic);
 
-                    return method ?? throw CreateNotFoundException(Resources.Value.OriginalMethodNotFound, name, isNonPublic, isStatic);
+                    return method ?? throw new KeyNotFoundException(
+                        string.Format(Resources.Value.OriginalMethodNotFound.Value,
+                        string.Join(", ", types.Select(t => t.Name)), GetAccessibilityDescription(isNonPublic, isStatic), name, WrapperType.Name, OriginalType.Name));
                 }
 
-                private KeyNotFoundException CreateNotFoundException(Resource<string> exceptionTextResource, string name, bool isNonPublic, bool isStatic)
-                {
-                    throw new KeyNotFoundException(string.Format(exceptionTextResource.Value, GetAccessibilityDescription(), name, WrapperType.Name));
-
-                    string GetAccessibilityDescription()
+                private string GetAccessibilityDescription(bool isNonPublic, bool isStatic)
                         => (isNonPublic ? Resources.Value.NonPublic : Resources.Value.Public).Value + (isStatic ? Resources.Value.Static : Resources.Value.Instance).Value;
-                }
 
 
                 private (string Name, bool IsNonPublic, bool IsStatic) GetWrapperInfo(XElement element) => GetInfo(element, "Wrapper", "IsWrapperNonPublic", "IsWrapperStatic");
