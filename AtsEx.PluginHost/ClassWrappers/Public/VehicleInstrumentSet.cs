@@ -22,6 +22,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<VehicleInstrumentSet>();
 
+            BrakeSystemGetMethod = members.GetSourcePropertyGetterOf(nameof(BrakeSystem));
+
             CabGetMethod = members.GetSourcePropertyGetterOf(nameof(Cab));
             CabSetMethod = members.GetSourcePropertySetterOf(nameof(Cab));
 
@@ -44,6 +46,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <returns>オリジナル オブジェクトをラップした <see cref="VehicleInstrumentSet"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
         public static VehicleInstrumentSet FromSource(object src) => src is null ? null : new VehicleInstrumentSet(src);
+
+        private static FastMethod BrakeSystemGetMethod;
+        /// <summary>
+        /// ブレーキシステム全体を表す <see cref="ClassWrappers.BrakeSystem"/> を取得します。
+        /// </summary>
+        public BrakeSystem BrakeSystem => ClassWrappers.BrakeSystem.FromSource(BrakeSystemGetMethod.Invoke(Src, null));
 
         private static FastMethod CabGetMethod;
         private static FastMethod CabSetMethod;

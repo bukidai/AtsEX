@@ -76,6 +76,26 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="BasicBrake" Original="bw">
+		<Property Wrapper="PistonArea">
+			<Getter Original="b"/>
+			<Setter Original="b"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="BrakeSystem" Original="bh">
+		<Property Wrapper="MotorCarBc">
+			<Getter Original="l"/>
+		</Property>
+		<Property Wrapper="TrailerCarBc">
+			<Getter Original="m"/>
+		</Property>
+		<Property Wrapper="FirstCarBc">
+			<Getter Original="j"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="BveFile" Original="b5">
 		<Property Wrapper="Path">
 			<Getter Original="d"/>
@@ -86,6 +106,12 @@
 	<Class Wrapper="CabBase" Original="bl">
 		<Property Wrapper="Handles">
 			<Getter Original="d"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="CarBc" Original="d6">
+		<Property Wrapper="BasicBrake">
+			<Getter Original="b"/>
 		</Property>
 	</Class>
 
@@ -733,6 +759,9 @@
 	</Class>
 
 	<Class Wrapper="VehicleInstrumentSet" Original="ck">
+		<Property Wrapper="BrakeSystem">
+			<Getter Original="b"/>
+		</Property>
 		<Property Wrapper="Cab">
 			<Getter Original="e"/>
 			<Setter Original="a"/>

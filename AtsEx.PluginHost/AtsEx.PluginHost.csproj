@@ -73,8 +73,11 @@
     <Compile Include="BveTypes\AdditionalTypeWrapperAttribute.cs" />
     <Compile Include="ClassInitializer\BveTypesSetter.cs" />
     <Compile Include="ClassInitializer\SetBveTypesAttribute.cs" />
+    <Compile Include="ClassWrappers\Public\BasicBrake.cs" />
+    <Compile Include="ClassWrappers\Public\BrakeSystem.cs" />
     <Compile Include="ClassWrappers\Public\AssistantTextDrawer.cs" />
     <Compile Include="ClassWrappers\Public\CabBase.cs" />
+    <Compile Include="ClassWrappers\Public\CarBc.cs" />
     <Compile Include="ClassWrappers\Public\CarInfo.cs" />
     <Compile Include="ClassWrappers\Public\Direct3DProvider.cs" />
     <Compile Include="ClassWrappers\Public\DrawDistanceManager.cs" />
