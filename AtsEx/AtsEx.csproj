@@ -152,6 +152,7 @@
     <Compile Include="Handles\HandlePositionSet.cs" />
     <Compile Include="Handles\PowerHandle.cs" />
     <Compile Include="Handles\Reverser.cs" />
+    <Compile Include="Hosting\ReleaseInfo.cs" />
     <Compile Include="Native\InputDevice\InputDevice.cs" />
     <Compile Include="Input\NativeAtsKey.cs" />
     <Compile Include="Input\NativeKeySet.cs" />

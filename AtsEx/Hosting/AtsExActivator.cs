@@ -33,13 +33,14 @@ namespace Automatic9045.AtsEx.Hosting
             {
                 AtsExRepositoryHost repositoryHost = new AtsExRepositoryHost();
 
-                Version latestVersion = await repositoryHost.GetLatestVersionAsync().ConfigureAwait(false);
+                ReleaseInfo latestRelease = await repositoryHost.GetLatestReleaseAsync().ConfigureAwait(false);
                 Version currentVersion = ExecutingAssembly.GetName().Version;
 
-                if (currentVersion < latestVersion)
+                if (currentVersion < latestRelease.Version)
                 {
                     DialogResult confirm = MessageBox.Show($"新しいバージョンの AtsEX がリリースされています。" +
-                        $"\n\n現在のバージョン：{currentVersion}\n最新のバージョン：{latestVersion}\n\n" +
+                        $"\n\n現在のバージョン：{currentVersion}\n最新のバージョン：{latestRelease.Version}\n\n" +
+                        $"\n\n詳細：{latestRelease.UpdateInfoMessage}\n\n" +
                         $"リリースページを開きますか？", "AtsEX", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (confirm == DialogResult.Yes)
                     {

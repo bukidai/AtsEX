@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 using Octokit;
 
@@ -21,10 +19,10 @@ namespace Automatic9045.AtsEx.Hosting
         {
         }
 
-        public async Task<Version> GetLatestVersionAsync()
+        public async Task<ReleaseInfo> GetLatestReleaseAsync()
         {
-            GitHubClient client = new GitHubClient(new ProductHeaderValue("atsex"));
-            IReadOnlyList<Release> releases = await client.Repository.Release.GetAll(RepositoryOwner, RepositoryName).ConfigureAwait(false);
+            GitHubClient gitHubClient = new GitHubClient(new ProductHeaderValue("atsex"));
+            IReadOnlyList<Release> releases = await gitHubClient.Repository.Release.GetAll(RepositoryOwner, RepositoryName).ConfigureAwait(false);
 
             if (releases.Count == 0) throw new Exception("リリースが見つかりません。");
 
@@ -34,7 +32,17 @@ namespace Automatic9045.AtsEx.Hosting
             string latestVersionText = latestRelease.TagName.TrimStart('v');
             Version latestVersion = Version.Parse(latestVersionText);
 
-            return latestVersion;
+            string UpdateInfoMessageGetter()
+            {
+                ReleaseAsset updateInfoAsset = latestRelease.Assets.First(asset => asset.Name == "UpdateInfo");
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    string updateInfoMessage = httpClient.GetStringAsync(updateInfoAsset.BrowserDownloadUrl).Result;
+                    return updateInfoMessage;
+                }
+            }
+
+            return new ReleaseInfo(latestVersion, UpdateInfoMessageGetter);
         }
     }
 }
