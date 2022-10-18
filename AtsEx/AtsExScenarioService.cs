@@ -206,6 +206,15 @@ namespace Automatic9045.AtsEx
 
             public void Resolve(Exception exception)
             {
+                if (exception is AggregateException ae)
+                {
+                    foreach (Exception ex in ae.InnerExceptions)
+                    {
+                        Resolve(ex);
+                    }
+                    return;
+                }
+
                 if (exception is CompilationException ce)
                 {
                     ce.ThrowAsLoadError(BveHacker.LoadErrorManager);
