@@ -255,9 +255,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /y /i "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
-xcopy /e /y /i "$(ProjectDir)Resources\" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\Resources\PluginHost\"
-
-xcopy /e /y /i "$(TargetDir)" "$(SolutionDir)_InputDevices\AtsEx\"
-xcopy /e /y /i "$(ProjectDir)Resources\" "$(SolutionDir)_InputDevices\AtsEx\Resources\PluginHost\"</PostBuildEvent>
+xcopy /e /y /i "$(ProjectDir)Resources\" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\Resources\PluginHost\"</PostBuildEvent>
   </PropertyGroup>
 </Project>
