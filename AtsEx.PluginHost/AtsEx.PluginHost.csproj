@@ -7,7 +7,7 @@
     <ProjectGuid>{AC6EBF16-D22B-4DA8-A0BE-5AFB729EA2E4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Automatic9045.AtsEx.PluginHost</RootNamespace>
+    <RootNamespace>AtsEx.PluginHost</RootNamespace>
     <AssemblyName>AtsEx.PluginHost</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

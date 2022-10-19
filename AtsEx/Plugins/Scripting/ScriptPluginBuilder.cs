@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.PluginHost.Handles;
-using Automatic9045.AtsEx.PluginHost.Plugins;
+using AtsEx.PluginHost.Handles;
+using AtsEx.PluginHost.Plugins;
 
-namespace Automatic9045.AtsEx.Plugins.Scripting
+namespace AtsEx.Plugins.Scripting
 {
     internal sealed class ScriptPluginBuilder : PluginBuilder
     {

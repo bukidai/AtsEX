@@ -11,11 +11,11 @@ using Zbx1425.DXDynamicTexture;
 
 using UnembeddedResources;
 
-using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.BveTypes;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost;
+using AtsEx.PluginHost.BveTypes;
+using AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx
+namespace AtsEx
 {
     internal abstract partial class AtsEx : IDisposable
     {

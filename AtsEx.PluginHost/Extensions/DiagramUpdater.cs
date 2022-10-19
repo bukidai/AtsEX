@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx.PluginHost.Extensions
+namespace AtsEx.PluginHost.Extensions
 {
     /// <summary>
     /// 時刻表、ダイヤグラムなどの行路に関わるオブジェクトの更新機能を提供します。

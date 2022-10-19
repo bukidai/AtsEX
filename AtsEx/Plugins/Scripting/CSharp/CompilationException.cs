@@ -10,9 +10,9 @@ using Microsoft.CodeAnalysis.Text;
 
 using UnembeddedResources;
 
-using Automatic9045.AtsEx.PluginHost;
+using AtsEx.PluginHost;
 
-namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
+namespace AtsEx.Plugins.Scripting.CSharp
 {
     internal sealed class CompilationException : Exception
     {

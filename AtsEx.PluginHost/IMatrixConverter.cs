@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using SlimDX;
 
-namespace Automatic9045.AtsEx.PluginHost
+namespace AtsEx.PluginHost
 {
     /// <summary>
     /// 行列の変換機能を提供します。

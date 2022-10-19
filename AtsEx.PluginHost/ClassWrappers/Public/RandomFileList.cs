@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using FastMember;
 using TypeWrapping;
 
-using Automatic9045.AtsEx.PluginHost.BveTypes;
+using AtsEx.PluginHost.BveTypes;
 
-namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
+namespace AtsEx.PluginHost.ClassWrappers
 {
     /// <summary>
     /// ランダムに 1 つの項目が選ばれる <see cref="BveFile"/> のリストを表します。

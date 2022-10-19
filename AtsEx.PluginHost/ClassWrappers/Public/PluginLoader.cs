@@ -9,9 +9,9 @@ using Mackoy.Bvets;
 using FastMember;
 using TypeWrapping;
 
-using Automatic9045.AtsEx.PluginHost.BveTypes;
+using AtsEx.PluginHost.BveTypes;
 
-namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
+namespace AtsEx.PluginHost.ClassWrappers
 {
     /// <summary>
     /// プラグインの読込機能を提供します。

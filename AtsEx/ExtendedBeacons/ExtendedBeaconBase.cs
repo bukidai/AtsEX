@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.Plugins.Scripting;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
-using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
-using Automatic9045.AtsEx.PluginHost.Plugins;
+using AtsEx.Plugins.Scripting;
+using AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.ExtendedBeacons;
+using AtsEx.PluginHost.Plugins;
 
-namespace Automatic9045.AtsEx.ExtendedBeacons
+namespace AtsEx.ExtendedBeacons
 {
     internal abstract class ExtendedBeaconBase<TPassedEventArgs> : PluginHost.ExtendedBeacons.ExtendedBeaconBase<TPassedEventArgs>, ICompilationErrorCheckable
         where TPassedEventArgs : PassedEventArgs

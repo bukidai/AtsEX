@@ -11,9 +11,9 @@ using FastMember;
 using TypeWrapping;
 using UnembeddedResources;
 
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypes
+namespace AtsEx.PluginHost.BveTypes
 {
     /// <summary>
     /// クラスラッパーに対応する BVE の型とメンバーの情報を提供します。

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Automatic9045.AtsEx.PluginHost.Handles
+namespace AtsEx.PluginHost.Handles
 {
     /// <summary>
     /// 逆転器の位置を指定します。

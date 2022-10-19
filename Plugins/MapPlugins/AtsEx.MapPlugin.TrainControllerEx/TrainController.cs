@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 using SlimDX;
 
-using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
-using Automatic9045.AtsEx.PluginHost.Extensions;
-using Automatic9045.AtsEx.PluginHost.Input;
-using Automatic9045.AtsEx.PluginHost.Input.Native;
-using Automatic9045.AtsEx.PluginHost.Plugins;
+using AtsEx.PluginHost;
+using AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.Extensions;
+using AtsEx.PluginHost.Input;
+using AtsEx.PluginHost.Input.Native;
+using AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.MapPlugins.TrainControllerEx
 {

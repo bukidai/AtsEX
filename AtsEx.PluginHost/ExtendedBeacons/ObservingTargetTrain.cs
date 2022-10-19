@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.ExtendedBeacons
+namespace AtsEx.PluginHost.ExtendedBeacons
 {
     /// <summary>
     /// 地上子が列車を検知する条件を指定します。

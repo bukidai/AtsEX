@@ -11,12 +11,12 @@ using System.Windows.Forms;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
-using Automatic9045.AtsEx.Handles;
-using Automatic9045.AtsEx.Plugins.Scripting.CSharp;
-using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using AtsEx.Handles;
+using AtsEx.Plugins.Scripting.CSharp;
+using AtsEx.PluginHost;
+using AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx
+namespace AtsEx
 {
     internal sealed class BveHacker : PluginHost.BveHacker, IDisposable
     {
@@ -43,7 +43,7 @@ namespace Automatic9045.AtsEx
 
             try
             {
-                _ExtendedBeacons = Automatic9045.AtsEx.ExtendedBeacons.ExtendedBeaconSet.Load(this, e.Scenario.Route.Structures.Repeated, e.Scenario.Route.StructureModels, e.Scenario.Trains);
+                _ExtendedBeacons = global::AtsEx.ExtendedBeacons.ExtendedBeaconSet.Load(this, e.Scenario.Route.Structures.Repeated, e.Scenario.Route.StructureModels, e.Scenario.Trains);
             }
             catch (Exception ex)
             {

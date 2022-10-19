@@ -11,21 +11,21 @@ using Microsoft.Scripting.Hosting;
 
 using UnembeddedResources;
 
-using Automatic9045.AtsEx.Plugins.Scripting;
-using Automatic9045.AtsEx.Plugins.Scripting.IronPython2;
-using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
-using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
-using Automatic9045.AtsEx.PluginHost.Plugins;
+using AtsEx.Plugins.Scripting;
+using AtsEx.Plugins.Scripting.IronPython2;
+using AtsEx.PluginHost;
+using AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.ExtendedBeacons;
+using AtsEx.PluginHost.Plugins;
 
-using Identifiers = Automatic9045.AtsEx.MapStatementIdentifiers;
-using ExtendedBeaconIdentifiers = Automatic9045.AtsEx.ExtendedBeacons.MapStatementIdentifiers;
-using ScriptIdentifiers = Automatic9045.AtsEx.Plugins.Scripting.MapStatementIdentifiers;
+using Identifiers = AtsEx.MapStatementIdentifiers;
+using ExtendedBeaconIdentifiers = AtsEx.ExtendedBeacons.MapStatementIdentifiers;
+using ScriptIdentifiers = AtsEx.Plugins.Scripting.MapStatementIdentifiers;
 
-using BeaconBase = Automatic9045.AtsEx.PluginHost.ExtendedBeacons.ExtendedBeaconBase<Automatic9045.AtsEx.PluginHost.ExtendedBeacons.PassedEventArgs>;
-using TrainObservingBeaconBase = Automatic9045.AtsEx.PluginHost.ExtendedBeacons.ExtendedBeaconBase<Automatic9045.AtsEx.PluginHost.ExtendedBeacons.TrainPassedEventArgs>;
+using BeaconBase = AtsEx.PluginHost.ExtendedBeacons.ExtendedBeaconBase<AtsEx.PluginHost.ExtendedBeacons.PassedEventArgs>;
+using TrainObservingBeaconBase = AtsEx.PluginHost.ExtendedBeacons.ExtendedBeaconBase<AtsEx.PluginHost.ExtendedBeacons.TrainPassedEventArgs>;
 
-namespace Automatic9045.AtsEx.ExtendedBeacons
+namespace AtsEx.ExtendedBeacons
 {
     internal partial class ExtendedBeaconSet : PluginHost.ExtendedBeacons.ExtendedBeaconSet
     {

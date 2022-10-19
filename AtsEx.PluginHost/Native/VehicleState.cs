@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.Native
+namespace AtsEx.PluginHost.Native
 {
     /// <summary>
     /// 車両の状態量を提供します。

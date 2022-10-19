@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
+namespace AtsEx.PluginHost.ClassWrappers
 {
     public partial class TimeManager
     {

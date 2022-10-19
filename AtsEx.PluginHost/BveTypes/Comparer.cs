@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypes
+namespace AtsEx.PluginHost.BveTypes
 {
     internal class TypeComparer : IComparer<Type>
     {

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Automatic9045.AtsEx.PluginHost
+namespace AtsEx.PluginHost
 {
     /// <summary>
     /// メインフォームの右クリックメニューを編集するための機能を提供します。

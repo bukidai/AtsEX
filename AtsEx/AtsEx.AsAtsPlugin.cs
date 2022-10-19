@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Automatic9045.AtsEx
+namespace AtsEx
 {
     internal abstract partial class AtsEx
     {

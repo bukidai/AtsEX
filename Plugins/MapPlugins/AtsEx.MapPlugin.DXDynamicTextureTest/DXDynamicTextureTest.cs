@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 using Zbx1425.DXDynamicTexture;
 
-using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
-using Automatic9045.AtsEx.PluginHost.Plugins;
+using AtsEx.PluginHost;
+using AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.Plugins;
 
 namespace Automatic9045.MapPlugins.DXDynamicTextureTest
 {

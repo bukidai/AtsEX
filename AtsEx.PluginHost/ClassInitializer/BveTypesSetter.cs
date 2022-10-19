@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.PluginHost.BveTypes;
+using AtsEx.PluginHost.BveTypes;
 
-namespace Automatic9045.AtsEx.PluginHost
+namespace AtsEx.PluginHost
 {
     internal sealed class BveTypesSetter : ClassInitializerBase
     {

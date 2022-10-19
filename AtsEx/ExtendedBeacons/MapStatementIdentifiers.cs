@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 using UnembeddedResources;
 
-using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
+using AtsEx.PluginHost.ExtendedBeacons;
 
-namespace Automatic9045.AtsEx.ExtendedBeacons
+namespace AtsEx.ExtendedBeacons
 {
     internal static partial class MapStatementIdentifiers
     {

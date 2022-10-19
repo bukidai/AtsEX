@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost
+namespace AtsEx.PluginHost
 {
     /// <summary>
     /// 双方向に型変換が可能なコンバーターを表します。

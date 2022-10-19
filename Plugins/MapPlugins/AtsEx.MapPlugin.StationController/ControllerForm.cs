@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
-using Automatic9045.AtsEx.PluginHost.Extensions;
+using AtsEx.PluginHost;
+using AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.Extensions;
 
 namespace Automatic9045.MapPlugins.StationController
 {

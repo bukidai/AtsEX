@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx.PluginHost
+namespace AtsEx.PluginHost
 {
     /// <summary>
     /// 読込時に発生した例外を解決するための機能を提供します。

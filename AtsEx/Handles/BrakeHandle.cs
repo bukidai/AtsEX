@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 using UnembeddedResources;
 
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
-using Automatic9045.AtsEx.PluginHost.Handles;
+using AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.Handles;
 
-namespace Automatic9045.AtsEx.Handles
+namespace AtsEx.Handles
 {
     internal class BrakeHandle : HandleBase, IBrakeHandle
     {

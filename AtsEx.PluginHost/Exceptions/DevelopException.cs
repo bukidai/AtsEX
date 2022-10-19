@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost
+namespace AtsEx.PluginHost
 {
     /// <summary>
     /// AtsEX 本体の不具合によるエラーを表します。この例外をキャッチした場合は AtsEX 開発者までご連絡ください。

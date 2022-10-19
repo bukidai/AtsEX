@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.PluginHost;
+using AtsEx.PluginHost;
 
-namespace Automatic9045.AtsEx.Plugins.Scripting
+namespace AtsEx.Plugins.Scripting
 {
     public class Globals
     {
-        public IApp App { get; } = Automatic9045.AtsEx.App.Instance;
+        public IApp App { get; } = global::AtsEx.App.Instance;
         public PluginHost.BveHacker BveHacker { get; }
 
         protected SortedList<string, dynamic> Variables;

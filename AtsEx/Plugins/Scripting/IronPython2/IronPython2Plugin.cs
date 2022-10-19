@@ -9,11 +9,11 @@ using IronPython.Hosting;
 
 using Microsoft.Scripting.Hosting;
 
-using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.Handles;
-using Automatic9045.AtsEx.PluginHost.Plugins;
+using AtsEx.PluginHost;
+using AtsEx.PluginHost.Handles;
+using AtsEx.PluginHost.Plugins;
 
-namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
+namespace AtsEx.Plugins.Scripting.IronPython2
 {
     internal sealed class IronPython2Plugin : ScriptPluginBase
     {

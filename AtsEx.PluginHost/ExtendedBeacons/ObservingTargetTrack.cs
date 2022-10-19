@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx.PluginHost.ExtendedBeacons
+namespace AtsEx.PluginHost.ExtendedBeacons
 {
     /// <summary>
     /// 拡張地上子が検知する対象の軌道を指定します。

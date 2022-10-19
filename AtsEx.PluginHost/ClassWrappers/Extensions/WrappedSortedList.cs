@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 using UnembeddedResources;
 
-using Automatic9045.AtsEx.PluginHost.BveTypes;
+using AtsEx.PluginHost.BveTypes;
 
-namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
+namespace AtsEx.PluginHost.ClassWrappers
 {
     /// <summary>
     /// 値がオリジナル型の <see cref="SortedList{TKey, TValue}"/> のラッパーを表します。

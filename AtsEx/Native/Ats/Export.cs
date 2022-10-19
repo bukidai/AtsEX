@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Automatic9045.AtsEx.Hosting;
+using AtsEx.Hosting;
 
-namespace Automatic9045.AtsEx.Native
+namespace AtsEx.Native
 {
     /// <summary>列車のスペックに関する構造体</summary>
     [StructLayout(LayoutKind.Sequential)]

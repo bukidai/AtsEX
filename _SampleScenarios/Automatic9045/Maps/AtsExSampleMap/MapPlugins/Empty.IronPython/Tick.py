@@ -1,3 +1,3 @@
-import Automatic9045.AtsEx.PluginHost.Plugins
+import AtsEx.PluginHost.Plugins
 
-__return__ = Automatic9045.AtsEx.PluginHost.Plugins.MapPluginTickResult()
+__return__ = AtsEx.PluginHost.Plugins.MapPluginTickResult()

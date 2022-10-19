@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using FastMember;
 using TypeWrapping;
 
-using Automatic9045.AtsEx.PluginHost.BveTypes;
+using AtsEx.PluginHost.BveTypes;
 
-namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
+namespace AtsEx.PluginHost.ClassWrappers
 {
     /// <summary>
     /// 自列車がマップ オブジェクトを通過したときに発生するイベントのデータを提供します。

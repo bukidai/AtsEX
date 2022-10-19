@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 using UnembeddedResources;
 
-namespace Automatic9045.AtsEx.PluginHost.Plugins
+namespace AtsEx.PluginHost.Plugins
 {
     /// <summary>
     /// プラグインの種類を指定します。

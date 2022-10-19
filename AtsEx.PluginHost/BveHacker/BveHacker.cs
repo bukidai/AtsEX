@@ -11,12 +11,12 @@ using Mackoy.Bvets;
 
 using UnembeddedResources;
 
-using Automatic9045.AtsEx.PluginHost.BveHackerServices;
-using Automatic9045.AtsEx.PluginHost.BveTypes;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
-using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
+using AtsEx.PluginHost.BveHackerServices;
+using AtsEx.PluginHost.BveTypes;
+using AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.ExtendedBeacons;
 
-namespace Automatic9045.AtsEx.PluginHost
+namespace AtsEx.PluginHost
 {
     /// <summary>
     /// <see cref="BveHacker.ScenarioCreated"/> または <see cref="BveHacker.PreviewScenarioCreated"/> イベントを処理するメソッドを表します。

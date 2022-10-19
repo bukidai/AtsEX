@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Automatic9045.AtsEx.PluginHost;
+using AtsEx.PluginHost;
 
 namespace Automatic9045.VehiclePlugins.StateViewer
 {

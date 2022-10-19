@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Automatic9045.AtsEx.PluginHost.Plugins
+namespace AtsEx.PluginHost.Plugins
 {
     public class AllPluginLoadedEventArgs : EventArgs
     {

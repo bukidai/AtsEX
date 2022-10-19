@@ -8,10 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Automatic9045.AtsEx.Native;
 using AtsEx.Native;
 
-namespace Automatic9045.AtsEx.Caller
+namespace AtsEx.Caller
 {
     /// <summary>処理を実装するクラス</summary>
     internal static class AtsCore

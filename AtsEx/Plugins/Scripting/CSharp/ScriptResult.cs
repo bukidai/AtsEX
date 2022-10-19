@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 
-namespace Automatic9045.AtsEx.Plugins.Scripting.CSharp
+namespace AtsEx.Plugins.Scripting.CSharp
 {
     internal class ScriptResult : IScriptResult
     {

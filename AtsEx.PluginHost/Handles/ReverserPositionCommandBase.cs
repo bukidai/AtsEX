@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.Handles
+namespace AtsEx.PluginHost.Handles
 {
     /// <summary>
     /// プラグインから逆転器の位置の出力を編集するためのコマンドを表します。

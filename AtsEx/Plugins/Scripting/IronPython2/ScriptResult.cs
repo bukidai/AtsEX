@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Microsoft.Scripting.Hosting;
 
-namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
+namespace AtsEx.Plugins.Scripting.IronPython2
 {
     internal class ScriptResult : IScriptResult
     {

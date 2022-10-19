@@ -12,11 +12,11 @@ using System.Xml.Schema;
 
 using UnembeddedResources;
 
-using Automatic9045.AtsEx.Plugins.Scripting;
-using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.Plugins;
+using AtsEx.Plugins.Scripting;
+using AtsEx.PluginHost;
+using AtsEx.PluginHost.Plugins;
 
-namespace Automatic9045.AtsEx.Plugins
+namespace AtsEx.Plugins
 {
     internal class PluginUsing
     {

@@ -1,15 +1,15 @@
-﻿using Automatic9045.AtsEx.PluginHost;
+﻿using AtsEx.PluginHost;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.Plugins.Scripting;
-using Automatic9045.AtsEx.PluginHost.ExtendedBeacons;
-using Automatic9045.AtsEx.PluginHost.Plugins;
+using AtsEx.Plugins.Scripting;
+using AtsEx.PluginHost.ExtendedBeacons;
+using AtsEx.PluginHost.Plugins;
 
-namespace Automatic9045.AtsEx.ExtendedBeacons
+namespace AtsEx.ExtendedBeacons
 {
     public abstract class ExtendedBeaconGlobalsBase<TPassedEventArgs> : Globals where TPassedEventArgs : PassedEventArgs
     {

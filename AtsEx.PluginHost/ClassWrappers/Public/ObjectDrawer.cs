@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using FastMember;
 using TypeWrapping;
 
-using Automatic9045.AtsEx.PluginHost.BveTypes;
+using AtsEx.PluginHost.BveTypes;
 
-namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
+namespace AtsEx.PluginHost.ClassWrappers
 {
     /// <summary>
     /// BVE によって読み込まれた全ての 3D モデルを描画するための機能を提供します。

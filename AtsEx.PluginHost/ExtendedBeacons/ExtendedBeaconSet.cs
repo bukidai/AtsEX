@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.PluginHost.Plugins;
+using AtsEx.PluginHost.Plugins;
 
-namespace Automatic9045.AtsEx.PluginHost.ExtendedBeacons
+namespace AtsEx.PluginHost.ExtendedBeacons
 {
     /// <summary>
     /// 拡張地上子の一覧を表します。

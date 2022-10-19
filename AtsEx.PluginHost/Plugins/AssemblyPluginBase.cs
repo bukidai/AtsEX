@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.Plugins
+namespace AtsEx.PluginHost.Plugins
 {
     /// <summary>
     /// アセンブリ (.dll) 形式の AtsEX プラグインを表します。

@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 using UnembeddedResources;
 
-using Automatic9045.AtsEx.Handles;
-using Automatic9045.AtsEx.Input;
-using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
-using Automatic9045.AtsEx.PluginHost.Handles;
-using Automatic9045.AtsEx.PluginHost.Input.Native;
-using Automatic9045.AtsEx.PluginHost.Native;
-using Automatic9045.AtsEx.PluginHost.Plugins;
+using AtsEx.Handles;
+using AtsEx.Input;
+using AtsEx.PluginHost;
+using AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.Handles;
+using AtsEx.PluginHost.Input.Native;
+using AtsEx.PluginHost.Native;
+using AtsEx.PluginHost.Plugins;
 
-namespace Automatic9045.AtsEx
+namespace AtsEx
 {
     internal sealed class App : IApp
     {

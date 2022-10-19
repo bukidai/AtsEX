@@ -7,14 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Automatic9045.AtsEx.Hosting;
+using AtsEx.Hosting;
 
-using Automatic9045.AtsEx.Handles;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
-using Automatic9045.AtsEx.PluginHost.Handles;
-using Automatic9045.AtsEx.PluginHost.Input.Native;
+using AtsEx.Handles;
+using AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.Handles;
+using AtsEx.PluginHost.Input.Native;
 
-namespace Automatic9045.AtsEx.Native
+namespace AtsEx.Native
 {
     /// <summary>メインの機能をここに実装する。</summary>
     internal static class AtsMain

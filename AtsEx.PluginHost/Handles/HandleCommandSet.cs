@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.Handles
+namespace AtsEx.PluginHost.Handles
 {
     /// <summary>
     /// プラグインからハンドルの出力を編集するためのコマンドのセットを表します。

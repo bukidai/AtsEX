@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 using TypeWrapping;
 
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypes
+namespace AtsEx.PluginHost.BveTypes
 {
     public sealed partial class BveTypeSet
     {

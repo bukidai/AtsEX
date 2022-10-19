@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using FastMember;
 using TypeWrapping;
 
-using Automatic9045.AtsEx.PluginHost.BveTypes;
+using AtsEx.PluginHost.BveTypes;
 
-namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
+namespace AtsEx.PluginHost.ClassWrappers
 {
     /// <summary>
     /// Structure マップ要素、Repeater マップ要素で設置されたストラクチャーの情報を提供します。

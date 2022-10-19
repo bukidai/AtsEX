@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.Plugins;
-using Automatic9045.AtsEx.Plugins.Scripting.CSharp;
-using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
-using Automatic9045.AtsEx.PluginHost.Plugins;
+using AtsEx.Plugins;
+using AtsEx.Plugins.Scripting.CSharp;
+using AtsEx.PluginHost;
+using AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.Plugins;
 
-namespace Automatic9045.AtsEx
+namespace AtsEx
 {
     internal class Map
     {

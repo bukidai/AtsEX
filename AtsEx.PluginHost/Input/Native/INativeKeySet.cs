@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Automatic9045.AtsEx.PluginHost.Input.Native
+namespace AtsEx.PluginHost.Input.Native
 {
     /// <summary>
     /// BVE が ATS プラグイン向けに提供するキーの入力情報を表します。

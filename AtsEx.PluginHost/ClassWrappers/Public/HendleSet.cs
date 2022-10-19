@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 using FastMember;
 using TypeWrapping;
 
-using Automatic9045.AtsEx.PluginHost.BveTypes;
-using Automatic9045.AtsEx.PluginHost.Handles;
+using AtsEx.PluginHost.BveTypes;
+using AtsEx.PluginHost.Handles;
 
-namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
+namespace AtsEx.PluginHost.ClassWrappers
 {
     /// <summary>
     /// 操作可能なハンドルのセットを表します。

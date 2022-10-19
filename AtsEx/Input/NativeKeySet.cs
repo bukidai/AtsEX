@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.PluginHost.Input;
-using Automatic9045.AtsEx.PluginHost.Input.Native;
+using AtsEx.PluginHost.Input;
+using AtsEx.PluginHost.Input.Native;
 
-namespace Automatic9045.AtsEx.Input
+namespace AtsEx.Input
 {
     internal class NativeKeySet : INativeKeySet
     {

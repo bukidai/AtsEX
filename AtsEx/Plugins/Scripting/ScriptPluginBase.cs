@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 using UnembeddedResources;
 
-using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.Handles;
-using Automatic9045.AtsEx.PluginHost.Plugins;
+using AtsEx.PluginHost;
+using AtsEx.PluginHost.Handles;
+using AtsEx.PluginHost.Plugins;
 
-namespace Automatic9045.AtsEx.Plugins.Scripting
+namespace AtsEx.Plugins.Scripting
 {
     internal abstract class ScriptPluginBase : PluginBase, IDisposable
     {

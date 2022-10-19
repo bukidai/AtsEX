@@ -11,7 +11,7 @@ using IronPython.Hosting;
 
 using Microsoft.Scripting.Hosting;
 
-namespace Automatic9045.AtsEx.Plugins.Scripting.IronPython2
+namespace AtsEx.Plugins.Scripting.IronPython2
 {
     internal static class ScriptEngineProvider
     {

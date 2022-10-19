@@ -12,7 +12,7 @@ using System.Xml.Schema;
 
 using UnembeddedResources;
 
-namespace Automatic9045.AtsEx.Plugins.Scripting
+namespace AtsEx.Plugins.Scripting
 {
     internal partial class ScriptPluginPackage
     {

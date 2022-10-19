@@ -6,12 +6,12 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using Automatic9045.AtsEx.Plugins;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
-using Automatic9045.AtsEx.PluginHost.Native;
-using Automatic9045.AtsEx.PluginHost.Plugins;
+using AtsEx.Plugins;
+using AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.Native;
+using AtsEx.PluginHost.Plugins;
 
-namespace Automatic9045.AtsEx
+namespace AtsEx
 {
     internal partial class AtsExScenarioService
     {

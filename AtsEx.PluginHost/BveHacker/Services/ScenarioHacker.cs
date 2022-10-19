@@ -11,10 +11,10 @@ using FastMember;
 using TypeWrapping;
 using ObjectiveHarmonyPatch;
 
-using Automatic9045.AtsEx.PluginHost.BveTypes;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.BveTypes;
+using AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx.PluginHost.BveHackerServices
+namespace AtsEx.PluginHost.BveHackerServices
 {
     internal sealed class ScenarioHacker : IDisposable
     {

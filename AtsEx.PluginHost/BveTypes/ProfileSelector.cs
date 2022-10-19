@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 using UnembeddedResources;
 
-namespace Automatic9045.AtsEx.PluginHost.BveTypes
+namespace AtsEx.PluginHost.BveTypes
 {
     internal class ProfileSelector
     {

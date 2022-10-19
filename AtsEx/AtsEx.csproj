@@ -8,7 +8,7 @@
     <ProjectGuid>{15F8005B-285B-4B98-B4D8-13978AD876F8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Automatic9045.AtsEx</RootNamespace>
+    <RootNamespace>AtsEx</RootNamespace>
     <AssemblyName>AtsEx</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

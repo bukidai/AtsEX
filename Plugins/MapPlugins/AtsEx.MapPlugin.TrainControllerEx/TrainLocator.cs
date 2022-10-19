@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using SlimDX;
 using SlimDX.Direct3D9;
 
-using Automatic9045.AtsEx.PluginHost;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost;
+using AtsEx.PluginHost.ClassWrappers;
 
 namespace Automatic9045.MapPlugins.TrainControllerEx
 {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using UnembeddedResources;
 
-namespace Automatic9045.AtsEx.Plugins.Scripting
+namespace AtsEx.Plugins.Scripting
 {
     internal static partial class MapStatementIdentifiers
     {

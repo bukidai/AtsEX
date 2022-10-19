@@ -12,10 +12,10 @@ using FastMember;
 using ObjectiveHarmonyPatch;
 using TypeWrapping;
 
-using Automatic9045.AtsEx.PluginHost.BveTypes;
-using Automatic9045.AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.BveTypes;
+using AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.AtsEx.PluginHost.Extensions
+namespace AtsEx.PluginHost.Extensions
 {
     /// <summary>
     /// 他列車を自由に移動・回転できるようにするパッチを表します。
