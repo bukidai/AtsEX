@@ -14,7 +14,7 @@ namespace AtsEx
     {
         internal sealed class AsAtsPlugin : AtsEx
         {
-            private const string LegalAtsExAssemblyRelativeLocation = @"Automatic9045\AtsEx\AtsEx.dll";
+            private const string LegalAtsExAssemblyRelativeLocation = @"AtsEx\AtsEx.dll";
 
             public string VersionWarningText { get; private set; }
 

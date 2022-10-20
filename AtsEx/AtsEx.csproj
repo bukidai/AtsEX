@@ -261,8 +261,8 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /e /y /i "$(TargetDir)" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\"
-xcopy /e /y /i "$(ProjectDir)Resources\" "$(SolutionDir)_SampleScenarios\Automatic9045\AtsEx\Resources\Core\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /e /y /i "$(TargetDir)" "$(SolutionDir)_SampleScenarios\AtsEx\"
+xcopy /e /y /i "$(ProjectDir)Resources\" "$(SolutionDir)_SampleScenarios\AtsEx\Resources\Core\"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PlatformTarget>AnyCPU</PlatformTarget>
