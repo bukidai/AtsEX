@@ -10,13 +10,14 @@ namespace Automatic9045.AtsEx.Hosting
     {
         public Version Version { get; }
 
-        private readonly Lazy<string> _UpdateInfoMessage;
-        public string UpdateInfoMessage => _UpdateInfoMessage.Value;
+        private readonly Func<string> UpdateInfoMessageGetter;
 
         public ReleaseInfo(Version version, Func<string> updateInfoMessageGetter)
         {
             Version = version;
-            _UpdateInfoMessage = new Lazy<string>(updateInfoMessageGetter);
+            UpdateInfoMessageGetter = updateInfoMessageGetter;
         }
+
+        public string GetUpdateInfoMessage() => UpdateInfoMessageGetter();
     }
 }

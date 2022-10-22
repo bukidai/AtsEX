@@ -38,9 +38,19 @@ namespace Automatic9045.AtsEx.Hosting
 
                 if (currentVersion < latestRelease.Version)
                 {
-                    DialogResult confirm = MessageBox.Show($"新しいバージョンの AtsEX がリリースされています。" +
-                        $"\n\n現在のバージョン：{currentVersion}\n最新のバージョン：{latestRelease.Version}\n\n" +
-                        $"\n\n詳細：{latestRelease.UpdateInfoMessage}\n\n" +
+                    string details = "";
+                    try
+                    {
+                        string updateInfoMessage = latestRelease.GetUpdateInfoMessage();
+                        details = $"詳細：\n{updateInfoMessage}\n\n";
+                    }
+                    catch
+                    {
+                    }
+
+                    DialogResult confirm = MessageBox.Show($"新しいバージョンの AtsEX がリリースされています。\n\n" +
+                        $"現在のバージョン：{currentVersion}\n最新のバージョン：{latestRelease.Version}\n\n" +
+                        details +
                         $"リリースページを開きますか？", "AtsEX", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (confirm == DialogResult.Yes)
                     {
