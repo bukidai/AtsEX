@@ -46,7 +46,7 @@ namespace Automatic9045.AtsEx.ExtendedBeacons
             {
                 TrainPassedEventArgs eventArgs = new TrainPassedEventArgs(senderTrain.Name, senderTrain.Train, direction);
                 TrainPassedGlobals globals = new TrainPassedGlobals(BveHacker, PluginVariables, this, eventArgs);
-                Script.RunAsync(globals).Wait();
+                Script.Run(globals);
                 base.NotifyPassed(globals.GetEventArgsWithScriptVariables());
             }
         }

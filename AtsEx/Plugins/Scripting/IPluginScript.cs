@@ -9,12 +9,12 @@ namespace Automatic9045.AtsEx.Plugins.Scripting
     internal interface IPluginScript<TGlobals> : ICloneable where TGlobals : Globals
     {
         IPluginScript<TGlobals> GetWithCheckErrors();
-        Task<IScriptResult> RunAsync(TGlobals globals);
+        IScriptResult Run(TGlobals globals);
     }
 
     internal interface IPluginScript<TResult, TGlobals> : IPluginScript<TGlobals> where TGlobals : Globals
     {
         new IPluginScript<TResult, TGlobals> GetWithCheckErrors();
-        new Task<IScriptResult<TResult>> RunAsync(TGlobals globals);
+        new IScriptResult<TResult> Run(TGlobals globals);
     }
 }
