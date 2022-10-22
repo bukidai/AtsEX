@@ -10,7 +10,7 @@ namespace Automatic9045.AtsEx.Handles
 {
     internal abstract class HandleBase : IHandle
     {
-        public bool CanSetNotchOutOfRange { get; protected set; } = false;
+        public bool CanSetNotchOutOfRange { get; protected set; } = true;
 
         public int MinNotch { get; }
         public int MaxNotch { get; }
@@ -28,7 +28,7 @@ namespace Automatic9045.AtsEx.Handles
             }
         }
 
-        public void AllowSetNotchOutOfRange() => CanSetNotchOutOfRange = true;
+        public void ProhibitNotchesOutOfRange() => CanSetNotchOutOfRange = false;
 
         /// <summary>
         /// <see cref="HandleBase"/> クラスの新しいインスタンスを初期化します。
