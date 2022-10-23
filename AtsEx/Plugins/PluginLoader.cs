@@ -53,10 +53,7 @@ namespace AtsEx.Plugins
             BveHacker = bveHacker;
         }
 
-        public async Task<Dictionary<string, PluginBase>> LoadFromPluginUsingAsync(PluginUsing pluginUsing)
-            => await Task.Run(() => LoadFromPluginUsing(pluginUsing)).ConfigureAwait(false);
-
-        private Dictionary<string, PluginBase> LoadFromPluginUsing(PluginUsing pluginUsing)
+        public Dictionary<string, PluginBase> LoadFromPluginUsing(PluginUsing pluginUsing)
         {
             Dictionary<string, PluginBase> plugins = new Dictionary<string, PluginBase>();
 

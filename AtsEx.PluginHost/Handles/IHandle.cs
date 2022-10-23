@@ -32,14 +32,12 @@ namespace AtsEx.PluginHost.Handles
         int Notch { get; }
 
         /// <summary>
-        /// <see cref="MaxNotch"/> を超えたノッチを設定することを許可します。
+        /// <see cref="MaxNotch"/> を超えたノッチを設定すると例外をスローするようにします。
         /// </summary>
         /// <remarks>
-        /// TASC プラグインなどを想定しています。<br/>
-        /// AtsEX 以外から読み込まれたプラグインが <see cref="MaxNotch"/> を超えたノッチを設定する場合は、
-        /// 必ず初めて <see cref="Plugins.PluginBase.Tick(TimeSpan)"/> メソッドが実行されるより前に実行してください。
+        /// TASC プラグインなどが <see cref="MaxNotch"/> を超えたノッチを設定することを想定して、既定では例外をスローしないようになっています。
         /// </remarks>
-        void AllowSetNotchOutOfRange();
+        void ProhibitNotchesOutOfRange();
 
         /// <summary>
         /// 指定した値にノッチを変更するコマンドを取得します。

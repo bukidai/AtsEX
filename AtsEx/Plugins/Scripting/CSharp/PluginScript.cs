@@ -92,9 +92,9 @@ namespace AtsEx.Plugins.Scripting.CSharp
             return compilationErrors.Any() ? throw new CompilationException(Name, compilationErrors) : this;
         }
 
-        public async Task<IScriptResult> RunAsync(TGlobals globals)
+        public IScriptResult Run(TGlobals globals)
         {
-            ScriptState state = await ExecuteCodeAsync(globals).ConfigureAwait(false);
+            ScriptState state = ExecuteCodeAsync(globals).Result;
             return new ScriptResult(state);
         }
 
@@ -143,9 +143,9 @@ namespace AtsEx.Plugins.Scripting.CSharp
 
         public new IPluginScript<TResult, TGlobals> GetWithCheckErrors() => base.GetWithCheckErrors() as PluginScript<TResult, TGlobals>;
 
-        public async new Task<IScriptResult<TResult>> RunAsync(TGlobals globals)
+        public new IScriptResult<TResult> Run(TGlobals globals)
         {
-            ScriptState state = await ExecuteCodeAsync(globals).ConfigureAwait(false);
+            ScriptState state = ExecuteCodeAsync(globals).Result;
             return new ScriptResult<TResult>(state);
         }
     }

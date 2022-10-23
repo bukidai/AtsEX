@@ -81,6 +81,9 @@ namespace AtsEx.PluginHost.ClassWrappers
         /// <summary>
         /// 抑速ノッチ数を取得します。
         /// </summary>
+        /// <remarks>
+        /// 値は負で指定されます。
+        /// </remarks>
         public int HoldingSpeedNotchCount
         {
             get => HoldingSpeedNotchCountGetMethod.Invoke(Src, null);

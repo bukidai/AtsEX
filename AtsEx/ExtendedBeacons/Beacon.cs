@@ -40,7 +40,7 @@ namespace AtsEx.ExtendedBeacons
         {
             PassedEventArgs eventArgs = new PassedEventArgs(direction);
             PassedGlobals globals = new PassedGlobals(BveHacker, PluginVariables, this, eventArgs);
-            Script.RunAsync(globals).Wait();
+            Script.Run(globals);
             base.NotifyPassed(globals.GetEventArgsWithScriptVariables());
         }
     }

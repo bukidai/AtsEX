@@ -38,7 +38,7 @@ namespace AtsEx.Handles
         public static PowerHandle FromNotchInfo(NotchInfo source, bool canSetNotchOutOfRange)
         {
             int powerNotchCount = source.PowerNotchCount;
-            int holdingSpeedNotchCount = source.HoldingSpeedNotchCount;
+            int holdingSpeedNotchCount = -source.HoldingSpeedNotchCount;
 
             return new PowerHandle(powerNotchCount, holdingSpeedNotchCount)
             {
