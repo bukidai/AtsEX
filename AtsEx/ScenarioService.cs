@@ -64,21 +64,11 @@ namespace AtsEx
         private readonly Dictionary<PluginType, ReadOnlyDictionary<string, PluginBase>> _Plugins = new Dictionary<PluginType, ReadOnlyDictionary<string, PluginBase>>();
         public ReadOnlyDictionary<PluginType, ReadOnlyDictionary<string, PluginBase>> Plugins => new ReadOnlyDictionary<PluginType, ReadOnlyDictionary<string, PluginBase>>(_Plugins);
 
-        private PluginHost.Handles.HandleSet _Handles = null;
-        public PluginHost.Handles.HandleSet Handles
-        {
-            get => _Handles ?? throw new InvalidOperationException();
-            set => _Handles = value;
-        }
+        public PluginHost.Handles.HandleSet Handles { get; }
 
         public INativeKeySet NativeKeys { get; } = new NativeKeySet();
 
-        private VehicleSpec _VehicleSpec = null;
-        public VehicleSpec VehicleSpec
-        {
-            get => _VehicleSpec ?? throw new InvalidOperationException();
-            private set => _VehicleSpec = value;
-        }
+        public VehicleSpec VehicleSpec { get; }
 
         public VehicleState VehicleState { get; set; } = null;
 

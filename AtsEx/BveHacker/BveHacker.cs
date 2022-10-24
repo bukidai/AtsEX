@@ -41,7 +41,6 @@ namespace AtsEx
             Reverser reverser = new Reverser();
 
             _Handles = new PluginHost.Handles.HandleSet(brake, power, reverser);
-            ScenarioService.Handles = Handles;
 
             try
             {
