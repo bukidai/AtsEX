@@ -13,7 +13,7 @@ namespace AtsEx.PluginHost.Plugins
     /// <summary>
     /// AtsEX プラグインを表します。
     /// </summary>
-    public abstract class PluginBase
+    public abstract class PluginBase : IDisposable
     {
         public PluginType PluginType { get; }
         public bool UseAtsExExtensions { get; }
@@ -90,6 +90,9 @@ namespace AtsEx.PluginHost.Plugins
             if (!UseAtsExExtensions) return;
             _BveHacker = builder.BveHacker;
         }
+
+        /// <inheritdoc/>
+        public abstract void Dispose();
 
         /// <summary>
         /// 毎フレーム呼び出されます。従来の ATS プラグインの Elapse(ATS_VEHICLESTATE vehicleState, int[] panel, int[] sound) に当たります。

@@ -36,7 +36,7 @@ namespace Automatic9045.MapPlugins.TrainController
         private void OnDPressed(object sender, EventArgs e) => Train.TrainInfo.TrackKey = "1";
         private void OnEPressed(object sender, EventArgs e) => Train.TrainInfo.TrackKey = "0";
 
-        public void Dispose()
+        public override void Dispose()
         {
             ScenarioService.NativeKeys.AtsKeys[NativeAtsKeyName.D].Pressed -= OnDPressed;
             ScenarioService.NativeKeys.AtsKeys[NativeAtsKeyName.E].Pressed -= OnEPressed;

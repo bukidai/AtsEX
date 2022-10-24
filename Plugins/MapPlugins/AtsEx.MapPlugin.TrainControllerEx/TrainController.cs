@@ -45,7 +45,7 @@ namespace Automatic9045.MapPlugins.TrainControllerEx
             };
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
             Patch.Dispose();
         }

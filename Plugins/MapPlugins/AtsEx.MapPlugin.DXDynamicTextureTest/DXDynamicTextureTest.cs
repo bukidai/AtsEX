@@ -25,7 +25,7 @@ namespace Automatic9045.MapPlugins.DXDynamicTextureTest
             BveHacker.ScenarioCreated += OnScenarioCreated;
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
             BveHacker.ScenarioCreated -= OnScenarioCreated;
         }

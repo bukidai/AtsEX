@@ -75,7 +75,7 @@ namespace AtsEx.Plugins.Scripting
             ScenarioService.Started += OnStarted;
         }
 
-        public void Dispose() => DisposeScript?.Run(Globals);
+        public override void Dispose() => DisposeScript?.Run(Globals);
 
         private void OnScenarioCreated(ScenarioCreatedEventArgs e)
         {

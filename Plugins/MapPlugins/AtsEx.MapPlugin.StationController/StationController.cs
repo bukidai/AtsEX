@@ -32,6 +32,13 @@ namespace Automatic9045.MapPlugins.StationController
             BveHacker.MainFormSource.Focus();
         }
 
+        public override void Dispose()
+        {
+            Form.FormClosing -= FormClosing;
+            Form.Close();
+            Form.Dispose();
+        }
+
         public override TickResult Tick(TimeSpan elapsed)
         {
             return new MapPluginTickResult();
@@ -53,13 +60,6 @@ namespace Automatic9045.MapPlugins.StationController
         {
             e.Cancel = true;
             MenuItem.Checked = false;
-        }
-
-        public void Dispose()
-        {
-            Form.FormClosing -= FormClosing;
-            Form.Close();
-            Form.Dispose();
         }
     }
 }

@@ -32,6 +32,13 @@ namespace Automatic9045.VehiclePlugins.StateViewer
             BveHacker.MainFormSource.Focus();
         }
 
+        public override void Dispose()
+        {
+            Form.FormClosing -= FormClosing;
+            Form.Close();
+            Form.Dispose();
+        }
+
         public override TickResult Tick(TimeSpan elapsed)
         {
             Form?.Tick();
@@ -55,13 +62,6 @@ namespace Automatic9045.VehiclePlugins.StateViewer
         {
             e.Cancel = true;
             MenuItem.Checked = false;
-        }
-
-        public void Dispose()
-        {
-            Form.FormClosing -= FormClosing;
-            Form.Close();
-            Form.Dispose();
         }
     }
 }

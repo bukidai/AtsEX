@@ -18,6 +18,10 @@ namespace Automatic9045.VehiclePlugins.SimpleAts
         {
         }
 
+        public override void Dispose()
+        {
+        }
+
         public override TickResult Tick(TimeSpan elapsed)
         {
             UserVehicleLocationManager locationManager = BveHacker.Scenario.LocationManager;

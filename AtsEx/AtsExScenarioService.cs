@@ -103,18 +103,12 @@ namespace AtsEx
         {
             foreach (PluginBase plugin in VehiclePlugins.Values)
             {
-                if (plugin is IDisposable disposable)
-                {
-                    disposable.Dispose();
-                }
+                plugin.Dispose();
             }
 
             foreach (PluginBase plugin in MapPlugins.Values)
             {
-                if (plugin is IDisposable disposable)
-                {
-                    disposable.Dispose();
-                }
+                plugin.Dispose();
             }
 
             BveHacker.Dispose();
