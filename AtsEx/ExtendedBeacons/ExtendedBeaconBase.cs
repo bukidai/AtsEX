@@ -14,16 +14,18 @@ namespace AtsEx.ExtendedBeacons
     internal abstract class ExtendedBeaconBase<TPassedEventArgs> : PluginHost.ExtendedBeacons.ExtendedBeaconBase<TPassedEventArgs>, ICompilationErrorCheckable
         where TPassedEventArgs : PassedEventArgs
     {
+        protected readonly ScenarioService ScenarioService;
         protected readonly BveHacker BveHacker;
         protected IReadOnlyDictionary<PluginType, PluginVariableCollection> PluginVariables;
 
         protected readonly IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> Script;
 
-        public ExtendedBeaconBase(BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
+        public ExtendedBeaconBase(ScenarioService scenarioService, BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
             string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain,
             IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> script)
             : base(name, definedStructure, observingTargetTrack, observingTargetTrain)
         {
+            ScenarioService = scenarioService;
             BveHacker = bveHacker;
             PluginVariables = pluginVariables;
 

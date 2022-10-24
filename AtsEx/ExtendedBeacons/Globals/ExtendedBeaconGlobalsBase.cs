@@ -20,9 +20,9 @@ namespace AtsEx.ExtendedBeacons
 
         private protected readonly IReadOnlyDictionary<PluginType, PluginVariableCollection> PluginVariables;
 
-        public ExtendedBeaconGlobalsBase(PluginHost.BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
+        public ExtendedBeaconGlobalsBase(IScenarioService scenarioService, PluginHost.BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
             PluginHost.ExtendedBeacons.ExtendedBeaconBase<TPassedEventArgs> sender, TPassedEventArgs eventArgs)
-            : base(bveHacker)
+            : base(scenarioService, bveHacker)
         {
             PluginVariables = pluginVariables;
 

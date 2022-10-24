@@ -11,22 +11,24 @@ namespace AtsEx.Plugins.Scripting
     public class Globals
     {
         public IApp App { get; } = global::AtsEx.App.Instance;
+        public IScenarioService ScenarioService { get; }
         public PluginHost.BveHacker BveHacker { get; }
 
         protected SortedList<string, dynamic> Variables;
 
-        private Globals(PluginHost.BveHacker bveHacker, SortedList<string, dynamic> variables)
+        private Globals(IScenarioService scenarioService, PluginHost.BveHacker bveHacker, SortedList<string, dynamic> variables)
         {
+            ScenarioService = scenarioService;
             BveHacker = bveHacker;
 
             Variables = variables;
         }
 
-        protected Globals(Globals source) : this(source.BveHacker, source.Variables)
+        protected Globals(Globals source) : this(source.ScenarioService, source.BveHacker, source.Variables)
         {
         }
 
-        public Globals(PluginHost.BveHacker bveHacker) : this(bveHacker, new SortedList<string, dynamic>())
+        public Globals(IScenarioService scenarioService, PluginHost.BveHacker bveHacker) : this(scenarioService, bveHacker, new SortedList<string, dynamic>())
         {
         }
 

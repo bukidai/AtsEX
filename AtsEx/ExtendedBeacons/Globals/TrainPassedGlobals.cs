@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using AtsEx.PluginHost;
 using AtsEx.PluginHost.ExtendedBeacons;
 using AtsEx.PluginHost.Plugins;
 
@@ -11,9 +12,9 @@ namespace AtsEx.ExtendedBeacons
 {
     internal class TrainPassedGlobals : ExtendedBeaconGlobalsBase<TrainPassedEventArgs>
     {
-        public TrainPassedGlobals(PluginHost.BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
+        public TrainPassedGlobals(IScenarioService scenarioService, PluginHost.BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
             PluginHost.ExtendedBeacons.ExtendedBeaconBase<TrainPassedEventArgs> sender, TrainPassedEventArgs eventArgs)
-            : base(bveHacker, pluginVariables, sender, eventArgs)
+            : base(scenarioService, bveHacker, pluginVariables, sender, eventArgs)
         {
         }
 

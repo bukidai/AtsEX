@@ -61,7 +61,7 @@ namespace AtsEx.Plugins.Scripting
             Description = builder.Description;
             Copyright = builder.Copyright;
 
-            Globals = new Globals(BveHacker);
+            Globals = new Globals(ScenarioService, BveHacker);
 
             DisposeScript = builder.DisposeScript?.GetWithCheckErrors();
             OnScenarioCreatedScript = builder.OnScenarioCreatedScript?.GetWithCheckErrors();
@@ -72,7 +72,7 @@ namespace AtsEx.Plugins.Scripting
             constructorScript?.Run(Globals);
 
             BveHacker.ScenarioCreated += OnScenarioCreated;
-            App.Started += OnStarted;
+            ScenarioService.Started += OnStarted;
         }
 
         public void Dispose() => DisposeScript?.Run(Globals);

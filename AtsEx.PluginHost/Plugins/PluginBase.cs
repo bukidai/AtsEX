@@ -18,6 +18,7 @@ namespace AtsEx.PluginHost.Plugins
         public PluginType PluginType { get; }
         public bool UseAtsExExtensions { get; }
         protected IApp App { get; }
+        protected IScenarioService ScenarioService { get; }
 
         private BveHacker _BveHacker = null;
         protected BveHacker BveHacker => UseAtsExExtensions ? _BveHacker : throw new InvalidOperationException($"{nameof(UseAtsExExtensions)} が {false} に設定されています。");
@@ -83,6 +84,7 @@ namespace AtsEx.PluginHost.Plugins
             PluginType = pluginType;
             UseAtsExExtensions = useAtsExExtensions;
             App = builder.App;
+            ScenarioService = builder.ScenarioService;
             Identifier = builder.Identifier;
 
             if (!UseAtsExExtensions) return;

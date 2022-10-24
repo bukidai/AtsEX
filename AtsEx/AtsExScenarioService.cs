@@ -46,6 +46,7 @@ namespace AtsEx
 #endif
         }
 
+        private readonly ScenarioService ScenarioService;
         private readonly BveHacker BveHacker;
 
         private readonly Dictionary<string, PluginBase> VehiclePlugins;
@@ -53,11 +54,12 @@ namespace AtsEx
 
         protected AtsExScenarioService(AtsEx atsEx, PluginUsing vehiclePluginUsing, VehicleSpec vehicleSpec)
         {
+            ScenarioService = new ScenarioService(vehicleSpec);
             BveHacker = atsEx.BveHacker;
 
             LoadErrorResolver loadErrorResolver = new LoadErrorResolver(BveHacker);
 
-            Plugins.PluginLoader pluginLoader = new Plugins.PluginLoader(BveHacker);
+            Plugins.PluginLoader pluginLoader = new Plugins.PluginLoader(ScenarioService, BveHacker);
             try
             {
                 {
@@ -90,12 +92,11 @@ namespace AtsEx
                 if (VehiclePlugins is null) VehiclePlugins = new Dictionary<string, PluginBase>();
                 if (MapPlugins is null) MapPlugins = new Dictionary<string, PluginBase>();
 
-                App.Instance.VehiclePlugins = VehiclePlugins;
-                App.Instance.MapPlugins = MapPlugins;
+                ScenarioService.VehiclePlugins = VehiclePlugins;
+                ScenarioService.MapPlugins = MapPlugins;
             }
 
-            App.Instance.SetScenario(vehicleSpec);
-            BveHacker.SetScenario();
+            BveHacker.SetScenario(ScenarioService);
         }
 
         public void Dispose()
@@ -121,18 +122,18 @@ namespace AtsEx
 
         public void Started(BrakePosition defaultBrakePosition)
         {
-            App.Instance.InvokeStarted(defaultBrakePosition);
+            ScenarioService.InvokeStarted(defaultBrakePosition);
         }
 
         public HandlePositionSet Tick(TimeSpan elapsed, VehicleState vehicleState)
         {
-            App.Instance.VehicleState = vehicleState;
+            ScenarioService.VehicleState = vehicleState;
 
             BveHacker.Tick(elapsed);
 
-            int powerNotch = App.Instance.Handles.Power.Notch;
-            int brakeNotch = App.Instance.Handles.Brake.Notch;
-            ReverserPosition reverserPosition = App.Instance.Handles.Reverser.Position;
+            int powerNotch = ScenarioService.Handles.Power.Notch;
+            int brakeNotch = ScenarioService.Handles.Brake.Notch;
+            ReverserPosition reverserPosition = ScenarioService.Handles.Reverser.Position;
 
             int? atsPowerNotch = null;
             int? atsBrakeNotch = null;
@@ -171,27 +172,27 @@ namespace AtsEx
 
         public void SetPower(int notch)
         {
-            (App.Instance.Handles.Power as PowerHandle).Notch = notch;
+            (ScenarioService.Handles.Power as PowerHandle).Notch = notch;
         }
 
         public void SetBrake(int notch)
         {
-            (App.Instance.Handles.Brake as BrakeHandle).Notch = notch;
+            (ScenarioService.Handles.Brake as BrakeHandle).Notch = notch;
         }
 
         public void SetReverser(ReverserPosition position)
         {
-            (App.Instance.Handles.Reverser as Reverser).Position = position;
+            (ScenarioService.Handles.Reverser as Reverser).Position = position;
         }
 
         public void KeyDown(NativeAtsKeyName key)
         {
-            (App.Instance.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyPressed();
+            (ScenarioService.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyPressed();
         }
 
         public void KeyUp(NativeAtsKeyName key)
         {
-            (App.Instance.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyReleased();
+            (ScenarioService.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyReleased();
         }
 
 

@@ -20,6 +20,8 @@ namespace AtsEx
 {
     internal sealed class BveHacker : PluginHost.BveHacker, IDisposable
     {
+        private ScenarioService ScenarioService;
+
         private readonly VersionFormProvider VersionFormProvider;
 
         public BveHacker(Action<Version> profileForDifferentBveVersionLoaded) : base(App.Instance, profileForDifferentBveVersionLoaded)
@@ -34,16 +36,16 @@ namespace AtsEx
         {
             NotchInfo notchInfo = e.Scenario.Vehicle.Instruments.Cab.Handles.NotchInfo;
 
-            BrakeHandle brake = BrakeHandle.FromNotchInfo(notchInfo, App.Instance.Handles.Brake.CanSetNotchOutOfRange);
-            PowerHandle power = PowerHandle.FromNotchInfo(notchInfo, App.Instance.Handles.Power.CanSetNotchOutOfRange);
+            BrakeHandle brake = BrakeHandle.FromNotchInfo(notchInfo, ScenarioService.Handles.Brake.CanSetNotchOutOfRange);
+            PowerHandle power = PowerHandle.FromNotchInfo(notchInfo, ScenarioService.Handles.Power.CanSetNotchOutOfRange);
             Reverser reverser = new Reverser();
 
             _Handles = new PluginHost.Handles.HandleSet(brake, power, reverser);
-            App.Instance.Handles = Handles;
+            ScenarioService.Handles = Handles;
 
             try
             {
-                _ExtendedBeacons = global::AtsEx.ExtendedBeacons.ExtendedBeaconSet.Load(this, e.Scenario.Route.Structures.Repeated, e.Scenario.Route.StructureModels, e.Scenario.Trains);
+                _ExtendedBeacons = global::AtsEx.ExtendedBeacons.ExtendedBeaconSet.Load(ScenarioService, this, e.Scenario.Route.Structures.Repeated, e.Scenario.Route.StructureModels, e.Scenario.Trains);
             }
             catch (Exception ex)
             {
@@ -82,9 +84,11 @@ namespace AtsEx
             _ContextMenuHacker.Dispose();
         }
 
-        public void SetScenario()
+        public void SetScenario(ScenarioService scenarioService)
         {
-            VersionFormProvider.Intialize(Enumerable.Concat(App.Instance.VehiclePlugins.Values, App.Instance.MapPlugins.Values));
+            ScenarioService = scenarioService;
+
+            VersionFormProvider.Intialize(Enumerable.Concat(ScenarioService.VehiclePlugins.Values, ScenarioService.MapPlugins.Values));
         }
 
         public void Tick(TimeSpan elapsed)

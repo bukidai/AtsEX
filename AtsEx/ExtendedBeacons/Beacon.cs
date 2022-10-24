@@ -15,10 +15,10 @@ namespace AtsEx.ExtendedBeacons
     {
         private double OldLocation = 0d;
 
-        public Beacon(BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
+        public Beacon(ScenarioService scenarioService, BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
             string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain,
             IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script)
-            : base(bveHacker, pluginVariables, name, definedStructure, observingTargetTrack, observingTargetTrain, script)
+            : base(scenarioService, bveHacker, pluginVariables, name, definedStructure, observingTargetTrack, observingTargetTrain, script)
         {
         }
 
@@ -39,7 +39,7 @@ namespace AtsEx.ExtendedBeacons
         protected void NotifyPassed(Direction direction)
         {
             PassedEventArgs eventArgs = new PassedEventArgs(direction);
-            PassedGlobals globals = new PassedGlobals(BveHacker, PluginVariables, this, eventArgs);
+            PassedGlobals globals = new PassedGlobals(ScenarioService, BveHacker, PluginVariables, this, eventArgs);
             Script.Run(globals);
             base.NotifyPassed(globals.GetEventArgsWithScriptVariables());
         }

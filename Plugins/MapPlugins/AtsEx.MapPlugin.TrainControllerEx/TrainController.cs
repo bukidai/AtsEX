@@ -52,7 +52,7 @@ namespace Automatic9045.MapPlugins.TrainControllerEx
 
         public override TickResult Tick(TimeSpan elapsed)
         {
-            IReadOnlyDictionary<NativeAtsKeyName, KeyBase> atsKeys = App.NativeKeys.AtsKeys;
+            IReadOnlyDictionary<NativeAtsKeyName, KeyBase> atsKeys = ScenarioService.NativeKeys.AtsKeys;
 
             RotationSpeedRatio = Math.Min(1, Math.Max(-1, CalculateSpeed(RotationSpeedRatio, 2, 1, elapsed, atsKeys[NativeAtsKeyName.H].IsPressed, atsKeys[NativeAtsKeyName.I].IsPressed)));
 

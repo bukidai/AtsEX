@@ -46,10 +46,12 @@ namespace AtsEx.Plugins
 #endif
         }
 
+        protected readonly ScenarioService ScenarioService;
         protected readonly BveHacker BveHacker;
 
-        public PluginLoader(BveHacker bveHacker)
+        public PluginLoader(ScenarioService scenarioService, BveHacker bveHacker)
         {
+            ScenarioService = scenarioService;
             BveHacker = bveHacker;
         }
 
@@ -65,13 +67,13 @@ namespace AtsEx.Plugins
 
             foreach (KeyValuePair<Identifier, ScriptPluginPackage> item in pluginUsing.CSharpScriptPackages)
             {
-                PluginBuilder pluginBuilder = new PluginBuilder(App.Instance, BveHacker, item.Key.Text);
+                PluginBuilder pluginBuilder = new PluginBuilder(App.Instance, ScenarioService, BveHacker, item.Key.Text);
                 plugins[item.Key.Text] = CSharpScriptPlugin.FromPackage(pluginBuilder, pluginUsing.PluginType, item.Value);
             }
 
             foreach (KeyValuePair<Identifier, ScriptPluginPackage> item in pluginUsing.IronPython2Packages)
             {
-                PluginBuilder pluginBuilder = new PluginBuilder(App.Instance, BveHacker, item.Key.Text);
+                PluginBuilder pluginBuilder = new PluginBuilder(App.Instance, ScenarioService, BveHacker, item.Key.Text);
                 plugins[item.Key.Text] = IronPython2Plugin.FromPackage(pluginBuilder, pluginUsing.PluginType, item.Value);
             }
 
@@ -139,7 +141,7 @@ namespace AtsEx.Plugins
                     {
                         (Type type, ConstructorInfo constructorInfo) = constructor;
 
-                        PluginBase pluginInstance = constructorInfo.Invoke(new object[] { new PluginBuilder(App.Instance, BveHacker, GenerateIdentifier()) }) as PluginBase;
+                        PluginBase pluginInstance = constructorInfo.Invoke(new object[] { new PluginBuilder(App.Instance, ScenarioService, BveHacker, GenerateIdentifier()) }) as PluginBase;
                         if (pluginInstance.PluginType != pluginType)
                         {
                             throw new InvalidOperationException(string.Format(Resources.Value.WrongPluginType.Value, pluginType.GetTypeString(), pluginInstance.PluginType.GetTypeString()));

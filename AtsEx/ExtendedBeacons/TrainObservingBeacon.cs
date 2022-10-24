@@ -15,10 +15,10 @@ namespace AtsEx.ExtendedBeacons
     {
         private readonly List<TrainInfo> TargetTrains;
 
-        public TrainObservingBeacon(BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
+        public TrainObservingBeacon(ScenarioService scenarioService, BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
             string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, IDictionary<string, Train> targetTrains,
             IPluginScript<ExtendedBeaconGlobalsBase<TrainPassedEventArgs>> script)
-            : base(bveHacker, pluginVariables, name, definedStructure, observingTargetTrack, ObservingTargetTrain.Trains, script)
+            : base(scenarioService, bveHacker, pluginVariables, name, definedStructure, observingTargetTrack, ObservingTargetTrain.Trains, script)
         {
             TargetTrains = targetTrains.Select(train => new TrainInfo(train.Key, train.Value)).ToList();
         }
@@ -45,7 +45,7 @@ namespace AtsEx.ExtendedBeacons
             void NotifyPassed(TrainInfo senderTrain, Direction direction)
             {
                 TrainPassedEventArgs eventArgs = new TrainPassedEventArgs(senderTrain.Name, senderTrain.Train, direction);
-                TrainPassedGlobals globals = new TrainPassedGlobals(BveHacker, PluginVariables, this, eventArgs);
+                TrainPassedGlobals globals = new TrainPassedGlobals(ScenarioService, BveHacker, PluginVariables, this, eventArgs);
                 Script.Run(globals);
                 base.NotifyPassed(globals.GetEventArgsWithScriptVariables());
             }
