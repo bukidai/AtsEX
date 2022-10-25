@@ -17,18 +17,18 @@ obj
 /_SampleScenarios/AtsEx/Resources/*/*.resx
 /_SampleScenarios/AtsEx/Resources/*/*/*.resx
 
-/_SampleScenarios/Automatic9045/Maps/AtsExSampleMap/MapPlugins/*.dll
-/_SampleScenarios/Automatic9045/Maps/AtsExSampleMap/MapPlugins/*.pdb
-/_SampleScenarios/Automatic9045/Maps/AtsExSampleMap/MapPlugins/*.dll.config
-/_SampleScenarios/Automatic9045/Maps/AtsExSampleMap/MapPlugins/*.xml
+/_SampleScenarios/AtsEx.Samples/Maps/Basic/MapPlugins/*.dll
+/_SampleScenarios/AtsEx.Samples/Maps/Basic/MapPlugins/*.pdb
+/_SampleScenarios/AtsEx.Samples/Maps/Basic/MapPlugins/*.dll.config
+/_SampleScenarios/AtsEx.Samples/Maps/Basic/MapPlugins/*.xml
 
-/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/*.dll
-/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/*.pdb
-/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/*.dll.config
-/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/*.xml
-!/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/*.VehiclePluginUsing.xml
-/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/AtsEXPlugins/*.dll
-/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/AtsEXPlugins/*.pdb
-/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/AtsEXPlugins/*.dll.config
-/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/AtsEXPlugins/*.xml
-/_SampleScenarios/Automatic9045/Vehicles/AtsExSampleVehicle/Ats/.AtsExBackup
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/*.dll
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/*.pdb
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/*.dll.config
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/*.xml
+!/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/*.VehiclePluginUsing.xml
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/AtsEXPlugins/*.dll
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/AtsEXPlugins/*.pdb
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/AtsEXPlugins/*.dll.config
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/AtsEXPlugins/*.xml
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/.AtsExBackup
