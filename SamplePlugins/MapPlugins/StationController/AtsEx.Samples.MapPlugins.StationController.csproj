@@ -7,7 +7,7 @@
     <ProjectGuid>{9BF5F305-141D-4B74-B5FE-27DC09FF68A5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Automatic9045.MapPlugins.StationController</RootNamespace>
+    <RootNamespace>AtsEx.Samples.MapPlugins.StationController</RootNamespace>
     <AssemblyName>StationController</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

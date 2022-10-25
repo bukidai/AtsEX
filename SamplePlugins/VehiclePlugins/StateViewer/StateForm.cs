@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.VehiclePlugins.StateViewer
+namespace AtsEx.Samples.VehiclePlugins.StateViewer
 {
     public partial class StateForm : Form
     {

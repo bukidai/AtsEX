@@ -9,7 +9,7 @@ using AtsEx.PluginHost;
 using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Plugins;
 
-namespace Automatic9045.VehiclePlugins.StateViewer
+namespace AtsEx.Samples.VehiclePlugins.StateViewer
 {
     public class StateViewer : AssemblyPluginBase, IDisposable
     {

@@ -10,7 +10,7 @@ using SlimDX.Direct3D9;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.MapPlugins.TrainControllerEx
+namespace AtsEx.Samples.MapPlugins.TrainControllerEx
 {
     internal class TrainLocator
     {

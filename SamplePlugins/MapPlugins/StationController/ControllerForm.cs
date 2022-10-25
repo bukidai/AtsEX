@@ -10,7 +10,7 @@ using AtsEx.PluginHost;
 using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.Extensions;
 
-namespace Automatic9045.MapPlugins.StationController
+namespace AtsEx.Samples.MapPlugins.StationController
 {
     public partial class ControllerForm : Form
     {

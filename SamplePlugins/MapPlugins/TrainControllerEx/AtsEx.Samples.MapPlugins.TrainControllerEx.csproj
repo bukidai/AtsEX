@@ -7,7 +7,7 @@
     <ProjectGuid>{9E5A6C98-1F14-460A-AC42-8138196AA3AE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Automatic9045.MapPlugins.TrainControllerEx</RootNamespace>
+    <RootNamespace>AtsEx.Samples.MapPlugins.TrainControllerEx</RootNamespace>
     <AssemblyName>TrainControllerEx</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

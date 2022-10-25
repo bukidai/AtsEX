@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 using AtsEx.PluginHost;
 
-namespace Automatic9045.VehiclePlugins.StateViewer
+namespace AtsEx.Samples.VehiclePlugins.StateViewer
 {
     public partial class StateForm : Form
     {

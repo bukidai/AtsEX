@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.ClassWrappers;
 
-namespace Automatic9045.MapPlugins.StationController
+namespace AtsEx.Samples.MapPlugins.StationController
 {
     public partial class ControllerForm : Form
     {

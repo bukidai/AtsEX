@@ -10,7 +10,7 @@ using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.Plugins;
 
-namespace Automatic9045.MapPlugins.TrainController
+namespace AtsEx.Samples.MapPlugins.TrainController
 {
     public class TrainController : AssemblyPluginBase, IDisposable
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using AtsEx.PluginHost;
 
-namespace Automatic9045.VehiclePlugins.StateViewer
+namespace AtsEx.Samples.VehiclePlugins.StateViewer
 {
     internal sealed class InstanceStore
     {

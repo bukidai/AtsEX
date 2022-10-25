@@ -9,7 +9,7 @@ using AtsEx.PluginHost;
 using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Plugins;
 
-namespace Automatic9045.MapPlugins.StationController
+namespace AtsEx.Samples.MapPlugins.StationController
 {
     public class StationController : AssemblyPluginBase, IDisposable
     {

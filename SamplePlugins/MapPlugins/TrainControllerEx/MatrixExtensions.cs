@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using SlimDX;
 
-namespace Automatic9045.MapPlugins.TrainControllerEx
+namespace AtsEx.Samples.MapPlugins.TrainControllerEx
 {
     internal static class MatrixExtensions
     {

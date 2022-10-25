@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using AtsEx.PluginHost;
 
-namespace Automatic9045.MapPlugins.StationController
+namespace AtsEx.Samples.MapPlugins.StationController
 {
     internal sealed class InstanceStore
     {

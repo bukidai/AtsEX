@@ -10,7 +10,7 @@ using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Plugins;
 
-namespace Automatic9045.VehiclePlugins.SimpleAts
+namespace AtsEx.Samples.VehiclePlugins.SimpleAts
 {
     public class SimpleAts : AssemblyPluginBase
     {
