@@ -36,7 +36,7 @@ namespace AtsEx.ExtendedBeacons
         private readonly IEnumerable<string> PluginIdentifiers;
         private readonly PluginType PluginType;
 
-        private readonly SortedList<string, SortedList<string, dynamic>> Variables = new SortedList<string, SortedList<string, dynamic>>();
+        private readonly Dictionary<string, Dictionary<string, dynamic>> Variables = new Dictionary<string, Dictionary<string, dynamic>>();
 
         public PluginVariableCollection(IEnumerable<string> pluginIdentifiers, PluginType pluginType)
         {
@@ -55,7 +55,7 @@ namespace AtsEx.ExtendedBeacons
                     throw new KeyNotFoundException(string.Format(Resources.Value.PluginIdentifierNotFound.Value, PluginType.GetTypeString(), pluginIdentifier));
                 }
 
-                Variables[pluginIdentifier] = new SortedList<string, dynamic>();
+                Variables[pluginIdentifier] = new Dictionary<string, dynamic>();
             }
 
             Variables[pluginIdentifier][name] = value;

@@ -19,7 +19,7 @@ namespace AtsEx.Input
             {
                 NativeAtsKeyName[] allKeyNames = Enum.GetValues(typeof(NativeAtsKeyName)) as NativeAtsKeyName[];
                 Dictionary<NativeAtsKeyName, KeyBase> keyDictionary = allKeyNames.ToDictionary(keyName => keyName, _ => new NativeAtsKey() as KeyBase);
-                SortedList<NativeAtsKeyName, KeyBase> sortedKeyList = new SortedList<NativeAtsKeyName, KeyBase>(keyDictionary);
+                Dictionary<NativeAtsKeyName, KeyBase> sortedKeyList = new Dictionary<NativeAtsKeyName, KeyBase>(keyDictionary);
 
                 AtsKeys = new ReadOnlyDictionary<NativeAtsKeyName, KeyBase>(sortedKeyList);
             }

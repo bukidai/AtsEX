@@ -16,14 +16,14 @@ namespace AtsEx.ExtendedBeacons
         public static readonly string Definer = "AtsEx::ExtendedBeacon".ToLower();
 
         private const string ObservingTargetTrackBase = "AtsEx::ExtendedBeacon.ObservingTargetTrack.";
-        public static readonly ReadOnlyDictionary<ObservingTargetTrack, string> ObservingTargetTracks = new ReadOnlyDictionary<ObservingTargetTrack, string>(new SortedList<ObservingTargetTrack, string>()
+        public static readonly ReadOnlyDictionary<ObservingTargetTrack, string> ObservingTargetTracks = new ReadOnlyDictionary<ObservingTargetTrack, string>(new Dictionary<ObservingTargetTrack, string>()
         {
             { ObservingTargetTrack.SpecifiedTrackOnly, (ObservingTargetTrackBase + "SpecifiedTrackOnly").ToLower() },
             { ObservingTargetTrack.AllTracks, (ObservingTargetTrackBase + "AllTracks").ToLower() },
         });
 
         private const string ObservingTargetTrainBase = "AtsEx::ExtendedBeacon.ObservingTargetTrain.";
-        public static readonly ReadOnlyDictionary<ObservingTargetTrain, string> ObservingTargetTrains = new ReadOnlyDictionary<ObservingTargetTrain, string>(new SortedList<ObservingTargetTrain, string>()
+        public static readonly ReadOnlyDictionary<ObservingTargetTrain, string> ObservingTargetTrains = new ReadOnlyDictionary<ObservingTargetTrain, string>(new Dictionary<ObservingTargetTrain, string>()
         {
             { PluginHost.ExtendedBeacons.ObservingTargetTrain.Myself, (ObservingTargetTrainBase + "Myself").ToLower() },
             { PluginHost.ExtendedBeacons.ObservingTargetTrain.Trains, (ObservingTargetTrainBase + "Trains").ToLower() },

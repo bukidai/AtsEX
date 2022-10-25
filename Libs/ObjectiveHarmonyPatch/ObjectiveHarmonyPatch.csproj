@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HarmonyPatch.cs" />
-    <Compile Include="HarmonyPatch.MethodComparer.cs" />
     <Compile Include="PatchInvokationResult.cs" />
     <Compile Include="PatchInvokedEventArgs.cs" />
     <Compile Include="PatchInvokedEventHandler.cs" />

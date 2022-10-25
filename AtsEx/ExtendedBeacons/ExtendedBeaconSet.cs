@@ -57,9 +57,9 @@ namespace AtsEx.ExtendedBeacons
         public override ReadOnlyDictionary<string, TrainObservingBeaconBase> TrainObservingBeacons { get; }
         public override ReadOnlyDictionary<string, BeaconBase> PreTrainObservingBeacons { get; }
 
-        protected SortedList<PluginType, PluginVariableCollection> PluginVariables = new SortedList<PluginType, PluginVariableCollection>();
+        protected Dictionary<PluginType, PluginVariableCollection> PluginVariables = new Dictionary<PluginType, PluginVariableCollection>();
 
-        protected ExtendedBeaconSet(SortedList<PluginType, PluginVariableCollection> pluginVariables,
+        protected ExtendedBeaconSet(Dictionary<PluginType, PluginVariableCollection> pluginVariables,
             IDictionary<string, BeaconBase> beacons, IDictionary<string, TrainObservingBeaconBase> trainObservingBeacons, IDictionary<string, BeaconBase> preTrainObservingBeacons)
         {
             PluginVariables = pluginVariables;
@@ -71,7 +71,7 @@ namespace AtsEx.ExtendedBeacons
 
         public static ExtendedBeaconSet Load(ScenarioService scenarioService, BveHacker bveHacker, IDictionary<string, MapObjectList> repeatedStructures, IDictionary<string, Model> structureModels, IDictionary<string, Train> trains)
         {
-            SortedList<PluginType, PluginVariableCollection> pluginVariables = new SortedList<PluginType, PluginVariableCollection>();
+            Dictionary<PluginType, PluginVariableCollection> pluginVariables = new Dictionary<PluginType, PluginVariableCollection>();
             foreach (PluginType pluginType in Enum.GetValues(typeof(PluginType)))
             {
                 pluginVariables[pluginType] = new PluginVariableCollection(scenarioService.Plugins[pluginType].Keys, pluginType);
@@ -83,7 +83,7 @@ namespace AtsEx.ExtendedBeacons
 
             List<ICompilationErrorCheckable> errorCheckList = new List<ICompilationErrorCheckable>();
 
-            Dictionary<Type, SortedList<ScriptLanguage, SortedList<string, dynamic>>> cachedScripts = new Dictionary<Type, SortedList<ScriptLanguage, SortedList<string, dynamic>>>();
+            Dictionary<Type, Dictionary<ScriptLanguage, Dictionary<string, dynamic>>> cachedScripts = new Dictionary<Type, Dictionary<ScriptLanguage, Dictionary<string, dynamic>>>();
 
             foreach (KeyValuePair<string, MapObjectList> sameKeyRepeaters in repeatedStructures)
             {
@@ -188,8 +188,8 @@ namespace AtsEx.ExtendedBeacons
             {
                 string mainMapDirectory = Path.GetDirectoryName(bveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path);
 
-                if (!cachedScripts.ContainsKey(typeof(TPassedEventArgs))) cachedScripts[typeof(TPassedEventArgs)] = new SortedList<ScriptLanguage, SortedList<string, dynamic>>();
-                if (!cachedScripts[typeof(TPassedEventArgs)].ContainsKey(language)) cachedScripts[typeof(TPassedEventArgs)][language] = new SortedList<string, dynamic>();
+                if (!cachedScripts.ContainsKey(typeof(TPassedEventArgs))) cachedScripts[typeof(TPassedEventArgs)] = new Dictionary<ScriptLanguage, Dictionary<string, dynamic>>();
+                if (!cachedScripts[typeof(TPassedEventArgs)].ContainsKey(language)) cachedScripts[typeof(TPassedEventArgs)][language] = new Dictionary<string, dynamic>();
 
                 if (cachedScripts[typeof(TPassedEventArgs)][language].ContainsKey(code))
                 {

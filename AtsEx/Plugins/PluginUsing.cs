@@ -42,13 +42,13 @@ namespace AtsEx.Plugins
 
         public PluginType PluginType { get; }
 
-        protected readonly SortedList<Identifier, Assembly> _Assemblies;
+        protected readonly Dictionary<Identifier, Assembly> _Assemblies;
         public ReadOnlyDictionary<Identifier, Assembly> Assemblies { get; }
 
-        protected readonly SortedList<Identifier, ScriptPluginPackage> _CSharpScriptPackages;
+        protected readonly Dictionary<Identifier, ScriptPluginPackage> _CSharpScriptPackages;
         public ReadOnlyDictionary<Identifier, ScriptPluginPackage> CSharpScriptPackages { get; }
 
-        protected readonly SortedList<Identifier, ScriptPluginPackage> _IronPython2Packages;
+        protected readonly Dictionary<Identifier, ScriptPluginPackage> _IronPython2Packages;
         public ReadOnlyDictionary<Identifier, ScriptPluginPackage> IronPython2Packages { get; }
 
         static PluginUsing()
@@ -71,9 +71,9 @@ namespace AtsEx.Plugins
             Name = name;
             PluginType = pluginType;
 
-            _Assemblies = new SortedList<Identifier, Assembly>(assemblies);
-            _CSharpScriptPackages = new SortedList<Identifier, ScriptPluginPackage>(csharpScriptPackages);
-            _IronPython2Packages = new SortedList<Identifier, ScriptPluginPackage>(ironPython2Packages);
+            _Assemblies = new Dictionary<Identifier, Assembly>(assemblies);
+            _CSharpScriptPackages = new Dictionary<Identifier, ScriptPluginPackage>(csharpScriptPackages);
+            _IronPython2Packages = new Dictionary<Identifier, ScriptPluginPackage>(ironPython2Packages);
 
             Assemblies = new ReadOnlyDictionary<Identifier, Assembly>(_Assemblies);
             CSharpScriptPackages = new ReadOnlyDictionary<Identifier, ScriptPluginPackage>(_CSharpScriptPackages);

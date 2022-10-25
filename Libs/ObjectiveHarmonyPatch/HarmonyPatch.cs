@@ -13,10 +13,10 @@ namespace ObjectiveHarmonyPatch
     /// <summary>
     /// オブジェクト (インスタンス) として扱える Harmony パッチのラッパーを提供します。
     /// </summary>
-    public sealed partial class HarmonyPatch : IDisposable
+    public sealed class HarmonyPatch : IDisposable
     {
         private static readonly Harmony Harmony = new Harmony("com.objective-harmony-patch");
-        private static readonly SortedList<MethodBase, List<HarmonyPatch>> Patches = new SortedList<MethodBase, List<HarmonyPatch>>(new MethodComaparer());
+        private static readonly Dictionary<MethodBase, List<HarmonyPatch>> Patches = new Dictionary<MethodBase, List<HarmonyPatch>>();
 
         private readonly MethodBase Original;
         private readonly HarmonyMethod PrefixHarmonyMethod = null;

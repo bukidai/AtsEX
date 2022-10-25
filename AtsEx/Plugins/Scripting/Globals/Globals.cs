@@ -14,9 +14,9 @@ namespace AtsEx.Plugins.Scripting
         public IScenarioService ScenarioService { get; }
         public PluginHost.BveHacker BveHacker { get; }
 
-        protected SortedList<string, dynamic> Variables;
+        protected Dictionary<string, dynamic> Variables;
 
-        private Globals(IScenarioService scenarioService, PluginHost.BveHacker bveHacker, SortedList<string, dynamic> variables)
+        private Globals(IScenarioService scenarioService, PluginHost.BveHacker bveHacker, Dictionary<string, dynamic> variables)
         {
             ScenarioService = scenarioService;
             BveHacker = bveHacker;
@@ -28,7 +28,7 @@ namespace AtsEx.Plugins.Scripting
         {
         }
 
-        public Globals(IScenarioService scenarioService, PluginHost.BveHacker bveHacker) : this(scenarioService, bveHacker, new SortedList<string, dynamic>())
+        public Globals(IScenarioService scenarioService, PluginHost.BveHacker bveHacker) : this(scenarioService, bveHacker, new Dictionary<string, dynamic>())
         {
         }
 

@@ -12,7 +12,7 @@ namespace AtsEx.Plugins.Scripting
     internal static partial class MapStatementIdentifiers
     {
         private const string ScriptLanguagesBase = "AtsEx::ScriptLanguage.";
-        public static readonly ReadOnlyDictionary<ScriptLanguage, string> ScriptLanguages = new ReadOnlyDictionary<ScriptLanguage, string>(new SortedList<ScriptLanguage, string>()
+        public static readonly ReadOnlyDictionary<ScriptLanguage, string> ScriptLanguages = new ReadOnlyDictionary<ScriptLanguage, string>(new Dictionary<ScriptLanguage, string>()
         {
             { ScriptLanguage.CSharpScript, (ScriptLanguagesBase + "CSharpScript").ToLower() },
             { ScriptLanguage.IronPython2, (ScriptLanguagesBase + "IronPython2").ToLower() },
