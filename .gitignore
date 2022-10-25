@@ -17,10 +17,10 @@ obj
 /_SampleScenarios/AtsEx/Resources/*/*.resx
 /_SampleScenarios/AtsEx/Resources/*/*/*.resx
 
-/_SampleScenarios/AtsEx.Samples/Maps/Basic/MapPlugins/*.dll
-/_SampleScenarios/AtsEx.Samples/Maps/Basic/MapPlugins/*.pdb
-/_SampleScenarios/AtsEx.Samples/Maps/Basic/MapPlugins/*.dll.config
-/_SampleScenarios/AtsEx.Samples/Maps/Basic/MapPlugins/*.xml
+/_SampleScenarios/AtsEx.Samples/Maps/Basic/Samples/*/MapPlugins/*.dll
+/_SampleScenarios/AtsEx.Samples/Maps/Basic/Samples/*/MapPlugins/*.pdb
+/_SampleScenarios/AtsEx.Samples/Maps/Basic/Samples/*/MapPlugins/*.dll.config
+/_SampleScenarios/AtsEx.Samples/Maps/Basic/Samples/*/MapPlugins/*.xml
 
 /_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/*.dll
 /_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/*.pdb

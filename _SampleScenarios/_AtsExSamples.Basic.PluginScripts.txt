@@ -1,0 +1,10 @@
+BveTs Scenario 2.00 : UTF-8
+
+Title = 普通 一橋→六合【スクリプトプラグインサンプル】
+Route = AtsEx.Samples\Maps\Basic\Samples\ScriptPlugins\Map.txt
+RouteTitle = ★AtsEX サンプル
+Vehicle = AtsEx.Samples\Vehicles\Basic\Vehicle_Simple.txt
+VehicleTitle = AtsEX 搭載サンプル車両
+Author = おーとま (automatic9045)
+;Image = 
+Comment = CSharp スクリプト、IronPython でスクリプトプラグインを開発するサンプルです。
