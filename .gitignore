@@ -22,13 +22,12 @@ obj
 /_SampleScenarios/AtsEx.Samples/Maps/Basic/MapPlugins/*.dll.config
 /_SampleScenarios/AtsEx.Samples/Maps/Basic/MapPlugins/*.xml
 
-/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/*.dll
-/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/*.pdb
-/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/*.dll.config
-/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/*.xml
-!/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/*.VehiclePluginUsing.xml
-/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/AtsEXPlugins/*.dll
-/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/AtsEXPlugins/*.pdb
-/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/AtsEXPlugins/*.dll.config
-/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/AtsEXPlugins/*.xml
-/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats/.AtsExBackup
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/*.dll
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/*.pdb
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/*.dll.config
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/*.xml
+!/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/*.VehiclePluginUsing.xml
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/AtsEXPlugins/*.dll
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/AtsEXPlugins/*.pdb
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/AtsEXPlugins/*.dll.config
+/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/AtsEXPlugins/*.xml
