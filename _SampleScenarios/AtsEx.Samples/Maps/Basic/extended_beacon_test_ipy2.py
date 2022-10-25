@@ -62,7 +62,7 @@ App、BveHackerに加えて
 
 import System
 from System.Windows.Forms import *
-import Automatic9045.AtsEx.PluginHost.ExtendedBeacons as eb
+import AtsEx.PluginHost.ExtendedBeacons as eb
 
 
 def tick(g):
