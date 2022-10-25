@@ -9,6 +9,7 @@ AtsEXの機能にアクセスするためのオブジェクトが変数【g】�
 全てのスクリプト（スクリプト言語で開発した車両・マッププラグイン、拡張地上子のスクリプトのどちらも）には
 
 	IApp App { get; }
+	IScenarioService ScenarioService { get; }
 	IBveHacker BveHacker { get; }
 
 が渡されています。
