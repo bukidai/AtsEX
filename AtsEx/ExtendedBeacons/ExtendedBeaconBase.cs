@@ -16,18 +16,16 @@ namespace AtsEx.ExtendedBeacons
     {
         protected readonly ScenarioService ScenarioService;
         protected readonly BveHacker BveHacker;
-        protected IReadOnlyDictionary<PluginType, PluginVariableCollection> PluginVariables;
 
         protected readonly IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> Script;
 
-        public ExtendedBeaconBase(ScenarioService scenarioService, BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
+        public ExtendedBeaconBase(ScenarioService scenarioService, BveHacker bveHacker,
             string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain,
             IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> script)
             : base(name, definedStructure, observingTargetTrack, observingTargetTrain)
         {
             ScenarioService = scenarioService;
             BveHacker = bveHacker;
-            PluginVariables = pluginVariables;
 
             Script = script;
         }

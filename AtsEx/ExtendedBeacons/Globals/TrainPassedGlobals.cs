@@ -12,9 +12,9 @@ namespace AtsEx.ExtendedBeacons
 {
     internal class TrainPassedGlobals : ExtendedBeaconGlobalsBase<TrainPassedEventArgs>
     {
-        public TrainPassedGlobals(IScenarioService scenarioService, PluginHost.BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
+        public TrainPassedGlobals(IScenarioService scenarioService, PluginHost.BveHacker bveHacker,
             PluginHost.ExtendedBeacons.ExtendedBeaconBase<TrainPassedEventArgs> sender, TrainPassedEventArgs eventArgs)
-            : base(scenarioService, bveHacker, pluginVariables, sender, eventArgs)
+            : base(scenarioService, bveHacker, sender, eventArgs)
         {
         }
 

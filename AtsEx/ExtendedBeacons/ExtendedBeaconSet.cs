@@ -57,13 +57,9 @@ namespace AtsEx.ExtendedBeacons
         public override ReadOnlyDictionary<string, TrainObservingBeaconBase> TrainObservingBeacons { get; }
         public override ReadOnlyDictionary<string, BeaconBase> PreTrainObservingBeacons { get; }
 
-        protected Dictionary<PluginType, PluginVariableCollection> PluginVariables = new Dictionary<PluginType, PluginVariableCollection>();
-
-        protected ExtendedBeaconSet(Dictionary<PluginType, PluginVariableCollection> pluginVariables,
+        protected ExtendedBeaconSet(
             IDictionary<string, BeaconBase> beacons, IDictionary<string, TrainObservingBeaconBase> trainObservingBeacons, IDictionary<string, BeaconBase> preTrainObservingBeacons)
         {
-            PluginVariables = pluginVariables;
-
             Beacons = new ReadOnlyDictionary<string, BeaconBase>(beacons);
             TrainObservingBeacons = new ReadOnlyDictionary<string, TrainObservingBeaconBase>(trainObservingBeacons);
             PreTrainObservingBeacons = new ReadOnlyDictionary<string, BeaconBase>(preTrainObservingBeacons);
@@ -71,12 +67,6 @@ namespace AtsEx.ExtendedBeacons
 
         public static ExtendedBeaconSet Load(ScenarioService scenarioService, BveHacker bveHacker, IDictionary<string, MapObjectList> repeatedStructures, IDictionary<string, Model> structureModels, IDictionary<string, Train> trains)
         {
-            Dictionary<PluginType, PluginVariableCollection> pluginVariables = new Dictionary<PluginType, PluginVariableCollection>();
-            foreach (PluginType pluginType in Enum.GetValues(typeof(PluginType)))
-            {
-                pluginVariables[pluginType] = new PluginVariableCollection(scenarioService.Plugins[pluginType].Keys, pluginType);
-            }
-
             Dictionary<string, BeaconBase> beacons = new Dictionary<string, BeaconBase>();
             Dictionary<string, TrainObservingBeaconBase> trainObservingBeacons = new Dictionary<string, TrainObservingBeaconBase>();
             Dictionary<string, BeaconBase> preTrainObservingBeacons = new Dictionary<string, BeaconBase>();
@@ -147,8 +137,8 @@ namespace AtsEx.ExtendedBeacons
                             {
                                 IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script = CreateScript<PassedEventArgs>(code, scriptLanguage);
                                 Beacon beacon = repeatedStructure.Location < 0
-                                    ? new InitializerBeacon(scenarioService, bveHacker, pluginVariables, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script)
-                                    : new Beacon(scenarioService, bveHacker, pluginVariables, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
+                                    ? new InitializerBeacon(scenarioService, bveHacker, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script)
+                                    : new Beacon(scenarioService, bveHacker, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
 
                                 beacons[name] = beacon;
                                 errorCheckList.Add(beacon);
@@ -158,7 +148,7 @@ namespace AtsEx.ExtendedBeacons
                             case ObservingTargetTrain.Trains:
                             {
                                 IPluginScript<ExtendedBeaconGlobalsBase<TrainPassedEventArgs>> script = CreateScript<TrainPassedEventArgs>(code, scriptLanguage);
-                                TrainObservingBeacon beacon = new TrainObservingBeacon(scenarioService, bveHacker, pluginVariables, name, repeatedStructure, observingTargetTrack, trains, script);
+                                TrainObservingBeacon beacon = new TrainObservingBeacon(scenarioService, bveHacker, name, repeatedStructure, observingTargetTrack, trains, script);
 
                                 trainObservingBeacons[name] = beacon;
                                 errorCheckList.Add(beacon);
@@ -168,7 +158,7 @@ namespace AtsEx.ExtendedBeacons
                             case ObservingTargetTrain.PreTrain:
                             {
                                 IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script = CreateScript<PassedEventArgs>(code, scriptLanguage);
-                                Beacon beacon = new Beacon(scenarioService, bveHacker, pluginVariables, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
+                                Beacon beacon = new Beacon(scenarioService, bveHacker, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
 
                                 preTrainObservingBeacons[name] = beacon;
                                 errorCheckList.Add(beacon);
@@ -181,7 +171,7 @@ namespace AtsEx.ExtendedBeacons
 
             errorCheckList.ForEach(beacon => beacon.CheckCompilationErrors());
 
-            return new ExtendedBeaconSet(pluginVariables, OrderBeacons(beacons), OrderBeacons(trainObservingBeacons), OrderBeacons(preTrainObservingBeacons));
+            return new ExtendedBeaconSet(OrderBeacons(beacons), OrderBeacons(trainObservingBeacons), OrderBeacons(preTrainObservingBeacons));
 
 
             IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> CreateScript<TPassedEventArgs>(string code, ScriptLanguage language) where TPassedEventArgs : PassedEventArgs
@@ -223,8 +213,6 @@ namespace AtsEx.ExtendedBeacons
             Dictionary<string, TBeacon> OrderBeacons<TBeacon>(Dictionary<string, TBeacon> source) where TBeacon : IExtendedBeacon
                 => source.OrderBy(item => item.Value).ToDictionary(x => x.Key, x => x.Value);
         }
-
-        protected override T GetPluginVariable<T>(PluginBase target, string name) => PluginVariables[target.PluginType].GetPluginVariable<T>(target.Identifier, name);
 
         public void Tick(double location, double preTrainLocation)
         {

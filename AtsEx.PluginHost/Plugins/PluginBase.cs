@@ -103,13 +103,5 @@ namespace AtsEx.PluginHost.Plugins
         /// 車両プラグインでは <see cref="VehiclePluginTickResult"/> を、マッププラグインでは <see cref="MapPluginTickResult"/> を返してください。
         /// </returns>
         public abstract TickResult Tick(TimeSpan elapsed);
-
-        /// <summary>
-        /// 拡張地上子からこのプラグイン向けに公開されている変数の値を取得します。
-        /// </summary>
-        /// <typeparam name="T">変数の型。</typeparam>
-        /// <param name="name">変数の名前。</param>
-        /// <returns>変数の値。</returns>
-        public T GetExtendedBeaconPluginVariables<T>(string name) => BveHacker.ExtendedBeacons.GetPluginVariable<T>(this, name);
     }
 }

@@ -28,7 +28,5 @@ namespace AtsEx.PluginHost.ExtendedBeacons
         /// 先行列車の通過を検知する地上子の一覧を取得します。
         /// </summary>
         public abstract ReadOnlyDictionary<string, ExtendedBeaconBase<PassedEventArgs>> PreTrainObservingBeacons { get; }
-
-        internal protected abstract T GetPluginVariable<T>(PluginBase target, string name);
     }
 }

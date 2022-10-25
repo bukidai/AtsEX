@@ -143,7 +143,6 @@
     <Compile Include="ExtendedBeacons\Globals\TrainPassedGlobals.cs" />
     <Compile Include="ExtendedBeacons\InitializerBeacon.cs" />
     <Compile Include="ExtendedBeacons\MapStatementIdentifiers.cs" />
-    <Compile Include="ExtendedBeacons\PluginVariableCollection.cs" />
     <Compile Include="ExtendedBeacons\TrainObservingBeacon.cs" />
     <Compile Include="Handles\BrakeHandle.cs" />
     <Compile Include="Handles\HandleBase.cs" />

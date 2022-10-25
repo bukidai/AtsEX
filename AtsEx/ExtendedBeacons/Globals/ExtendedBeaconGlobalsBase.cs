@@ -18,23 +18,13 @@ namespace AtsEx.ExtendedBeacons
         public readonly TPassedEventArgs e;
 #pragma warning restore IDE1006 // 命名スタイル
 
-        private protected readonly IReadOnlyDictionary<PluginType, PluginVariableCollection> PluginVariables;
-
-        public ExtendedBeaconGlobalsBase(IScenarioService scenarioService, PluginHost.BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
+        public ExtendedBeaconGlobalsBase(IScenarioService scenarioService, PluginHost.BveHacker bveHacker,
             PluginHost.ExtendedBeacons.ExtendedBeaconBase<TPassedEventArgs> sender, TPassedEventArgs eventArgs)
             : base(scenarioService, bveHacker)
         {
-            PluginVariables = pluginVariables;
-
             this.sender = sender;
             e = eventArgs;
         }
-
-        public T GetPluginVariable<T>(PluginType pluginType, string pluginIdentifier, string name)
-            => PluginVariables[pluginType].GetPluginVariable<T>(pluginIdentifier, name);
-
-        public void SetPluginVariable<T>(PluginType pluginType, string pluginIdentifier, string name, T value)
-            => PluginVariables[pluginType].SetPluginVariable(pluginIdentifier, name, value);
 
         internal abstract TPassedEventArgs GetEventArgsWithScriptVariables();
     }

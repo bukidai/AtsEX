@@ -15,10 +15,10 @@ namespace AtsEx.ExtendedBeacons
     {
         private bool IsFirstTime = true;
 
-        public InitializerBeacon(ScenarioService scenarioService, BveHacker bveHacker, IReadOnlyDictionary<PluginType, PluginVariableCollection> pluginVariables,
+        public InitializerBeacon(ScenarioService scenarioService, BveHacker bveHacker,
             string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain,
             IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script)
-            : base(scenarioService, bveHacker, pluginVariables, name, definedStructure, observingTargetTrack, observingTargetTrain, script)
+            : base(scenarioService, bveHacker, name, definedStructure, observingTargetTrack, observingTargetTrain, script)
         {
         }
 
