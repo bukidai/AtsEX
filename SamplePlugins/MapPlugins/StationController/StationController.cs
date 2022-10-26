@@ -18,7 +18,7 @@ namespace AtsEx.Samples.MapPlugins.StationController
 
         public StationController(PluginBuilder services) : base(services, PluginType.MapPlugin)
         {
-            InstanceStore.Initialize(BveHacker);
+            InstanceStore.Initialize(ScenarioService, BveHacker);
 
             MenuItem = BveHacker.ContextMenuHacker.AddCheckableMenuItem("駅編集ウィンドウを表示", MenuItemCheckedChanged);
 

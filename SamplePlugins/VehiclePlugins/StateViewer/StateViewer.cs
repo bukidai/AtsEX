@@ -18,7 +18,7 @@ namespace AtsEx.Samples.VehiclePlugins.StateViewer
 
         public StateViewer(PluginBuilder services) : base(services, PluginType.VehiclePlugin)
         {
-            InstanceStore.Initialize(BveHacker);
+            InstanceStore.Initialize(ScenarioService, BveHacker);
 
             MenuItem = BveHacker.ContextMenuHacker.AddCheckableMenuItem("状態ウィンドウを表示", MenuItemCheckedChanged);
 
