@@ -128,7 +128,6 @@
     <Compile Include="Hosting\AssemblyResolver.cs" />
     <Compile Include="Hosting\AtsExActivator.cs" />
     <Compile Include="Hosting\AtsExRepositoryHost.cs" />
-    <Compile Include="App.cs" />
     <Compile Include="AtsEx.AsAtsPlugin.cs" />
     <Compile Include="AtsEx.cs" />
     <Compile Include="AtsExScenarioService.AsAtsPlugin.cs" />
@@ -216,8 +215,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\App.ja.resx" />
-    <Content Include="Resources\App.resx" />
     <Content Include="Resources\AtsEx.ja.resx" />
     <Content Include="Resources\AtsEx.resx" />
     <Content Include="Resources\AtsExScenarioService.ja.resx" />

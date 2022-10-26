@@ -24,7 +24,7 @@ namespace AtsEx
 
         private readonly VersionFormProvider VersionFormProvider;
 
-        public BveHacker(Action<Version> profileForDifferentBveVersionLoaded) : base(App.Instance, profileForDifferentBveVersionLoaded)
+        public BveHacker(Action<Version> profileForDifferentBveVersionLoaded) : base(profileForDifferentBveVersionLoaded)
         {
             _ContextMenuHacker = new ContextMenuHacker(MainForm);
             _ContextMenuHacker.AddSeparator(true);

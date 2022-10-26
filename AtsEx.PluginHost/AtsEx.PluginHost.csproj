@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs" />
     <Compile Include="BveHacker\Services\MainFormHacker.cs" />
     <Compile Include="BveHacker\Services\ScenarioHacker.cs" />
     <Compile Include="BveHacker\Services\StructureSetLifeProlonger.cs" />
@@ -185,7 +186,6 @@
     <Compile Include="Exceptions\BveFileLoadException.cs" />
     <Compile Include="Exceptions\DevelopException.cs" />
     <Compile Include="Exceptions\PropertyNotInitializedException.cs" />
-    <Compile Include="IApp.cs" />
     <Compile Include="Plugins\PluginInfo.cs" />
     <Compile Include="Handles\ReverserPosition.cs" />
     <Compile Include="BveHacker\BveHacker.cs" />
@@ -223,6 +223,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BveTypes\WrapTypes\5.8.7554.391.xml" />
+    <Content Include="Resources\App.ja.resx" />
+    <Content Include="Resources\App.resx" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BveTypes\WrapTypes\6.0.7554.619.xml" />

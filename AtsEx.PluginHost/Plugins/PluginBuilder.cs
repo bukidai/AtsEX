@@ -8,14 +8,12 @@ namespace AtsEx.PluginHost.Plugins
 {
     public class PluginBuilder
     {
-        internal protected IApp App { get; }
         internal protected IScenarioService ScenarioService { get; }
         internal protected BveHacker BveHacker { get; }
         internal protected string Identifier { get; }
 
-        public PluginBuilder(IApp app, IScenarioService scenarioService, BveHacker bveHacker, string identifier)
+        public PluginBuilder(IScenarioService scenarioService, BveHacker bveHacker, string identifier)
         {
-            App = app;
             ScenarioService = scenarioService;
             BveHacker = bveHacker;
             Identifier = identifier;
@@ -23,7 +21,6 @@ namespace AtsEx.PluginHost.Plugins
 
         protected PluginBuilder(PluginBuilder pluginBuilder)
         {
-            App = pluginBuilder.App;
             ScenarioService = pluginBuilder.ScenarioService;
             BveHacker = pluginBuilder.BveHacker;
             Identifier = pluginBuilder.Identifier;

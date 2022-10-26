@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AtsEx.Plugins;
+using AtsEx.PluginHost;
 using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.Native;
 using AtsEx.PluginHost.Plugins;

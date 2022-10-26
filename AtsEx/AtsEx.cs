@@ -12,8 +12,6 @@ using Zbx1425.DXDynamicTexture;
 using UnembeddedResources;
 
 using AtsEx.PluginHost;
-using AtsEx.PluginHost.BveTypes;
-using AtsEx.PluginHost.ClassWrappers;
 
 namespace AtsEx
 {
@@ -48,10 +46,7 @@ namespace AtsEx
         {
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
 
-            string pluginHostAssemblyPath = Path.Combine(Path.GetDirectoryName(executingAssembly.Location), "AtsEx.PluginHost.dll");
-            Assembly pluginHostAssembly = Assembly.LoadFrom(pluginHostAssemblyPath);
-
-            App.CreateInstance(targetProcess, targetAssembly, pluginHostAssembly);
+            App.CreateInstance(targetProcess, targetAssembly, executingAssembly);
             BveHacker = new BveHacker(ProfileForDifferentBveVersionLoaded);
 
             TextureManager.Initialize();

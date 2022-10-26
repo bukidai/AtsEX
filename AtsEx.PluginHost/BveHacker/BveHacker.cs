@@ -48,16 +48,13 @@ namespace AtsEx.PluginHost
 #endif
         }
 
-        private readonly IApp App;
         private readonly StructureSetLifeProlonger StructureSetLifeProlonger;
 
-        protected BveHacker(IApp app, Action<Version> profileForDifferentBveVersionLoaded)
+        protected BveHacker(Action<Version> profileForDifferentBveVersionLoaded)
         {
-            App = app;
-
             try
             {
-                BveTypes = BveTypeSet.LoadAsync(App.BveAssembly, App.BveVersion, true, profileForDifferentBveVersionLoaded).Result;
+                BveTypes = BveTypeSet.LoadAsync(App.Instance.BveAssembly, App.Instance.BveVersion, true, profileForDifferentBveVersionLoaded).Result;
             }
             catch (KeyNotFoundException)
             {
@@ -65,13 +62,13 @@ namespace AtsEx.PluginHost
                 throw;
             }
 
-            ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(App, this);
+            ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(this);
             classWrapperInitializer.InitializeAllAsync().Wait();
 
-            BveTypesSetter bveTypesSetter = new BveTypesSetter(App, this);
+            BveTypesSetter bveTypesSetter = new BveTypesSetter(this);
             bveTypesSetter.InitializeAllAsync().Wait();
 
-            MainFormHacker = new MainFormHacker(App.Process);
+            MainFormHacker = new MainFormHacker(App.Instance.Process);
             ScenarioHacker = new ScenarioHacker(MainFormHacker, BveTypes);
 
             StructureSetLifeProlonger = new StructureSetLifeProlonger(this);
@@ -91,7 +88,7 @@ namespace AtsEx.PluginHost
             if (slimDXAssemblies.Count() > 1)
             {
                 string locationText = string.Join("\n", slimDXAssemblies.Select(assembly => "・" + assembly.Location));
-                MessageBox.Show(string.Format(Resources.Value.IllegalSlimDXDetected.Value, locationText), App.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(string.Format(Resources.Value.IllegalSlimDXDetected.Value, locationText), App.Instance.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

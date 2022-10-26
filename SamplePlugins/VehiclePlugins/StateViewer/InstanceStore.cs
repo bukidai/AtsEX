@@ -13,18 +13,16 @@ namespace AtsEx.Samples.VehiclePlugins.StateViewer
         public static InstanceStore Instance { get; private set; } = null;
         public static bool IsInitialized => !(Instance is null);
 
-        public static void Initialize(IApp app, BveHacker bveHacker)
+        public static void Initialize(BveHacker bveHacker)
         {
-            Instance = new InstanceStore(app, bveHacker);
+            Instance = new InstanceStore(bveHacker);
         }
 
 
-        public IApp App { get; }
         public BveHacker BveHacker { get; }
 
-        private InstanceStore(IApp app, BveHacker bveHacker)
+        private InstanceStore(BveHacker bveHacker)
         {
-            App = app;
             BveHacker = bveHacker;
         }
     }

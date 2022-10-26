@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using AtsEx.PluginHost;
+
 namespace AtsEx
 {
     internal abstract partial class AtsEx

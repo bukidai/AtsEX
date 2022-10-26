@@ -9,17 +9,8 @@ namespace AtsEx.PluginHost
 {
     internal abstract class ClassInitializerBase
     {
-        protected readonly IApp App;
-        protected readonly BveHacker BveHacker;
-
-        protected readonly object[] Parameters;
-
-        public ClassInitializerBase(IApp app, BveHacker bveHacker)
+        public ClassInitializerBase()
         {
-            App = app;
-            BveHacker = bveHacker;
-
-            Parameters = new object[] { App, BveHacker };
         }
 
         public async Task InitializeAllAsync() => await Task.Run(InitializeAll).ConfigureAwait(false);

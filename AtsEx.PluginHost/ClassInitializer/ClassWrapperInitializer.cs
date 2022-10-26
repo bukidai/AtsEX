@@ -11,18 +11,18 @@ namespace AtsEx.PluginHost.ClassWrappers
 {
     internal sealed class ClassWrapperInitializer : ClassInitializerBase
     {
-        private static new BveHacker BveHacker = null;
+        private static BveHacker BveHacker = null;
 
         public static BveTypeSet LazyInitialize() => BveHacker.BveTypes;
 
-        public ClassWrapperInitializer(IApp app, BveHacker bveHacker) : base(app, bveHacker)
+        public ClassWrapperInitializer(BveHacker bveHacker) : base()
         {
             BveHacker = BveHacker ?? bveHacker;
         }
 
         public override void InitializeAll()
         {
-            Type[] allTypes = App.AtsExPluginHostAssembly.GetTypes();
+            Type[] allTypes = App.Instance.AtsExPluginHostAssembly.GetTypes();
             IEnumerable<Type> classWrapperTypes = allTypes.Where(t => t == typeof(ClassWrapperBase) || t.IsSubclassOf(typeof(ClassWrapperBase)));
 
             Initialize<InitializeClassWrapperAttribute>(classWrapperTypes, method =>

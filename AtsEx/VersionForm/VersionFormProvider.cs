@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using UnembeddedResources;
 
+using AtsEx.PluginHost;
 using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx

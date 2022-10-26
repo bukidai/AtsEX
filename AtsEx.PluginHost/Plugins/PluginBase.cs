@@ -17,7 +17,6 @@ namespace AtsEx.PluginHost.Plugins
     {
         public PluginType PluginType { get; }
         public bool UseAtsExExtensions { get; }
-        protected IApp App { get; }
         protected IScenarioService ScenarioService { get; }
 
         private BveHacker _BveHacker = null;
@@ -83,7 +82,6 @@ namespace AtsEx.PluginHost.Plugins
         {
             PluginType = pluginType;
             UseAtsExExtensions = useAtsExExtensions;
-            App = builder.App;
             ScenarioService = builder.ScenarioService;
             Identifier = builder.Identifier;
 

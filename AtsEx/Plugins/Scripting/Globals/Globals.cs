@@ -10,7 +10,6 @@ namespace AtsEx.Plugins.Scripting
 {
     public class Globals
     {
-        public IApp App { get; } = global::AtsEx.App.Instance;
         public IScenarioService ScenarioService { get; }
         public PluginHost.BveHacker BveHacker { get; }
 

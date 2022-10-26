@@ -8,7 +8,6 @@ AtsEXの機能にアクセスするためのオブジェクトが変数【g】�
 
 全てのスクリプト（スクリプト言語で開発した車両・マッププラグイン、拡張地上子のスクリプトのどちらも）には
 
-	IApp App { get; }
 	IScenarioService ScenarioService { get; }
 	IBveHacker BveHacker { get; }
 
@@ -41,7 +40,7 @@ void SetPluginVariable<T>(PluginType pluginType, string pluginIdentifier, string
 
 ●自列車が通過した場合
 
-App、BveHackerに加えて
+ScenarioService、BveHackerに加えて
 
 	readonly ExtendedBeaconBase<PassedEventArgs> sender;
 	readonly PassedEventArgs e;
@@ -51,7 +50,7 @@ App、BveHackerに加えて
 
 ●他列車が通過した場合
 
-App、BveHackerに加えて
+ScenarioService、BveHackerに加えて
 
 	readonly ExtendedBeaconBase<TrainPassedEventArgs> sender;
 	readonly TrainPassedEventArgs e;

@@ -11,6 +11,8 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 
+using AtsEx.PluginHost;
+
 namespace AtsEx.Plugins.Scripting.CSharp
 {
     internal class PluginScript<TGlobals> : IPluginScript<TGlobals> where TGlobals : Globals

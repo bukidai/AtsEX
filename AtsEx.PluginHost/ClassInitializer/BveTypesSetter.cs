@@ -11,13 +11,16 @@ namespace AtsEx.PluginHost
 {
     internal sealed class BveTypesSetter : ClassInitializerBase
     {
-        public BveTypesSetter(IApp app, BveHacker bveHacker) : base(app, bveHacker)
+        private readonly BveHacker BveHacker;
+
+        public BveTypesSetter(BveHacker bveHacker) : base()
         {
+            BveHacker = bveHacker;
         }
 
         public override void InitializeAll()
         {
-            Type[] types = App.AtsExPluginHostAssembly.GetTypes();
+            Type[] types = App.Instance.AtsExPluginHostAssembly.GetTypes();
 
             Initialize<SetBveTypesAttribute>(types, method =>
             {
