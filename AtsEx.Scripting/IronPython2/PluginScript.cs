@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 using Microsoft.Scripting.Hosting;
 
-namespace AtsEx.Plugins.Scripting.IronPython2
+namespace AtsEx.Scripting.IronPython2
 {
-    internal partial class PluginScript<TGlobals> : IPluginScript<TGlobals> where TGlobals : Globals
+    public class PluginScript<TGlobals> : IPluginScript<TGlobals> where TGlobals : Globals
     {
         public string Name { get; } = null;
 
@@ -96,7 +96,7 @@ namespace AtsEx.Plugins.Scripting.IronPython2
         }
     }
 
-    internal class PluginScript<TResult, TGlobals> : PluginScript<TGlobals>, IPluginScript<TResult, TGlobals> where TGlobals : Globals
+    public class PluginScript<TResult, TGlobals> : PluginScript<TGlobals>, IPluginScript<TResult, TGlobals> where TGlobals : Globals
     {
         protected PluginScript(ScriptSource source, ScriptScope scope, string name) : base(source, scope, name)
         {

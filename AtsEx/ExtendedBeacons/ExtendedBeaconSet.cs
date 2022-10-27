@@ -12,11 +12,11 @@ using Microsoft.Scripting.Hosting;
 using UnembeddedResources;
 
 using AtsEx.Plugins.Scripting;
-using AtsEx.Plugins.Scripting.IronPython2;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.ExtendedBeacons;
-using AtsEx.PluginHost.Plugins;
+using AtsEx.Scripting;
+using AtsEx.Scripting.IronPython2;
 
 using Identifiers = AtsEx.MapStatementIdentifiers;
 using ExtendedBeaconIdentifiers = AtsEx.ExtendedBeacons.MapStatementIdentifiers;
@@ -191,14 +191,14 @@ namespace AtsEx.ExtendedBeacons
                 switch (language)
                 {
                     case ScriptLanguage.CSharpScript:
-                        script = new Plugins.Scripting.CSharp.PluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>>(code, mainMapDirectory, Resources.Value.ItemName.Value);
+                        script = new Scripting.CSharp.PluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>>(code, mainMapDirectory, Resources.Value.ItemName.Value);
                         break;
 
                     case ScriptLanguage.IronPython2:
                         ScriptEngine scriptEngine = ScriptEngineProvider.CreateEngine(mainMapDirectory);
                         ScriptScope scriptScope = ScriptEngineProvider.CreateScope(scriptEngine);
 
-                        script = new Plugins.Scripting.IronPython2.PluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>>(code, scriptEngine, scriptScope, Resources.Value.ItemName.Value);
+                        script = new Scripting.IronPython2.PluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>>(code, scriptEngine, scriptScope, Resources.Value.ItemName.Value);
                         break;
 
                     default:

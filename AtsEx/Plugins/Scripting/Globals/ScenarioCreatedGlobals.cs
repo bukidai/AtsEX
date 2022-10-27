@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AtsEx.PluginHost;
+using AtsEx.Scripting;
 
 namespace AtsEx.Plugins.Scripting
 {

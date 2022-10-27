@@ -9,6 +9,7 @@ using UnembeddedResources;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Plugins;
+using AtsEx.Scripting;
 
 namespace AtsEx.Plugins.Scripting
 {

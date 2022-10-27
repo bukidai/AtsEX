@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using AtsEx.Plugins.Scripting;
+using AtsEx.Scripting;
 using AtsEx.PluginHost.ExtendedBeacons;
-using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx.ExtendedBeacons
 {

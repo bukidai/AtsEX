@@ -7,10 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AtsEx.Plugins;
-using AtsEx.Plugins.Scripting.CSharp;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.Plugins;
+using AtsEx.Scripting.CSharp;
 
 namespace AtsEx
 {

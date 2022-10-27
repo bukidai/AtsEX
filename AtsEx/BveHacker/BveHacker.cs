@@ -12,9 +12,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
 using AtsEx.Handles;
-using AtsEx.Plugins.Scripting.CSharp;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.ClassWrappers;
+using AtsEx.Scripting.CSharp;
 
 namespace AtsEx
 {

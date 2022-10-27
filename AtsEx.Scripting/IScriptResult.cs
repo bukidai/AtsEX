@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AtsEx.Plugins.Scripting
+namespace AtsEx.Scripting
 {
-    internal interface IScriptResult
+    public interface IScriptResult
     {
         T GetVariable<T>(string name);
     }
 
-    internal interface IScriptResult<TResult> : IScriptResult
+    public interface IScriptResult<TResult> : IScriptResult
     {
         TResult ReturnValue { get; }
     }

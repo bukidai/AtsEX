@@ -13,9 +13,9 @@ using Microsoft.Scripting.Hosting;
 
 using AtsEx.PluginHost;
 
-namespace AtsEx.Plugins.Scripting.IronPython2
+namespace AtsEx.Scripting.IronPython2
 {
-    internal static class ScriptEngineProvider
+    public static class ScriptEngineProvider
     {
         private static readonly IEnumerable<string> PluginHostNamespaces;
 

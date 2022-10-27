@@ -5,13 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using IronPython.Hosting;
-
 using Microsoft.Scripting.Hosting;
 
-using AtsEx.PluginHost;
-using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Plugins;
+using AtsEx.Scripting;
+using AtsEx.Scripting.IronPython2;
 
 namespace AtsEx.Plugins.Scripting.IronPython2
 {

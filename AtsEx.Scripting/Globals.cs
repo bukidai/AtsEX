@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 using AtsEx.PluginHost;
 
-namespace AtsEx.Plugins.Scripting
+namespace AtsEx.Scripting
 {
     public class Globals
     {
         public IScenarioService ScenarioService { get; }
-        public PluginHost.BveHacker BveHacker { get; }
+        public BveHacker BveHacker { get; }
 
         protected Dictionary<string, dynamic> Variables;
 
-        private Globals(IScenarioService scenarioService, PluginHost.BveHacker bveHacker, Dictionary<string, dynamic> variables)
+        private Globals(IScenarioService scenarioService, BveHacker bveHacker, Dictionary<string, dynamic> variables)
         {
             ScenarioService = scenarioService;
             BveHacker = bveHacker;
@@ -27,7 +27,7 @@ namespace AtsEx.Plugins.Scripting
         {
         }
 
-        public Globals(IScenarioService scenarioService, PluginHost.BveHacker bveHacker) : this(scenarioService, bveHacker, new Dictionary<string, dynamic>())
+        public Globals(IScenarioService scenarioService, BveHacker bveHacker) : this(scenarioService, bveHacker, new Dictionary<string, dynamic>())
         {
         }
 

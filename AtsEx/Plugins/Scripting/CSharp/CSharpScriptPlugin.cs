@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using AtsEx.PluginHost;
-using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Plugins;
+using AtsEx.Scripting;
+using AtsEx.Scripting.CSharp;
 
 namespace AtsEx.Plugins.Scripting.CSharp
 {

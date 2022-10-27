@@ -8,6 +8,7 @@ using AtsEx.Plugins.Scripting;
 using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.ExtendedBeacons;
 using AtsEx.PluginHost.Plugins;
+using AtsEx.Scripting;
 
 namespace AtsEx.ExtendedBeacons
 {

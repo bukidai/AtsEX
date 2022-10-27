@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Scripting;
@@ -13,12 +14,12 @@ using Microsoft.CodeAnalysis.CSharp.Scripting;
 
 using AtsEx.PluginHost;
 
-namespace AtsEx.Plugins.Scripting.CSharp
+namespace AtsEx.Scripting.CSharp
 {
-    internal class PluginScript<TGlobals> : IPluginScript<TGlobals> where TGlobals : Globals
+    public class PluginScript<TGlobals> : IPluginScript<TGlobals> where TGlobals : Globals
     {
         protected static readonly ScriptOptions ScriptOptions = ScriptOptions.Default.
-            AddReferences(typeof(System.Windows.Forms.Form).Assembly).
+            AddReferences(typeof(Form).Assembly).
             WithImports("System", "System.Collections.Generic", "System.Linq", "System.Text", "System.Windows.Forms").
             AddReferences(App.Instance.AtsExPluginHostAssembly).
             AddImports(App.Instance.AtsExPluginHostAssembly.GetTypes().Select(t => t.Namespace).Distinct().Where(n => !(n is null)));
@@ -109,7 +110,7 @@ namespace AtsEx.Plugins.Scripting.CSharp
         }
     }
 
-    internal class PluginScript<TResult, TGlobals> : PluginScript<TGlobals>, IPluginScript<TResult, TGlobals> where TGlobals : Globals
+    public class PluginScript<TResult, TGlobals> : PluginScript<TGlobals>, IPluginScript<TResult, TGlobals> where TGlobals : Globals
     {
         protected PluginScript(Script script, string name, bool skipCompile) : base(script, name, skipCompile)
         {

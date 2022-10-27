@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AtsEx.Plugins.Scripting
+namespace AtsEx.Scripting
 {
-    internal interface ICompilationErrorCheckable
+    public interface ICompilationErrorCheckable
     {
         void CheckCompilationErrors();
     }

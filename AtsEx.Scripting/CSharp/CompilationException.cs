@@ -12,9 +12,9 @@ using UnembeddedResources;
 
 using AtsEx.PluginHost;
 
-namespace AtsEx.Plugins.Scripting.CSharp
+namespace AtsEx.Scripting.CSharp
 {
-    internal sealed class CompilationException : Exception
+    public sealed class CompilationException : Exception
     {
         private class ResourceSet
         {
