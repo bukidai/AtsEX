@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using AtsEx.PluginHost.Handles;
+using UnembeddedResources;
 
 namespace AtsEx.PluginHost.Plugins
 {
@@ -15,6 +15,20 @@ namespace AtsEx.PluginHost.Plugins
     /// </summary>
     public abstract class PluginBase : IDisposable
     {
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<PluginBase>("PluginHost");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> CannotUseAtsExExtensions { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
         /// <summary>
         /// この AtsEX プラグインの種類を取得します。
         /// </summary>
@@ -40,7 +54,8 @@ namespace AtsEx.PluginHost.Plugins
         protected IPluginSet Plugins => _Plugins ?? throw new PropertyNotInitializedException(nameof(Plugins));
 
         private readonly BveHacker _BveHacker = null;
-        protected BveHacker BveHacker => UseAtsExExtensions ? _BveHacker : throw new InvalidOperationException($"{nameof(UseAtsExExtensions)} が {false} に設定されています。"); // TODO
+        protected BveHacker BveHacker
+            => UseAtsExExtensions ? _BveHacker : throw new InvalidOperationException(string.Format(Resources.Value.CannotUseAtsExExtensions.Value, nameof(UseAtsExExtensions)));
 
         /// <summary>
         /// 全ての AtsEX プラグインが読み込まれ、<see cref="Plugins"/> プロパティが取得可能になると発生します。

@@ -227,6 +227,8 @@
     <EmbeddedResource Include="BveTypes\WrapTypes\5.8.7554.391.xml" />
     <Content Include="Resources\App.ja.resx" />
     <Content Include="Resources\App.resx" />
+    <Content Include="Resources\PluginBase.ja.resx" />
+    <Content Include="Resources\PluginBase.resx" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BveTypes\WrapTypes\6.0.7554.619.xml" />
