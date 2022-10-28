@@ -15,12 +15,28 @@ namespace AtsEx.PluginHost.Plugins
     /// </summary>
     public abstract class PluginBase : IDisposable
     {
+        /// <summary>
+        /// この AtsEX プラグインの種類を取得します。
+        /// </summary>
         public PluginType PluginType { get; }
+
+        /// <summary>
+        /// この AtsEX プラグインが AtsEX 拡張機能 (<see cref="PluginHost.BveHacker"/> など) を使用するかどうかを取得します。
+        /// </summary>
+        /// <remarks>
+        /// <see langword="false"/> に設定されている場合、<see cref="BveHacker"/> プロパティは取得できません。
+        /// </remarks>
         public bool UseAtsExExtensions { get; }
 
+        /// <summary>
+        /// BVE が標準で提供する ATS プラグイン向けの機能のラッパーを取得します。
+        /// </summary>
         protected INative Native { get; }
 
         private IPluginSet _Plugins = null;
+        /// <summary>
+        /// 読み込まれた AtsEX プラグインの一覧を取得します。
+        /// </summary>
         protected IPluginSet Plugins => _Plugins ?? throw new PropertyNotInitializedException(nameof(Plugins));
 
         private readonly BveHacker _BveHacker = null;
@@ -32,17 +48,17 @@ namespace AtsEx.PluginHost.Plugins
         protected event AllPluginsLoadedEventHandler AllPluginsLoaded;
 
         /// <summary>
-        /// PluginUsing ファイルで指定した AtsEX プラグインの識別子を取得します。このプロパティの値は全プラグインにおいて一意であることが保証されています。
+        /// PluginUsing ファイルで指定したこの  AtsEX プラグインの識別子を取得します。このプロパティの値は全プラグインにおいて一意であることが保証されています。
         /// </summary>
         public string Identifier { get; }
 
         /// <summary>
-        /// AtsEX プラグインのファイルの完全パスを取得します。
+        /// この AtsEX プラグインのファイルの完全パスを取得します。
         /// </summary>
         public abstract string Location { get; }
 
         /// <summary>
-        /// AtsEX プラグインのファイル名を取得します。
+        /// この AtsEX プラグインのファイル名を取得します。
         /// </summary>
         /// <remarks>
         /// 通常はプラグイン パッケージ ファイルの名前と拡張子 (例: MyPlugin.dll) を表しますが、<br/>
@@ -51,22 +67,22 @@ namespace AtsEx.PluginHost.Plugins
         public abstract string Name { get; }
 
         /// <summary>
-        /// AtsEX プラグインのタイトルを取得します。
+        /// この AtsEX プラグインのタイトルを取得します。
         /// </summary>
         public abstract string Title { get; }
 
         /// <summary>
-        /// AtsEX プラグインのバージョンを表す文字列を取得します。
+        /// この AtsEX プラグインのバージョンを表す文字列を取得します。
         /// </summary>
         public abstract string Version { get; }
 
         /// <summary>
-        /// AtsEX プラグインの説明を取得します。
+        /// この AtsEX プラグインの説明を取得します。
         /// </summary>
         public abstract string Description { get; }
 
         /// <summary>
-        /// AtsEX プラグインの著作権表示を取得します。
+        /// この AtsEX プラグインの著作権表示を取得します。
         /// </summary>
         public abstract string Copyright { get; }
 
@@ -74,7 +90,7 @@ namespace AtsEx.PluginHost.Plugins
         /// AtsEX 拡張機能を利用する AtsEX プラグインの新しいインスタンスを初期化します。
         /// </summary>
         /// <param name="builder">AtsEX から渡される BVE、AtsEX の情報。</param>
-        /// <param name="pluginType">プラグインの種別。</param>
+        /// <param name="pluginType">プラグインの種類。</param>
         public PluginBase(PluginBuilder builder, PluginType pluginType) : this(builder, pluginType, true)
         {
         }
@@ -83,7 +99,7 @@ namespace AtsEx.PluginHost.Plugins
         /// AtsEX プラグインの新しいインスタンスを初期化します。
         /// </summary>
         /// <param name="builder">AtsEX から渡される BVE、AtsEX の情報。</param>
-        /// <param name="pluginType">AtsEX プラグインの種別。</param>
+        /// <param name="pluginType">AtsEX プラグインの種類。</param>
         /// <param name="useAtsExExtensions">AtsEX 拡張機能を利用するか。<br/>
         /// <see langword="false"/> を指定すると、<see cref="BveHacker"/> が取得できなくなる代わりに、BVE のバージョンの問題で AtsEX 拡張機能の読込に失敗した場合でもシナリオを開始できるようになります。<br/>
         /// マッププラグインでは <see langword="false"/> を指定することはできません。</param>
