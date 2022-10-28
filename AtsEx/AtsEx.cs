@@ -41,6 +41,7 @@ namespace AtsEx
         }
 
         public BveHacker BveHacker { get; }
+        public VersionFormProvider VersionFormProvider { get; }
 
         protected AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly)
         {
@@ -48,6 +49,8 @@ namespace AtsEx
 
             App.CreateInstance(targetProcess, targetAssembly, executingAssembly);
             BveHacker = new BveHacker(ProfileForDifferentBveVersionLoaded);
+
+            VersionFormProvider = new VersionFormProvider(BveHacker);
 
             TextureManager.Initialize();
         }
@@ -58,6 +61,7 @@ namespace AtsEx
         {
             TextureManager.Clear();
 
+            VersionFormProvider.Dispose();
             BveHacker.Dispose();
         }
     }

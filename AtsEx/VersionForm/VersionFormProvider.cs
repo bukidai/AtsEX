@@ -70,10 +70,9 @@ namespace AtsEx
             Form.Hide();
         }
 
-        public void Intialize(IEnumerable<PluginBase> plugins)
-        {
-            Form.SetPluginDetails(plugins);
-        }
+        public void SetScenario(IEnumerable<PluginBase> plugins) => Form.SetPluginDetails(plugins);
+
+        public void UnsetScenario() => Form.UnsetScenarioDetails();
 
         public void Dispose()
         {

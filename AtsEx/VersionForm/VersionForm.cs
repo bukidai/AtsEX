@@ -92,5 +92,10 @@ namespace AtsEx
                 return subItem;
             }
         }
+
+        public void UnsetScenarioDetails()
+        {
+            PluginList.Items.Clear();
+        }
     }
 }

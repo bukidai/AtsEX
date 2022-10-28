@@ -47,14 +47,19 @@ namespace AtsEx
 #endif
         }
 
+        private readonly AtsEx AtsEx;
+
         private readonly NativeImpl Native;
         private readonly PluginSet Plugins;
+
         private readonly BveHacker BveHacker;
 
         protected AtsExScenarioService(AtsEx atsEx, PluginUsing vehiclePluginUsing, PluginHost.Native.VehicleSpec vehicleSpec)
         {
+            AtsEx = atsEx;
+            BveHacker = AtsEx.BveHacker;
+
             Native = new NativeImpl(vehicleSpec);
-            BveHacker = atsEx.BveHacker;
 
             LoadErrorResolver loadErrorResolver = new LoadErrorResolver(BveHacker);
 
@@ -95,19 +100,21 @@ namespace AtsEx
 
                 Plugins = new PluginSet(vehiclePlugins, mapPlugins);
                 pluginLoader.SetPluginSetToLoadedPlugins(Plugins);
+
+                AtsEx.VersionFormProvider.SetScenario(Plugins.Select(item => item.Value));
             }
 
-            BveHacker.SetScenario(Native, Plugins);
+            BveHacker.SetScenario(Native);
         }
 
         public void Dispose()
         {
+            AtsEx.VersionFormProvider.UnsetScenario();
+
             foreach (KeyValuePair<string, PluginBase> plugin in Plugins)
             {
                 plugin.Value.Dispose();
             }
-
-            BveHacker.Dispose();
         }
 
         public void Started(BrakePosition defaultBrakePosition)

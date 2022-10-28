@@ -24,14 +24,10 @@ namespace AtsEx
     {
         private NativeImpl Native;
 
-        private readonly VersionFormProvider VersionFormProvider;
-
         public BveHacker(Action<Version> profileForDifferentBveVersionLoaded) : base(profileForDifferentBveVersionLoaded)
         {
             _ContextMenuHacker = new ContextMenuHacker(MainForm);
             _ContextMenuHacker.AddSeparator(true);
-
-            VersionFormProvider = new VersionFormProvider(this);
         }
 
         protected override void OnScenarioCreated(ScenarioCreatedEventArgs e)
@@ -81,15 +77,12 @@ namespace AtsEx
         public override void Dispose()
         {
             base.Dispose();
-            VersionFormProvider.Dispose();
             _ContextMenuHacker.Dispose();
         }
 
-        public void SetScenario(NativeImpl native, PluginSet plugins) // TODO
+        public void SetScenario(NativeImpl native)
         {
             Native = native;
-
-            VersionFormProvider.Intialize(plugins.Select(item => item.Value));
         }
 
         public void Tick(TimeSpan elapsed)
