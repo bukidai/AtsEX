@@ -6,5 +6,9 @@ using System.Threading.Tasks;
 
 namespace AtsEx.PluginHost.Native
 {
+    /// <summary>
+    /// <see cref="INative.Started"/> イベントを処理するメソッドを表します。
+    /// </summary>
+    /// <param name="e">イベントデータを格納している <see cref="StartedEventArgs"/>。</param>
     public delegate void StartedEventHandler(StartedEventArgs e);
 }
