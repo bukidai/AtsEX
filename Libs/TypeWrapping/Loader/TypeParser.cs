@@ -102,12 +102,7 @@ namespace TypeWrapping
                 }
 
                 Type result = Type.GetType(text);
-                return result;
-
-                if (result is null)
-                {
-                    throw new ArgumentException(string.Format(Resources.Value.TypeNotFound.Value, text));
-                }
+                return result ?? throw new ArgumentException(string.Format(Resources.Value.TypeNotFound.Value, text));
             });
             return type;
         }
