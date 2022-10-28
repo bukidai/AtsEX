@@ -189,7 +189,6 @@
     <Compile Include="Exceptions\BveFileLoadException.cs" />
     <Compile Include="Exceptions\DevelopException.cs" />
     <Compile Include="Exceptions\PropertyNotInitializedException.cs" />
-    <Compile Include="Plugins\PluginInfo.cs" />
     <Compile Include="Handles\ReverserPosition.cs" />
     <Compile Include="BveHacker\BveHacker.cs" />
     <Compile Include="Plugins\PluginBase.cs" />
