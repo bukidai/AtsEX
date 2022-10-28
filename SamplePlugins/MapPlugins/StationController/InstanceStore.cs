@@ -13,18 +13,18 @@ namespace AtsEx.Samples.MapPlugins.StationController
         public static InstanceStore Instance { get; private set; } = null;
         public static bool IsInitialized => !(Instance is null);
 
-        public static void Initialize(IScenarioService scenarioService, BveHacker bveHacker)
+        public static void Initialize(INative native, BveHacker bveHacker)
         {
-            Instance = new InstanceStore(scenarioService, bveHacker);
+            Instance = new InstanceStore(native, bveHacker);
         }
 
 
-        public IScenarioService ScenarioService { get; }
+        public INative Native { get; }
         public BveHacker BveHacker { get; }
 
-        private InstanceStore(IScenarioService scenarioService, BveHacker bveHacker)
+        private InstanceStore(INative native, BveHacker bveHacker)
         {
-            ScenarioService = scenarioService;
+            Native = native;
             BveHacker = bveHacker;
         }
     }

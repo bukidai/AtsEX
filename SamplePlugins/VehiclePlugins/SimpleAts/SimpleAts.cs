@@ -25,7 +25,7 @@ namespace AtsEx.Samples.VehiclePlugins.SimpleAts
         public override TickResult Tick(TimeSpan elapsed)
         {
             UserVehicleLocationManager locationManager = BveHacker.Scenario.LocationManager;
-            AtsEx.PluginHost.Handles.HandleSet handleSet = ScenarioService.Handles;
+            AtsEx.PluginHost.Handles.HandleSet handleSet = Native.Handles;
 
             double speedMps = locationManager.SpeedMeterPerSecond;
 

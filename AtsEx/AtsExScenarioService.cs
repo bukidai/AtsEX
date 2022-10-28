@@ -10,6 +10,7 @@ using UnembeddedResources;
 
 using AtsEx.Handles;
 using AtsEx.Input;
+using AtsEx.Native;
 using AtsEx.Plugins;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.ClassWrappers;
@@ -46,29 +47,29 @@ namespace AtsEx
 #endif
         }
 
-        private readonly ScenarioService ScenarioService;
+        private readonly NativeImpl Native;
+        private readonly PluginSet Plugins;
         private readonly BveHacker BveHacker;
 
-        private readonly Dictionary<string, PluginBase> VehiclePlugins;
-        private readonly Dictionary<string, PluginBase> MapPlugins;
-
-        protected AtsExScenarioService(AtsEx atsEx, PluginUsing vehiclePluginUsing, VehicleSpec vehicleSpec)
+        protected AtsExScenarioService(AtsEx atsEx, PluginUsing vehiclePluginUsing, PluginHost.Native.VehicleSpec vehicleSpec)
         {
-            ScenarioService = new ScenarioService(vehicleSpec);
+            Native = new NativeImpl(vehicleSpec);
             BveHacker = atsEx.BveHacker;
 
             LoadErrorResolver loadErrorResolver = new LoadErrorResolver(BveHacker);
 
-            Plugins.PluginLoader pluginLoader = new Plugins.PluginLoader(ScenarioService, BveHacker);
+            Plugins.PluginLoader pluginLoader = new Plugins.PluginLoader(Native, BveHacker);
+            Dictionary<string, PluginBase> vehiclePlugins = null;
+            Dictionary<string, PluginBase> mapPlugins = null;
             try
             {
                 {
-                    VehiclePlugins = pluginLoader.LoadFromPluginUsing(vehiclePluginUsing);
+                    vehiclePlugins = pluginLoader.LoadFromPluginUsing(vehiclePluginUsing);
                 }
 
                 {
                     Map map = Map.Load(BveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path, pluginLoader, loadErrorResolver);
-                    MapPlugins = map.LoadedPlugins;
+                    mapPlugins = map.LoadedPlugins;
 
                     IEnumerable<LoadError> removeTargetErrors = BveHacker.LoadErrorManager.Errors.Where(error =>
                     {
@@ -89,26 +90,21 @@ namespace AtsEx
             }
             finally
             {
-                if (VehiclePlugins is null) VehiclePlugins = new Dictionary<string, PluginBase>();
-                if (MapPlugins is null) MapPlugins = new Dictionary<string, PluginBase>();
+                if (vehiclePlugins is null) vehiclePlugins = new Dictionary<string, PluginBase>();
+                if (mapPlugins is null) mapPlugins = new Dictionary<string, PluginBase>();
 
-                ScenarioService.VehiclePlugins = VehiclePlugins;
-                ScenarioService.MapPlugins = MapPlugins;
+                Plugins = new PluginSet(vehiclePlugins, mapPlugins);
+                pluginLoader.SetPluginSetToLoadedPlugins(Plugins);
             }
 
-            BveHacker.SetScenario(ScenarioService);
+            BveHacker.SetScenario(Native, Plugins);
         }
 
         public void Dispose()
         {
-            foreach (PluginBase plugin in VehiclePlugins.Values)
+            foreach (KeyValuePair<string, PluginBase> plugin in Plugins)
             {
-                plugin.Dispose();
-            }
-
-            foreach (PluginBase plugin in MapPlugins.Values)
-            {
-                plugin.Dispose();
+                plugin.Value.Dispose();
             }
 
             BveHacker.Dispose();
@@ -116,25 +112,25 @@ namespace AtsEx
 
         public void Started(BrakePosition defaultBrakePosition)
         {
-            ScenarioService.InvokeStarted(defaultBrakePosition);
+            Native.InvokeStarted(defaultBrakePosition);
         }
 
-        public HandlePositionSet Tick(TimeSpan elapsed, VehicleState vehicleState)
+        public HandlePositionSet Tick(TimeSpan elapsed, PluginHost.Native.VehicleState vehicleState)
         {
-            ScenarioService.VehicleState = vehicleState;
+            Native.VehicleState = vehicleState;
 
             BveHacker.Tick(elapsed);
 
-            int powerNotch = ScenarioService.Handles.Power.Notch;
-            int brakeNotch = ScenarioService.Handles.Brake.Notch;
-            ReverserPosition reverserPosition = ScenarioService.Handles.Reverser.Position;
+            int powerNotch = Native.Handles.Power.Notch;
+            int brakeNotch = Native.Handles.Brake.Notch;
+            ReverserPosition reverserPosition = Native.Handles.Reverser.Position;
 
             int? atsPowerNotch = null;
             int? atsBrakeNotch = null;
             ReverserPosition? atsReverserPosition = null;
             ConstantSpeedCommand? atsConstantSpeedCommand = null;
 
-            foreach (PluginBase plugin in VehiclePlugins.Values)
+            foreach (PluginBase plugin in Plugins[PluginType.VehiclePlugin].Values)
             {
                 TickResult tickResult = plugin.Tick(elapsed);
                 if (!(tickResult is VehiclePluginTickResult vehiclePluginTickResult))
@@ -151,7 +147,7 @@ namespace AtsEx
                 if (atsConstantSpeedCommand is null) atsConstantSpeedCommand = commandSet.ConstantSpeedCommand;
             }
 
-            foreach (PluginBase plugin in MapPlugins.Values)
+            foreach (PluginBase plugin in Plugins[PluginType.MapPlugin].Values)
             {
                 TickResult tickResult = plugin.Tick(elapsed);
                 if (!(tickResult is MapPluginTickResult))
@@ -166,27 +162,27 @@ namespace AtsEx
 
         public void SetPower(int notch)
         {
-            (ScenarioService.Handles.Power as PowerHandle).Notch = notch;
+            (Native.Handles.Power as PowerHandle).Notch = notch;
         }
 
         public void SetBrake(int notch)
         {
-            (ScenarioService.Handles.Brake as BrakeHandle).Notch = notch;
+            (Native.Handles.Brake as BrakeHandle).Notch = notch;
         }
 
         public void SetReverser(ReverserPosition position)
         {
-            (ScenarioService.Handles.Reverser as Reverser).Position = position;
+            (Native.Handles.Reverser as Reverser).Position = position;
         }
 
         public void KeyDown(NativeAtsKeyName key)
         {
-            (ScenarioService.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyPressed();
+            (Native.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyPressed();
         }
 
         public void KeyUp(NativeAtsKeyName key)
         {
-            (ScenarioService.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyReleased();
+            (Native.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyReleased();
         }
 
 

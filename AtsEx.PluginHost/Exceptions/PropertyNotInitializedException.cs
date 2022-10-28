@@ -10,6 +10,9 @@ using UnembeddedResources;
 
 namespace AtsEx.PluginHost
 {
+    /// <summary>
+    /// まだ初期化されておらず取得できないプロパティを取得しようとしたときにスローされる例外です。
+    /// </summary>
     public class PropertyNotInitializedException : Exception
     {
         private class ResourceSet
@@ -33,6 +36,10 @@ namespace AtsEx.PluginHost
 #endif
         }
 
+        /// <summary>
+        /// <see cref="PropertyNotInitializedException"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="propertyName">この例外の対象となるプロパティの名前。</param>
         public PropertyNotInitializedException(string propertyName) : base(string.Format(Resources.Value.Message.Value, propertyName))
         {
         }

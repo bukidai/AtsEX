@@ -10,24 +10,24 @@ namespace AtsEx.Scripting
 {
     public class Globals
     {
-        public IScenarioService ScenarioService { get; }
+        public INative Native { get; }
         public BveHacker BveHacker { get; }
 
         protected Dictionary<string, dynamic> Variables;
 
-        private Globals(IScenarioService scenarioService, BveHacker bveHacker, Dictionary<string, dynamic> variables)
+        private Globals(INative native, BveHacker bveHacker, Dictionary<string, dynamic> variables)
         {
-            ScenarioService = scenarioService;
+            Native = native;
             BveHacker = bveHacker;
 
             Variables = variables;
         }
 
-        protected Globals(Globals source) : this(source.ScenarioService, source.BveHacker, source.Variables)
+        protected Globals(Globals source) : this(source.Native, source.BveHacker, source.Variables)
         {
         }
 
-        public Globals(IScenarioService scenarioService, BveHacker bveHacker) : this(scenarioService, bveHacker, new Dictionary<string, dynamic>())
+        public Globals(INative native, BveHacker bveHacker) : this(native, bveHacker, new Dictionary<string, dynamic>())
         {
         }
 

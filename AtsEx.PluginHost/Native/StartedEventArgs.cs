@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 using AtsEx.PluginHost.ClassWrappers;
 
-namespace AtsEx.PluginHost
+namespace AtsEx.PluginHost.Native
 {
     public class StartedEventArgs : EventArgs
     {

@@ -12,6 +12,8 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
 using AtsEx.Handles;
+using AtsEx.Native;
+using AtsEx.Plugins;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.Scripting.CSharp;
@@ -20,7 +22,7 @@ namespace AtsEx
 {
     internal sealed class BveHacker : PluginHost.BveHacker, IDisposable
     {
-        private ScenarioService ScenarioService;
+        private NativeImpl Native;
 
         private readonly VersionFormProvider VersionFormProvider;
 
@@ -36,15 +38,15 @@ namespace AtsEx
         {
             NotchInfo notchInfo = e.Scenario.Vehicle.Instruments.Cab.Handles.NotchInfo;
 
-            BrakeHandle brake = BrakeHandle.FromNotchInfo(notchInfo, ScenarioService.Handles.Brake.CanSetNotchOutOfRange);
-            PowerHandle power = PowerHandle.FromNotchInfo(notchInfo, ScenarioService.Handles.Power.CanSetNotchOutOfRange);
+            BrakeHandle brake = BrakeHandle.FromNotchInfo(notchInfo, Native.Handles.Brake.CanSetNotchOutOfRange);
+            PowerHandle power = PowerHandle.FromNotchInfo(notchInfo, Native.Handles.Power.CanSetNotchOutOfRange);
             Reverser reverser = new Reverser();
 
             _Handles = new PluginHost.Handles.HandleSet(brake, power, reverser);
 
             try
             {
-                _ExtendedBeacons = global::AtsEx.ExtendedBeacons.ExtendedBeaconSet.Load(ScenarioService, this, e.Scenario.Route.Structures.Repeated, e.Scenario.Route.StructureModels, e.Scenario.Trains);
+                _ExtendedBeacons = global::AtsEx.ExtendedBeacons.ExtendedBeaconSet.Load(Native, this, e.Scenario.Route.Structures.Repeated, e.Scenario.Route.StructureModels, e.Scenario.Trains);
             }
             catch (Exception ex)
             {
@@ -83,11 +85,11 @@ namespace AtsEx
             _ContextMenuHacker.Dispose();
         }
 
-        public void SetScenario(ScenarioService scenarioService)
+        public void SetScenario(NativeImpl native, PluginSet plugins) // TODO
         {
-            ScenarioService = scenarioService;
+            Native = native;
 
-            VersionFormProvider.Intialize(Enumerable.Concat(ScenarioService.VehiclePlugins.Values, ScenarioService.MapPlugins.Values));
+            VersionFormProvider.Intialize(plugins.Select(item => item.Value));
         }
 
         public void Tick(TimeSpan elapsed)

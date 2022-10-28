@@ -8,6 +8,7 @@ using UnembeddedResources;
 
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.Handles;
+using AtsEx.PluginHost.Native;
 using AtsEx.PluginHost.Plugins;
 using AtsEx.Scripting;
 
@@ -62,7 +63,7 @@ namespace AtsEx.Plugins.Scripting
             Description = builder.Description;
             Copyright = builder.Copyright;
 
-            Globals = new Globals(ScenarioService, BveHacker);
+            Globals = new Globals(Native, BveHacker);
 
             DisposeScript = builder.DisposeScript?.GetWithCheckErrors();
             OnScenarioCreatedScript = builder.OnScenarioCreatedScript?.GetWithCheckErrors();
@@ -73,7 +74,7 @@ namespace AtsEx.Plugins.Scripting
             constructorScript?.Run(Globals);
 
             BveHacker.ScenarioCreated += OnScenarioCreated;
-            ScenarioService.Started += OnStarted;
+            Native.Started += OnStarted;
         }
 
         public override void Dispose() => DisposeScript?.Run(Globals);

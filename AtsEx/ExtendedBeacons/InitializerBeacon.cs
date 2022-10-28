@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using AtsEx.Native;
 using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.ExtendedBeacons;
 using AtsEx.Scripting;
@@ -14,10 +15,10 @@ namespace AtsEx.ExtendedBeacons
     {
         private bool IsFirstTime = true;
 
-        public InitializerBeacon(ScenarioService scenarioService, BveHacker bveHacker,
+        public InitializerBeacon(NativeImpl native, BveHacker bveHacker,
             string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain,
             IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script)
-            : base(scenarioService, bveHacker, name, definedStructure, observingTargetTrack, observingTargetTrain, script)
+            : base(native, bveHacker, name, definedStructure, observingTargetTrack, observingTargetTrain, script)
         {
         }
 

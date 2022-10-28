@@ -138,6 +138,8 @@
     <Compile Include="Native\Ats\CallerCompatibilityVersionAttribute.cs" />
     <Compile Include="Native\Ats\Export.cs" />
     <Compile Include="Native\Ats\AtsMain.cs" />
+    <Compile Include="Plugins\PluginBuilder.cs" />
+    <Compile Include="Plugins\PluginSet.cs" />
     <Compile Include="Plugins\Identifier.cs" />
     <Compile Include="Plugins\PluginLoader.cs" />
     <Compile Include="Plugins\PluginUsing.cs" />
@@ -154,7 +156,7 @@
     <Compile Include="Plugins\Scripting\ScriptPluginPackage.InformationBuilder.cs" />
     <Compile Include="Plugins\Scripting\ScriptPluginPackage.ScriptsBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScenarioService.cs" />
+    <Compile Include="NativeImpl.cs" />
     <Compile Include="VersionForm\VersionForm.cs">
       <SubType>Form</SubType>
     </Compile>

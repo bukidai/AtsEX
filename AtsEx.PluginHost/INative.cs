@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,22 +6,14 @@ using System.Threading.Tasks;
 using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.Native;
-using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx.PluginHost
 {
-    public interface IScenarioService
+    /// <summary>
+    /// BVE が標準で提供する ATS プラグイン向けの機能をラップします。
+    /// </summary>
+    public interface INative
     {
-        /// <summary>
-        /// 読み込まれた AtsEX プラグインの一覧を取得します。
-        /// </summary>
-        /// <remarks>
-        /// <see cref="PluginBase"/> のコンストラクタ内など、
-        /// 車両プラグインは <see cref="AllVehiclePluginLoaded"/> イベント、マッププラグインは <see cref="AllMapPluginLoaded"/> イベントが発生するより前には取得できないので注意してください。
-        /// </remarks>
-        ReadOnlyDictionary<PluginType, ReadOnlyDictionary<string, PluginBase>> Plugins { get; }
-
-
         /// <summary>
         /// 全てのハンドルのセットを取得します。
         /// </summary>
@@ -51,18 +41,6 @@ namespace AtsEx.PluginHost
         /// このプロパティの値はフレーム毎に更新されます。
         /// </summary>
         VehicleState VehicleState { get; }
-
-
-        /// <summary>
-        /// 全ての AtsEX 車両プラグインの読込が完了し、車両プラグインの一覧が <see cref="Plugins"/> から取得可能になると発生します。
-        /// マッププラグインは発生時点では読み込めないので注意してください。
-        /// </summary>
-        event AllPluginLoadedEventHandler AllVehiclePluginLoaded;
-
-        /// <summary>
-        /// 全ての AtsEX マッププラグインの読込が完了し、マッププラグインの一覧が <see cref="Plugins"/> から取得可能になると発生します。
-        /// </summary>
-        event AllPluginLoadedEventHandler AllMapPluginLoaded;
 
 
         /// <summary>

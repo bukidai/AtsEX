@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using AtsEx.Scripting;
+using AtsEx.Native;
 using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.ExtendedBeacons;
+using AtsEx.Scripting;
 
 namespace AtsEx.ExtendedBeacons
 {
@@ -14,10 +15,10 @@ namespace AtsEx.ExtendedBeacons
     {
         private double OldLocation = 0d;
 
-        public Beacon(ScenarioService scenarioService, BveHacker bveHacker,
+        public Beacon(NativeImpl native, BveHacker bveHacker,
             string name, RepeatedStructure definedStructure, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain,
             IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script)
-            : base(scenarioService, bveHacker, name, definedStructure, observingTargetTrack, observingTargetTrain, script)
+            : base(native, bveHacker, name, definedStructure, observingTargetTrack, observingTargetTrain, script)
         {
         }
 
@@ -38,7 +39,7 @@ namespace AtsEx.ExtendedBeacons
         protected void NotifyPassed(Direction direction)
         {
             PassedEventArgs eventArgs = new PassedEventArgs(direction);
-            PassedGlobals globals = new PassedGlobals(ScenarioService, BveHacker, this, eventArgs);
+            PassedGlobals globals = new PassedGlobals(Native, BveHacker, this, eventArgs);
             Script.Run(globals);
             base.NotifyPassed(globals.GetEventArgsWithScriptVariables());
         }

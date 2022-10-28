@@ -29,8 +29,8 @@ namespace AtsEx.Samples.MapPlugins.TrainController
                 Train = e.Scenario.Trains["test"];
             };
 
-            ScenarioService.NativeKeys.AtsKeys[NativeAtsKeyName.D].Pressed += OnDPressed;
-            ScenarioService.NativeKeys.AtsKeys[NativeAtsKeyName.E].Pressed += OnEPressed;
+            Native.NativeKeys.AtsKeys[NativeAtsKeyName.D].Pressed += OnDPressed;
+            Native.NativeKeys.AtsKeys[NativeAtsKeyName.E].Pressed += OnEPressed;
         }
 
         private void OnDPressed(object sender, EventArgs e) => Train.TrainInfo.TrackKey = "1";
@@ -38,14 +38,14 @@ namespace AtsEx.Samples.MapPlugins.TrainController
 
         public override void Dispose()
         {
-            ScenarioService.NativeKeys.AtsKeys[NativeAtsKeyName.D].Pressed -= OnDPressed;
-            ScenarioService.NativeKeys.AtsKeys[NativeAtsKeyName.E].Pressed -= OnEPressed;
+            Native.NativeKeys.AtsKeys[NativeAtsKeyName.D].Pressed -= OnDPressed;
+            Native.NativeKeys.AtsKeys[NativeAtsKeyName.E].Pressed -= OnEPressed;
         }
 
         public override TickResult Tick(TimeSpan elapsed)
         {
-            if (ScenarioService.NativeKeys.AtsKeys[NativeAtsKeyName.F].IsPressed) Speed -= 10.0 * elapsed.Ticks / TimeSpan.TicksPerMillisecond / 1000;
-            if (ScenarioService.NativeKeys.AtsKeys[NativeAtsKeyName.G].IsPressed) Speed += 10.0 * elapsed.Ticks / TimeSpan.TicksPerMillisecond / 1000;
+            if (Native.NativeKeys.AtsKeys[NativeAtsKeyName.F].IsPressed) Speed -= 10.0 * elapsed.Ticks / TimeSpan.TicksPerMillisecond / 1000;
+            if (Native.NativeKeys.AtsKeys[NativeAtsKeyName.G].IsPressed) Speed += 10.0 * elapsed.Ticks / TimeSpan.TicksPerMillisecond / 1000;
 
             if (Speed > 0)
             {

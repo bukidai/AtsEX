@@ -6,22 +6,24 @@ using System.Threading.Tasks;
 
 namespace AtsEx.PluginHost.Plugins
 {
-    public class PluginBuilder
+    public abstract class PluginBuilder
     {
-        internal protected IScenarioService ScenarioService { get; }
+        internal protected INative Native { get; }
         internal protected BveHacker BveHacker { get; }
         internal protected string Identifier { get; }
 
-        public PluginBuilder(IScenarioService scenarioService, BveHacker bveHacker, string identifier)
+        internal protected abstract event AllPluginsLoadedEventHandler AllPluginsLoaded;
+
+        public PluginBuilder(INative native, BveHacker bveHacker, string identifier)
         {
-            ScenarioService = scenarioService;
+            Native = native;
             BveHacker = bveHacker;
             Identifier = identifier;
         }
 
         protected PluginBuilder(PluginBuilder pluginBuilder)
         {
-            ScenarioService = pluginBuilder.ScenarioService;
+            Native = pluginBuilder.Native;
             BveHacker = pluginBuilder.BveHacker;
             Identifier = pluginBuilder.Identifier;
         }

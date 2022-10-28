@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using UnembeddedResources;
 
+using AtsEx.Native;
 using AtsEx.Plugins.Scripting;
 using AtsEx.Plugins.Scripting.CSharp;
 using AtsEx.Plugins.Scripting.IronPython2;
@@ -46,12 +47,14 @@ namespace AtsEx.Plugins
 #endif
         }
 
-        protected readonly ScenarioService ScenarioService;
+        protected readonly NativeImpl Native;
         protected readonly BveHacker BveHacker;
 
-        public PluginLoader(ScenarioService scenarioService, BveHacker bveHacker)
+        public event AllPluginsLoadedEventHandler AllPluginsLoaded;
+
+        public PluginLoader(NativeImpl native, BveHacker bveHacker)
         {
-            ScenarioService = scenarioService;
+            Native = native;
             BveHacker = bveHacker;
         }
 
@@ -67,13 +70,13 @@ namespace AtsEx.Plugins
 
             foreach (KeyValuePair<Identifier, ScriptPluginPackage> item in pluginUsing.CSharpScriptPackages)
             {
-                PluginBuilder pluginBuilder = new PluginBuilder(ScenarioService, BveHacker, item.Key.Text);
+                PluginBuilder pluginBuilder = new PluginBuilder(Native, BveHacker, item.Key.Text, this);
                 plugins[item.Key.Text] = CSharpScriptPlugin.FromPackage(pluginBuilder, pluginUsing.PluginType, item.Value);
             }
 
             foreach (KeyValuePair<Identifier, ScriptPluginPackage> item in pluginUsing.IronPython2Packages)
             {
-                PluginBuilder pluginBuilder = new PluginBuilder(ScenarioService, BveHacker, item.Key.Text);
+                PluginBuilder pluginBuilder = new PluginBuilder(Native, BveHacker, item.Key.Text, this);
                 plugins[item.Key.Text] = IronPython2Plugin.FromPackage(pluginBuilder, pluginUsing.PluginType, item.Value);
             }
 
@@ -141,7 +144,7 @@ namespace AtsEx.Plugins
                     {
                         (Type type, ConstructorInfo constructorInfo) = constructor;
 
-                        PluginBase pluginInstance = constructorInfo.Invoke(new object[] { new PluginBuilder(ScenarioService, BveHacker, GenerateIdentifier()) }) as PluginBase;
+                        PluginBase pluginInstance = constructorInfo.Invoke(new object[] { new PluginBuilder(Native, BveHacker, GenerateIdentifier(), this) }) as PluginBase;
                         if (pluginInstance.PluginType != pluginType)
                         {
                             throw new InvalidOperationException(string.Format(Resources.Value.WrongPluginType.Value, pluginType.GetTypeString(), pluginInstance.PluginType.GetTypeString()));
@@ -168,5 +171,7 @@ namespace AtsEx.Plugins
                 }
             }
         }
+
+        public void SetPluginSetToLoadedPlugins(IPluginSet plugins) => AllPluginsLoaded?.Invoke(new AllPluginsLoadedEventArgs(plugins));
     }
 }

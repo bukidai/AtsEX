@@ -11,6 +11,7 @@ using Microsoft.Scripting.Hosting;
 
 using UnembeddedResources;
 
+using AtsEx.Native;
 using AtsEx.Plugins.Scripting;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.ClassWrappers;
@@ -65,7 +66,7 @@ namespace AtsEx.ExtendedBeacons
             PreTrainObservingBeacons = new ReadOnlyDictionary<string, BeaconBase>(preTrainObservingBeacons);
         }
 
-        public static ExtendedBeaconSet Load(ScenarioService scenarioService, BveHacker bveHacker, IDictionary<string, MapObjectList> repeatedStructures, IDictionary<string, Model> structureModels, IDictionary<string, Train> trains)
+        public static ExtendedBeaconSet Load(NativeImpl native, BveHacker bveHacker, IDictionary<string, MapObjectList> repeatedStructures, IDictionary<string, Model> structureModels, IDictionary<string, Train> trains)
         {
             Dictionary<string, BeaconBase> beacons = new Dictionary<string, BeaconBase>();
             Dictionary<string, TrainObservingBeaconBase> trainObservingBeacons = new Dictionary<string, TrainObservingBeaconBase>();
@@ -137,8 +138,8 @@ namespace AtsEx.ExtendedBeacons
                             {
                                 IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script = CreateScript<PassedEventArgs>(code, scriptLanguage);
                                 Beacon beacon = repeatedStructure.Location < 0
-                                    ? new InitializerBeacon(scenarioService, bveHacker, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script)
-                                    : new Beacon(scenarioService, bveHacker, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
+                                    ? new InitializerBeacon(native, bveHacker, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script)
+                                    : new Beacon(native, bveHacker, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
 
                                 beacons[name] = beacon;
                                 errorCheckList.Add(beacon);
@@ -148,7 +149,7 @@ namespace AtsEx.ExtendedBeacons
                             case ObservingTargetTrain.Trains:
                             {
                                 IPluginScript<ExtendedBeaconGlobalsBase<TrainPassedEventArgs>> script = CreateScript<TrainPassedEventArgs>(code, scriptLanguage);
-                                TrainObservingBeacon beacon = new TrainObservingBeacon(scenarioService, bveHacker, name, repeatedStructure, observingTargetTrack, trains, script);
+                                TrainObservingBeacon beacon = new TrainObservingBeacon(native, bveHacker, name, repeatedStructure, observingTargetTrack, trains, script);
 
                                 trainObservingBeacons[name] = beacon;
                                 errorCheckList.Add(beacon);
@@ -158,7 +159,7 @@ namespace AtsEx.ExtendedBeacons
                             case ObservingTargetTrain.PreTrain:
                             {
                                 IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script = CreateScript<PassedEventArgs>(code, scriptLanguage);
-                                Beacon beacon = new Beacon(scenarioService, bveHacker, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
+                                Beacon beacon = new Beacon(native, bveHacker, name, repeatedStructure, observingTargetTrack, observingTargetTrain, script);
 
                                 preTrainObservingBeacons[name] = beacon;
                                 errorCheckList.Add(beacon);

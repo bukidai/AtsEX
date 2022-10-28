@@ -100,6 +100,8 @@
     <Compile Include="DXDynamicTexture\TouchEventArgs.cs" />
     <Compile Include="DXDynamicTexture\TouchManager.cs" />
     <Compile Include="DXDynamicTexture\TouchTextureHandle.cs" />
+    <Compile Include="Native\StartedEventHandler.cs" />
+    <Compile Include="Plugins\AllPluginsLoadedEventArgs.cs" />
     <Compile Include="ExtendedBeacons\ObservingTargetTrain.cs" />
     <Compile Include="ExtendedBeacons\ExtendedBeaconBase.cs" />
     <Compile Include="Direction.cs" />
@@ -118,9 +120,11 @@
     <Compile Include="Handles\IPowerHandle.cs" />
     <Compile Include="Handles\ReverserPositionCommandBase.cs" />
     <Compile Include="ILoadErrorResolver.cs" />
-    <Compile Include="IScenarioService.cs" />
+    <Compile Include="INative.cs" />
+    <Compile Include="Plugins\AllPluginsLoadedEventHandler.cs" />
     <Compile Include="Plugins\AssemblyPluginBase.cs" />
     <Compile Include="Handles\NotchCommandBase.cs" />
+    <Compile Include="Plugins\IPluginSet.cs" />
     <Compile Include="Plugins\PluginBuilder.cs" />
     <Compile Include="BveTypes\BveTypeSet.cs" />
     <Compile Include="BveTypes\BveTypeSet.InstanceCreator.cs" />
@@ -181,8 +185,7 @@
     <Compile Include="ClassWrappers\Public\BrakePosition.cs" />
     <Compile Include="Plugins\PluginType.cs" />
     <Compile Include="EventArgs\ScenarioCreatedEventArgs.cs" />
-    <Compile Include="EventArgs\StartedEventArgs.cs" />
-    <Compile Include="EventArgs\AllPluginLoadedEventArgs.cs" />
+    <Compile Include="Native\StartedEventArgs.cs" />
     <Compile Include="Exceptions\BveFileLoadException.cs" />
     <Compile Include="Exceptions\DevelopException.cs" />
     <Compile Include="Exceptions\PropertyNotInitializedException.cs" />

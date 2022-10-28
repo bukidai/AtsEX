@@ -17,10 +17,19 @@ namespace AtsEx.PluginHost.Plugins
     {
         public PluginType PluginType { get; }
         public bool UseAtsExExtensions { get; }
-        protected IScenarioService ScenarioService { get; }
 
-        private BveHacker _BveHacker = null;
-        protected BveHacker BveHacker => UseAtsExExtensions ? _BveHacker : throw new InvalidOperationException($"{nameof(UseAtsExExtensions)} が {false} に設定されています。");
+        protected INative Native { get; }
+
+        private IPluginSet _Plugins = null;
+        protected IPluginSet Plugins => _Plugins ?? throw new PropertyNotInitializedException(nameof(Plugins));
+
+        private readonly BveHacker _BveHacker = null;
+        protected BveHacker BveHacker => UseAtsExExtensions ? _BveHacker : throw new InvalidOperationException($"{nameof(UseAtsExExtensions)} が {false} に設定されています。"); // TODO
+
+        /// <summary>
+        /// 全ての AtsEX プラグインが読み込まれ、<see cref="Plugins"/> プロパティが取得可能になると発生します。
+        /// </summary>
+        protected event AllPluginsLoadedEventHandler AllPluginsLoaded;
 
         /// <summary>
         /// PluginUsing ファイルで指定した AtsEX プラグインの識別子を取得します。このプロパティの値は全プラグインにおいて一意であることが保証されています。
@@ -82,11 +91,14 @@ namespace AtsEx.PluginHost.Plugins
         {
             PluginType = pluginType;
             UseAtsExExtensions = useAtsExExtensions;
-            ScenarioService = builder.ScenarioService;
+            Native = builder.Native;
             Identifier = builder.Identifier;
 
             if (!UseAtsExExtensions) return;
             _BveHacker = builder.BveHacker;
+
+            builder.AllPluginsLoaded += e => _Plugins = e.Plugins;
+            builder.AllPluginsLoaded += e => AllPluginsLoaded?.Invoke(e);
         }
 
         /// <inheritdoc/>

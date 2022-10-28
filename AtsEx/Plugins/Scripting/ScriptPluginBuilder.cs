@@ -9,7 +9,7 @@ using AtsEx.Scripting;
 
 namespace AtsEx.Plugins.Scripting
 {
-    internal sealed class ScriptPluginBuilder : PluginBuilder
+    internal sealed class ScriptPluginBuilder : PluginHost.Plugins.PluginBuilder
     {
         public string Location { get; set; }
         public string Title { get; set; }
@@ -23,8 +23,13 @@ namespace AtsEx.Plugins.Scripting
         public IPluginScript<StartedGlobals> OnStartedScript { get; set; }
         public IPluginScript<TickResult, TickGlobals> TickScript { get; set; }
 
+        protected override event AllPluginsLoadedEventHandler AllPluginsLoaded;
+
         public ScriptPluginBuilder(PluginBuilder source) : base(source)
         {
+            source.CreatedBy.AllPluginsLoaded += e => source.GetAllPluginsLoaded()?.Invoke(e);
         }
+
+        public void InvokeAllPluginsLoaded(IPluginSet plugins) => AllPluginsLoaded?.Invoke(new AllPluginsLoadedEventArgs(plugins));
     }
 }

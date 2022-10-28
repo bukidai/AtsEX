@@ -13,9 +13,6 @@ using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx.PluginHost
 {
-    public delegate void AllPluginLoadedEventHandler(AllPluginLoadedEventArgs e);
-    public delegate void StartedEventHandler(StartedEventArgs e);
-
     public sealed class App
     {
         private class ResourceSet
