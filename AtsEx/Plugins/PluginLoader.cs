@@ -58,26 +58,26 @@ namespace AtsEx.Plugins
             BveHacker = bveHacker;
         }
 
-        public Dictionary<string, PluginBase> LoadFromPluginUsing(PluginUsing pluginUsing)
+        public Dictionary<string, PluginBase> Load(IPluginSourceSet pluginSources)
         {
             Dictionary<string, PluginBase> plugins = new Dictionary<string, PluginBase>();
 
-            foreach (KeyValuePair<Identifier, Assembly> item in pluginUsing.Assemblies)
+            foreach (KeyValuePair<Identifier, Assembly> item in pluginSources.Assemblies)
             {
-                List<PluginBase> loadedPlugins = LoadFromAssembly(item.Key, item.Value, pluginUsing.PluginType);
+                List<PluginBase> loadedPlugins = LoadFromAssembly(item.Key, item.Value, pluginSources.PluginType);
                 loadedPlugins.ForEach(plugin => plugins[plugin.Identifier] = plugin);
             }
 
-            foreach (KeyValuePair<Identifier, ScriptPluginPackage> item in pluginUsing.CSharpScriptPackages)
+            foreach (KeyValuePair<Identifier, ScriptPluginPackage> item in pluginSources.CSharpScriptPackages)
             {
                 PluginBuilder pluginBuilder = new PluginBuilder(Native, BveHacker, item.Key.Text, this);
-                plugins[item.Key.Text] = CSharpScriptPlugin.FromPackage(pluginBuilder, pluginUsing.PluginType, item.Value);
+                plugins[item.Key.Text] = CSharpScriptPlugin.FromPackage(pluginBuilder, pluginSources.PluginType, item.Value);
             }
 
-            foreach (KeyValuePair<Identifier, ScriptPluginPackage> item in pluginUsing.IronPython2Packages)
+            foreach (KeyValuePair<Identifier, ScriptPluginPackage> item in pluginSources.IronPython2Packages)
             {
                 PluginBuilder pluginBuilder = new PluginBuilder(Native, BveHacker, item.Key.Text, this);
-                plugins[item.Key.Text] = IronPython2Plugin.FromPackage(pluginBuilder, pluginUsing.PluginType, item.Value);
+                plugins[item.Key.Text] = IronPython2Plugin.FromPackage(pluginBuilder, pluginSources.PluginType, item.Value);
             }
 
             // TODO: ここで他の種類のプラグイン（ネイティブなど）を読み込む
@@ -135,7 +135,7 @@ namespace AtsEx.Plugins
                         default:
                             if (!(identifier is RandomIdentifier))
                             {
-                                throw new BveFileLoadException(string.Format(Resources.Value.CannotSetIdentifier.Value, fileName), pluginUsing.Name);
+                                throw new BveFileLoadException(string.Format(Resources.Value.CannotSetIdentifier.Value, fileName), pluginSources.Name);
                             }
                             break;
                     }

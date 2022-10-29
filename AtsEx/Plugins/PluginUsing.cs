@@ -18,7 +18,7 @@ using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx.Plugins
 {
-    internal class PluginUsing
+    internal class PluginUsing : IPluginSourceSet
     {
         private class ResourceSet
         {

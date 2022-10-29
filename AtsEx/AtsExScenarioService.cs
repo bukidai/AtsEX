@@ -69,7 +69,7 @@ namespace AtsEx
             try
             {
                 {
-                    vehiclePlugins = pluginLoader.LoadFromPluginUsing(vehiclePluginUsing);
+                    vehiclePlugins = pluginLoader.Load(vehiclePluginUsing);
                 }
 
                 {
