@@ -64,4 +64,7 @@
     <Content Include="Resources\FastMethod\Generic.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /e /y /i "$(ProjectDir)Resources\" "$(SolutionDir)_SampleScenarios\AtsEx\Resources\FastMember\"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
