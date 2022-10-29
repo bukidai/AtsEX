@@ -33,20 +33,6 @@ namespace AtsEx.Plugins.Scripting
         protected static readonly XmlSchemaSet SchemaSet = new XmlSchemaSet();
         protected static readonly string TargetNamespace;
 
-        public bool UseAtsExExtensions { get; }
-
-        public string Location { get; }
-        public string Title { get; }
-        public string Version { get; }
-        public string Description { get; }
-        public string Copyright { get; }
-
-        public string ConstructorScriptPath { get; }
-        public string DisposeScriptPath { get; }
-        public string OnScenarioCreatedScriptPath { get; }
-        public string OnStartedScriptPath { get; }
-        public string TickScriptPath { get; }
-
         static ScriptPluginPackage()
         {
 #if DEBUG
@@ -60,6 +46,20 @@ namespace AtsEx.Plugins.Scripting
                 SchemaSet.Add(schema);
             }
         }
+
+        public bool UseAtsExExtensions { get; }
+
+        public string Location { get; }
+        public string Title { get; }
+        public string Version { get; }
+        public string Description { get; }
+        public string Copyright { get; }
+
+        public string ConstructorScriptPath { get; }
+        public string DisposeScriptPath { get; }
+        public string OnScenarioCreatedScriptPath { get; }
+        public string OnStartedScriptPath { get; }
+        public string TickScriptPath { get; }
 
         protected ScriptPluginPackage(InformationBuilder informationBuilder, ScriptsBuilder scriptsBuilder, bool useAtsExExtensions)
         {

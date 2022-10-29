@@ -28,6 +28,13 @@ namespace FastMember
 
             private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
 
+            static Generic()
+            {
+#if DEBUG
+                _ = Resources.Value;
+#endif
+            }
+
             private readonly ConcurrentDictionary<object, Type[]> GenericTypeArgumentCache = new ConcurrentDictionary<object, Type[]>();
             private readonly ConcurrentDictionary<Type[], FastMethod> MethodCache = new ConcurrentDictionary<Type[], FastMethod>();
 

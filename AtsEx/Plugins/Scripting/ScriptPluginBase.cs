@@ -32,6 +32,15 @@ namespace AtsEx.Plugins.Scripting
         private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
         private static readonly string NameText;
 
+        static ScriptPluginBase()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+
+            NameText = Resources.Value.Name.Value;
+        }
+
         public override string Location { get; } = "";
         public override string Name { get; } = NameText;
         public override string Title { get; } = "";
@@ -45,15 +54,6 @@ namespace AtsEx.Plugins.Scripting
         private readonly IPluginScript<ScenarioCreatedGlobals> OnScenarioCreatedScript;
         private readonly IPluginScript<StartedGlobals> OnStartedScript;
         private readonly IPluginScript<TickResult, TickGlobals> TickScript;
-
-        static ScriptPluginBase()
-        {
-#if DEBUG
-            _ = Resources.Value;
-#endif
-
-            NameText = Resources.Value.Name.Value;
-        }
 
         protected ScriptPluginBase(ScriptPluginBuilder builder, PluginType pluginType, bool useAtsExExtensions) : base(builder, pluginType, useAtsExExtensions)
         {

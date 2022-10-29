@@ -29,6 +29,13 @@ namespace AtsEx.PluginHost.Plugins
 
         private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
 
+        static PluginBase()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
+
         /// <summary>
         /// この AtsEX プラグインの種類を取得します。
         /// </summary>

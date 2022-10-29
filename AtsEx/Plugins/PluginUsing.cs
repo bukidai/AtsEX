@@ -38,19 +38,6 @@ namespace AtsEx.Plugins
         protected static XmlSchemaSet SchemaSet = new XmlSchemaSet();
         protected static string TargetNamespace;
 
-        public string Name { get; }
-
-        public PluginType PluginType { get; }
-
-        protected readonly Dictionary<Identifier, Assembly> _Assemblies;
-        public ReadOnlyDictionary<Identifier, Assembly> Assemblies { get; }
-
-        protected readonly Dictionary<Identifier, ScriptPluginPackage> _CSharpScriptPackages;
-        public ReadOnlyDictionary<Identifier, ScriptPluginPackage> CSharpScriptPackages { get; }
-
-        protected readonly Dictionary<Identifier, ScriptPluginPackage> _IronPython2Packages;
-        public ReadOnlyDictionary<Identifier, ScriptPluginPackage> IronPython2Packages { get; }
-
         static PluginUsing()
         {
 #if DEBUG
@@ -64,6 +51,19 @@ namespace AtsEx.Plugins
                 SchemaSet.Add(schema);
             }
         }
+
+        public string Name { get; }
+
+        public PluginType PluginType { get; }
+
+        protected readonly Dictionary<Identifier, Assembly> _Assemblies;
+        public ReadOnlyDictionary<Identifier, Assembly> Assemblies { get; }
+
+        protected readonly Dictionary<Identifier, ScriptPluginPackage> _CSharpScriptPackages;
+        public ReadOnlyDictionary<Identifier, ScriptPluginPackage> CSharpScriptPackages { get; }
+
+        protected readonly Dictionary<Identifier, ScriptPluginPackage> _IronPython2Packages;
+        public ReadOnlyDictionary<Identifier, ScriptPluginPackage> IronPython2Packages { get; }
 
         protected PluginUsing(string name, PluginType pluginType,
             IDictionary<Identifier, Assembly> assemblies, IDictionary<Identifier, ScriptPluginPackage> csharpScriptPackages, IDictionary<Identifier, ScriptPluginPackage> ironPython2Packages)
