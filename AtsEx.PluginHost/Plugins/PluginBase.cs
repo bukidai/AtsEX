@@ -163,14 +163,14 @@ namespace AtsEx.PluginHost.Plugins
             _Extensions = builder.Extensions;
             Identifier = builder.Identifier;
 
-            if (!UseAtsExExtensions) return;
-            _BveHacker = builder.BveHacker;
             builder.AllExtensionsLoaded += e => _Extensions = e.Extensions;
             builder.AllExtensionsLoaded += e => AllExtensionsLoaded?.Invoke(e);
 
             builder.AllPluginsLoaded += e => _Plugins = e.Plugins;
             builder.AllPluginsLoaded += e => AllPluginsLoaded?.Invoke(e);
 
+            if (!UseAtsExExtensions) return;
+            _BveHacker = builder.BveHacker;
         }
 
         private void ABC(AllExtensionsLoadedEventArgs e) => MessageBox.Show("a");
