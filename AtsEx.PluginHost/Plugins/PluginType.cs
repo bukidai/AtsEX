@@ -16,9 +16,19 @@ namespace AtsEx.PluginHost.Plugins
     /// </summary>
     public enum PluginType
     {
-        /// <summary>車両プラグイン。</summary>
+        /// <summary>
+        /// 拡張機能を表します。
+        /// </summary>
+        Extension,
+
+        /// <summary>
+        /// 車両プラグインを表します。
+        /// </summary>
         VehiclePlugin,
-        /// <summary>マッププラグイン。</summary>
+
+        /// <summary>
+        /// マッププラグインを表します。
+        /// </summary>
         MapPlugin,
     }
 
@@ -28,6 +38,7 @@ namespace AtsEx.PluginHost.Plugins
         {
             private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType(typeof(PluginTypeConverter), "PluginHost");
 
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> Extension { get; private set; }
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> VehiclePlugin { get; private set; }
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> MapPlugin { get; private set; }
 
@@ -50,6 +61,9 @@ namespace AtsEx.PluginHost.Plugins
         {
             switch (pluginType)
             {
+                case PluginType.Extension:
+                    return Resources.Value.Extension;
+
                 case PluginType.VehiclePlugin:
                     return Resources.Value.VehiclePlugin;
 
@@ -67,6 +81,9 @@ namespace AtsEx.PluginHost.Plugins
         {
             switch (pluginType)
             {
+                case PluginType.Extension:
+                    return Color.White;
+
                 case PluginType.VehiclePlugin:
                     return Color.LightBlue;
 

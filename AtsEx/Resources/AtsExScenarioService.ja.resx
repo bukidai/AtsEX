@@ -120,9 +120,6 @@
   <data name="MapPluginTickResultTypeInvalid" xml:space="preserve">
     <value>マッププラグインの {0} メソッドは {1} を返さなければなりません。</value>
   </data>
-  <data name="UnhandledExceptionCaption" xml:space="preserve">
-    <value>ハンドルされていない例外 - {0}</value>
-  </data>
   <data name="VehiclePluginTickResultTypeInvalid" xml:space="preserve">
     <value>車両プラグインの {0} メソッドは {1} を返さなければなりません。</value>
   </data>

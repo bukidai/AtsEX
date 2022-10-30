@@ -52,7 +52,7 @@ namespace AtsEx
 
                                 try
                                 {
-                                    PluginUsing mapPluginUsing = PluginUsing.Load(PluginType.MapPlugin, mapPluginUsingAbsolutePath);
+                                    PluginSourceSet mapPluginUsing = PluginSourceSet.FromPluginUsing(PluginType.MapPlugin, mapPluginUsingAbsolutePath);
                                     Dictionary<string, PluginBase> loadedMapPlugins = pluginLoader.Load(mapPluginUsing);
                                     AddRangeToLoadedPlugins(loadedMapPlugins);
                                 }

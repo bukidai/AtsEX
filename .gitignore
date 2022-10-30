@@ -17,6 +17,11 @@ obj
 /_SampleScenarios/AtsEx/Resources/*/*.resx
 /_SampleScenarios/AtsEx/Resources/*/*/*.resx
 
+/_SampleScenarios/AtsEx/Extensions/*.dll
+/_SampleScenarios/AtsEx/Extensions/*.pdb
+/_SampleScenarios/AtsEx/Extensions/*.dll.config
+/_SampleScenarios/AtsEx/Extensions/*.xml
+
 /_SampleScenarios/AtsEx.Samples/Maps/Basic/Samples/*/MapPlugins/*.dll
 /_SampleScenarios/AtsEx.Samples/Maps/Basic/Samples/*/MapPlugins/*.pdb
 /_SampleScenarios/AtsEx.Samples/Maps/Basic/Samples/*/MapPlugins/*.dll.config

@@ -120,9 +120,6 @@
   <data name="MapPluginTickResultTypeInvalid" xml:space="preserve">
     <value>The {0} method of map plugins cannot return {1}.</value>
   </data>
-  <data name="UnhandledExceptionCaption" xml:space="preserve">
-    <value>Unhandled exception - {0}</value>
-  </data>
   <data name="VehiclePluginTickResultTypeInvalid" xml:space="preserve">
     <value>The {0} method of vehicle plugins must return {1}.</value>
   </data>

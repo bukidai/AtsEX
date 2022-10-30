@@ -117,13 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Extension" xml:space="preserve">
-    <value>拡張機能</value>
-  </data>
-  <data name="MapPlugin" xml:space="preserve">
-    <value>マッププラグイン</value>
-  </data>
-  <data name="VehiclePlugin" xml:space="preserve">
-    <value>車両プラグイン</value>
+  <data name="UnhandledExceptionCaption" xml:space="preserve">
+    <value>ハンドルされていない例外 - {0}</value>
   </data>
 </root>

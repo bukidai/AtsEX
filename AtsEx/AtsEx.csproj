@@ -133,17 +133,21 @@
     <Compile Include="Hosting\ReleaseInfo.cs" />
     <Compile Include="Input\NativeAtsKey.cs" />
     <Compile Include="Input\NativeKeySet.cs" />
+    <Compile Include="Plugins\PluginLoadErrorResolver.cs" />
     <Compile Include="MapLoader\Map.cs" />
     <Compile Include="MapStatementIdentifiers.cs" />
     <Compile Include="Native\Ats\CallerCompatibilityVersionAttribute.cs" />
     <Compile Include="Native\Ats\Export.cs" />
     <Compile Include="Native\Ats\AtsMain.cs" />
-    <Compile Include="Plugins\IPluginSourceSet.cs" />
+    <Compile Include="Plugins\Extensions\ExtensionFactorySet.cs" />
+    <Compile Include="Plugins\PluginSourceSet.Concat.cs" />
+    <Compile Include="Plugins\PluginSourceSet.cs" />
     <Compile Include="Plugins\PluginBuilder.cs" />
     <Compile Include="Plugins\PluginSet.cs" />
     <Compile Include="Plugins\Identifier.cs" />
     <Compile Include="Plugins\PluginLoader.cs" />
-    <Compile Include="Plugins\PluginUsing.cs" />
+    <Compile Include="Plugins\PluginSourceSet.FromDirectory.cs" />
+    <Compile Include="Plugins\PluginSourceSet.FromPluginUsing.cs" />
     <Compile Include="Plugins\Scripting\CSharp\CSharpScriptPlugin.cs" />
     <Compile Include="Plugins\Scripting\Globals\ScenarioCreatedGlobals.cs" />
     <Compile Include="Plugins\Scripting\Globals\StartedGlobals.cs" />
@@ -211,8 +215,8 @@
     <Content Include="Resources\PluginLoader.resx" />
     <Content Include="Resources\Plugins\MapStatementIdentifiers.ja.resx" />
     <Content Include="Resources\Plugins\MapStatementIdentifiers.resx" />
-    <Content Include="Resources\PluginUsing.ja.resx" />
-    <Content Include="Resources\PluginUsing.resx" />
+    <Content Include="Resources\PluginSourceSet.ja.resx" />
+    <Content Include="Resources\PluginSourceSet.resx" />
     <Content Include="Resources\ScriptPluginBase.ja.resx" />
     <Content Include="Resources\ScriptPluginBase.resx" />
     <Content Include="Resources\ScriptPluginPackage.ja.resx" />
@@ -227,6 +231,8 @@
     <EmbeddedResource Include="Plugins\Scripting\AtsExScriptPluginPackageManifestXmlSchema.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Content Include="Resources\PluginLoadErrorResolver.ja.resx" />
+    <Content Include="Resources\PluginLoadErrorResolver.resx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

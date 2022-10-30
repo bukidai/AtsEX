@@ -126,6 +126,9 @@ The legal location to place is '{2}'.</value>
   <data name="BveVersionNotSupported" xml:space="preserve">
     <value>Loaded the profile for BVE version {1} instead of current version {0}, which is not supported. It may cause some extensions of {2} not to work well.</value>
   </data>
+  <data name="ExtensionTickResultTypeInvalid" xml:space="preserve">
+    <value>The {0} method of extensions must return {1}.</value>
+  </data>
   <data name="IgnoreAndContinue" xml:space="preserve">
     <value>Ignore and continue loading?</value>
   </data>

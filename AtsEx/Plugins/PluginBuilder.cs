@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.Plugins;
+using AtsEx.PluginHost.Plugins.Extensions;
 
 namespace AtsEx.Plugins
 {
@@ -13,14 +14,18 @@ namespace AtsEx.Plugins
     {
         public PluginLoader CreatedBy { get; }
 
+        protected override event AllExtensionsLoadedEventHandler AllExtensionsLoaded;
         protected override event AllPluginsLoadedEventHandler AllPluginsLoaded;
 
-        public PluginBuilder(INative native, PluginHost.BveHacker bveHacker, string identifier, PluginLoader createdBy) : base(native, bveHacker, identifier)
+        public PluginBuilder(INative native, PluginHost.BveHacker bveHacker, IExtensionFactorySet extensions, string identifier, PluginLoader createdBy)
+            : base(native, bveHacker, extensions, identifier)
         {
             CreatedBy = createdBy;
+            CreatedBy.AllExtensionsLoaded += e => AllExtensionsLoaded?.Invoke(e);
             CreatedBy.AllPluginsLoaded += e => AllPluginsLoaded?.Invoke(e);
         }
 
+        public AllExtensionsLoadedEventHandler GetAllExtensionsLoaded() => AllExtensionsLoaded;
         public AllPluginsLoadedEventHandler GetAllPluginsLoaded() => AllPluginsLoaded;
     }
 }

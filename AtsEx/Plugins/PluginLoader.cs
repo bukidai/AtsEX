@@ -14,6 +14,7 @@ using AtsEx.Plugins.Scripting.CSharp;
 using AtsEx.Plugins.Scripting.IronPython2;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.Plugins;
+using AtsEx.PluginHost.Plugins.Extensions;
 
 namespace AtsEx.Plugins
 {
@@ -49,16 +50,19 @@ namespace AtsEx.Plugins
 
         protected readonly NativeImpl Native;
         protected readonly BveHacker BveHacker;
+        protected readonly IExtensionFactorySet Extensions;
 
+        public event AllExtensionsLoadedEventHandler AllExtensionsLoaded;
         public event AllPluginsLoadedEventHandler AllPluginsLoaded;
 
-        public PluginLoader(NativeImpl native, BveHacker bveHacker)
+        public PluginLoader(NativeImpl native, BveHacker bveHacker, IExtensionFactorySet extensions)
         {
             Native = native;
             BveHacker = bveHacker;
+            Extensions = extensions;
         }
 
-        public Dictionary<string, PluginBase> Load(IPluginSourceSet pluginSources)
+        public Dictionary<string, PluginBase> Load(PluginSourceSet pluginSources)
         {
             Dictionary<string, PluginBase> plugins = new Dictionary<string, PluginBase>();
 
@@ -70,13 +74,13 @@ namespace AtsEx.Plugins
 
             foreach (KeyValuePair<Identifier, ScriptPluginPackage> item in pluginSources.CSharpScriptPackages)
             {
-                PluginBuilder pluginBuilder = new PluginBuilder(Native, BveHacker, item.Key.Text, this);
+                PluginBuilder pluginBuilder = new PluginBuilder(Native, BveHacker, Extensions, item.Key.Text, this);
                 plugins[item.Key.Text] = CSharpScriptPlugin.FromPackage(pluginBuilder, pluginSources.PluginType, item.Value);
             }
 
             foreach (KeyValuePair<Identifier, ScriptPluginPackage> item in pluginSources.IronPython2Packages)
             {
-                PluginBuilder pluginBuilder = new PluginBuilder(Native, BveHacker, item.Key.Text, this);
+                PluginBuilder pluginBuilder = new PluginBuilder(Native, BveHacker, Extensions, item.Key.Text, this);
                 plugins[item.Key.Text] = IronPython2Plugin.FromPackage(pluginBuilder, pluginSources.PluginType, item.Value);
             }
 
@@ -144,7 +148,7 @@ namespace AtsEx.Plugins
                     {
                         (Type type, ConstructorInfo constructorInfo) = constructor;
 
-                        PluginBase pluginInstance = constructorInfo.Invoke(new object[] { new PluginBuilder(Native, BveHacker, GenerateIdentifier(), this) }) as PluginBase;
+                        PluginBase pluginInstance = constructorInfo.Invoke(new object[] { new PluginBuilder(Native, BveHacker, Extensions, GenerateIdentifier(), this) }) as PluginBase;
                         if (pluginInstance.PluginType != pluginType)
                         {
                             throw new InvalidOperationException(string.Format(Resources.Value.WrongPluginType.Value, pluginType.GetTypeString(), pluginInstance.PluginType.GetTypeString()));
@@ -172,6 +176,7 @@ namespace AtsEx.Plugins
             }
         }
 
+        public void SetExtensionFactorySetToLoadedPlugins(IExtensionFactorySet extensions) => AllExtensionsLoaded?.Invoke(new AllExtensionsLoadedEventArgs(extensions));
         public void SetPluginSetToLoadedPlugins(IPluginSet plugins) => AllPluginsLoaded?.Invoke(new AllPluginsLoadedEventArgs(plugins));
     }
 }

@@ -5,12 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AtsEx.PluginHost.Plugins;
+using AtsEx.PluginHost.Plugins.Extensions;
 using AtsEx.Scripting;
 
 namespace AtsEx.Plugins.Scripting
 {
     internal sealed class ScriptPluginBuilder : PluginHost.Plugins.PluginBuilder
     {
+        private readonly PluginLoader CreatedBy;
+
         public string Location { get; set; }
         public string Title { get; set; }
         public string Version { get; set; }
@@ -23,13 +26,15 @@ namespace AtsEx.Plugins.Scripting
         public IPluginScript<StartedGlobals> OnStartedScript { get; set; }
         public IPluginScript<TickResult, TickGlobals> TickScript { get; set; }
 
+        protected override event AllExtensionsLoadedEventHandler AllExtensionsLoaded;
         protected override event AllPluginsLoadedEventHandler AllPluginsLoaded;
 
         public ScriptPluginBuilder(PluginBuilder source) : base(source)
         {
-            source.CreatedBy.AllPluginsLoaded += e => source.GetAllPluginsLoaded()?.Invoke(e);
-        }
+            CreatedBy = source.CreatedBy;
 
-        public void InvokeAllPluginsLoaded(IPluginSet plugins) => AllPluginsLoaded?.Invoke(new AllPluginsLoadedEventArgs(plugins));
+            CreatedBy.AllExtensionsLoaded += e => source.GetAllExtensionsLoaded()?.Invoke(e);
+            CreatedBy.AllPluginsLoaded += e => source.GetAllPluginsLoaded()?.Invoke(e);
+        }
     }
 }

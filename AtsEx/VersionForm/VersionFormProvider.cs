@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using UnembeddedResources;
 
+using AtsEx.Plugins;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.Plugins;
 
@@ -37,17 +38,22 @@ namespace AtsEx
 #endif
         }
 
-        private readonly BveHacker BveHacker;
+        private readonly ContextMenuHacker ContextMenuHacker;
+        private readonly Form MainFormSource;
+
+        private readonly IEnumerable<PluginBase> Extensions;
 
         private readonly VersionForm Form = null;
         private readonly ToolStripMenuItem MenuItem;
 
 
-        public VersionFormProvider(BveHacker bveHacker)
+        public VersionFormProvider(ContextMenuHacker contextMenuHacker, Form mainFormSource, IEnumerable<PluginBase> extensions)
         {
-            BveHacker = bveHacker;
+            ContextMenuHacker = contextMenuHacker;
+            MainFormSource = mainFormSource;
 
-            ContextMenuHacker contextMenuHacker = BveHacker.ContextMenuHacker as ContextMenuHacker;
+            Extensions = extensions;
+
             MenuItem = contextMenuHacker.AddClickableMenuItem(string.Format(Resources.Value.VersionInfoMenuItem.Value, App.Instance.ProductShortName), MenuItemClick, true);
 
             Form = new VersionForm();
@@ -58,7 +64,7 @@ namespace AtsEx
         {
             if (!Form.Visible)
             {
-                Form.Show(BveHacker.MainFormSource);
+                Form.Show(MainFormSource);
             }
 
             Form.Focus();
@@ -70,9 +76,9 @@ namespace AtsEx
             Form.Hide();
         }
 
-        public void SetScenario(IEnumerable<PluginBase> plugins) => Form.SetPluginDetails(plugins);
+        public void SetScenario(IEnumerable<PluginBase> plugins) => Form.SetPluginDetails(Extensions.Concat(plugins));
 
-        public void UnsetScenario() => Form.UnsetScenarioDetails();
+        public void UnsetScenario() => Form.SetPluginDetails(Extensions);
 
         public void Dispose()
         {

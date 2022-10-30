@@ -1,24 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 using UnembeddedResources;
 
 using AtsEx.Handles;
 using AtsEx.Input;
-using AtsEx.Native;
 using AtsEx.Plugins;
-using AtsEx.PluginHost;
 using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Input.Native;
-using AtsEx.PluginHost.Native;
 using AtsEx.PluginHost.Plugins;
-using AtsEx.Scripting.CSharp;
 
 namespace AtsEx
 {
@@ -30,7 +24,6 @@ namespace AtsEx
 
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> VehiclePluginTickResultTypeInvalid { get; private set; }
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> MapPluginTickResultTypeInvalid { get; private set; }
-            [ResourceStringHolder(nameof(Localizer))] public Resource<string> UnhandledExceptionCaption { get; private set; }
 
             public ResourceSet()
             {
@@ -54,16 +47,16 @@ namespace AtsEx
 
         private readonly BveHacker BveHacker;
 
-        protected AtsExScenarioService(AtsEx atsEx, PluginUsing vehiclePluginUsing, PluginHost.Native.VehicleSpec vehicleSpec)
+        protected AtsExScenarioService(AtsEx atsEx, PluginSourceSet vehiclePluginUsing, PluginHost.Native.VehicleSpec vehicleSpec)
         {
             AtsEx = atsEx;
             BveHacker = AtsEx.BveHacker;
 
             Native = new NativeImpl(vehicleSpec);
 
-            LoadErrorResolver loadErrorResolver = new LoadErrorResolver(BveHacker);
+            PluginLoadErrorResolver loadErrorResolver = new PluginLoadErrorResolver(BveHacker.LoadErrorManager);
 
-            Plugins.PluginLoader pluginLoader = new Plugins.PluginLoader(Native, BveHacker);
+            Plugins.PluginLoader pluginLoader = new Plugins.PluginLoader(Native, BveHacker, AtsEx.Extensions);
             Dictionary<string, PluginBase> vehiclePlugins = null;
             Dictionary<string, PluginBase> mapPlugins = null;
             try
@@ -190,43 +183,6 @@ namespace AtsEx
         public void KeyUp(NativeAtsKeyName key)
         {
             (Native.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyReleased();
-        }
-
-
-        private class LoadErrorResolver : ILoadErrorResolver
-        {
-            private readonly BveHacker BveHacker;
-
-            public LoadErrorResolver(BveHacker bveHacker)
-            {
-                BveHacker = bveHacker;
-            }
-
-            public void Resolve(Exception exception)
-            {
-                if (exception is AggregateException ae)
-                {
-                    foreach (Exception ex in ae.InnerExceptions)
-                    {
-                        Resolve(ex);
-                    }
-                    return;
-                }
-
-                if (exception is CompilationException ce)
-                {
-                    ce.ThrowAsLoadError(BveHacker.LoadErrorManager);
-                }
-                else if (exception is BveFileLoadException fe)
-                {
-                    BveHacker.LoadErrorManager.Throw(fe.Message, fe.SenderFileName, fe.LineIndex, fe.CharIndex);
-                }
-                else
-                {
-                    BveHacker.LoadErrorManager.Throw(exception.Message);
-                    MessageBox.Show(exception.ToString(), string.Format(Resources.Value.UnhandledExceptionCaption.Value, App.Instance.ProductShortName));
-                }
-            }
         }
 
 
