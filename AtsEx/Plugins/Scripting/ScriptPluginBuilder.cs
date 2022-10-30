@@ -26,8 +26,8 @@ namespace AtsEx.Plugins.Scripting
         public IPluginScript<StartedGlobals> OnStartedScript { get; set; }
         public IPluginScript<TickResult, TickGlobals> TickScript { get; set; }
 
-        protected override event AllExtensionsLoadedEventHandler AllExtensionsLoaded;
-        protected override event AllPluginsLoadedEventHandler AllPluginsLoaded;
+        protected override event AllExtensionsLoadedEventHandler AllExtensionsLoaded { add => CreatedBy.AllExtensionsLoaded += value; remove => CreatedBy.AllExtensionsLoaded -= value; }
+        protected override event AllPluginsLoadedEventHandler AllPluginsLoaded { add => CreatedBy.AllPluginsLoaded += value; remove => CreatedBy.AllPluginsLoaded -= value; }
 
         public ScriptPluginBuilder(PluginBuilder source) : base(source)
         {
