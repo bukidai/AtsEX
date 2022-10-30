@@ -23,7 +23,7 @@ namespace Zbx1425.DXDynamicTexture
 
         internal static Device DXDevice;
 
-        public static void Initialize()
+        internal static void Initialize()
         {
             if (IsInitialized) throw new InvalidOperationException("DXDynamicTexture has been already initialized.");
             IsInitialized = true;
@@ -110,7 +110,7 @@ namespace Zbx1425.DXDynamicTexture
             }
         }
 
-        public static void Clear()
+        internal static void Clear()
         {
             Dispose();
             Handles.Clear();

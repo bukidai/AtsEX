@@ -7,8 +7,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using Zbx1425.DXDynamicTexture;
-
 using UnembeddedResources;
 
 using AtsEx.Plugins;
@@ -86,15 +84,12 @@ namespace AtsEx
             }
 
             VersionFormProvider = new VersionFormProvider(BveHacker.ContextMenuHacker as ContextMenuHacker, BveHacker.MainFormSource, extensionFactories.Values);
-            TextureManager.Initialize();
         }
 
         protected abstract void ProfileForDifferentBveVersionLoaded(Version profileVersion);
 
         public virtual void Dispose()
         {
-            TextureManager.Clear();
-
             VersionFormProvider.Dispose();
             BveHacker.Dispose();
         }

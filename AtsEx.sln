@@ -39,6 +39,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeWrapping", "Libs\TypeWr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.Scripting", "AtsEx.Scripting\AtsEx.Scripting.csproj", "{47E87F46-20FC-4094-A733-EDD30819F1D5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{D8B1A356-B814-470B-9C6B-C8D0DFAD6D5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.Extensions.DXDynamicTexture", "Extensions\AtsEx.Extensions.DXDynamicTexture\AtsEx.Extensions.DXDynamicTexture.csproj", "{725E0C18-0857-4BB1-A559-882A1EE2B892}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +105,10 @@ Global
 		{47E87F46-20FC-4094-A733-EDD30819F1D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47E87F46-20FC-4094-A733-EDD30819F1D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47E87F46-20FC-4094-A733-EDD30819F1D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{725E0C18-0857-4BB1-A559-882A1EE2B892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{725E0C18-0857-4BB1-A559-882A1EE2B892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{725E0C18-0857-4BB1-A559-882A1EE2B892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{725E0C18-0857-4BB1-A559-882A1EE2B892}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,6 +126,7 @@ Global
 		{9A22C1B4-6EDF-46AD-A03E-71847594E6E3} = {B3D0DA09-BB5C-4FF7-9844-80A381655B5C}
 		{B63ADEF8-3BF9-48E1-8B61-8FA042B19F89} = {B3D0DA09-BB5C-4FF7-9844-80A381655B5C}
 		{28FC1147-DB95-42F0-AEB3-AE8AE93F0179} = {B3D0DA09-BB5C-4FF7-9844-80A381655B5C}
+		{725E0C18-0857-4BB1-A559-882A1EE2B892} = {D8B1A356-B814-470B-9C6B-C8D0DFAD6D5B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434AD268-BAE2-48A7-8AE5-2AB6B982F843}

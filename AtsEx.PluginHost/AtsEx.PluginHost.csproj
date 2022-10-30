@@ -94,12 +94,6 @@
     <Compile Include="ClassWrappers\Public\VehicleInstrumentSet.cs" />
     <Compile Include="ClassWrappers\Public\SectionManager.cs" />
     <Compile Include="DictionaryExtensions.cs" />
-    <Compile Include="DXDynamicTexture\GDIHelper.cs" />
-    <Compile Include="DXDynamicTexture\TextureHandle.cs" />
-    <Compile Include="DXDynamicTexture\TextureManager.cs" />
-    <Compile Include="DXDynamicTexture\TouchEventArgs.cs" />
-    <Compile Include="DXDynamicTexture\TouchManager.cs" />
-    <Compile Include="DXDynamicTexture\TouchTextureHandle.cs" />
     <Compile Include="Native\StartedEventHandler.cs" />
     <Compile Include="Plugins\AllPluginsLoadedEventArgs.cs" />
     <Compile Include="ExtendedBeacons\ObservingTargetTrain.cs" />
@@ -224,7 +218,6 @@
     <Content Include="Resources\ClassWrapperBase.resx" />
     <Content Include="Resources\BveHacker.resx" />
     <Content Include="Resources\BveHacker.ja.resx" />
-    <None Include="DXDynamicTexture\.editorconfig" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
