@@ -50,6 +50,21 @@ namespace AtsEx
 
         protected AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly)
         {
+            AppDomain.CurrentDomain.AssemblyResolve += (sender, e) =>
+            {
+                AssemblyName assemblyName = new AssemblyName(e.Name);
+                if (assemblyName.Name == "SlimDX")
+                {
+                    Assembly[] loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+                    foreach (Assembly assembly in loadedAssemblies)
+                    {
+                        if (assembly.GetName().Name == "SlimDX") return assembly;
+                    }
+                }
+
+                return null;
+            };
+
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
 
             App.CreateInstance(targetProcess, targetAssembly, executingAssembly);
