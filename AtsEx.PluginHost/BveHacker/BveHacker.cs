@@ -56,10 +56,31 @@ namespace AtsEx.PluginHost
             {
                 BveTypes = BveTypeSet.LoadAsync(App.Instance.BveAssembly, App.Instance.BveVersion, true, profileForDifferentBveVersionLoaded).Result;
             }
-            catch (KeyNotFoundException)
+            catch (Exception ex)
             {
-                CheckSlimDX();
+                ResolveException(ex);
                 throw;
+
+                void ResolveException(Exception exception)
+                {
+                    switch (exception)
+                    {
+                        case AggregateException ae:
+                        {
+                            foreach (Exception innerException in ae.InnerExceptions)
+                            {
+                                ResolveException(innerException);
+                            }
+                            break;
+                        }
+
+                        case KeyNotFoundException ke:
+                        {
+                            CheckSlimDX();
+                            break;
+                        }
+                    }
+                }
             }
 
             ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(this);
