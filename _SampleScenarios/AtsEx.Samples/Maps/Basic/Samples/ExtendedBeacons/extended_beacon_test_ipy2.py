@@ -6,12 +6,15 @@ AtsEXの機能にアクセスするためのオブジェクトが変数【g】�
 
 ----------------------------------------------------------------------------------------------------
 
-全てのスクリプト（スクリプト言語で開発した車両・マッププラグイン、拡張地上子のスクリプトのどちらも）には
+全てのスクリプト（スクリプト言語で開発した拡張機能、車両・マッププラグイン、拡張地上子のスクリプト等）には
 
-	IScenarioService ScenarioService { get; }
-	IBveHacker BveHacker { get; }
+	INative Native { get; } // BVEが標準でATSプラグイン向けに提供している機能のラッパー
+	IExtensionFactorySet Extensions { get; } // 読み込まれたAtsEX拡張機能の一覧
+	IPluginSet Plugins { get; } // 読み込まれたぷらの一覧
+	IBveHacker BveHacker { get; } // BVE本体を直接操作するための機能
 
 が渡されています。
+これらの他に、BVE、AtsEX本体のバージョン情報などがApp.Instance静的プロパティから取得可能です。
 
 
 ●全拡張地上子共通
@@ -40,7 +43,7 @@ void SetPluginVariable<T>(PluginType pluginType, string pluginIdentifier, string
 
 ●自列車が通過した場合
 
-ScenarioService、BveHackerに加えて
+上記プロパティに加えて
 
 	readonly ExtendedBeaconBase<PassedEventArgs> sender;
 	readonly PassedEventArgs e;
@@ -50,7 +53,7 @@ ScenarioService、BveHackerに加えて
 
 ●他列車が通過した場合
 
-ScenarioService、BveHackerに加えて
+上記プロパティに加えて
 
 	readonly ExtendedBeaconBase<TrainPassedEventArgs> sender;
 	readonly TrainPassedEventArgs e;
