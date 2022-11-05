@@ -218,10 +218,10 @@ namespace AtsEx.PluginHost
         /// 全てのハンドルのセットを取得します。
         /// </summary>
         /// <remarks>
-        /// <see cref="BveHacker"/> が利用できない場合は <see cref="IApp.Handles"/> プロパティを使用してください。
-        /// ただし、<see cref="IApp.Handles"/> プロパティに設定されている値は力行ハンドルの抑速ノッチ、ブレーキハンドルの抑速ブレーキノッチを無視したものになります。
+        /// <see cref="BveHacker"/> が利用できない場合は <see cref="INative.Handles"/> プロパティを使用してください。
+        /// ただし、<see cref="INative.Handles"/> プロパティに設定されている値は力行ハンドルの抑速ノッチ、ブレーキハンドルの抑速ブレーキノッチを無視したものになります。
         /// </remarks>
-        /// <seealso cref="IApp.Handles"/>
+        /// <seealso cref="INative.Handles"/>
         public abstract Handles.HandleSet Handles { get; }
 
         /// <summary>
