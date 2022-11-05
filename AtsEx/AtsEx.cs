@@ -106,6 +106,12 @@ namespace AtsEx
         public virtual void Dispose()
         {
             VersionFormProvider.Dispose();
+
+            foreach (PluginBase extension in Extensions)
+            {
+                extension.Dispose();
+            }
+
             BveHacker.Dispose();
         }
 
