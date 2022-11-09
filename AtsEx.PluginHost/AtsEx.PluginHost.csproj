@@ -94,6 +94,10 @@
     <Compile Include="ClassWrappers\Public\VehicleInstrumentSet.cs" />
     <Compile Include="ClassWrappers\Public\SectionManager.cs" />
     <Compile Include="DictionaryExtensions.cs" />
+    <Compile Include="MapStatements\Identifier.cs" />
+    <Compile Include="MapStatements\IHeader.cs" />
+    <Compile Include="MapStatements\IHeaderSet.cs" />
+    <Compile Include="MapStatements\Namespace.cs" />
     <Compile Include="Native\StartedEventHandler.cs" />
     <Compile Include="Plugins\AllPluginsLoadedEventArgs.cs" />
     <Compile Include="ExtendedBeacons\ObservingTargetTrain.cs" />
@@ -226,6 +230,10 @@
     <Content Include="Resources\App.resx" />
     <Content Include="Resources\PluginBase.ja.resx" />
     <Content Include="Resources\PluginBase.resx" />
+    <Content Include="Resources\Namespace.resx" />
+    <Content Include="Resources\Namespace.ja.resx" />
+    <Content Include="Resources\Identifier.ja.resx" />
+    <Content Include="Resources\Identifier.resx" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BveTypes\WrapTypes\6.0.7554.619.xml" />

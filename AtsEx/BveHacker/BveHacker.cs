@@ -12,10 +12,10 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
 using AtsEx.Handles;
-using AtsEx.Native;
-using AtsEx.Plugins;
+using AtsEx.MapStatements;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.ClassWrappers;
+using AtsEx.PluginHost.MapStatements;
 using AtsEx.Scripting.CSharp;
 
 namespace AtsEx
@@ -28,6 +28,8 @@ namespace AtsEx
         {
             _ContextMenuHacker = new ContextMenuHacker(MainForm);
             _ContextMenuHacker.AddSeparator(true);
+
+            _MapHeaders = HeaderSet.FromMap(ScenarioInfo.RouteFiles.SelectedFile.Path);
         }
 
         protected override void OnScenarioCreated(ScenarioCreatedEventArgs e)
@@ -101,8 +103,12 @@ namespace AtsEx
         private PluginHost.Handles.HandleSet _Handles;
         public override PluginHost.Handles.HandleSet Handles => _Handles;
 
-
         private ExtendedBeacons.ExtendedBeaconSet _ExtendedBeacons;
         public override PluginHost.ExtendedBeacons.ExtendedBeaconSet ExtendedBeacons => _ExtendedBeacons;
+
+#pragma warning disable IDE1006 // 命名スタイル
+        public HeaderSet _MapHeaders { get; }
+#pragma warning restore IDE1006 // 命名スタイル
+        public override IHeaderSet MapHeaders => _MapHeaders;
     }
 }

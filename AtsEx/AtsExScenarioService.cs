@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ using AtsEx.Plugins;
 using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Input.Native;
+using AtsEx.PluginHost.MapStatements;
 using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx
@@ -66,15 +68,40 @@ namespace AtsEx
                 }
 
                 {
-                    Map map = Map.Load(BveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path, pluginLoader, loadErrorResolver);
-                    mapPlugins = map.LoadedPlugins;
+                    PluginHost.MapStatements.Identifier mapPluginUsingIdentifier = new PluginHost.MapStatements.Identifier(Namespace.Root, "mappluginusing");
+                    IEnumerable<IHeader> mapPluginUsingHeaders = BveHacker.MapHeaders.GetAll(mapPluginUsingIdentifier);
 
+                    foreach (IHeader header in mapPluginUsingHeaders)
+                    {
+                        string mapPluginUsingPath = Path.Combine(Path.GetDirectoryName(BveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path), header.Argument);
+                        PluginSourceSet mapPluginUsing = PluginSourceSet.FromPluginUsing(PluginType.MapPlugin, mapPluginUsingPath);
+
+                        Dictionary<string, PluginBase> loadedMapPlugins = pluginLoader.Load(mapPluginUsing);
+                        AddRangeToMapPlugins(loadedMapPlugins);
+                    }
+
+
+                    void AddRangeToMapPlugins(Dictionary<string, PluginBase> plugins)
+                    {
+                        if (mapPlugins is null)
+                        {
+                            mapPlugins = plugins;
+                        }
+                        else
+                        {
+                            foreach (KeyValuePair<string, PluginBase> plugin in plugins)
+                            {
+                                mapPlugins.Add(plugin.Key, plugin.Value);
+                            }
+                        }
+                    }
+                }
+
+                {
                     IEnumerable<LoadError> removeTargetErrors = BveHacker.LoadErrorManager.Errors.Where(error =>
                     {
-                        if (error.Text.Contains("[[NOMPI]]")) return true;
-
-                        bool isMapPluginUsingError = map.MapPluginUsingErrors.Contains(error, new LoadErrorEqualityComparer());
-                        return isMapPluginUsingError;
+                        bool isTargetError = BveHacker._MapHeaders.Any(header => header.LineIndex == error.LineIndex && header.CharIndex == header.CharIndex);
+                        return isTargetError;
                     });
                     foreach (LoadError error in removeTargetErrors)
                     {

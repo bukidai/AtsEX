@@ -15,6 +15,7 @@ using AtsEx.PluginHost.BveHackerServices;
 using AtsEx.PluginHost.BveTypes;
 using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.ExtendedBeacons;
+using AtsEx.PluginHost.MapStatements;
 
 namespace AtsEx.PluginHost
 {
@@ -228,6 +229,11 @@ namespace AtsEx.PluginHost
         /// 拡張地上子の一覧を取得します。
         /// </summary>
         public abstract ExtendedBeaconSet ExtendedBeacons { get; }
+
+        /// <summary>
+        /// マップに定義されているヘッダーの一覧を取得します。
+        /// </summary>
+        public abstract IHeaderSet MapHeaders { get; }
 
 
         private readonly ScenarioHacker ScenarioHacker;

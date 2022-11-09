@@ -133,8 +133,11 @@
     <Compile Include="Hosting\ReleaseInfo.cs" />
     <Compile Include="Input\NativeAtsKey.cs" />
     <Compile Include="Input\NativeKeySet.cs" />
+    <Compile Include="MapStatements\Header.cs" />
+    <Compile Include="MapStatements\HeaderSet.cs" />
+    <Compile Include="MapStatements\MapTextParser.cs" />
     <Compile Include="Plugins\PluginLoadErrorResolver.cs" />
-    <Compile Include="MapLoader\Map.cs" />
+    <Compile Include="MapStatements\HeaderSet.Factory.cs" />
     <Compile Include="MapStatementIdentifiers.cs" />
     <Compile Include="Native\Ats\CallerCompatibilityVersionAttribute.cs" />
     <Compile Include="Native\Ats\Export.cs" />
@@ -162,6 +165,7 @@
     <Compile Include="Plugins\Scripting\ScriptPluginPackage.ScriptsBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NativeImpl.cs" />
+    <Compile Include="Utilities\EnumerableInDictionaryEnumerator.cs" />
     <Compile Include="VersionForm\VersionForm.cs">
       <SubType>Form</SubType>
     </Compile>
