@@ -73,6 +73,10 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// <summary>
         /// 両数を取得・設定します。
         /// </summary>
+        /// <remarks>
+        /// 必要に応じて <see cref="AirSupplement.MotorCarRatio"/> プロパティも設定してください。
+        /// </remarks>
+        /// <seealso cref="AirSupplement.MotorCarRatio"/>
         public double Count
         {
             get => CountGetMethod.Invoke(Src, null);
