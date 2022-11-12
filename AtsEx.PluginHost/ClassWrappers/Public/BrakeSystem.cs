@@ -30,7 +30,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         }
 
         /// <summary>
-        /// オリジナル オブジェクトから <see cref="AssistantText"/> クラスの新しいインスタンスを初期化します。
+        /// オリジナル オブジェクトから <see cref="BrakeSystem"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected BrakeSystem(object src) : base(src)

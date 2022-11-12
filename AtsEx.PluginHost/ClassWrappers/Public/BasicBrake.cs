@@ -44,7 +44,7 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         private static FastMethod PistonAreaGetMethod;
         private static FastMethod PistonAreaSetMethod;
         /// <summary>
-        /// てこ比を 1、機械的損失を 0 としたときの 1 両あたりのシリンダ受圧面積 [m^2] を取得します。
+        /// てこ比を 1、機械的損失を 0 としたときの 1 両あたりのシリンダ受圧面積 [m^2] を取得・設定します。
         /// </summary>
         public double PistonArea
         {
