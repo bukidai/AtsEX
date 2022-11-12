@@ -33,6 +33,8 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
 
             StationsGetMethod = members.GetSourcePropertyGetterOf(nameof(Stations));
 
+            BeaconsGetMethod = members.GetSourcePropertyGetterOf(nameof(Beacons));
+
             PreTrainObjectsGetMethod = members.GetSourcePropertyGetterOf(nameof(PreTrainObjects));
 
             SectionsGetMethod = members.GetSourcePropertyGetterOf(nameof(Sections));
@@ -100,6 +102,12 @@ namespace Automatic9045.AtsEx.PluginHost.ClassWrappers
         /// 停車場のリストを取得します。
         /// </summary>
         public StationList Stations => StationList.FromSource(StationsGetMethod.Invoke(Src, null));
+
+        private static FastMethod BeaconsGetMethod;
+        /// <summary>
+        /// 地上子のリストを取得します。
+        /// </summary>
+        public MapFunctionList Beacons => MapFunctionList.FromSource(BeaconsGetMethod.Invoke(Src, null));
 
         private static FastMethod PreTrainObjectsGetMethod;
         /// <summary>

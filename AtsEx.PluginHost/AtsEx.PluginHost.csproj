@@ -73,6 +73,7 @@
     <Compile Include="BveTypes\AdditionalTypeWrapperAttribute.cs" />
     <Compile Include="ClassInitializer\BveTypesSetter.cs" />
     <Compile Include="ClassInitializer\SetBveTypesAttribute.cs" />
+    <Compile Include="ClassWrappers\Public\Beacon.cs" />
     <Compile Include="ClassWrappers\Public\LockoutValve.cs" />
     <Compile Include="ClassWrappers\Public\ElectroPneumaticBlendedBrakingControlBase.cs" />
     <Compile Include="ClassWrappers\Public\BasicBrake.cs" />

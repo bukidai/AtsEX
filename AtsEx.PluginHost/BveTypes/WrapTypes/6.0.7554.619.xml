@@ -98,6 +98,21 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="Beacon" Original="fm">
+		<Property Wrapper="TargetSectionIndex">
+			<Getter Original="a"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="Type">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="SendData">
+			<Getter Original="b"/>
+			<Setter Original="c"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="BrakeSystem" Original="bh">
 		<Property Wrapper="ElectroPneumaticBlendedBrakingControl">
 			<Getter Original="k"/>
@@ -452,6 +467,9 @@
 		</Property>
 		<Property Wrapper="Stations">
 			<Getter Original="f"/>
+		</Property>
+		<Property Wrapper="Beacons">
+			<Getter Original="r"/>
 		</Property>
 		<Property Wrapper="PreTrainObjects">
 			<Getter Original="p"/>
