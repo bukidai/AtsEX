@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AtsEx.PluginHost.ExtendedBeacons
+namespace AtsEx.PluginHost
 {
     /// <summary>
     /// 方向を指定します。
