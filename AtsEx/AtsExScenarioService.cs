@@ -211,12 +211,5 @@ namespace AtsEx
         {
             (Native.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyReleased();
         }
-
-
-        private class LoadErrorEqualityComparer : IEqualityComparer<LoadError>
-        {
-            public bool Equals(LoadError x, LoadError y) => x.SenderFileName == y.SenderFileName && x.LineIndex == y.LineIndex && x.CharIndex == y.CharIndex;
-            public int GetHashCode(LoadError obj) => obj.GetHashCode();
-        }
     }
 }
