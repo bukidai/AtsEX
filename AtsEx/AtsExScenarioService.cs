@@ -148,14 +148,7 @@ namespace AtsEx
 
             BveHacker.Tick(elapsed);
 
-            int powerNotch = Native.Handles.Power.Notch;
-            int brakeNotch = Native.Handles.Brake.Notch;
-            ReverserPosition reverserPosition = Native.Handles.Reverser.Position;
-
-            int? atsPowerNotch = null;
-            int? atsBrakeNotch = null;
-            ReverserPosition? atsReverserPosition = null;
-            ConstantSpeedCommand? atsConstantSpeedCommand = null;
+            CommandBuilder commandBuilder = new CommandBuilder(Native.Handles);
 
             foreach (PluginBase plugin in Plugins[PluginType.VehiclePlugin].Values)
             {
@@ -166,25 +159,22 @@ namespace AtsEx
                        $"{nameof(PluginBase)}.{nameof(PluginBase.Tick)}", nameof(VehiclePluginTickResult)));
                 }
 
-                HandleCommandSet commandSet = vehiclePluginTickResult.HandleCommandSet;
-
-                if (atsPowerNotch is null) atsPowerNotch = commandSet.PowerCommand.GetOverridenNotch(powerNotch);
-                if (atsBrakeNotch is null) atsBrakeNotch = commandSet.BrakeCommand.GetOverridenNotch(brakeNotch);
-                if (atsReverserPosition is null) atsReverserPosition = commandSet.ReverserCommand.GetOverridenPosition(reverserPosition);
-                if (atsConstantSpeedCommand is null) atsConstantSpeedCommand = commandSet.ConstantSpeedCommand;
+                commandBuilder.Override(vehiclePluginTickResult);
             }
 
             foreach (PluginBase plugin in Plugins[PluginType.MapPlugin].Values)
             {
                 TickResult tickResult = plugin.Tick(elapsed);
-                if (!(tickResult is MapPluginTickResult))
+                if (!(tickResult is MapPluginTickResult mapPluginTickResult))
                 {
                     throw new InvalidOperationException(string.Format(Resources.Value.MapPluginTickResultTypeInvalid.Value,
                        $"{nameof(PluginBase)}.{nameof(PluginBase.Tick)}", nameof(MapPluginTickResult)));
                 }
+
+                commandBuilder.Override(mapPluginTickResult);
             }
 
-            return new HandlePositionSet(atsPowerNotch ?? powerNotch, atsBrakeNotch ?? brakeNotch, atsReverserPosition ?? reverserPosition, atsConstantSpeedCommand ?? ConstantSpeedCommand.Continue);
+            return commandBuilder.Compile();
         }
 
         public void SetPower(int notch)

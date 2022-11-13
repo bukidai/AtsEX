@@ -107,6 +107,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AtsExScenarioService.CommandBuilder.cs" />
     <Compile Include="Hosting\AssemblyResolver.cs" />
     <Compile Include="Hosting\AtsExActivator.cs" />
     <Compile Include="Hosting\AtsExRepositoryHost.cs" />
