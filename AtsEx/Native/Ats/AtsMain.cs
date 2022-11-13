@@ -44,6 +44,8 @@ namespace AtsEx.Native
                 MessageBox.Show(errorMessage, "AtsEX Caller バージョンエラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw new NotSupportedException(errorMessage.Replace("\n", ""));
             }
+
+            AtsEx = new AtsEx.AsAtsPlugin(Activator.TargetProcess, Activator.TargetAppDomain, Activator.TargetAssembly);
         }
 
         public static void Dispose()
@@ -57,7 +59,6 @@ namespace AtsEx.Native
             PluginHost.Native.VehicleSpec exVehicleSpec = new PluginHost.Native.VehicleSpec(
                 vehicleSpec.BrakeNotches, vehicleSpec.PowerNotches, vehicleSpec.AtsNotch, vehicleSpec.B67Notch, vehicleSpec.Cars);
 
-            AtsEx = new AtsEx.AsAtsPlugin(Activator.TargetProcess, Activator.TargetAppDomain, Activator.TargetAssembly);
             AtsExScenarioService = new AtsExScenarioService.AsAtsPlugin(AtsEx, CallerAssembly, exVehicleSpec);
         }
 
