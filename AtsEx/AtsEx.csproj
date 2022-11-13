@@ -133,9 +133,12 @@
     <Compile Include="Hosting\ReleaseInfo.cs" />
     <Compile Include="Input\NativeAtsKey.cs" />
     <Compile Include="Input\NativeKeySet.cs" />
+    <Compile Include="MapStatements\Statement.cs" />
     <Compile Include="MapStatements\Header.cs" />
+    <Compile Include="MapStatements\StatementSet.cs" />
     <Compile Include="MapStatements\HeaderSet.cs" />
     <Compile Include="MapStatements\MapTextParser.cs" />
+    <Compile Include="MapStatements\StatementSet.Factory.cs" />
     <Compile Include="Plugins\PluginLoadErrorResolver.cs" />
     <Compile Include="MapStatements\HeaderSet.Factory.cs" />
     <Compile Include="MapStatementIdentifiers.cs" />

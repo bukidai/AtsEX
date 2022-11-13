@@ -235,6 +235,11 @@ namespace AtsEx.PluginHost
         /// </summary>
         public abstract IHeaderSet MapHeaders { get; }
 
+        /// <summary>
+        /// マップに定義されているユーザー独自ステートメントの一覧を取得します。
+        /// </summary>
+        public abstract IStatementSet MapStatements { get; }
+
 
         private readonly ScenarioHacker ScenarioHacker;
 

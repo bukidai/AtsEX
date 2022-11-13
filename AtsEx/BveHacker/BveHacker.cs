@@ -34,6 +34,8 @@ namespace AtsEx
 
         protected override void OnScenarioCreated(ScenarioCreatedEventArgs e)
         {
+            _MapStatements = StatementSet.Create(e.Scenario.Route.Structures.Repeated, e.Scenario.Route.StructureModels, e.Scenario.Trains);
+
             NotchInfo notchInfo = e.Scenario.Vehicle.Instruments.Cab.Handles.NotchInfo;
 
             BrakeHandle brake = BrakeHandle.FromNotchInfo(notchInfo, Native.Handles.Brake.CanSetNotchOutOfRange);
@@ -110,5 +112,10 @@ namespace AtsEx
         public HeaderSet _MapHeaders { get; }
 #pragma warning restore IDE1006 // 命名スタイル
         public override IHeaderSet MapHeaders => _MapHeaders;
+
+#pragma warning disable IDE1006 // 命名スタイル
+        public IStatementSet _MapStatements { get; private set; }
+#pragma warning restore IDE1006 // 命名スタイル
+        public override IStatementSet MapStatements => _MapStatements;
     }
 }
