@@ -35,15 +35,12 @@ namespace AtsEx.Handles
         {
         }
 
-        public static PowerHandle FromNotchInfo(NotchInfo source, bool canSetNotchOutOfRange)
+        public static PowerHandle FromNotchInfo(NotchInfo source)
         {
             int powerNotchCount = source.PowerNotchCount;
             int holdingSpeedNotchCount = -source.HoldingSpeedNotchCount;
 
-            return new PowerHandle(powerNotchCount, holdingSpeedNotchCount)
-            {
-                CanSetNotchOutOfRange = canSetNotchOutOfRange,
-            };
+            return new PowerHandle(powerNotchCount, holdingSpeedNotchCount);
         }
 
         public NotchCommandBase GetCommandToSetToNeutral() => new NotchCommandBase.SetNotchCommand(0);

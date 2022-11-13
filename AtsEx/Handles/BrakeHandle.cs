@@ -59,15 +59,12 @@ namespace AtsEx.Handles
             HasHoldingSpeedBrake = hasHoldingSpeedBrake;
         }
 
-        public static BrakeHandle FromNotchInfo(NotchInfo source, bool canSetNotchOutOfRange)
+        public static BrakeHandle FromNotchInfo(NotchInfo source)
         {
             int serviceBrakeNotchCount = source.BrakeNotchCount;
             bool hasHoldingSpeedBrake = source.HasHoldingSpeedBrake;
 
-            return new BrakeHandle(serviceBrakeNotchCount - (hasHoldingSpeedBrake ? 1 : 0), source.AtsCancelNotch, source.B67Notch, hasHoldingSpeedBrake)
-            {
-                CanSetNotchOutOfRange = canSetNotchOutOfRange,
-            };
+            return new BrakeHandle(serviceBrakeNotchCount - (hasHoldingSpeedBrake ? 1 : 0), source.AtsCancelNotch, source.B67Notch, hasHoldingSpeedBrake);
         }
 
         public NotchCommandBase GetCommandToSetToNeutral() => new NotchCommandBase.SetNotchCommand(0);
