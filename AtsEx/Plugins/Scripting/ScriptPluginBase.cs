@@ -98,7 +98,7 @@ namespace AtsEx.Plugins.Scripting
                 switch (PluginType)
                 {
                     case PluginType.VehiclePlugin:
-                        return new VehiclePluginTickResult(HandleCommandSet.DoNothing);
+                        return new VehiclePluginTickResult();
 
                     case PluginType.MapPlugin:
                         return new MapPluginTickResult();

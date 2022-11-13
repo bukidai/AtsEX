@@ -43,7 +43,7 @@ namespace AtsEx.Samples.VehiclePlugins.StateViewer
         {
             Form?.Tick();
 
-            return new VehiclePluginTickResult(HandleCommandSet.DoNothing);
+            return new VehiclePluginTickResult();
         }
 
         private void MenuItemCheckedChanged(object sender, EventArgs e)

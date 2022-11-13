@@ -13,18 +13,22 @@ namespace AtsEx.PluginHost.Plugins
     /// </summary>
     public class VehiclePluginTickResult : TickResult
     {
+        private HandleCommandSet _HandleCommandSet = HandleCommandSet.DoNothing;
         /// <summary>
-        /// ハンドルの出力を編集するためのコマンドのセットを取得します。
+        /// ハンドルの出力を編集するためのコマンドのセットを取得・設定します。
         /// </summary>
-        public HandleCommandSet HandleCommandSet { get; }
+        /// <remarks>何もしないことを表すには <see cref="HandleCommandSet.DoNothing"/> を指定してください。</remarks>
+        public HandleCommandSet HandleCommandSet
+        {
+            get => _HandleCommandSet;
+            set => _HandleCommandSet = value ?? throw new ArgumentNullException(nameof(value));
+        }
 
         /// <summary>
         /// <see cref="VehiclePluginTickResult"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
-        /// <param name="handleCommandSet">ハンドルの出力を編集するためのコマンドのセット。何もしないことを表すには <see cref="HandleCommandSet.DoNothing"/> を指定してください。</param>
-        public VehiclePluginTickResult(HandleCommandSet handleCommandSet)
+        public VehiclePluginTickResult()
         {
-            HandleCommandSet = handleCommandSet ?? throw new ArgumentNullException(nameof(handleCommandSet));
         }
     }
 }

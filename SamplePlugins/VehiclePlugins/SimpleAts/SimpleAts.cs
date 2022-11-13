@@ -25,10 +25,11 @@ namespace AtsEx.Samples.VehiclePlugins.SimpleAts
         public override TickResult Tick(TimeSpan elapsed)
         {
             UserVehicleLocationManager locationManager = BveHacker.Scenario.LocationManager;
-            AtsEx.PluginHost.Handles.HandleSet handleSet = Native.Handles;
+            PluginHost.Handles.HandleSet handleSet = Native.Handles;
 
             double speedMps = locationManager.SpeedMeterPerSecond;
 
+            VehiclePluginTickResult tickResult = new VehiclePluginTickResult();
             if (speedMps > 100d.KmphToMps()) // 100km/h以上出ていたら常用最大ブレーキ
             {
                 int atsPowerNotch = 0;
@@ -39,13 +40,10 @@ namespace AtsEx.Samples.VehiclePlugins.SimpleAts
                 ReverserPositionCommandBase reverserCommand = ReverserPositionCommandBase.Continue;
                 ConstantSpeedCommand? constantSpeedCommand = ConstantSpeedCommand.Disable;
 
-                HandleCommandSet handleCommandSet = new HandleCommandSet(powerCommand, brakeCommand, reverserCommand, constantSpeedCommand);
-                return new VehiclePluginTickResult(handleCommandSet);
+                tickResult.HandleCommandSet = new HandleCommandSet(powerCommand, brakeCommand, reverserCommand, constantSpeedCommand);
             }
-            else
-            {
-                return new VehiclePluginTickResult(HandleCommandSet.DoNothing);
-            }
+
+            return tickResult;
         }
     }
 }
