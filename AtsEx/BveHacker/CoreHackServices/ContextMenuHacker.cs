@@ -7,8 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using BveTypes.ClassWrappers;
+
 using AtsEx.PluginHost;
-using AtsEx.PluginHost.ClassWrappers;
 
 namespace AtsEx
 {

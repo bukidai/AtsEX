@@ -9,12 +9,11 @@ using System.Threading.Tasks;
 
 using Microsoft.Scripting.Hosting;
 
+using BveTypes.ClassWrappers;
 using UnembeddedResources;
 
-using AtsEx.Native;
 using AtsEx.Plugins.Scripting;
 using AtsEx.PluginHost;
-using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.ExtendedBeacons;
 using AtsEx.Scripting;
 using AtsEx.Scripting.IronPython2;

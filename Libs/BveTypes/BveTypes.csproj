@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3658EDE1-0C3E-4104-A351-64981E4F82DF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BveTypes</RootNamespace>
+    <AssemblyName>BveTypes</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mackoy.IInputDevice">
+      <HintPath>..\..\AtsEx.PluginHost\LocalReferences\BveTs\Mackoy.IInputDevice.DLL</HintPath>
+    </Reference>
+    <Reference Include="Mackoy.XmlInterfaces">
+      <HintPath>..\..\AtsEx.PluginHost\LocalReferences\BveTs\Mackoy.XmlInterfaces.DLL</HintPath>
+    </Reference>
+    <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
+      <HintPath>..\..\packages\SlimDX.4.0.13.44\lib\NET40\SlimDX.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdditionalTypeWrapperAttribute.cs" />
+    <Compile Include="BveTypeSet.cs" />
+    <Compile Include="BveTypeSet.InstanceCreator.cs" />
+    <Compile Include="ClassInitializer\BveTypesSetter.cs" />
+    <Compile Include="ClassInitializer\ClassInitializerBase.cs" />
+    <Compile Include="ClassInitializer\ClassWrapperInitializer.cs" />
+    <Compile Include="ClassInitializer\InitializeClassWrapperAttribute.cs" />
+    <Compile Include="ClassInitializer\SetBveTypesAttribute.cs" />
+    <Compile Include="ClassWrappers\ClassWrapperBase.cs" />
+    <Compile Include="ClassWrappers\ClassWrapperConverter.cs" />
+    <Compile Include="ClassWrappers\CreateClassWrapperFromSourceAttribute.cs" />
+    <Compile Include="ClassWrappers\Extensions\WrappedList.cs" />
+    <Compile Include="ClassWrappers\Extensions\WrappedSortedList.cs" />
+    <Compile Include="ClassWrappers\Helpers\ReverserPosition.cs" />
+    <Compile Include="ClassWrappers\Helpers\TiltOptions.cs" />
+    <Compile Include="ClassWrappers\Public\AssistantText.cs" />
+    <Compile Include="ClassWrappers\Public\AssistantTextBase.cs" />
+    <Compile Include="ClassWrappers\Public\AssistantTextDrawer.cs" />
+    <Compile Include="ClassWrappers\Public\BasicBrake.cs" />
+    <Compile Include="ClassWrappers\Public\BrakePosition.cs" />
+    <Compile Include="ClassWrappers\Public\BrakeSystem.cs" />
+    <Compile Include="ClassWrappers\Public\BveFile.cs" />
+    <Compile Include="ClassWrappers\Public\CabBase.cs" />
+    <Compile Include="ClassWrappers\Public\CarBc.cs" />
+    <Compile Include="ClassWrappers\Public\CarInfo.cs" />
+    <Compile Include="ClassWrappers\Public\Direct3DProvider.cs" />
+    <Compile Include="ClassWrappers\Public\DrawDistanceManager.cs" />
+    <Compile Include="ClassWrappers\Public\Forms\ChartForm.cs" />
+    <Compile Include="ClassWrappers\Public\Forms\LoadingProgressForm.cs" />
+    <Compile Include="ClassWrappers\Public\Forms\MainForm.cs" />
+    <Compile Include="ClassWrappers\Public\Forms\ScenarioSelectionForm.cs" />
+    <Compile Include="ClassWrappers\Public\Forms\TimePosForm.cs" />
+    <Compile Include="ClassWrappers\Public\HendleSet.cs" />
+    <Compile Include="ClassWrappers\Public\KeyProvider.cs" />
+    <Compile Include="ClassWrappers\Public\LoadError.cs" />
+    <Compile Include="ClassWrappers\Public\LocatableMapObject.cs" />
+    <Compile Include="ClassWrappers\Public\LocationManager.cs" />
+    <Compile Include="ClassWrappers\Public\MapFunctionList.cs" />
+    <Compile Include="ClassWrappers\Public\MapObjectBase.cs" />
+    <Compile Include="ClassWrappers\Public\MapObjectList.cs" />
+    <Compile Include="ClassWrappers\Public\MaterialInfo.cs" />
+    <Compile Include="ClassWrappers\Public\Model.cs" />
+    <Compile Include="ClassWrappers\Public\NotchInfo.cs" />
+    <Compile Include="ClassWrappers\Public\ObjectDrawer.cs" />
+    <Compile Include="ClassWrappers\Public\ObjectPassedEventArgs.cs" />
+    <Compile Include="ClassWrappers\Public\PluginLoader.cs" />
+    <Compile Include="ClassWrappers\Public\PreTrainObjectList.cs" />
+    <Compile Include="ClassWrappers\Public\PutBetweenStructure.cs" />
+    <Compile Include="ClassWrappers\Public\RandomFileList.cs" />
+    <Compile Include="ClassWrappers\Public\RepeatedStructure.cs" />
+    <Compile Include="ClassWrappers\Public\Route.cs" />
+    <Compile Include="ClassWrappers\Public\Scenario.cs" />
+    <Compile Include="ClassWrappers\Public\ScenarioInfo.cs" />
+    <Compile Include="ClassWrappers\Public\Section.cs" />
+    <Compile Include="ClassWrappers\Public\SectionManager.cs" />
+    <Compile Include="ClassWrappers\Public\SingleStructureList.cs" />
+    <Compile Include="ClassWrappers\Public\Sound.cs" />
+    <Compile Include="ClassWrappers\Public\Station.cs" />
+    <Compile Include="ClassWrappers\Public\StationList.cs" />
+    <Compile Include="ClassWrappers\Public\Structure.cs" />
+    <Compile Include="ClassWrappers\Public\StructureSet.cs" />
+    <Compile Include="ClassWrappers\Public\TimeManager.cs" />
+    <Compile Include="ClassWrappers\Public\TimeManager.GameState.cs" />
+    <Compile Include="ClassWrappers\Public\TimeTable.cs" />
+    <Compile Include="ClassWrappers\Public\Train.cs" />
+    <Compile Include="ClassWrappers\Public\TrainInfo.cs" />
+    <Compile Include="ClassWrappers\Public\UserVehicleLocationManager.cs" />
+    <Compile Include="ClassWrappers\Public\ValueEventArgs.cs" />
+    <Compile Include="ClassWrappers\Public\Vehicle.cs" />
+    <Compile Include="ClassWrappers\Public\VehicleDynamics.cs" />
+    <Compile Include="ClassWrappers\Public\VehicleInstrumentSet.cs" />
+    <Compile Include="Comparer.cs" />
+    <Compile Include="ITwoWayConverter.cs" />
+    <Compile Include="Profile.cs" />
+    <Compile Include="ProfileSelector.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WrapTypes\5.8.7554.391.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WrapTypes\6.0.7554.619.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FastMember\FastMember.csproj">
+      <Project>{b63adef8-3bf9-48e1-8b61-8fa042b19f89}</Project>
+      <Name>FastMember</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\TypeWrapping\TypeWrapping.csproj">
+      <Project>{28fc1147-db95-42f0-aeb3-ae8ae93f0179}</Project>
+      <Name>TypeWrapping</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\UnembeddedResources\UnembeddedResources.csproj">
+      <Project>{97512546-8929-4c0b-983d-5347197a3862}</Project>
+      <Name>UnembeddedResources</Name>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

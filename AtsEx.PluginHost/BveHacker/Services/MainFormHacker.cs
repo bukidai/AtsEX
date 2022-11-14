@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using AtsEx.PluginHost.ClassWrappers;
+using BveTypes.ClassWrappers;
 
 namespace AtsEx.PluginHost.BveHackerServices
 {

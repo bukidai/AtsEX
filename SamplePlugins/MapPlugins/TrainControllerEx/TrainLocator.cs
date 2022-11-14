@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 using SlimDX;
 using SlimDX.Direct3D9;
 
-using AtsEx.PluginHost;
-using AtsEx.PluginHost.ClassWrappers;
+using BveTypes.ClassWrappers;
 
 namespace AtsEx.Samples.MapPlugins.TrainControllerEx
 {

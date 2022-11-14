@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using BveTypes.ClassWrappers;
+
 using AtsEx.PluginHost;
-using AtsEx.PluginHost.ClassWrappers;
-using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.Plugins;
 

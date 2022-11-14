@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using AtsEx.PluginHost.ClassWrappers;
+using BveTypes.ClassWrappers;
 
 namespace AtsEx.PluginHost
 {
@@ -17,7 +17,7 @@ namespace AtsEx.PluginHost
     public class ScenarioCreatedEventArgs : EventArgs
     {
         /// <summary>
-        /// 生成された <see cref="ClassWrappers.Scenario"/> クラスのインスタンス。
+        /// 生成された <see cref="BveTypes.ClassWrappers.Scenario"/> クラスのインスタンス。
         /// </summary>
         public Scenario Scenario { get; }
 

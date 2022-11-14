@@ -9,12 +9,13 @@ using System.Windows.Forms;
 
 using Mackoy.Bvets;
 
+using BveTypes;
+using BveTypes.ClassWrappers;
 using UnembeddedResources;
 
 using AtsEx.PluginHost.BveHackerServices;
-using AtsEx.PluginHost.BveTypes;
-using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.ExtendedBeacons;
+using AtsEx.PluginHost.Extensions;
 using AtsEx.PluginHost.MapStatements;
 
 namespace AtsEx.PluginHost
@@ -84,11 +85,7 @@ namespace AtsEx.PluginHost
                 }
             }
 
-            ClassWrapperInitializer classWrapperInitializer = new ClassWrapperInitializer(this);
-            classWrapperInitializer.InitializeAllAsync().Wait();
-
-            BveTypesSetter bveTypesSetter = new BveTypesSetter(this);
-            bveTypesSetter.InitializeAllAsync().Wait();
+            TrainDrawPatch.Initialize(BveTypes);
 
             MainFormHacker = new MainFormHacker(App.Instance.Process);
             ScenarioHacker = new ScenarioHacker(MainFormHacker, BveTypes);
@@ -198,7 +195,7 @@ namespace AtsEx.PluginHost
         public Preferences Preferences => MainForm.Preferences;
 
         /// <summary>
-        /// キー入力を管理する <see cref="ClassWrappers.KeyProvider"/> を取得します。
+        /// キー入力を管理する <see cref="BveTypes.ClassWrappers.KeyProvider"/> を取得します。
         /// </summary>
         public KeyProvider KeyProvider => MainForm.KeyProvider;
 
@@ -249,7 +246,7 @@ namespace AtsEx.PluginHost
         public event ScenarioCreatedEventHandler PreviewScenarioCreated;
 
         /// <summary>
-        /// <see cref="ClassWrappers.Scenario"/> のインスタンスが生成されたときに通知します。
+        /// <see cref="BveTypes.ClassWrappers.Scenario"/> のインスタンスが生成されたときに通知します。
         /// </summary>
         public event ScenarioCreatedEventHandler ScenarioCreated;
 
@@ -264,7 +261,7 @@ namespace AtsEx.PluginHost
 
         /// <summary>
         /// 現在実行中のシナリオを取得します。シナリオの読込中は <see cref="InvalidOperationException"/> をスローします。
-        /// シナリオの読込中に <see cref="ClassWrappers.Scenario"/> を取得するには <see cref="ScenarioCreated"/> イベントを購読してください。
+        /// シナリオの読込中に <see cref="BveTypes.ClassWrappers.Scenario"/> を取得するには <see cref="ScenarioCreated"/> イベントを購読してください。
         /// </summary>
         public Scenario Scenario => ScenarioHacker.CurrentScenario ?? throw new InvalidOperationException(string.Format(Resources.Value.CannotGetScenario.Value, nameof(Scenario)));
 

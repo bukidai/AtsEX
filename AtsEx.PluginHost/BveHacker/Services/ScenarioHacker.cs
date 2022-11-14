@@ -7,12 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using BveTypes;
+using BveTypes.ClassWrappers;
 using FastMember;
 using TypeWrapping;
 using ObjectiveHarmonyPatch;
-
-using AtsEx.PluginHost.BveTypes;
-using AtsEx.PluginHost.ClassWrappers;
 
 namespace AtsEx.PluginHost.BveHackerServices
 {

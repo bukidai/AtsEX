@@ -1,0 +1,774 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<WrapTypes xmlns="http://automatic9045.github.io/ns/xmlschemas/WrapTypesXmlSchema.xsd">
+	<Enum Wrapper="BrakePosition" Original="ds"/>
+
+	<!-- Unidentified classes -->
+	<!-- Unidentified classes END -->
+
+	<!-- Forms -->
+	<Class Wrapper="ChartForm" Original="bj">
+	</Class>
+
+	<Class Wrapper="LoadingProgressForm" Original="dt">
+		<Field WrapperProperty="IsErrorCritical" Original="a" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="ErrorCount" Original="b" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="Panel" Original="e" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="ErrorListView" Original="p" IsOriginalNonPublic="true"/>
+
+		<Method Wrapper="ThrowError" WrapperParams="System.String; System.String; System.Int32; System.Int32" Original="a"/>
+		<Method Wrapper="ThrowError" WrapperParams="atsex:LoadError" Original="a"/>
+		<Method Wrapper="ThrowErrors" WrapperParams="System.Collections.Generic.IEnumerable`1[atsex:LoadError]" Original="a"/>
+	</Class>
+
+	<Class Wrapper="MainForm" Original="bz">
+		<Field WrapperProperty="ScenarioSelectForm" Original="c" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="LoadingProgressForm" Original="k" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="TimePosForm" Original="d" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="ChartForm" Original="e" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="ContextMenu" Original="y" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="CurrentScenarioInfo" Original="q" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="CurrentScenario" Original="n" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="Preferences" Original="w" IsOriginalStatic="true"/>
+		<Field WrapperProperty="KeyProvider" Original="m" IsOriginalNonPublic="true"/>
+
+		<Method Wrapper="LoadScenario" WrapperParams="atsex:ScenarioInfo; System.Boolean" Original="a" IsOriginalNonPublic="true"/>
+		<Method Wrapper="UnloadScenario" WrapperParams="void" Original="b" IsOriginalNonPublic="true"/>
+	</Class>
+
+	<Class Wrapper="ScenarioSelectionForm" Original="da">
+	</Class>
+
+	<Class Wrapper="TimePosForm" Original="aj">
+		<Method Wrapper="SetScenario" WrapperParams="atsex:Scenario" Original="a"/>
+		<Method Wrapper="Draw" WrapperParams="void" Original="d" IsOriginalNonPublic="true"/>
+	</Class>
+	<!-- Forms END -->
+
+	<Class Wrapper="AssistantText" Original="bc">
+		<Property Wrapper="Color">
+			<Getter Original="e"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Text">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="AssistantTextBase" Original="cu">
+		<Property Wrapper="AssistantSettings">
+			<Getter Original="h"/>
+		</Property>
+		<Property Wrapper="BackgroundColor">
+			<Getter Original="f"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="DisplayArea">
+			<Getter Original="g"/>
+		</Property>
+
+		<Method Wrapper="Draw" WrapperParams="void" Original="o"/>
+	</Class>
+
+	<Class Wrapper="AssistantTextDrawer" Original="ar">
+		<Property Wrapper="AssistantTexts">
+			<Getter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="BasicBrake" Original="bw">
+		<Property Wrapper="PistonArea">
+			<Getter Original="b"/>
+			<Setter Original="b"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="BrakeSystem" Original="bh">
+		<Property Wrapper="MotorCarBc">
+			<Getter Original="l"/>
+		</Property>
+		<Property Wrapper="TrailerCarBc">
+			<Getter Original="m"/>
+		</Property>
+		<Property Wrapper="FirstCarBc">
+			<Getter Original="j"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="BveFile" Original="b5">
+		<Property Wrapper="Path">
+			<Getter Original="d"/>
+			<Setter Original="c"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="CabBase" Original="bl">
+		<Property Wrapper="Handles">
+			<Getter Original="d"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="CarBc" Original="d6">
+		<Property Wrapper="BasicBrake">
+			<Getter Original="b"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="CarInfo" Original="bd">
+		<Property Wrapper="Weight">
+			<Getter Original="g"/>
+			<Setter Original="g"/>
+		</Property>
+		<Property Wrapper="Count">
+			<Getter Original="f"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="InertiaFactor">
+			<Getter Original="e"/>
+			<Setter Original="h"/>
+		</Property>
+		<Property Wrapper="ShoeFrictionA">
+			<Getter Original="h"/>
+			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="ShoeFrictionB">
+			<Getter Original="j"/>
+			<Setter Original="f"/>
+		</Property>
+		<Property Wrapper="ShoeFrictionC">
+			<Getter Original="i"/>
+			<Setter Original="e"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="Direct3DProvider" Original="d9">
+		<Property Wrapper="Instance" IsWrapperStatic="true">
+			<Getter Original="d" IsOriginalStatic="true"/>
+		</Property>
+		<Property Wrapper="Device">
+			<Getter Original="e"/>
+		</Property>
+		<Property Wrapper="PresentParameters">
+			<Getter Original="g"/>
+		</Property>
+		<Property Wrapper="Direct3D">
+			<Getter Original="f"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="DrawDistanceManager" Original="et">
+		<Property Wrapper="FrontDrawDistance">
+			<Getter Original="d"/>
+		</Property>
+		<Property Wrapper="BackDrawDistance">
+			<Getter Original="f"/>
+		</Property>
+		<Property Wrapper="DrawDistance">
+			<Getter Original="c"/>
+		</Property>
+		<Property Wrapper="DrawDistanceObjects">
+			<Getter Original="e"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="HandleSet" Original="a2">
+		<Property Wrapper="NotchInfo">
+			<Getter Original="e"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="BrakeNotch">
+			<Getter Original="d"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="PowerNotch">
+			<Getter Original="c"/>
+			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="_ReverserPosition" IsWrapperNonPublic="true">
+			<Getter Original="b"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="ConstantSpeed" IsWrapperNonPublic="true">
+			<Getter Original="g"/>
+			<Setter Original="d"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="KeyProvider" Original="ag">
+		<Property Wrapper="InputDevices">
+			<Getter Original="c"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="LoadError" Original="ai">
+		<Property Wrapper="Text">
+			<Getter Original="b"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="SenderFileName">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="LineIndex">
+			<Getter Original="d"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="CharIndex">
+			<Getter Original="a"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="LocatableMapObject" Original="fs">
+		<Property Wrapper="Matrix">
+			<Getter Original="e"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="TrackKey">
+			<Getter Original="h"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Span">
+			<Getter Original="g"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="TiltsAlongCant">
+			<Getter Original="f"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="TiltsAlongGradient">
+			<Getter Original="d"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="LocationManager" Original="ct">
+		<Property Wrapper="SpeedMeterPerSecond">
+			<Getter Original="g"/>
+		</Property>
+
+		<Method Wrapper="SetSpeed" WrapperParams="System.Double" Original="d"/>
+	</Class>
+
+	<Class Wrapper="MapFunctionList" Original="dh">
+	</Class>
+
+	<Class Wrapper="MapObjectBase" Original="db">
+		<Property Wrapper="Location">
+			<Getter Original="v"/>
+			<Setter Original="g"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="MapObjectList" Original="b6">
+	</Class>
+
+	<Class Wrapper="MaterialInfo" Original="e0">
+		<Property Wrapper="Material">
+			<Getter Original="a"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Texture">
+			<Getter Original="b"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Is2D">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="Model" Original="fp">
+		<Property Wrapper="Mesh">
+			<Getter Original="e"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="Materials">
+			<Getter Original="a"/>
+			<Setter Original="a"/>
+		</Property>
+
+		<Method Wrapper="Draw" WrapperParams="atsex:Direct3DProvider; System.Boolean" Original="a"/>
+	</Class>
+
+	<Class Wrapper="NotchInfo" Original="e9">
+		<Property Wrapper="PowerNotchCount">
+			<Getter Original="d"/>
+			<Setter Original="d"/>
+		</Property>
+		<Property Wrapper="HoldingSpeedNotchCount">
+			<Getter Original="c"/>
+			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="BrakeNotchCount">
+			<Getter Original="h"/>
+			<Setter Original="f"/>
+		</Property>
+		<Property Wrapper="B67Notch">
+			<Getter Original="j"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="AtsCancelNotch">
+			<Getter Original="k"/>
+			<Setter Original="e"/>
+		</Property>
+		<Property Wrapper="MotorBrakeNotch">
+			<Getter Original="f"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="HasHoldingSpeedBrake">
+			<Getter Original="b"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="EmergencyBrakeNotch">
+			<Getter Original="i"/>
+		</Property>
+		<Property Wrapper="PrioritizeBrake">
+			<Getter Original="a"/>
+			<Setter Original="c"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="ObjectDrawer" Original="cz">
+		<Field WrapperProperty="DrawDistanceManager" Original="g" IsOriginalNonPublic="true"/>
+
+		<Method Wrapper="SetRoute" WrapperParams="atsex:Route" Original="a"/>
+	</Class>
+
+	<Class Wrapper="ObjectPassedEventArgs" Original="e5">
+		<Property Wrapper="MapObject">
+			<Getter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="PluginLoader" Original="aa">
+		<Method Wrapper="OnSetBeaconData" WrapperParams="System.Object; atsex:ObjectPassedEventArgs" Original="a" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnKeyDown" WrapperParams="System.Object; Mackoy.Bvets.InputEventArgs, Mackoy.IInputDevice" Original="b" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnKeyUp" WrapperParams="System.Object; Mackoy.Bvets.InputEventArgs, Mackoy.IInputDevice" Original="a" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnDoorStateChanged" WrapperParams="System.Object; System.EventArgs" Original="c" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnSetSignal" WrapperParams="System.Object; System.EventArgs" Original="b" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnSetReverser" WrapperParams="System.Object; System.EventArgs" Original="a" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnSetBrake" WrapperParams="System.Object; atsex:ValueEventArgs`1[System.Int32]" Original="b" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnSetPower" WrapperParams="System.Object; atsex:ValueEventArgs`1[System.Int32]" Original="a" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnSetVehicleSpec" WrapperParams="atsex:NotchInfo; System.Int32" Original="a"/>
+		<Method Wrapper="OnInitialize" WrapperParams="atsex:BrakePosition" Original="a"/>
+		<Method Wrapper="OnElapse" WrapperParams="System.Int32" Original="a"/>
+	</Class>
+
+	<Class Wrapper="PreTrainObjectList" Original="e6">
+		<Method Wrapper="GetPreTrainLocation" WrapperParams="System.Int32" Original="a"/>
+	</Class>
+
+	<Class Wrapper="PutBetweenStructure" Original="df">
+		<Property Wrapper="Model">
+			<Getter Original="d"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="TrackKey1">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="TrackKey2">
+			<Getter Original="b"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="TransformOnlyX">
+			<Getter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="RandomFileList" Original="dr">
+		<Property Wrapper="SelectedFile">
+			<Getter Original="a"/>
+			<Setter Original="a" IsOriginalNonPublic="true"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="RepeatedStructure" Original="ec">
+		<Property Wrapper="Models">
+			<Getter Original="a"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Interval">
+			<Getter Original="b"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="Route" Original="br">
+		<Property Wrapper="DrawLimitLocation">
+			<Getter Original="e"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Structures">
+			<Getter Original="y"/>
+		</Property>
+		<Property Wrapper="Stations">
+			<Getter Original="f"/>
+		</Property>
+		<Property Wrapper="PreTrainObjects">
+			<Getter Original="p"/>
+		</Property>
+		<Property Wrapper="Sections">
+			<Getter Original="n"/>
+		</Property>
+		<Property Wrapper="Sounds">
+			<Getter Original="t"/>
+		</Property>
+		<Property Wrapper="Sounds3D">
+			<Getter Original="h"/>
+		</Property>
+		<Property Wrapper="StructureModels">
+			<Getter Original="s"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="DrawDistanceObjects">
+			<Getter Original="j"/>
+		</Property>
+
+		<Field WrapperProperty="Structures" Original="d" IsOriginalNonPublic="true"/>
+
+		<Method Wrapper="GetTrackMatrix" WrapperParams="atsex:LocatableMapObject; System.Double; System.Double" Original="a"/>
+	</Class>
+
+	<Class Wrapper="Scenario" Original="er">
+		<Property Wrapper="TimeManager">
+			<Getter Original="j"/>
+		</Property>
+		<Property Wrapper="LocationManager">
+			<Getter Original="b"/>
+		</Property>
+		<Property Wrapper="Route">
+			<Getter Original="h"/>
+		</Property>
+		<Property Wrapper="Vehicle">
+			<Getter Original="a"/>
+		</Property>
+		<Property Wrapper="Trains">
+			<Getter Original="g"/>
+		</Property>
+		<Property Wrapper="SectionManager">
+			<Getter Original="e"/>
+		</Property>
+		<Property Wrapper="TimeTable">
+			<Getter Original="d"/>
+		</Property>
+
+		<Field WrapperProperty="ObjectDrawer" Original="j" IsOriginalNonPublic="true"/>
+
+		<Method Wrapper="InitializeTimeAndLocation" WrapperParams="System.Double; System.Int32" Original="a" IsOriginalNonPublic="true"/>
+		<Method Wrapper="Initialize" WrapperParams="System.Int32" Original="a"/>
+	</Class>
+
+	<Class Wrapper="ScenarioInfo" Original="ek">
+		<Property Wrapper="Path">
+			<Getter Original="i"/>
+			<Setter Original="g"/>
+		</Property>
+		<Property Wrapper="FileName">
+			<Getter Original="d"/>
+			<Setter Original="i"/>
+		</Property>
+		<Property Wrapper="DirectoryName">
+			<Getter Original="c"/>
+			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="Title">
+			<Getter Original="k"/>
+			<Setter Original="d"/>
+		</Property>
+		<Property Wrapper="ImagePath">
+			<Getter Original="j"/>
+			<Setter Original="f"/>
+		</Property>
+		<Property Wrapper="Author">
+			<Getter Original="a"/>
+			<Setter Original="h"/>
+		</Property>
+		<Property Wrapper="Comment">
+			<Getter Original="f"/>
+			<Setter Original="e"/>
+		</Property>
+		<Property Wrapper="RouteFiles">
+			<Getter Original="h"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="VehicleFiles">
+			<Getter Original="g"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="RouteTitle">
+			<Getter Original="b"/>
+			<Setter Original="j"/>
+		</Property>
+		<Property Wrapper="VehicleTitle">
+			<Getter Original="e"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="ScenarioFileLoadErrors">
+			<Getter Original="l"/>
+			<Setter Original="a"/>
+		</Property>
+
+		<Method Wrapper="FromFile" WrapperParams="System.String" Original="a" IsWrapperStatic="true" IsOriginalStatic="true"/>
+	</Class>
+
+	<Class Wrapper="Section" Original="o">
+		<Property Wrapper="CurrentSignalIndex">
+			<Getter Original="c"/>
+		</Property>
+		<Property Wrapper="SignalIndexes">
+			<Getter Original="d"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="SectionManager" Original="fe">
+		<Property Wrapper="Sections">
+			<Getter Original="i"/>
+		</Property>
+
+		<Field WrapperProperty="SectionIndexesTrainOn" Original="k" IsOriginalNonPublic="true"/>
+	</Class>
+
+	<Class Wrapper="SingleStructureList" Original="bg">
+	</Class>
+
+	<Class Wrapper="Sound" Original="ep">
+	</Class>
+
+	<Class Wrapper="Station" Original="ef">
+		<Property Wrapper="Name">
+			<Getter Original="a"/>
+			<Setter Original="a" IsOriginalNonPublic="true"/>
+		</Property>
+		<Property Wrapper="ArrivalTimeMilliseconds">
+			<Getter Original="g"/>
+			<Setter Original="c" IsOriginalNonPublic="true"/>
+		</Property>
+		<Property Wrapper="DepertureTimeMilliseconds">
+			<Getter Original="m"/>
+			<Setter Original="b" IsOriginalNonPublic="true"/>
+		</Property>
+		<Property Wrapper="DoorCloseTimeMilliseconds">
+			<Getter Original="n"/>
+			<Setter Original="h"/>
+		</Property>
+		<Property Wrapper="DefaultTimeMilliseconds">
+			<Getter Original="d"/>
+			<Setter Original="e"/>
+		</Property>
+		<Property Wrapper="Pass">
+			<Getter Original="p"/>
+			<Setter Original="b" IsOriginalNonPublic="true"/>
+		</Property>
+		<Property Wrapper="IsTerminal">
+			<Getter Original="l"/>
+			<Setter Original="a" IsOriginalNonPublic="true"/>
+		</Property>
+		<Property Wrapper="StoppageTimeMilliseconds">
+			<Getter Original="c"/>
+			<Setter Original="a" IsOriginalNonPublic="true"/>
+		</Property>
+		<Property Wrapper="DoorSide">
+			<Getter Original="o"/>
+			<Setter Original="f"/>
+		</Property>
+		<Property Wrapper="DepertureSound">
+			<Getter Original="h"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="ArrivalSound">
+			<Getter Original="t"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="SignalFlag">
+			<Getter Original="e"/>
+			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="MarginMax">
+			<Getter Original="b"/>
+			<Setter Original="e"/>
+		</Property>
+		<Property Wrapper="MarginMin">
+			<Getter Original="s"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="MinStopPosition">
+			<Getter Original="j"/>
+		</Property>
+		<Property Wrapper="MaxStopPosition">
+			<Getter Original="f"/>
+		</Property>
+		<Property Wrapper="AlightingTimeMilliseconds">
+			<Getter Original="q"/>
+			<Setter Original="g"/>
+		</Property>
+		<Property Wrapper="TargetLoadFactor">
+			<Getter Original="u"/>
+			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="CurrentLoadFactor">
+			<Getter Original="k"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="DoorReopen">
+			<Getter Original="r"/>
+			<Setter Original="d"/>
+		</Property>
+		<Property Wrapper="StuckInDoorMilliseconds">
+			<Getter Original="i"/>
+			<Setter Original="d"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="StationList" Original="dp">
+		<Method Wrapper="Insert" WrapperParams="atsex:Station" Original="a"/>
+		<Method Wrapper="GetStandardTime" WrapperParams="System.Double" Original="a"/>
+	</Class>
+
+	<Class Wrapper="Structure" Original="n">
+		<Property Wrapper="Model">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="StructureSet" Original="dn">
+		<Property Wrapper="DrawLimitLocation">
+			<Getter Original="a"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Repeated">
+			<Getter Original="c"/>
+		</Property>
+		<Property Wrapper="Put">
+			<Getter Original="b"/>
+		</Property>
+		<Property Wrapper="PutBetween">
+			<Getter Original="e"/>
+		</Property>
+		<Property Wrapper="Signals">
+			<Getter Original="d"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="TimeManager" Original="cn">
+		<Children>
+			<Enum Wrapper="GameState" Original="a"/>
+		</Children>
+
+		<Property Wrapper="State">
+			<Getter Original="g"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="TimeMilliseconds">
+			<Getter Original="b"/>
+		</Property>
+		<Method Wrapper="SetTime" WrapperParams="System.Int32" Original="a"/>
+	</Class>
+
+	<Class Wrapper="TimeTable" Original="aw">
+		<Field WrapperProperty="Model" Original="j" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="NameTexts" Original="b" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="ArrivalTimeTexts" Original="c" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="DepertureTimeTexts" Original="d" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="NameTextWidths" Original="e" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="ArrivalTimeTextWidths" Original="f" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="DepertureTimeTextWidths" Original="g" IsOriginalNonPublic="true"/>
+		<Method Wrapper="Update" WrapperParams="void" Original="a" IsOriginalNonPublic="true"/>
+	</Class>
+
+	<Class Wrapper="Train" Original="e4">
+		<Field WrapperProperty="UserVehicleLocationManager" Original="b" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="Route" Original="c" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="TrainInfo" Original="d" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="DrawDistanceManager" Original="e" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="Location" Original="g" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="Speed" Original="h" IsOriginalNonPublic="true"/>
+
+		<Method Wrapper="DrawCars" WrapperParams="atsex:Direct3DProvider; SlimDX.Matrix, SlimDX" Original="a"/>
+	</Class>
+
+	<Class Wrapper="TrainInfo" Original="fc">
+		<Property Wrapper="Structures">
+			<Getter Original="f"/>
+		</Property>
+		<Property Wrapper="TrackKey">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="UserVehicleLocationManager" Original="fu">
+		<Property Wrapper="Location">
+			<Getter Original="c"/>
+		</Property>
+		<Property Wrapper="BlockIndex">
+			<Getter Original="d"/>
+		</Property>
+
+		<Method Wrapper="SetLocation" WrapperParams="System.Double; System.Boolean" Original="a"/>
+	</Class>
+
+	<Class Wrapper="ValueEventArgs`1" Original="ValueEventArgs`1">
+		<Property Wrapper="Value">
+			<Getter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="Vehicle" Original="f">
+		<Property Wrapper="Instruments">
+			<Getter Original="f"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Dynamics">
+			<Getter Original="g"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="VehicleDynamics" Original="b2">
+		<Property Wrapper="CurveResistanceFactor">
+			<Getter Original="i"/>
+			<Setter Original="g"/>
+		</Property>
+		<Property Wrapper="RunningResistanceFactorA">
+			<Getter Original="a"/>
+			<Setter Original="d"/>
+		</Property>
+		<Property Wrapper="RunningResistanceFactorB">
+			<Getter Original="h"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="RunningResistanceFactorC">
+			<Getter Original="e"/>
+			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="TrailerCar">
+			<Getter Original="d"/>
+		</Property>
+		<Property Wrapper="MotorCar">
+			<Getter Original="j"/>
+		</Property>
+		<Property Wrapper="FirstCar">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="VehicleInstrumentSet" Original="ck">
+		<Property Wrapper="BrakeSystem">
+			<Getter Original="b"/>
+		</Property>
+		<Property Wrapper="Cab">
+			<Getter Original="e"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="PluginLoader">
+			<Getter Original="f"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+</WrapTypes>

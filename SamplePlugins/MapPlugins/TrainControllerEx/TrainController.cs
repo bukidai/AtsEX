@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 using SlimDX;
 
+using BveTypes.ClassWrappers;
+
 using AtsEx.PluginHost;
-using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.Extensions;
 using AtsEx.PluginHost.Input;
 using AtsEx.PluginHost.Input.Native;

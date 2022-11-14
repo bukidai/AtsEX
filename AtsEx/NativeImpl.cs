@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using BveTypes.ClassWrappers;
+
 using AtsEx.Handles;
 using AtsEx.Input;
 using AtsEx.PluginHost;
-using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.Native;
 

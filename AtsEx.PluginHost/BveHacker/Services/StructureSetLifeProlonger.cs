@@ -9,8 +9,7 @@ using FastMember;
 using ObjectiveHarmonyPatch;
 using TypeWrapping;
 
-using AtsEx.PluginHost.BveTypes;
-using AtsEx.PluginHost.ClassWrappers;
+using BveTypes.ClassWrappers;
 
 namespace AtsEx.PluginHost.BveHackerServices
 {

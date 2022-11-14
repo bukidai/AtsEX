@@ -11,10 +11,11 @@ using System.Windows.Forms;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
+using BveTypes.ClassWrappers;
+
 using AtsEx.Handles;
 using AtsEx.MapStatements;
 using AtsEx.PluginHost;
-using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.MapStatements;
 using AtsEx.Scripting.CSharp;
 

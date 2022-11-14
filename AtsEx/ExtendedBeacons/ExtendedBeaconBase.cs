@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using AtsEx.Native;
-using AtsEx.PluginHost.ClassWrappers;
+using BveTypes.ClassWrappers;
+
 using AtsEx.PluginHost.ExtendedBeacons;
 using AtsEx.Scripting;
 

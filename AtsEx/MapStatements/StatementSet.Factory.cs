@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using AtsEx.PluginHost.ClassWrappers;
+using BveTypes.ClassWrappers;
+using BveTypes.ClassWrappers.Extensions;
+
 using AtsEx.PluginHost.MapStatements;
 
 namespace AtsEx.MapStatements

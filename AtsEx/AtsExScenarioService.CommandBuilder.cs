@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using BveTypes.ClassWrappers;
+
 using AtsEx.Handles;
 using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Plugins;
-using AtsEx.PluginHost.Plugins.Extensions;
 
 namespace AtsEx
 {
@@ -24,7 +25,7 @@ namespace AtsEx
             private ReverserPosition? AtsReverserPosition = null;
             private ConstantSpeedCommand? AtsConstantSpeedCommand = null;
 
-            public CommandBuilder(HandleSet handles)
+            public CommandBuilder(PluginHost.Handles.HandleSet handles)
             {
                 PowerNotch = handles.Power.Notch;
                 BrakeNotch = handles.Brake.Notch;

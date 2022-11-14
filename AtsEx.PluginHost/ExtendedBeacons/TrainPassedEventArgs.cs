@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using AtsEx.PluginHost.ExtendedBeacons;
-using AtsEx.PluginHost.ClassWrappers;
-using AtsEx.PluginHost.Plugins;
+using BveTypes.ClassWrappers;
 
 namespace AtsEx.PluginHost.ExtendedBeacons
 {

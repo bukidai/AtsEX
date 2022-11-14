@@ -5,13 +5,12 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
+using BveTypes.ClassWrappers;
 using UnembeddedResources;
 
 using AtsEx.Handles;
 using AtsEx.Input;
 using AtsEx.Plugins;
-using AtsEx.PluginHost.ClassWrappers;
-using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.MapStatements;
 using AtsEx.PluginHost.Plugins;

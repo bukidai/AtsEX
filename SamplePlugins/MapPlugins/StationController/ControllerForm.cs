@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using BveTypes.ClassWrappers;
+
 using AtsEx.PluginHost;
-using AtsEx.PluginHost.ClassWrappers;
 using AtsEx.PluginHost.Extensions;
 
 namespace AtsEx.Samples.MapPlugins.StationController

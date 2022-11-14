@@ -71,28 +71,6 @@
     <Compile Include="BveHacker\Services\MainFormHacker.cs" />
     <Compile Include="BveHacker\Services\ScenarioHacker.cs" />
     <Compile Include="BveHacker\Services\StructureSetLifeProlonger.cs" />
-    <Compile Include="BveTypes\AdditionalTypeWrapperAttribute.cs" />
-    <Compile Include="ClassInitializer\BveTypesSetter.cs" />
-    <Compile Include="ClassInitializer\SetBveTypesAttribute.cs" />
-    <Compile Include="ClassWrappers\Public\BasicBrake.cs" />
-    <Compile Include="ClassWrappers\Public\BrakeSystem.cs" />
-    <Compile Include="ClassWrappers\Public\AssistantTextDrawer.cs" />
-    <Compile Include="ClassWrappers\Public\CabBase.cs" />
-    <Compile Include="ClassWrappers\Public\CarBc.cs" />
-    <Compile Include="ClassWrappers\Public\CarInfo.cs" />
-    <Compile Include="ClassWrappers\Public\Direct3DProvider.cs" />
-    <Compile Include="ClassWrappers\Public\DrawDistanceManager.cs" />
-    <Compile Include="ClassWrappers\Public\HendleSet.cs" />
-    <Compile Include="ClassWrappers\Public\MapFunctionList.cs" />
-    <Compile Include="ClassWrappers\Public\NotchInfo.cs" />
-    <Compile Include="ClassWrappers\Public\ObjectPassedEventArgs.cs" />
-    <Compile Include="ClassWrappers\Public\PluginLoader.cs" />
-    <Compile Include="ClassWrappers\Public\PreTrainObjectList.cs" />
-    <Compile Include="ClassWrappers\Public\RepeatedStructure.cs" />
-    <Compile Include="ClassWrappers\Public\Section.cs" />
-    <Compile Include="ClassWrappers\Public\ValueEventArgs.cs" />
-    <Compile Include="ClassWrappers\Public\VehicleInstrumentSet.cs" />
-    <Compile Include="ClassWrappers\Public\SectionManager.cs" />
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="MapStatements\Identifier.cs" />
     <Compile Include="MapStatements\IHeader.cs" />
@@ -132,76 +110,23 @@
     <Compile Include="Plugins\Extensions\ExtensionTickResult.cs" />
     <Compile Include="Plugins\IPluginSet.cs" />
     <Compile Include="Plugins\PluginBuilder.cs" />
-    <Compile Include="BveTypes\BveTypeSet.cs" />
-    <Compile Include="BveTypes\BveTypeSet.InstanceCreator.cs" />
-    <Compile Include="BveTypes\Profile.cs" />
-    <Compile Include="BveTypes\ProfileSelector.cs" />
-    <Compile Include="BveTypes\Comparer.cs" />
-    <Compile Include="ClassInitializer\ClassInitializerBase.cs" />
-    <Compile Include="ClassInitializer\ClassWrapperInitializer.cs" />
-    <Compile Include="ClassInitializer\InitializeClassWrapperAttribute.cs" />
-    <Compile Include="ClassWrappers\ClassWrapperConverter.cs" />
-    <Compile Include="ClassWrappers\CreateClassWrapperFromSourceAttribute.cs" />
-    <Compile Include="ClassWrappers\Extensions\WrappedList.cs" />
-    <Compile Include="ClassWrappers\Public\Forms\ChartForm.cs" />
-    <Compile Include="ClassWrappers\Public\Forms\LoadingProgressForm.cs" />
-    <Compile Include="ClassWrappers\Public\Forms\MainForm.cs" />
-    <Compile Include="ClassWrappers\Public\KeyProvider.cs" />
-    <Compile Include="ClassWrappers\Public\LocatableMapObject.cs" />
-    <Compile Include="ClassWrappers\Public\PutBetweenStructure.cs" />
-    <Compile Include="ClassWrappers\Public\Structure.cs" />
-    <Compile Include="ClassWrappers\Public\Train.cs" />
-    <Compile Include="ClassWrappers\Public\TrainInfo.cs" />
-    <Compile Include="ClassWrappers\Public\UserVehicleLocationManager.cs" />
-    <Compile Include="ClassWrappers\Public\LocationManager.cs" />
-    <Compile Include="ClassWrappers\Public\TimeManager.cs" />
-    <Compile Include="ClassWrappers\Public\Forms\ScenarioSelectionForm.cs" />
-    <Compile Include="ClassWrappers\Public\Forms\TimePosForm.cs" />
-    <Compile Include="ClassWrappers\Public\ObjectDrawer.cs" />
-    <Compile Include="ClassWrappers\Public\VehicleDynamics.cs" />
-    <Compile Include="ClassWrappers\Public\TimeManager.GameState.cs" />
-    <Compile Include="Enums\TiltOptions.cs" />
     <Compile Include="IContextMenuHacker.cs" />
     <Compile Include="Extensions\DiagramUpdater.cs" />
     <Compile Include="LoadErrorManager.cs" />
     <Compile Include="LoadErrorManager.LoadErrorList.cs" />
     <Compile Include="Native\VehicleSpec.cs" />
     <Compile Include="Native\VehicleState.cs" />
-    <Compile Include="ClassWrappers\ClassWrapperBase.cs" />
-    <Compile Include="ClassWrappers\Extensions\WrappedSortedList.cs" />
-    <Compile Include="ClassWrappers\Public\AssistantText.cs" />
-    <Compile Include="ClassWrappers\Public\AssistantTextBase.cs" />
-    <Compile Include="ClassWrappers\Public\BveFile.cs" />
-    <Compile Include="ClassWrappers\Public\LoadError.cs" />
-    <Compile Include="ClassWrappers\Public\MapObjectBase.cs" />
-    <Compile Include="ClassWrappers\Public\MapObjectList.cs" />
-    <Compile Include="ClassWrappers\Public\MaterialInfo.cs" />
-    <Compile Include="ClassWrappers\Public\Model.cs" />
-    <Compile Include="ClassWrappers\Public\RandomFileList.cs" />
-    <Compile Include="ClassWrappers\Public\Route.cs" />
-    <Compile Include="ClassWrappers\Public\ScenarioInfo.cs" />
-    <Compile Include="ClassWrappers\Public\Scenario.cs" />
-    <Compile Include="ClassWrappers\Public\SingleStructureList.cs" />
-    <Compile Include="ClassWrappers\Public\Sound.cs" />
-    <Compile Include="ClassWrappers\Public\Station.cs" />
-    <Compile Include="ClassWrappers\Public\StationList.cs" />
-    <Compile Include="ClassWrappers\Public\StructureSet.cs" />
-    <Compile Include="ClassWrappers\Public\TimeTable.cs" />
-    <Compile Include="ClassWrappers\Public\Vehicle.cs" />
-    <Compile Include="ClassWrappers\Public\BrakePosition.cs" />
     <Compile Include="Plugins\PluginType.cs" />
     <Compile Include="EventArgs\ScenarioCreatedEventArgs.cs" />
     <Compile Include="Native\StartedEventArgs.cs" />
     <Compile Include="Exceptions\BveFileLoadException.cs" />
     <Compile Include="Exceptions\DevelopException.cs" />
     <Compile Include="Exceptions\PropertyNotInitializedException.cs" />
-    <Compile Include="Handles\ReverserPosition.cs" />
     <Compile Include="BveHacker\BveHacker.cs" />
     <Compile Include="Plugins\PluginBase.cs" />
     <Compile Include="Input\KeyBase.cs" />
     <Compile Include="Input\Native\INativeKeySet.cs" />
     <Compile Include="Input\Native\NativeAtsKeyName.cs" />
-    <Compile Include="ITwoWayConverter.cs" />
     <Compile Include="Plugins\TickResult\MapPluginTickResult.cs" />
     <Compile Include="Plugins\TickResult\TickResult.cs" />
     <Compile Include="Plugins\TickResult\VehiclePluginTickResult.cs" />
@@ -229,7 +154,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BveTypes\WrapTypes\5.8.7554.391.xml" />
     <Content Include="Resources\App.ja.resx" />
     <Content Include="Resources\App.resx" />
     <Content Include="Resources\PluginBase.ja.resx" />
@@ -240,16 +164,15 @@
     <Content Include="Resources\Identifier.resx" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BveTypes\WrapTypes\6.0.7554.619.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="LocalReferences\.gitignore" />
     <Content Include="LocalReferences\BveTs\Mackoy.XmlInterfaces.DLL" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="ClassWrappers\UnidentifiedClasses\" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Libs\BveTypes\BveTypes.csproj">
+      <Project>{3658ede1-0c3e-4104-a351-64981e4f82df}</Project>
+      <Name>BveTypes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libs\FastMember\FastMember.csproj">
       <Project>{b63adef8-3bf9-48e1-8b61-8fa042b19f89}</Project>
       <Name>FastMember</Name>

@@ -7,11 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using AtsEx.Hosting;
+using BveTypes.ClassWrappers;
 
 using AtsEx.Handles;
-using AtsEx.PluginHost.ClassWrappers;
-using AtsEx.PluginHost.Handles;
+using AtsEx.Hosting;
 using AtsEx.PluginHost.Input.Native;
 
 namespace AtsEx.Native

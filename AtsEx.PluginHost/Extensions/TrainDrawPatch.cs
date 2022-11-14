@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 using SlimDX;
 using SlimDX.Direct3D9;
 
+using BveTypes;
+using BveTypes.ClassWrappers;
 using FastMember;
 using ObjectiveHarmonyPatch;
 using TypeWrapping;
-
-using AtsEx.PluginHost.BveTypes;
-using AtsEx.PluginHost.ClassWrappers;
 
 namespace AtsEx.PluginHost.Extensions
 {
@@ -27,8 +26,7 @@ namespace AtsEx.PluginHost.Extensions
         private readonly Train Target;
         private readonly HarmonyPatch HarmonyPatch;
 
-        [SetBveTypes]
-        private static void Initialize(BveTypeSet bveTypes)
+        internal static void Initialize(BveTypeSet bveTypes)
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<Train>();
             DrawCarsMethod = members.GetSourceMethodOf(nameof(Train.DrawCars));

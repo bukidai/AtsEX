@@ -189,6 +189,10 @@
       <Name>AtsEx.Scripting</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\Libs\BveTypes\BveTypes.csproj">
+      <Project>{3658ede1-0c3e-4104-a351-64981e4f82df}</Project>
+      <Name>BveTypes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libs\FastMember\FastMember.csproj">
       <Project>{b63adef8-3bf9-48e1-8b61-8fa042b19f89}</Project>
       <Name>FastMember</Name>

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using BveTypes.ClassWrappers;
+
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.MapStatements;
-using AtsEx.PluginHost.ClassWrappers;
 
 namespace AtsEx.MapStatements
 {

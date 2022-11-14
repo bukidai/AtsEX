@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using BveTypes.ClassWrappers;
+
 using AtsEx.PluginHost.Handles;
 
 namespace AtsEx.Handles

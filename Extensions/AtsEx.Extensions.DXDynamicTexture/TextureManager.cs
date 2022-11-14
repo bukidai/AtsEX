@@ -9,7 +9,7 @@ using HarmonyLib;
 
 using SlimDX.Direct3D9;
 
-using AtsEx.PluginHost.ClassWrappers;
+using BveTypes.ClassWrappers;
 
 #pragma warning disable CS1591 // 公開されている型またはメンバーの XML コメントがありません
 namespace Zbx1425.DXDynamicTexture
