@@ -19,7 +19,7 @@ namespace AtsEx.MapStatements
             Statements = statements;
         }
 
-        public IEnumerable<IStatement> GetAll(Identifier identifier) => Statements[identifier];
+        public IEnumerable<IStatement> GetAll(Identifier identifier) => Statements.TryGetValue(identifier, out IEnumerable<Statement> result) ? result : Enumerable.Empty<Statement>();
 
         public IEnumerator<Statement> GetEnumerator() => new EnumerableInDictionaryEnumerator<Identifier, Statement>(Statements);
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

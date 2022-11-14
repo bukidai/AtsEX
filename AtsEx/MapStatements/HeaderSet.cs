@@ -22,7 +22,7 @@ namespace AtsEx.MapStatements
             NoMapPluginHeaders = noMapPluginHeaders;
         }
 
-        public IEnumerable<IHeader> GetAll(Identifier identifier) => Headers[identifier];
+        public IEnumerable<IHeader> GetAll(Identifier identifier) => Headers.TryGetValue(identifier, out IEnumerable<Header> result) ? result : Enumerable.Empty<Header>();
 
         public IEnumerator<Header> GetEnumerator() => new Enumerator(this);
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
