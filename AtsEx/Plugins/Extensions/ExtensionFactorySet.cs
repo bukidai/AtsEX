@@ -19,7 +19,7 @@ namespace AtsEx.Plugins.Extensions
             ExtensionFactories = extensionFactories.ToDictionary(x => x.GetType(), x => x);
         }
 
-        public PluginBase GetFactory<TExtensionFactory>() where TExtensionFactory : PluginBase => ExtensionFactories[typeof(TExtensionFactory)];
+        public TExtensionFactory GetFactory<TExtensionFactory>() where TExtensionFactory : PluginBase => (TExtensionFactory)ExtensionFactories[typeof(TExtensionFactory)];
 
         public IEnumerator<PluginBase> GetEnumerator() => ExtensionFactories.Values.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

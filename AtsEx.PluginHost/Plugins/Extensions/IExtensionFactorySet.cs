@@ -16,6 +16,6 @@ namespace AtsEx.PluginHost.Plugins.Extensions
         /// </summary>
         /// <typeparam name="TExtensionFactory">AtsEX 拡張機能ファクトリ の型。</typeparam>
         /// <returns><typeparamref name="TExtensionFactory"/> 型の AtsEX 拡張機能ファクトリ。</returns>
-        PluginBase GetFactory<TExtensionFactory>() where TExtensionFactory : PluginBase;
+        TExtensionFactory GetFactory<TExtensionFactory>() where TExtensionFactory : PluginBase;
     }
 }
