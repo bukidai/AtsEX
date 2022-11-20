@@ -245,6 +245,8 @@
     </EmbeddedResource>
     <Content Include="Resources\PluginLoadErrorResolver.ja.resx" />
     <Content Include="Resources\PluginLoadErrorResolver.resx" />
+    <Content Include="Resources\Plugins\Extensions\ExtensionSet.ja.resx" />
+    <Content Include="Resources\Plugins\Extensions\ExtensionSet.resx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

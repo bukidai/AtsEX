@@ -16,6 +16,6 @@ namespace AtsEx.PluginHost.Plugins.Extensions
         /// </summary>
         /// <typeparam name="TExtension">AtsEX 拡張機能の型。</typeparam>
         /// <returns><typeparamref name="TExtension"/> 型の AtsEX 拡張機能。</returns>
-        TExtension GetExtension<TExtension>() where TExtension : PluginBase;
+        TExtension GetExtension<TExtension>();
     }
 }
