@@ -121,19 +121,19 @@
     <value>Since the assembly '{0}' has multiple valid plugin classes, you cannot set the identifier to it.</value>
   </data>
   <data name="ConstructorNotFound" xml:space="preserve">
-    <value>Some class(es) that implement {1} are found in '{0},' but any constructors with an {2} parameter are not found.</value>
+    <value>Some class(es) that implement {0} are found, but any constructors with an {1} parameter are not found.</value>
   </data>
   <data name="MaybeBecauseBuiltForDifferentVersion" xml:space="preserve">
-    <value>Failed to load some classes in assembly '{0}'; this might be because it is built for the old version (Version {1}) of {2}.</value>
+    <value>Failed to load; this might be because it is built for the old version (Version {0}) of {1}.</value>
   </data>
   <data name="MustUseExtensions" xml:space="preserve">
     <value>The {0} must use {1} extensions.</value>
   </data>
   <data name="PluginClassNotFound" xml:space="preserve">
-    <value>Found no class subclass of {1} in '{0}.' It may not be a {2} plugin. The {2} plugin must have at least one class subclass of {1}.</value>
+    <value>Found no class subclass of {0}. It may not be a {1} plugin. The {1} plugin must have at least one class subclass of {0}.</value>
   </data>
   <data name="PluginVersionNotSupported" xml:space="preserve">
-    <value>'{0}', built for {2} Version {1}, is too old that the current {2} cannot load it; the current {2} (Version {3}) only supports plugins created for {2} Version {4} or newer.</value>
+    <value>This assembly, built for {1} Version {0}, is too old that the current {1} cannot load it; the current {1} (Version {2}) only supports plugins created for {1} Version {3} or newer.</value>
   </data>
   <data name="WrongPluginType" xml:space="preserve">
     <value>You tried to load a {1} as a {2}.</value>

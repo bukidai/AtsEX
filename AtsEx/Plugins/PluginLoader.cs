@@ -99,13 +99,13 @@ namespace AtsEx.Plugins
                 AssemblyName referencedPluginHostAssembly = referencedAssemblies.FirstOrDefault(asm => asm.Name == "AtsEx.PluginHost");
                 if (referencedPluginHostAssembly is null)
                 {
-                    throw new BveFileLoadException(string.Format(Resources.Value.PluginClassNotFound.Value, fileName, nameof(PluginBase), App.Instance.ProductShortName));
+                    throw new BveFileLoadException(string.Format(Resources.Value.PluginClassNotFound.Value, nameof(PluginBase), App.Instance.ProductShortName), fileName);
                 }
                 else if (referencedPluginHostAssembly.Version < SupportedMinVersion)
                 {
                     throw new BveFileLoadException(string.Format(
                         Resources.Value.PluginVersionNotSupported.Value,
-                        fileName, referencedPluginHostAssembly.Version, App.Instance.ProductShortName, pluginHostVersion, SupportedMinVersion.ToString(2)));
+                        referencedPluginHostAssembly.Version, App.Instance.ProductShortName, pluginHostVersion, SupportedMinVersion.ToString(2)), fileName);
                 }
 
                 bool isBuiltForDifferentVersion = referencedPluginHostAssembly.Version != pluginHostVersion;
@@ -116,7 +116,7 @@ namespace AtsEx.Plugins
                     IEnumerable<Type> pluginTypes = allTypes.Where(t => t.IsClass && !t.IsAbstract && t.IsSubclassOf(typeof(PluginBase)));
                     if (!pluginTypes.Any())
                     {
-                        throw new BveFileLoadException(string.Format(Resources.Value.PluginClassNotFound.Value, fileName, nameof(PluginBase), App.Instance.ProductShortName));
+                        throw new BveFileLoadException(string.Format(Resources.Value.PluginClassNotFound.Value, nameof(PluginBase), App.Instance.ProductShortName), fileName);
                     }
 
                     List<(Type, ConstructorInfo)> constructors = new List<(Type, ConstructorInfo)>();
@@ -131,7 +131,7 @@ namespace AtsEx.Plugins
                     switch (constructors.Count)
                     {
                         case 0:
-                            throw new BveFileLoadException(string.Format(Resources.Value.ConstructorNotFound.Value, fileName, nameof(PluginBase), typeof(PluginBuilder)));
+                            throw new BveFileLoadException(string.Format(Resources.Value.ConstructorNotFound.Value, nameof(PluginBase), typeof(PluginBuilder)), fileName);
 
                         case 1:
                             break;
@@ -168,9 +168,7 @@ namespace AtsEx.Plugins
                 }
                 catch
                 {
-                    BveHacker.LoadErrorManager.Throw(string.Format(
-                        Resources.Value.MaybeBecauseBuiltForDifferentVersion.Value,
-                        fileName, pluginHostVersion, App.Instance.ProductShortName));
+                    BveHacker.LoadErrorManager.Throw(string.Format(Resources.Value.MaybeBecauseBuiltForDifferentVersion.Value, pluginHostVersion, App.Instance.ProductShortName), fileName);
                     throw;
                 }
             }
