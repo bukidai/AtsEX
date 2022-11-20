@@ -50,12 +50,12 @@ namespace AtsEx.Plugins
 
         protected readonly NativeImpl Native;
         protected readonly BveHacker BveHacker;
-        protected readonly IExtensionFactorySet Extensions;
+        protected readonly IExtensionSet Extensions;
 
         public event AllExtensionsLoadedEventHandler AllExtensionsLoaded;
         public event AllPluginsLoadedEventHandler AllPluginsLoaded;
 
-        public PluginLoader(NativeImpl native, BveHacker bveHacker, IExtensionFactorySet extensions)
+        public PluginLoader(NativeImpl native, BveHacker bveHacker, IExtensionSet extensions)
         {
             Native = native;
             BveHacker = bveHacker;
@@ -176,7 +176,7 @@ namespace AtsEx.Plugins
             }
         }
 
-        public void SetExtensionFactorySetToLoadedPlugins(IExtensionFactorySet extensions) => AllExtensionsLoaded?.Invoke(new AllExtensionsLoadedEventArgs(extensions));
+        public void SetExtensionSetToLoadedPlugins(IExtensionSet extensions) => AllExtensionsLoaded?.Invoke(new AllExtensionsLoadedEventArgs(extensions));
         public void SetPluginSetToLoadedPlugins(IPluginSet plugins) => AllPluginsLoaded?.Invoke(new AllPluginsLoadedEventArgs(plugins));
     }
 }

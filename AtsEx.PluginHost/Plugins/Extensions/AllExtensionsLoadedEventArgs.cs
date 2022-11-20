@@ -18,13 +18,13 @@ namespace AtsEx.PluginHost.Plugins.Extensions
         /// <summary>
         /// 読み込まれた AtsEX 拡張機能の一覧を取得します。
         /// </summary>
-        public IExtensionFactorySet Extensions { get; }
+        public IExtensionSet Extensions { get; }
 
         /// <summary>
         /// <see cref="AllExtensionsLoadedEventArgs"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
-        /// <param name="extensions">読み込まれた AtsEX 拡張機能ファクトリの一覧。</param>
-        public AllExtensionsLoadedEventArgs(IExtensionFactorySet extensions) : base()
+        /// <param name="extensions">読み込まれた AtsEX 拡張機能の一覧。</param>
+        public AllExtensionsLoadedEventArgs(IExtensionSet extensions) : base()
         {
             Extensions = extensions;
         }

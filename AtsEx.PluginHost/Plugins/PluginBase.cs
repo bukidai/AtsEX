@@ -56,14 +56,14 @@ namespace AtsEx.PluginHost.Plugins
         /// </summary>
         protected INative Native { get; }
 
-        private IExtensionFactorySet _Extensions = null;
+        private IExtensionSet _Extensions = null;
         /// <summary>
-        /// 読み込まれた AtsEX 拡張機能ファクトリの一覧を取得します。
+        /// 読み込まれた AtsEX 拡張機能の一覧を取得します。
         /// </summary>
         /// <remarks>
         /// AtsEX 拡張機能の場合 (<see cref="PluginType"/> が <see cref="PluginType.Extension"/> の場合) は取得できません。
         /// </remarks>
-        protected IExtensionFactorySet Extensions => _Extensions ?? throw new PropertyNotInitializedException(nameof(Extensions));
+        protected IExtensionSet Extensions => _Extensions ?? throw new PropertyNotInitializedException(nameof(Extensions));
 
         private IPluginSet _Plugins = null;
         /// <summary>
@@ -74,7 +74,7 @@ namespace AtsEx.PluginHost.Plugins
         /// AtsEX 拡張機能の場合 (<see cref="PluginType"/> が <see cref="PluginType.Extension"/> の場合) 、<see cref="AllExtensionsLoaded"/> イベントが発生するまでは取得できません。
         /// </para>
         /// <para>
-        /// AtsEX 拡張機能ファクトリは <see cref="Extensions"/> プロパティから取得できます。
+        /// AtsEX 拡張機能は <see cref="Extensions"/> プロパティから取得できます。
         /// </para>
         /// </remarks>
         protected IPluginSet Plugins => _Plugins ?? throw new PropertyNotInitializedException(nameof(Plugins));

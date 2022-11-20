@@ -146,7 +146,7 @@
     <Compile Include="Native\Ats\CallerCompatibilityVersionAttribute.cs" />
     <Compile Include="Native\Ats\Export.cs" />
     <Compile Include="Native\Ats\AtsMain.cs" />
-    <Compile Include="Plugins\Extensions\ExtensionFactorySet.cs" />
+    <Compile Include="Plugins\Extensions\ExtensionSet.cs" />
     <Compile Include="Plugins\PluginSourceSet.Concat.cs" />
     <Compile Include="Plugins\PluginSourceSet.cs" />
     <Compile Include="Plugins\PluginBuilder.cs" />

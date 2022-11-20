@@ -44,7 +44,7 @@ namespace AtsEx
         }
 
         public BveHacker BveHacker { get; }
-        public IExtensionFactorySet Extensions { get; }
+        public IExtensionSet Extensions { get; }
 
         public VersionFormProvider VersionFormProvider { get; }
 
@@ -73,7 +73,7 @@ namespace AtsEx
             PluginLoadErrorResolver loadErrorResolver = new PluginLoadErrorResolver(BveHacker.LoadErrorManager);
 
             PluginLoader pluginLoader = new PluginLoader(null, BveHacker, null);
-            Dictionary<string, PluginBase> extensionFactories = null;
+            Dictionary<string, PluginBase> extensions = null;
             try
             {
                 string extensionsDirectory = Path.Combine(Path.GetDirectoryName(App.Instance.AtsExAssembly.Location), "Extensions");
@@ -84,7 +84,7 @@ namespace AtsEx
                     ? PluginSourceSet.FromPluginUsing(PluginType.Extension, pluginUsingPath) : PluginSourceSet.Empty(PluginType.Extension);
                 PluginSourceSet fromDirectory = PluginSourceSet.FromDirectory(null, PluginType.Extension, extensionsDirectory);
 
-                extensionFactories = pluginLoader.Load(fromPluginUsing.Concat(null, fromDirectory));
+                extensions = pluginLoader.Load(fromPluginUsing.Concat(null, fromDirectory));
             }
             catch (Exception ex)
             {
@@ -92,13 +92,13 @@ namespace AtsEx
             }
             finally
             {
-                if (extensionFactories is null) extensionFactories = new Dictionary<string, PluginBase>();
+                if (extensions is null) extensions = new Dictionary<string, PluginBase>();
 
-                Extensions = new ExtensionFactorySet(extensionFactories.Values);
-                pluginLoader.SetExtensionFactorySetToLoadedPlugins(Extensions);
+                Extensions = new ExtensionSet(extensions.Values);
+                pluginLoader.SetExtensionSetToLoadedPlugins(Extensions);
             }
 
-            VersionFormProvider = new VersionFormProvider(BveHacker.ContextMenuHacker as ContextMenuHacker, BveHacker.MainFormSource, extensionFactories.Values);
+            VersionFormProvider = new VersionFormProvider(BveHacker.ContextMenuHacker as ContextMenuHacker, BveHacker.MainFormSource, extensions.Values);
         }
 
         protected abstract void ProfileForDifferentBveVersionLoaded(Version profileVersion);

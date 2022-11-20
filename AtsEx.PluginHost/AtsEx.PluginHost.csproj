@@ -106,7 +106,7 @@
     <Compile Include="Handles\NotchCommandBase.cs" />
     <Compile Include="Plugins\Extensions\AllExtensionsLoadedEventArgs.cs" />
     <Compile Include="Plugins\Extensions\AllExtensionsLoadedEventHandler.cs" />
-    <Compile Include="Plugins\Extensions\IExtensionFactorySet.cs" />
+    <Compile Include="Plugins\Extensions\IExtensionSet.cs" />
     <Compile Include="Plugins\Extensions\ExtensionTickResult.cs" />
     <Compile Include="Plugins\IPluginSet.cs" />
     <Compile Include="Plugins\PluginBuilder.cs" />

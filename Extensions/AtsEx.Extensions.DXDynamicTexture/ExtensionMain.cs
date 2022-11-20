@@ -11,9 +11,9 @@ using AtsEx.PluginHost.Plugins.Extensions;
 
 namespace AtsEx.Extensions.DXDynamicTexture
 {
-    public class ExtensionFactory : AssemblyPluginBase
+    public class ExtensionMain : AssemblyPluginBase
     {
-        public ExtensionFactory(PluginBuilder builder) : base(builder, PluginType.Extension, false)
+        public ExtensionMain(PluginBuilder builder) : base(builder, PluginType.Extension, false)
         {
             TextureManager.Initialize();
         }

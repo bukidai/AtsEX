@@ -54,7 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtensionFactory.cs" />
+    <Compile Include="ExtensionMain.cs" />
     <Compile Include="GDIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextureHandle.cs" />
