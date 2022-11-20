@@ -113,7 +113,7 @@ namespace AtsEx.Plugins
                 try
                 {
                     Type[] allTypes = assembly.GetTypes();
-                    IEnumerable<Type> pluginTypes = allTypes.Where(t => t.IsClass && t.IsPublic && !t.IsAbstract && t.IsSubclassOf(typeof(PluginBase)));
+                    IEnumerable<Type> pluginTypes = allTypes.Where(t => t.IsClass && !t.IsAbstract && t.IsSubclassOf(typeof(PluginBase)));
                     if (!pluginTypes.Any())
                     {
                         throw new BveFileLoadException(string.Format(Resources.Value.PluginClassNotFound.Value, fileName, nameof(PluginBase), App.Instance.ProductShortName));
