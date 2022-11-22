@@ -32,6 +32,11 @@ namespace AtsEx.PluginHost.MapStatements
         private static readonly string NamespaceSeparator = "::";
         private static readonly string IdentifierSeparator = ".";
 
+        /// <summary>
+        /// null の値を表す識別子を取得します。
+        /// </summary>
+        public static readonly Identifier Null = new Identifier(Namespace.Root, "null");
+
         static Identifier()
         {
 #if DEBUG
