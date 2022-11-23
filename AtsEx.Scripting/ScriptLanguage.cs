@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AtsEx.Plugins.Scripting
+namespace AtsEx.Scripting
 {
     /// <summary>
     /// スクリプトの言語を指定します。
     /// </summary>
-    internal enum ScriptLanguage
+    public enum ScriptLanguage
     {
         CSharpScript,
         IronPython2,

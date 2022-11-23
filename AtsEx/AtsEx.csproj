@@ -161,7 +161,6 @@
     <Compile Include="Plugins\Scripting\Globals\TickGlobals.cs" />
     <Compile Include="Plugins\Scripting\IronPython2\IronPython2Plugin.cs" />
     <Compile Include="Plugins\Scripting\MapStatementIdentifiers.cs" />
-    <Compile Include="Plugins\Scripting\ScriptLanguage.cs" />
     <Compile Include="Plugins\Scripting\ScriptPluginBase.cs" />
     <Compile Include="Plugins\Scripting\ScriptPluginBuilder.cs" />
     <Compile Include="Plugins\Scripting\ScriptPluginPackage.cs" />
