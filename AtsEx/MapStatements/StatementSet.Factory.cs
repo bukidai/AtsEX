@@ -31,7 +31,7 @@ namespace AtsEx.MapStatements
                     if (declaration.Length == 0) continue;
 
                     Identifier name = declaration[0];
-                    if (name is null) continue;
+                    if (name.Namespace is null || name.Namespace.IsChildOf(Namespace.Root)) continue;
                     Identifier[] additionalDeclaration = declaration.Skip(1).ToArray();
 
                     double to = sameKeyRepeaters.Value.Count >= i || sameKeyRepeaters.Value[i + 1] is null ? double.PositiveInfinity : sameKeyRepeaters.Value[i + 1].Location;
@@ -53,9 +53,7 @@ namespace AtsEx.MapStatements
                 {
                     result[i] =
                         !loadedModels.TryGetValue(models[i], out string structureKey) ||
-                        !Identifier.TryParse(structureKey, out Identifier identifier) ||
-                        identifier.Namespace is null ||
-                        !identifier.Namespace.IsChildOf(Namespace.Root) ? null : identifier;
+                        !Identifier.TryParse(structureKey, out Identifier identifier) ? null : identifier;
                 }
 
                 return result;
