@@ -73,6 +73,7 @@
     <Compile Include="BveHacker\Services\StructureSetLifeProlonger.cs" />
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="MapStatements\IdentifierToEnumConverter.cs" />
+    <Compile Include="LoadErrorManager\ILoadErrorManager.cs" />
     <Compile Include="MapStatements\Identifier.cs" />
     <Compile Include="MapStatements\IHeader.cs" />
     <Compile Include="MapStatements\IStatementSet.cs" />
@@ -83,15 +84,7 @@
     <Compile Include="MapStatements\TrainPassedEventArgs.cs" />
     <Compile Include="Native\StartedEventHandler.cs" />
     <Compile Include="Plugins\AllPluginsLoadedEventArgs.cs" />
-    <Compile Include="ExtendedBeacons\ObservingTargetTrain.cs" />
-    <Compile Include="ExtendedBeacons\ExtendedBeaconBase.cs" />
     <Compile Include="Direction.cs" />
-    <Compile Include="ExtendedBeacons\ExtendedBeaconSet.cs" />
-    <Compile Include="ExtendedBeacons\ObservingTargetTrack.cs" />
-    <Compile Include="ExtendedBeacons\PassedEventArgs.cs" />
-    <Compile Include="ExtendedBeacons\TrainPassedEventArgs.cs" />
-    <Compile Include="IMatrixConverter.cs" />
-    <Compile Include="Extensions\TrainDrawPatch.cs" />
     <Compile Include="Handles\ConstantSpeedCommand.cs" />
     <Compile Include="Handles\IBrakeHandle.cs" />
     <Compile Include="Handles\IHandle.cs" />
@@ -113,10 +106,6 @@
     <Compile Include="Plugins\Extensions\ExtensionTickResult.cs" />
     <Compile Include="Plugins\IPluginSet.cs" />
     <Compile Include="Plugins\PluginBuilder.cs" />
-    <Compile Include="IContextMenuHacker.cs" />
-    <Compile Include="Extensions\DiagramUpdater.cs" />
-    <Compile Include="LoadErrorManager.cs" />
-    <Compile Include="LoadErrorManager.LoadErrorList.cs" />
     <Compile Include="Native\VehicleSpec.cs" />
     <Compile Include="Native\VehicleState.cs" />
     <Compile Include="Plugins\PluginType.cs" />

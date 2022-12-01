@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using AtsEx.Extensions.ContextMenuHacker;
 using AtsEx.PluginHost;
-using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx.Samples.MapPlugins.StationController
@@ -18,9 +18,10 @@ namespace AtsEx.Samples.MapPlugins.StationController
 
         public StationController(PluginBuilder services) : base(services, PluginType.MapPlugin)
         {
-            InstanceStore.Initialize(Native, BveHacker);
+            InstanceStore.Initialize(Native, Extensions, BveHacker);
 
-            MenuItem = BveHacker.ContextMenuHacker.AddCheckableMenuItem("駅編集ウィンドウを表示", MenuItemCheckedChanged);
+            IContextMenuHacker contextMenuHacker = Extensions.GetExtension<IContextMenuHacker>();
+            MenuItem = contextMenuHacker.AddCheckableMenuItem("駅編集ウィンドウを表示", MenuItemCheckedChanged, ContextMenuItemType.Plugins);
 
             MenuItem.Checked = false;
 

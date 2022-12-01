@@ -116,16 +116,6 @@
     <Compile Include="AtsExScenarioService.AsAtsPlugin.cs" />
     <Compile Include="AtsExScenarioService.cs" />
     <Compile Include="BveHacker\BveHacker.cs" />
-    <Compile Include="BveHacker\CoreHackServices\ContextMenuHacker.cs" />
-    <Compile Include="ExtendedBeacons\Beacon.cs" />
-    <Compile Include="ExtendedBeacons\ExtendedBeaconBase.cs" />
-    <Compile Include="ExtendedBeacons\ExtendedBeaconSet.cs" />
-    <Compile Include="ExtendedBeacons\Globals\ExtendedBeaconGlobalsBase.cs" />
-    <Compile Include="ExtendedBeacons\Globals\PassedGlobals.cs" />
-    <Compile Include="ExtendedBeacons\Globals\TrainPassedGlobals.cs" />
-    <Compile Include="ExtendedBeacons\InitializerBeacon.cs" />
-    <Compile Include="ExtendedBeacons\MapStatementIdentifiers.cs" />
-    <Compile Include="ExtendedBeacons\TrainObservingBeacon.cs" />
     <Compile Include="Handles\BrakeHandle.cs" />
     <Compile Include="Handles\HandleBase.cs" />
     <Compile Include="Handles\HandlePositionSet.cs" />
@@ -134,6 +124,8 @@
     <Compile Include="Hosting\ReleaseInfo.cs" />
     <Compile Include="Input\NativeAtsKey.cs" />
     <Compile Include="Input\NativeKeySet.cs" />
+    <Compile Include="LoadErrorManager\LoadErrorList.cs" />
+    <Compile Include="LoadErrorManager\LoadErrorManager.cs" />
     <Compile Include="MapStatements\Statement.cs" />
     <Compile Include="MapStatements\Header.cs" />
     <Compile Include="MapStatements\StatementSet.cs" />
@@ -155,6 +147,7 @@
     <Compile Include="Plugins\PluginLoader.cs" />
     <Compile Include="Plugins\PluginSourceSet.FromDirectory.cs" />
     <Compile Include="Plugins\PluginSourceSet.FromPluginUsing.cs" />
+    <Compile Include="Plugins\ReferencedPluginHostGetter.cs" />
     <Compile Include="Plugins\Scripting\CSharp\CSharpScriptPlugin.cs" />
     <Compile Include="Plugins\Scripting\Globals\ScenarioCreatedGlobals.cs" />
     <Compile Include="Plugins\Scripting\Globals\StartedGlobals.cs" />
@@ -188,6 +181,11 @@
       <Name>AtsEx.Scripting</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\Extensions\AtsEx.CoreExtensions\AtsEx.CoreExtensions.csproj">
+      <Project>{fbe0c5ab-7271-4801-a862-af39dd32c829}</Project>
+      <Name>AtsEx.CoreExtensions</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\Libs\BveTypes\BveTypes.csproj">
       <Project>{3658ede1-0c3e-4104-a351-64981e4f82df}</Project>
       <Name>BveTypes</Name>
@@ -214,12 +212,6 @@
     <Content Include="Resources\AtsEx.resx" />
     <Content Include="Resources\AtsExScenarioService.ja.resx" />
     <Content Include="Resources\AtsExScenarioService.resx" />
-    <Content Include="Resources\ExtendedBeacons\ExtendedBeaconSet.ja.resx" />
-    <Content Include="Resources\ExtendedBeacons\ExtendedBeaconSet.resx" />
-    <Content Include="Resources\ExtendedBeacons\MapStatementIdentifiers.ja.resx" />
-    <Content Include="Resources\ExtendedBeacons\MapStatementIdentifiers.resx" />
-    <Content Include="Resources\ExtendedBeacons\PluginVariableCollection.ja.resx" />
-    <Content Include="Resources\ExtendedBeacons\PluginVariableCollection.resx" />
     <Content Include="Resources\Handles\BrakeHandle.ja.resx" />
     <Content Include="Resources\Handles\BrakeHandle.resx" />
     <Content Include="Resources\PluginLoader.ja.resx" />

@@ -13,7 +13,7 @@ Beacon.Fuga,Structures_Original\Null.x
 AtsEx::Null,Structures_Original\Null.x
 ,
 #AtsEX識別子（拡張地上子）,
-AtsEx::ExtendedBeacon,Structures_Original\Null.x
+AtsEx::ExtendedBeacon.Put,Structures_Original\Null.x
 AtsEx::ExtendedBeacon.ObservingTargetTrack.SpecifiedTrackOnly,Structures_Original\Null.x
 AtsEx::ExtendedBeacon.ObservingTargetTrack.AllTracks,Structures_Original\Null.x
 AtsEx::ExtendedBeacon.ObservingTargetTrain.Myself,Structures_Original\Null.x

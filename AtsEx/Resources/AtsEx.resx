@@ -132,4 +132,7 @@ The legal location to place is '{2}'.</value>
   <data name="IgnoreAndContinue" xml:space="preserve">
     <value>Ignore and continue loading?</value>
   </data>
+  <data name="MaybeBecauseBuiltForDifferentVersion" xml:space="preserve">
+    <value>Failed to load; this might be because it is built for the old version (Version {0}) of {1}.</value>
+  </data>
 </root>

@@ -8,8 +8,8 @@ using System.Windows.Forms;
 
 using BveTypes.ClassWrappers;
 
+using AtsEx.Extensions.DiagramUpdater;
 using AtsEx.PluginHost;
-using AtsEx.PluginHost.Extensions;
 
 namespace AtsEx.Samples.MapPlugins.StationController
 {
@@ -73,7 +73,8 @@ namespace AtsEx.Samples.MapPlugins.StationController
                 return;
             }
 
-            DiagramUpdater.UpdateDiagram(bveHacker.Scenario, bveHacker.TimePosForm);
+            IDiagramUpdater diagramUpdater = InstanceStore.Instance.Extensions.GetExtension<IDiagramUpdater>();
+            diagramUpdater.UpdateDiagram();
             ResetInput();
         }
 
@@ -94,7 +95,8 @@ namespace AtsEx.Samples.MapPlugins.StationController
                 Station lastStation = stations.Last() as Station;
             }
 
-            DiagramUpdater.UpdateDiagram(bveHacker.Scenario, bveHacker.TimePosForm);
+            IDiagramUpdater diagramUpdater = InstanceStore.Instance.Extensions.GetExtension<IDiagramUpdater>();
+            diagramUpdater.UpdateDiagram();
         }
     }
 }

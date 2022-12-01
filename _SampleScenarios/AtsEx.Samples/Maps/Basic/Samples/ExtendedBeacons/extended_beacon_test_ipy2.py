@@ -62,16 +62,21 @@ void SetPluginVariable<T>(PluginType pluginType, string pluginIdentifier, string
 
 """
 
+import sys
+import clr
+sys.path.append('MapPlugins')
+clr.AddReference('ExtendedBeacons')
+
 import System
 from System.Windows.Forms import *
-import AtsEx.PluginHost.ExtendedBeacons as eb
+import AtsEx.MapPlugins.ExtendedBeacons as eb
 
 
 def tick(g):
 	# 自・他列車両方の通過の検知をする（Map.txt の地上子定義を参照）ので、sender の型で場合分けをする。
 	
-	beaconName = g.sender.Name
-	beaconTrack = g.sender.DefinedStructure.TrackKey
+	beaconName = g.sender.BeaconName
+	beaconTrack = g.sender.DefinedStatement.DefinedStructure.TrackKey
 	beaconTargetTrack = g.sender.ObservingTargetTrack
 	beaconTargetTrain = g.sender.ObservingTargetTrain
 	trainDirection = g.e.Direction
@@ -79,7 +84,7 @@ def tick(g):
 	if beaconTargetTrain == eb.ObservingTargetTrain.Myself:
 		MessageBox.Show('自列車の通過を検知しました。\n' +
 			'\n' +
-			'拡張地上子の名前: ' + beaconName + '\n' +
+			'拡張地上子の名前: ' + beaconName.FullName + '\n' +
 			'拡張地上子の設置先軌道: ' + beaconTrack + '\n' +
 			'拡張地上子の検知対象軌道: ' + str(beaconTargetTrack) + '\n' +
 			'拡張地上子の検知対象列車: ' + str(beaconTargetTrain) + '\n' +
@@ -92,7 +97,7 @@ def tick(g):
 		
 		MessageBox.Show('他列車の通過を検知しました。\n' +
 			'\n' +
-			'拡張地上子の名前: ' + beaconName + '\n' +
+			'拡張地上子の名前: ' + beaconName.FullName + '\n' +
 			'拡張地上子の設置先軌道: ' + beaconTrack + '\n' +
 			'拡張地上子の検知対象軌道: ' + str(beaconTargetTrack) + '\n' +
 			'拡張地上子の検知対象列車: ' + str(beaconTargetTrain) + '\n' +

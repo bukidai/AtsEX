@@ -5,9 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
+
 using UnembeddedResources;
 
 using AtsEx.PluginHost;
+using AtsEx.PluginHost.LoadErrorManager;
 using AtsEx.Scripting.CSharp;
 
 namespace AtsEx.Plugins
@@ -35,9 +39,9 @@ namespace AtsEx.Plugins
 #endif
         }
 
-        private readonly LoadErrorManager LoadErrorManager;
+        private readonly ILoadErrorManager LoadErrorManager;
 
-        public PluginLoadErrorResolver(LoadErrorManager loadErrorManager)
+        public PluginLoadErrorResolver(ILoadErrorManager loadErrorManager)
         {
             LoadErrorManager = loadErrorManager;
         }
@@ -55,7 +59,11 @@ namespace AtsEx.Plugins
 
             if (exception is CompilationException ce)
             {
-                ce.ThrowAsLoadError(LoadErrorManager);
+                foreach (Diagnostic error in ce.CompilationErrors)
+                {
+                    LinePosition linePosition = error.Location.GetLineSpan().StartLinePosition;
+                    LoadErrorManager.Throw(error.GetMessage(System.Globalization.CultureInfo.CurrentUICulture), ce.SenderName, linePosition.Line, linePosition.Character + 1);
+                }
             }
             else if (exception is BveFileLoadException fe)
             {

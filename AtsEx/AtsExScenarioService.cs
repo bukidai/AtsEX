@@ -122,8 +122,6 @@ namespace AtsEx
 
                 AtsEx.VersionFormProvider.SetScenario(Plugins.Select(item => item.Value));
             }
-
-            BveHacker.SetScenario(Native);
         }
 
         public void Dispose()

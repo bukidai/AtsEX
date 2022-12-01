@@ -58,15 +58,15 @@ void SetPluginVariable<T>(PluginType pluginType, string pluginIdentifier, string
 
 // 他列車の通過の検知しかしない（Map.txt の地上子定義を参照）ので e は必ず TrainPassedEventArgs 型。
 
-string beaconName = sender.Name;
-string beaconTrack = sender.DefinedStructure.TrackKey;
+Identifier beaconName = sender.BeaconName;
+string beaconTrack = sender.DefinedStatement.DefinedStructure.TrackKey;
 string trainName = e.SenderTrainName;
 string trainTrack = e.SenderTrain.TrainInfo.TrackKey;
 Direction trainDirection = e.Direction;
 
 MessageBox.Show("他列車の通過を検知しました。\n" +
 	"\n" +
-	$"拡張地上子の名前: {beaconName}\n" +
+	$"拡張地上子の名前: {beaconName.FullName}\n" +
 	$"拡張地上子の設置先軌道: {beaconTrack}\n" +
 	"\n" +
 	$"他列車の名前: {trainName}\n" +

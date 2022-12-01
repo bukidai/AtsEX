@@ -8,8 +8,8 @@ using SlimDX;
 
 using BveTypes.ClassWrappers;
 
+using AtsEx.Extensions.TrainDrawPatch;
 using AtsEx.PluginHost;
-using AtsEx.PluginHost.Extensions;
 using AtsEx.PluginHost.Input;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.Plugins;
@@ -42,7 +42,7 @@ namespace AtsEx.Samples.MapPlugins.TrainControllerEx
                 float initialDirection = (float)(Math.PI * 0.5); // 回転の基点は手前方向、右回りを正とする。初期状態は π/2 = 左向き
 
                 TrainLocator = new TrainLocator(Train, GetBlockIndexFunc, GetMaxDrawDistanceFunc, initialLocation, initialDirection, 0.2f, 0.01f);
-                Patch = TrainDrawPatch.Patch(Train, TrainLocator.CreateDrawDelegate());
+                Patch = Extensions.GetExtension<ITrainDrawPatchFactory>().Patch(Train, TrainLocator.CreateDrawDelegate());
             };
         }
 

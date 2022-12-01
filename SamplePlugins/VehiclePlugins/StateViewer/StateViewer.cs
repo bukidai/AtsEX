@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using AtsEx.Extensions.ContextMenuHacker;
 using AtsEx.PluginHost;
-using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx.Samples.VehiclePlugins.StateViewer
@@ -20,7 +20,7 @@ namespace AtsEx.Samples.VehiclePlugins.StateViewer
         {
             InstanceStore.Initialize(Native, BveHacker);
 
-            MenuItem = BveHacker.ContextMenuHacker.AddCheckableMenuItem("状態ウィンドウを表示", MenuItemCheckedChanged);
+            MenuItem = Extensions.GetExtension<IContextMenuHacker>().AddCheckableMenuItem("状態ウィンドウを表示", MenuItemCheckedChanged, ContextMenuItemType.Plugins);
 
             MenuItem.Checked = false;
 

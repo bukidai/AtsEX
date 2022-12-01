@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AtsEx.PluginHost;
+using AtsEx.PluginHost.Plugins.Extensions;
 
 namespace AtsEx.Samples.MapPlugins.StationController
 {
@@ -13,18 +14,20 @@ namespace AtsEx.Samples.MapPlugins.StationController
         public static InstanceStore Instance { get; private set; } = null;
         public static bool IsInitialized => !(Instance is null);
 
-        public static void Initialize(INative native, BveHacker bveHacker)
+        public static void Initialize(INative native, IExtensionSet extensions, BveHacker bveHacker)
         {
-            Instance = new InstanceStore(native, bveHacker);
+            Instance = new InstanceStore(native, extensions, bveHacker);
         }
 
 
         public INative Native { get; }
+        public IExtensionSet Extensions { get; }
         public BveHacker BveHacker { get; }
 
-        private InstanceStore(INative native, BveHacker bveHacker)
+        private InstanceStore(INative native, IExtensionSet extensions, BveHacker bveHacker)
         {
             Native = native;
+            Extensions = extensions;
             BveHacker = bveHacker;
         }
     }

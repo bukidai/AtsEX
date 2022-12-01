@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -14,8 +13,7 @@ using BveTypes.ClassWrappers;
 using UnembeddedResources;
 
 using AtsEx.PluginHost.BveHackerServices;
-using AtsEx.PluginHost.ExtendedBeacons;
-using AtsEx.PluginHost.Extensions;
+using AtsEx.PluginHost.LoadErrorManager;
 using AtsEx.PluginHost.MapStatements;
 
 namespace AtsEx.PluginHost
@@ -85,14 +83,10 @@ namespace AtsEx.PluginHost
                 }
             }
 
-            TrainDrawPatch.Initialize(BveTypes);
-
             MainFormHacker = new MainFormHacker(App.Instance.Process);
             ScenarioHacker = new ScenarioHacker(MainFormHacker, BveTypes);
 
             StructureSetLifeProlonger = new StructureSetLifeProlonger(this);
-
-            LoadErrorManager = new LoadErrorManager(LoadingProgressForm);
 
 
             ScenarioHacker.ScenarioCreated += e => PreviewScenarioCreated?.Invoke(e);
@@ -203,13 +197,7 @@ namespace AtsEx.PluginHost
         /// <summary>
         /// シナリオ読込時のエラーを編集するための機能を提供する <see cref="PluginHost.LoadErrorManager"/> を取得します。
         /// </summary>
-        public LoadErrorManager LoadErrorManager { get; }
-
-
-        /// <summary>
-        /// メインフォームの右クリックメニューを編集するための機能を提供する <see cref="IContextMenuHacker"/> を取得します。
-        /// </summary>
-        public abstract IContextMenuHacker ContextMenuHacker { get; }
+        public abstract ILoadErrorManager LoadErrorManager { get; }
 
 
         /// <summary>
@@ -222,10 +210,6 @@ namespace AtsEx.PluginHost
         /// <seealso cref="INative.Handles"/>
         public abstract Handles.HandleSet Handles { get; }
 
-        /// <summary>
-        /// 拡張地上子の一覧を取得します。
-        /// </summary>
-        public abstract ExtendedBeaconSet ExtendedBeacons { get; }
 
         /// <summary>
         /// マップに定義されているヘッダーの一覧を取得します。

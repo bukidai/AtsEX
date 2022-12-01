@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using UnembeddedResources;
 
-using AtsEx.Plugins;
+using AtsEx.Extensions.ContextMenuHacker;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.Plugins;
 
@@ -38,7 +38,6 @@ namespace AtsEx
 #endif
         }
 
-        private readonly ContextMenuHacker ContextMenuHacker;
         private readonly Form MainFormSource;
 
         private readonly IEnumerable<PluginBase> Extensions;
@@ -47,14 +46,14 @@ namespace AtsEx
         private readonly ToolStripMenuItem MenuItem;
 
 
-        public VersionFormProvider(ContextMenuHacker contextMenuHacker, Form mainFormSource, IEnumerable<PluginBase> extensions)
+        public VersionFormProvider(Form mainFormSource, IEnumerable<PluginBase> extensions, IContextMenuHacker contextMenuHacker)
         {
-            ContextMenuHacker = contextMenuHacker;
             MainFormSource = mainFormSource;
 
             Extensions = extensions;
 
-            MenuItem = contextMenuHacker.AddClickableMenuItem(string.Format(Resources.Value.VersionInfoMenuItem.Value, App.Instance.ProductShortName), MenuItemClick, true);
+            string versionInfoMenuItemText = string.Format(Resources.Value.VersionInfoMenuItem.Value, App.Instance.ProductShortName);
+            MenuItem = contextMenuHacker.AddClickableMenuItem(versionInfoMenuItemText, MenuItemClick, ContextMenuItemType.CoreAndExtensions);
 
             Form = new VersionForm();
             Form.FormClosing += FormClosing;

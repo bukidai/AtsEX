@@ -22,7 +22,7 @@ include '..\..\BaseMap.txt';
 	$script = '#load `ExtendedBeaconTest_CSharpScript.csx`';
 
 	Repeater[$script].Begin0('0', 0, 0, 0, // スクリプトはリピーターキーに指定します。また、連続ストラクチャーの設置先軌道は地上子の設置先軌道としてそのまま使用されます。
-		'AtsEx::ExtendedBeacon', // 拡張地上子であることを表す文字列。
+		'AtsEx::ExtendedBeacon.Put', // 拡張地上子であることを表す文字列。
 		'Beacon.Hoge', // 拡張地上子の任意の名前。この名前はプラグインから地上子を参照する（BveHacker クラスの ExtendedBeacons プロパティから）際に使用します。省略する場合は AtsEx::Null を指定します。
 		'AtsEx::ScriptLanguage.CSharpScript', // スクリプトの記述言語を指定する文字列。
 		'AtsEx::ExtendedBeacon.ObservingTargetTrack.AllTracks', // 拡張地上子の検知対象の軌道を指定する文字列。
@@ -39,7 +39,7 @@ include '..\..\BaseMap.txt';
 		'test.tick(g)';
 
 	Repeater[$script].Begin0('0', 0, 0, 0,
-		'AtsEx::ExtendedBeacon',
+		'AtsEx::ExtendedBeacon.Put',
 		'Beacon.Fuga',
 		'AtsEx::ScriptLanguage.IronPython2',
 		'AtsEx::ExtendedBeacon.ObservingTargetTrack.AllTracks',
@@ -52,7 +52,7 @@ include '..\..\BaseMap.txt';
 
 	$script = '#load `ExtendedBeaconTest_CSharpScript.csx`';
 	Repeater[$script].Begin0('0', 0, 0, 0,
-		'AtsEx::ExtendedBeacon',
+		'AtsEx::ExtendedBeacon.Put',
 		'AtsEx::Null',
 		'AtsEx::ScriptLanguage.CSharpScript',
 		'AtsEx::ExtendedBeacon.ObservingTargetTrack.SpecifiedTrackOnly', // 地上子の設置先軌道（= '0'）のみを検知対象とした例。

@@ -6,11 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Text;
 
 using UnembeddedResources;
-
-using AtsEx.PluginHost;
 
 namespace AtsEx.Scripting.CSharp
 {
@@ -44,15 +41,6 @@ namespace AtsEx.Scripting.CSharp
         {
             SenderName = senderName;
             CompilationErrors = compilationErrors;
-        }
-
-        public void ThrowAsLoadError(LoadErrorManager loadErrorManager)
-        {
-            foreach (Diagnostic error in CompilationErrors)
-            {
-                LinePosition linePosition = error.Location.GetLineSpan().StartLinePosition;
-                loadErrorManager.Throw(error.GetMessage(System.Globalization.CultureInfo.CurrentUICulture), SenderName, linePosition.Line, linePosition.Character + 1);
-            }
         }
     }
 }
