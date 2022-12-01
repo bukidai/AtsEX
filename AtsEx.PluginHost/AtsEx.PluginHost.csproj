@@ -72,6 +72,7 @@
     <Compile Include="BveHacker\Services\ScenarioHacker.cs" />
     <Compile Include="BveHacker\Services\StructureSetLifeProlonger.cs" />
     <Compile Include="DictionaryExtensions.cs" />
+    <Compile Include="MapStatements\IdentifierToEnumConverter.cs" />
     <Compile Include="MapStatements\Identifier.cs" />
     <Compile Include="MapStatements\IHeader.cs" />
     <Compile Include="MapStatements\IStatementSet.cs" />
@@ -169,7 +170,9 @@
     <Content Include="LocalReferences\.gitignore" />
     <Content Include="LocalReferences\BveTs\Mackoy.XmlInterfaces.DLL" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\IdentifierToEnumConverter`1.resx" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Libs\BveTypes\BveTypes.csproj">
       <Project>{3658ede1-0c3e-4104-a351-64981e4f82df}</Project>
@@ -192,6 +195,9 @@
       <Name>UnembeddedResources</Name>
       <Private>False</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\IdentifierToEnumConverter`1.ja.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
