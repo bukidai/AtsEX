@@ -18,7 +18,7 @@ namespace AtsEx.Scripting.CSharp
     {
         private class ResourceSet
         {
-            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<CompilationException>("Core");
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<CompilationException>("Scripting");
 
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> Message { get; private set; }
 
