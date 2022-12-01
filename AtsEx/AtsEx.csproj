@@ -153,7 +153,6 @@
     <Compile Include="Plugins\Scripting\Globals\StartedGlobals.cs" />
     <Compile Include="Plugins\Scripting\Globals\TickGlobals.cs" />
     <Compile Include="Plugins\Scripting\IronPython2\IronPython2Plugin.cs" />
-    <Compile Include="Plugins\Scripting\MapStatementIdentifiers.cs" />
     <Compile Include="Plugins\Scripting\ScriptPluginBase.cs" />
     <Compile Include="Plugins\Scripting\ScriptPluginBuilder.cs" />
     <Compile Include="Plugins\Scripting\ScriptPluginPackage.cs" />
@@ -216,8 +215,6 @@
     <Content Include="Resources\Handles\BrakeHandle.resx" />
     <Content Include="Resources\PluginLoader.ja.resx" />
     <Content Include="Resources\PluginLoader.resx" />
-    <Content Include="Resources\Plugins\MapStatementIdentifiers.ja.resx" />
-    <Content Include="Resources\Plugins\MapStatementIdentifiers.resx" />
     <Content Include="Resources\PluginSourceSet.ja.resx" />
     <Content Include="Resources\PluginSourceSet.resx" />
     <Content Include="Resources\ScriptPluginBase.ja.resx" />
