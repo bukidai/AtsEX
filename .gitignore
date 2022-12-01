@@ -14,8 +14,7 @@ obj
 /_SampleScenarios/AtsEx/*.dll.config
 /_SampleScenarios/AtsEx/*.xml
 /_SampleScenarios/AtsEx/*/*.resources.dll
-/_SampleScenarios/AtsEx/Resources/*/*.resx
-/_SampleScenarios/AtsEx/Resources/*/*/*.resx
+/_SampleScenarios/AtsEx/Resources
 
 /_SampleScenarios/AtsEx/Extensions/*.dll
 /_SampleScenarios/AtsEx/Extensions/*.pdb
