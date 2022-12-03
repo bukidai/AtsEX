@@ -53,6 +53,12 @@ namespace AtsEx.PluginHost.MapStatements
         /// <returns>作成したユーザー名前空間。</returns>
         public static Namespace GetUserNamespace(string userName) => UserRoot.Child(userName);
 
+        /// <inheritdoc/>
+        public static bool operator ==(Namespace left, Namespace right) => left.Equals(right);
+
+        /// <inheritdoc/>
+        public static bool operator !=(Namespace left, Namespace right) => !(left == right);
+
         private readonly Namespace Parent;
 
         /// <summary>

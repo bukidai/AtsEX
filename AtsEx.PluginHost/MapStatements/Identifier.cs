@@ -44,6 +44,12 @@ namespace AtsEx.PluginHost.MapStatements
 #endif
         }
 
+        /// <inheritdoc/>
+        public static bool operator ==(Identifier left, Identifier right) => left.Equals(right);
+
+        /// <inheritdoc/>
+        public static bool operator !=(Identifier left, Identifier right) => !(left == right);
+
         /// <summary>
         /// この識別子の名前空間を取得します。
         /// </summary>
