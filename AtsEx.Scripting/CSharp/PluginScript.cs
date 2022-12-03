@@ -18,11 +18,31 @@ namespace AtsEx.Scripting.CSharp
 {
     public class PluginScript<TGlobals> : IPluginScript<TGlobals> where TGlobals : Globals
     {
-        protected static readonly ScriptOptions ScriptOptions = ScriptOptions.Default.
-            AddReferences(typeof(Form).Assembly).
-            WithImports("System", "System.Collections.Generic", "System.Linq", "System.Text", "System.Windows.Forms").
-            AddReferences(App.Instance.AtsExPluginHostAssembly).
-            AddImports(App.Instance.AtsExPluginHostAssembly.GetTypes().Select(t => t.Namespace).Distinct().Where(n => !(n is null)));
+        protected static readonly ScriptOptions ScriptOptions;
+
+        static PluginScript()
+        {
+            if (typeof(TGlobals) == typeof(Globals))
+            {
+                ScriptOptions scriptOptions = ScriptOptions.Default
+                    .AddReferences(typeof(Form).Assembly)
+                    .WithImports("System", "System.Collections.Generic", "System.Linq", "System.Text", "System.Windows.Forms");
+
+                AddReferenceAndImports(Assembly.GetExecutingAssembly());
+                AddReferenceAndImports(App.Instance.AtsExPluginHostAssembly);
+
+                ScriptOptions = scriptOptions;
+
+
+                void AddReferenceAndImports(Assembly assembly) => scriptOptions = scriptOptions
+                    .AddReferences(assembly)
+                    .AddImports(assembly.GetTypes().Select(t => t.Namespace).Distinct().Where(n => !(n is null)));
+            }
+            else
+            {
+                ScriptOptions = PluginScript<Globals>.ScriptOptions;
+            }
+        }
 
         public string Name { get; } = null;
 

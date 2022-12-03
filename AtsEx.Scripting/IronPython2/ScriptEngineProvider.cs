@@ -28,11 +28,15 @@ namespace AtsEx.Scripting.IronPython2
         {
             ScriptEngine scriptEngine = Python.CreateEngine();
 
+            Assembly executingAssembly = Assembly.GetExecutingAssembly();
+
             scriptEngine.Runtime.LoadAssembly(typeof(Form).Assembly);
             scriptEngine.Runtime.LoadAssembly(App.Instance.AtsExPluginHostAssembly);
+            scriptEngine.Runtime.LoadAssembly(executingAssembly);
 
-            ImportAssembliesFromArray("System", "System.Collections.Generic", "System.Text", "System.Windows.Forms");
-            ImportAssemblies(App.Instance.AtsExPluginHostAssembly.GetTypes().Where(t => t.IsPublic).Select(t => t.Namespace).Distinct().Where(n => !(n is null)));
+            AddImportsFromArray("System", "System.Collections.Generic", "System.Text", "System.Windows.Forms");
+            AddImportsFromAssembly(App.Instance.AtsExPluginHostAssembly);
+            AddImportsFromAssembly(executingAssembly);
 
             ICollection<string> engineSearchPaths = scriptEngine.GetSearchPaths();
             foreach (string path in searchPaths) engineSearchPaths.Add(path);
@@ -41,17 +45,20 @@ namespace AtsEx.Scripting.IronPython2
             return scriptEngine;
 
 
-            void ImportAssembly(string name) => scriptEngine.Execute($"import {name}");
+            void AddImport(string name) => scriptEngine.Execute($"import {name}");
 
-            void ImportAssemblies(IEnumerable<string> names)
+            void AddImports(IEnumerable<string> names)
             {
                 foreach (string name in names)
                 {
-                    ImportAssembly(name);
+                    AddImport(name);
                 }
             }
 
-            void ImportAssembliesFromArray(params string[] names) => ImportAssemblies(names);
+            void AddImportsFromArray(params string[] names) => AddImports(names);
+
+            void AddImportsFromAssembly(Assembly assembly)
+                => AddImports(assembly.GetTypes().Where(t => t.IsPublic).Select(t => t.Namespace).Distinct().Where(n => !(n is null)));
         }
 
         public static ScriptEngine CreateEngine(params string[] searchPaths) => CreateEngine(searchPaths as ICollection<string>);
