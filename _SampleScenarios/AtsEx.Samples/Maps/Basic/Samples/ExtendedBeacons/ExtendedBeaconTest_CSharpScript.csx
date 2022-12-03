@@ -3,8 +3,6 @@
 全てのスクリプト（スクリプト言語で開発した拡張機能、車両・マッププラグイン、拡張地上子のスクリプト等）には
 
 	INative Native { get; } // BVEが標準でATSプラグイン向けに提供している機能のラッパー
-	IExtensionFactorySet Extensions { get; } // 読み込まれたAtsEX拡張機能の一覧
-	IPluginSet Plugins { get; } // 読み込まれたぷらの一覧
 	IBveHacker BveHacker { get; } // BVE本体を直接操作するための機能
 
 が渡されています。
@@ -13,26 +11,16 @@
 
 ●全拡張地上子共通
 
-以下の2種類の変数機能が提供されています。用途に合わせてお選びください。
-
-
-◇拡張地上子に紐づいた変数
-
-プラグインから BveHacker.ExtendedBeacons[(地上子の名前)].Passed イベントを通じて値を取得可能な変数です。
+プラグインから Plugins[PluginType.MapPlugin][(拡張地上子PIの名前)].ExtendedBeacons[(地上子の名前)].Passed イベントを通じて値を取得可能な変数です。
 void SetVariable<T>(string name, T value) メソッドで書き込み、T GetVariable<T>(string name) メソッドで読み込みができます。
 
 この変数は拡張地上子スクリプトを跨いで共有することはできません。
-下記「プラグインに紐づいた変数」を使用するか、それが適切でない要件の場合はプラグインとして実装した方が良い可能性が高いです。
 
 
-◇プラグインに紐づいた変数
+※プラグインに紐づいた変数は廃止となりました（β0.17～）。
 
-プラグインのメインクラスから T GetExtendedBeaconPluginVariable<T>(string name) メソッドを通じて取得可能な変数です。
-void SetPluginVariable<T>(PluginType pluginType, string pluginIdentifier, string name, T value) メソッドで書き込み、T GetPluginVariable<T>(PluginType pluginType, string pluginIdentifier, string name) メソッドで読み込みができます。
 
-この変数は全ての拡張地上子スクリプトで共有されます。
-これは、例えば「この地上子からこの地上子までは～～～の区間」のような設定を行い、その区間内に限ってプラグインから何らかの処理を加える……などの用途に向けたものです。
-安易にグローバルな変数を定義することは、保守性を著しく損なうため推奨しません。使用の際はご注意ください。
+☆より高レベルな実装をしたい場合は独自構文機能をご利用ください。
 
 
 ●自列車が通過した場合
