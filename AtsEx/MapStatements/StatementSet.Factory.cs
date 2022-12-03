@@ -31,12 +31,12 @@ namespace AtsEx.MapStatements
                     if (declaration.Length == 0) continue;
 
                     Identifier name = declaration[0];
-                    if (name.Namespace is null || name.Namespace.IsChildOf(Namespace.Root)) continue;
+                    if (name.Namespace is null || !name.Namespace.IsChildOf(Namespace.Root)) continue;
                     Identifier[] additionalDeclaration = declaration.Skip(1).ToArray();
 
                     double to = sameKeyRepeaters.Value.Count >= i || sameKeyRepeaters.Value[i + 1] is null ? double.PositiveInfinity : sameKeyRepeaters.Value[i + 1].Location;
 
-                    Statement statement = new Statement(name, additionalDeclaration, repeater, to, trains);
+                    Statement statement = new Statement(name, additionalDeclaration, argument, repeater, to, trains);
 
                     List<Statement> list = statements.GetOrAdd(name, new List<Statement>()) as List<Statement>;
                     list.Add(statement);

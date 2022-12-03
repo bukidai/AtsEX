@@ -26,10 +26,11 @@ namespace AtsEx.MapStatements
         public double To { get; }
         public RepeatedStructure DefinedStructure { get; }
 
-        public Statement(Identifier name, Identifier[] additionalDeclaration, RepeatedStructure definedStructure, double to, IEnumerable<TracableTrain> targetTrains)
+        public Statement(Identifier name, Identifier[] additionalDeclaration, string argument, RepeatedStructure definedStructure, double to, IEnumerable<TracableTrain> targetTrains)
         {
             Name = name;
             AdditionalDeclaration = additionalDeclaration;
+            Argument = argument;
 
             DefinedStructure = definedStructure;
             To = to;
