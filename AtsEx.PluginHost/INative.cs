@@ -19,9 +19,9 @@ namespace AtsEx.PluginHost
         /// </summary>
         /// <remarks>
         /// このプロパティに設定されている値は力行ハンドルの抑速ノッチ、ブレーキハンドルの抑速ブレーキノッチを無視したものになります。<br/>
-        /// 正確な値を確実に取得したい場合は <see cref="BveHacker.Handles"/> プロパティを使用してください。
+        /// 正確な値を確実に取得したい場合は <see cref="IBveHacker.Handles"/> プロパティを使用してください。
         /// </remarks>
-        /// <seealso cref="BveHacker.Handles"/>
+        /// <seealso cref="IBveHacker.Handles"/>
         HandleSet Handles { get; }
 
 

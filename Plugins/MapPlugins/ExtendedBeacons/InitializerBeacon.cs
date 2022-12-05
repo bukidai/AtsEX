@@ -14,7 +14,7 @@ namespace AtsEx.MapPlugins.ExtendedBeacons
     {
         private bool IsFirstTime = true;
 
-        public InitializerBeacon(INative native, BveHacker bveHacker,
+        public InitializerBeacon(INative native, IBveHacker bveHacker,
             IStatement definedStatement, Identifier beaconName, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain,
             IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script)
             : base(native, bveHacker, definedStatement, beaconName, observingTargetTrack, observingTargetTrain, script)

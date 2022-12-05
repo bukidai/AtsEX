@@ -14,7 +14,7 @@ namespace AtsEx.MapPlugins.ExtendedBeacons
     {
         private double OldLocation = 0d;
 
-        public Beacon(INative native, BveHacker bveHacker,
+        public Beacon(INative native, IBveHacker bveHacker,
             IStatement definedStatement, Identifier beaconName, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain,
             IPluginScript<ExtendedBeaconGlobalsBase<PassedEventArgs>> script)
             : base(native, bveHacker, definedStatement, beaconName, observingTargetTrack, observingTargetTrain, script)

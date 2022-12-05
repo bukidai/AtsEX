@@ -46,7 +46,7 @@ namespace AtsEx.PluginHost.Plugins
         /// <param name="builder">AtsEX から渡される BVE、AtsEX の情報。</param>
         /// <param name="pluginType">AtsEX プラグインの種別。</param>
         /// <param name="useAtsExExtensions">AtsEX 拡張機能を利用するか。<br/>
-        /// <see langword="false"/> を指定すると、<see cref="BveHacker"/> が取得できなくなる代わりに、BVE のバージョンの問題で AtsEX 拡張機能の読込に失敗した場合でもシナリオを開始できるようになります。<br/>
+        /// <see langword="false"/> を指定すると、<see cref="IBveHacker"/> が取得できなくなる代わりに、BVE のバージョンの問題で AtsEX 拡張機能の読込に失敗した場合でもシナリオを開始できるようになります。<br/>
         /// マッププラグインでは <see langword="false"/> を指定することはできません。</param>
         public AssemblyPluginBase(PluginBuilder builder, PluginType pluginType, bool useAtsExExtensions) : base(builder, pluginType, useAtsExExtensions)
         {

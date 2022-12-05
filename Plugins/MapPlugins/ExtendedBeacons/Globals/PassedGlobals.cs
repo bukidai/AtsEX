@@ -9,7 +9,7 @@ namespace AtsEx.MapPlugins.ExtendedBeacons
 {
     internal class PassedGlobals : ExtendedBeaconGlobalsBase<PassedEventArgs>
     {
-        public PassedGlobals(INative native, PluginHost.BveHacker bveHacker,
+        public PassedGlobals(INative native, PluginHost.IBveHacker bveHacker,
             ExtendedBeaconBase<PassedEventArgs> sender, PassedEventArgs eventArgs)
             : base(native, bveHacker, sender, eventArgs)
         {

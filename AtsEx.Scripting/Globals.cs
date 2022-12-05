@@ -11,11 +11,11 @@ namespace AtsEx.Scripting
     public class Globals
     {
         public INative Native { get; }
-        public BveHacker BveHacker { get; }
+        public IBveHacker BveHacker { get; }
 
         protected Dictionary<string, dynamic> Variables;
 
-        private Globals(INative native, BveHacker bveHacker, Dictionary<string, dynamic> variables)
+        private Globals(INative native, IBveHacker bveHacker, Dictionary<string, dynamic> variables)
         {
             Native = native;
             BveHacker = bveHacker;
@@ -27,7 +27,7 @@ namespace AtsEx.Scripting
         {
         }
 
-        public Globals(INative native, BveHacker bveHacker) : this(native, bveHacker, new Dictionary<string, dynamic>())
+        public Globals(INative native, IBveHacker bveHacker) : this(native, bveHacker, new Dictionary<string, dynamic>())
         {
         }
 

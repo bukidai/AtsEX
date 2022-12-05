@@ -12,16 +12,20 @@ using BveTypes.ClassWrappers;
 namespace AtsEx.PluginHost
 {
     /// <summary>
-    /// <see cref="BveHacker.PreviewScenarioCreated"/>、<see cref="BveHacker.ScenarioCreated"/> イベントのデータを提供します。
+    /// <see cref="IBveHacker.PreviewScenarioCreated"/>、<see cref="IBveHacker.ScenarioCreated"/> イベントのデータを提供します。
     /// </summary>
     public class ScenarioCreatedEventArgs : EventArgs
     {
         /// <summary>
-        /// 生成された <see cref="BveTypes.ClassWrappers.Scenario"/> クラスのインスタンス。
+        /// 生成された <see cref="BveTypes.ClassWrappers.Scenario"/> クラスのインスタンスを取得します。
         /// </summary>
         public Scenario Scenario { get; }
 
-        internal ScenarioCreatedEventArgs(Scenario scenario) : base()
+        /// <summary>
+        /// <see cref="ScenarioCreatedEventArgs"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="scenario">生成された <see cref="BveTypes.ClassWrappers.Scenario"/> クラスのインスタンス。</param>
+        public ScenarioCreatedEventArgs(Scenario scenario) : base()
         {
             Scenario = scenario;
         }

@@ -17,7 +17,7 @@ namespace AtsEx.Plugins
         protected override event AllExtensionsLoadedEventHandler AllExtensionsLoaded;
         protected override event AllPluginsLoadedEventHandler AllPluginsLoaded;
 
-        public PluginBuilder(INative native, PluginHost.BveHacker bveHacker, IExtensionSet extensions, string identifier, PluginLoader createdBy)
+        public PluginBuilder(INative native, PluginHost.IBveHacker bveHacker, IExtensionSet extensions, string identifier, PluginLoader createdBy)
             : base(native, bveHacker, extensions, identifier)
         {
             CreatedBy = createdBy;

@@ -14,7 +14,7 @@ namespace AtsEx.Samples.MapPlugins.StationController
         public static InstanceStore Instance { get; private set; } = null;
         public static bool IsInitialized => !(Instance is null);
 
-        public static void Initialize(INative native, IExtensionSet extensions, BveHacker bveHacker)
+        public static void Initialize(INative native, IExtensionSet extensions, IBveHacker bveHacker)
         {
             Instance = new InstanceStore(native, extensions, bveHacker);
         }
@@ -22,9 +22,9 @@ namespace AtsEx.Samples.MapPlugins.StationController
 
         public INative Native { get; }
         public IExtensionSet Extensions { get; }
-        public BveHacker BveHacker { get; }
+        public IBveHacker BveHacker { get; }
 
-        private InstanceStore(INative native, IExtensionSet extensions, BveHacker bveHacker)
+        private InstanceStore(INative native, IExtensionSet extensions, IBveHacker bveHacker)
         {
             Native = native;
             Extensions = extensions;

@@ -50,7 +50,7 @@ namespace AtsEx.Samples.MapPlugins.StationController
 
         private void AddButtonClicked(object sender, EventArgs e)
         {
-            BveHacker bveHacker = InstanceStore.Instance.BveHacker;
+            IBveHacker bveHacker = InstanceStore.Instance.BveHacker;
 
             StationList stations = bveHacker.Scenario.Route.Stations;
             try
@@ -80,7 +80,7 @@ namespace AtsEx.Samples.MapPlugins.StationController
 
         private void RemoveButtonClicked(object sender, EventArgs e)
         {
-            BveHacker bveHacker = InstanceStore.Instance.BveHacker;
+            IBveHacker bveHacker = InstanceStore.Instance.BveHacker;
 
             StationList stations = InstanceStore.Instance.BveHacker.Scenario.Route.Stations;
             if (stations.Count == 0) return;

@@ -21,7 +21,7 @@ namespace AtsEx.Extensions.DiagramUpdater
         /// 更新に使用する <see cref="Scenario"/> を明示的に指定して、時刻表と「時刻と位置」フォーム内のダイヤグラムの表示を最新の設定に更新します。
         /// </summary>
         /// <remarks>
-        /// <see cref="BveHacker.ScenarioCreated"/> イベント内で呼び出す場合など、<see cref="BveHacker.Scenario"/> が利用できない場合にこのオーバーロードを使用してください。
+        /// <see cref="IBveHacker.ScenarioCreated"/> イベント内で呼び出す場合など、<see cref="IBveHacker.Scenario"/> が利用できない場合にこのオーバーロードを使用してください。
         /// 通常は <see cref="UpdateDiagram()"/> オーバーロードを使用してください。
         /// </remarks>
         /// <seealso cref="UpdateDiagram()"/>
@@ -29,11 +29,11 @@ namespace AtsEx.Extensions.DiagramUpdater
         void UpdateDiagram(Scenario scenario);
 
         /// <summary>
-        /// <see cref="BveHacker.Scenario"/> を使用して、時刻表と「時刻と位置」フォーム内のダイヤグラムの表示を最新の設定に更新します。
+        /// <see cref="IBveHacker.Scenario"/> を使用して、時刻表と「時刻と位置」フォーム内のダイヤグラムの表示を最新の設定に更新します。
         /// </summary>
         /// <remarks>
-        /// <see cref="BveHacker.ScenarioCreated"/> イベント内で呼び出す場合など、
-        /// <see cref="BveHacker.Scenario"/> が利用できない場合は <see cref="UpdateDiagram(Scenario)"/> オーバーロードを使用してください。
+        /// <see cref="IBveHacker.ScenarioCreated"/> イベント内で呼び出す場合など、
+        /// <see cref="IBveHacker.Scenario"/> が利用できない場合は <see cref="UpdateDiagram(Scenario)"/> オーバーロードを使用してください。
         /// </remarks>
         /// <seealso cref="UpdateDiagram(Scenario)"/>
         void UpdateDiagram();

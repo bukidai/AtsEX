@@ -19,7 +19,7 @@ namespace AtsEx.MapPlugins.ExtendedBeacons
     public abstract class ExtendedBeaconBase<TPassedEventArgs> : IExtendedBeacon, ICompilationErrorCheckable where TPassedEventArgs : PassedEventArgs
     {
         protected readonly INative Native;
-        protected readonly BveHacker BveHacker;
+        protected readonly IBveHacker BveHacker;
 
         protected readonly IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> Script;
 
@@ -53,7 +53,7 @@ namespace AtsEx.MapPlugins.ExtendedBeacons
         /// </summary>
         public ObservingTargetTrain ObservingTargetTrain { get; }
 
-        private protected ExtendedBeaconBase(INative native, BveHacker bveHacker,
+        private protected ExtendedBeaconBase(INative native, IBveHacker bveHacker,
             IStatement definedStatement, Identifier beaconName, ObservingTargetTrack observingTargetTrack, ObservingTargetTrain observingTargetTrain,
             IPluginScript<ExtendedBeaconGlobalsBase<TPassedEventArgs>> script)
         {

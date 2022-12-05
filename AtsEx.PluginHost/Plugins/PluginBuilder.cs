@@ -11,14 +11,14 @@ namespace AtsEx.PluginHost.Plugins
     public abstract class PluginBuilder
     {
         internal protected INative Native { get; }
-        internal protected BveHacker BveHacker { get; }
+        internal protected IBveHacker BveHacker { get; }
         internal protected IExtensionSet Extensions { get; }
         internal protected string Identifier { get; }
 
         internal protected abstract event AllExtensionsLoadedEventHandler AllExtensionsLoaded;
         internal protected abstract event AllPluginsLoadedEventHandler AllPluginsLoaded;
 
-        public PluginBuilder(INative native, BveHacker bveHacker, IExtensionSet extensions, string identifier)
+        public PluginBuilder(INative native, IBveHacker bveHacker, IExtensionSet extensions, string identifier)
         {
             Native = native;
             BveHacker = bveHacker;

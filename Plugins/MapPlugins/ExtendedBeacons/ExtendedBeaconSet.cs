@@ -60,7 +60,7 @@ namespace AtsEx.MapPlugins.ExtendedBeacons
             PreTrainObservingBeacons = new ReadOnlyDictionary<Identifier, BeaconBase>(preTrainObservingBeacons);
         }
 
-        public static ExtendedBeaconSet Load(INative native, BveHacker bveHacker, Scenario scenario)
+        public static ExtendedBeaconSet Load(INative native, IBveHacker bveHacker, Scenario scenario)
         {
             Dictionary<Identifier, BeaconBase> beacons = new Dictionary<Identifier, BeaconBase>();
             Dictionary<Identifier, TrainObservingBeaconBase> trainObservingBeacons = new Dictionary<Identifier, TrainObservingBeaconBase>();

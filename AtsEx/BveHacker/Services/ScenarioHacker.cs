@@ -13,7 +13,9 @@ using FastMember;
 using TypeWrapping;
 using ObjectiveHarmonyPatch;
 
-namespace AtsEx.PluginHost.BveHackerServices
+using AtsEx.PluginHost;
+
+namespace AtsEx.BveHackerServices
 {
     internal sealed class ScenarioHacker : IDisposable
     {

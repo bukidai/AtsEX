@@ -68,9 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="BveHacker\Services\MainFormHacker.cs" />
-    <Compile Include="BveHacker\Services\ScenarioHacker.cs" />
-    <Compile Include="BveHacker\Services\StructureSetLifeProlonger.cs" />
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="MapStatements\IdentifierToEnumConverter.cs" />
     <Compile Include="LoadErrorManager\ILoadErrorManager.cs" />
@@ -114,7 +111,7 @@
     <Compile Include="Exceptions\BveFileLoadException.cs" />
     <Compile Include="Exceptions\DevelopException.cs" />
     <Compile Include="Exceptions\PropertyNotInitializedException.cs" />
-    <Compile Include="BveHacker\BveHacker.cs" />
+    <Compile Include="BveHacker\IBveHacker.cs" />
     <Compile Include="Plugins\PluginBase.cs" />
     <Compile Include="Input\KeyBase.cs" />
     <Compile Include="Input\Native\INativeKeySet.cs" />
@@ -141,8 +138,6 @@
     <Content Include="Resources\ClassWrappers\MapObjectList.resx" />
     <Content Include="Resources\ClassWrapperBase.ja.resx" />
     <Content Include="Resources\ClassWrapperBase.resx" />
-    <Content Include="Resources\BveHacker.resx" />
-    <Content Include="Resources\BveHacker.ja.resx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

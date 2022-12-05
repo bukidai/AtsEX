@@ -16,7 +16,7 @@ namespace AtsEx.MapPlugins.ExtendedBeacons
     {
         private readonly List<TrainInfo> TargetTrains;
 
-        public TrainObservingBeacon(INative native, BveHacker bveHacker,
+        public TrainObservingBeacon(INative native, IBveHacker bveHacker,
             IStatement definedStatement, Identifier beaconName, ObservingTargetTrack observingTargetTrack,
             IDictionary<string, Train> targetTrains, IPluginScript<ExtendedBeaconGlobalsBase<TrainPassedEventArgs>> script)
             : base(native, bveHacker, definedStatement, beaconName, observingTargetTrack, ObservingTargetTrain.Trains, script)

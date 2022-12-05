@@ -12,7 +12,7 @@ namespace AtsEx.PluginHost.MapStatements
     /// Repeater ステートメントを使用して独自に定義する構文を表します。
     /// </summary>
     /// <remarks>
-    /// <see cref="IHeader"/> と異なり、シナリオの読込が完了して <see cref="BveHacker.ScenarioCreated"/> イベントが発生するまでは取得できませんが、
+    /// <see cref="IHeader"/> と異なり、シナリオの読込が完了して <see cref="IBveHacker.ScenarioCreated"/> イベントが発生するまでは取得できませんが、
     /// マップ内の変数を埋め込んだり、定義した距離程と関連付けたりすることが可能です。
     /// </remarks>
     public interface IStatement

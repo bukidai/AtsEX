@@ -44,7 +44,7 @@ namespace AtsEx.PluginHost.Plugins
         public PluginType PluginType { get; }
 
         /// <summary>
-        /// この AtsEX プラグインが AtsEX 拡張機能 (<see cref="PluginHost.BveHacker"/> など) を使用するかどうかを取得します。
+        /// この AtsEX プラグインが AtsEX 拡張機能 (<see cref="PluginHost.IBveHacker"/> など) を使用するかどうかを取得します。
         /// </summary>
         /// <remarks>
         /// <see langword="false"/> に設定されている場合、<see cref="BveHacker"/> プロパティは取得できません。
@@ -79,8 +79,8 @@ namespace AtsEx.PluginHost.Plugins
         /// </remarks>
         protected IPluginSet Plugins => _Plugins ?? throw new PropertyNotInitializedException(nameof(Plugins));
 
-        private readonly BveHacker _BveHacker = null;
-        protected BveHacker BveHacker
+        private readonly IBveHacker _BveHacker = null;
+        protected IBveHacker BveHacker
             => UseAtsExExtensions ? _BveHacker : throw new InvalidOperationException(string.Format(Resources.Value.CannotUseAtsExExtensions.Value, nameof(UseAtsExExtensions)));
 
         /// <summary>
