@@ -9,7 +9,7 @@ namespace AtsEx.Utilities
 {
     internal class EnumerableInDictionaryEnumerator<TKey, TValue> : IEnumerator<TValue>
     {
-        private readonly IDictionary<TKey, IEnumerable<TValue>> Source;
+        private readonly IDictionary<TKey, IReadOnlyList<TValue>> Source;
         private readonly IEnumerator<TKey> KeyEnumerator;
 
         private IEnumerator<TValue> CurrentEnumerator = null;
@@ -17,7 +17,7 @@ namespace AtsEx.Utilities
         public TValue Current => CurrentEnumerator.Current;
         object IEnumerator.Current => Current;
 
-        public EnumerableInDictionaryEnumerator(IDictionary<TKey, IEnumerable<TValue>> source)
+        public EnumerableInDictionaryEnumerator(IDictionary<TKey, IReadOnlyList<TValue>> source)
         {
             Source = source;
             KeyEnumerator = Source.Keys.GetEnumerator();

@@ -12,17 +12,17 @@ namespace AtsEx.MapStatements
 {
     internal sealed partial class HeaderSet : IHeaderSet, IEnumerable<Header>
     {
-        private readonly IDictionary<Identifier, IEnumerable<Header>> Headers;
+        private readonly IDictionary<Identifier, IReadOnlyList<Header>> Headers;
 
-        public IEnumerable<Header> NoMapPluginHeaders { get; }
+        public IReadOnlyList<Header> NoMapPluginHeaders { get; }
 
-        public HeaderSet(IDictionary<Identifier, IEnumerable<Header>> headers, IEnumerable<Header> noMapPluginHeaders)
+        public HeaderSet(IDictionary<Identifier, IReadOnlyList<Header>> headers, IReadOnlyList<Header> noMapPluginHeaders)
         {
             Headers = headers;
             NoMapPluginHeaders = noMapPluginHeaders;
         }
 
-        public IEnumerable<IHeader> GetAll(Identifier identifier) => Headers.TryGetValue(identifier, out IEnumerable<Header> result) ? result : Enumerable.Empty<Header>();
+        public IReadOnlyList<IHeader> GetAll(Identifier identifier) => Headers.TryGetValue(identifier, out IReadOnlyList<Header> result) ? result : new List<Header>();
 
         public IEnumerator<Header> GetEnumerator() => new Enumerator(this);
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

@@ -12,14 +12,14 @@ namespace AtsEx.MapStatements
 {
     internal sealed partial class StatementSet : IStatementSet, IEnumerable<Statement>
     {
-        private readonly IDictionary<Identifier, IEnumerable<Statement>> Statements;
+        private readonly IDictionary<Identifier, IReadOnlyList<Statement>> Statements;
 
-        public StatementSet(IDictionary<Identifier, IEnumerable<Statement>> statements)
+        public StatementSet(IDictionary<Identifier, IReadOnlyList<Statement>> statements)
         {
             Statements = statements;
         }
 
-        public IEnumerable<IStatement> GetAll(Identifier identifier) => Statements.TryGetValue(identifier, out IEnumerable<Statement> result) ? result : Enumerable.Empty<Statement>();
+        public IReadOnlyList<IStatement> GetAll(Identifier identifier) => Statements.TryGetValue(identifier, out IReadOnlyList<Statement> result) ? result : new List<Statement>();
 
         public IEnumerator<Statement> GetEnumerator() => new EnumerableInDictionaryEnumerator<Identifier, Statement>(Statements);
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

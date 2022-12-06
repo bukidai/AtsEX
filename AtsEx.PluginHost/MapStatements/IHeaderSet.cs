@@ -16,6 +16,6 @@ namespace AtsEx.PluginHost.MapStatements
         /// </summary>
         /// <param name="identifier">ヘッダーの識別子。</param>
         /// <returns>識別子 <paramref name="identifier"/> を持つヘッダーの一覧。</returns>
-        IEnumerable<IHeader> GetAll(Identifier identifier);
+        IReadOnlyList<IHeader> GetAll(Identifier identifier);
     }
 }

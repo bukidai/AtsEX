@@ -18,7 +18,7 @@ namespace AtsEx.MapStatements
         {
             IEnumerable<Statement.TracableTrain> trains = targetTrains.Select(item => new Statement.TracableTrain(item.Key, item.Value));
 
-            ConcurrentDictionary<Identifier, IEnumerable<Statement>> statements = new ConcurrentDictionary<Identifier, IEnumerable<Statement>>();
+            ConcurrentDictionary<Identifier, IReadOnlyList<Statement>> statements = new ConcurrentDictionary<Identifier, IReadOnlyList<Statement>>();
             foreach (KeyValuePair<string, MapObjectList> sameKeyRepeaters in repeatedStructures)
             {
                 for (int i = 0; i < sameKeyRepeaters.Value.Count; i++)

@@ -16,6 +16,6 @@ namespace AtsEx.PluginHost.MapStatements
         /// </summary>
         /// <param name="identifier">ステートメントの識別子。</param>
         /// <returns>識別子 <paramref name="identifier"/> を持つステートメントの一覧。</returns>
-        IEnumerable<IStatement> GetAll(Identifier identifier);
+        IReadOnlyList<IStatement> GetAll(Identifier identifier);
     }
 }

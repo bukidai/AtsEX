@@ -26,13 +26,13 @@ namespace AtsEx.MapStatements
 
         public static HeaderSet FromMap(string filePath)
         {
-            (IDictionary<Identifier, IEnumerable<Header>> headers, IEnumerable<Header> noMapPluginHeaders) = Load(filePath);
+            (IDictionary<Identifier, IReadOnlyList<Header>> headers, IReadOnlyList<Header> noMapPluginHeaders) = Load(filePath);
             return new HeaderSet(headers, noMapPluginHeaders);
         }
 
-        private static (IDictionary<Identifier, IEnumerable<Header>> Headers, IEnumerable<Header> NoMapPluginHeaders) Load(string filePath)
+        private static (IDictionary<Identifier, IReadOnlyList<Header>> Headers, IReadOnlyList<Header> NoMapPluginHeaders) Load(string filePath)
         {
-            ConcurrentDictionary<Identifier, IEnumerable<Header>> headers = new ConcurrentDictionary<Identifier, IEnumerable<Header>>();
+            ConcurrentDictionary<Identifier, IReadOnlyList<Header>> headers = new ConcurrentDictionary<Identifier, IReadOnlyList<Header>>();
             List<Header> noMapPluginHeaders = new List<Header>();
 
             string fileName = Path.GetFileName(filePath);
@@ -76,9 +76,9 @@ namespace AtsEx.MapStatements
 
                         if (!File.Exists(includeAbsolutePath)) return;
 
-                        (IDictionary<Identifier, IEnumerable<Header>> headersInIncludedMap, IEnumerable<Header> noMapPluginHeadersInIncludedMap) = Load(includeAbsolutePath);
+                        (IDictionary<Identifier, IReadOnlyList<Header>> headersInIncludedMap, IReadOnlyList<Header> noMapPluginHeadersInIncludedMap) = Load(includeAbsolutePath);
 
-                        foreach (KeyValuePair<Identifier, IEnumerable<Header>> pair in headersInIncludedMap)
+                        foreach (KeyValuePair<Identifier, IReadOnlyList<Header>> pair in headersInIncludedMap)
                         {
                             List<Header> list = headers.GetOrAdd(pair.Key, new List<Header>()) as List<Header>;
                             list.AddRange(pair.Value);
