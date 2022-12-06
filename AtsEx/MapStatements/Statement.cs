@@ -15,8 +15,8 @@ namespace AtsEx.MapStatements
     {
         private readonly IEnumerable<TracableTrain> TargetTrains;
 
-        private double OldVehicleLocation = 0d;
-        private double OldPreTrainLocation = 0;
+        private double OldVehicleLocation = double.NegativeInfinity;
+        private double OldPreTrainLocation = double.NegativeInfinity;
 
         public Identifier Name { get; }
         public Identifier[] AdditionalDeclaration { get; }
