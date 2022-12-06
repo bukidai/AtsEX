@@ -129,6 +129,10 @@ namespace AtsEx
 
         public void Tick(TimeSpan elapsed)
         {
+            double vehicleLocation = Scenario.LocationManager.Location;
+            double preTrainLocation = Scenario.Route.PreTrainObjects.GetPreTrainLocation(Scenario.TimeManager.TimeMilliseconds);
+
+            _MapStatements.Tick(vehicleLocation, preTrainLocation);
         }
 
 
@@ -162,7 +166,7 @@ namespace AtsEx
         public IHeaderSet MapHeaders => _MapHeaders;
 
 #pragma warning disable IDE1006 // 命名スタイル
-        public IStatementSet _MapStatements { get; private set; }
+        public StatementSet _MapStatements { get; private set; }
 #pragma warning restore IDE1006 // 命名スタイル
         public IStatementSet MapStatements => _MapStatements;
 

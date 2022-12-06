@@ -23,5 +23,13 @@ namespace AtsEx.MapStatements
 
         public IEnumerator<Statement> GetEnumerator() => new EnumerableInDictionaryEnumerator<Identifier, Statement>(Statements);
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public void Tick(double vehicleLocation, double preTrainLocation)
+        {
+            foreach (Statement statement in this)
+            {
+                statement.Tick(vehicleLocation, preTrainLocation);
+            }
+        }
     }
 }
