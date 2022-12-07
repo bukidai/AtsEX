@@ -17,11 +17,11 @@ using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx
 {
-    internal abstract partial class AtsExScenarioService : IDisposable
+    internal abstract partial class ScenarioService : IDisposable
     {
         private class ResourceSet
         {
-            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<AtsExScenarioService>("Core");
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<ScenarioService>("Core");
 
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> VehiclePluginTickResultTypeInvalid { get; private set; }
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> MapPluginTickResultTypeInvalid { get; private set; }
@@ -34,7 +34,7 @@ namespace AtsEx
 
         private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
 
-        static AtsExScenarioService()
+        static ScenarioService()
         {
 #if DEBUG
             _ = Resources.Value;
@@ -48,7 +48,7 @@ namespace AtsEx
 
         private readonly BveHacker BveHacker;
 
-        protected AtsExScenarioService(AtsEx atsEx, PluginSourceSet vehiclePluginUsing, PluginHost.Native.VehicleSpec vehicleSpec)
+        protected ScenarioService(AtsEx atsEx, PluginSourceSet vehiclePluginUsing, PluginHost.Native.VehicleSpec vehicleSpec)
         {
             AtsEx = atsEx;
             BveHacker = AtsEx.BveHacker;

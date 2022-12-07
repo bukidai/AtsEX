@@ -29,7 +29,7 @@ namespace AtsEx.Native
         private static readonly Stopwatch Stopwatch = new Stopwatch();
 
         private static AtsEx.AsAtsPlugin AtsEx;
-        private static AtsExScenarioService.AsAtsPlugin AtsExScenarioService;
+        private static ScenarioService.AsAtsPlugin AtsExScenarioService;
 
         public static void Load(Assembly callerAssembly, AtsExActivator activator)
         {
@@ -58,7 +58,7 @@ namespace AtsEx.Native
             PluginHost.Native.VehicleSpec exVehicleSpec = new PluginHost.Native.VehicleSpec(
                 vehicleSpec.BrakeNotches, vehicleSpec.PowerNotches, vehicleSpec.AtsNotch, vehicleSpec.B67Notch, vehicleSpec.Cars);
 
-            AtsExScenarioService = new AtsExScenarioService.AsAtsPlugin(AtsEx, CallerAssembly, exVehicleSpec);
+            AtsExScenarioService = new ScenarioService.AsAtsPlugin(AtsEx, CallerAssembly, exVehicleSpec);
         }
 
         public static void Initialize(int defaultBrakePosition)

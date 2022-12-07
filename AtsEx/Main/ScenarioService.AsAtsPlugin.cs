@@ -15,9 +15,9 @@ using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx
 {
-    internal partial class AtsExScenarioService
+    internal partial class ScenarioService
     {
-        internal sealed class AsAtsPlugin : AtsExScenarioService
+        internal sealed class AsAtsPlugin : ScenarioService
         {
             public AsAtsPlugin(AtsEx.AsAtsPlugin atsEx, Assembly callerAssembly, VehicleSpec vehicleSpec)
                 : base(atsEx, LoadVehiclePluginUsing(callerAssembly), vehicleSpec)

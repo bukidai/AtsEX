@@ -12,7 +12,7 @@ using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx
 {
-    internal partial class AtsExScenarioService
+    internal partial class ScenarioService
     {
         private sealed class CommandBuilder
         {

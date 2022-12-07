@@ -107,17 +107,17 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AtsExScenarioService.CommandBuilder.cs" />
+    <Compile Include="Main\ScenarioService.CommandBuilder.cs" />
     <Compile Include="BveHacker\Services\MainFormHacker.cs" />
     <Compile Include="BveHacker\Services\ScenarioHacker.cs" />
     <Compile Include="BveHacker\Services\StructureSetLifeProlonger.cs" />
     <Compile Include="Hosting\AssemblyResolver.cs" />
     <Compile Include="Hosting\AtsExActivator.cs" />
     <Compile Include="Hosting\AtsExRepositoryHost.cs" />
-    <Compile Include="AtsEx.AsAtsPlugin.cs" />
-    <Compile Include="AtsEx.cs" />
-    <Compile Include="AtsExScenarioService.AsAtsPlugin.cs" />
-    <Compile Include="AtsExScenarioService.cs" />
+    <Compile Include="Main\AtsEx.AsAtsPlugin.cs" />
+    <Compile Include="Main\AtsEx.cs" />
+    <Compile Include="Main\ScenarioService.AsAtsPlugin.cs" />
+    <Compile Include="Main\ScenarioService.cs" />
     <Compile Include="BveHacker\BveHacker.cs" />
     <Compile Include="Handles\BrakeHandle.cs" />
     <Compile Include="Handles\HandleBase.cs" />
@@ -212,8 +212,8 @@
   <ItemGroup>
     <Content Include="Resources\AtsEx.ja.resx" />
     <Content Include="Resources\AtsEx.resx" />
-    <Content Include="Resources\AtsExScenarioService.ja.resx" />
-    <Content Include="Resources\AtsExScenarioService.resx" />
+    <Content Include="Resources\ScenarioService.ja.resx" />
+    <Content Include="Resources\ScenarioService.resx" />
     <Content Include="Resources\Handles\BrakeHandle.ja.resx" />
     <Content Include="Resources\Handles\BrakeHandle.resx" />
     <Content Include="Resources\PluginLoader.ja.resx" />
