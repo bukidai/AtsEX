@@ -108,6 +108,8 @@ namespace Zbx1425.DXDynamicTexture
             {
                 if (item.Value != null && item.Value.IsCreated) item.Value.Dispose();
             }
+
+            Harmony.UnpatchAll(Harmony.Id);
         }
 
         internal static void Clear()
