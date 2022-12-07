@@ -42,11 +42,10 @@ namespace AtsEx
         }
 
         private readonly AtsEx AtsEx;
-
         private readonly NativeImpl Native;
-        private readonly PluginSet Plugins;
-
         private readonly BveHacker BveHacker;
+
+        private readonly PluginService _PluginService;
 
         protected ScenarioService(AtsEx atsEx, PluginSourceSet vehiclePluginUsing, PluginHost.Native.VehicleSpec vehicleSpec)
         {
@@ -55,83 +54,17 @@ namespace AtsEx
 
             Native = new NativeImpl(vehicleSpec);
 
-            PluginLoadErrorResolver loadErrorResolver = new PluginLoadErrorResolver(BveHacker.LoadErrorManager);
+            PluginLoader pluginLoader = new PluginLoader(Native, BveHacker, AtsEx.Extensions);
+            PluginSet plugins = pluginLoader.Load(vehiclePluginUsing);
+            _PluginService = new PluginService(plugins, Native.Handles);
 
-            Plugins.PluginLoader pluginLoader = new Plugins.PluginLoader(Native, BveHacker, AtsEx.Extensions);
-            Dictionary<string, PluginBase> vehiclePlugins = null;
-            Dictionary<string, PluginBase> mapPlugins = null;
-            try
-            {
-                {
-                    vehiclePlugins = pluginLoader.Load(vehiclePluginUsing);
-                }
-
-                {
-                    PluginHost.MapStatements.Identifier mapPluginUsingIdentifier = new PluginHost.MapStatements.Identifier(Namespace.Root, "mappluginusing");
-                    IEnumerable<IHeader> mapPluginUsingHeaders = BveHacker.MapHeaders.GetAll(mapPluginUsingIdentifier);
-
-                    foreach (IHeader header in mapPluginUsingHeaders)
-                    {
-                        string mapPluginUsingPath = Path.Combine(Path.GetDirectoryName(BveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path), header.Argument);
-                        PluginSourceSet mapPluginUsing = PluginSourceSet.FromPluginUsing(PluginType.MapPlugin, mapPluginUsingPath);
-
-                        Dictionary<string, PluginBase> loadedMapPlugins = pluginLoader.Load(mapPluginUsing);
-                        AddRangeToMapPlugins(loadedMapPlugins);
-                    }
-
-
-                    void AddRangeToMapPlugins(Dictionary<string, PluginBase> plugins)
-                    {
-                        if (mapPlugins is null)
-                        {
-                            mapPlugins = plugins;
-                        }
-                        else
-                        {
-                            foreach (KeyValuePair<string, PluginBase> plugin in plugins)
-                            {
-                                mapPlugins.Add(plugin.Key, plugin.Value);
-                            }
-                        }
-                    }
-                }
-
-                {
-                    IEnumerable<LoadError> removeTargetErrors = BveHacker.LoadErrorManager.Errors.Where(error =>
-                    {
-                        bool isTargetError = BveHacker._MapHeaders.Any(header => header.LineIndex == error.LineIndex && header.CharIndex == header.CharIndex);
-                        return isTargetError;
-                    });
-                    foreach (LoadError error in removeTargetErrors)
-                    {
-                        BveHacker.LoadErrorManager.Errors.Remove(error);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                loadErrorResolver.Resolve(ex);
-            }
-            finally
-            {
-                if (vehiclePlugins is null) vehiclePlugins = new Dictionary<string, PluginBase>();
-                if (mapPlugins is null) mapPlugins = new Dictionary<string, PluginBase>();
-
-                Plugins = new PluginSet(vehiclePlugins, mapPlugins);
-                pluginLoader.SetPluginSetToLoadedPlugins(Plugins);
-
-                AtsEx.VersionFormProvider.SetScenario(Plugins.Select(item => item.Value));
-            }
+            AtsEx.VersionFormProvider.SetScenario(plugins.Select(item => item.Value));
         }
 
         public void Dispose()
         {
             AtsEx.VersionFormProvider.UnsetScenario();
-
-            foreach (KeyValuePair<string, PluginBase> plugin in Plugins)
-            {
-                plugin.Value.Dispose();
-            }
+            _PluginService.Dispose();
         }
 
         public void Started(BrakePosition defaultBrakePosition)
@@ -144,34 +77,9 @@ namespace AtsEx
             Native.VehicleState = vehicleState;
 
             BveHacker.Tick(elapsed);
+            HandlePositionSet tickResult = _PluginService.Tick(elapsed);
 
-            CommandBuilder commandBuilder = new CommandBuilder(Native.Handles);
-
-            foreach (PluginBase plugin in Plugins[PluginType.VehiclePlugin].Values)
-            {
-                TickResult tickResult = plugin.Tick(elapsed);
-                if (!(tickResult is VehiclePluginTickResult vehiclePluginTickResult))
-                {
-                    throw new InvalidOperationException(string.Format(Resources.Value.VehiclePluginTickResultTypeInvalid.Value,
-                       $"{nameof(PluginBase)}.{nameof(PluginBase.Tick)}", nameof(VehiclePluginTickResult)));
-                }
-
-                commandBuilder.Override(vehiclePluginTickResult);
-            }
-
-            foreach (PluginBase plugin in Plugins[PluginType.MapPlugin].Values)
-            {
-                TickResult tickResult = plugin.Tick(elapsed);
-                if (!(tickResult is MapPluginTickResult mapPluginTickResult))
-                {
-                    throw new InvalidOperationException(string.Format(Resources.Value.MapPluginTickResultTypeInvalid.Value,
-                       $"{nameof(PluginBase)}.{nameof(PluginBase.Tick)}", nameof(MapPluginTickResult)));
-                }
-
-                commandBuilder.Override(mapPluginTickResult);
-            }
-
-            return commandBuilder.Compile();
+            return tickResult;
         }
 
         public void SetPower(int notch)

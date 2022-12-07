@@ -107,7 +107,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main\ScenarioService.CommandBuilder.cs" />
+    <Compile Include="Main\ScenarioService.PluginService.CommandBuilder.cs" />
     <Compile Include="BveHacker\Services\MainFormHacker.cs" />
     <Compile Include="BveHacker\Services\ScenarioHacker.cs" />
     <Compile Include="BveHacker\Services\StructureSetLifeProlonger.cs" />
@@ -129,6 +129,8 @@
     <Compile Include="Input\NativeKeySet.cs" />
     <Compile Include="LoadErrorManager\LoadErrorList.cs" />
     <Compile Include="LoadErrorManager\LoadErrorManager.cs" />
+    <Compile Include="Main\ScenarioService.PluginLoader.cs" />
+    <Compile Include="Main\ScenarioService.PluginService.cs" />
     <Compile Include="MapStatements\Statement.cs" />
     <Compile Include="MapStatements\Header.cs" />
     <Compile Include="MapStatements\StatementSet.cs" />

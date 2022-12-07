@@ -22,7 +22,7 @@ namespace AtsEx
             public AsAtsPlugin(AtsEx.AsAtsPlugin atsEx, Assembly callerAssembly, VehicleSpec vehicleSpec)
                 : base(atsEx, LoadVehiclePluginUsing(callerAssembly), vehicleSpec)
             {
-                if (BveHacker.BveTypes.ProfileVersion != App.Instance.BveVersion && Plugins.All(item => !item.Value.UseAtsExExtensions))
+                if (BveHacker.BveTypes.ProfileVersion != App.Instance.BveVersion && !_PluginService.UseAtsExExtensions)
                 {
                     LoadError removeTargetError = BveHacker.LoadErrorManager.Errors.FirstOrDefault(error => error.Text == atsEx.VersionWarningText);
                     if (!(removeTargetError is null))
