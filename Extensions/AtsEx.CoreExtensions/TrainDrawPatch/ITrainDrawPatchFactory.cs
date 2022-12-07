@@ -8,12 +8,14 @@ using SlimDX;
 
 using BveTypes.ClassWrappers;
 
+using AtsEx.PluginHost.Plugins.Extensions;
+
 namespace AtsEx.Extensions.TrainDrawPatch
 {
     /// <summary>
     /// <see cref="TrainDrawPatch"/> クラスの新しいインスタンスを初期化するたのファクトリを表します。
     /// </summary>
-    public interface ITrainDrawPatchFactory
+    public interface ITrainDrawPatchFactory : IExtension
     {
         /// <summary>
         /// 指定した他列車に、自由に移動・回転できるようにするパッチを適用します。

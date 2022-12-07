@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using AtsEx.PluginHost.Plugins.Extensions;
+
 namespace AtsEx.Extensions.ContextMenuHacker
 {
     /// <summary>
     /// メインフォームの右クリックメニューを編集するための機能を提供します。
     /// </summary>
-    public interface IContextMenuHacker
+    public interface IContextMenuHacker : IExtension
     {
         /// <summary>
         /// メニューに新しい項目を追加します。

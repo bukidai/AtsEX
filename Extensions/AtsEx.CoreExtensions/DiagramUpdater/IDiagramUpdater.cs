@@ -15,7 +15,7 @@ namespace AtsEx.Extensions.DiagramUpdater
     /// <summary>
     /// 時刻表、ダイヤグラムなどの行路に関わるオブジェクトの更新機能を提供します。
     /// </summary>
-    public interface IDiagramUpdater
+    public interface IDiagramUpdater : IExtension
     {
         /// <summary>
         /// 更新に使用する <see cref="Scenario"/> を明示的に指定して、時刻表と「時刻と位置」フォーム内のダイヤグラムの表示を最新の設定に更新します。

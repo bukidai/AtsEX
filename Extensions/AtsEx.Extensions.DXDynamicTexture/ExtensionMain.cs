@@ -12,7 +12,7 @@ using AtsEx.PluginHost.Plugins.Extensions;
 namespace AtsEx.Extensions.DXDynamicTexture
 {
     [HideExtensionMain]
-    public class ExtensionMain : AssemblyPluginBase
+    public class ExtensionMain : AssemblyPluginBase, IExtension
     {
         public ExtensionMain(PluginBuilder builder) : base(builder, PluginType.Extension, false)
         {

@@ -20,6 +20,7 @@ namespace AtsEx.Plugins.Extensions
         {
             private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<ExtensionSet>(@"Core\Plugins\Extensions");
 
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> DisplayTypeNotExtension { get; private set; }
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> NotSubclassOfDisplayType { get; private set; }
 
             public ResourceSet()
@@ -65,7 +66,7 @@ namespace AtsEx.Plugins.Extensions
             }).ToDictionary(x => x.DisplayType, x => x);
         }
 
-        public TExtension GetExtension<TExtension>()
+        public TExtension GetExtension<TExtension>() where TExtension : IExtension
         {
             ExtensionDefinitionInfo result = Extensions[typeof(TExtension)];
             return !result.Hide && result.Body is TExtension extension ? extension : throw new KeyNotFoundException();
@@ -83,6 +84,11 @@ namespace AtsEx.Plugins.Extensions
 
             public ExtensionDefinitionInfo(PluginBase body, bool hide, Type displayType)
             {
+                if (!displayType.GetInterfaces().Contains(typeof(IExtension)))
+                {
+                    throw new InvalidCastException(string.Format(Resources.Value.DisplayTypeNotExtension.Value, nameof(displayType), displayType.FullName, typeof(IExtension).FullName));
+                }
+
                 Type bodyType = body.GetType();
                 if (bodyType != displayType && !bodyType.GetInterfaces().Contains(displayType) && !bodyType.IsSubclassOf(displayType))
                 {
