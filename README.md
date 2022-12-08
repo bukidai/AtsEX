@@ -71,6 +71,10 @@ Copyright (c) 2017  Andreas Pardeike
 
 Copyright (c) .NET Foundation and Contributors
 
+#### [Markdig](https://github.com/xoofx/markdig) (BSD-2-Clause)
+
+Copyright (c) 2018-2019, Alexandre Mutel
+
 #### [Microsoft.CodeAnalysis.Analyzers](https://github.com/dotnet/roslyn-analyzers) (MIT)
 
 Copyright (c) .NET Foundation and Contributors

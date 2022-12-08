@@ -32,17 +32,17 @@ namespace AtsEx.Hosting
             string latestVersionText = latestRelease.TagName.TrimStart('v');
             Version latestVersion = Version.Parse(latestVersionText);
 
-            string GetUpdateInfoMessage()
+            string GetUpdateDetails()
             {
                 ReleaseAsset updateInfoAsset = latestRelease.Assets.First(asset => asset.Name.StartsWith("UpdateInfo."));
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    string updateInfoMessage = httpClient.GetStringAsync(updateInfoAsset.BrowserDownloadUrl).Result;
-                    return updateInfoMessage;
+                    string updateDetails = httpClient.GetStringAsync(updateInfoAsset.BrowserDownloadUrl).Result;
+                    return updateDetails;
                 }
             }
 
-            return new ReleaseInfo(latestVersion, GetUpdateInfoMessage);
+            return new ReleaseInfo(latestVersion, new Uri(latestRelease.HtmlUrl), GetUpdateDetails);
         }
     }
 }

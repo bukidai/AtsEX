@@ -171,7 +171,7 @@ namespace AtsEx.Native
 #endif
 
             Activator = new AtsExActivator();
-            Activator.CheckUpdatesAsync().Wait();
+            Activator.CheckUpdates();
         }
 
         public static void Load(Assembly callerAssembly) => AtsMain.Load(callerAssembly, Activator);

@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Markdig;
+
+using AtsEx.Properties;
+
 namespace AtsEx.Hosting
 {
     internal class AtsExActivator
@@ -27,40 +31,66 @@ namespace AtsEx.Hosting
             CheckAssembly();
         }
 
-        public async Task CheckUpdatesAsync()
+        public void CheckUpdates()
         {
+            DateTime stoppedUpdateNotificationOn = DateTime.MinValue;
+            try
+            {
+                stoppedUpdateNotificationOn = Settings.Default.StoppedUpdateNotificationOn;
+            }
+            catch { }
+
+            DateTime now = DateTime.Now;
+            if (now < stoppedUpdateNotificationOn)
+            {
+                Settings.Default.StoppedUpdateNotificationOn = DateTime.MinValue;
+                Settings.Default.Save();
+            }
+            else
+            {
+                if (now - stoppedUpdateNotificationOn < new TimeSpan(12, 0, 0)) return;
+            }
+
             try
             {
                 AtsExRepositoryHost repositoryHost = new AtsExRepositoryHost();
 
-                ReleaseInfo latestRelease = await repositoryHost.GetLatestReleaseAsync().ConfigureAwait(false);
+                ReleaseInfo latestRelease = repositoryHost.GetLatestReleaseAsync().Result;
                 Version currentVersion = ExecutingAssembly.GetName().Version;
 
-                if (currentVersion < latestRelease.Version)
+                if (currentVersion < latestRelease.Version || true)
                 {
-                    string details = "";
-                    try
-                    {
-                        string updateInfoMessage = latestRelease.GetUpdateInfoMessage();
-                        details = $"詳細：\n{updateInfoMessage}\n\n";
-                    }
-                    catch
-                    {
-                    }
+                    UpdateInfoDialog dialog = new UpdateInfoDialog(currentVersion, latestRelease.Version, GetUpdateDetailsHtmlAsync().Result);
 
-                    DialogResult confirm = MessageBox.Show($"新しいバージョンの AtsEX がリリースされています。\n\n" +
-                        $"現在のバージョン：{currentVersion}\n最新のバージョン：{latestRelease.Version}\n\n" +
-                        details +
-                        $"リリースページを開きますか？", "AtsEX", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (confirm == DialogResult.Yes)
+                    DialogResult confirm = dialog.ShowDialog();
+                    if (confirm == DialogResult.OK)
                     {
                         Process.Start("https://github.com/automatic9045/AtsEX/releases");
                     }
+
+                    if (dialog.DoNotShowAgain)
+                    {
+                        Settings.Default.StoppedUpdateNotificationOn = now;
+                        Settings.Default.Save();
+                    }
+
+
+                    async Task<string> GetUpdateDetailsHtmlAsync()
+                        => await Task.Run(() =>
+                        {
+                            string updateDetailsMarkdown = "【詳細の取得に失敗しました】";
+                            try
+                            {
+                                updateDetailsMarkdown = latestRelease.GetUpdateDetails();
+                            }
+                            catch { }
+
+                            string updateDetailsHtml = Markdown.ToHtml(updateDetailsMarkdown);
+                            return updateDetailsHtml;
+                        }).ConfigureAwait(false);
                 }
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         private void CheckAssembly()

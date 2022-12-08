@@ -9,15 +9,17 @@ namespace AtsEx.Hosting
     internal class ReleaseInfo
     {
         public Version Version { get; }
+        public Uri Url { get; }
 
-        private readonly Func<string> UpdateInfoMessageGetter;
+        private readonly Func<string> UpdateDetailsFactory;
 
-        public ReleaseInfo(Version version, Func<string> updateInfoMessageGetter)
+        public ReleaseInfo(Version version, Uri url, Func<string> updateDetailsFactory)
         {
             Version = version;
-            UpdateInfoMessageGetter = updateInfoMessageGetter;
+            Url = url;
+            UpdateDetailsFactory = updateDetailsFactory;
         }
 
-        public string GetUpdateInfoMessage() => UpdateInfoMessageGetter();
+        public string GetUpdateDetails() => UpdateDetailsFactory();
     }
 }
