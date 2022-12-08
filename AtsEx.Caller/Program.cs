@@ -18,7 +18,7 @@ namespace AtsEx.Caller
         private const int Version = 0x00020000;
 
         private static Assembly Assembly = Assembly.GetExecutingAssembly();
-        private const int CallerVersion = 1;
+        private const int CallerVersion = 2;
 
         static AtsCore()
         {

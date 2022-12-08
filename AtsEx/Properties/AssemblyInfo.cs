@@ -38,5 +38,6 @@ using AtsEx.Native;
 
 // 互換性バージョンの履歴
 // ==============================
-// 1: beta0.16 (0.16.x.x) - 
-[assembly: CallerCompatibilityVersion(1)]
+// 1: beta0.16 (0.16.x.x)
+// 2: beta0.17 (0.17.x.x) -
+[assembly: CallerCompatibilityVersion(2)]

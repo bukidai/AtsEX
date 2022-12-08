@@ -38,7 +38,7 @@ namespace AtsEx.Plugins
         }
 
         private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
-        private static readonly Version SupportedMinVersion = new Version(0, 12);
+        private static readonly Version SupportedMinPluginHostVersion = new Version(0, 17);
 
         static PluginLoader()
         {
@@ -120,11 +120,11 @@ namespace AtsEx.Plugins
                 {
                     throw new BveFileLoadException(string.Format(Resources.Value.PluginClassNotFound.Value, nameof(PluginBase), App.Instance.ProductShortName), fileName);
                 }
-                else if (referencedPluginHost.Version < SupportedMinVersion)
+                else if (referencedPluginHost.Version < SupportedMinPluginHostVersion)
                 {
                     throw new BveFileLoadException(string.Format(
                         Resources.Value.PluginVersionNotSupported.Value,
-                        referencedPluginHost.Version, App.Instance.ProductShortName, pluginHostVersion, SupportedMinVersion.ToString(2)), fileName);
+                        referencedPluginHost.Version, App.Instance.ProductShortName, pluginHostVersion, SupportedMinPluginHostVersion.ToString(2)), fileName);
                 }
 
                 Type[] allTypes = assembly.GetTypes();
