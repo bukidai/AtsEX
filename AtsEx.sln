@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.MapPlugins.ExtendedBe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MapPlugins", "MapPlugins", "{93E65A22-8E4E-45F4-B6B3-49097B956906}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastCaching", "Libs\FastCaching\FastCaching.csproj", "{54A911B0-4B7A-4F49-AC5F-4EFC5761F1F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +133,10 @@ Global
 		{DEA13CE0-F2BC-45ED-8C35-3C970F634AC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEA13CE0-F2BC-45ED-8C35-3C970F634AC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEA13CE0-F2BC-45ED-8C35-3C970F634AC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54A911B0-4B7A-4F49-AC5F-4EFC5761F1F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54A911B0-4B7A-4F49-AC5F-4EFC5761F1F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54A911B0-4B7A-4F49-AC5F-4EFC5761F1F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54A911B0-4B7A-4F49-AC5F-4EFC5761F1F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -153,6 +159,7 @@ Global
 		{FBE0C5AB-7271-4801-A862-AF39DD32C829} = {D8B1A356-B814-470B-9C6B-C8D0DFAD6D5B}
 		{DEA13CE0-F2BC-45ED-8C35-3C970F634AC6} = {93E65A22-8E4E-45F4-B6B3-49097B956906}
 		{93E65A22-8E4E-45F4-B6B3-49097B956906} = {C0370973-55DF-4AD0-9055-BA3FA1E9517C}
+		{54A911B0-4B7A-4F49-AC5F-4EFC5761F1F7} = {B3D0DA09-BB5C-4FF7-9844-80A381655B5C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434AD268-BAE2-48A7-8AE5-2AB6B982F843}

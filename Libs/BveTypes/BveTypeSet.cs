@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using FastCaching;
 using FastMember;
 using TypeWrapping;
 using UnembeddedResources;
@@ -43,7 +42,7 @@ namespace BveTypes
 
         private readonly Dictionary<Type, TypeMemberSetBase> Types;
         private readonly Dictionary<Type, Type> OriginalAndWrapperTypes;
-        private readonly ConcurrentDictionary<Type, FastMethod> FromSourceMethods = new ConcurrentDictionary<Type, FastMethod>();
+        private readonly FastCache<Type, FastMethod> FromSourceMethodCache = new FastCache<Type, FastMethod>();
 
         private BveTypeSet(IEnumerable<TypeMemberSetBase> types, Version profileVersion)
         {
@@ -135,7 +134,7 @@ namespace BveTypes
         {
             if (wrapperType is null) throw new ArgumentNullException(nameof(wrapperType));
 
-            FastMethod result = FromSourceMethods.GetOrAdd(wrapperType, type =>
+            FastMethod result = FromSourceMethodCache.GetOrAdd(wrapperType, type =>
             {
                 MethodInfo fromSourceMethod = wrapperType.
                     GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.InvokeMethod).

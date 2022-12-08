@@ -72,6 +72,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FastCaching\FastCaching.csproj">
+      <Project>{54a911b0-4b7a-4f49-ac5f-4efc5761f1f7}</Project>
+      <Name>FastCaching</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FastMember\FastMember.csproj">
       <Project>{b63adef8-3bf9-48e1-8b61-8fa042b19f89}</Project>
       <Name>FastMember</Name>

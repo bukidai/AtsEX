@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+using FastCaching;
 using UnembeddedResources;
 
 namespace TypeWrapping
@@ -39,7 +40,7 @@ namespace TypeWrapping
 #endif
         }
 
-        private readonly ConcurrentDictionary<string, Type> Cache = new ConcurrentDictionary<string, Type>();
+        private readonly FastCache<string, Type> Cache = new FastCache<string, Type>();
         private readonly ConcurrentDictionary<string, Type> SpecializedTypes;
 
         private readonly string SpecializedTypeAlias;

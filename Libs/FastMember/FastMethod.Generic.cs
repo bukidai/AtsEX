@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using FastCaching;
 using UnembeddedResources;
 
 namespace FastMember
@@ -35,8 +36,8 @@ namespace FastMember
 #endif
             }
 
-            private readonly ConcurrentDictionary<object, Type[]> GenericTypeArgumentCache = new ConcurrentDictionary<object, Type[]>();
-            private readonly ConcurrentDictionary<Type[], FastMethod> MethodCache = new ConcurrentDictionary<Type[], FastMethod>();
+            private readonly FastCache<object, Type[]> GenericTypeArgumentCache = new FastCache<object, Type[]>();
+            private readonly FastCache<Type[], FastMethod> MethodCache = new FastCache<Type[], FastMethod>();
 
             public override MethodInfo Source { get; }
 
