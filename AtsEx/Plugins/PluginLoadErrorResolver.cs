@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -48,31 +49,46 @@ namespace AtsEx.Plugins
 
         public void Resolve(Exception exception)
         {
-            if (exception is AggregateException ae)
+            bool isWrapperException = false;
+            switch (exception)
             {
-                foreach (Exception ex in ae.InnerExceptions)
-                {
-                    Resolve(ex);
-                }
-                return;
+                case AggregateException ex:
+                    foreach (Exception innerException in ex.InnerExceptions)
+                    {
+                        Resolve(innerException);
+                    }
+                    isWrapperException = true;
+                    break;
+
+                case TypeInitializationException ex:
+                    Resolve(ex.InnerException);
+                    isWrapperException = true;
+                    break;
+
+                case TargetInvocationException ex:
+                    Resolve(ex.InnerException);
+                    isWrapperException = true;
+                    break;
             }
 
-            if (exception is CompilationException ce)
+            switch (exception)
             {
-                foreach (Diagnostic error in ce.CompilationErrors)
-                {
-                    LinePosition linePosition = error.Location.GetLineSpan().StartLinePosition;
-                    LoadErrorManager.Throw(error.GetMessage(System.Globalization.CultureInfo.CurrentUICulture), ce.SenderName, linePosition.Line, linePosition.Character + 1);
-                }
-            }
-            else if (exception is BveFileLoadException fe)
-            {
-                LoadErrorManager.Throw(fe.Message, fe.SenderFileName, fe.LineIndex, fe.CharIndex);
-            }
-            else
-            {
-                LoadErrorManager.Throw(exception.Message);
-                MessageBox.Show(exception.ToString(), string.Format(Resources.Value.UnhandledExceptionCaption.Value, App.Instance.ProductShortName));
+                case CompilationException ex:
+                    foreach (Diagnostic error in ex.CompilationErrors)
+                    {
+                        LinePosition linePosition = error.Location.GetLineSpan().StartLinePosition;
+                        LoadErrorManager.Throw(error.GetMessage(System.Globalization.CultureInfo.CurrentUICulture), ex.SenderName, linePosition.Line, linePosition.Character + 1);
+                    }
+                    break;
+
+                case BveFileLoadException ex:
+                    LoadErrorManager.Throw(ex.Message, ex.SenderFileName, ex.LineIndex, ex.CharIndex);
+                    break;
+
+                default:
+                    LoadErrorManager.Throw(exception.Message);
+                    if (!isWrapperException) MessageBox.Show(exception.ToString(), string.Format(Resources.Value.UnhandledExceptionCaption.Value, App.Instance.ProductShortName));
+                    break;
             }
         }
     }
