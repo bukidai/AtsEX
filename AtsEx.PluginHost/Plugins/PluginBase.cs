@@ -173,9 +173,6 @@ namespace AtsEx.PluginHost.Plugins
             _BveHacker = builder.BveHacker;
         }
 
-        private void ABC(AllExtensionsLoadedEventArgs e) => MessageBox.Show("a");
-        private void DEF(AllPluginsLoadedEventArgs e) => MessageBox.Show("ba");
-
         /// <inheritdoc/>
         public abstract void Dispose();
 
