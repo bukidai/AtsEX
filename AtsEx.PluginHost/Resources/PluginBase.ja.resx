@@ -120,4 +120,7 @@
   <data name="CannotUseAtsExExtensions" xml:space="preserve">
     <value>{0} が false に設定されています。</value>
   </data>
+  <data name="PluginTypeNotSpecified" xml:space="preserve">
+    <value>{0} が付加されておらず、プラグインの種類を特定できません。</value>
+  </data>
 </root>

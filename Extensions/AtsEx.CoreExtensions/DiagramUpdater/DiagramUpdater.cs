@@ -12,6 +12,7 @@ using AtsEx.PluginHost.Plugins.Extensions;
 
 namespace AtsEx.Extensions.DiagramUpdater
 {
+    [PluginType(PluginType.Extension)]
     [ExtensionMainDisplayType(typeof(IDiagramUpdater))]
     internal sealed class DiagramUpdater : AssemblyPluginBase, IDiagramUpdater
     {
@@ -20,7 +21,7 @@ namespace AtsEx.Extensions.DiagramUpdater
         public override string Title { get; } = nameof(DiagramUpdater);
         public override string Description { get; } = "時刻表、ダイヤグラムなどの行路に関わるオブジェクトの更新機能を提供します。";
 
-        public DiagramUpdater(PluginBuilder builder) : base(builder, PluginType.Extension)
+        public DiagramUpdater(PluginBuilder builder) : base(builder)
         {
             TimePosForm = BveHacker.TimePosForm;
         }

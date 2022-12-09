@@ -10,6 +10,7 @@ using AtsEx.PluginHost.Plugins.Extensions;
 
 namespace AtsEx.Extensions.ContextMenuHacker
 {
+    [PluginType(PluginType.Extension)]
     [ExtensionMainDisplayType(typeof(IContextMenuHacker))]
     internal sealed class ContextMenuHacker : AssemblyPluginBase, IContextMenuHacker
     {
@@ -18,7 +19,7 @@ namespace AtsEx.Extensions.ContextMenuHacker
 
         private readonly SortedList<int, List<ToolStripItem>> AddedItems = new SortedList<int, List<ToolStripItem>>();
 
-        public ContextMenuHacker(PluginBuilder builder) : base(builder, PluginType.Extension)
+        public ContextMenuHacker(PluginBuilder builder) : base(builder)
         {
             ContextMenuItems = BveHacker.MainForm.ContextMenu.Items;
             StartIndex = ContextMenuItems.IndexOfKey("toolStripMenuItem") + 1;

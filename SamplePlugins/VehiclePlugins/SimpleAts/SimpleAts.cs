@@ -13,9 +13,10 @@ using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx.Samples.VehiclePlugins.SimpleAts
 {
+    [PluginType(PluginType.VehiclePlugin)]
     public class SimpleAts : AssemblyPluginBase
     {
-        public SimpleAts(PluginBuilder builder) : base(builder, PluginType.VehiclePlugin)
+        public SimpleAts(PluginBuilder builder) : base(builder)
         {
         }
 

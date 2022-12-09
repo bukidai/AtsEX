@@ -14,6 +14,7 @@ using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx.Samples.MapPlugins.DXDynamicTextureTest
 {
+    [PluginType(PluginType.MapPlugin)]
     public class DXDynamicTextureTest : AssemblyPluginBase, IDisposable
     {
         private static readonly Random Random = new Random();
@@ -21,7 +22,7 @@ namespace AtsEx.Samples.MapPlugins.DXDynamicTextureTest
         private TextureHandle TextureHandle;
         private GDIHelper GDIHelper;
 
-        public DXDynamicTextureTest(PluginBuilder builder) : base(builder, PluginType.MapPlugin)
+        public DXDynamicTextureTest(PluginBuilder builder) : base(builder)
         {
             BveHacker.ScenarioCreated += OnScenarioCreated;
         }

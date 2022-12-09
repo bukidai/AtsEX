@@ -94,6 +94,7 @@
     <Compile Include="Plugins\AllPluginsLoadedEventHandler.cs" />
     <Compile Include="Plugins\AssemblyPluginBase.cs" />
     <Compile Include="Handles\NotchCommandBase.cs" />
+    <Compile Include="Plugins\DoNotUseBveHackerAttribute.cs" />
     <Compile Include="Plugins\Extensions\AllExtensionsLoadedEventArgs.cs" />
     <Compile Include="Plugins\Extensions\AllExtensionsLoadedEventHandler.cs" />
     <Compile Include="Plugins\Extensions\ExtensionMainDisplayTypeAttribute.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Input\KeyBase.cs" />
     <Compile Include="Input\Native\INativeKeySet.cs" />
     <Compile Include="Input\Native\NativeAtsKeyName.cs" />
+    <Compile Include="Plugins\PluginTypeAttribute.cs" />
     <Compile Include="Plugins\TickResult\MapPluginTickResult.cs" />
     <Compile Include="Plugins\TickResult\TickResult.cs" />
     <Compile Include="Plugins\TickResult\VehiclePluginTickResult.cs" />

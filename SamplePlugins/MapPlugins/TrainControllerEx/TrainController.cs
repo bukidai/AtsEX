@@ -16,6 +16,7 @@ using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx.Samples.MapPlugins.TrainControllerEx
 {
+    [PluginType(PluginType.MapPlugin)]
     public class TrainController : AssemblyPluginBase, IDisposable
     {
         private Train Train;
@@ -25,7 +26,7 @@ namespace AtsEx.Samples.MapPlugins.TrainControllerEx
         private float RotationSpeedRatio = 0; // -1 ～ 1
         private float Speed = 15 / 3.6f; // 初速度 15 [km/h] = (15 / 3.6) [m/s]
 
-        public TrainController(PluginBuilder builder) : base(builder, PluginType.MapPlugin)
+        public TrainController(PluginBuilder builder) : base(builder)
         {
             BveHacker.ScenarioCreated += e =>
             {

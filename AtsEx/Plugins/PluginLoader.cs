@@ -170,7 +170,7 @@ namespace AtsEx.Plugins
                     {
                         throw new InvalidOperationException(string.Format(Resources.Value.WrongPluginType.Value, pluginType.GetTypeString(), pluginInstance.PluginType.GetTypeString()));
                     }
-                    else if (pluginInstance.PluginType == PluginType.MapPlugin && !pluginInstance.UseAtsExExtensions)
+                    else if (pluginInstance.PluginType == PluginType.MapPlugin && !pluginInstance.UseBveHacker)
                     {
                         throw new NotSupportedException(string.Format(Resources.Value.MustUseExtensions.Value, pluginInstance.PluginType.GetTypeString(), App.Instance.ProductShortName));
                     }

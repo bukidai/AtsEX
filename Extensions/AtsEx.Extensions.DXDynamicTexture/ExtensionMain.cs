@@ -11,10 +11,12 @@ using AtsEx.PluginHost.Plugins.Extensions;
 
 namespace AtsEx.Extensions.DXDynamicTexture
 {
+    [PluginType(PluginType.Extension)]
+    [DoNotUseBveHacker]
     [HideExtensionMain]
     public class ExtensionMain : AssemblyPluginBase, IExtension
     {
-        public ExtensionMain(PluginBuilder builder) : base(builder, PluginType.Extension, false)
+        public ExtensionMain(PluginBuilder builder) : base(builder)
         {
             TextureManager.Initialize();
         }

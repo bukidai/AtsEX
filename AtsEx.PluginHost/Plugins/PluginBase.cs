@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,8 +14,12 @@ using AtsEx.PluginHost.Plugins.Extensions;
 namespace AtsEx.PluginHost.Plugins
 {
     /// <summary>
-    /// AtsEX プラグインを表します。
+    /// 全ての AtsEX プラグインの基本クラスを表します。
     /// </summary>
+    /// <remarks>
+    /// このクラスを直接継承する必要があるのは、特殊な AtsEX プラグインの場合のみです。
+    /// アセンブリ (.dll) 形式の通常の AtsEX プラグインでは <see cref="AssemblyPluginBase"/> を継承してください。
+    /// </remarks>
     public abstract class PluginBase : IDisposable
     {
         private class ResourceSet
@@ -22,6 +27,7 @@ namespace AtsEx.PluginHost.Plugins
             private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<PluginBase>("PluginHost");
 
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> CannotUseAtsExExtensions { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> PluginTypeNotSpecified { get; private set; }
 
             public ResourceSet()
             {
@@ -44,12 +50,12 @@ namespace AtsEx.PluginHost.Plugins
         public PluginType PluginType { get; }
 
         /// <summary>
-        /// この AtsEX プラグインが AtsEX 拡張機能 (<see cref="PluginHost.IBveHacker"/> など) を使用するかどうかを取得します。
+        /// この AtsEX プラグインが AtsEX 独自の特殊機能拡張 (<see cref="IBveHacker"/>、マッププラグインなど) を利用するかどうかを取得します。
         /// </summary>
         /// <remarks>
         /// <see langword="false"/> に設定されている場合、<see cref="BveHacker"/> プロパティは取得できません。
         /// </remarks>
-        public bool UseAtsExExtensions { get; }
+        public bool UseBveHacker { get; }
 
         /// <summary>
         /// BVE が標準で提供する ATS プラグイン向けの機能のラッパーを取得します。
@@ -81,7 +87,7 @@ namespace AtsEx.PluginHost.Plugins
 
         private readonly IBveHacker _BveHacker = null;
         protected IBveHacker BveHacker
-            => UseAtsExExtensions ? _BveHacker : throw new InvalidOperationException(string.Format(Resources.Value.CannotUseAtsExExtensions.Value, nameof(UseAtsExExtensions)));
+            => UseBveHacker ? _BveHacker : throw new InvalidOperationException(string.Format(Resources.Value.CannotUseAtsExExtensions.Value, nameof(UseBveHacker)));
 
         /// <summary>
         /// 全ての AtsEX プラグインが読み込まれ、<see cref="Plugins"/> プロパティが取得可能になると発生します。
@@ -139,28 +145,21 @@ namespace AtsEx.PluginHost.Plugins
         public abstract string Copyright { get; }
 
         /// <summary>
-        /// AtsEX 拡張機能を利用する AtsEX プラグインの新しいインスタンスを初期化します。
-        /// </summary>
-        /// <param name="builder">AtsEX から渡される BVE、AtsEX の情報。</param>
-        /// <param name="pluginType">プラグインの種類。</param>
-        public PluginBase(PluginBuilder builder, PluginType pluginType) : this(builder, pluginType, true)
-        {
-        }
-
-        /// <summary>
         /// AtsEX プラグインの新しいインスタンスを初期化します。
         /// </summary>
         /// <param name="builder">AtsEX から渡される BVE、AtsEX の情報。</param>
         /// <param name="pluginType">AtsEX プラグインの種類。</param>
-        /// <param name="useAtsExExtensions">AtsEX 拡張機能を利用するか。<br/>
+        /// <param name="useBveHacker">AtsEX 独自の特殊機能拡張 (<see cref="IBveHacker"/>、マッププラグインなど) を利用するか。<br/>
         /// <see langword="false"/> を指定すると、<see cref="BveHacker"/> が取得できなくなる代わりに、BVE のバージョンの問題で AtsEX 拡張機能の読込に失敗した場合でもシナリオを開始できるようになります。<br/>
         /// マッププラグインでは <see langword="false"/> を指定することはできません。</param>
-        public PluginBase(PluginBuilder builder, PluginType pluginType, bool useAtsExExtensions)
+        public PluginBase(PluginBuilder builder, PluginType pluginType, bool useBveHacker)
         {
             PluginType = pluginType;
-            UseAtsExExtensions = useAtsExExtensions;
+            UseBveHacker = useBveHacker;
+
             Native = builder.Native;
             _Extensions = builder.Extensions;
+            _BveHacker = builder.BveHacker;
             Identifier = builder.Identifier;
 
             builder.AllExtensionsLoaded += e => _Extensions = e.Extensions;
@@ -168,9 +167,38 @@ namespace AtsEx.PluginHost.Plugins
 
             builder.AllPluginsLoaded += e => _Plugins = e.Plugins;
             builder.AllPluginsLoaded += e => AllPluginsLoaded?.Invoke(e);
+        }
 
-            if (!UseAtsExExtensions) return;
-            _BveHacker = builder.BveHacker;
+        /// <summary>
+        /// AtsEX プラグインの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <remarks>
+        /// <see cref="PluginTypeAttribute"/> を付加して、プラグインの種類を指定してください。<br/>
+        /// AtsEX 拡張機能を利用しないプラグインであることを指定するには、<see cref="DoNotUseBveHackerAttribute"/> を付加してください。
+        /// </remarks>
+        /// <param name="builder">AtsEX から渡される BVE、AtsEX の情報。</param>
+        public PluginBase(PluginBuilder builder) : this(builder, default, default)
+        {
+            Type type = GetType();
+            PluginType? pluginType = null;
+            bool useBveHacker = true;
+            foreach (Attribute attribute in type.GetCustomAttributes())
+            {
+                switch (attribute)
+                {
+                    case PluginTypeAttribute pluginTypeAttribute:
+                        pluginType = pluginTypeAttribute.PluginType;
+                        break;
+
+                    case DoNotUseBveHackerAttribute doNotUseBveHackerAttribute:
+                        useBveHacker = false;
+                        break;
+                }
+            }
+            if (pluginType is null) throw new InvalidOperationException(string.Format(Resources.Value.PluginTypeNotSpecified.Value, typeof(PluginTypeAttribute).FullName));
+
+            PluginType = (PluginType)pluginType;
+            UseBveHacker = useBveHacker;
         }
 
         /// <inheritdoc/>

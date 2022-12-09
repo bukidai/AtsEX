@@ -11,12 +11,13 @@ using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx.Samples.MapPlugins.StationController
 {
+    [PluginType(PluginType.MapPlugin)]
     public class StationController : AssemblyPluginBase, IDisposable
     {
         private readonly ControllerForm Form;
         private readonly ToolStripMenuItem MenuItem;
 
-        public StationController(PluginBuilder services) : base(services, PluginType.MapPlugin)
+        public StationController(PluginBuilder services) : base(services)
         {
             InstanceStore.Initialize(Native, Extensions, BveHacker);
 

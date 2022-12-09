@@ -16,12 +16,13 @@ using AtsEx.Scripting.CSharp;
 
 namespace AtsEx.MapPlugins.ExtendedBeacons
 {
+    [PluginType(PluginType.MapPlugin)]
     public class PluginMain : AssemblyPluginBase
     {
         private ExtendedBeaconSet _ExtendedBeacons;
         public IExtendedBeaconSet ExtendedBeacons => _ExtendedBeacons;
 
-        public PluginMain(PluginBuilder builder) : base(builder, PluginType.MapPlugin)
+        public PluginMain(PluginBuilder builder) : base(builder)
         {
             BveHacker.ScenarioCreated += OnScenarioCreated;
         }

@@ -15,6 +15,7 @@ using AtsEx.PluginHost.Plugins.Extensions;
 
 namespace AtsEx.Extensions.TrainDrawPatch
 {
+    [PluginType(PluginType.Extension)]
     [ExtensionMainDisplayType(typeof(ITrainDrawPatchFactory))]
     internal sealed class TrainDrawPatchFactory : AssemblyPluginBase, ITrainDrawPatchFactory
     {
@@ -23,7 +24,7 @@ namespace AtsEx.Extensions.TrainDrawPatch
         public override string Title { get; } = nameof(TrainDrawPatch);
         public override string Description { get; } = "他列車を自由に移動・回転できるようにするパッチを提供します。";
 
-        public TrainDrawPatchFactory(PluginBuilder builder) : base(builder, PluginType.Extension)
+        public TrainDrawPatchFactory(PluginBuilder builder) : base(builder)
         {
             ClassMemberSet members = BveHacker.BveTypes.GetClassInfoOf<Train>();
             DrawCarsMethod = members.GetSourceMethodOf(nameof(Train.DrawCars));

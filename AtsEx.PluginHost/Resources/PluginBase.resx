@@ -120,4 +120,7 @@
   <data name="CannotUseAtsExExtensions" xml:space="preserve">
     <value>{0} is set to false.</value>
   </data>
+  <data name="PluginTypeNotSpecified" xml:space="preserve">
+    <value>Cannot specify the type of plugin since {0} is not associated with the class.</value>
+  </data>
 </root>

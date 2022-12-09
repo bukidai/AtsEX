@@ -25,7 +25,7 @@ namespace AtsEx
                 Plugins = plugins;
                 Handles = handles;
 
-                UseAtsExExtensions = Plugins.Any(item => item.Value.UseAtsExExtensions);
+                UseAtsExExtensions = Plugins.Any(item => item.Value.UseBveHacker);
             }
 
             public void Dispose()

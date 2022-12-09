@@ -11,12 +11,13 @@ using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx.Samples.VehiclePlugins.StateViewer
 {
+    [PluginType(PluginType.VehiclePlugin)]
     public class StateViewer : AssemblyPluginBase, IDisposable
     {
         private readonly StateForm Form;
         private readonly ToolStripMenuItem MenuItem;
 
-        public StateViewer(PluginBuilder services) : base(services, PluginType.VehiclePlugin)
+        public StateViewer(PluginBuilder services) : base(services)
         {
             InstanceStore.Initialize(Native, BveHacker);
 

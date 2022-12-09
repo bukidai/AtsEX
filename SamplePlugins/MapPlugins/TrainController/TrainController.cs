@@ -12,12 +12,13 @@ using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx.Samples.MapPlugins.TrainController
 {
+    [PluginType(PluginType.MapPlugin)]
     public class TrainController : AssemblyPluginBase, IDisposable
     {
         private Train Train;
         private double Speed = 25 / 3.6; // 25[km/h] = (25 / 3.6)[m/s]
 
-        public TrainController(PluginBuilder builder) : base(builder, PluginType.MapPlugin)
+        public TrainController(PluginBuilder builder) : base(builder)
         {
             BveHacker.ScenarioCreated += e =>
             {
