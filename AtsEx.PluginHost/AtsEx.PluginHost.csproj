@@ -90,7 +90,6 @@
     <Compile Include="Handles\HandleCommandSet.cs" />
     <Compile Include="Handles\IPowerHandle.cs" />
     <Compile Include="Handles\ReverserPositionCommandBase.cs" />
-    <Compile Include="ILoadErrorResolver.cs" />
     <Compile Include="INative.cs" />
     <Compile Include="Plugins\AllPluginsLoadedEventHandler.cs" />
     <Compile Include="Plugins\AssemblyPluginBase.cs" />

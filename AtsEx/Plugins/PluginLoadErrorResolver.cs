@@ -17,7 +17,7 @@ using AtsEx.Scripting.CSharp;
 
 namespace AtsEx.Plugins
 {
-    internal class PluginLoadErrorResolver : ILoadErrorResolver
+    internal class PluginLoadErrorResolver
     {
         private class ResourceSet
         {
