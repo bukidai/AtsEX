@@ -88,7 +88,7 @@ namespace AtsEx
                 }
                 catch (Exception ex)
                 {
-                    loadErrorResolver.Resolve(ex);
+                    loadErrorResolver.Resolve(null, ex);
                 }
                 finally
                 {

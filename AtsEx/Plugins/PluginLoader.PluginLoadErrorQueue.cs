@@ -17,7 +17,7 @@ namespace AtsEx.Plugins
         private class PluginLoadErrorQueue
         {
             private readonly PluginLoadErrorResolver LoadErrorManager;
-            private readonly Queue<Exception> ExceptionsToResolve = new Queue<Exception>();
+            private readonly Queue<PluginException> ExceptionsToResolve = new Queue<PluginException>();
 
             public PluginLoadErrorQueue(ILoadErrorManager loadErrorManager)
             {
@@ -26,39 +26,52 @@ namespace AtsEx.Plugins
 
             public void OnFailedToLoadAssembly(Assembly assembly, Exception ex)
             {
+                string assemblyFileName = Path.GetFileName(assembly.Location);
+
                 Version pluginHostVersion = App.Instance.AtsExPluginHostAssembly.GetName().Version;
                 Version referencedPluginHostVersion = assembly.GetReferencedPluginHost().Version;
                 if (pluginHostVersion != referencedPluginHostVersion)
                 {
-                    string assemblyFileName = Path.GetFileName(assembly.Location);
-
                     string message = string.Format(Resources.Value.MaybeBecauseBuiltForDifferentVersion.Value, pluginHostVersion, App.Instance.ProductShortName);
                     BveFileLoadException additionalInfoException = new BveFileLoadException(message, assemblyFileName);
 
-                    ExceptionsToResolve.Enqueue(additionalInfoException);
+                    ExceptionsToResolve.Enqueue(new PluginException(assemblyFileName, additionalInfoException));
                 }
 
-                ExceptionsToResolve.Enqueue(ex);
+                ExceptionsToResolve.Enqueue(new PluginException(assemblyFileName, ex));
             }
 
             public void OnFailedToLoadScriptPlugin(ScriptPluginPackage scriptPluginPackage, Exception ex)
             {
-                ExceptionsToResolve.Enqueue(ex);
+                ExceptionsToResolve.Enqueue(new PluginException(scriptPluginPackage.Title, ex));
             }
 
             public void Resolve()
             {
                 while (ExceptionsToResolve.Count > 0)
                 {
-                    Exception exception = ExceptionsToResolve.Dequeue();
+                    PluginException exception = ExceptionsToResolve.Dequeue();
                     try
                     {
-                        LoadErrorManager.Resolve(exception);
+                        LoadErrorManager.Resolve(exception.SenderName, exception.Exception);
                     }
                     catch
                     {
-                        throw exception;
+                        throw exception.Exception;
                     }
+                }
+            }
+
+
+            private class PluginException
+            {
+                public string SenderName { get; }
+                public Exception Exception { get; }
+
+                public PluginException(string senderName, Exception exception)
+                {
+                    SenderName = senderName;
+                    Exception = exception;
                 }
             }
         }

@@ -47,7 +47,7 @@ namespace AtsEx.Plugins
             LoadErrorManager = loadErrorManager;
         }
 
-        public void Resolve(Exception exception)
+        public void Resolve(string senderName, Exception exception)
         {
             bool isWrapperException = false;
             switch (exception)
@@ -55,18 +55,18 @@ namespace AtsEx.Plugins
                 case AggregateException ex:
                     foreach (Exception innerException in ex.InnerExceptions)
                     {
-                        Resolve(innerException);
+                        Resolve(senderName, innerException);
                     }
                     isWrapperException = true;
                     break;
 
                 case TypeInitializationException ex:
-                    Resolve(ex.InnerException);
+                    Resolve(senderName, ex.InnerException);
                     isWrapperException = true;
                     break;
 
                 case TargetInvocationException ex:
-                    Resolve(ex.InnerException);
+                    Resolve(senderName, ex.InnerException);
                     isWrapperException = true;
                     break;
             }
@@ -86,7 +86,7 @@ namespace AtsEx.Plugins
                     break;
 
                 default:
-                    LoadErrorManager.Throw(exception.Message);
+                    LoadErrorManager.Throw(exception.Message, senderName);
                     if (!isWrapperException) MessageBox.Show(exception.ToString(), string.Format(Resources.Value.UnhandledExceptionCaption.Value, App.Instance.ProductShortName));
                     break;
             }
