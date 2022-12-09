@@ -132,7 +132,4 @@
   <data name="IgnoreAndContinue" xml:space="preserve">
     <value>無視して読込を続行しますか？</value>
   </data>
-  <data name="MaybeBecauseBuiltForDifferentVersion" xml:space="preserve">
-    <value>初期化に失敗しました。古いバージョン (バージョン {0}) の {1} に準拠していることが原因の可能性があります。</value>
-  </data>
 </root>

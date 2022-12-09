@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,8 +11,6 @@ using AtsEx.Handles;
 using AtsEx.Input;
 using AtsEx.Plugins;
 using AtsEx.PluginHost.Input.Native;
-using AtsEx.PluginHost.MapStatements;
-using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx
 {

@@ -123,6 +123,9 @@
   <data name="ConstructorNotFound" xml:space="preserve">
     <value>Some class(es) that implement {0} are found, but any constructors with an {1} parameter are not found.</value>
   </data>
+  <data name="MaybeBecauseBuiltForDifferentVersion" xml:space="preserve">
+    <value>Failed to load; this might be because it is built for the old version (Version {0}) of {1}.</value>
+  </data>
   <data name="MustUseExtensions" xml:space="preserve">
     <value>The {0} must use {1} extensions.</value>
   </data>

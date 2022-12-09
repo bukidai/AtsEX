@@ -18,7 +18,7 @@ using AtsEx.PluginHost.Plugins.Extensions;
 
 namespace AtsEx.Plugins
 {
-    internal class PluginLoader
+    internal partial class PluginLoader
     {
         private class ResourceSet
         {
@@ -30,6 +30,7 @@ namespace AtsEx.Plugins
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> CannotSetIdentifier { get; private set; }
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> WrongPluginType { get; private set; }
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> MustUseExtensions { get; private set; }
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> MaybeBecauseBuiltForDifferentVersion { get; private set; }
 
             public ResourceSet()
             {
@@ -61,10 +62,10 @@ namespace AtsEx.Plugins
             Extensions = extensions;
         }
 
-        public Dictionary<string, PluginBase> Load(PluginSourceSet pluginSources, Action<Assembly, Exception> onFailedToLoadAssembly = null,
-            Action<ScriptPluginPackage, Exception> onFailedToLoadCSharpScriptPlugin = null, Action<ScriptPluginPackage, Exception> onFailedToLoadIronPython2Plugin = null)
+        public Dictionary<string, PluginBase> Load(PluginSourceSet pluginSources)
         {
             Dictionary<string, PluginBase> plugins = new Dictionary<string, PluginBase>();
+            PluginLoadErrorQueue loadErrorQueue = new PluginLoadErrorQueue(BveHacker.LoadErrorManager);
 
             foreach (KeyValuePair<Identifier, Assembly> item in pluginSources.Assemblies)
             {
@@ -75,7 +76,7 @@ namespace AtsEx.Plugins
                 }
                 catch (Exception ex)
                 {
-                    onFailedToLoadAssembly?.Invoke(item.Value, ex);
+                    loadErrorQueue.OnFailedToLoadAssembly(item.Value, ex);
                 }
             }
 
@@ -88,7 +89,7 @@ namespace AtsEx.Plugins
                 }
                 catch (Exception ex)
                 {
-                    onFailedToLoadCSharpScriptPlugin?.Invoke(item.Value, ex);
+                    loadErrorQueue.OnFailedToLoadScriptPlugin(item.Value, ex);
                 }
             }
 
@@ -101,12 +102,13 @@ namespace AtsEx.Plugins
                 }
                 catch (Exception ex)
                 {
-                    onFailedToLoadIronPython2Plugin?.Invoke(item.Value, ex);
+                    loadErrorQueue.OnFailedToLoadScriptPlugin(item.Value, ex);
                 }
             }
 
             // TODO: ここで他の種類のプラグイン（ネイティブなど）を読み込む
 
+            loadErrorQueue.Resolve();
             return plugins;
 
 
