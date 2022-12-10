@@ -34,7 +34,7 @@ namespace AtsEx.MapStatements
                     if (name.Namespace is null || !name.Namespace.IsChildOf(Namespace.Root)) continue;
                     Identifier[] additionalDeclaration = declaration.Skip(1).ToArray();
 
-                    double to = sameKeyRepeaters.Value.Count >= i || sameKeyRepeaters.Value[i + 1] is null ? double.PositiveInfinity : sameKeyRepeaters.Value[i + 1].Location;
+                    double to = sameKeyRepeaters.Value.Count <= i + 1 || sameKeyRepeaters.Value[i + 1] is null ? double.PositiveInfinity : sameKeyRepeaters.Value[i + 1].Location;
 
                     Statement statement = new Statement(name, additionalDeclaration, argument, repeater, to, trains);
 
