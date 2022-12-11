@@ -72,7 +72,9 @@ namespace AtsEx.Native
                 vehicleState.Location, vehicleState.Speed, TimeSpan.FromMilliseconds(vehicleState.Time),
                 vehicleState.BcPressure, vehicleState.MrPressure, vehicleState.ErPressure, vehicleState.BpPressure, vehicleState.SapPressure, vehicleState.Current);
 
-            HandlePositionSet handlePositionSet = AtsExScenarioService?.Tick(Stopwatch.IsRunning ? Stopwatch.Elapsed : TimeSpan.Zero, exVehicleState);
+            TimeSpan elapsed = Stopwatch.IsRunning ? Stopwatch.Elapsed : TimeSpan.Zero;
+            AtsEx.Tick(elapsed);
+            HandlePositionSet handlePositionSet = AtsExScenarioService?.Tick(elapsed, exVehicleState);
 
             Stopwatch.Restart();
 
