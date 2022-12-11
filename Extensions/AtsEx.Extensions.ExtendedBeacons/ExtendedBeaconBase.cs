@@ -8,7 +8,7 @@ using AtsEx.PluginHost;
 using AtsEx.PluginHost.MapStatements;
 using AtsEx.Scripting;
 
-namespace AtsEx.MapPlugins.ExtendedBeacons
+namespace AtsEx.Extensions.ExtendedBeacons
 {
     public delegate void PassedEventHandler<TPassedEventArgs>(object sender, TPassedEventArgs e) where TPassedEventArgs : PassedEventArgs;
 

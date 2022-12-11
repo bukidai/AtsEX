@@ -57,7 +57,7 @@ clr.AddReference('ExtendedBeacons')
 
 import System
 from System.Windows.Forms import *
-import AtsEx.MapPlugins.ExtendedBeacons as eb
+import AtsEx.Extensions.ExtendedBeacons as eb
 
 
 def tick(g):

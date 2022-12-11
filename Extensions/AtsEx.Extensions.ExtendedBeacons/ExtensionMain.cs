@@ -10,19 +10,20 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
 using AtsEx.PluginHost;
-using AtsEx.PluginHost.LoadErrorManager;
 using AtsEx.PluginHost.Plugins;
+using AtsEx.PluginHost.Plugins.Extensions;
 using AtsEx.Scripting.CSharp;
 
-namespace AtsEx.MapPlugins.ExtendedBeacons
+namespace AtsEx.Extensions.ExtendedBeacons
 {
-    [PluginType(PluginType.MapPlugin)]
-    public class PluginMain : AssemblyPluginBase
+    [PluginType(PluginType.Extension)]
+    [ExtensionMainDisplayType(typeof(IExtensionMain))]
+    internal class ExtensionMain : AssemblyPluginBase, IExtensionMain
     {
         private ExtendedBeaconSet _ExtendedBeacons;
         public IExtendedBeaconSet ExtendedBeacons => _ExtendedBeacons;
 
-        public PluginMain(PluginBuilder builder) : base(builder)
+        public ExtensionMain(PluginBuilder builder) : base(builder)
         {
             BveHacker.ScenarioCreated += OnScenarioCreated;
         }
@@ -76,7 +77,7 @@ namespace AtsEx.MapPlugins.ExtendedBeacons
 
             _ExtendedBeacons.Tick(location, preTrainLocation);
 
-            return new MapPluginTickResult();
+            return new ExtensionTickResult();
         }
     }
 }

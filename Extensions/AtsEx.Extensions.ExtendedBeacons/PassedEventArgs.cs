@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using AtsEx.PluginHost;
 
-namespace AtsEx.MapPlugins.ExtendedBeacons
+namespace AtsEx.Extensions.ExtendedBeacons
 {
     /// <summary>
     /// 拡張地上子上を列車が通過したときに発生するイベントのデータを提供します。

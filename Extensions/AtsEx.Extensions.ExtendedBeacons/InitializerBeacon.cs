@@ -8,7 +8,7 @@ using AtsEx.PluginHost;
 using AtsEx.PluginHost.MapStatements;
 using AtsEx.Scripting;
 
-namespace AtsEx.MapPlugins.ExtendedBeacons
+namespace AtsEx.Extensions.ExtendedBeacons
 {
     internal class InitializerBeacon : Beacon
     {

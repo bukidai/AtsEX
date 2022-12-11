@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using AtsEx.Scripting;
 
-namespace AtsEx.MapPlugins.ExtendedBeacons
+namespace AtsEx.Extensions.ExtendedBeacons
 {
     public abstract class ExtendedBeaconGlobalsBase<TPassedEventArgs> : Globals where TPassedEventArgs : PassedEventArgs
     {

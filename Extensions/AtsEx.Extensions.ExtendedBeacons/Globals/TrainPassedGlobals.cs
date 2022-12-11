@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using AtsEx.PluginHost;
 
-namespace AtsEx.MapPlugins.ExtendedBeacons
+namespace AtsEx.Extensions.ExtendedBeacons
 {
     internal class TrainPassedGlobals : ExtendedBeaconGlobalsBase<TrainPassedEventArgs>
     {

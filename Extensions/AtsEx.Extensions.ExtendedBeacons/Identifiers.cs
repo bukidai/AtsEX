@@ -9,7 +9,7 @@ using UnembeddedResources;
 
 using AtsEx.PluginHost.MapStatements;
 
-namespace AtsEx.MapPlugins.ExtendedBeacons
+namespace AtsEx.Extensions.ExtendedBeacons
 {
     internal static partial class Identifiers
     {

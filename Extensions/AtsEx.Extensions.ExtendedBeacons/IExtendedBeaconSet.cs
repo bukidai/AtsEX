@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using AtsEx.PluginHost.MapStatements;
 
-namespace AtsEx.MapPlugins.ExtendedBeacons
+namespace AtsEx.Extensions.ExtendedBeacons
 {
     /// <summary>
     /// 拡張地上子の一覧を表します。

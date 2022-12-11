@@ -17,10 +17,10 @@ using AtsEx.PluginHost.MapStatements;
 using AtsEx.Scripting;
 using AtsEx.Scripting.IronPython2;
 
-using BeaconBase = AtsEx.MapPlugins.ExtendedBeacons.ExtendedBeaconBase<AtsEx.MapPlugins.ExtendedBeacons.PassedEventArgs>;
-using TrainObservingBeaconBase = AtsEx.MapPlugins.ExtendedBeacons.ExtendedBeaconBase<AtsEx.MapPlugins.ExtendedBeacons.TrainPassedEventArgs>;
+using BeaconBase = AtsEx.Extensions.ExtendedBeacons.ExtendedBeaconBase<AtsEx.Extensions.ExtendedBeacons.PassedEventArgs>;
+using TrainObservingBeaconBase = AtsEx.Extensions.ExtendedBeacons.ExtendedBeaconBase<AtsEx.Extensions.ExtendedBeacons.TrainPassedEventArgs>;
 
-namespace AtsEx.MapPlugins.ExtendedBeacons
+namespace AtsEx.Extensions.ExtendedBeacons
 {
     internal partial class ExtendedBeaconSet : IExtendedBeaconSet
     {
