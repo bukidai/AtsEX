@@ -38,7 +38,6 @@ namespace AtsEx
                     ? PluginSourceSet.FromPluginUsing(PluginType.Extension, pluginUsingPath) : PluginSourceSet.Empty(PluginType.Extension);
                 PluginSourceSet fromDirectory = PluginSourceSet.FromDirectory(null, PluginType.Extension, extensionsDirectory);
 
-                Queue<Exception> exceptionsToResolve = new Queue<Exception>();
                 Dictionary<string, PluginBase> loadedExtensions = pluginLoader.Load(fromPluginUsing.Concat(null, fromDirectory));
 
                 ExtensionSet extensions = new ExtensionSet(loadedExtensions.Values);
