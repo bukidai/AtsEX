@@ -195,8 +195,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /e /y /i "$(TargetDir)" "$(SolutionDir)_SampleScenarios\AtsEx\Extensions"
-xcopy /e /y /i "$(ProjectDir)Resources\" "$(SolutionDir)_SampleScenarios\AtsEx\Extensions\Resources\ExtendedBeacons\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /e /y /i "$(TargetDir)" "$(SolutionDir)_SampleScenarios\AtsEx\Debug\Extensions"
+xcopy /e /y /i "$(ProjectDir)Resources\" "$(SolutionDir)_SampleScenarios\AtsEx\Debug\Extensions\Resources\ExtendedBeacons\"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

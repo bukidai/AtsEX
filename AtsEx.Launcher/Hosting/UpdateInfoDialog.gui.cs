@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AtsEx.Hosting
+namespace AtsEx.Launcher.Hosting
 {
     internal partial class UpdateInfoDialog : Form
     {

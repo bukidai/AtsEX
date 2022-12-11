@@ -8,71 +8,52 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using AtsEx.Native;
+using AtsEx.Launcher;
 
 namespace AtsEx.Caller
 {
-    /// <summary>処理を実装するクラス</summary>
     internal static class AtsCore
     {
         private const int Version = 0x00020000;
 
-        private static Assembly Assembly = Assembly.GetExecutingAssembly();
+        private static readonly Assembly Assembly = Assembly.GetExecutingAssembly();
+        private const string LauncherName = "AtsEx.Launcher";
+
         private const int CallerVersion = 2;
+
+        private static VersionSelector VersionSelector;
 
         static AtsCore()
         {
             try
             {
-                Assembly atsExAssembly = LoadAtsExAssembly();
-                CheckCompatibility(atsExAssembly);
+                string configLocation = Path.Combine(Path.GetDirectoryName(Assembly.Location), "AtsEx.Caller.txt");
+                string launcherLocation;
+                using (StreamReader sr = new StreamReader(configLocation))
+                {
+                    launcherLocation = Path.Combine(Path.GetDirectoryName(Assembly.Location), sr.ReadLine(), LauncherName + ".dll");
+                }
+
+                AppDomain.CurrentDomain.AssemblyResolve += (sender, e) =>
+                {
+                    AssemblyName assemblyName = new AssemblyName(e.Name);
+                    return assemblyName.Name == LauncherName ? Assembly.LoadFrom(launcherLocation) : null;
+                };
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Failed to initialize AtsEX Caller.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw;
             }
-
-
-            Assembly LoadAtsExAssembly()
-            {
-                string configLocation = Path.Combine(Path.GetDirectoryName(Assembly.Location), "AtsEx.Caller.txt");
-                string atsExLocation;
-                using (StreamReader sr = new StreamReader(configLocation))
-                {
-                    atsExLocation = Path.Combine(Path.GetDirectoryName(Assembly.Location), sr.ReadLine());
-                }
-
-                AppDomain.CurrentDomain.AssemblyResolve += (sender, e) =>
-                {
-                    AssemblyName assemblyName = new AssemblyName(e.Name);
-                    string path = Path.Combine(Path.GetDirectoryName(atsExLocation), assemblyName.Name + ".dll");
-                    return File.Exists(path) ? Assembly.LoadFrom(path) : null;
-                };
-
-                return Assembly.LoadFrom(atsExLocation);
-            }
-
-            void CheckCompatibility(Assembly atsExAssembly)
-            {
-                CallerCompatibilityVersionAttribute compatibilityVersionAttribute = atsExAssembly.GetCustomAttribute<CallerCompatibilityVersionAttribute>();
-                if (compatibilityVersionAttribute.Version != CallerVersion)
-                {
-                    Version assemblyVersion = Assembly.GetName().Version;
-                    throw new NotSupportedException(
-                        $"読み込まれた AtsEX Caller (バージョン {assemblyVersion}) は現在の AtsEX ではサポートされていません。" +
-                        "互換性情報は https://automatic9045.github.io をご参照ください。");
-                }
-            }
         }
 
         /// <summary>Called when this plugin is loaded</summary>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void Load() => Export.Load(Assembly);
+        public static void Load() => VersionSelector = new VersionSelector(Assembly);
 
         /// <summary>Called when this plugin is unloaded</summary>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void Dispose() => Export.Dispose();
+        public static void Dispose() => VersionSelector?.CoreHost.Dispose();
 
         /// <summary>Called when the version number is needed</summary>
         /// <returns>plugin version number</returns>
@@ -82,12 +63,12 @@ namespace AtsEx.Caller
         /// <summary>Called when set the Vehicle Spec</summary>
         /// <param name="vehicleSpec">Set Spec</param>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void SetVehicleSpec(VehicleSpec vehicleSpec) => Export.SetVehicleSpec(vehicleSpec);
+        public static void SetVehicleSpec(VehicleSpec vehicleSpec) => VersionSelector.CoreHost.SetVehicleSpec(vehicleSpec);
 
         /// <summary>Called when car is put</summary>
         /// <param name="defaultBrakePosition">Default Brake Position (Refer to InitialPos class)</param>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void Initialize(int defaultBrakePosition) => Export.Initialize(defaultBrakePosition);
+        public static void Initialize(int defaultBrakePosition) => VersionSelector.CoreHost.Initialize(defaultBrakePosition);
 
         /// <summary>Called in every refleshing the display</summary>
         /// <param name="vehicleState">State</param>
@@ -95,54 +76,54 @@ namespace AtsEx.Caller
         /// <param name="sound">Sound (Pointer of int[256])</param>
         /// <returns></returns>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static AtsHandles Elapse(VehicleState vehicleState, int[] panel, int[] sound) => Export.Elapse(vehicleState, panel, sound);
+        public static AtsHandles Elapse(VehicleState vehicleState, int[] panel, int[] sound) => VersionSelector.CoreHost.Elapse(vehicleState, panel, sound);
 
         /// <summary>Called when Power notch is moved</summary>
         /// <param name="notch">Notch Number</param>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void SetPower(int notch) => Export.SetPower(notch);
+        public static void SetPower(int notch) => VersionSelector.CoreHost.SetPower(notch);
 
         /// <summary>Called when Brake Notch is moved</summary>
         /// <param name="notch">Brake notch Number</param>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void SetBrake(int notch) => Export.SetBrake(notch);
+        public static void SetBrake(int notch) => VersionSelector.CoreHost.SetBrake(notch);
 
         /// <summary>Called when Reverser is moved</summary>
         /// <param name="position">Reverser Position</param>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void SetReverser(int position) => Export.SetReverser(position);
+        public static void SetReverser(int position) => VersionSelector.CoreHost.SetReverser(position);
 
         /// <summary>Called when Key is Pushed</summary>
         /// <param name="atsKeyCode">Pushed Key Number</param>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void KeyDown(int atsKeyCode) => Export.KeyDown(atsKeyCode);
+        public static void KeyDown(int atsKeyCode) => VersionSelector.CoreHost.KeyDown(atsKeyCode);
 
         /// <summary>Called when Key is Released</summary>
         /// <param name="atsKeyCode">Released Key Number</param>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void KeyUp(int atsKeyCode) => Export.KeyUp(atsKeyCode);
+        public static void KeyUp(int atsKeyCode) => VersionSelector.CoreHost.KeyUp(atsKeyCode);
 
         /// <summary>Called when the Horn is Blown</summary>
         /// <param name="hornType">Blown Horn Number</param>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void HornBlow(int hornType) => Export.HornBlow((HornType)hornType);
+        public static void HornBlow(int hornType) => VersionSelector.CoreHost.HornBlow(hornType);
 
         /// <summary>Called when Door is opened</summary>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void DoorOpen() => Export.DoorOpen();
+        public static void DoorOpen() => VersionSelector.CoreHost.DoorOpen();
 
         /// <summary>Called when Door is closed</summary>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void DoorClose() => Export.DoorClose();
+        public static void DoorClose() => VersionSelector.CoreHost.DoorClose();
 
         /// <summary>Called when the Signal Showing Number is changed</summary>
         /// <param name="signal">Signal Showing Number</param>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void SetSignal(int signal) => Export.SetSignal(signal);
+        public static void SetSignal(int signal) => VersionSelector.CoreHost.SetSignal(signal);
 
         /// <summary>Called when passed above the Beacon</summary>
         /// <param name="beaconData">Beacon info</param>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void SetBeaconData(BeaconData beaconData) => Export.SetBeaconData(beaconData);
+        public static void SetBeaconData(BeaconData beaconData) => VersionSelector.CoreHost.SetBeaconData(beaconData);
     }
 }

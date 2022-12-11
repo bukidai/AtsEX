@@ -39,17 +39,18 @@ namespace AtsEx.PluginHost
 #endif
         }
 
-        private App(Process targetProcess, Assembly bveAssembly, Assembly atsExAssembly)
+        private App(Process targetProcess, Assembly bveAssembly, Assembly launcherAssembly, Assembly atsExAssembly)
         {
             Process = targetProcess;
             BveAssembly = bveAssembly;
+            AtsExLauncherAssembly = launcherAssembly;
             AtsExAssembly = atsExAssembly;
             AtsExPluginHostAssembly = Assembly.GetExecutingAssembly();
             BveVersion = BveAssembly.GetName().Version;
         }
 
-        public static void CreateInstance(Process targetProcess, Assembly bveAssembly, Assembly atsExAssembly)
-            => Instance = new App(targetProcess, bveAssembly, atsExAssembly);
+        public static void CreateInstance(Process targetProcess, Assembly bveAssembly, Assembly launcherAssembly, Assembly atsExAssembly)
+            => Instance = new App(targetProcess, bveAssembly, launcherAssembly, atsExAssembly);
 
         /// <summary>
         /// プロダクト名を取得します。
@@ -66,6 +67,11 @@ namespace AtsEx.PluginHost
         /// 制御対象の BVE を実行している <see cref="System.Diagnostics.Process"/> を取得します。
         /// </summary>
         public Process Process { get; }
+
+        /// <summary>
+        /// AtsEX Launcher の <see cref="Assembly"/> を取得します。
+        /// </summary>
+        public Assembly AtsExLauncherAssembly { get; }
 
         /// <summary>
         /// AtsEX の <see cref="Assembly"/> を取得します。

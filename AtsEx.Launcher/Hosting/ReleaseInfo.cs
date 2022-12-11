@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AtsEx.Hosting
+namespace AtsEx.Launcher.Hosting
 {
     internal class ReleaseInfo
     {

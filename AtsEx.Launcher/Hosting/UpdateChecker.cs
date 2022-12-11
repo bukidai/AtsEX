@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -10,28 +9,13 @@ using System.Windows.Forms;
 
 using Markdig;
 
-using AtsEx.Properties;
+using AtsEx.Launcher.Properties;
 
-namespace AtsEx.Hosting
+namespace AtsEx.Launcher.Hosting
 {
-    internal class AtsExActivator
+    internal static class UpdateChecker
     {
-        public Process TargetProcess { get; }
-        public AppDomain TargetAppDomain { get; }
-        public Assembly TargetAssembly { get; }
-
-        private readonly Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
-
-        public AtsExActivator()
-        {
-            TargetProcess = Process.GetCurrentProcess();
-            TargetAppDomain = AppDomain.CurrentDomain;
-            TargetAssembly = Assembly.GetEntryAssembly();
-
-            CheckAssembly();
-        }
-
-        public void CheckUpdates()
+        public static void CheckUpdates()
         {
             DateTime stoppedUpdateNotificationOn = DateTime.MinValue;
             try
@@ -56,9 +40,9 @@ namespace AtsEx.Hosting
                 AtsExRepositoryHost repositoryHost = new AtsExRepositoryHost();
 
                 ReleaseInfo latestRelease = repositoryHost.GetLatestReleaseAsync().Result;
-                Version currentVersion = ExecutingAssembly.GetName().Version;
+                Version currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
-                if (currentVersion < latestRelease.Version || true)
+                if (currentVersion < latestRelease.Version)
                 {
                     UpdateInfoDialog dialog = new UpdateInfoDialog(currentVersion, latestRelease.Version, GetUpdateDetailsHtmlAsync().Result);
 
@@ -91,36 +75,6 @@ namespace AtsEx.Hosting
                 }
             }
             catch { }
-        }
-
-        private void CheckAssembly()
-        {
-            if (TargetAssembly is null)
-            {
-                ShowErrorDialog("BVE 本体が読み込めないフォーマットです。");
-            }
-            else if (!TargetAssembly.GetTypes().Any(t => t.Namespace == "Mackoy.Bvets"))
-            {
-                ShowErrorDialog("BVE 本体と異なるプロセスで実行することはできません。", "https://automatic9045.github.io/contents/bve/AtsEX/faq/#diff-process");
-            }
-        }
-
-        private void ShowErrorDialog(string message, string faqUrl = null)
-        {
-            if (faqUrl is null)
-            {
-                MessageBox.Show(message, $"エラー - AtsEX", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                DialogResult dialogResult = MessageBox.Show($"{message}\n\nこのエラーに関する情報を表示しますか？\n（ブラウザで Web サイトが開きます）", $"エラー - AtsEX", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    Process.Start(faqUrl);
-                }
-            }
-
-            throw new NotSupportedException(message);
         }
     }
 }

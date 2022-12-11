@@ -9,13 +9,10 @@ using System.Threading.Tasks;
 
 using UnembeddedResources;
 
-using AtsEx.Plugins;
-using AtsEx.Plugins.Extensions;
-using AtsEx.Plugins.Scripting;
+using AtsEx.Native;
 
 using AtsEx.Extensions.ContextMenuHacker;
 using AtsEx.PluginHost;
-using AtsEx.PluginHost.LoadErrorManager;
 using AtsEx.PluginHost.Plugins;
 using AtsEx.PluginHost.Plugins.Extensions;
 
@@ -54,7 +51,7 @@ namespace AtsEx
 
         public VersionFormProvider VersionFormProvider { get; }
 
-        protected AtsEx(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly)
+        protected AtsEx(CallerInfo callerInfo)
         {
             AppDomain.CurrentDomain.AssemblyResolve += (sender, e) =>
             {
@@ -73,7 +70,7 @@ namespace AtsEx
 
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
 
-            App.CreateInstance(targetProcess, targetAssembly, executingAssembly);
+            App.CreateInstance(callerInfo.Process, callerInfo.BveAssembly, callerInfo.AtsExLauncherAssembly, executingAssembly);
             BveHacker = new BveHacker(ProfileForDifferentBveVersionLoaded);
 
             ExtensionLoader extensionLoader = new ExtensionLoader(BveHacker);

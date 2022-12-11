@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using AtsEx.Native;
 using AtsEx.PluginHost;
 
 namespace AtsEx
@@ -16,29 +17,29 @@ namespace AtsEx
     {
         internal sealed class AsAtsPlugin : AtsEx
         {
-            private const string LegalAtsExAssemblyRelativeLocation = @"AtsEx\AtsEx.dll";
+            private const string LegalLauncherAssemblyRelativeLocation = @"AtsEx\AtsEx.Launcher.dll";
 
             public string VersionWarningText { get; private set; }
 
-            public AsAtsPlugin(Process targetProcess, AppDomain targetAppDomain, Assembly targetAssembly)
-                : base(targetProcess, targetAppDomain, targetAssembly)
+            public AsAtsPlugin(CallerInfo callerInfo)
+                : base(callerInfo)
             {
                 CheckAtsExAssemblyLocation();
             }
 
             private void CheckAtsExAssemblyLocation()
             {
-                string atsExAssemblyLocation = App.Instance.AtsExAssembly.Location;
+                string launcherAssemblyLocation = App.Instance.AtsExLauncherAssembly.Location;
 
                 string scenarioDirectory = BveHacker.ScenarioInfo.DirectoryName;
-                string legalAtsExAssemblyLocation = Path.Combine(scenarioDirectory, LegalAtsExAssemblyRelativeLocation);
+                string legalLauncherAssemblyLocation = Path.Combine(scenarioDirectory, LegalLauncherAssemblyRelativeLocation);
 
-                if (GetNormalizedPath(atsExAssemblyLocation) != GetNormalizedPath(legalAtsExAssemblyLocation))
+                if (GetNormalizedPath(launcherAssemblyLocation) != GetNormalizedPath(legalLauncherAssemblyLocation))
                 {
                     string warningText = string.Format(Resources.Value.AtsExAssemblyLocationIllegal.Value,
-                        App.Instance.ProductShortName, atsExAssemblyLocation, legalAtsExAssemblyLocation);
+                        App.Instance.ProductShortName, launcherAssemblyLocation, legalLauncherAssemblyLocation);
 
-                    BveHacker.LoadErrorManager.Throw(warningText.Replace("\n", ""), Path.GetFileName(atsExAssemblyLocation));
+                    BveHacker.LoadErrorManager.Throw(warningText.Replace("\n", ""), Path.GetFileName(launcherAssemblyLocation));
                     if (MessageBox.Show($"{warningText}\n\n{Resources.Value.IgnoreAndContinue.Value}", App.Instance.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                     {
                         Environment.Exit(0);

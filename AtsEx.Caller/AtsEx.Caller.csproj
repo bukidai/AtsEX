@@ -49,10 +49,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AtsEx\AtsEx.csproj">
-      <Project>{15f8005b-285b-4b98-b4d8-13978ad876f8}</Project>
-      <Name>AtsEx</Name>
-      <Private>False</Private>
+    <ProjectReference Include="..\AtsEx.Launcher\AtsEx.Launcher.csproj">
+      <Project>{a4645e87-8e06-4687-a7c8-9d015e5567f2}</Project>
+      <Name>AtsEx.Launcher</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

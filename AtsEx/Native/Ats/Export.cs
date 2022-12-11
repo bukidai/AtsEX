@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-
-using AtsEx.Hosting;
 
 namespace AtsEx.Native
 {
@@ -160,25 +156,9 @@ namespace AtsEx.Native
     /// <summary>publicするクラス</summary>
     public static class Export
     {
-        private const int Version = 0x00020000;
-
-        private static readonly AtsExActivator Activator;
-
-        static Export()
-        {
-#if DEBUG
-            if (!Debugger.IsAttached) Debugger.Launch();
-#endif
-
-            Activator = new AtsExActivator();
-            Activator.CheckUpdates();
-        }
-
-        public static void Load(Assembly callerAssembly) => AtsMain.Load(callerAssembly, Activator);
+        public static void Load(CallerInfo callerInfo) => AtsMain.Load(callerInfo);
 
         public static void Dispose() => AtsMain.Dispose();
-
-        public static int GetPluginVersion() => Version;
 
         public static void SetVehicleSpec(VehicleSpec vehicleSpec)
         {
@@ -186,7 +166,7 @@ namespace AtsEx.Native
             AtsMain.SetVehicleSpec(vehicleSpec);
         }
 
-        public static void Initialize(int defaultBrakePosition) => AtsMain.Initialize(defaultBrakePosition);
+        public static void Initialize(DefaultBrakePosition defaultBrakePosition) => AtsMain.Initialize(defaultBrakePosition);
 
         public static AtsHandles Elapse(VehicleState vehicleState, int[] panel, int[] sound) => AtsMain.Elapse(vehicleState, panel, sound);
 
@@ -196,9 +176,9 @@ namespace AtsEx.Native
 
         public static void SetReverser(int position) => AtsMain.SetReverser(position);
 
-        public static void KeyDown(int atsKeyCode) => AtsMain.KeyDown(atsKeyCode);
+        public static void KeyDown(ATSKeys atsKeyCode) => AtsMain.KeyDown(atsKeyCode);
 
-        public static void KeyUp(int atsKeyCode) => AtsMain.KeyUp(atsKeyCode);
+        public static void KeyUp(ATSKeys atsKeyCode) => AtsMain.KeyUp(atsKeyCode);
 
         public static void HornBlow(HornType hornType) => AtsMain.HornBlow(hornType);
 

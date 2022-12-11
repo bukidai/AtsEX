@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using BveTypes.ClassWrappers;
 
 using AtsEx.Handles;
-using AtsEx.Hosting;
 using AtsEx.PluginHost.Input.Native;
 
 namespace AtsEx.Native
@@ -23,20 +22,18 @@ namespace AtsEx.Native
         /// <summary>Is the Door Closed TF</summary>
         public static bool IsDoorClosed { get; set; } = false;
 
-        private static Assembly CallerAssembly;
-        private static AtsExActivator Activator;
+        private static CallerInfo CallerInfo;
 
         private static readonly Stopwatch Stopwatch = new Stopwatch();
 
         private static AtsEx.AsAtsPlugin AtsEx;
         private static ScenarioService.AsAtsPlugin AtsExScenarioService;
 
-        public static void Load(Assembly callerAssembly, AtsExActivator activator)
+        public static void Load(CallerInfo callerInfo)
         {
-            CallerAssembly = callerAssembly;
-            Activator = activator;
+            CallerInfo = callerInfo;
 
-            Version callerVersion = callerAssembly.GetName().Version;
+            Version callerVersion = CallerInfo.AtsExCallerAssembly.GetName().Version;
             if (callerVersion < new Version(0, 16))
             {
                 string errorMessage = $"読み込まれた AtsEX Caller (バージョン {callerVersion}) は現在の AtsEX ではサポートされていません。\nbeta0.16 (バージョン 0.16) 以降の Ats Caller をご利用下さい。";
@@ -44,7 +41,7 @@ namespace AtsEx.Native
                 throw new NotSupportedException(errorMessage.Replace("\n", ""));
             }
 
-            AtsEx = new AtsEx.AsAtsPlugin(Activator.TargetProcess, Activator.TargetAppDomain, Activator.TargetAssembly);
+            AtsEx = new AtsEx.AsAtsPlugin(CallerInfo);
         }
 
         public static void Dispose()
@@ -58,10 +55,10 @@ namespace AtsEx.Native
             PluginHost.Native.VehicleSpec exVehicleSpec = new PluginHost.Native.VehicleSpec(
                 vehicleSpec.BrakeNotches, vehicleSpec.PowerNotches, vehicleSpec.AtsNotch, vehicleSpec.B67Notch, vehicleSpec.Cars);
 
-            AtsExScenarioService = new ScenarioService.AsAtsPlugin(AtsEx, CallerAssembly, exVehicleSpec);
+            AtsExScenarioService = new ScenarioService.AsAtsPlugin(AtsEx, CallerInfo.AtsExCallerAssembly, exVehicleSpec);
         }
 
-        public static void Initialize(int defaultBrakePosition)
+        public static void Initialize(DefaultBrakePosition defaultBrakePosition)
         {
             AtsExScenarioService?.Started((BrakePosition)defaultBrakePosition);
         }
@@ -102,12 +99,12 @@ namespace AtsEx.Native
             AtsExScenarioService?.SetReverser((ReverserPosition)position);
         }
 
-        public static void KeyDown(int atsKeyCode)
+        public static void KeyDown(ATSKeys atsKeyCode)
         {
             AtsExScenarioService?.KeyDown((NativeAtsKeyName)atsKeyCode);
         }
 
-        public static void KeyUp(int atsKeyCode)
+        public static void KeyUp(ATSKeys atsKeyCode)
         {
             AtsExScenarioService?.KeyUp((NativeAtsKeyName)atsKeyCode);
         }

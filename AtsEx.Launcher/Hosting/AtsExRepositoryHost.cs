@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 using Octokit;
 
-namespace AtsEx.Hosting
+namespace AtsEx.Launcher.Hosting
 {
     internal sealed class AtsExRepositoryHost
     {
