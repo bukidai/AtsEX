@@ -22,7 +22,14 @@ namespace BveTypes.ClassWrappers
 
             SectionsGetMethod = members.GetSourcePropertyGetterOf(nameof(Sections));
 
+            TimeManagerField = members.GetSourceFieldOf(nameof(TimeManager));
+            PreTrainPassObjectsField = members.GetSourceFieldOf(nameof(PreTrainPassObjects));
+            PreTrainSectionIndexField = members.GetSourceFieldOf(nameof(PreTrainSectionIndex));
             SectionIndexesTrainOnField = members.GetSourceFieldOf(nameof(SectionIndexesTrainOn));
+            PreTrainLocationField = members.GetSourceFieldOf(nameof(PreTrainLocation));
+
+            OnSectionChangedMethod = members.GetSourceMethodOf(nameof(OnSectionChanged));
+            UpdatePreTrainSectionMethod = members.GetSourceMethodOf(nameof(UpdatePreTrainSection));
         }
 
         /// <summary>
@@ -47,6 +54,36 @@ namespace BveTypes.ClassWrappers
         /// </summary>
         public MapFunctionList Sections => MapFunctionList.FromSource(SectionsGetMethod.Invoke(Src, null));
 
+        private static FastField TimeManagerField;
+        /// <summary>
+        /// 閉塞の制御に使用する <see cref="ClassWrappers.TimeManager"/> を取得・設定します。
+        /// </summary>
+        public TimeManager TimeManager
+        {
+            get => TimeManager.FromSource(TimeManagerField.GetValue(Src));
+            set => TimeManagerField.SetValue(Src, value.Src);
+        }
+
+        private static FastField PreTrainPassObjectsField;
+        /// <summary>
+        /// 先行列車の走行位置を定義している PreTrain.Pass ステートメントの一覧を取得・設定します。
+        /// </summary>
+        public MapObjectList PreTrainPassObjects
+        {
+            get => MapObjectList.FromSource(PreTrainPassObjectsField.GetValue(Src));
+            set => PreTrainPassObjectsField.SetValue(Src, value.Src);
+        }
+
+        private static FastField PreTrainSectionIndexField;
+        /// <summary>
+        /// 先行列車が走行している閉塞のインデックスを取得・設定します。
+        /// </summary>
+        public int PreTrainSectionIndex
+        {
+            get => PreTrainSectionIndexField.GetValue(Src);
+            set => PreTrainSectionIndexField.SetValue(Src, value);
+        }
+
         private static FastField SectionIndexesTrainOnField;
         /// <summary>
         /// 列車が走行している閉塞のインデックスの一覧を取得・設定します。
@@ -56,5 +93,27 @@ namespace BveTypes.ClassWrappers
             get => SectionIndexesTrainOnField.GetValue(Src);
             set => SectionIndexesTrainOnField.SetValue(Src, value);
         }
+
+        private static FastField PreTrainLocationField;
+        /// <summary>
+        /// 先行列車が走行している距離程 [m] を取得・設定します。
+        /// </summary>
+        public double PreTrainLocation
+        {
+            get => PreTrainLocationField.GetValue(Src);
+            set => PreTrainLocationField.SetValue(Src, value);
+        }
+
+        private static FastMethod OnSectionChangedMethod;
+        /// <summary>
+        /// 自列車または先行列車の走行している閉塞が変更されたときに呼び出されます。
+        /// </summary>
+        public void OnSectionChanged() => OnSectionChangedMethod.Invoke(Src, new object[] { });
+
+        private static FastMethod UpdatePreTrainSectionMethod;
+        /// <summary>
+        /// 先行列車が走行している閉塞を最新の状態に更新します。
+        /// </summary>
+        public void UpdatePreTrainSection() => UpdatePreTrainSectionMethod.Invoke(Src, new object[] { });
     }
 }
