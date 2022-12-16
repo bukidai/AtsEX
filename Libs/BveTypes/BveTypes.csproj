@@ -113,6 +113,7 @@
     <Compile Include="ClassWrappers\Public\Sound.cs" />
     <Compile Include="ClassWrappers\Public\Station.cs" />
     <Compile Include="ClassWrappers\Public\StationList.cs" />
+    <Compile Include="ClassWrappers\Public\ValueNode.cs" />
     <Compile Include="ClassWrappers\Public\Structure.cs" />
     <Compile Include="ClassWrappers\Public\StructureSet.cs" />
     <Compile Include="ClassWrappers\Public\TimeManager.cs" />

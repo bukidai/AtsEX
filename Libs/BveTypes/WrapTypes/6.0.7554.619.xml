@@ -725,6 +725,13 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="ValueNode`1" Original="ValueNode`1">
+		<Property Wrapper="Value">
+			<Getter Original="a"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="Vehicle" Original="f">
 		<Property Wrapper="Instruments">
 			<Getter Original="f"/>

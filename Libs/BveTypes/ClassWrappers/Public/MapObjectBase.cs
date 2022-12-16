@@ -21,6 +21,7 @@ namespace BveTypes.ClassWrappers
     /// <seealso cref="PutBetweenStructure"/>
     /// <seealso cref="Station"/>
     /// <seealso cref="Structure"/>
+    /// <seealso cref="ValueNode{T}"/>
     public class MapObjectBase : ClassWrapperBase, IComparable
     {
         [InitializeClassWrapper]
