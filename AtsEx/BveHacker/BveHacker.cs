@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -61,22 +62,21 @@ namespace AtsEx
 
                 void ResolveException(Exception exception)
                 {
-                    switch (exception)
+                    if (exception is AggregateException ae)
                     {
-                        case AggregateException ae:
+                        foreach (Exception innerException in ae.InnerExceptions)
                         {
-                            foreach (Exception innerException in ae.InnerExceptions)
-                            {
-                                ResolveException(innerException);
-                            }
-                            break;
+                            ResolveException(innerException);
                         }
-
-                        case KeyNotFoundException ke:
+                    }
+                    else
+                    {
+                        if (exception is KeyNotFoundException)
                         {
                             CheckSlimDX();
-                            break;
                         }
+
+                        ExceptionDispatchInfo.Capture(exception).Throw();
                     }
                 }
             }
