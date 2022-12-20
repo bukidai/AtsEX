@@ -16,12 +16,12 @@ namespace AtsEx.Plugins
     {
         private class PluginLoadErrorQueue
         {
-            private readonly PluginLoadErrorResolver LoadErrorManager;
+            private readonly PluginLoadErrorResolver LoadErrorResolver;
             private readonly Queue<PluginException> ExceptionsToResolve = new Queue<PluginException>();
 
             public PluginLoadErrorQueue(ILoadErrorManager loadErrorManager)
             {
-                LoadErrorManager = new PluginLoadErrorResolver(loadErrorManager);
+                LoadErrorResolver = new PluginLoadErrorResolver(loadErrorManager);
             }
 
             public void OnFailedToLoadAssembly(Assembly assembly, Exception ex)
@@ -53,7 +53,7 @@ namespace AtsEx.Plugins
                     PluginException exception = ExceptionsToResolve.Dequeue();
                     try
                     {
-                        LoadErrorManager.Resolve(exception.SenderName, exception.Exception);
+                        LoadErrorResolver.Resolve(exception.SenderName, exception.Exception);
                     }
                     catch
                     {
