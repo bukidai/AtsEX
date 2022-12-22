@@ -54,6 +54,11 @@
     <Compile Include="ContextMenuHacker\IContextMenuHacker.cs" />
     <Compile Include="DiagramUpdater\IDiagramUpdater.cs" />
     <Compile Include="DiagramUpdater\DiagramUpdater.cs" />
+    <Compile Include="PreTrainPatch\IPreTrainLocationConverter.cs" />
+    <Compile Include="PreTrainPatch\IPreTrainPatchFactory.cs" />
+    <Compile Include="PreTrainPatch\PreTrainLocation.cs" />
+    <Compile Include="PreTrainPatch\PreTrainPatch.cs" />
+    <Compile Include="PreTrainPatch\PreTrainPatchFactory.cs" />
     <Compile Include="TrainDrawPatch\ITrainDrawPatchFactory.cs" />
     <Compile Include="TrainDrawPatch\TrainDrawPatchFactory.cs" />
     <Compile Include="IMatrixConverter.cs" />
