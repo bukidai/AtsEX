@@ -12,12 +12,13 @@ using Microsoft.CodeAnalysis.Text;
 using UnembeddedResources;
 
 using AtsEx.PluginHost;
-using AtsEx.PluginHost.LoadErrorManager;
 using AtsEx.Scripting.CSharp;
+
+using AtsEx.PluginHost.LoadErrorManager;
 
 namespace AtsEx.Plugins
 {
-    internal class PluginLoadErrorResolver
+    internal class PluginLoadErrorResolver : ExceptionResolver
     {
         private class ResourceSet
         {
@@ -47,30 +48,8 @@ namespace AtsEx.Plugins
             LoadErrorManager = loadErrorManager;
         }
 
-        public void Resolve(string senderName, Exception exception)
+        protected override void Throw(string senderName, Exception exception, bool isWrapperException)
         {
-            bool isWrapperException = false;
-            switch (exception)
-            {
-                case AggregateException ex:
-                    foreach (Exception innerException in ex.InnerExceptions)
-                    {
-                        Resolve(senderName, innerException);
-                    }
-                    isWrapperException = true;
-                    break;
-
-                case TypeInitializationException ex:
-                    Resolve(senderName, ex.InnerException);
-                    isWrapperException = true;
-                    break;
-
-                case TargetInvocationException ex:
-                    Resolve(senderName, ex.InnerException);
-                    isWrapperException = true;
-                    break;
-            }
-
             switch (exception)
             {
                 case CompilationException ex:
@@ -86,8 +65,8 @@ namespace AtsEx.Plugins
                     break;
 
                 default:
-                    LoadErrorManager.Throw(exception.Message, senderName);
                     if (!isWrapperException) MessageBox.Show(exception.ToString(), string.Format(Resources.Value.UnhandledExceptionCaption.Value, App.Instance.ProductShortName));
+                    LoadErrorManager.Throw(exception.Message, senderName);
                     break;
             }
         }

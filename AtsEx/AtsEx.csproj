@@ -104,6 +104,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExceptionResolver.cs" />
     <Compile Include="Main\AtsEx.ExtensionLoader.cs" />
     <Compile Include="Main\AtsEx.ExtensionService.cs" />
     <Compile Include="Native\Ats\Export.cs" />

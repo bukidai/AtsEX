@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
@@ -57,28 +58,15 @@ namespace AtsEx
             }
             catch (Exception ex)
             {
-                ResolveException(ex);
-                throw;
-
-                void ResolveException(Exception exception)
+                if (ex is KeyNotFoundException)
                 {
-                    if (exception is AggregateException ae)
-                    {
-                        foreach (Exception innerException in ae.InnerExceptions)
-                        {
-                            ResolveException(innerException);
-                        }
-                    }
-                    else
-                    {
-                        if (exception is KeyNotFoundException)
-                        {
-                            CheckSlimDX();
-                        }
-
-                        ExceptionDispatchInfo.Capture(exception).Throw();
-                    }
+                    CheckSlimDX();
                 }
+
+                ExceptionResolver exceptionResolver = new ExceptionResolver();
+                string senderName = Path.GetFileName(typeof(BveTypeSet).Assembly.Location);
+                exceptionResolver.Resolve(senderName, ex);
+                throw;
             }
 
             MainFormHacker = new MainFormHacker(App.Instance.Process);
