@@ -77,7 +77,14 @@ namespace TypeWrapping
 
                 public Type GetOriginal(Type wrapper)
                 {
-                    if (wrapper.IsConstructedGenericType)
+                    if (wrapper.IsGenericParameter)
+                    {
+                        Type declaringWrapper = wrapper.DeclaringType;
+                        Type declaringOriginal = GetOriginal(declaringWrapper);
+
+                        return (declaringOriginal as TypeInfo).GenericTypeParameters[wrapper.GenericParameterPosition];
+                    }
+                    else if (wrapper.IsConstructedGenericType)
                     {
                         Type wrapperParent = wrapper.GetGenericTypeDefinition();
                         WrapperToOriginal.TryGetValue(wrapperParent, out Type originalParent);
