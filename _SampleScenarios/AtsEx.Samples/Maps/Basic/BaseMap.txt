@@ -4,6 +4,7 @@ include '[[AtsEx::NOMPI]] このマップでは AtsEX マッププラグイン�
 include '[[AtsEx::NOMPI]] This map requires an AtsEX-powered vehicle to execute map plugins. For more information, visit https://automatic9045.github.io';
 
 Structure.Load('..\..\Structures.csv');
+Signal.Load('..\..\Signal.csv');
 
 Curve.SetGauge(1.067);
 Curve.SetCenter(1.067 / 2);
