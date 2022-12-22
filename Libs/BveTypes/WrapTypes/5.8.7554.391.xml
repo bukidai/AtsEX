@@ -262,6 +262,10 @@
 	</Class>
 
 	<Class Wrapper="MapObjectList" Original="b6">
+		<Property Wrapper="CurrentIndex">
+			<Getter Original="g"/>
+			<Setter Original="d"/>
+		</Property>
 	</Class>
 
 	<Class Wrapper="MaterialInfo" Original="e0">

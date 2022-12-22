@@ -6,6 +6,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using FastMember;
+using TypeWrapping;
+
 using BveTypes.ClassWrappers.Extensions;
 
 namespace BveTypes.ClassWrappers
@@ -20,6 +23,10 @@ namespace BveTypes.ClassWrappers
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
         {
+            ClassMemberSet members = bveTypes.GetClassInfoOf<MapObjectList>();
+
+            CurrentIndexGetMethod = members.GetSourcePropertyGetterOf(nameof(CurrentIndex));
+            CurrentIndexSetMethod = members.GetSourcePropertySetterOf(nameof(CurrentIndex));
         }
 
         /// <summary>
@@ -37,5 +44,19 @@ namespace BveTypes.ClassWrappers
         /// <returns>オリジナル オブジェクトをラップした <see cref="MapObjectList"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
         public static MapObjectList FromSource(object src) => src is null ? null : new MapObjectList((IList)src);
+
+        private static FastMethod CurrentIndexGetMethod;
+        private static FastMethod CurrentIndexSetMethod;
+        /// <summary>
+        /// この <see cref="MapObjectList"/> に関連付けられた現在のインデックスを取得・設定します。
+        /// </summary>
+        /// <remarks>
+        /// 通常、この <see cref="MapObjectList"/> において自列車の距離程に対応する値を示します。
+        /// </remarks>
+        public int CurrentIndex
+        {
+            get => (int)CurrentIndexGetMethod.Invoke(Src, null);
+            set => CurrentIndexSetMethod.Invoke(Src, new object[] { value });
+        }
     }
 }
