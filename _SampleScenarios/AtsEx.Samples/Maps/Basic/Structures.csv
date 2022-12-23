@@ -1,6 +1,7 @@
 BveTs Structure List 2.00,
 Info,Structures_Original\Info\HowToDriveOtherTrain.x
 Info_Ex,Structures_Original\Info\HowToDriveOtherTrain_Ex.x
+Info_Signal,Structures_Original\Info\HowToControlSignal.x
 Bus,Structures_Original\Bus\Bus.x
 ,
 dxdt-test,structures\Station\Stop6.x

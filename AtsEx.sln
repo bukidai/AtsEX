@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.Launcher", "AtsEx.Lau
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.Samples.MapPlugins.PreTrainController", "SamplePlugins\MapPlugins\PreTrainController\AtsEx.Samples.MapPlugins.PreTrainController.csproj", "{381AF3E4-97FF-42AD-84C5-67111A2B482A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.Samples.MapPlugins.SignalController", "SamplePlugins\MapPlugins\SignalController\AtsEx.Samples.MapPlugins.SignalController.csproj", "{8C69A759-3A3B-47AC-8D25-E29318AAB460}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -149,6 +151,10 @@ Global
 		{381AF3E4-97FF-42AD-84C5-67111A2B482A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{381AF3E4-97FF-42AD-84C5-67111A2B482A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{381AF3E4-97FF-42AD-84C5-67111A2B482A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C69A759-3A3B-47AC-8D25-E29318AAB460}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C69A759-3A3B-47AC-8D25-E29318AAB460}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C69A759-3A3B-47AC-8D25-E29318AAB460}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C69A759-3A3B-47AC-8D25-E29318AAB460}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -173,6 +179,7 @@ Global
 		{54A911B0-4B7A-4F49-AC5F-4EFC5761F1F7} = {B3D0DA09-BB5C-4FF7-9844-80A381655B5C}
 		{DEA13CE0-F2BC-45ED-8C35-3C970F634AC6} = {D8B1A356-B814-470B-9C6B-C8D0DFAD6D5B}
 		{381AF3E4-97FF-42AD-84C5-67111A2B482A} = {FCA108F3-EC46-4DD5-962E-3ECCBC2100AE}
+		{8C69A759-3A3B-47AC-8D25-E29318AAB460} = {FCA108F3-EC46-4DD5-962E-3ECCBC2100AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434AD268-BAE2-48A7-8AE5-2AB6B982F843}
