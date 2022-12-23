@@ -59,6 +59,9 @@
     <Compile Include="PreTrainPatch\PreTrainLocation.cs" />
     <Compile Include="PreTrainPatch\PreTrainPatch.cs" />
     <Compile Include="PreTrainPatch\PreTrainPatchFactory.cs" />
+    <Compile Include="SignalPatch\ISignalPatchFactory.cs" />
+    <Compile Include="SignalPatch\SignalPatch.cs" />
+    <Compile Include="SignalPatch\SignalPatchFactory.cs" />
     <Compile Include="TrainDrawPatch\ITrainDrawPatchFactory.cs" />
     <Compile Include="TrainDrawPatch\TrainDrawPatchFactory.cs" />
     <Compile Include="IMatrixConverter.cs" />
