@@ -29,6 +29,7 @@ namespace BveTypes.ClassWrappers
             PreTrainLocationField = members.GetSourceFieldOf(nameof(PreTrainLocation));
 
             OnSectionChangedMethod = members.GetSourceMethodOf(nameof(OnSectionChanged));
+            UpdateSignalsMethod = members.GetSourceMethodOf(nameof(OnSignalChanged));
             UpdatePreTrainSectionMethod = members.GetSourceMethodOf(nameof(UpdatePreTrainSection));
         }
 
@@ -109,6 +110,15 @@ namespace BveTypes.ClassWrappers
         /// 自列車または先行列車の走行している閉塞が変更されたときに呼び出されます。
         /// </summary>
         public void OnSectionChanged() => OnSectionChangedMethod.Invoke(Src, new object[] { });
+
+        private static FastMethod UpdateSignalsMethod;
+        /// <summary>
+        /// 各閉塞の信号現示が変更されたとき、または走行している閉塞が変更されたときに呼び出されます。
+        /// </summary>
+        /// <remarks>
+        /// 各閉塞の信号現示を取得するには <see cref="Section.CurrentSignalIndex"/> プロパティを使用してください。
+        /// </remarks>
+        public void OnSignalChanged() => UpdateSignalsMethod.Invoke(Src, new object[] { });
 
         private static FastMethod UpdatePreTrainSectionMethod;
         /// <summary>

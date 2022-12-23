@@ -20,10 +20,16 @@ namespace BveTypes.ClassWrappers
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<Section>();
 
+            SectionIndexesTrainOnGetMethod = members.GetSourcePropertyGetterOf(nameof(SectionIndexesTrainOn));
+            SectionIndexesTrainOnSetMethod = members.GetSourcePropertySetterOf(nameof(SectionIndexesTrainOn));
+
             CurrentSignalIndexGetMethod = members.GetSourcePropertyGetterOf(nameof(CurrentSignalIndex));
 
             SignalIndexesGetMethod = members.GetSourcePropertyGetterOf(nameof(SignalIndexes));
             SignalIndexesSetMethod = members.GetSourcePropertySetterOf(nameof(SignalIndexes));
+
+            SectionCountGetMethod = members.GetSourcePropertyGetterOf(nameof(SectionCount));
+            SectionCountSetMethod = members.GetSourcePropertySetterOf(nameof(SectionCount));
         }
 
         /// <summary>
@@ -42,6 +48,20 @@ namespace BveTypes.ClassWrappers
         [CreateClassWrapperFromSource]
         public static Section FromSource(object src) => src is null ? null : new Section(src);
 
+        private static FastMethod SectionIndexesTrainOnGetMethod;
+        private static FastMethod SectionIndexesTrainOnSetMethod;
+        /// <summary>
+        /// 列車 (自列車・先行列車) が走行している閉塞のインデックスの一覧を取得・設定します。
+        /// </summary>
+        /// <remarks>
+        /// 要素は昇順にソートされています。
+        /// </remarks>
+        public List<int> SectionIndexesTrainOn
+        {
+            get => SectionIndexesTrainOnGetMethod.Invoke(Src, null);
+            set => SectionIndexesTrainOnSetMethod.Invoke(Src, new object[] { value });
+        }
+
         private static FastMethod CurrentSignalIndexGetMethod;
         /// <summary>
         /// 現在の信号現示のインデックスを取得します。
@@ -57,6 +77,17 @@ namespace BveTypes.ClassWrappers
         {
             get => SignalIndexesGetMethod.Invoke(Src, null);
             set => SignalIndexesSetMethod.Invoke(Src, new object[] { value });
+        }
+
+        private static FastMethod SectionCountGetMethod;
+        private static FastMethod SectionCountSetMethod;
+        /// <summary>
+        /// 信号現示インデックスの一覧を取得・設定します。
+        /// </summary>
+        public int SectionCount
+        {
+            get => SectionCountGetMethod.Invoke(Src, null);
+            set => SectionCountSetMethod.Invoke(Src, new object[] { value });
         }
     }
 }
