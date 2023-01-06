@@ -34,7 +34,8 @@ namespace AtsEx.Launcher.Hosting
 
             string GetUpdateDetails()
             {
-                ReleaseAsset updateInfoAsset = latestRelease.Assets.First(asset => asset.Name.StartsWith("UpdateInfo."));
+                IEnumerable<ReleaseAsset> updateInfoAssets = latestRelease.Assets.Where(asset => asset.Name.StartsWith("UpdateInfo.", StringComparison.Ordinal));
+                ReleaseAsset updateInfoAsset = updateInfoAssets.FirstOrDefault(asset => asset.Name.EndsWith(".md", StringComparison.Ordinal)) ?? updateInfoAssets.First();
                 using (HttpClient httpClient = new HttpClient())
                 {
                     string updateDetails = httpClient.GetStringAsync(updateInfoAsset.BrowserDownloadUrl).Result;
