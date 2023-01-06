@@ -28,7 +28,7 @@ namespace AtsEx.MapStatements
 
                     string argument = sameKeyRepeaters.Key;
                     Identifier[] declaration = GetDeclaration(repeater.Models);
-                    if (declaration.Length == 0) continue;
+                    if (declaration.Length == 0 || declaration[0] is null) continue;
 
                     Identifier name = declaration[0];
                     if (name.Namespace is null || !name.Namespace.IsChildOf(Namespace.Root)) continue;
@@ -52,6 +52,7 @@ namespace AtsEx.MapStatements
                 for (int i = 0; i < models.Count; i++)
                 {
                     result[i] =
+                        models[i] is null ||
                         !loadedModels.TryGetValue(models[i], out string structureKey) ||
                         !Identifier.TryParse(structureKey, out Identifier identifier) ? null : identifier;
                 }
