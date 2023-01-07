@@ -41,7 +41,7 @@ BVE本体（`BveTs.exe`）と同じフォルダ内にある`Mackoy.XmlInterfaces
 
 ## プロジェクトの構成
 
-![Projects](Projects.svg)
+【最新版はただいま準備中です】
 
 ## 使用ライブラリ等（アルファベット順）
 #### [.NET Runtime](https://github.com/dotnet/runtime) (MIT)
