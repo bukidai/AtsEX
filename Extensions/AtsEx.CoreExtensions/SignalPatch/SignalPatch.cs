@@ -30,26 +30,23 @@ namespace AtsEx.Extensions.SignalPatch
             {
                 if (e.Instance != Target.Src) return new PatchInvokationResult();
 
-                int num = 0;
-                int num2;
-                while (true)
+                int sectionIndexDifference;
+                for (int i = 0; true; i++)
                 {
-                    bool flag = num >= target.SectionIndexesTrainOn.Count;
-                    if (flag)
+                    if (i >= target.SectionIndexesTrainOn.Count)
                     {
-                        num2 = target.SignalIndexes.Length - 1;
+                        sectionIndexDifference = target.SignalIndexes.Length - 1;
                         break;
                     }
-                    bool flag2 = target.SectionIndexesTrainOn[num] >= target.SectionCount;
-                    if (flag2)
+
+                    if (target.SectionIndexesTrainOn[i] >= target.SectionCount)
                     {
-                        num2 = Math.Min(target.SectionIndexesTrainOn[num] - target.SectionCount, target.SignalIndexes.Length - 1);
+                        sectionIndexDifference = Math.Min(target.SectionIndexesTrainOn[i] - target.SectionCount, target.SignalIndexes.Length - 1);
                         break;
                     }
-                    num++;
                 }
 
-                int source = target.SignalIndexes[num2];
+                int source = target.SignalIndexes[sectionIndexDifference];
                 int converted = factory(source);
 
                 return new PatchInvokationResult(converted, true);
