@@ -79,6 +79,8 @@
     <Compile Include="MapStatements\Namespace.cs" />
     <Compile Include="MapStatements\PassedEventArgs.cs" />
     <Compile Include="MapStatements\TrainPassedEventArgs.cs" />
+    <Compile Include="Native\BeaconPassedEventArgs.cs" />
+    <Compile Include="Native\BeaconPassedEventHandler.cs" />
     <Compile Include="Native\StartedEventHandler.cs" />
     <Compile Include="Plugins\AllPluginsLoadedEventArgs.cs" />
     <Compile Include="Direction.cs" />

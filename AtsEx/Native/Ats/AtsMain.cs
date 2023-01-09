@@ -11,6 +11,7 @@ using BveTypes.ClassWrappers;
 
 using AtsEx.Handles;
 using AtsEx.PluginHost.Input.Native;
+using AtsEx.PluginHost.Native;
 
 namespace AtsEx.Native
 {
@@ -127,7 +128,8 @@ namespace AtsEx.Native
         }
         public static void SetBeaconData(BeaconData beaconData)
         {
-
+            BeaconPassedEventArgs args = new BeaconPassedEventArgs(beaconData.Num, beaconData.Sig, beaconData.Z, beaconData.Data);
+            AtsExScenarioService?.BeaconPassed(args);
         }
     }
 }

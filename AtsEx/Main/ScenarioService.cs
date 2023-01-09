@@ -11,6 +11,7 @@ using AtsEx.Handles;
 using AtsEx.Input;
 using AtsEx.Plugins;
 using AtsEx.PluginHost.Input.Native;
+using AtsEx.PluginHost.Native;
 
 namespace AtsEx
 {
@@ -102,6 +103,11 @@ namespace AtsEx
         public void KeyUp(NativeAtsKeyName key)
         {
             (Native.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyReleased();
+        }
+
+        public void BeaconPassed(BeaconPassedEventArgs args)
+        {
+            Native.InvokeBeaconPassed(args);
         }
     }
 }

@@ -32,6 +32,8 @@ namespace AtsEx
             Started?.Invoke(e);
         }
 
+        public void InvokeBeaconPassed(BeaconPassedEventArgs args) => BeaconPassed?.Invoke(args);
+
         public PluginHost.Handles.HandleSet Handles { get; }
 
         public INativeKeySet NativeKeys { get; } = new NativeKeySet();
@@ -41,5 +43,7 @@ namespace AtsEx
         public VehicleState VehicleState { get; set; } = null;
 
         public event StartedEventHandler Started;
+
+        public event BeaconPassedEventHandler BeaconPassed;
     }
 }

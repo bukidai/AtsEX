@@ -47,5 +47,10 @@ namespace AtsEx.PluginHost
         /// シナリオ開始時に発生します。従来の ATS プラグインの Initialize(int brake) に当たります。
         /// </summary>
         event StartedEventHandler Started;
+
+        /// <summary>
+        /// 地上子上を通過した時に発生します。従来の ATS プラグインの SendBeaconData(ATS_BEACONDATA beaconData) に当たります。
+        /// </summary>
+        event BeaconPassedEventHandler BeaconPassed;
     }
 }
