@@ -22,7 +22,7 @@ namespace AtsEx.Extensions.SignalPatch
         {
             Target = target;
 
-            HarmonyPatch = HarmonyPatch.PatchAsync(getCurrentSignalIndexMethod.Source, PatchTypes.Prefix).Result;
+            HarmonyPatch = HarmonyPatch.Patch(getCurrentSignalIndexMethod.Source, PatchTypes.Prefix);
             HarmonyPatch.Prefix += Prefix;
 
 

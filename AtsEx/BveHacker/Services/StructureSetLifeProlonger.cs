@@ -26,7 +26,7 @@ namespace AtsEx.BveHackerServices
             ClassMemberSet trainDrawerMembers = BveHacker.BveTypes.GetClassInfoOf<ObjectDrawer>();
             FastMethod setRouteMethod = trainDrawerMembers.GetSourceMethodOf(nameof(ObjectDrawer.SetRoute));
 
-            SetRouteMethodPatch = HarmonyPatch.PatchAsync(setRouteMethod.Source, PatchTypes.Prefix).Result;
+            SetRouteMethodPatch = HarmonyPatch.Patch(setRouteMethod.Source, PatchTypes.Prefix);
             SetRouteMethodPatch.Prefix += (_, e) =>
             {
                 Route route = Route.FromSource(e.Args[0]);

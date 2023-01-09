@@ -25,7 +25,7 @@ namespace AtsEx.Extensions.PreTrainPatch
         {
             SectionManager = sectionManager;
 
-            HarmonyPatch = HarmonyPatch.PatchAsync(updatePreTrainLocationMethod.Source, PatchTypes.Prefix).Result;
+            HarmonyPatch = HarmonyPatch.Patch(updatePreTrainLocationMethod.Source, PatchTypes.Prefix);
             HarmonyPatch.Prefix += Prefix;
 
 

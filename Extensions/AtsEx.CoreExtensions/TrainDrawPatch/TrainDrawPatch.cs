@@ -27,7 +27,7 @@ namespace AtsEx.Extensions.TrainDrawPatch
         {
             Target = target;
 
-            HarmonyPatch = HarmonyPatch.PatchAsync(drawCarsMethod.Source, PatchTypes.Prefix).Result;
+            HarmonyPatch = HarmonyPatch.Patch(drawCarsMethod.Source, PatchTypes.Prefix);
             HarmonyPatch.Prefix += Prefix;
 
 
