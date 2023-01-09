@@ -69,10 +69,12 @@
     <Compile Include="ClassWrappers\Extensions\WrappedSortedList.cs" />
     <Compile Include="ClassWrappers\Helpers\ReverserPosition.cs" />
     <Compile Include="ClassWrappers\Helpers\TiltOptions.cs" />
+    <Compile Include="ClassWrappers\Public\AirSupplement.cs" />
     <Compile Include="ClassWrappers\Public\AssistantText.cs" />
     <Compile Include="ClassWrappers\Public\AssistantTextBase.cs" />
     <Compile Include="ClassWrappers\Public\AssistantTextDrawer.cs" />
     <Compile Include="ClassWrappers\Public\BasicBrake.cs" />
+    <Compile Include="ClassWrappers\Public\Beacon.cs" />
     <Compile Include="ClassWrappers\Public\BrakePosition.cs" />
     <Compile Include="ClassWrappers\Public\BrakeSystem.cs" />
     <Compile Include="ClassWrappers\Public\BveFile.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="ClassWrappers\Public\CarInfo.cs" />
     <Compile Include="ClassWrappers\Public\Direct3DProvider.cs" />
     <Compile Include="ClassWrappers\Public\DrawDistanceManager.cs" />
+    <Compile Include="ClassWrappers\Public\ElectroPneumaticBlendedBrakingControlBase.cs" />
     <Compile Include="ClassWrappers\Public\Forms\ChartForm.cs" />
     <Compile Include="ClassWrappers\Public\Forms\LoadingProgressForm.cs" />
     <Compile Include="ClassWrappers\Public\Forms\MainForm.cs" />
@@ -91,6 +94,7 @@
     <Compile Include="ClassWrappers\Public\LoadError.cs" />
     <Compile Include="ClassWrappers\Public\LocatableMapObject.cs" />
     <Compile Include="ClassWrappers\Public\LocationManager.cs" />
+    <Compile Include="ClassWrappers\Public\LockoutValve.cs" />
     <Compile Include="ClassWrappers\Public\MapFunctionList.cs" />
     <Compile Include="ClassWrappers\Public\MapObjectBase.cs" />
     <Compile Include="ClassWrappers\Public\MapObjectList.cs" />

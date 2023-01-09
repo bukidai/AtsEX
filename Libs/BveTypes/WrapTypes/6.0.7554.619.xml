@@ -44,6 +44,21 @@
 	</Class>
 	<!-- Forms END -->
 
+	<Class Wrapper="AirSupplement" Original="c5">
+		<Property Wrapper="ShoeFriction">
+			<Getter Original="b"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="MotorCarRatio">
+			<Getter Original="c"/>
+			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="PistonArea">
+			<Getter Original="a"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="AssistantText" Original="bc">
 		<Property Wrapper="Color">
 			<Getter Original="e"/>
@@ -83,7 +98,31 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="Beacon" Original="fm">
+		<Property Wrapper="TargetSectionIndex">
+			<Getter Original="a"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="Type">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="SendData">
+			<Getter Original="b"/>
+			<Setter Original="c"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="BrakeSystem" Original="bh">
+		<Property Wrapper="ElectroPneumaticBlendedBrakingControl">
+			<Getter Original="k"/>
+		</Property>
+		<Property Wrapper="AirSupplement">
+			<Getter Original="g"/>
+		</Property>
+		<Property Wrapper="LockoutValve">
+			<Getter Original="d"/>
+		</Property>
 		<Property Wrapper="MotorCarBc">
 			<Getter Original="l"/>
 		</Property>
@@ -172,6 +211,25 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="ElectroPneumaticBlendedBrakingControlBase" Original="e3">
+		<Property Wrapper="InitialPressure">
+			<Getter Original="k"/>
+			<Setter Original="e"/>
+		</Property>
+		<Property Wrapper="MaximumPressure">
+			<Getter Original="l"/>
+			<Setter Original="f"/>
+		</Property>
+		<Property Wrapper="SapBcRatio">
+			<Getter Original="g"/>
+			<Setter Original="g"/>
+		</Property>
+		<Property Wrapper="SapBcOffset">
+			<Getter Original="h"/>
+			<Setter Original="i"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="HandleSet" Original="a2">
 		<Property Wrapper="NotchInfo">
 			<Getter Original="e"/>
@@ -249,6 +307,9 @@
 		</Property>
 
 		<Method Wrapper="SetSpeed" WrapperParams="System.Double" Original="d"/>
+	</Class>
+
+	<Class Wrapper="LockoutValve" Original="dg">
 	</Class>
 
 	<Class Wrapper="MapFunctionList" Original="dh">
@@ -410,6 +471,9 @@
 		</Property>
 		<Property Wrapper="Stations">
 			<Getter Original="f"/>
+		</Property>
+		<Property Wrapper="Beacons">
+			<Getter Original="r"/>
 		</Property>
 		<Property Wrapper="PreTrainObjects">
 			<Getter Original="p"/>
