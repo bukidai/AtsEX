@@ -82,7 +82,7 @@ namespace BveTypes.ClassWrappers
         private static FastMethod SectionCountGetMethod;
         private static FastMethod SectionCountSetMethod;
         /// <summary>
-        /// 信号現示インデックスの一覧を取得・設定します。
+        /// 閉塞の総数を取得・設定します。
         /// </summary>
         public int SectionCount
         {
