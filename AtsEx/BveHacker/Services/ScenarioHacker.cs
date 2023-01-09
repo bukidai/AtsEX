@@ -35,21 +35,21 @@ namespace AtsEx.BveHackerServices
             FastMethod initializeTimeAndLocationMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.InitializeTimeAndLocation));
             FastMethod initializeMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.Initialize));
 
-            InitializeTimeAndLocationMethodPatch = CreateAndSetupPatch(initializeTimeAndLocationMethod.Source);
-            InitializeMethodPatch = CreateAndSetupPatch(initializeMethod.Source);
+            InitializeTimeAndLocationMethodPatch = CreateAndSetupPatch(nameof(ScenarioHacker), initializeTimeAndLocationMethod.Source);
+            InitializeMethodPatch = CreateAndSetupPatch(nameof(ScenarioHacker), initializeMethod.Source);
 
 
-            HarmonyPatch CreateAndSetupPatch(MethodBase original)
+            HarmonyPatch CreateAndSetupPatch(string name, MethodBase original)
             {
-                HarmonyPatch patch = HarmonyPatch.Patch(original, PatchTypes.Postfix);
-                patch.Postfix += OnPatchInvoked;
+                HarmonyPatch patch = HarmonyPatch.Patch(name, original, PatchType.Postfix);
+                patch.Invoked += OnPatchInvoked;
 
                 return patch;
 
 
                 PatchInvokationResult OnPatchInvoked(object sender, PatchInvokedEventArgs e)
                 {
-                    if (IsScenarioCreatedEventInvoked) return new PatchInvokationResult();
+                    if (IsScenarioCreatedEventInvoked) return PatchInvokationResult.DoNothing(e);
 
                     IsScenarioCreatedEventInvoked = true;
 
@@ -57,7 +57,7 @@ namespace AtsEx.BveHackerServices
                     ScenarioCreatedEventArgs scenarioCreatedEventArgs = new ScenarioCreatedEventArgs(scenario);
                     ScenarioCreated?.Invoke(scenarioCreatedEventArgs);
 
-                    return new PatchInvokationResult();
+                    return PatchInvokationResult.DoNothing(e);
                 }
             }
         }

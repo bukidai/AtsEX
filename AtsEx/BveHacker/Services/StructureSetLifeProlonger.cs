@@ -26,15 +26,15 @@ namespace AtsEx.BveHackerServices
             ClassMemberSet trainDrawerMembers = BveHacker.BveTypes.GetClassInfoOf<ObjectDrawer>();
             FastMethod setRouteMethod = trainDrawerMembers.GetSourceMethodOf(nameof(ObjectDrawer.SetRoute));
 
-            SetRouteMethodPatch = HarmonyPatch.Patch(setRouteMethod.Source, PatchTypes.Prefix);
-            SetRouteMethodPatch.Prefix += (_, e) =>
+            SetRouteMethodPatch = HarmonyPatch.Patch(nameof(StructureSetLifeProlonger), setRouteMethod.Source, PatchType.Prefix);
+            SetRouteMethodPatch.Invoked += (_, e) =>
             {
                 Route route = Route.FromSource(e.Args[0]);
                 StructureSet structures = route.Structures;
 
                 BveHacker.PreviewScenarioCreated += e2 => e2.Scenario.Route.Structures = structures;
 
-                return new PatchInvokationResult();
+                return PatchInvokationResult.DoNothing(e);
             };
         }
 

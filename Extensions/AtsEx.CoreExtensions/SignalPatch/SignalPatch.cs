@@ -18,17 +18,17 @@ namespace AtsEx.Extensions.SignalPatch
         private readonly Section Target;
         private readonly HarmonyPatch HarmonyPatch;
 
-        internal SignalPatch(FastMethod getCurrentSignalIndexMethod, SectionManager sectionManager, Section target, Converter<int, int> factory)
+        internal SignalPatch(string name, FastMethod getCurrentSignalIndexMethod, SectionManager sectionManager, Section target, Converter<int, int> factory)
         {
             Target = target;
 
-            HarmonyPatch = HarmonyPatch.Patch(getCurrentSignalIndexMethod.Source, PatchTypes.Prefix);
-            HarmonyPatch.Prefix += Prefix;
+            HarmonyPatch = HarmonyPatch.Patch(name, getCurrentSignalIndexMethod.Source, PatchType.Prefix);
+            HarmonyPatch.Invoked += Prefix;
 
 
             PatchInvokationResult Prefix(object sender, PatchInvokedEventArgs e)
             {
-                if (e.Instance != Target.Src) return new PatchInvokationResult();
+                if (e.Instance != Target.Src) return PatchInvokationResult.DoNothing(e);
 
                 int sectionIndexDifference;
                 for (int i = 0; true; i++)
@@ -49,7 +49,7 @@ namespace AtsEx.Extensions.SignalPatch
                 int source = target.SignalIndexes[sectionIndexDifference];
                 int converted = factory(source);
 
-                return new PatchInvokationResult(converted, true);
+                return new PatchInvokationResult(converted, SkipModes.SkipOriginal);
             }
         }
 

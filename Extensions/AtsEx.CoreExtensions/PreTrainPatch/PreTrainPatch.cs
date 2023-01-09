@@ -21,26 +21,26 @@ namespace AtsEx.Extensions.PreTrainPatch
         private readonly SectionManager SectionManager;
         private readonly HarmonyPatch HarmonyPatch;
 
-        internal PreTrainPatch(FastMethod updatePreTrainLocationMethod, SectionManager sectionManager, Action overrideAction)
+        internal PreTrainPatch(string name, FastMethod updatePreTrainLocationMethod, SectionManager sectionManager, Action overrideAction)
         {
             SectionManager = sectionManager;
 
-            HarmonyPatch = HarmonyPatch.Patch(updatePreTrainLocationMethod.Source, PatchTypes.Prefix);
-            HarmonyPatch.Prefix += Prefix;
+            HarmonyPatch = HarmonyPatch.Patch(name, updatePreTrainLocationMethod.Source, PatchType.Prefix);
+            HarmonyPatch.Invoked += Prefix;
 
 
             PatchInvokationResult Prefix(object sender, PatchInvokedEventArgs e)
             {
-                if (e.Instance != SectionManager.Src) return new PatchInvokationResult();
+                if (e.Instance != SectionManager.Src) return PatchInvokationResult.DoNothing(e);
 
                 overrideAction();
 
-                return new PatchInvokationResult(true);
+                return new PatchInvokationResult(SkipModes.SkipOriginal);
             }
         }
 
-        internal PreTrainPatch(FastMethod updatePreTrainLocationMethod, SectionManager sectionManager, IPreTrainLocationConverter converter)
-            : this(updatePreTrainLocationMethod, sectionManager, () => UpdatePreTrainLocation(sectionManager, converter))
+        internal PreTrainPatch(string name, FastMethod updatePreTrainLocationMethod, SectionManager sectionManager, IPreTrainLocationConverter converter)
+            : this(name, updatePreTrainLocationMethod, sectionManager, () => UpdatePreTrainLocation(sectionManager, converter))
         {
         }
 

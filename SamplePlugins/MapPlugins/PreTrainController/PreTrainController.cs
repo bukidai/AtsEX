@@ -33,7 +33,7 @@ namespace AtsEx.Samples.MapPlugins.PreTrainController
                 Train.Location = 35;
 
                 SectionManager sectionManager = e.Scenario.SectionManager;
-                PreTrainPatch = Extensions.GetExtension<IPreTrainPatchFactory>().Patch(sectionManager, new PreTrainLocationConverter(Train, sectionManager));
+                PreTrainPatch = Extensions.GetExtension<IPreTrainPatchFactory>().Patch(nameof(PreTrainPatch), sectionManager, new PreTrainLocationConverter(Train, sectionManager));
             };
         }
 

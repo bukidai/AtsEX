@@ -9,8 +9,7 @@ namespace ObjectiveHarmonyPatch
     /// <summary>
     /// Harmony パッチの種類を表します。
     /// </summary>
-    [Flags]
-    public enum PatchTypes
+    public enum PatchType
     {
         /// <summary>
         /// Prefix パッチを表します。

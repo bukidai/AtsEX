@@ -9,11 +9,11 @@ using HarmonyLib;
 namespace ObjectiveHarmonyPatch
 {
     /// <summary>
-    /// <see cref="HarmonyPatch.Prefix"/>、<see cref="HarmonyPatch.Postfix"/> イベントの結果を表します。
+    /// <see cref="HarmonyPatch.Invoked"/> イベントの結果を表します。
     /// </summary>
     public class PatchInvokationResult
     {
-        /// <summary>
+        /// <summa\ry>
         /// パッチ先のオリジナルメソッドの戻り値を上書きするかどうかを取得します。
         /// </summary>
         public bool ChangeReturnValue { get; }
@@ -29,30 +29,41 @@ namespace ObjectiveHarmonyPatch
         public object ReturnValue { get; }
 
         /// <summary>
-        /// このパッチをもって、以降のパッチ (とオリジナルメソッド) の実行を中止するかどうかを取得します。動作の仕様の詳細は Harmony のドキュメントをご参照ください。
+        /// オリジナルメソッドおよびこれ以降のパッチをスキップするかどうかを取得します。
         /// </summary>
-        public bool Cancel { get; }
+        /// <seealso cref="PatchInvokedEventArgs.SkipOriginal"/>
+        public SkipModes SkipModes { get; }
 
         /// <summary>
         /// 戻り値の変更を伴う <see cref="PatchInvokationResult"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
         /// <param name="returnValue">上書きする戻り値。</param>
-        /// <param name="cancel">このパッチをもって、以降のパッチ（とオリジナルメソッド）の実行を中止するかどうか。</param>
-        public PatchInvokationResult(object returnValue, bool cancel = false)
+        /// <param name="skipModes">オリジナルメソッドおよびこれ以降のパッチをスキップするかどうか。</param>
+        /// <seealso cref="PatchInvokedEventArgs.SkipOriginal"/>
+        public PatchInvokationResult(object returnValue, SkipModes skipModes)
         {
             ChangeReturnValue = true;
             ReturnValue = returnValue;
-            Cancel = cancel;
+            SkipModes = skipModes;
         }
 
         /// <summary>
         /// 戻り値の変更を伴わない <see cref="PatchInvokationResult"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
-        /// <param name="cancel">このパッチをもって、以降のパッチ（とオリジナルメソッド）の実行を中止するかどうか。</param>
-        public PatchInvokationResult(bool cancel = false)
+        /// <param name="skipModes">オリジナルメソッドおよびこれ以降のパッチをスキップするかどうか。</param>
+        /// <seealso cref="PatchInvokedEventArgs.SkipOriginal"/>
+        public PatchInvokationResult(SkipModes skipModes)
         {
             ChangeReturnValue = false;
-            Cancel = cancel;
+            SkipModes = skipModes;
         }
+
+        /// <summary>
+        /// 一切の操作を行わない <see cref="PatchInvokationResult"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="args">1 つ前のパッチの <see cref="SkipModes"/> を継承するための <see cref="PatchInvokedEventArgs"/>。</param>
+        /// <seealso cref="PatchInvokedEventArgs.SkipOriginal"/>
+        public static PatchInvokationResult DoNothing(PatchInvokedEventArgs args)
+            => new PatchInvokationResult(args.SkipOriginal ? SkipModes.SkipOriginal : SkipModes.Continue);
     }
 }

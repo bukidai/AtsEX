@@ -36,7 +36,7 @@ namespace AtsEx.Extensions.PreTrainPatch
 
         public override TickResult Tick(TimeSpan elapsed) => new ExtensionTickResult();
 
-        public PreTrainPatch Patch(SectionManager sectionManager, IPreTrainLocationConverter converter)
-            => new PreTrainPatch(UpdatePreTrainSectionMethod, sectionManager, converter);
+        public PreTrainPatch Patch(string name, SectionManager sectionManager, IPreTrainLocationConverter converter)
+            => new PreTrainPatch(name, UpdatePreTrainSectionMethod, sectionManager, converter);
     }
 }

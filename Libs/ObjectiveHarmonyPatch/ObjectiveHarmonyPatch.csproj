@@ -45,11 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HarmonyPatch.cs" />
+    <Compile Include="HarmonyPatchHost.cs" />
     <Compile Include="PatchInvokationResult.cs" />
     <Compile Include="PatchInvokedEventArgs.cs" />
     <Compile Include="PatchInvokedEventHandler.cs" />
-    <Compile Include="PatchTypes.cs" />
+    <Compile Include="PatchType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SkipModes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

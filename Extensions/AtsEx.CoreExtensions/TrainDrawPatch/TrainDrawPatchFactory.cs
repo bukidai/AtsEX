@@ -36,14 +36,14 @@ namespace AtsEx.Extensions.TrainDrawPatch
 
         public override TickResult Tick(TimeSpan elapsed) => new ExtensionTickResult();
 
-        public TrainDrawPatch Patch(Train target, IMatrixConverter worldMatrixConverter)
-            => new TrainDrawPatch(DrawCarsMethod, target, worldMatrixConverter, new DefaultMatrixConverter());
+        public TrainDrawPatch Patch(string name, Train target, IMatrixConverter worldMatrixConverter)
+            => new TrainDrawPatch(name, DrawCarsMethod, target, worldMatrixConverter, new DefaultMatrixConverter());
 
-        public TrainDrawPatch Patch(Train target, IMatrixConverter worldMatrixConverter, IMatrixConverter viewMatrixConverter)
-            => new TrainDrawPatch(DrawCarsMethod, target, worldMatrixConverter, viewMatrixConverter);
+        public TrainDrawPatch Patch(string name, Train target, IMatrixConverter worldMatrixConverter, IMatrixConverter viewMatrixConverter)
+            => new TrainDrawPatch(name, DrawCarsMethod, target, worldMatrixConverter, viewMatrixConverter);
 
-        public TrainDrawPatch Patch(Train target, Action<Direct3DProvider, Matrix> overrideAction)
-            => new TrainDrawPatch(DrawCarsMethod, target, overrideAction);
+        public TrainDrawPatch Patch(string name, Train target, Action<Direct3DProvider, Matrix> overrideAction)
+            => new TrainDrawPatch(name, DrawCarsMethod, target, overrideAction);
 
 
         private class DefaultMatrixConverter : IMatrixConverter

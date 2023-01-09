@@ -23,29 +23,29 @@ namespace AtsEx.Extensions.TrainDrawPatch
         private readonly Train Target;
         private readonly HarmonyPatch HarmonyPatch;
 
-        internal TrainDrawPatch(FastMethod drawCarsMethod, Train target, Action<Direct3DProvider, Matrix> overrideAction)
+        internal TrainDrawPatch(string name, FastMethod drawCarsMethod, Train target, Action<Direct3DProvider, Matrix> overrideAction)
         {
             Target = target;
 
-            HarmonyPatch = HarmonyPatch.Patch(drawCarsMethod.Source, PatchTypes.Prefix);
-            HarmonyPatch.Prefix += Prefix;
+            HarmonyPatch = HarmonyPatch.Patch(name, drawCarsMethod.Source, PatchType.Prefix);
+            HarmonyPatch.Invoked += Prefix;
 
 
             PatchInvokationResult Prefix(object sender, PatchInvokedEventArgs e)
             {
-                if (e.Instance != Target.Src) return new PatchInvokationResult();
+                if (e.Instance != Target.Src) return PatchInvokationResult.DoNothing(e);
 
                 Direct3DProvider direct3DProvider = Direct3DProvider.FromSource(e.Args[0]);
                 Matrix viewMatrix = (Matrix)e.Args[1];
 
                 overrideAction(direct3DProvider, viewMatrix);
 
-                return new PatchInvokationResult(true);
+                return new PatchInvokationResult(SkipModes.SkipOriginal);
             }
         }
 
-        internal TrainDrawPatch(FastMethod drawCarsMethod, Train target, IMatrixConverter worldMatrixConverter, IMatrixConverter viewMatrixConverter)
-            : this(drawCarsMethod, target, (direct3DProvider, viewMatrix) => DrawCars(direct3DProvider, viewMatrix, target, worldMatrixConverter, viewMatrixConverter))
+        internal TrainDrawPatch(string name, FastMethod drawCarsMethod, Train target, IMatrixConverter worldMatrixConverter, IMatrixConverter viewMatrixConverter)
+            : this(name, drawCarsMethod, target, (direct3DProvider, viewMatrix) => DrawCars(direct3DProvider, viewMatrix, target, worldMatrixConverter, viewMatrixConverter))
         {
         }
 
