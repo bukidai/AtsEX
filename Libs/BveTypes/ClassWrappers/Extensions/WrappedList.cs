@@ -134,7 +134,7 @@ namespace BveTypes.ClassWrappers.Extensions
         }
 
         /// <inheritdoc/>
-        public IEnumerator<TWrapper> GetEnumerator() => new Enumerator(Src.GetEnumerator(), Converter);
+        public IEnumerator<TWrapper> GetEnumerator() => new WrappedEnumerator<TWrapper>(Src.GetEnumerator(), Converter);
 
         /// <inheritdoc/>
         public int IndexOf(TWrapper item) => Src.IndexOf(Converter.ConvertBack(item));
@@ -192,34 +192,6 @@ namespace BveTypes.ClassWrappers.Extensions
             public object Create() => Default.Invoke(null);
             public object Create(IEnumerable collection) => WithItems.Invoke(new object[] { collection });
             public object Create(int capacity) => WithCapacitySpecified.Invoke(new object[] { capacity });
-        }
-
-        internal sealed class Enumerator : IEnumerator<TWrapper>, IEnumerator
-        {
-            private readonly IEnumerator Src;
-            private readonly ITwoWayConverter<object, TWrapper> Converter;
-
-            public Enumerator(IEnumerator src, ITwoWayConverter<object, TWrapper> converter)
-            {
-                Src = src;
-                Converter = converter;
-            }
-
-            public TWrapper Current => Converter.Convert(Src.Current);
-
-            object IEnumerator.Current => Current;
-
-            public bool MoveNext() => Src.MoveNext();
-
-            public void Reset() => Src.Reset();
-
-            public void Dispose()
-            {
-                if (Src is IDisposable disposable)
-                {
-                    disposable.Dispose();
-                }
-            }
         }
     }
 }
