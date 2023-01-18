@@ -48,9 +48,10 @@ namespace BveTypes.ClassWrappers
         /// ストラクチャーを描画するための機能を提供する <see cref="ClassWrappers.StructureDrawer"/> を取得します。
         /// </summary>
         public StructureDrawer StructureDrawer => ClassWrappers.StructureDrawer.FromSource(StructureDrawerField.GetValue(Src));
+
         private static FastField DrawDistanceManagerField;
         /// <summary>
-        /// ストラクチャーを描画する範囲を算出するための機能を提供する <see cref="ClassWrappers.DrawDistanceManager"/> を取得します。
+        /// ストラクチャーの描画範囲を算出するための機能を提供する <see cref="ClassWrappers.DrawDistanceManager"/> を取得します。
         /// </summary>
         public DrawDistanceManager DrawDistanceManager => ClassWrappers.DrawDistanceManager.FromSource(DrawDistanceManagerField.GetValue(Src));
 

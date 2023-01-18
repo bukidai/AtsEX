@@ -11,7 +11,7 @@ using TypeWrapping;
 namespace BveTypes.ClassWrappers
 {
     /// <summary>
-    /// ストラクチャーを描画する範囲を算出するための機能を提供します。
+    /// ストラクチャーの描画範囲を算出するための機能を提供します。
     /// </summary>
     public class DrawDistanceManager : ClassWrapperBase
     {
