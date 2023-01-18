@@ -301,6 +301,12 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="LocatableModel" Original="ej">
+		<Property Wrapper="Model">
+			<Getter Original="b"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="LocationManager" Original="ct">
 		<Property Wrapper="SpeedMeterPerSecond">
 			<Getter Original="g"/>
@@ -396,6 +402,7 @@
 	</Class>
 
 	<Class Wrapper="ObjectDrawer" Original="cz">
+		<Field WrapperProperty="StructureDrawer" Original="b" IsOriginalNonPublic="true"/>
 		<Field WrapperProperty="DrawDistanceManager" Original="g" IsOriginalNonPublic="true"/>
 
 		<Method Wrapper="SetRoute" WrapperParams="atsex:Route" Original="a"/>
@@ -717,6 +724,31 @@
 			<Getter Original="c"/>
 			<Setter Original="a"/>
 		</Property>
+	</Class>
+
+	<Class Wrapper="StructureBlock" Original="a5">
+		<Property Wrapper="Models">
+			<Getter Original="c"/>
+		</Property>
+		<Property Wrapper="WorldMatrix">
+			<Getter Original="g"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="MatrixFromLastBlock">
+			<Getter Original="f"/>
+			<Setter Original="a"/>
+		</Property>
+		<Method Wrapper="Draw" WrapperParams="atsex:Direct3DProvider; SlimDX.Matrix, SlimDX; System.Boolean" Original="a"/>
+	</Class>
+
+	<Class Wrapper="StructureDrawer" Original="ey">
+		<Property Wrapper="Blocks">
+			<Getter Original="a"/>
+		</Property>
+		<Field WrapperProperty="MinDrawBlockIndex" Original="b" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="MaxDrawBlockIndexPlus1" Original="c" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnDrawLocationRangeUpdated" WrapperParams="System.Object; System.EventArgs" Original="a" IsOriginalNonPublic="true"/>
+		<Method Wrapper="Draw" WrapperParams="atsex:Direct3DProvider; SlimDX.Matrix, SlimDX" Original="a"/>
 	</Class>
 
 	<Class Wrapper="StructureSet" Original="dn">

@@ -95,6 +95,7 @@
     <Compile Include="ClassWrappers\Public\KeyProvider.cs" />
     <Compile Include="ClassWrappers\Public\LoadError.cs" />
     <Compile Include="ClassWrappers\Public\LocatableMapObject.cs" />
+    <Compile Include="ClassWrappers\Public\LocatableModel.cs" />
     <Compile Include="ClassWrappers\Public\LocationManager.cs" />
     <Compile Include="ClassWrappers\Public\LockoutValve.cs" />
     <Compile Include="ClassWrappers\Public\MapFunctionList.cs" />
@@ -119,6 +120,8 @@
     <Compile Include="ClassWrappers\Public\Sound.cs" />
     <Compile Include="ClassWrappers\Public\Station.cs" />
     <Compile Include="ClassWrappers\Public\StationList.cs" />
+    <Compile Include="ClassWrappers\Public\StructureBlock.cs" />
+    <Compile Include="ClassWrappers\Public\StructureDrawer.cs" />
     <Compile Include="ClassWrappers\Public\ValueNode.cs" />
     <Compile Include="ClassWrappers\Public\Structure.cs" />
     <Compile Include="ClassWrappers\Public\StructureSet.cs" />
