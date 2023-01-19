@@ -14,7 +14,7 @@ using AtsEx.Extensions.PreTrainPatch;
 namespace AtsEx.Samples.MapPlugins.PreTrainController
 {
     [PluginType(PluginType.MapPlugin)]
-    public class PreTrainController : AssemblyPluginBase, IDisposable
+    public class PreTrainController : AssemblyPluginBase
     {
         private Train Train;
         private PreTrainPatch PreTrainPatch;

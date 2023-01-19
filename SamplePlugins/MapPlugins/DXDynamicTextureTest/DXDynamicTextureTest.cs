@@ -15,7 +15,7 @@ using AtsEx.PluginHost.Plugins;
 namespace AtsEx.Samples.MapPlugins.DXDynamicTextureTest
 {
     [PluginType(PluginType.MapPlugin)]
-    public class DXDynamicTextureTest : AssemblyPluginBase, IDisposable
+    public class DXDynamicTextureTest : AssemblyPluginBase
     {
         private static readonly Random Random = new Random();
 

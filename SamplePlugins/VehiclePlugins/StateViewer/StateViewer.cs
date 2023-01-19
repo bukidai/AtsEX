@@ -12,7 +12,7 @@ using AtsEx.PluginHost.Plugins;
 namespace AtsEx.Samples.VehiclePlugins.StateViewer
 {
     [PluginType(PluginType.VehiclePlugin)]
-    public class StateViewer : AssemblyPluginBase, IDisposable
+    public class StateViewer : AssemblyPluginBase
     {
         private readonly StateForm Form;
         private readonly ToolStripMenuItem MenuItem;

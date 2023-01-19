@@ -17,7 +17,7 @@ using AtsEx.PluginHost.Plugins;
 namespace AtsEx.Samples.MapPlugins.TrainControllerEx
 {
     [PluginType(PluginType.MapPlugin)]
-    public class TrainController : AssemblyPluginBase, IDisposable
+    public class TrainController : AssemblyPluginBase
     {
         private Train Train;
         private TrainLocator TrainLocator;

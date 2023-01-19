@@ -12,7 +12,7 @@ using AtsEx.PluginHost.Plugins;
 namespace AtsEx.Samples.MapPlugins.StationController
 {
     [PluginType(PluginType.MapPlugin)]
-    public class StationController : AssemblyPluginBase, IDisposable
+    public class StationController : AssemblyPluginBase
     {
         private readonly ControllerForm Form;
         private readonly ToolStripMenuItem MenuItem;

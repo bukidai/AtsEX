@@ -13,7 +13,7 @@ using AtsEx.PluginHost.Plugins;
 namespace AtsEx.Samples.MapPlugins.TrainController
 {
     [PluginType(PluginType.MapPlugin)]
-    public class TrainController : AssemblyPluginBase, IDisposable
+    public class TrainController : AssemblyPluginBase
     {
         private Train Train;
         private double Speed = 25 / 3.6; // 25[km/h] = (25 / 3.6)[m/s]
