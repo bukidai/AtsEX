@@ -61,7 +61,7 @@ namespace BveTypes.ClassWrappers
         /// 25m 毎に 1 つの描画ブロックが定義されており、全てのストラクチャーは設置された距離程が含まれるブロックに登録されます。<br/>
         /// 各ストラクチャーが描画距離内に入っているかどうかを描画ブロック単位で判定することで、ストラクチャーの描画処理を高速化しています。
         /// </remarks>
-        public double BlockIndex => BlockIndexGetMethod.Invoke(Src, null);
+        public int BlockIndex => BlockIndexGetMethod.Invoke(Src, null);
 
         private static FastMethod SetLocationMethod;
         /// <summary>
