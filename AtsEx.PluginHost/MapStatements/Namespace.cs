@@ -87,7 +87,7 @@ namespace AtsEx.PluginHost.MapStatements
             if (!skipValidationCheck) _ = CheckNameFormatValidation(name, true);
 
             Parent = parent;
-            Name = name;
+            Name = name.ToLowerInvariant();
 
             FullName = Parent is null ? Name : Parent.FullName + Separator + Name;
         }

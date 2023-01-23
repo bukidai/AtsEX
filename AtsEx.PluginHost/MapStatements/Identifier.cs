@@ -86,7 +86,7 @@ namespace AtsEx.PluginHost.MapStatements
             if (!skipValidationCheck) _ = CheckNameFormatValidation(name, true);
 
             Parent = parent;
-            Name = name;
+            Name = name.ToLowerInvariant();
             Namespace = ns;
         }
 
