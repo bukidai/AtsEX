@@ -9,7 +9,6 @@ namespace FastCaching
 {
     public class FastCache<TKey, TValue> where TKey : class where TValue : class
     {
-        private readonly object WriterLock = new object();
         private readonly Hashtable Items;
 
         public FastCache()
@@ -19,16 +18,19 @@ namespace FastCaching
 
         public TValue GetOrAdd(TKey key, Func<TKey, TValue> valueFactory)
         {
-            if (Items.ContainsKey(key))
+            lock (Items.SyncRoot)
             {
-                return Items[key] as TValue;
-            }
-            else
-            {
-                TValue value = valueFactory(key);
-                lock (WriterLock) Items.Add(key, value);
+                if (Items.ContainsKey(key))
+                {
+                    return Items[key] as TValue;
+                }
+                else
+                {
+                    TValue value = valueFactory(key);
+                    Items.Add(key, value);
 
-                return value;
+                    return value;
+                }
             }
         }
     }
