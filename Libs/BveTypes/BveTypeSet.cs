@@ -126,8 +126,16 @@ namespace BveTypes
         /// <paramref name="originalType"/> に指定したオリジナル型のラッパー型を取得します。
         /// </summary>
         /// <param name="originalType">オリジナル型。</param>
-        /// <returns></returns>
+        /// <returns><paramref name="originalType"/> のラッパー型。</returns>
         public Type GetWrapperTypeOf(Type originalType) => OriginalAndWrapperTypes[originalType];
+
+        /// <summary>
+        /// <paramref name="originalType"/> に指定したオリジナル型のラッパー型を取得します。
+        /// </summary>
+        /// <param name="originalType">オリジナル型。</param>
+        /// <param name="wrapperType"><paramref name="originalType"/> のラッパー型が見つかった場合はラッパー型を表す <see cref="Type"/>、見つからなかった場合は <see langword="null"/> が格納されます。</param>
+        /// <returns><paramref name="originalType"/> のラッパー型が見つかった場合は <see langword="true"/>、見つからなかった場合は <see langword="false"/>。</returns>
+        public bool TryGetWrapperTypeOf(Type originalType, out Type wrapperType) => OriginalAndWrapperTypes.TryGetValue(originalType, out wrapperType);
 
 
         internal FastMethod GetCreateFromSourceMethod(Type wrapperType)
