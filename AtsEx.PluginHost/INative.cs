@@ -49,6 +49,16 @@ namespace AtsEx.PluginHost
         event StartedEventHandler Started;
 
         /// <summary>
+        /// 客室ドアが開いた時に発生します。従来の ATS プラグインの DoorOpen() に当たります。
+        /// </summary>
+        event DoorEventHandler DoorOpened;
+
+        /// <summary>
+        /// 客室ドアが閉まった時に発生します。従来の ATS プラグインの DoorClose() に当たります。
+        /// </summary>
+        event DoorEventHandler DoorClosed;
+
+        /// <summary>
         /// 地上子上を通過した時に発生します。従来の ATS プラグインの SendBeaconData(ATS_BEACONDATA beaconData) に当たります。
         /// </summary>
         event BeaconPassedEventHandler BeaconPassed;

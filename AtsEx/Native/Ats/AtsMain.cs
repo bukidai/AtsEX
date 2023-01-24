@@ -112,11 +112,11 @@ namespace AtsEx.Native
 
         public static void DoorOpen()
         {
-
+            AtsExScenarioService?.DoorOpened(new DoorEventArgs());
         }
         public static void DoorClose()
         {
-
+            AtsExScenarioService?.DoorClosed(new DoorEventArgs());
         }
         public static void HornBlow(HornType hornType)
         {

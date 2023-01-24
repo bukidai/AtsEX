@@ -81,6 +81,8 @@
     <Compile Include="MapStatements\TrainPassedEventArgs.cs" />
     <Compile Include="Native\BeaconPassedEventArgs.cs" />
     <Compile Include="Native\BeaconPassedEventHandler.cs" />
+    <Compile Include="Native\DoorEventArgs.cs" />
+    <Compile Include="Native\DoorEventHandler.cs" />
     <Compile Include="Native\StartedEventHandler.cs" />
     <Compile Include="Plugins\AllPluginsLoadedEventArgs.cs" />
     <Compile Include="Direction.cs" />

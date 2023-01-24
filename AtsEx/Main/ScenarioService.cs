@@ -105,6 +105,16 @@ namespace AtsEx
             (Native.NativeKeys.AtsKeys[key] as NativeAtsKey).NotifyReleased();
         }
 
+        public void DoorOpened(DoorEventArgs args)
+        {
+            Native.InvokeDoorOpened(args);
+        }
+
+        public void DoorClosed(DoorEventArgs args)
+        {
+            Native.InvokeDoorClosed(args);
+        }
+
         public void BeaconPassed(BeaconPassedEventArgs args)
         {
             Native.InvokeBeaconPassed(args);

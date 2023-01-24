@@ -32,6 +32,10 @@ namespace AtsEx
             Started?.Invoke(e);
         }
 
+        public void InvokeDoorOpened(DoorEventArgs args) => DoorOpened?.Invoke(args);
+
+        public void InvokeDoorClosed(DoorEventArgs args) => DoorClosed?.Invoke(args);
+
         public void InvokeBeaconPassed(BeaconPassedEventArgs args) => BeaconPassed?.Invoke(args);
 
         public PluginHost.Handles.HandleSet Handles { get; }
@@ -43,6 +47,9 @@ namespace AtsEx
         public VehicleState VehicleState { get; set; } = null;
 
         public event StartedEventHandler Started;
+
+        public event DoorEventHandler DoorOpened;
+        public event DoorEventHandler DoorClosed;
 
         public event BeaconPassedEventHandler BeaconPassed;
     }
