@@ -11,7 +11,7 @@ using TypeWrapping;
 namespace BveTypes.ClassWrappers
 {
     /// <summary>
-    /// 車両パラメーターを表します。
+    /// 自列車の力学系全体を表します。
     /// </summary>
     public class VehicleDynamics : ClassWrapperBase
     {
