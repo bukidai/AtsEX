@@ -23,6 +23,11 @@ namespace BveTypes.ClassWrappers
             AirSupplementGetMethod = members.GetSourcePropertyGetterOf(nameof(AirSupplement));
             LockoutValveGetMethod = members.GetSourcePropertyGetterOf(nameof(LockoutValve));
 
+            BrakeControllerGetMethod = members.GetSourcePropertyGetterOf(nameof(BrakeController));
+            EcbGetMethod = members.GetSourcePropertyGetterOf(nameof(Ecb));
+            SmeeGetMethod = members.GetSourcePropertyGetterOf(nameof(Smee));
+            ClGetMethod = members.GetSourcePropertyGetterOf(nameof(Cl));
+
             MotorCarBcGetMethod = members.GetSourcePropertyGetterOf(nameof(MotorCarBc));
 
             TrailerCarBcGetMethod = members.GetSourcePropertyGetterOf(nameof(TrailerCarBc));
@@ -67,6 +72,33 @@ namespace BveTypes.ClassWrappers
         /// 締切電磁弁式電空協調制御を取得します。
         /// </summary>
         public AirSupplement LockoutValve => ClassWrappers.AirSupplement.FromSource(LockoutValveGetMethod.Invoke(Src, null));
+
+        private static FastMethod BrakeControllerGetMethod;
+        /// <summary>
+        /// 自列車が使用するブレーキ方式を取得します。
+        /// </summary>
+        /// <remarks>
+        /// 取得される値は、パラメーターファイルでの設定に合わせて <see cref="Ecb"/> プロパティ、<see cref="Smee"/> プロパティ、<see cref="Cl"/> プロパティのいずれかとなります。
+        /// </remarks>
+        public BrakeControllerBase BrakeController => CreateFromSource(BrakeControllerGetMethod.Invoke(Src, null));
+
+        private static FastMethod EcbGetMethod;
+        /// <summary>
+        /// 電気指令式ブレーキを取得します。
+        /// </summary>
+        public Ecb Ecb => ClassWrappers.Ecb.FromSource(EcbGetMethod.Invoke(Src, null));
+
+        private static FastMethod SmeeGetMethod;
+        /// <summary>
+        /// 電磁直通空気ブレーキを取得します。
+        /// </summary>
+        public Smee Smee => ClassWrappers.Smee.FromSource(SmeeGetMethod.Invoke(Src, null));
+
+        private static FastMethod ClGetMethod;
+        /// <summary>
+        /// 自動空気ブレーキを取得します。
+        /// </summary>
+        public Cl Cl => ClassWrappers.Cl.FromSource(ClGetMethod.Invoke(Src, null));
 
         private static FastMethod MotorCarBcGetMethod;
         /// <summary>

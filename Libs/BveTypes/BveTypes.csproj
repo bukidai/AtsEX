@@ -77,14 +77,17 @@
     <Compile Include="ClassWrappers\Public\AssistantTextDrawer.cs" />
     <Compile Include="ClassWrappers\Public\BasicBrake.cs" />
     <Compile Include="ClassWrappers\Public\Beacon.cs" />
+    <Compile Include="ClassWrappers\Public\BrakeControllerBase.cs" />
     <Compile Include="ClassWrappers\Public\BrakePosition.cs" />
     <Compile Include="ClassWrappers\Public\BrakeSystem.cs" />
     <Compile Include="ClassWrappers\Public\BveFile.cs" />
     <Compile Include="ClassWrappers\Public\CabBase.cs" />
     <Compile Include="ClassWrappers\Public\CarBc.cs" />
     <Compile Include="ClassWrappers\Public\CarInfo.cs" />
+    <Compile Include="ClassWrappers\Public\Cl.cs" />
     <Compile Include="ClassWrappers\Public\Direct3DProvider.cs" />
     <Compile Include="ClassWrappers\Public\DrawDistanceManager.cs" />
+    <Compile Include="ClassWrappers\Public\Ecb.cs" />
     <Compile Include="ClassWrappers\Public\ElectroPneumaticBlendedBrakingControlBase.cs" />
     <Compile Include="ClassWrappers\Public\Forms\ChartForm.cs" />
     <Compile Include="ClassWrappers\Public\Forms\LoadingProgressForm.cs" />
@@ -117,6 +120,7 @@
     <Compile Include="ClassWrappers\Public\Section.cs" />
     <Compile Include="ClassWrappers\Public\SectionManager.cs" />
     <Compile Include="ClassWrappers\Public\SingleStructureList.cs" />
+    <Compile Include="ClassWrappers\Public\Smee.cs" />
     <Compile Include="ClassWrappers\Public\Sound.cs" />
     <Compile Include="ClassWrappers\Public\Station.cs" />
     <Compile Include="ClassWrappers\Public\StationList.cs" />

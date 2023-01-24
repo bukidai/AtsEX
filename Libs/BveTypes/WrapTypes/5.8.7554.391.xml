@@ -113,6 +113,17 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="BrakeControllerBase" Original="a1">
+		<Property Wrapper="MaximumPressure">
+			<Getter Original="e"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="PressureRates">
+			<Getter Original="f"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="BrakeSystem" Original="bh">
 		<Property Wrapper="ElectroPneumaticBlendedBrakingControl">
 			<Getter Original="k"/>
@@ -125,6 +136,18 @@
 		</Property>
 		<Property Wrapper="MotorCarBc">
 			<Getter Original="l"/>
+		</Property>
+		<Property Wrapper="BrakeController">
+			<Getter Original="i"/>
+		</Property>
+		<Property Wrapper="Ecb">
+			<Getter Original="f"/>
+		</Property>
+		<Property Wrapper="Smee">
+			<Getter Original="h"/>
+		</Property>
+		<Property Wrapper="Cl">
+			<Getter Original="c"/>
 		</Property>
 		<Property Wrapper="TrailerCarBc">
 			<Getter Original="m"/>
@@ -181,6 +204,13 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="Cl" Original="dv">
+		<Property Wrapper="BpInitialPressure">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="Direct3DProvider" Original="d9">
 		<Property Wrapper="Instance" IsWrapperStatic="true">
 			<Getter Original="d" IsOriginalStatic="true"/>
@@ -209,6 +239,9 @@
 		<Property Wrapper="DrawDistanceObjects">
 			<Getter Original="e"/>
 		</Property>
+	</Class>
+
+	<Class Wrapper="Ecb" Original="ew">
 	</Class>
 
 	<Class Wrapper="ElectroPneumaticBlendedBrakingControlBase" Original="e3">
@@ -624,6 +657,13 @@
 	</Class>
 
 	<Class Wrapper="SingleStructureList" Original="bg">
+	</Class>
+
+	<Class Wrapper="Smee" Original="ce">
+		<Property Wrapper="BpInitialPressure">
+			<Getter Original="b"/>
+			<Setter Original="a"/>
+		</Property>
 	</Class>
 
 	<Class Wrapper="Sound" Original="ep">
