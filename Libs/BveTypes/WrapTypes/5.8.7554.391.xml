@@ -263,6 +263,10 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="GraphCurve" Original="be">
+		<Method Wrapper="GetY" WrapperParams="System.Int32" Original="a"/>
+	</Class>
+
 	<Class Wrapper="HandleSet" Original="a2">
 		<Property Wrapper="NotchInfo">
 			<Getter Original="e"/>
