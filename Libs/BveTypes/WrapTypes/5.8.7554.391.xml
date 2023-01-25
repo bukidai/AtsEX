@@ -925,9 +925,26 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="VehicleElectricity" Original="a3">
+		<Property Wrapper="Performance">
+			<Getter Original="j"/>
+		</Property>
+		<Property Wrapper="RegenerationLimit">
+			<Getter Original="e"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="SlipVelocityCoefficient">
+			<Getter Original="b"/>
+			<Setter Original="a"/>
+		</Property>
+	</Class>
+
 	<Class Wrapper="VehicleInstrumentSet" Original="ck">
 		<Property Wrapper="BrakeSystem">
 			<Getter Original="b"/>
+		</Property>
+		<Property Wrapper="Electricity">
+			<Getter Original="a"/>
 		</Property>
 		<Property Wrapper="Cab">
 			<Getter Original="e"/>
@@ -937,5 +954,53 @@
 			<Getter Original="f"/>
 			<Setter Original="a"/>
 		</Property>
+	</Class>
+
+	<Class Wrapper="VehiclePerformance" Original="fz">
+	</Class>
+
+	<Class Wrapper="VehiclePerformanceBase" Original="fn">
+		<Property Wrapper="Power">
+			<Getter Original="g"/>
+		</Property>
+		<Property Wrapper="Brake">
+			<Getter Original="i"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="VehicleStep" Original="ak">
+		<Property Wrapper="Curves">
+			<Getter Original="k"/>
+		</Property>
+		<Property Wrapper="Force">
+			<Getter Original="d"/>
+		</Property>
+		<Property Wrapper="MaxForce">
+			<Getter Original="o"/>
+		</Property>
+		<Property Wrapper="Current">
+			<Getter Original="r"/>
+		</Property>
+		<Property Wrapper="MaxCurrent">
+			<Getter Original="h"/>
+		</Property>
+		<Property Wrapper="NoLoadCurrent">
+			<Getter Original="l"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="VehicleStepSet" Original="fw">
+		<Property Wrapper="StepCount">
+			<Getter Original="b"/>
+		</Property>
+		<Property Wrapper="CurrentStepIndex">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="CurrentStep">
+			<Getter Original="a"/>
+		</Property>
+
+		<Method Wrapper="GetStep" WrapperParams="System.Int32" Original="b"/>
 	</Class>
 </WrapTypes>

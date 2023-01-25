@@ -22,6 +22,8 @@ namespace BveTypes.ClassWrappers
 
             BrakeSystemGetMethod = members.GetSourcePropertyGetterOf(nameof(BrakeSystem));
 
+            ElectricityGetMethod = members.GetSourcePropertyGetterOf(nameof(Electricity));
+
             CabGetMethod = members.GetSourcePropertyGetterOf(nameof(Cab));
             CabSetMethod = members.GetSourcePropertySetterOf(nameof(Cab));
 
@@ -50,6 +52,12 @@ namespace BveTypes.ClassWrappers
         /// ブレーキシステム全体を表す <see cref="ClassWrappers.BrakeSystem"/> を取得します。
         /// </summary>
         public BrakeSystem BrakeSystem => ClassWrappers.BrakeSystem.FromSource(BrakeSystemGetMethod.Invoke(Src, null));
+
+        private static FastMethod ElectricityGetMethod;
+        /// <summary>
+        /// 電気の系全体を表す <see cref="VehicleElectricity"/> を取得します。
+        /// </summary>
+        public VehicleElectricity Electricity => VehicleElectricity.FromSource(ElectricityGetMethod.Invoke(Src, null));
 
         private static FastMethod CabGetMethod;
         private static FastMethod CabSetMethod;

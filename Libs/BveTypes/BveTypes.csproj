@@ -89,6 +89,7 @@
     <Compile Include="ClassWrappers\Public\DrawDistanceManager.cs" />
     <Compile Include="ClassWrappers\Public\Ecb.cs" />
     <Compile Include="ClassWrappers\Public\GraphCurve.cs" />
+    <Compile Include="ClassWrappers\Public\VehicleElectricity.cs" />
     <Compile Include="ClassWrappers\Public\ElectroPneumaticBlendedBrakingControlBase.cs" />
     <Compile Include="ClassWrappers\Public\Forms\ChartForm.cs" />
     <Compile Include="ClassWrappers\Public\Forms\LoadingProgressForm.cs" />
@@ -140,6 +141,10 @@
     <Compile Include="ClassWrappers\Public\Vehicle.cs" />
     <Compile Include="ClassWrappers\Public\VehicleDynamics.cs" />
     <Compile Include="ClassWrappers\Public\VehicleInstrumentSet.cs" />
+    <Compile Include="ClassWrappers\Public\VehiclePerformance.cs" />
+    <Compile Include="ClassWrappers\Public\VehiclePerformanceBase.cs" />
+    <Compile Include="ClassWrappers\Public\VehicleStep.cs" />
+    <Compile Include="ClassWrappers\Public\VehicleStepSet.cs" />
     <Compile Include="Comparer.cs" />
     <Compile Include="ITwoWayConverter.cs" />
     <Compile Include="Profile.cs" />
