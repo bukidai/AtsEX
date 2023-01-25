@@ -62,8 +62,8 @@
     <Compile Include="SignalPatch\ISignalPatchFactory.cs" />
     <Compile Include="SignalPatch\SignalPatch.cs" />
     <Compile Include="SignalPatch\SignalPatchFactory.cs" />
-    <Compile Include="StructureFinder\IStructureModelFinder.cs" />
-    <Compile Include="StructureFinder\StructureModelFinder.cs" />
+    <Compile Include="StructureModelFinder\IStructureModelFinder.cs" />
+    <Compile Include="StructureModelFinder\StructureModelFinder.cs" />
     <Compile Include="TrainDrawPatch\ITrainDrawPatchFactory.cs" />
     <Compile Include="TrainDrawPatch\TrainDrawPatchFactory.cs" />
     <Compile Include="IMatrixConverter.cs" />
