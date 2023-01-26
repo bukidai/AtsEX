@@ -61,7 +61,7 @@ namespace BveTypes.ClassWrappers
         /// </summary>
         public TimeManager TimeManager
         {
-            get => TimeManager.FromSource(TimeManagerField.GetValue(Src));
+            get => ClassWrappers.TimeManager.FromSource(TimeManagerField.GetValue(Src));
             set => TimeManagerField.SetValue(Src, value.Src);
         }
 
