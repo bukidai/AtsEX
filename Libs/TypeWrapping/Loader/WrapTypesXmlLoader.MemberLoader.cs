@@ -105,7 +105,8 @@ namespace TypeWrapping
                         }
                     }
 
-                    if (!originalType.IsAbstract)
+                    bool isStruct = originalType.IsValueType && !originalType.IsPrimitive && !originalType.IsEnum;
+                    if (!isStruct && !originalType.IsAbstract)
                     {
                         BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.InvokeMethod;
                         ConstructorInfo[] wrapperConstructors = wrapperType.GetConstructors(bindingFlags);
