@@ -23,10 +23,9 @@ namespace AtsEx.Samples.MapPlugins.SignalController
         {
             BveHacker.ScenarioCreated += e =>
             {
-                SectionManager sectionManager = e.Scenario.SectionManager;
-                Section section = sectionManager.Sections[2] as Section;
+                Section section = e.Scenario.SectionManager.Sections[2] as Section;
 
-                SignalPatch = Extensions.GetExtension<ISignalPatchFactory>().Patch(nameof(SignalPatch), sectionManager, section, source => SignalIndex);
+                SignalPatch = Extensions.GetExtension<ISignalPatchFactory>().Patch(nameof(SignalPatch), section, source => SignalIndex);
             };
 
             Native.NativeKeys.AtsKeys[NativeAtsKeyName.D].Pressed += OnDPressed;

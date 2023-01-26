@@ -18,7 +18,7 @@ namespace AtsEx.Extensions.SignalPatch
         private readonly Section Target;
         private readonly HarmonyPatch HarmonyPatch;
 
-        internal SignalPatch(string name, FastMethod getCurrentSignalIndexMethod, SectionManager sectionManager, Section target, Converter<int, int> factory)
+        internal SignalPatch(string name, FastMethod getCurrentSignalIndexMethod, Section target, Converter<int, int> factory)
         {
             Target = target;
 

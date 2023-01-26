@@ -38,7 +38,9 @@ namespace AtsEx.Extensions.SignalPatch
             return new ExtensionTickResult();
         }
 
-        public SignalPatch Patch(string name, SectionManager sectionManager, Section target, Converter<int, int> factory)
-            => new SignalPatch(name, GetCurrentSignalIndexMethod, sectionManager, target, factory);
+        public SignalPatch Patch(string name, Section target, Converter<int, int> factory)
+            => new SignalPatch(name, GetCurrentSignalIndexMethod, target, factory);
+
+        public SignalPatch Patch(string name, SectionManager _, Section target, Converter<int, int> factory) => Patch(name, target, factory);
     }
 }
