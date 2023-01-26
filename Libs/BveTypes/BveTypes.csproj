@@ -89,6 +89,7 @@
     <Compile Include="ClassWrappers\Public\DrawDistanceManager.cs" />
     <Compile Include="ClassWrappers\Public\Ecb.cs" />
     <Compile Include="ClassWrappers\Public\GraphCurve.cs" />
+    <Compile Include="ClassWrappers\Public\GraphCurvePoint.cs" />
     <Compile Include="ClassWrappers\Public\VehicleElectricity.cs" />
     <Compile Include="ClassWrappers\Public\ElectroPneumaticBlendedBrakingControlBase.cs" />
     <Compile Include="ClassWrappers\Public\Forms\ChartForm.cs" />
