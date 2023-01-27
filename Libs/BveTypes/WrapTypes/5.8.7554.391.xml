@@ -996,6 +996,54 @@
 		<Property Wrapper="NoLoadCurrent">
 			<Getter Original="l"/>
 		</Property>
+		<Property Wrapper="JerkRegulationUp">
+			<Getter Original="p"/>
+			<Setter Original="i"/>
+		</Property>
+		<Property Wrapper="JerkRegulationDown">
+			<Getter Original="a"/>
+			<Setter Original="j"/>
+		</Property>
+		<Property Wrapper="BreakerDelayOn">
+			<Getter Original="b"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="BreakerDelayOff">
+			<Getter Original="c"/>
+			<Setter Original="h"/>
+		</Property>
+		<Property Wrapper="ResetTime">
+			<Getter Original="f"/>
+			<Setter Original="e"/>
+		</Property>
+		<Property Wrapper="CurrentReducingTime">
+			<Getter Original="q"/>
+			<Setter Original="f"/>
+		</Property>
+		<Property Wrapper="RequiredNotchUp">
+			<Getter Original="e"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="RequiredNotchDown">
+			<Getter Original="m"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="StopDelayUp">
+			<Getter Original="g"/>
+			<Setter Original="c"/>
+		</Property>
+		<Property Wrapper="StopDelayDown">
+			<Getter Original="i"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="CurrentLimitingValueEmpty">
+			<Getter Original="j"/>
+			<Setter Original="g"/>
+		</Property>
+		<Property Wrapper="CurrentLimitingValueFull">
+			<Getter Original="n"/>
+			<Setter Original="d"/>
+		</Property>
 	</Class>
 
 	<Class Wrapper="VehicleStepSet" Original="fw">
