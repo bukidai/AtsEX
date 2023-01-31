@@ -1,0 +1,39 @@
+BveTs Instrument Panel 2.01
+
+[This]
+Resolution = 1280
+Left = -640
+Top = -400
+Right = 640
+Bottom = 400
+Center = 0, 0
+Origin = 0, 0
+
+[PilotLamp]
+Subject = ats0
+Location = -560, -320
+DaytimeImage = ats0.png
+
+[Needle]
+Subject = ats1
+Location = -560, 0
+DaytimeImage = ats1.png
+Origin = 16, 240
+Radius = 160
+InitialAngle = 0
+LastAngle = 135
+Minimum = 0
+Maximum = 200
+NaturalFreq = 100
+
+[Needle]
+Subject = ats2
+Location = -320, 0
+DaytimeImage = ats2.png
+Origin = 16, 240
+Radius = 160
+InitialAngle = 0
+LastAngle = 135
+Minimum = -100
+Maximum = 100
+NaturalFreq = 100

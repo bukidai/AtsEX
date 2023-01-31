@@ -1,0 +1,7 @@
+bvets Vehicle 2.00
+PerformanceCurve = Notch\Notch.txt
+Parameters = Parameters.txt
+Panel = Panel\Panel.txt
+Sound = Sound.txt
+Ats64 = Ats_WithPanel\AtsEx.Caller.x64.dll
+Ats32 = Ats_WithPanel\AtsEx.Caller.x86.dll
