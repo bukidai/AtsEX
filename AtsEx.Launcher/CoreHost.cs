@@ -25,7 +25,7 @@ namespace AtsEx.Launcher
         public void Dispose() => Export.Dispose();
         public void SetVehicleSpec(VehicleSpec vehicleSpec) => Export.SetVehicleSpec(vehicleSpec.Convert());
         public void Initialize(int defaultBrakePosition) => Export.Initialize((DefaultBrakePosition)defaultBrakePosition);
-        public AtsHandles Elapse(VehicleState vehicleState, int[] panel, int[] sound)
+        public AtsHandles Elapse(VehicleState vehicleState, IntPtr panel, IntPtr sound)
         {
             Native.AtsHandles handles = Export.Elapse(vehicleState.Convert(), panel, sound);
             return new AtsHandles()

@@ -70,7 +70,7 @@ namespace AtsEx
             Native.InvokeStarted(defaultBrakePosition);
         }
 
-        public HandlePositionSet Tick(TimeSpan elapsed, PluginHost.Native.VehicleState vehicleState)
+        public HandlePositionSet Tick(TimeSpan elapsed, VehicleState vehicleState, Native.AtsIoArray panel, Native.AtsIoArray sound)
         {
             Native.VehicleState = vehicleState;
 

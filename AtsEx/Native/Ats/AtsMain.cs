@@ -64,15 +64,18 @@ namespace AtsEx.Native
             AtsExScenarioService?.Started((BrakePosition)defaultBrakePosition);
         }
 
-        public static AtsHandles Elapse(VehicleState vehicleState, int[] panel, int[] sound)
+        public static AtsHandles Elapse(VehicleState vehicleState, IntPtr panel, IntPtr sound)
         {
+            AtsIoArray panelArray = new AtsIoArray(panel);
+            AtsIoArray soundArray = new AtsIoArray(sound);
+
             PluginHost.Native.VehicleState exVehicleState = new PluginHost.Native.VehicleState(
                 vehicleState.Location, vehicleState.Speed, TimeSpan.FromMilliseconds(vehicleState.Time),
                 vehicleState.BcPressure, vehicleState.MrPressure, vehicleState.ErPressure, vehicleState.BpPressure, vehicleState.SapPressure, vehicleState.Current);
 
             TimeSpan elapsed = Stopwatch.IsRunning ? Stopwatch.Elapsed : TimeSpan.Zero;
             AtsEx.Tick(elapsed);
-            HandlePositionSet handlePositionSet = AtsExScenarioService?.Tick(elapsed, exVehicleState);
+            HandlePositionSet handlePositionSet = AtsExScenarioService?.Tick(elapsed, exVehicleState, panelArray, soundArray);
 
             Stopwatch.Restart();
 

@@ -168,7 +168,7 @@ namespace AtsEx.Native
 
         public static void Initialize(DefaultBrakePosition defaultBrakePosition) => AtsMain.Initialize(defaultBrakePosition);
 
-        public static AtsHandles Elapse(VehicleState vehicleState, int[] panel, int[] sound) => AtsMain.Elapse(vehicleState, panel, sound);
+        public static AtsHandles Elapse(VehicleState vehicleState, IntPtr panel, IntPtr sound) => AtsMain.Elapse(vehicleState, panel, sound);
 
         public static void SetPower(int notch) => AtsMain.SetPower(notch);
 
