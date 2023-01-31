@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.Native;
+using AtsEx.PluginHost.Panels.Native;
 
 namespace AtsEx.PluginHost
 {
@@ -23,6 +24,13 @@ namespace AtsEx.PluginHost
         /// </remarks>
         /// <seealso cref="IBveHacker.Handles"/>
         HandleSet Handles { get; }
+
+
+        /// <summary>
+        /// AtsEX プラグインから、ATS プラグインによって制御可能な運転台パネルの状態量 (例えば「ats12」など、subjectKey が「ats」から始まる状態量) を操作するための機能を提供する
+        /// <see cref="IAtsPanelValueSet"/> を取得します。
+        /// </summary>
+        IAtsPanelValueSet AtsPanelValues { get; }
 
 
         /// <summary>

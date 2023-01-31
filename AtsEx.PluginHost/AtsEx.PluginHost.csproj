@@ -85,6 +85,8 @@
     <Compile Include="Native\DoorEventArgs.cs" />
     <Compile Include="Native\DoorEventHandler.cs" />
     <Compile Include="Native\StartedEventHandler.cs" />
+    <Compile Include="Panels\Native\IAtsPanelValueSet.cs" />
+    <Compile Include="Panels\Native\IAtsPanelValue.cs" />
     <Compile Include="Plugins\AllPluginsLoadedEventArgs.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Handles\ConstantSpeedCommand.cs" />

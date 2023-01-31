@@ -110,6 +110,8 @@
     <Compile Include="Native\Ats\AtsIoArray.cs" />
     <Compile Include="Native\Ats\Export.cs" />
     <Compile Include="Native\Ats\CallerInfo.cs" />
+    <Compile Include="Panels\AtsPanelValue.cs" />
+    <Compile Include="Panels\AtsPanelValueSet.cs" />
     <Compile Include="Plugins\PluginLoader.PluginLoadErrorQueue.cs" />
     <Compile Include="Main\ScenarioService.PluginService.CommandBuilder.cs" />
     <Compile Include="BveHacker\Services\MainFormHacker.cs" />
@@ -241,6 +243,8 @@
     <Content Include="Resources\Plugins\Extensions\ExtensionSet.resx" />
     <Content Include="Resources\BveHacker.resx" />
     <Content Include="Resources\BveHacker.ja.resx" />
+    <Content Include="Resources\AtsPanelValueSet.ja.resx" />
+    <Content Include="Resources\AtsPanelValueSet.resx" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

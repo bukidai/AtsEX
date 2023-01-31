@@ -8,9 +8,11 @@ using BveTypes.ClassWrappers;
 
 using AtsEx.Handles;
 using AtsEx.Input;
+using AtsEx.Panels;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.Native;
+using AtsEx.PluginHost.Panels.Native;
 
 namespace AtsEx
 {
@@ -39,6 +41,8 @@ namespace AtsEx
         public void InvokeBeaconPassed(BeaconPassedEventArgs args) => BeaconPassed?.Invoke(args);
 
         public PluginHost.Handles.HandleSet Handles { get; }
+
+        public IAtsPanelValueSet AtsPanelValues { get; } = new AtsPanelValueSet();
 
         public INativeKeySet NativeKeys { get; } = new NativeKeySet();
 
