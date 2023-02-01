@@ -15,10 +15,13 @@ namespace AtsEx.Launcher
     public class CoreHost : IDisposable
     {
         private const int LauncherVersion = 3;
+
+        private readonly CallerInfo CallerInfo;
+
         internal CoreHost(Assembly callerAssembly, TargetBveFinder bveFinder)
         {
             Assembly launcherAssembly = Assembly.GetExecutingAssembly();
-            CallerInfo callerInfo = new CallerInfo(bveFinder.TargetProcess, bveFinder.TargetAppDomain, bveFinder.TargetAssembly, callerAssembly, launcherAssembly);
+            CallerInfo = new CallerInfo(bveFinder.TargetProcess, bveFinder.TargetAppDomain, bveFinder.TargetAssembly, callerAssembly, launcherAssembly);
 
             Assembly atsExAssembly = typeof(Export).Assembly;
             LauncherCompatibilityVersionAttribute compatibilityVersionAttribute = atsExAssembly.GetCustomAttribute<LauncherCompatibilityVersionAttribute>();
@@ -28,7 +31,7 @@ namespace AtsEx.Launcher
                 throw new NotSupportedException($"読み込まれた AtsEX Launcher (バージョン {launcherAssemblyVersion}) は現在の AtsEX ではサポートされていません。");
             }
 
-            Export.Load(callerInfo);
+            Export.Load(CallerInfo);
         }
 
         public void Dispose() => Export.Dispose();
@@ -44,6 +47,12 @@ namespace AtsEx.Launcher
                 Reverser = handles.Reverser,
                 ConstantSpeed = handles.ConstantSpeed,
             };
+        }
+        [Obsolete("使用不可", true)]
+        public AtsHandles Elapse(VehicleState vehicleState, int[] panel, int[] sound)
+        {
+            Version callerAssemblyVersion = CallerInfo.AtsExCallerAssembly.GetName().Version;
+            throw new NotSupportedException($"読み込まれた AtsEX Caller (バージョン {callerAssemblyVersion}) は現在の AtsEX ではサポートされていません。");
         }
         public void SetPower(int notch) => Export.SetPower(notch);
         public void SetBrake(int notch) => Export.SetBrake(notch);
