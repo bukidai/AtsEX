@@ -19,7 +19,7 @@ namespace AtsEx.Caller
         private static readonly Assembly Assembly = Assembly.GetExecutingAssembly();
         private const string LauncherName = "AtsEx.Launcher";
 
-        private const int CallerVersion = 2;
+        private const int CallerVersion = 3;
 
         private static VersionSelector VersionSelector;
 

@@ -14,7 +14,7 @@ namespace AtsEx.Launcher
 {
     public class CoreHost : IDisposable
     {
-        private const int LauncherVersion = 2;
+        private const int LauncherVersion = 3;
         internal CoreHost(Assembly callerAssembly, TargetBveFinder bveFinder)
         {
             Assembly launcherAssembly = Assembly.GetExecutingAssembly();
