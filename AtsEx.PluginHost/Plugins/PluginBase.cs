@@ -205,7 +205,7 @@ namespace AtsEx.PluginHost.Plugins
         public abstract void Dispose();
 
         /// <summary>
-        /// 毎フレーム呼び出されます。従来の ATS プラグインの Elapse(ATS_VEHICLESTATE vehicleState, int[] panel, int[] sound) に当たります。
+        /// 毎フレーム呼び出されます。ネイティブ ATS プラグインの Elapse(ATS_VEHICLESTATE vehicleState, int[] panel, int[] sound) に当たります。
         /// </summary>
         /// <param name="elapsed">前フレームから経過した時間。</param>
         /// <returns>
