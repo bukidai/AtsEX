@@ -11,6 +11,7 @@ using AtsEx.Handles;
 using AtsEx.Input;
 using AtsEx.Panels;
 using AtsEx.Plugins;
+using AtsEx.Sound;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.Native;
 
@@ -79,6 +80,7 @@ namespace AtsEx
             HandlePositionSet tickResult = _PluginService.Tick(elapsed);
 
             (Native.AtsPanelValues as AtsPanelValueSet).Tick(panel);
+            (Native.AtsSounds as AtsSoundSet).Tick(sound);
 
             return tickResult;
         }

@@ -7,6 +7,7 @@ using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.Native;
 using AtsEx.PluginHost.Panels.Native;
+using AtsEx.PluginHost.Sound.Native;
 
 namespace AtsEx.PluginHost
 {
@@ -31,6 +32,11 @@ namespace AtsEx.PluginHost
         /// <see cref="IAtsPanelValueSet"/> を取得します。
         /// </summary>
         IAtsPanelValueSet AtsPanelValues { get; }
+
+        /// <summary>
+        /// AtsEX プラグインから ATS サウンドを再生するための機能を提供する <see cref="IAtsSoundSet"/> を取得します。
+        /// </summary>
+        IAtsSoundSet AtsSounds { get; }
 
 
         /// <summary>

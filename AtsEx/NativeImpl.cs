@@ -9,10 +9,12 @@ using BveTypes.ClassWrappers;
 using AtsEx.Handles;
 using AtsEx.Input;
 using AtsEx.Panels;
+using AtsEx.Sound;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.Native;
 using AtsEx.PluginHost.Panels.Native;
+using AtsEx.PluginHost.Sound.Native;
 
 namespace AtsEx
 {
@@ -45,6 +47,7 @@ namespace AtsEx
         public IAtsPanelValueSet AtsPanelValues { get; } = new AtsPanelValueSet();
 
         public INativeKeySet NativeKeys { get; } = new NativeKeySet();
+        public IAtsSoundSet AtsSounds { get; } = new AtsSoundSet();
 
         public VehicleSpec VehicleSpec { get; }
 

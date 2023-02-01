@@ -102,7 +102,7 @@ namespace AtsEx.Native
         /// <summary>前回の状態を継続する</summary>
         Continue = 2,
         /// <summary>再生を停止する</summary>
-        Stop = -1000,
+        Stop = -10000,
     }
     /// <summary>ハンドルの初期位置設定</summary>
     public enum DefaultBrakePosition

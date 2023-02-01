@@ -129,6 +129,10 @@
     <Compile Include="Plugins\TickResult\TickResult.cs" />
     <Compile Include="Plugins\TickResult\VehiclePluginTickResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sound\ISound.cs" />
+    <Compile Include="Sound\Native\IAtsSoundSet.cs" />
+    <Compile Include="Sound\Native\IAtsSound.cs" />
+    <Compile Include="Sound\PlayState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\PropertyNotInitializedException.resx" />
