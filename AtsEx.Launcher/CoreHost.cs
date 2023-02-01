@@ -14,10 +14,19 @@ namespace AtsEx.Launcher
 {
     public class CoreHost : IDisposable
     {
-        internal CoreHost(Assembly callerAssembly, AtsExActivator activator)
+        private const int LauncherVersion = 2;
+        internal CoreHost(Assembly callerAssembly, TargetBveFinder bveFinder)
         {
             Assembly launcherAssembly = Assembly.GetExecutingAssembly();
-            CallerInfo callerInfo = new CallerInfo(activator.TargetProcess, activator.TargetAppDomain, activator.TargetAssembly, callerAssembly, launcherAssembly);
+            CallerInfo callerInfo = new CallerInfo(bveFinder.TargetProcess, bveFinder.TargetAppDomain, bveFinder.TargetAssembly, callerAssembly, launcherAssembly);
+
+            Assembly atsExAssembly = typeof(Export).Assembly;
+            LauncherCompatibilityVersionAttribute compatibilityVersionAttribute = atsExAssembly.GetCustomAttribute<LauncherCompatibilityVersionAttribute>();
+            if (compatibilityVersionAttribute.Version != LauncherVersion)
+            {
+                Version launcherAssemblyVersion = launcherAssembly.GetName().Version;
+                throw new NotSupportedException($"読み込まれた AtsEX Launcher (バージョン {launcherAssemblyVersion}) は現在の AtsEX ではサポートされていません。");
+            }
 
             Export.Load(callerInfo);
         }

@@ -64,8 +64,9 @@
   <ItemGroup>
     <Compile Include="CoreHost.cs" />
     <Compile Include="Hosting\UpdateChecker.cs" />
+    <Compile Include="LauncherCompatibilityVersionAttribute.cs" />
     <Compile Include="VersionSelector.cs" />
-    <Compile Include="Hosting\AtsExActivator.cs" />
+    <Compile Include="Hosting\TargetBveFinder.cs" />
     <Compile Include="Hosting\AtsExRepositoryHost.cs" />
     <Compile Include="Hosting\ReleaseInfo.cs" />
     <Compile Include="Hosting\UpdateInfoDialog.cs">

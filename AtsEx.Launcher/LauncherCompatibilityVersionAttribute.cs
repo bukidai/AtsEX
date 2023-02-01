@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AtsEx.Native
+namespace AtsEx.Launcher
 {
     /// <summary>
     /// AtsEX Caller の互換性バージョンを取得します。

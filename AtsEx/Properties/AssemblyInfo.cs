@@ -40,4 +40,4 @@ using AtsEx.Native;
 // ==============================
 // 1: beta0.16 (0.16.x.x)
 // 2: beta0.17 (0.17.x.x) -
-[assembly: CallerCompatibilityVersion(2)]
+[assembly: LauncherCompatibilityVersion(2)]

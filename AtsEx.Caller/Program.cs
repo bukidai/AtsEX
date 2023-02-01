@@ -39,11 +39,25 @@ namespace AtsEx.Caller
                     AssemblyName assemblyName = new AssemblyName(e.Name);
                     return assemblyName.Name == LauncherName ? Assembly.LoadFrom(launcherLocation) : null;
                 };
+
+                CheckCallerCompatibility(launcherLocation);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Failed to initialize AtsEX Caller.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw;
+            }
+
+
+            void CheckCallerCompatibility(string launcherLocation)
+            {
+                Assembly launcherAssembly = typeof(CallerCompatibilityVersionAttribute).Assembly;
+                CallerCompatibilityVersionAttribute compatibilityVersionAttribute = launcherAssembly.GetCustomAttribute<CallerCompatibilityVersionAttribute>();
+                if (compatibilityVersionAttribute.Version != CallerVersion)
+                {
+                    Version assemblyVersion = Assembly.GetName().Version;
+                    throw new NotSupportedException($"読み込まれた AtsEX Caller (バージョン {assemblyVersion}) は現在の AtsEX ではサポートされていません。");
+                }
             }
         }
 

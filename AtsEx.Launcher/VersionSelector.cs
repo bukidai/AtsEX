@@ -13,7 +13,7 @@ namespace AtsEx.Launcher
 {
     public class VersionSelector
     {
-        private static readonly AtsExActivator Activator = new AtsExActivator();
+        private static readonly TargetBveFinder BveFinder = new TargetBveFinder();
 
         static VersionSelector()
         {
@@ -50,7 +50,7 @@ namespace AtsEx.Launcher
                 return File.Exists(path) ? Assembly.LoadFrom(path) : null;
             };
 
-            CoreHost = new CoreHost(callerAssembly, Activator);
+            CoreHost = new CoreHost(callerAssembly, BveFinder);
             UpdateChecker.CheckUpdates();
         }
     }

@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace AtsEx.Launcher.Hosting
 {
-    internal class AtsExActivator
+    internal class TargetBveFinder
     {
         public Process TargetProcess { get; }
         public AppDomain TargetAppDomain { get; }
         public Assembly TargetAssembly { get; }
 
-        public AtsExActivator()
+        public TargetBveFinder()
         {
             TargetProcess = Process.GetCurrentProcess();
             TargetAppDomain = AppDomain.CurrentDomain;
