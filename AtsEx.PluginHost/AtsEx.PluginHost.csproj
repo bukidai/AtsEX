@@ -68,8 +68,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Binding\BindingMode.cs" />
+    <Compile Include="Binding\IBinding.cs" />
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="Exceptions\ConflictException.cs" />
+    <Compile Include="ITwoWayConverter.cs" />
     <Compile Include="MapStatements\IdentifierToEnumConverter.cs" />
     <Compile Include="LoadErrorManager\ILoadErrorManager.cs" />
     <Compile Include="MapStatements\Identifier.cs" />

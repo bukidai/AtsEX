@@ -76,6 +76,8 @@ namespace AtsEx
         {
             Native.VehicleState = vehicleState;
 
+            (Native.AtsPanelValues as AtsPanelValueSet).PreTick(panel);
+
             BveHacker.Tick(elapsed);
             HandlePositionSet tickResult = _PluginService.Tick(elapsed);
 
