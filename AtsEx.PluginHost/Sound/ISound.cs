@@ -30,5 +30,10 @@ namespace AtsEx.PluginHost.Sound
         /// サウンドの再生を停止します。
         /// </summary>
         void Stop();
+
+        /// <summary>
+        /// サウンドの再生を一度停止し、その後再度再生します。
+        /// </summary>
+        void StopAndPlay();
     }
 }

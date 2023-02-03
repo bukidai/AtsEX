@@ -15,7 +15,7 @@ namespace AtsEx.Sound
         private const int MinVolume = -9999;
         private const int MaxVolume = 0;
 
-        private int CommandValue = (int)SoundPlayType.Continue;
+        private Queue<int> CommandQueue = new Queue<int>();
 
         public PlayState PlayState { get; private set; }
 
@@ -23,23 +23,17 @@ namespace AtsEx.Sound
         {
         }
 
-        public int Tick()
-        {
-            int result = CommandValue;
-            CommandValue = (int)SoundPlayType.Continue;
-
-            return result;
-        }
+        public int Tick() => CommandQueue.Count == 0 ? (int)SoundPlayType.Continue : CommandQueue.Dequeue();
 
         public void Play()
         {
-            CommandValue = (int)SoundPlayType.Once;
+            CommandQueue.Enqueue((int)SoundPlayType.Once);
             PlayState = PlayState.Playing;
         }
 
         public void PlayLoop()
         {
-            CommandValue = (int)SoundPlayType.Loop;
+            CommandQueue.Enqueue((int)SoundPlayType.Loop);
             PlayState = PlayState.PlayingLoop;
         }
 
@@ -51,14 +45,21 @@ namespace AtsEx.Sound
                 throw new ArgumentOutOfRangeException(nameof(volume));
             }
 
-            CommandValue = commandValue;
+            CommandQueue.Enqueue(commandValue);
             PlayState = PlayState.PlayingLoop;
         }
 
         public void Stop()
         {
-            CommandValue = (int)SoundPlayType.Stop;
+            CommandQueue.Enqueue((int)SoundPlayType.Stop);
             PlayState = PlayState.Stop;
+        }
+
+        public void StopAndPlay()
+        {
+            CommandQueue.Enqueue((int)SoundPlayType.Stop);
+            CommandQueue.Enqueue((int)SoundPlayType.Once);
+            PlayState = PlayState.Playing;
         }
     }
 }
