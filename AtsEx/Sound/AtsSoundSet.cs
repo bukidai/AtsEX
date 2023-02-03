@@ -51,7 +51,7 @@ namespace AtsEx.Sound
         {
             foreach (KeyValuePair<int, AtsSound> x in RegisteredSounds)
             {
-                if (OldCommandValues.TryGetValue(x.Key, out int oldValue) && source[x.Key] != oldValue)
+                if (source[x.Key] != (int)SoundPlayType.Continue && OldCommandValues.TryGetValue(x.Key, out int oldValue) && source[x.Key] != oldValue)
                 {
                     string senderName = x.Key.ToString();
                     throw new ConflictException(string.Format(Resources.Value.ChangeConflicted.Value, senderName), senderName);
