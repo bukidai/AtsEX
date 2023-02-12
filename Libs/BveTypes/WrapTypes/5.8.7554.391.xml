@@ -661,7 +661,7 @@
 		<Field WrapperProperty="TimeManager" Original="a" IsOriginalNonPublic="true"/>
 		<Field WrapperProperty="PreTrainPassObjects" Original="d" IsOriginalNonPublic="true"/>
 		<Field WrapperProperty="PreTrainSectionIndex" Original="f" IsOriginalNonPublic="true"/>
-		<Field WrapperProperty="SectionIndexesTrainOn" Original="k" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="StopSignalSectionIndexes" Original="k" IsOriginalNonPublic="true"/>
 		<Field WrapperProperty="PreTrainLocation" Original="l" IsOriginalNonPublic="true"/>
 
 		<Method Wrapper="OnSectionChanged" WrapperParams="void" Original="c" IsOriginalNonPublic="true"/>

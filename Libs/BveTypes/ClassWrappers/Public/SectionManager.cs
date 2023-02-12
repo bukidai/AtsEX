@@ -25,7 +25,7 @@ namespace BveTypes.ClassWrappers
             TimeManagerField = members.GetSourceFieldOf(nameof(TimeManager));
             PreTrainPassObjectsField = members.GetSourceFieldOf(nameof(PreTrainPassObjects));
             PreTrainSectionIndexField = members.GetSourceFieldOf(nameof(PreTrainSectionIndex));
-            SectionIndexesTrainOnField = members.GetSourceFieldOf(nameof(SectionIndexesTrainOn));
+            StopSignalSectionIndexesField = members.GetSourceFieldOf(nameof(StopSignalSectionIndexes));
             PreTrainLocationField = members.GetSourceFieldOf(nameof(PreTrainLocation));
 
             OnSectionChangedMethod = members.GetSourceMethodOf(nameof(OnSectionChanged));
@@ -85,14 +85,31 @@ namespace BveTypes.ClassWrappers
             set => PreTrainSectionIndexField.SetValue(Src, value);
         }
 
-        private static FastField SectionIndexesTrainOnField;
+        private static FastField StopSignalSectionIndexesField;
         /// <summary>
-        /// 列車が走行している閉塞のインデックスの一覧を取得・設定します。
+        /// 停止現示の基となっている閉塞のインデックスの一覧を取得・設定します。
         /// </summary>
+        /// <remarks>
+        /// <list type="bullet">
+        /// <item>signalFlag に 1 が設定されている閉塞のうち、自列車より前方にあって、かつ自列車からみて最も近いもの</item>
+        /// <item>先行列車が走行している閉塞</item>
+        /// </list>
+        /// これらの閉塞のインデックスを手前から順に並べたものです。
+        /// </remarks>
+        public List<int> StopSignalSectionIndexes
+        {
+            get => StopSignalSectionIndexesField.GetValue(Src);
+            set => StopSignalSectionIndexesField.SetValue(Src, value);
+        }
+
+        /// <summary>
+        /// 非推奨のプロパティです。
+        /// </summary>
+        [Obsolete(nameof(StopSignalSectionIndexes) + " プロパティを使用してください。")]
         public List<int> SectionIndexesTrainOn
         {
-            get => SectionIndexesTrainOnField.GetValue(Src);
-            set => SectionIndexesTrainOnField.SetValue(Src, value);
+            get => StopSignalSectionIndexes;
+            set => StopSignalSectionIndexes = value;
         }
 
         private static FastField PreTrainLocationField;
