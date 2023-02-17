@@ -23,7 +23,7 @@
 
 ## プロジェクトの構成
 
-【最新版はただいま準備中です】
+![AtsEX 構成図](SystemOverview.svg)
 
 ## 使用ライブラリ等（アルファベット順）
 #### [.NET Runtime](https://github.com/dotnet/runtime) (MIT)
