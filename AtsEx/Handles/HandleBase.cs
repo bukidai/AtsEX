@@ -43,9 +43,13 @@ namespace AtsEx.Handles
 
         public NotchCommandBase GetCommandToSetNotchTo(int notch)
         {
-            return notch < MinNotch ? throw new ArgumentOutOfRangeException(nameof(notch))
-                : MaxNotch < notch ? throw new ArgumentOutOfRangeException(nameof(notch))
-                : new NotchCommandBase.SetNotchCommand(notch);
+            if (!CanSetNotchOutOfRange)
+            {
+                if (notch < MinNotch) throw new ArgumentOutOfRangeException(nameof(notch));
+                if (MaxNotch < notch) throw new ArgumentOutOfRangeException(nameof(notch));
+            }
+
+            return new NotchCommandBase.SetNotchCommand(notch);
         }
 
         public int ExecuteNotchCommands(IReadOnlyList<NotchCommandBase> commandEntries)
