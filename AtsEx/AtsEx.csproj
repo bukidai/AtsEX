@@ -107,6 +107,7 @@
     <Compile Include="ExceptionResolver.cs" />
     <Compile Include="Main\AtsEx.ExtensionLoader.cs" />
     <Compile Include="Main\AtsEx.ExtensionService.cs" />
+    <Compile Include="MapStatements\MonitorableTrain.cs" />
     <Compile Include="Native\Ats\AtsIoArray.cs" />
     <Compile Include="Native\Ats\Export.cs" />
     <Compile Include="Native\Ats\CallerInfo.cs" />

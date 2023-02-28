@@ -13,10 +13,12 @@ namespace AtsEx.MapStatements
     internal sealed partial class StatementSet : IStatementSet, IEnumerable<Statement>
     {
         private readonly IDictionary<Identifier, IReadOnlyList<Statement>> Statements;
+        private readonly IEnumerable<MonitorableTrain> TrainsToMonitor;
 
-        public StatementSet(IDictionary<Identifier, IReadOnlyList<Statement>> statements)
+        public StatementSet(IDictionary<Identifier, IReadOnlyList<Statement>> statements, IEnumerable<MonitorableTrain> trainsToMonitor)
         {
             Statements = statements;
+            TrainsToMonitor = trainsToMonitor;
         }
 
         public IReadOnlyList<IStatement> GetAll(Identifier identifier) => Statements.TryGetValue(identifier, out IReadOnlyList<Statement> result) ? result : new List<Statement>();
@@ -26,10 +28,8 @@ namespace AtsEx.MapStatements
 
         public void Tick(double vehicleLocation, double preTrainLocation)
         {
-            foreach (Statement statement in this)
-            {
-                statement.Tick(vehicleLocation, preTrainLocation);
-            }
+            foreach (MonitorableTrain train in TrainsToMonitor) train.UpdateLocation();
+            foreach (Statement statement in this) statement.Tick(vehicleLocation, preTrainLocation, TrainsToMonitor);
         }
     }
 }

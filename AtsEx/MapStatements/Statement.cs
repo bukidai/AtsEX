@@ -13,8 +13,6 @@ namespace AtsEx.MapStatements
 {
     internal sealed class Statement : IStatement
     {
-        private readonly IEnumerable<TracableTrain> TargetTrains;
-
         private double OldVehicleLocation = double.NegativeInfinity;
         private double OldPreTrainLocation = double.NegativeInfinity;
 
@@ -26,7 +24,7 @@ namespace AtsEx.MapStatements
         public double To { get; }
         public RepeatedStructure DefinedStructure { get; }
 
-        public Statement(Identifier name, Identifier[] additionalDeclaration, string argument, RepeatedStructure definedStructure, double to, IEnumerable<TracableTrain> targetTrains)
+        public Statement(Identifier name, Identifier[] additionalDeclaration, string argument, RepeatedStructure definedStructure, double to)
         {
             Name = name;
             AdditionalDeclaration = additionalDeclaration;
@@ -34,11 +32,9 @@ namespace AtsEx.MapStatements
 
             DefinedStructure = definedStructure;
             To = to;
-
-            TargetTrains = targetTrains;
         }
 
-        public void Tick(double vehicleLocation, double preTrainLocation)
+        public void Tick(double vehicleLocation, double preTrainLocation, IEnumerable<MonitorableTrain> trainsToMonitor)
         {
             {
                 if (OldVehicleLocation < From && From <= vehicleLocation)
@@ -85,10 +81,8 @@ namespace AtsEx.MapStatements
                 OldPreTrainLocation = preTrainLocation;
             }
 
-            foreach (TracableTrain train in TargetTrains)
+            foreach (MonitorableTrain train in trainsToMonitor)
             {
-                train.UpdateLocation();
-
                 if (train.OldLocation < From && From <= train.Location)
                 {
                     TrainEntered?.Invoke(this, new TrainPassedEventArgs(train.Name, train.Train, Direction.Forward));
@@ -116,29 +110,5 @@ namespace AtsEx.MapStatements
         public event EventHandler<PassedEventArgs> Exited;
         public event EventHandler<PassedEventArgs> PreTrainExited;
         public event EventHandler<TrainPassedEventArgs> TrainExited;
-
-        internal class TracableTrain
-        {
-            public string Name { get; }
-            public Train Train { get; }
-
-            public double OldLocation { get; private set; }
-            public double Location { get; private set; }
-
-            public TracableTrain(string name, Train train)
-            {
-                Name = name;
-                Train = train;
-
-                OldLocation = train.Location;
-                Location = train.Location;
-            }
-
-            public void UpdateLocation()
-            {
-                OldLocation = Location;
-                Location = Train.Location;
-            }
-        }
     }
 }
