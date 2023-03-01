@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using FastMember;
 using UnembeddedResources;
 
 namespace BveTypes.ClassWrappers.Extensions
@@ -49,9 +50,9 @@ namespace BveTypes.ClassWrappers.Extensions
 
         private readonly Type SrcType;
 
-        private readonly FieldInfo VersionField;
-        private readonly FieldInfo KeysField;
-        private readonly FieldInfo ValuesField;
+        private readonly FastField VersionField;
+        private readonly FastField KeysField;
+        private readonly FastField ValuesField;
 
         private int Version => (int)VersionField.GetValue(Src);
         private TKey[] KeyArray => KeysField.GetValue(Src) as TKey[];
@@ -75,9 +76,9 @@ namespace BveTypes.ClassWrappers.Extensions
 
             SrcType = Src.GetType();
 
-            VersionField = SrcType.GetField("version", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.InvokeMethod);
-            KeysField = SrcType.GetField("keys", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.InvokeMethod);
-            ValuesField = SrcType.GetField("values", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.InvokeMethod);
+            VersionField = FastField.Create(SrcType.GetField("version", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.InvokeMethod));
+            KeysField = FastField.Create(SrcType.GetField("keys", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.InvokeMethod));
+            ValuesField = FastField.Create(SrcType.GetField("values", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.InvokeMethod));
         }
 
         /// <summary>

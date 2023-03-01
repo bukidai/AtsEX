@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using FastMember;
+
 namespace BveTypes.ClassWrappers.Extensions
 {
     /// <summary>
@@ -175,18 +177,18 @@ namespace BveTypes.ClassWrappers.Extensions
 
         internal sealed class ListConstructorSet
         {
-            private readonly ConstructorInfo Default;
+            private readonly FastConstructor Default;
 
-            private readonly ConstructorInfo WithItems;
+            private readonly FastConstructor WithItems;
 
-            private readonly ConstructorInfo WithCapacitySpecified;
+            private readonly FastConstructor WithCapacitySpecified;
             private static readonly Type[] WithCapacitySpecifiedParameters = new Type[] { typeof(int) };
 
             public ListConstructorSet(Type type)
             {
-                Default = type.GetConstructor(Type.EmptyTypes);
-                WithItems = type.GetConstructor(new Type[] { typeof(IEnumerable<>).MakeGenericType(new Type[] { type.GenericTypeArguments[0] }) });
-                WithCapacitySpecified = type.GetConstructor(WithCapacitySpecifiedParameters);
+                Default = FastConstructor.Create(type.GetConstructor(Type.EmptyTypes));
+                WithItems = FastConstructor.Create(type.GetConstructor(new Type[] { typeof(IEnumerable<>).MakeGenericType(new Type[] { type.GenericTypeArguments[0] }) }));
+                WithCapacitySpecified = FastConstructor.Create(type.GetConstructor(WithCapacitySpecifiedParameters));
             }
 
             public object Create() => Default.Invoke(null);
