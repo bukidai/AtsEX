@@ -8,21 +8,20 @@ using AtsEx.PluginHost.Plugins.Extensions;
 
 namespace AtsEx.PluginHost.Plugins
 {
-    public abstract class PluginBuilder
+    public class PluginBuilder
     {
-        internal protected INative Native { get; }
-        internal protected IBveHacker BveHacker { get; }
-        internal protected IExtensionSet Extensions { get; }
-        internal protected string Identifier { get; }
+        internal INative Native { get; }
+        internal IBveHacker BveHacker { get; }
+        internal IExtensionSet Extensions { get; }
+        internal IPluginSet Plugins { get; }
+        internal string Identifier { get; }
 
-        internal protected abstract event AllExtensionsLoadedEventHandler AllExtensionsLoaded;
-        internal protected abstract event AllPluginsLoadedEventHandler AllPluginsLoaded;
-
-        public PluginBuilder(INative native, IBveHacker bveHacker, IExtensionSet extensions, string identifier)
+        public PluginBuilder(INative native, IBveHacker bveHacker, IExtensionSet extensions, IPluginSet plugins, string identifier)
         {
             Native = native;
             BveHacker = bveHacker;
             Extensions = extensions;
+            Plugins = plugins;
             Identifier = identifier;
         }
 
@@ -31,6 +30,7 @@ namespace AtsEx.PluginHost.Plugins
             Native = pluginBuilder.Native;
             BveHacker = pluginBuilder.BveHacker;
             Extensions = pluginBuilder.Extensions;
+            Plugins = pluginBuilder.Plugins;
             Identifier = pluginBuilder.Identifier;
         }
     }

@@ -72,6 +72,7 @@
     <Compile Include="Binding\IBinding.cs" />
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="Exceptions\ConflictException.cs" />
+    <Compile Include="Exceptions\MemberNotInitializedException.cs" />
     <Compile Include="ITwoWayConverter.cs" />
     <Compile Include="MapStatements\IdentifierToEnumConverter.cs" />
     <Compile Include="LoadErrorManager\ILoadErrorManager.cs" />
@@ -198,6 +199,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\IdentifierToEnumConverter`1.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\MemberNotInitializedException.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\MemberNotInitializedException.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

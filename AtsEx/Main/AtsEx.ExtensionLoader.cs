@@ -28,7 +28,8 @@ namespace AtsEx
 
             public ExtensionSet Load()
             {
-                PluginLoader pluginLoader = new PluginLoader(null, BveHacker, null);
+                ExtensionSet extensions = new ExtensionSet();
+                PluginLoader pluginLoader = new PluginLoader(null, BveHacker, extensions, null);
 
                 string extensionsDirectory = Path.Combine(Path.GetDirectoryName(App.Instance.AtsExAssembly.Location), "Extensions");
                 Directory.CreateDirectory(extensionsDirectory);
@@ -40,9 +41,7 @@ namespace AtsEx
 
                 Dictionary<string, PluginBase> loadedExtensions = pluginLoader.Load(fromPluginUsing.Concat(null, fromDirectory));
 
-                ExtensionSet extensions = new ExtensionSet(loadedExtensions.Values);
-                pluginLoader.SetExtensionSetToLoadedPlugins(extensions);
-
+                extensions.SetExtensions(loadedExtensions.Values);
                 return extensions;
             }
         }

@@ -6,26 +6,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using AtsEx.PluginHost;
 using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx.Plugins
 {
     internal class PluginSet : IPluginSet
     {
-        protected readonly Dictionary<PluginType, ReadOnlyDictionary<string, PluginBase>> Items;
+        private Dictionary<PluginType, ReadOnlyDictionary<string, PluginBase>> Items = null;
+        public ReadOnlyDictionary<string, PluginBase> this[PluginType pluginType] => Items is null ? throw new MemberNotInitializedException() : Items[pluginType];
 
-        public ReadOnlyDictionary<string, PluginBase> this[PluginType pluginType] => Items[pluginType];
+        public event EventHandler AllPluginsLoaded;
 
-        public PluginSet(IDictionary<string, PluginBase> vehiclePlugins, IDictionary<string, PluginBase> mapPlugins)
+        public PluginSet()
         {
+        }
+
+        public void SetPlugins(IDictionary<string, PluginBase> vehiclePlugins, IDictionary<string, PluginBase> mapPlugins)
+        {
+            if (!(Items is null)) throw new InvalidOperationException();
+
             Items = new Dictionary<PluginType, ReadOnlyDictionary<string, PluginBase>>()
             {
                 [PluginType.VehiclePlugin] = new ReadOnlyDictionary<string, PluginBase>(vehiclePlugins),
                 [PluginType.MapPlugin] = new ReadOnlyDictionary<string, PluginBase>(mapPlugins),
             };
+
+            AllPluginsLoaded?.Invoke(this, EventArgs.Empty);
         }
 
-        public IEnumerator<KeyValuePair<string, PluginBase>> GetEnumerator() => new Enumerator(this);
+        public IEnumerator<KeyValuePair<string, PluginBase>> GetEnumerator() => Items is null ? throw new MemberNotInitializedException() : new Enumerator(this);
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         private class Enumerator : IEnumerator<KeyValuePair<string, PluginBase>>

@@ -17,5 +17,13 @@ namespace AtsEx.PluginHost.Plugins.Extensions
         /// <typeparam name="TExtension">AtsEX 拡張機能の型。</typeparam>
         /// <returns><typeparamref name="TExtension"/> 型の AtsEX 拡張機能。</returns>
         TExtension GetExtension<TExtension>() where TExtension : IExtension;
+
+        /// <summary>
+        /// 全ての AtsEX 拡張機能が読み込まれ、<see cref="Extensions"/> プロパティが取得可能になると発生します。
+        /// </summary>
+        /// <remarks>
+        /// AtsEX 拡張機能以外の AtsEX プラグインの場合 (<see cref="PluginBase.PluginType"/> が <see cref="PluginType.Extension"/> 以外の場合)、<see cref="PluginBase.Extensions"/> プロパティは初めから取得可能です。
+        /// </remarks>
+        event EventHandler AllExtensionsLoaded;
     }
 }

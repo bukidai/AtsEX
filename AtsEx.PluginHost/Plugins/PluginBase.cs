@@ -62,28 +62,29 @@ namespace AtsEx.PluginHost.Plugins
         /// </summary>
         protected INative Native { get; }
 
-        private IExtensionSet _Extensions = null;
         /// <summary>
         /// 読み込まれた AtsEX 拡張機能の一覧を取得します。
         /// </summary>
         /// <remarks>
-        /// AtsEX 拡張機能の場合 (<see cref="PluginType"/> が <see cref="PluginType.Extension"/> の場合) は取得できません。
+        /// <list type="bullet">
+        /// <item>AtsEX 拡張機能の場合 (<see cref="PluginType"/> が <see cref="PluginType.Extension"/> の場合)、<see cref="IExtensionSet.AllExtensionsLoaded"/> イベントが発生するまでは項目を取得できません。</item>
+        /// <item>AtsEX 拡張機能以外の AtsEX プラグインは <see cref="Plugins"/> プロパティから取得できます。</item>
+        /// </list>
         /// </remarks>
-        protected IExtensionSet Extensions => _Extensions ?? throw new PropertyNotInitializedException(nameof(Extensions));
+        ///////// <seealso cref="Plugins"/>
+        protected IExtensionSet Extensions { get; }
 
-        private IPluginSet _Plugins = null;
         /// <summary>
         /// 読み込まれた AtsEX プラグインの一覧を取得します。
         /// </summary>
         /// <remarks>
-        /// <para>
-        /// AtsEX 拡張機能の場合 (<see cref="PluginType"/> が <see cref="PluginType.Extension"/> の場合) 、<see cref="AllExtensionsLoaded"/> イベントが発生するまでは取得できません。
-        /// </para>
-        /// <para>
-        /// AtsEX 拡張機能は <see cref="Extensions"/> プロパティから取得できます。
-        /// </para>
+        /// <list type="bullet">
+        /// <item>AtsEX 拡張機能の場合 (<see cref="PluginType"/> が <see cref="PluginType.Extension"/> の場合) は取得できません。</item>
+        /// <item>AtsEX 拡張機能は <see cref="Extensions"/> プロパティから取得できます。</item>
+        /// </list>
         /// </remarks>
-        protected IPluginSet Plugins => _Plugins ?? throw new PropertyNotInitializedException(nameof(Plugins));
+        /// <seealso cref="Extensions"/>
+        protected IPluginSet Plugins { get; }
 
         private readonly IBveHacker _BveHacker = null;
         /// <summary>
@@ -91,22 +92,6 @@ namespace AtsEx.PluginHost.Plugins
         /// </summary>
         protected IBveHacker BveHacker
             => UseBveHacker ? _BveHacker : throw new InvalidOperationException(string.Format(Resources.Value.CannotUseAtsExExtensions.Value, nameof(UseBveHacker)));
-
-        /// <summary>
-        /// 全ての AtsEX プラグインが読み込まれ、<see cref="Plugins"/> プロパティが取得可能になると発生します。
-        /// </summary>
-        /// <remarks>
-        /// AtsEX 拡張機能の場合 (<see cref="PluginType"/> が <see cref="PluginType.Extension"/> の場合) は取得できません。
-        /// </remarks>
-        protected event AllPluginsLoadedEventHandler AllPluginsLoaded;
-
-        /// <summary>
-        /// 全ての AtsEX 拡張機能が読み込まれ、<see cref="Extensions"/> プロパティが取得可能になると発生します。
-        /// </summary>
-        /// <remarks>
-        /// AtsEX 拡張機能以外の AtsEX プラグインの場合 (<see cref="PluginType"/> が <see cref="PluginType.Extension"/> 以外の場合)、<see cref="Extensions"/> プロパティは初めから取得可能です。
-        /// </remarks>
-        protected event AllExtensionsLoadedEventHandler AllExtensionsLoaded;
 
         /// <summary>
         /// PluginUsing ファイルで指定したこの  AtsEX プラグインの識別子を取得します。このプロパティの値は全プラグインにおいて一意であることが保証されています。
@@ -161,15 +146,10 @@ namespace AtsEx.PluginHost.Plugins
             UseBveHacker = useBveHacker;
 
             Native = builder.Native;
-            _Extensions = builder.Extensions;
+            Extensions = builder.Extensions;
+            Plugins = builder.Plugins;
             _BveHacker = builder.BveHacker;
             Identifier = builder.Identifier;
-
-            builder.AllExtensionsLoaded += e => _Extensions = e.Extensions;
-            builder.AllExtensionsLoaded += e => AllExtensionsLoaded?.Invoke(e);
-
-            builder.AllPluginsLoaded += e => _Plugins = e.Plugins;
-            builder.AllPluginsLoaded += e => AllPluginsLoaded?.Invoke(e);
         }
 
         /// <summary>

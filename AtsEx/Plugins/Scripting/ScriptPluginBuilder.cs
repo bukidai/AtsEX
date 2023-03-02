@@ -10,10 +10,8 @@ using AtsEx.Scripting;
 
 namespace AtsEx.Plugins.Scripting
 {
-    internal sealed class ScriptPluginBuilder : PluginHost.Plugins.PluginBuilder
+    internal sealed class ScriptPluginBuilder : PluginBuilder
     {
-        private readonly PluginLoader CreatedBy;
-
         public string Location { get; set; }
         public string Title { get; set; }
         public string Version { get; set; }
@@ -26,15 +24,8 @@ namespace AtsEx.Plugins.Scripting
         public IPluginScript<StartedGlobals> OnStartedScript { get; set; }
         public IPluginScript<TickResult, TickGlobals> TickScript { get; set; }
 
-        protected override event AllExtensionsLoadedEventHandler AllExtensionsLoaded { add => CreatedBy.AllExtensionsLoaded += value; remove => CreatedBy.AllExtensionsLoaded -= value; }
-        protected override event AllPluginsLoadedEventHandler AllPluginsLoaded { add => CreatedBy.AllPluginsLoaded += value; remove => CreatedBy.AllPluginsLoaded -= value; }
-
         public ScriptPluginBuilder(PluginBuilder source) : base(source)
         {
-            CreatedBy = source.CreatedBy;
-
-            CreatedBy.AllExtensionsLoaded += e => source.GetAllExtensionsLoaded()?.Invoke(e);
-            CreatedBy.AllPluginsLoaded += e => source.GetAllPluginsLoaded()?.Invoke(e);
         }
     }
 }

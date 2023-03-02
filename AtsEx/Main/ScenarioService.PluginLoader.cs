@@ -33,11 +33,12 @@ namespace AtsEx
             {
                 PluginLoadErrorResolver loadErrorResolver = new PluginLoadErrorResolver(BveHacker.LoadErrorManager);
 
-                Plugins.PluginLoader pluginLoader = new Plugins.PluginLoader(Native, BveHacker, Extensions);
+                PluginSet loadedPlugins = new PluginSet();
+                Plugins.PluginLoader pluginLoader = new Plugins.PluginLoader(Native, BveHacker, Extensions, loadedPlugins);
+
                 Dictionary<string, PluginBase> vehiclePlugins = null;
                 Dictionary<string, PluginBase> mapPlugins = null;
 
-                PluginSet loadedPlugins;
                 try
                 {
                     {
@@ -96,9 +97,7 @@ namespace AtsEx
                     if (mapPlugins is null) mapPlugins = new Dictionary<string, PluginBase>();
                 }
 
-                loadedPlugins = new PluginSet(vehiclePlugins, mapPlugins);
-                pluginLoader.SetPluginSetToLoadedPlugins(loadedPlugins);
-
+                loadedPlugins.SetPlugins(vehiclePlugins, mapPlugins);
                 return loadedPlugins;
             }
         }

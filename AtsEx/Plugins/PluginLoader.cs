@@ -51,15 +51,14 @@ namespace AtsEx.Plugins
         protected readonly NativeImpl Native;
         protected readonly BveHacker BveHacker;
         protected readonly IExtensionSet Extensions;
+        protected readonly IPluginSet Plugins;
 
-        public event AllExtensionsLoadedEventHandler AllExtensionsLoaded;
-        public event AllPluginsLoadedEventHandler AllPluginsLoaded;
-
-        public PluginLoader(NativeImpl native, BveHacker bveHacker, IExtensionSet extensions)
+        public PluginLoader(NativeImpl native, BveHacker bveHacker, IExtensionSet extensions, IPluginSet plugins)
         {
             Native = native;
             BveHacker = bveHacker;
             Extensions = extensions;
+            Plugins = plugins;
         }
 
         public Dictionary<string, PluginBase> Load(PluginSourceSet pluginSources)
@@ -84,7 +83,7 @@ namespace AtsEx.Plugins
             {
                 try
                 {
-                    PluginBuilder pluginBuilder = new PluginBuilder(Native, BveHacker, Extensions, item.Key.Text, this);
+                    PluginBuilder pluginBuilder = new PluginBuilder(Native, BveHacker, Extensions, Plugins, item.Key.Text);
                     plugins[item.Key.Text] = CSharpScriptPlugin.FromPackage(pluginBuilder, pluginSources.PluginType, item.Value);
                 }
                 catch (Exception ex)
@@ -97,7 +96,7 @@ namespace AtsEx.Plugins
             {
                 try
                 {
-                    PluginBuilder pluginBuilder = new PluginBuilder(Native, BveHacker, Extensions, item.Key.Text, this);
+                    PluginBuilder pluginBuilder = new PluginBuilder(Native, BveHacker, Extensions, Plugins, item.Key.Text);
                     plugins[item.Key.Text] = IronPython2Plugin.FromPackage(pluginBuilder, pluginSources.PluginType, item.Value);
                 }
                 catch (Exception ex)
@@ -165,7 +164,7 @@ namespace AtsEx.Plugins
                 {
                     (Type type, ConstructorInfo constructorInfo) = constructor;
 
-                    PluginBase pluginInstance = constructorInfo.Invoke(new object[] { new PluginBuilder(Native, BveHacker, Extensions, GenerateIdentifier(), this) }) as PluginBase;
+                    PluginBase pluginInstance = constructorInfo.Invoke(new object[] { new PluginBuilder(Native, BveHacker, Extensions, Plugins, GenerateIdentifier()) }) as PluginBase;
                     if (pluginInstance.PluginType != pluginType)
                     {
                         throw new InvalidOperationException(string.Format(Resources.Value.WrongPluginType.Value, pluginType.GetTypeString(), pluginInstance.PluginType.GetTypeString()));
@@ -184,8 +183,5 @@ namespace AtsEx.Plugins
                 string GenerateIdentifier() => constructors.Count == 1 ? identifier.Text : Guid.NewGuid().ToString();
             }
         }
-
-        public void SetExtensionSetToLoadedPlugins(IExtensionSet extensions) => AllExtensionsLoaded?.Invoke(new AllExtensionsLoadedEventArgs(extensions));
-        public void SetPluginSetToLoadedPlugins(IPluginSet plugins) => AllPluginsLoaded?.Invoke(new AllPluginsLoadedEventArgs(plugins));
     }
 }

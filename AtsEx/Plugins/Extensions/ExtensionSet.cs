@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 using UnembeddedResources;
 
+using AtsEx.PluginHost;
 using AtsEx.PluginHost.Plugins;
 using AtsEx.PluginHost.Plugins.Extensions;
 
@@ -38,11 +39,19 @@ namespace AtsEx.Plugins.Extensions
 #endif
         }
 
-        private readonly Dictionary<Type, ExtensionDefinitionInfo> Extensions;
+        private Dictionary<Type, ExtensionDefinitionInfo> Items = null;
 
-        public ExtensionSet(IEnumerable<PluginBase> extensions)
+        public event EventHandler AllExtensionsLoaded;
+
+        public ExtensionSet()
         {
-            Extensions = extensions.Select(x =>
+        }
+
+        public void SetExtensions(IEnumerable<PluginBase> extensions)
+        {
+            if (!(Items is null)) throw new InvalidOperationException();
+
+            Items = extensions.Select(x =>
             {
                 Type type = x.GetType();
 
@@ -64,15 +73,19 @@ namespace AtsEx.Plugins.Extensions
 
                 return new ExtensionDefinitionInfo(x, hide, displayType);
             }).ToDictionary(x => x.DisplayType, x => x);
+
+            AllExtensionsLoaded?.Invoke(this, EventArgs.Empty);
         }
 
         public TExtension GetExtension<TExtension>() where TExtension : IExtension
         {
-            ExtensionDefinitionInfo result = Extensions[typeof(TExtension)];
+            if (Items is null) throw new MemberNotInitializedException();
+
+            ExtensionDefinitionInfo result = Items[typeof(TExtension)];
             return !result.Hide && result.Body is TExtension extension ? extension : throw new KeyNotFoundException();
         }
 
-        public IEnumerator<PluginBase> GetEnumerator() => Extensions.Values.Select(x => x.Body).GetEnumerator();
+        public IEnumerator<PluginBase> GetEnumerator() => Items is null ? throw new MemberNotInitializedException() : Items.Values.Select(x => x.Body).GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
 

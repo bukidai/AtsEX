@@ -148,7 +148,6 @@
     <Compile Include="Plugins\Extensions\ExtensionSet.cs" />
     <Compile Include="Plugins\PluginSourceSet.Concat.cs" />
     <Compile Include="Plugins\PluginSourceSet.cs" />
-    <Compile Include="Plugins\PluginBuilder.cs" />
     <Compile Include="Plugins\PluginSet.cs" />
     <Compile Include="Plugins\Identifier.cs" />
     <Compile Include="Plugins\PluginLoader.cs" />
