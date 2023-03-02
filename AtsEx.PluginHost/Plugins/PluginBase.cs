@@ -86,6 +86,9 @@ namespace AtsEx.PluginHost.Plugins
         protected IPluginSet Plugins => _Plugins ?? throw new PropertyNotInitializedException(nameof(Plugins));
 
         private readonly IBveHacker _BveHacker = null;
+        /// <summary>
+        /// 本来 ATS プラグインからは利用できない BVE 本体の諸機能へアクセスするための <see cref="IBveHacker"/> を取得します。
+        /// </summary>
         protected IBveHacker BveHacker
             => UseBveHacker ? _BveHacker : throw new InvalidOperationException(string.Format(Resources.Value.CannotUseAtsExExtensions.Value, nameof(UseBveHacker)));
 

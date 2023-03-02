@@ -22,6 +22,9 @@ namespace AtsEx.PluginHost
     /// <param name="e">イベント データを格納している <see cref="ScenarioCreatedEventArgs"/>。</param>
     public delegate void ScenarioCreatedEventHandler(ScenarioCreatedEventArgs e);
 
+    /// <summary>
+    /// 本来 ATS プラグインからは利用できない BVE 本体の諸機能へアクセスするための機能を提供します。
+    /// </summary>
     public interface IBveHacker : IDisposable
     {
         /// <summary>
