@@ -63,6 +63,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.Samples.MapPlugins.Si
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.Samples.VehiclePlugins.AtsPanelValueTest", "SamplePlugins\VehiclePlugins\AtsPanelValueTest\AtsEx.Samples.VehiclePlugins.AtsPanelValueTest.csproj", "{E33F8E6F-519C-45C9-9F41-28BFC666B599}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.Samples.MapPlugins.MapStatementTest", "SamplePlugins\MapPlugins\MapStatementTest\AtsEx.Samples.MapPlugins.MapStatementTest.csproj", "{6111D7B6-CCCE-439C-BD12-F76CCC74DA2B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -161,6 +163,10 @@ Global
 		{E33F8E6F-519C-45C9-9F41-28BFC666B599}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E33F8E6F-519C-45C9-9F41-28BFC666B599}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E33F8E6F-519C-45C9-9F41-28BFC666B599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6111D7B6-CCCE-439C-BD12-F76CCC74DA2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6111D7B6-CCCE-439C-BD12-F76CCC74DA2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6111D7B6-CCCE-439C-BD12-F76CCC74DA2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6111D7B6-CCCE-439C-BD12-F76CCC74DA2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -187,6 +193,7 @@ Global
 		{381AF3E4-97FF-42AD-84C5-67111A2B482A} = {FCA108F3-EC46-4DD5-962E-3ECCBC2100AE}
 		{8C69A759-3A3B-47AC-8D25-E29318AAB460} = {FCA108F3-EC46-4DD5-962E-3ECCBC2100AE}
 		{E33F8E6F-519C-45C9-9F41-28BFC666B599} = {31284256-F435-4CDC-B1B6-FCB71C97D6EF}
+		{6111D7B6-CCCE-439C-BD12-F76CCC74DA2B} = {FCA108F3-EC46-4DD5-962E-3ECCBC2100AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434AD268-BAE2-48A7-8AE5-2AB6B982F843}

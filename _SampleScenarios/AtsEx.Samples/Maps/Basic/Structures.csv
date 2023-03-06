@@ -12,6 +12,13 @@ Beacon.Fuga,Structures_Original\Null.x
 ,
 #AtsEX識別子（全般）,
 AtsEx::Null,Structures_Original\Null.x
+
+#AtsEX識別子（独自マップ構文サンプル）,
+AtsEx::User::Automatic9045::Alert::HeaderAlert,Structures_Original\Null.x
+AtsEx::User::Automatic9045::Alert::Alert.Put,Structures_Original\Null.x
+AtsEx::User::Automatic9045::Alert::Alert.PutRange,Structures_Original\Null.x
+AtsEx::User::Automatic9045::Alert::AlertType.Basic,Structures_Original\Null.x
+AtsEx::User::Automatic9045::Alert::AlertType.ShowValue,Structures_Original\Null.x
 ,
 #AtsEX識別子（拡張地上子）,
 AtsEx::ExtendedBeacon.Put,Structures_Original\Null.x
