@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <WrapTypes xmlns="http://automatic9045.github.io/ns/xmlschemas/WrapTypesXmlSchema.xsd">
 	<Enum Wrapper="BrakePosition" Original="ds"/>
+	<Enum Wrapper="DoorState" Original="dy"/>
 
 	<!-- Unidentified classes -->
 	<!-- Unidentified classes END -->
@@ -177,6 +178,23 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="CarDoor" Original="av">
+		<Property Wrapper="CloseTime">
+			<Getter Original="f"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="IsOpen">
+			<Getter Original="d"/>
+		</Property>
+
+		<Field WrapperProperty="TimeLeftToCompleteClosing" Original="c" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="State" Original="e" IsOriginalNonPublic="true"/>
+
+		<Method Wrapper="SetState" WrapperParams="atsex:DoorState" Original="a"/>
+		<Method Wrapper="Open" WrapperParams="void" Original="e"/>
+		<Method Wrapper="Close" WrapperParams="System.Int32" Original="b"/>
+	</Class>
+
 	<Class Wrapper="CarInfo" Original="bd">
 		<Property Wrapper="Weight">
 			<Getter Original="g"/>
@@ -224,6 +242,20 @@
 		<Property Wrapper="Direct3D">
 			<Getter Original="f"/>
 		</Property>
+	</Class>
+
+	<Class Wrapper="DoorSet" Original="cc">
+		<Property Wrapper="StandardCloseTime">
+			<Getter Original="a"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="AreAllClosingOrClosed">
+			<Getter Original="b"/>
+		</Property>
+
+		<Method Wrapper="GetSide" IsWrapperNonPublic="true" WrapperParams="System.Int32" Original="c"/>
+		<Method Wrapper="SetCarLength" WrapperParams="System.Int32" Original="a"/>
+		<Method Wrapper="SetState" WrapperParams="atsex:DoorState; atsex:DoorState" Original="a"/>
 	</Class>
 
 	<Class Wrapper="DrawDistanceManager" Original="et">
@@ -669,6 +701,24 @@
 		<Method Wrapper="UpdatePreTrainSection" WrapperParams="void" Original="a" IsOriginalNonPublic="true"/>
 	</Class>
 
+	<Class Wrapper="SideDoorSet" Original="cf">
+		<Property Wrapper="StandardCloseTime">
+			<Getter Original="d"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="CarDoors">
+			<Getter Original="e"/>
+		</Property>
+		<Property Wrapper="IsOpen">
+			<Getter Original="b"/>
+		</Property>
+
+		<Method Wrapper="SetCarLength" WrapperParams="System.Int32" Original="c"/>
+		<Method Wrapper="SetState" WrapperParams="atsex:DoorState" Original="a"/>
+		<Method Wrapper="OpenDoors" WrapperParams="void" Original="c"/>
+		<Method Wrapper="CloseDoors" WrapperParams="System.Int32" Original="b"/>
+	</Class>
+
 	<Class Wrapper="SingleStructureList" Original="bg">
 	</Class>
 
@@ -897,6 +947,10 @@
 	<Class Wrapper="Vehicle" Original="f">
 		<Property Wrapper="Instruments">
 			<Getter Original="f"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Doors">
+			<Getter Original="b"/>
 			<Setter Original="a"/>
 		</Property>
 		<Property Wrapper="Dynamics">

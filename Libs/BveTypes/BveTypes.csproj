@@ -69,6 +69,7 @@
     <Compile Include="ClassWrappers\Extensions\WrappedEnumerator.cs" />
     <Compile Include="ClassWrappers\Extensions\WrappedList.cs" />
     <Compile Include="ClassWrappers\Extensions\WrappedSortedList.cs" />
+    <Compile Include="ClassWrappers\Helpers\DoorSide.cs" />
     <Compile Include="ClassWrappers\Helpers\ReverserPosition.cs" />
     <Compile Include="ClassWrappers\Helpers\TiltOptions.cs" />
     <Compile Include="ClassWrappers\Public\AirSupplement.cs" />
@@ -86,10 +87,14 @@
     <Compile Include="ClassWrappers\Public\CarInfo.cs" />
     <Compile Include="ClassWrappers\Public\Cl.cs" />
     <Compile Include="ClassWrappers\Public\Direct3DProvider.cs" />
+    <Compile Include="ClassWrappers\Public\CarDoor.cs" />
+    <Compile Include="ClassWrappers\Public\DoorSet.cs" />
+    <Compile Include="ClassWrappers\Public\DoorState.cs" />
     <Compile Include="ClassWrappers\Public\DrawDistanceManager.cs" />
     <Compile Include="ClassWrappers\Public\Ecb.cs" />
     <Compile Include="ClassWrappers\Public\GraphCurve.cs" />
     <Compile Include="ClassWrappers\Public\GraphCurvePoint.cs" />
+    <Compile Include="ClassWrappers\Public\SideDoorSet.cs" />
     <Compile Include="ClassWrappers\Public\VehicleElectricity.cs" />
     <Compile Include="ClassWrappers\Public\ElectroPneumaticBlendedBrakingControlBase.cs" />
     <Compile Include="ClassWrappers\Public\Forms\ChartForm.cs" />

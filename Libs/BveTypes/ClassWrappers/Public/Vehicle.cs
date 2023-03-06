@@ -23,6 +23,9 @@ namespace BveTypes.ClassWrappers
             InstrumentsGetMethod = members.GetSourcePropertyGetterOf(nameof(Instruments));
             InstrumentsSetMethod = members.GetSourcePropertySetterOf(nameof(Instruments));
 
+            DoorsGetMethod = members.GetSourcePropertyGetterOf(nameof(Doors));
+            DoorsSetMethod = members.GetSourcePropertySetterOf(nameof(Doors));
+
             DynamicsGetMethod = members.GetSourcePropertyGetterOf(nameof(Dynamics));
             DynamicsSetMethod = members.GetSourcePropertySetterOf(nameof(Dynamics));
         }
@@ -52,6 +55,17 @@ namespace BveTypes.ClassWrappers
         {
             get => VehicleInstrumentSet.FromSource(InstrumentsGetMethod.Invoke(Src, null));
             set => InstrumentsSetMethod.Invoke(Src, new object[] { value.Src });
+        }
+
+        private static FastMethod DoorsGetMethod;
+        private static FastMethod DoorsSetMethod;
+        /// <summary>
+        /// 自列車のドアのセットを取得・設定します。
+        /// </summary>
+        public DoorSet Doors
+        {
+            get => DoorSet.FromSource(DoorsGetMethod.Invoke(Src, null));
+            set => DoorsSetMethod.Invoke(Src, new object[] { value.Src });
         }
 
         private static FastMethod DynamicsGetMethod;
