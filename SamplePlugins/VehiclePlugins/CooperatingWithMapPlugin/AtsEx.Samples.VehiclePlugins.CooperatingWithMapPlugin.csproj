@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{68D8C868-7775-42DB-A696-CF8DEF486A89}</ProjectGuid>
+    <ProjectGuid>{4B561359-C045-465E-B216-D20B80B5FDC7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AtsEx.Samples.VehiclePlugins.SimpleAts</RootNamespace>
-    <AssemblyName>SimpleAts</AssemblyName>
+    <RootNamespace>AtsEx.Samples.MapPlugins.CooperatingWithMapPlugin</RootNamespace>
+    <AssemblyName>CooperatingWithMapPlugin</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,9 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SimpleAts.cs" />
+    <Compile Include="PluginMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AtsEx.PluginHost\AtsEx.PluginHost.csproj">
@@ -51,16 +50,9 @@
       <Name>AtsEx.PluginHost</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Libs\BveTypes\BveTypes.csproj">
-      <Project>{3658ede1-0c3e-4104-a351-64981e4f82df}</Project>
-      <Name>BveTypes</Name>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y /i "$(TargetDir)" "$(SolutionDir)_SampleScenarios\AtsEx.Samples\Vehicles\Basic\Ats_Simple\AtsEXPlugins\"
-xcopy /y /i "$(TargetDir)" "$(SolutionDir)_SampleScenarios\AtsEx.Samples\Vehicles\Basic\Ats_WithPanel\AtsEXPlugins\"
-xcopy /y /i "$(TargetDir)" "$(SolutionDir)_SampleScenarios\AtsEx.Samples\Vehicles\Basic\Ats_CooperatingWithMapPlugin\AtsEXPlugins\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /y /i "$(TargetDir)" "$(SolutionDir)_SampleScenarios\AtsEx.Samples\Vehicles\Basic\Ats_CooperatingWithMapPlugin\AtsEXPlugins\"</PostBuildEvent>
   </PropertyGroup>
 </Project>
