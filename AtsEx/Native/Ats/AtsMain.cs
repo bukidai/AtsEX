@@ -13,16 +13,11 @@ using AtsEx.Handles;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.Native;
 
-namespace AtsEx.Native
+namespace AtsEx.Native.Ats
 {
     /// <summary>メインの機能をここに実装する。</summary>
-    internal static class AtsMain
+    public static class AtsMain
     {
-        public static VehicleSpec VehicleSpec { get; set; }
-
-        /// <summary>Is the Door Closed TF</summary>
-        public static bool IsDoorClosed { get; set; } = false;
-
         private static CallerInfo CallerInfo;
 
         private static readonly Stopwatch Stopwatch = new Stopwatch();

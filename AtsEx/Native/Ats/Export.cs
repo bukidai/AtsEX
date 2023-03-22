@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AtsEx.Native
+namespace AtsEx.Native.Ats
 {
     /// <summary>列車のスペックに関する構造体</summary>
     [StructLayout(LayoutKind.Sequential)]
@@ -149,53 +149,5 @@ namespace AtsEx.Native
         K = 14,
         /// <summary>ATSKey_L (Default : D0)</summary>
         L = 15,
-    }
-
-
-
-    /// <summary>publicするクラス</summary>
-    public static class Export
-    {
-        public static void Load(CallerInfo callerInfo) => AtsMain.Load(callerInfo);
-
-        public static void Dispose() => AtsMain.Dispose();
-
-        public static void SetVehicleSpec(VehicleSpec vehicleSpec)
-        {
-            AtsMain.VehicleSpec = vehicleSpec;
-            AtsMain.SetVehicleSpec(vehicleSpec);
-        }
-
-        public static void Initialize(DefaultBrakePosition defaultBrakePosition) => AtsMain.Initialize(defaultBrakePosition);
-
-        public static AtsHandles Elapse(VehicleState vehicleState, IntPtr panel, IntPtr sound) => AtsMain.Elapse(vehicleState, panel, sound);
-
-        public static void SetPower(int notch) => AtsMain.SetPower(notch);
-
-        public static void SetBrake(int notch) => AtsMain.SetBrake(notch);
-
-        public static void SetReverser(int position) => AtsMain.SetReverser(position);
-
-        public static void KeyDown(ATSKeys atsKeyCode) => AtsMain.KeyDown(atsKeyCode);
-
-        public static void KeyUp(ATSKeys atsKeyCode) => AtsMain.KeyUp(atsKeyCode);
-
-        public static void HornBlow(HornType hornType) => AtsMain.HornBlow(hornType);
-
-        public static void DoorOpen()
-        {
-            AtsMain.IsDoorClosed = false;
-            AtsMain.DoorOpen();
-        }
-
-        public static void DoorClose()
-        {
-            AtsMain.IsDoorClosed = true;
-            AtsMain.DoorClose();
-        }
-
-        public static void SetSignal(int signal) => AtsMain.SetSignal(signal);
-
-        public static void SetBeaconData(BeaconData beaconData) => AtsMain.SetBeaconData(beaconData);
     }
 }

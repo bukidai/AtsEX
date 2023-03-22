@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using UnembeddedResources;
 
-using AtsEx.Native;
+using AtsEx.Native.Ats;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.Binding;
 using AtsEx.PluginHost.Panels.Native;

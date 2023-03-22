@@ -22,7 +22,7 @@ namespace AtsEx.Launcher
         /// <summary>編成車両数</summary>
         public int Cars;
 
-        internal Native.VehicleSpec Convert() => new Native.VehicleSpec()
+        internal Native.Ats.VehicleSpec Convert() => new Native.Ats.VehicleSpec()
         {
             BrakeNotches = BrakeNotches,
             PowerNotches = PowerNotches,
@@ -55,7 +55,7 @@ namespace AtsEx.Launcher
         /// <summary>電流[A]</summary>
         public float Current;
 
-        internal Native.VehicleState Convert() => new Native.VehicleState()
+        internal Native.Ats.VehicleState Convert() => new Native.Ats.VehicleState()
         {
             Location = Location,
             Speed = Speed,
@@ -82,7 +82,7 @@ namespace AtsEx.Launcher
         /// <summary>定速制御状態</summary>
         public int ConstantSpeed;
 
-        internal Native.AtsHandles Convert() => new Native.AtsHandles()
+        internal Native.Ats.AtsHandles Convert() => new Native.Ats.AtsHandles()
         {
             Brake = Brake,
             Power = Power,
@@ -104,7 +104,7 @@ namespace AtsEx.Launcher
         /// <summary>Beaconの第三引数の値</summary>
         public int Data;
 
-        internal Native.BeaconData Convert() => new Native.BeaconData()
+        internal Native.Ats.BeaconData Convert() => new Native.Ats.BeaconData()
         {
             Num = Num,
             Sig = Sig,

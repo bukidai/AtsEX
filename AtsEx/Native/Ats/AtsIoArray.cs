@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AtsEx.Native
+namespace AtsEx.Native.Ats
 {
     internal class AtsIoArray : IEnumerable<int>
     {

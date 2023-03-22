@@ -110,7 +110,7 @@
     <Compile Include="MapStatements\MonitorableTrain.cs" />
     <Compile Include="Native\Ats\AtsIoArray.cs" />
     <Compile Include="Native\Ats\Export.cs" />
-    <Compile Include="Native\Ats\CallerInfo.cs" />
+    <Compile Include="Native\CallerInfo.cs" />
     <Compile Include="Panels\AtsPanelValue.cs" />
     <Compile Include="Panels\AtsPanelValueSet.cs" />
     <Compile Include="Plugins\PluginLoader.PluginLoadErrorQueue.cs" />
@@ -143,7 +143,7 @@
     <Compile Include="Plugins\PluginLoadErrorResolver.cs" />
     <Compile Include="MapStatements\HeaderSet.Factory.cs" />
     <Compile Include="MapStatementIdentifiers.cs" />
-    <Compile Include="Native\Ats\LauncherCompatibilityVersionAttribute.cs" />
+    <Compile Include="Native\LauncherCompatibilityVersionAttribute.cs" />
     <Compile Include="Native\Ats\AtsMain.cs" />
     <Compile Include="Plugins\Extensions\ExtensionSet.cs" />
     <Compile Include="Plugins\PluginSourceSet.Concat.cs" />

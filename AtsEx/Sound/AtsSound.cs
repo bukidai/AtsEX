@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using AtsEx.Native;
+using AtsEx.Native.Ats;
 using AtsEx.PluginHost.Sound;
 using AtsEx.PluginHost.Sound.Native;
 
