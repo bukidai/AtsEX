@@ -36,9 +36,7 @@ namespace AtsEx.Samples.MapPlugins.StationController
 
         public override void Dispose()
         {
-            Form.FormClosing -= FormClosing;
             Form.Close();
-            Form.Dispose();
         }
 
         public override TickResult Tick(TimeSpan elapsed)
