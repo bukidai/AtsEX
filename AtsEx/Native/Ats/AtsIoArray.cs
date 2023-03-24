@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 
 namespace AtsEx.Native.Ats
 {
-    internal class AtsIoArray : IEnumerable<int>
+    internal class AtsIoArray : IList<int>
     {
         private readonly IntPtr Address;
 
         public int Length { get; }
+
+        int ICollection<int>.Count => Length;
+
+        bool ICollection<int>.IsReadOnly { get; } = false;
 
         public unsafe int this[int index]
         {
@@ -46,6 +50,24 @@ namespace AtsEx.Native.Ats
         public IEnumerator<int> GetEnumerator() => new Enumerator(this);
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+        public int IndexOf(int item)
+        {
+            for (int i = 0; i < Length; i++)
+            {
+                if (this[i] == item) return i;
+            }
+
+            return -1;
+        }
+
+        public bool Contains(int item) => IndexOf(item) != -1;
+
+        void IList<int>.Insert(int index, int item) => throw new NotSupportedException();
+        void IList<int>.RemoveAt(int index) => throw new NotSupportedException();
+        void ICollection<int>.Add(int item) => throw new NotSupportedException();
+        void ICollection<int>.Clear() => throw new NotSupportedException();
+        void ICollection<int>.CopyTo(int[] array, int arrayIndex) => throw new NotSupportedException();
+        bool ICollection<int>.Remove(int item) => throw new NotSupportedException();
 
         private class Enumerator : IEnumerator<int>
         {

@@ -49,7 +49,7 @@ namespace AtsEx.Panels
         {
         }
 
-        public void PreTick(AtsIoArray source)
+        public void PreTick(IList<int> source)
         {
             foreach (KeyValuePair<int, IAtsPanelValueWithChangeLog> x in RegisteredValues)
             {
@@ -66,7 +66,7 @@ namespace AtsEx.Panels
             }
         }
 
-        public void Tick(AtsIoArray source)
+        public void Tick(IList<int> source)
         {
             foreach (KeyValuePair<int, IAtsPanelValueWithChangeLog> x in RegisteredValues)
             {

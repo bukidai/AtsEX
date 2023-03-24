@@ -47,7 +47,7 @@ namespace AtsEx.Sound
         {
         }
 
-        public void Tick(AtsIoArray source)
+        public void Tick(IList<int> source)
         {
             foreach (KeyValuePair<int, AtsSound> x in RegisteredSounds)
             {
