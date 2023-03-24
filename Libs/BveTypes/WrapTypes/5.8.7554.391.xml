@@ -32,6 +32,7 @@
 		<Field WrapperProperty="Preferences" Original="w" IsOriginalStatic="true"/>
 		<Field WrapperProperty="KeyProvider" Original="m" IsOriginalNonPublic="true"/>
 
+		<Method Wrapper="CreateDirectXDevices" WrapperParams="void" Original="e"/>
 		<Method Wrapper="LoadScenario" WrapperParams="atsex:ScenarioInfo; System.Boolean" Original="a" IsOriginalNonPublic="true"/>
 		<Method Wrapper="UnloadScenario" WrapperParams="void" Original="b" IsOriginalNonPublic="true"/>
 	</Class>
@@ -493,6 +494,20 @@
 	</Class>
 
 	<Class Wrapper="PluginLoader" Original="aa">
+		<Property Wrapper="PanelArray">
+			<Getter Original="a"/>
+		</Property>
+		<Property Wrapper="SoundArray">
+			<Getter Original="b"/>
+		</Property>
+
+		<Field WrapperProperty="IsPluginLoaded" Original="a" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="Handles" Original="c" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="LocationManager" Original="h" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="StateStore" Original="i" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="SectionManager" Original="j" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="Doors" Original="k" IsOriginalNonPublic="true"/>
+
 		<Method Wrapper="OnSetBeaconData" WrapperParams="System.Object; atsex:ObjectPassedEventArgs" Original="a" IsOriginalNonPublic="true"/>
 		<Method Wrapper="OnKeyDown" WrapperParams="System.Object; Mackoy.Bvets.InputEventArgs, Mackoy.IInputDevice" Original="b" IsOriginalNonPublic="true"/>
 		<Method Wrapper="OnKeyUp" WrapperParams="System.Object; Mackoy.Bvets.InputEventArgs, Mackoy.IInputDevice" Original="a" IsOriginalNonPublic="true"/>
@@ -688,6 +703,9 @@
 	<Class Wrapper="SectionManager" Original="fe">
 		<Property Wrapper="Sections">
 			<Getter Original="i"/>
+		</Property>
+		<Property Wrapper="LastSection">
+			<Getter Original="g"/>
 		</Property>
 
 		<Field WrapperProperty="TimeManager" Original="a" IsOriginalNonPublic="true"/>
@@ -1029,6 +1047,16 @@
 		<Property Wrapper="Brake">
 			<Getter Original="i"/>
 		</Property>
+	</Class>
+
+	<Class Wrapper="VehicleStateStore" Original="fb">
+		<Field WrapperProperty="Speed" Original="f"/>
+		<Field WrapperProperty="Current" Original="i"/>
+		<Field WrapperProperty="BcPressure" Original="k"/>
+		<Field WrapperProperty="MrPressure" Original="m"/>
+		<Field WrapperProperty="SapPressure" Original="o"/>
+		<Field WrapperProperty="BpPressure" Original="p"/>
+		<Field WrapperProperty="ErPressure" Original="q"/>
 	</Class>
 
 	<Class Wrapper="VehicleStep" Original="ak">

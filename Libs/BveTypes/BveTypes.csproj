@@ -149,6 +149,7 @@
     <Compile Include="ClassWrappers\Public\VehicleInstrumentSet.cs" />
     <Compile Include="ClassWrappers\Public\VehiclePerformance.cs" />
     <Compile Include="ClassWrappers\Public\VehiclePerformanceBase.cs" />
+    <Compile Include="ClassWrappers\Public\VehicleStateStore.cs" />
     <Compile Include="ClassWrappers\Public\VehicleStep.cs" />
     <Compile Include="ClassWrappers\Public\VehicleStepSet.cs" />
     <Compile Include="Comparer.cs" />

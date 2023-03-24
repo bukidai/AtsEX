@@ -21,6 +21,16 @@ namespace BveTypes.ClassWrappers
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<PluginLoader>();
 
+            PanelArrayGetMethod = members.GetSourcePropertyGetterOf(nameof(PanelArray));
+            SoundArrayGetMethod = members.GetSourcePropertyGetterOf(nameof(SoundArray));
+
+            IsPluginLoadedField = members.GetSourceFieldOf(nameof(IsPluginLoaded));
+            HandlesField = members.GetSourceFieldOf(nameof(Handles));
+            LocationManagerField = members.GetSourceFieldOf(nameof(LocationManager));
+            StateStoreField = members.GetSourceFieldOf(nameof(StateStore));
+            SectionManagerField = members.GetSourceFieldOf(nameof(SectionManager));
+            DoorsField = members.GetSourceFieldOf(nameof(Doors));
+
             OnSetBeaconDataMethod = members.GetSourceMethodOf(nameof(OnSetBeaconData));
             OnKeyDownMethod = members.GetSourceMethodOf(nameof(OnKeyDown));
             OnKeyUpMethod = members.GetSourceMethodOf(nameof(OnKeyUp));
@@ -49,6 +59,78 @@ namespace BveTypes.ClassWrappers
         /// <returns>オリジナル オブジェクトをラップした <see cref="PluginLoader"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
         public static PluginLoader FromSource(object src) => src is null ? null : new PluginLoader(src);
+
+        private static FastMethod PanelArrayGetMethod;
+        /// <summary>
+        /// パネルに渡す値の配列を取得・設定します。
+        /// </summary>
+        public int[] PanelArray => PanelArrayGetMethod.Invoke(Src, null);
+
+        private static FastMethod SoundArrayGetMethod;
+        /// <summary>
+        /// サウンドの再生状態を表す値の配列を取得・設定します。
+        /// </summary>
+        public int[] SoundArray => SoundArrayGetMethod.Invoke(Src, null);
+
+        private static FastField IsPluginLoadedField;
+        /// <summary>
+        /// 自列車のハンドルのセットを取得・設定します。
+        /// </summary>
+        public bool IsPluginLoaded
+        {
+            get => IsPluginLoadedField.GetValue(Src);
+            set => IsPluginLoadedField.SetValue(Src, value);
+        }
+
+        private static FastField HandlesField;
+        /// <summary>
+        /// 自列車のハンドルのセットを取得・設定します。
+        /// </summary>
+        public HandleSet Handles
+        {
+            get => HandleSet.FromSource(HandlesField.GetValue(Src));
+            set => HandlesField.SetValue(Src, value.Src);
+        }
+
+        private static FastField LocationManagerField;
+        /// <summary>
+        /// 自列車の位置情報に関する処理を行う <see cref="UserVehicleLocationManager"/> を取得・設定します。
+        /// </summary>
+        public UserVehicleLocationManager LocationManager
+        {
+            get => UserVehicleLocationManager.FromSource(LocationManagerField.GetValue(Src));
+            set => LocationManagerField.SetValue(Src, value.Src);
+        }
+
+        private static FastField StateStoreField;
+        /// <summary>
+        /// 自列車の状態に関する情報を提供する <see cref="VehicleStateStore"/> を取得・設定します。
+        /// </summary>
+        public VehicleStateStore StateStore
+        {
+            get => VehicleStateStore.FromSource(StateStoreField.GetValue(Src));
+            set => StateStoreField.SetValue(Src, value.Src);
+        }
+
+        private static FastField SectionManagerField;
+        /// <summary>
+        /// 閉塞を制御するための機能を提供する <see cref="ClassWrappers.SectionManager"/> を取得・設定します。
+        /// </summary>
+        public SectionManager SectionManager
+        {
+            get => ClassWrappers.SectionManager.FromSource(SectionManagerField.GetValue(Src));
+            set => SectionManagerField.SetValue(Src, value.Src);
+        }
+
+        private static FastField DoorsField;
+        /// <summary>
+        /// 自列車のドアのセットを取得・設定します。
+        /// </summary>
+        public DoorSet Doors
+        {
+            get => DoorSet.FromSource(DoorsField.GetValue(Src));
+            set => DoorsField.SetValue(Src, value.Src);
+        }
 
         private static FastMethod OnSetBeaconDataMethod;
         /// <summary>

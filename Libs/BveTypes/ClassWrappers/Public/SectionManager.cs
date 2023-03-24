@@ -21,6 +21,7 @@ namespace BveTypes.ClassWrappers
             ClassMemberSet members = bveTypes.GetClassInfoOf<SectionManager>();
 
             SectionsGetMethod = members.GetSourcePropertyGetterOf(nameof(Sections));
+            LastSectionGetMethod = members.GetSourcePropertyGetterOf(nameof(LastSection));
 
             TimeManagerField = members.GetSourceFieldOf(nameof(TimeManager));
             PreTrainPassObjectsField = members.GetSourceFieldOf(nameof(PreTrainPassObjects));
@@ -54,6 +55,12 @@ namespace BveTypes.ClassWrappers
         /// 閉塞の一覧を取得します。
         /// </summary>
         public MapFunctionList Sections => MapFunctionList.FromSource(SectionsGetMethod.Invoke(Src, null));
+
+        private static FastMethod LastSectionGetMethod;
+        /// <summary>
+        /// 最後の閉塞を取得します。
+        /// </summary>
+        public Section LastSection => Section.FromSource(LastSectionGetMethod.Invoke(Src, null));
 
         private static FastField TimeManagerField;
         /// <summary>

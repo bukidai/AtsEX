@@ -35,6 +35,7 @@ namespace BveTypes.ClassWrappers
             TimePosFormField = members.GetSourceFieldOf(nameof(TimePosForm));
             ChartFormField = members.GetSourceFieldOf(nameof(ChartForm));
 
+            CreateDirectXDevicesMethod = members.GetSourceMethodOf(nameof(CreateDirectXDevices));
             LoadScenarioMethod = members.GetSourceMethodOf(nameof(LoadScenario));
             UnloadScenarioMethod = members.GetSourceMethodOf(nameof(UnloadScenario));
         }
@@ -134,6 +135,12 @@ namespace BveTypes.ClassWrappers
             set => KeyProviderField.SetValue(Src, value.Src);
         }
 
+
+        private static FastMethod CreateDirectXDevicesMethod;
+        /// <summary>
+        /// シナリオを閉じます。
+        /// </summary>
+        public void CreateDirectXDevices() => CreateDirectXDevicesMethod.Invoke(Src, null);
 
         private static FastMethod LoadScenarioMethod;
         /// <summary>
