@@ -21,7 +21,7 @@ namespace AtsEx.Caller
 
         private const int CallerVersion = 3;
 
-        private static VersionSelector VersionSelector;
+        private static VersionSelector.AsAtsPlugin VersionSelector;
 
         static AtsCore()
         {
@@ -44,7 +44,7 @@ namespace AtsEx.Caller
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Failed to initialize AtsEX Caller.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "Failed to run AtsEX Launcher.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw;
             }
 
@@ -63,7 +63,7 @@ namespace AtsEx.Caller
 
         /// <summary>Called when this plugin is loaded</summary>
         [DllExport(CallingConvention = CallingConvention.StdCall)]
-        public static void Load() => VersionSelector = new VersionSelector(Assembly);
+        public static void Load() => VersionSelector = new VersionSelector.AsAtsPlugin(Assembly);
 
         /// <summary>Called when this plugin is unloaded</summary>
         [DllExport(CallingConvention = CallingConvention.StdCall)]

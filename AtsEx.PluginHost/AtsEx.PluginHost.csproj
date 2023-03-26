@@ -88,6 +88,7 @@
     <Compile Include="Native\BeaconPassedEventHandler.cs" />
     <Compile Include="Native\DoorEventArgs.cs" />
     <Compile Include="Native\DoorEventHandler.cs" />
+    <Compile Include="LaunchMode.cs" />
     <Compile Include="Native\StartedEventHandler.cs" />
     <Compile Include="Panels\Native\IAtsPanelValueSet.cs" />
     <Compile Include="Panels\Native\IAtsPanelValue.cs" />

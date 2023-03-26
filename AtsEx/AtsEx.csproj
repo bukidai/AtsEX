@@ -105,11 +105,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExceptionResolver.cs" />
+    <Compile Include="Native\AppInitializer.cs" />
+    <Compile Include="Native\BveTypeSetLoader.cs" />
     <Compile Include="Main\AtsEx.ExtensionLoader.cs" />
     <Compile Include="Main\AtsEx.ExtensionService.cs" />
     <Compile Include="MapStatements\MonitorableTrain.cs" />
     <Compile Include="Native\Ats\AtsIoArray.cs" />
-    <Compile Include="Native\Ats\Export.cs" />
+    <Compile Include="Native\Export.cs" />
     <Compile Include="Native\CallerInfo.cs" />
     <Compile Include="Panels\AtsPanelValue.cs" />
     <Compile Include="Panels\AtsPanelValueSet.cs" />
@@ -249,6 +251,10 @@
     <Content Include="Resources\AtsPanelValueSet.resx" />
     <Content Include="Resources\AtsSoundSet.ja.resx" />
     <Content Include="Resources\AtsSoundSet.resx" />
+    <Content Include="Resources\AtsMain.ja.resx" />
+    <Content Include="Resources\AtsMain.resx" />
+    <Content Include="Resources\BveTypeSetLoader.resx" />
+    <Content Include="Resources\BveTypeSetLoader.ja.resx" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

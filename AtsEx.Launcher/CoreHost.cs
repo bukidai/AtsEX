@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -15,22 +14,14 @@ namespace AtsEx.Launcher
 {
     public class CoreHost : IDisposable
     {
-        private const int LauncherVersion = 3;
-
         private readonly CallerInfo CallerInfo;
 
         internal CoreHost(Assembly callerAssembly, TargetBveFinder bveFinder)
         {
+            LauncherVersionChecker.Check();
+
             Assembly launcherAssembly = Assembly.GetExecutingAssembly();
             CallerInfo = new CallerInfo(bveFinder.TargetProcess, bveFinder.TargetAppDomain, bveFinder.TargetAssembly, callerAssembly, launcherAssembly);
-
-            Assembly atsExAssembly = typeof(AtsMain).Assembly;
-            LauncherCompatibilityVersionAttribute compatibilityVersionAttribute = atsExAssembly.GetCustomAttribute<LauncherCompatibilityVersionAttribute>();
-            if (compatibilityVersionAttribute.Version != LauncherVersion)
-            {
-                Version launcherAssemblyVersion = launcherAssembly.GetName().Version;
-                throw new NotSupportedException($"読み込まれた AtsEX Launcher (バージョン {launcherAssemblyVersion}) は現在の AtsEX ではサポートされていません。");
-            }
 
             AtsMain.Load(CallerInfo);
         }
@@ -40,7 +31,7 @@ namespace AtsEx.Launcher
         public void Initialize(int defaultBrakePosition) => AtsMain.Initialize((DefaultBrakePosition)defaultBrakePosition);
         public AtsHandles Elapse(VehicleState vehicleState, IntPtr panel, IntPtr sound)
         {
-            Native.Ats.AtsHandles handles = AtsMain.Elapse(vehicleState.Convert(), panel, sound);
+            Native.AtsHandles handles = AtsMain.Elapse(vehicleState.Convert(), panel, sound);
             return new AtsHandles()
             {
                 Brake = handles.Brake,

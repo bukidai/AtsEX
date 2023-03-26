@@ -11,7 +11,7 @@ using AtsEx.Launcher.Hosting;
 
 namespace AtsEx.Launcher
 {
-    public class VersionSelector
+    public partial class VersionSelector
     {
         private static readonly TargetBveFinder BveFinder = new TargetBveFinder();
 
@@ -22,9 +22,10 @@ namespace AtsEx.Launcher
 #endif
         }
 
+        [Obsolete]
         public CoreHost CoreHost { get; }
 
-        public VersionSelector(Assembly callerAssembly)
+        public VersionSelector()
         {
             Assembly launcherAssembly = Assembly.GetExecutingAssembly();
             string rootDirectory = Path.GetDirectoryName(launcherAssembly.Location);
@@ -50,8 +51,13 @@ namespace AtsEx.Launcher
                 return File.Exists(path) ? Assembly.LoadFrom(path) : null;
             };
 
-            CoreHost = new CoreHost(callerAssembly, BveFinder);
             UpdateChecker.CheckUpdates();
+        }
+
+        [Obsolete]
+        public VersionSelector(Assembly callerAssembly) : this()
+        {
+            CoreHost = new CoreHost(callerAssembly, BveFinder);
         }
     }
 }

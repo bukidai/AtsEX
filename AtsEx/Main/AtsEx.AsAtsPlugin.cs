@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using BveTypes;
 
 using AtsEx.Native;
 using AtsEx.PluginHost;
@@ -19,10 +19,7 @@ namespace AtsEx
         {
             private const string LegalLauncherAssemblyRelativeLocation = @"AtsEx\AtsEx.Launcher.dll";
 
-            public string VersionWarningText { get; private set; }
-
-            public AsAtsPlugin(CallerInfo callerInfo)
-                : base(callerInfo)
+            public AsAtsPlugin(BveTypeSet bveTypes) : base(bveTypes)
             {
                 CheckAtsExAssemblyLocation();
             }
@@ -48,12 +45,6 @@ namespace AtsEx
 
 
                 string GetNormalizedPath(string abdolutePath) => Path.GetFullPath(abdolutePath).ToLower();
-            }
-
-            protected override void ProfileForDifferentBveVersionLoaded(Version profileVersion)
-            {
-                VersionWarningText = string.Format(Resources.Value.BveVersionNotSupported.Value, App.Instance.BveVersion, profileVersion, App.Instance.ProductShortName);
-                BveHacker.LoadErrorManager.Throw(VersionWarningText);
             }
         }
     }

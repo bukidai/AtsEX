@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using BveTypes;
 using UnembeddedResources;
 
 using AtsEx.Native;
@@ -26,7 +25,6 @@ namespace AtsEx
 
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> AtsExAssemblyLocationIllegal { get; private set; }
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> IgnoreAndContinue { get; private set; }
-            [ResourceStringHolder(nameof(Localizer))] public Resource<string> BveVersionNotSupported { get; private set; }
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> ExtensionTickResultTypeInvalid { get; private set; }
 
             public ResourceSet()
@@ -51,7 +49,7 @@ namespace AtsEx
 
         public VersionFormProvider VersionFormProvider { get; }
 
-        protected AtsEx(CallerInfo callerInfo)
+        protected AtsEx(BveTypeSet bveTypes)
         {
             AppDomain.CurrentDomain.AssemblyResolve += (sender, e) =>
             {
@@ -68,10 +66,7 @@ namespace AtsEx
                 return null;
             };
 
-            Assembly executingAssembly = Assembly.GetExecutingAssembly();
-
-            App.CreateInstance(callerInfo.Process, callerInfo.BveAssembly, callerInfo.AtsExLauncherAssembly, executingAssembly);
-            BveHacker = new BveHacker(ProfileForDifferentBveVersionLoaded);
+            BveHacker = new BveHacker(bveTypes);
 
             ExtensionLoader extensionLoader = new ExtensionLoader(BveHacker);
             Extensions = extensionLoader.Load();
@@ -82,8 +77,6 @@ namespace AtsEx
 
         private VersionFormProvider CreateVersionFormProvider(IEnumerable<PluginBase> extensions)
             => new VersionFormProvider(BveHacker.MainFormSource, extensions, Extensions.GetExtension<IContextMenuHacker>());
-
-        protected abstract void ProfileForDifferentBveVersionLoaded(Version profileVersion);
 
         public virtual void Dispose()
         {

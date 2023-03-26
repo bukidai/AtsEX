@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using BveTypes;
 using BveTypes.ClassWrappers;
+using UnembeddedResources;
 
 using AtsEx.Handles;
+using AtsEx.PluginHost;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.Native;
 
@@ -18,15 +20,44 @@ namespace AtsEx.Native.Ats
     /// <summary>メインの機能をここに実装する。</summary>
     public static class AtsMain
     {
+        private class ResourceSet
+        {
+            private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType(typeof(AtsMain), "Core");
+
+            [ResourceStringHolder(nameof(Localizer))] public Resource<string> BveVersionNotSupported { get; private set; }
+
+            public ResourceSet()
+            {
+                ResourceLoader.LoadAndSetAll(this);
+            }
+        }
+
+        private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
+
+        static AtsMain()
+        {
+#if DEBUG
+            _ = Resources.Value;
+#endif
+        }
+
         private static CallerInfo CallerInfo;
 
         private static readonly Stopwatch Stopwatch = new Stopwatch();
 
+        private static string VersionWarningText;
+
         private static AtsEx.AsAtsPlugin AtsEx;
-        private static ScenarioService.AsAtsPlugin AtsExScenarioService;
+        private static ScenarioService.AsAtsPlugin ScenarioService;
+
+        private static int Power;
+        private static int Brake;
+        private static int Reverser;
 
         public static void Load(CallerInfo callerInfo)
         {
+            if (App.IsInitialized) return;
+
             CallerInfo = callerInfo;
 
             Version callerVersion = CallerInfo.AtsExCallerAssembly.GetName().Version;
@@ -37,30 +68,59 @@ namespace AtsEx.Native.Ats
                 throw new NotSupportedException(errorMessage.Replace("\n", ""));
             }
 
-            AtsEx = new AtsEx.AsAtsPlugin(CallerInfo);
+            AppInitializer.Initialize(CallerInfo, LaunchMode.Ats);
+
+            BveTypeSetLoader bveTypesLoader = new BveTypeSetLoader();
+            BveTypeSetLoader.ProfileForDifferentVersionBveLoadedEventArgs args = null;
+            bveTypesLoader.ProfileForDifferentVersionBveLoaded += (sender, e) => args = e;
+
+            BveTypeSet bveTypes = bveTypesLoader.Load();
+
+            AtsEx = new AtsEx.AsAtsPlugin(bveTypes);
+
+            if (!(args is null))
+            {
+                VersionWarningText = string.Format(Resources.Value.BveVersionNotSupported.Value, args.BveVersion, args.ProfileVersion, App.Instance.ProductShortName);
+                AtsEx.BveHacker.LoadErrorManager.Throw(VersionWarningText);
+            }
         }
 
         public static void Dispose()
         {
-            AtsExScenarioService?.Dispose();
+            ScenarioService?.Dispose();
             AtsEx?.Dispose();
         }
 
         public static void SetVehicleSpec(VehicleSpec vehicleSpec)
         {
+            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+
             PluginHost.Native.VehicleSpec exVehicleSpec = new PluginHost.Native.VehicleSpec(
                 vehicleSpec.BrakeNotches, vehicleSpec.PowerNotches, vehicleSpec.AtsNotch, vehicleSpec.B67Notch, vehicleSpec.Cars);
 
-            AtsExScenarioService = new ScenarioService.AsAtsPlugin(AtsEx, CallerInfo.AtsExCallerAssembly, exVehicleSpec);
+            ScenarioService = new ScenarioService.AsAtsPlugin(AtsEx, CallerInfo.AtsExCallerAssembly, exVehicleSpec, VersionWarningText);
         }
 
         public static void Initialize(DefaultBrakePosition defaultBrakePosition)
         {
-            AtsExScenarioService?.Started((BrakePosition)defaultBrakePosition);
+            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+
+            ScenarioService?.Started((BrakePosition)defaultBrakePosition);
         }
 
         public static AtsHandles Elapse(VehicleState vehicleState, IntPtr panel, IntPtr sound)
         {
+            if (App.Instance.LaunchMode != LaunchMode.Ats)
+            {
+                return new AtsHandles()
+                {
+                    Brake = Brake,
+                    Power = Power,
+                    Reverser = Reverser,
+                    ConstantSpeed = 0,
+                };
+            }
+
             AtsIoArray panelArray = new AtsIoArray(panel);
             AtsIoArray soundArray = new AtsIoArray(sound);
 
@@ -70,7 +130,7 @@ namespace AtsEx.Native.Ats
 
             TimeSpan elapsed = Stopwatch.IsRunning ? Stopwatch.Elapsed : TimeSpan.Zero;
             AtsEx.Tick(elapsed);
-            HandlePositionSet handlePositionSet = AtsExScenarioService?.Tick(elapsed, exVehicleState, panelArray, soundArray);
+            HandlePositionSet handlePositionSet = ScenarioService?.Tick(elapsed, exVehicleState, panelArray, soundArray);
 
             Stopwatch.Restart();
 
@@ -85,36 +145,52 @@ namespace AtsEx.Native.Ats
 
         public static void SetPower(int notch)
         {
-            AtsExScenarioService?.SetPower(notch);
+            Power = notch;
+
+            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+
+            ScenarioService?.SetPower(notch);
         }
 
         public static void SetBrake(int notch)
         {
-            AtsExScenarioService?.SetBrake(notch);
+            Brake = notch;
+
+            ScenarioService?.SetBrake(notch);
         }
 
         public static void SetReverser(int position)
         {
-            AtsExScenarioService?.SetReverser((ReverserPosition)position);
+            Reverser = position;
+
+            ScenarioService?.SetReverser((ReverserPosition)position);
         }
 
         public static void KeyDown(ATSKeys atsKeyCode)
         {
-            AtsExScenarioService?.KeyDown((NativeAtsKeyName)atsKeyCode);
+            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+
+            ScenarioService?.KeyDown((NativeAtsKeyName)atsKeyCode);
         }
 
         public static void KeyUp(ATSKeys atsKeyCode)
         {
-            AtsExScenarioService?.KeyUp((NativeAtsKeyName)atsKeyCode);
+            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+
+            ScenarioService?.KeyUp((NativeAtsKeyName)atsKeyCode);
         }
 
         public static void DoorOpen()
         {
-            AtsExScenarioService?.DoorOpened(new DoorEventArgs());
+            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+
+            ScenarioService?.DoorOpened(new DoorEventArgs());
         }
         public static void DoorClose()
         {
-            AtsExScenarioService?.DoorClosed(new DoorEventArgs());
+            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+
+            ScenarioService?.DoorClosed(new DoorEventArgs());
         }
         public static void HornBlow(HornType hornType)
         {
@@ -126,8 +202,10 @@ namespace AtsEx.Native.Ats
         }
         public static void SetBeaconData(BeaconData beaconData)
         {
+            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+
             BeaconPassedEventArgs args = new BeaconPassedEventArgs(beaconData.Num, beaconData.Sig, beaconData.Z, beaconData.Data);
-            AtsExScenarioService?.BeaconPassed(args);
+            ScenarioService?.BeaconPassed(args);
         }
     }
 }

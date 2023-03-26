@@ -117,16 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AtsExAssemblyLocationIllegal" xml:space="preserve">
-    <value>{0} のメインアセンブリの配置先 '{1}' は不正です。
+  <data name="IllegalSlimDXDetected" xml:space="preserve">
+    <value>BVE 本体に同梱されているものではない SlimDX.dll が読み込まれています。
+読み込まれている SlimDX.dll の一覧は以下の通りです:
 
-{0} 本体を最新のバージョンに維持するため、車両・マップ毎に組み込むことは推奨されません。{0} ATS プラグイン版をご利用の場合は 1 つのシナリオフォルダに 1 つのみ配置してください。
-正しい配置先は '{2}' です。</value>
-  </data>
-  <data name="ExtensionTickResultTypeInvalid" xml:space="preserve">
-    <value>拡張機能の {0} メソッドは {1} を返さなければなりません。</value>
-  </data>
-  <data name="IgnoreAndContinue" xml:space="preserve">
-    <value>無視して読込を続行しますか？</value>
+{0}
+
+BVE 本体に同梱されているもの以外の SlimDX.dll の読込は不具合の原因となる可能性があります。
+プラグインに SlimDX.dll が同梱されている場合は削除してください。</value>
   </data>
 </root>

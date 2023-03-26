@@ -12,6 +12,8 @@ using Mackoy.Bvets;
 
 using BveTypes;
 using BveTypes.ClassWrappers;
+using ObjectiveHarmonyPatch;
+using TypeWrapping;
 using UnembeddedResources;
 
 using AtsEx.BveHackerServices;
@@ -24,13 +26,12 @@ using AtsEx.PluginHost.MapStatements;
 
 namespace AtsEx
 {
-    internal sealed class BveHacker : PluginHost.IBveHacker, IDisposable
+    internal sealed class BveHacker : IBveHacker, IDisposable
     {
         private class ResourceSet
         {
             private readonly ResourceLocalizer Localizer = ResourceLocalizer.FromResXOfType<BveHacker>("Core");
 
-            [ResourceStringHolder(nameof(Localizer))] public Resource<string> IllegalSlimDXDetected { get; private set; }
             [ResourceStringHolder(nameof(Localizer))] public Resource<string> CannotGetScenario { get; private set; }
 
             public ResourceSet()
@@ -48,26 +49,14 @@ namespace AtsEx
 #endif
         }
 
+        private readonly HarmonyPatch LoadScenarioPatch;
+        private readonly HarmonyPatch UnloadScenarioPatch;
+
         private readonly StructureSetLifeProlonger StructureSetLifeProlonger;
 
-        public BveHacker(Action<Version> profileForDifferentBveVersionLoaded)
+        public BveHacker(BveTypeSet bveTypes)
         {
-            try
-            {
-                BveTypes = BveTypeSet.LoadAsync(App.Instance.BveAssembly, App.Instance.BveVersion, true, profileForDifferentBveVersionLoaded).Result;
-            }
-            catch (Exception ex)
-            {
-                if (ex is KeyNotFoundException)
-                {
-                    CheckSlimDX();
-                }
-
-                ExceptionResolver exceptionResolver = new ExceptionResolver();
-                string senderName = Path.GetFileName(typeof(BveTypeSet).Assembly.Location);
-                exceptionResolver.Resolve(senderName, ex);
-                throw;
-            }
+            BveTypes = bveTypes;
 
             MainFormHacker = new MainFormHacker(App.Instance.Process);
             ScenarioHacker = new ScenarioHacker(MainFormHacker, BveTypes);
@@ -79,24 +68,47 @@ namespace AtsEx
             ScenarioHacker.ScenarioCreated += e => ScenarioCreated?.Invoke(e);
 
             LoadErrorManager = new LoadErrorManager.LoadErrorManager(LoadingProgressForm);
-            _MapHeaders = HeaderSet.FromMap(ScenarioInfo.RouteFiles.SelectedFile.Path);
 
-
-            void CheckSlimDX()
+            switch (App.Instance.LaunchMode)
             {
-                IEnumerable<Assembly> slimDXAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where(asm => asm.GetName().Name == "SlimDX");
+                case LaunchMode.Ats:
+                    _MapHeaders = HeaderSet.FromMap(ScenarioInfo.RouteFiles.SelectedFile.Path);
+                    break;
 
-                if (slimDXAssemblies.Count() > 1)
-                {
-                    string locationText = string.Join("\n", slimDXAssemblies.Select(assembly => "・" + assembly.Location));
-                    MessageBox.Show(string.Format(Resources.Value.IllegalSlimDXDetected.Value, locationText), App.Instance.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                case LaunchMode.InputDevice:
+                    ClassMemberSet mainFormMembers = BveTypes.GetClassInfoOf<MainForm>();
+                    LoadScenarioPatch = HarmonyPatch.Patch(nameof(BveHacker), mainFormMembers.GetSourceMethodOf(nameof(MainForm.LoadScenario)).Source, PatchType.Prefix);
+                    UnloadScenarioPatch = HarmonyPatch.Patch(nameof(BveHacker), mainFormMembers.GetSourceMethodOf(nameof(MainForm.UnloadScenario)).Source, PatchType.Prefix);
+
+                    LoadScenarioPatch.Invoked += (sender, e) =>
+                    {
+                        ScenarioInfo scenarioInfo = ScenarioInfo.FromSource(e.Args[0]);
+                        _MapHeaders = HeaderSet.FromMap(scenarioInfo.RouteFiles.SelectedFile.Path);
+
+                        return new PatchInvokationResult(SkipModes.Continue);
+                    };
+
+                    UnloadScenarioPatch.Invoked += (sender, e) =>
+                    {
+                        _MapHeaders = null;
+                        _MapStatements = null;
+
+                        return new PatchInvokationResult(SkipModes.Continue);
+                    };
+
+                    break;
+
+                default:
+                    throw new NotImplementedException();
             }
         }
 
         /// <inheritdoc/>
         public void Dispose()
         {
+            LoadScenarioPatch?.Dispose();
+            UnloadScenarioPatch?.Dispose();
+
             StructureSetLifeProlonger.Dispose();
             ScenarioHacker.Dispose();
         }
@@ -149,12 +161,12 @@ namespace AtsEx
         public PluginHost.Handles.HandleSet Handles { get; private set; }
 
 #pragma warning disable IDE1006 // 命名スタイル
-        public HeaderSet _MapHeaders { get; }
+        public HeaderSet _MapHeaders { get; private set; } = null;
 #pragma warning restore IDE1006 // 命名スタイル
         public IHeaderSet MapHeaders => _MapHeaders;
 
 #pragma warning disable IDE1006 // 命名スタイル
-        public StatementSet _MapStatements { get; private set; }
+        public StatementSet _MapStatements { get; private set; } = null;
 #pragma warning restore IDE1006 // 命名スタイル
         public IStatementSet MapStatements => _MapStatements;
 

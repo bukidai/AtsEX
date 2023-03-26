@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using UnembeddedResources;
 
-using AtsEx.Native.Ats;
+using AtsEx.Native;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.Sound.Native;
 

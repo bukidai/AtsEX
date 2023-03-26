@@ -32,6 +32,8 @@ namespace AtsEx.PluginHost
 
         public static App Instance { get; private set; }
 
+        public static bool IsInitialized { get; private set; } = false;
+
         static App()
         {
 #if DEBUG
@@ -39,7 +41,7 @@ namespace AtsEx.PluginHost
 #endif
         }
 
-        private App(Process targetProcess, Assembly bveAssembly, Assembly launcherAssembly, Assembly atsExAssembly)
+        private App(Process targetProcess, Assembly bveAssembly, Assembly launcherAssembly, Assembly atsExAssembly, LaunchMode launchMode)
         {
             Process = targetProcess;
             BveAssembly = bveAssembly;
@@ -47,10 +49,14 @@ namespace AtsEx.PluginHost
             AtsExAssembly = atsExAssembly;
             AtsExPluginHostAssembly = Assembly.GetExecutingAssembly();
             BveVersion = BveAssembly.GetName().Version;
+            LaunchMode = launchMode;
         }
 
-        public static void CreateInstance(Process targetProcess, Assembly bveAssembly, Assembly launcherAssembly, Assembly atsExAssembly)
-            => Instance = new App(targetProcess, bveAssembly, launcherAssembly, atsExAssembly);
+        public static void CreateInstance(Process targetProcess, Assembly bveAssembly, Assembly launcherAssembly, Assembly atsExAssembly, LaunchMode launchMode)
+        {
+            Instance = new App(targetProcess, bveAssembly, launcherAssembly, atsExAssembly, launchMode);
+            IsInitialized = true;
+        }
 
         /// <summary>
         /// プロダクト名を取得します。
@@ -92,5 +98,10 @@ namespace AtsEx.PluginHost
         /// 実行元の BVE のバージョンを取得します。
         /// </summary>
         public Version BveVersion { get; }
+
+        /// <summary>
+        /// AtsEX 本体の呼出モードを取得します。
+        /// </summary>
+        public LaunchMode LaunchMode { get; }
     }
 }

@@ -65,6 +65,8 @@
     <Compile Include="CoreHost.cs" />
     <Compile Include="Hosting\UpdateChecker.cs" />
     <Compile Include="LauncherCompatibilityVersionAttribute.cs" />
+    <Compile Include="LauncherVersionChecker.cs" />
+    <Compile Include="VersionSelector.AsAtsPlugin.cs" />
     <Compile Include="VersionSelector.cs" />
     <Compile Include="Hosting\TargetBveFinder.cs" />
     <Compile Include="Hosting\AtsExRepositoryHost.cs" />

@@ -120,13 +120,4 @@
   <data name="CannotGetScenario" xml:space="preserve">
     <value>シナリオの読込が完了していないため、{0} プロパティの値は取得できません。</value>
   </data>
-  <data name="IllegalSlimDXDetected" xml:space="preserve">
-    <value>BVE 本体に同梱されているものではない SlimDX.dll が読み込まれています。
-読み込まれている SlimDX.dll の一覧は以下の通りです:
-
-{0}
-
-BVE 本体に同梱されているもの以外の SlimDX.dll の読込は不具合の原因となる可能性があります。
-プラグインに SlimDX.dll が同梱されている場合は削除してください。</value>
-  </data>
 </root>
