@@ -37,6 +37,8 @@ namespace BveTypes.ClassWrappers
 
             ShoeFrictionCGetMethod = members.GetSourcePropertyGetterOf(nameof(ShoeFrictionC));
             ShoeFrictionCSetMethod = members.GetSourcePropertySetterOf(nameof(ShoeFrictionC));
+
+            IsSlippingField = members.GetSourceFieldOf(nameof(IsSlipping));
         }
 
         /// <summary>
@@ -123,6 +125,16 @@ namespace BveTypes.ClassWrappers
         {
             get => ShoeFrictionCGetMethod.Invoke(Src, null);
             set => ShoeFrictionCSetMethod.Invoke(Src, new object[] { value });
+        }
+
+        private static FastField IsSlippingField;
+        /// <summary>
+        /// 現在空転または滑走しているかどうかを取得・設定します。
+        /// </summary>
+        public bool IsSlipping
+        {
+            get => IsSlippingField.GetValue(Src);
+            set => IsSlippingField.SetValue(Src, value);
         }
     }
 }

@@ -221,6 +221,8 @@
 			<Getter Original="i"/>
 			<Setter Original="e"/>
 		</Property>
+
+		<Field WrapperProperty="IsSlipping" Original="n" IsOriginalNonPublic="true"/>
 	</Class>
 
 	<Class Wrapper="Cl" Original="dv">
