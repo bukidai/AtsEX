@@ -29,7 +29,19 @@ namespace BveTypes
         public static async Task<BveTypeSet> LoadAsync(Assembly bveAssembly, Version bveVersion, bool allowLoadProfileForDifferentBveVersion, Action<Version> profileForDifferentBveVersionLoaded = null)
             => await Task.Run(() => Load(bveAssembly, bveVersion, allowLoadProfileForDifferentBveVersion, profileForDifferentBveVersionLoaded)).ConfigureAwait(false);
 
-        private static BveTypeSet Load(Assembly bveAssembly, Version bveVersion, bool allowLoadProfileForDifferentBveVersion, Action<Version> profileForDifferentBveVersionLoaded = null)
+        /// <summary>
+        /// BVE のアセンブリとバージョンを指定して、クラスラッパーに対応する BVE の型とメンバーの定義を読み込みます。
+        /// </summary>
+        /// <param name="bveAssembly">BVE の <see cref="Assembly"/>。</param>
+        /// <param name="bveVersion">BVE のバージョン。</param>
+        /// <param name="allowLoadProfileForDifferentBveVersion">実行中の BVE がサポートされないバージョンの場合、他のバージョン向けのプロファイルで代用するか。</param>
+        /// <param name="profileForDifferentBveVersionLoaded">実行中の BVE がサポートされないバージョンであり、他のバージョン向けのプロファイルで代用された時に実行するデリケート。パラメータにはプロファイルのバージョンが渡されます。</param>
+        /// <returns><see cref="BveTypeSet"/> クラスの新しいインスタンス。</returns>
+        /// <exception cref="KeyNotFoundException"></exception>
+        /// <exception cref="NotImplementedException"></exception>
+        /// <exception cref="TypeLoadException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        public static BveTypeSet Load(Assembly bveAssembly, Version bveVersion, bool allowLoadProfileForDifferentBveVersion, Action<Version> profileForDifferentBveVersionLoaded = null)
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
 
