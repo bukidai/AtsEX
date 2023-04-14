@@ -21,11 +21,16 @@ namespace BveTypes.ClassWrappers
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<PluginLoader>();
 
+            Constructor = members.GetSourceConstructor();
+
             PanelArrayGetMethod = members.GetSourcePropertyGetterOf(nameof(PanelArray));
             SoundArrayGetMethod = members.GetSourcePropertyGetterOf(nameof(SoundArray));
 
             IsPluginLoadedField = members.GetSourceFieldOf(nameof(IsPluginLoaded));
             HandlesField = members.GetSourceFieldOf(nameof(Handles));
+            _PanelArrayField = members.GetSourceFieldOf(nameof(_PanelArray));
+            _SoundArrayField = members.GetSourceFieldOf(nameof(_SoundArray));
+            _OldSoundArrayField = members.GetSourceFieldOf(nameof(_OldSoundArray));
             LocationManagerField = members.GetSourceFieldOf(nameof(LocationManager));
             StateStoreField = members.GetSourceFieldOf(nameof(StateStore));
             SectionManagerField = members.GetSourceFieldOf(nameof(SectionManager));
@@ -60,6 +65,12 @@ namespace BveTypes.ClassWrappers
         [CreateClassWrapperFromSource]
         public static PluginLoader FromSource(object src) => src is null ? null : new PluginLoader(src);
 
+        private static FastConstructor Constructor;
+        public PluginLoader(UserVehicleLocationManager locationManager, KeyProvider keyProvider, HandleSet _0, HandleSet _1, VehicleStateStore vehicleStateStore, SectionManager sectionManager, MapFunctionList beacons, DoorSet doors)
+            : this(Constructor.Invoke(new object[] { locationManager.Src, keyProvider.Src, _0.Src, _1.Src, vehicleStateStore.Src, sectionManager.Src, beacons.Src, doors.Src }))
+        {
+        }
+
         private static FastMethod PanelArrayGetMethod;
         /// <summary>
         /// パネルに渡す値の配列を取得・設定します。
@@ -90,6 +101,42 @@ namespace BveTypes.ClassWrappers
         {
             get => HandleSet.FromSource(HandlesField.GetValue(Src));
             set => HandlesField.SetValue(Src, value.Src);
+        }
+
+        private static FastField _PanelArrayField;
+        /// <summary>
+        /// <see cref="PanelArray"/> プロパティのバッキングフィールドを取得・設定します。
+        /// </summary>
+#pragma warning disable IDE1006 // 命名スタイル
+        public int[] _PanelArray
+#pragma warning restore IDE1006 // 命名スタイル
+        {
+            get => _PanelArrayField.GetValue(Src);
+            set => _PanelArrayField.SetValue(Src, value);
+        }
+
+        private static FastField _SoundArrayField;
+        /// <summary>
+        /// <see cref="SoundArray"/> プロパティのバッキングフィールドを取得・設定します。
+        /// </summary>
+#pragma warning disable IDE1006 // 命名スタイル
+        public int[] _SoundArray
+#pragma warning restore IDE1006 // 命名スタイル
+        {
+            get => _SoundArrayField.GetValue(Src);
+            set => _SoundArrayField.SetValue(Src, value);
+        }
+
+        private static FastField _OldSoundArrayField;
+        /// <summary>
+        /// <see cref="OldSoundArray"/> プロパティのバッキングフィールドを取得・設定します。
+        /// </summary>
+#pragma warning disable IDE1006 // 命名スタイル
+        public int[] _OldSoundArray
+#pragma warning restore IDE1006 // 命名スタイル
+        {
+            get => _OldSoundArrayField.GetValue(Src);
+            set => _OldSoundArrayField.SetValue(Src, value);
         }
 
         private static FastField LocationManagerField;

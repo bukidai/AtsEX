@@ -29,6 +29,7 @@ namespace BveTypes.ClassWrappers
             SapPressureField = members.GetSourceFieldOf(nameof(SapPressure));
             BpPressureField = members.GetSourceFieldOf(nameof(BpPressure));
             ErPressureField = members.GetSourceFieldOf(nameof(ErPressure));
+            PanelArrayField = members.GetSourceFieldOf(nameof(PanelArray));
         }
 
         /// <summary>
@@ -115,6 +116,16 @@ namespace BveTypes.ClassWrappers
         {
             get => ErPressureField.GetValue(Src);
             set => ErPressureField.SetValue(Src, value);
+        }
+
+        private static FastField PanelArrayField;
+        /// <summary>
+        /// パネルに渡す値の配列を取得・設定します。
+        /// </summary>
+        public double[] PanelArray
+        {
+            get => PanelArrayField.GetValue(Src);
+            set => PanelArrayField.SetValue(Src, value);
         }
     }
 }

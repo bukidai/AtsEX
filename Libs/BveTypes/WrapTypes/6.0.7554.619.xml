@@ -503,6 +503,9 @@
 
 		<Field WrapperProperty="IsPluginLoaded" Original="a" IsOriginalNonPublic="true"/>
 		<Field WrapperProperty="Handles" Original="c" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="_PanelArray" Original="d" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="_SoundArray" Original="e" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="_OldSoundArray" Original="f" IsOriginalNonPublic="true"/>
 		<Field WrapperProperty="LocationManager" Original="h" IsOriginalNonPublic="true"/>
 		<Field WrapperProperty="StateStore" Original="i" IsOriginalNonPublic="true"/>
 		<Field WrapperProperty="SectionManager" Original="j" IsOriginalNonPublic="true"/>
@@ -1057,6 +1060,7 @@
 		<Field WrapperProperty="SapPressure" Original="o"/>
 		<Field WrapperProperty="BpPressure" Original="p"/>
 		<Field WrapperProperty="ErPressure" Original="q"/>
+		<Field WrapperProperty="PanelArray" Original="aa"/>
 	</Class>
 
 	<Class Wrapper="VehicleStep" Original="ak">
