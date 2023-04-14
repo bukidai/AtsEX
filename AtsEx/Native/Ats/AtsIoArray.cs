@@ -41,7 +41,7 @@ namespace AtsEx.Native.Ats
             }
         }
 
-        public AtsIoArray(IntPtr source, int length = 256)
+        public AtsIoArray(IntPtr source, int length = 1024)
         {
             Address = source;
             Length = length;

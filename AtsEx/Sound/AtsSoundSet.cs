@@ -27,7 +27,7 @@ namespace AtsEx.Sound
         }
 
         private const int MinIndex = 0;
-        private const int MaxIndex = 255;
+        private const int MaxIndex = 1023;
 
         private static readonly Lazy<ResourceSet> Resources = new Lazy<ResourceSet>();
 
