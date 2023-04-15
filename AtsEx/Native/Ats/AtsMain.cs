@@ -56,7 +56,7 @@ namespace AtsEx.Native.Ats
 
         public static void Load(CallerInfo callerInfo)
         {
-            if (App.IsInitialized) return;
+            if (App.IsInitialized && App.Instance.LaunchMode != LaunchMode.Ats) return;
 
             CallerInfo = callerInfo;
 
@@ -87,8 +87,13 @@ namespace AtsEx.Native.Ats
 
         public static void Dispose()
         {
+            if (App.IsInitialized && App.Instance.LaunchMode != LaunchMode.Ats) return;
+
             ScenarioService?.Dispose();
+            ScenarioService = null;
+
             AtsEx?.Dispose();
+            AtsEx = null;
         }
 
         public static void SetVehicleSpec(VehicleSpec vehicleSpec)
