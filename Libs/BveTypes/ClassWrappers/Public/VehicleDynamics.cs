@@ -32,6 +32,9 @@ namespace BveTypes.ClassWrappers
             RunningResistanceFactorCGetMethod = members.GetSourcePropertyGetterOf(nameof(RunningResistanceFactorC));
             RunningResistanceFactorCSetMethod = members.GetSourcePropertySetterOf(nameof(RunningResistanceFactorC));
 
+            CarLengthGetMethod = members.GetSourcePropertyGetterOf(nameof(CarLength));
+            CarLengthSetMethod = members.GetSourcePropertySetterOf(nameof(CarLength));
+
             TrailerCarGetMethod = members.GetSourcePropertyGetterOf(nameof(TrailerCar));
 
             MotorCarGetMethod = members.GetSourcePropertyGetterOf(nameof(MotorCar));
@@ -106,6 +109,17 @@ namespace BveTypes.ClassWrappers
         {
             get => RunningResistanceFactorCGetMethod.Invoke(Src, null);
             set => RunningResistanceFactorCSetMethod.Invoke(Src, new object[] { value });
+        }
+
+        private static FastMethod CarLengthGetMethod;
+        private static FastMethod CarLengthSetMethod;
+        /// <summary>
+        /// 1 両当たりの長さ [m] を取得・設定します。
+        /// </summary>
+        public double CarLength
+        {
+            get => CarLengthGetMethod.Invoke(Src, null);
+            set => CarLengthSetMethod.Invoke(Src, new object[] { value });
         }
 
         private static FastMethod TrailerCarGetMethod;

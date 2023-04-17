@@ -999,6 +999,10 @@
 			<Getter Original="e"/>
 			<Setter Original="c"/>
 		</Property>
+		<Property Wrapper="CarLength">
+			<Getter Original="b"/>
+			<Setter Original="e"/>
+		</Property>
 		<Property Wrapper="TrailerCar">
 			<Getter Original="d"/>
 		</Property>
