@@ -51,21 +51,6 @@ namespace AtsEx
 
         protected AtsEx(BveTypeSet bveTypes)
         {
-            AppDomain.CurrentDomain.AssemblyResolve += (sender, e) =>
-            {
-                AssemblyName assemblyName = new AssemblyName(e.Name);
-                if (assemblyName.Name == "SlimDX")
-                {
-                    Assembly[] loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
-                    foreach (Assembly assembly in loadedAssemblies)
-                    {
-                        if (assembly.GetName().Name == "SlimDX") return assembly;
-                    }
-                }
-
-                return null;
-            };
-
             BveHacker = new BveHacker(bveTypes);
 
             ExtensionLoader extensionLoader = new ExtensionLoader(BveHacker);
