@@ -29,8 +29,12 @@ namespace AtsEx.Plugins
                 string assemblyFileName = Path.GetFileName(assembly.Location);
 
                 Version pluginHostVersion = App.Instance.AtsExPluginHostAssembly.GetName().Version;
-                Version referencedPluginHostVersion = assembly.GetReferencedPluginHost().Version;
-                if (pluginHostVersion != referencedPluginHostVersion)
+                Version referencedPluginHostVersion = assembly.GetReferencedPluginHost()?.Version;
+                if (referencedPluginHostVersion is null)
+                {
+
+                }
+                else if (pluginHostVersion != referencedPluginHostVersion)
                 {
                     string message = string.Format(Resources.Value.MaybeBecauseBuiltForDifferentVersion.Value, pluginHostVersion, App.Instance.ProductShortName);
                     BveFileLoadException additionalInfoException = new BveFileLoadException(message, assemblyFileName);

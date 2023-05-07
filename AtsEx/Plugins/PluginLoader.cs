@@ -70,7 +70,7 @@ namespace AtsEx.Plugins
             {
                 try
                 {
-                    List<PluginBase> loadedPlugins = LoadFromAssembly(item.Key, item.Value, pluginSources.PluginType);
+                    List<PluginBase> loadedPlugins = LoadFromAssembly(item.Key, item.Value, pluginSources.PluginType, pluginSources.AllowNonPluginAssembly);
                     loadedPlugins.ForEach(plugin => plugins[plugin.Identifier] = plugin);
                 }
                 catch (Exception ex)
@@ -111,7 +111,7 @@ namespace AtsEx.Plugins
             return plugins;
 
 
-            List<PluginBase> LoadFromAssembly(Identifier identifier, Assembly assembly, PluginType pluginType)
+            List<PluginBase> LoadFromAssembly(Identifier identifier, Assembly assembly, PluginType pluginType, bool allowNonPluginAssembly)
             {
                 string fileName = Path.GetFileName(assembly.Location);
 
@@ -119,7 +119,9 @@ namespace AtsEx.Plugins
                 AssemblyName referencedPluginHost = assembly.GetReferencedPluginHost();
                 if (referencedPluginHost is null)
                 {
-                    throw new BveFileLoadException(string.Format(Resources.Value.PluginClassNotFound.Value, nameof(PluginBase), App.Instance.ProductShortName), fileName);
+                    return allowNonPluginAssembly
+                        ? new List<PluginBase>()
+                        : throw new BveFileLoadException(string.Format(Resources.Value.PluginClassNotFound.Value, nameof(PluginBase), App.Instance.ProductShortName), fileName);
                 }
                 else if (referencedPluginHost.Version < SupportedMinPluginHostVersion)
                 {

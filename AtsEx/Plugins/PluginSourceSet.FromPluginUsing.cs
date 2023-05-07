@@ -17,7 +17,7 @@ namespace AtsEx.Plugins
 {
     internal sealed partial class PluginSourceSet
     {
-        public static PluginSourceSet FromPluginUsing(PluginType pluginType, string listPath)
+        public static PluginSourceSet FromPluginUsing(PluginType pluginType, bool allowNonPluginAssembly, string listPath)
         {
             XDocument doc = XDocument.Load(listPath, LoadOptions.SetLineInfo);
             doc.Validate(SchemaSet, DocumentValidation);
@@ -33,7 +33,7 @@ namespace AtsEx.Plugins
             Dictionary<Identifier, ScriptPluginPackage> ironPython2Packages = root.Elements(TargetNamespace + "IronPython2").
                 ToDictionary(GetIdentifier, element => LoadScriptPluginPackage(element, Path.GetDirectoryName(listPath)));
 
-            return new PluginSourceSet(Path.GetFileName(listPath), pluginType, assemblies, cSharpScriptPackages, ironPython2Packages);
+            return new PluginSourceSet(Path.GetFileName(listPath), pluginType, allowNonPluginAssembly, assemblies, cSharpScriptPackages, ironPython2Packages);
 
 
             Identifier GetIdentifier(XElement element)

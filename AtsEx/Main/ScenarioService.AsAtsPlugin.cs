@@ -35,7 +35,7 @@ namespace AtsEx
             private static PluginSourceSet LoadVehiclePluginUsing(Assembly callerAssembly)
             {
                 string vehiclePluginUsingPath = Path.Combine(Path.GetDirectoryName(callerAssembly.Location), Path.GetFileNameWithoutExtension(callerAssembly.Location) + ".VehiclePluginUsing.xml");
-                PluginSourceSet vehiclePluginUsing = PluginSourceSet.FromPluginUsing(PluginType.VehiclePlugin, vehiclePluginUsingPath);
+                PluginSourceSet vehiclePluginUsing = PluginSourceSet.FromPluginUsing(PluginType.VehiclePlugin, false, vehiclePluginUsingPath);
 
                 return vehiclePluginUsing;
             }

@@ -36,8 +36,8 @@ namespace AtsEx
 
                 string pluginUsingPath = Path.Combine(extensionsDirectory, "PluginUsing.xml");
                 PluginSourceSet fromPluginUsing = File.Exists(pluginUsingPath)
-                    ? PluginSourceSet.FromPluginUsing(PluginType.Extension, pluginUsingPath) : PluginSourceSet.Empty(PluginType.Extension);
-                PluginSourceSet fromDirectory = PluginSourceSet.FromDirectory(null, PluginType.Extension, extensionsDirectory);
+                    ? PluginSourceSet.FromPluginUsing(PluginType.Extension, true, pluginUsingPath) : PluginSourceSet.Empty(PluginType.Extension);
+                PluginSourceSet fromDirectory = PluginSourceSet.FromDirectory(null, PluginType.Extension, true, extensionsDirectory);
 
                 Dictionary<string, PluginBase> loadedExtensions = pluginLoader.Load(fromPluginUsing.Concat(null, fromDirectory));
 

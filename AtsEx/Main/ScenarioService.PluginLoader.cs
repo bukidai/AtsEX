@@ -52,7 +52,7 @@ namespace AtsEx
                         foreach (IHeader header in mapPluginUsingHeaders)
                         {
                             string mapPluginUsingPath = Path.Combine(Path.GetDirectoryName(BveHacker.ScenarioInfo.RouteFiles.SelectedFile.Path), header.Argument);
-                            PluginSourceSet mapPluginUsing = PluginSourceSet.FromPluginUsing(PluginType.MapPlugin, mapPluginUsingPath);
+                            PluginSourceSet mapPluginUsing = PluginSourceSet.FromPluginUsing(PluginType.MapPlugin, false, mapPluginUsingPath);
 
                             Dictionary<string, PluginBase> loadedMapPlugins = pluginLoader.Load(mapPluginUsing);
                             AddRangeToMapPlugins(loadedMapPlugins);
