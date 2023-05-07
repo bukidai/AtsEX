@@ -60,6 +60,9 @@ namespace AtsEx.PluginHost.Plugins
         /// <summary>
         /// BVE が標準で提供する ATS プラグイン向けの機能のラッパーを取得します。
         /// </summary>
+        /// <remarks>
+        /// AtsEX 拡張機能の場合 (<see cref="PluginType"/> が <see cref="PluginType.Extension"/> の場合) は取得できません。
+        /// </remarks>
         protected INative Native { get; }
 
         /// <summary>
