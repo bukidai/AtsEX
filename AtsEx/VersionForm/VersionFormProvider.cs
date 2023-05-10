@@ -42,7 +42,7 @@ namespace AtsEx
 
         private readonly IEnumerable<PluginBase> Extensions;
 
-        private readonly VersionForm Form = null;
+        private readonly VersionForm Form;
         private readonly ToolStripMenuItem MenuItem;
 
 
@@ -74,6 +74,8 @@ namespace AtsEx
             e.Cancel = true;
             Form.Hide();
         }
+
+        public void ShowForm() => Form.Show(MainFormSource);
 
         public void SetScenario(IEnumerable<PluginBase> plugins) => Form.SetPluginDetails(Extensions.Concat(plugins));
 
