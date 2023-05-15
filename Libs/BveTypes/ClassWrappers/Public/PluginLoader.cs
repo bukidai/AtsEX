@@ -35,6 +35,7 @@ namespace BveTypes.ClassWrappers
             StateStoreField = members.GetSourceFieldOf(nameof(StateStore));
             SectionManagerField = members.GetSourceFieldOf(nameof(SectionManager));
             DoorsField = members.GetSourceFieldOf(nameof(Doors));
+            AtsHandlesField = members.GetSourceFieldOf(nameof(AtsHandles));
 
             OnSetBeaconDataMethod = members.GetSourceMethodOf(nameof(OnSetBeaconData));
             OnKeyDownMethod = members.GetSourceMethodOf(nameof(OnKeyDown));
@@ -95,7 +96,7 @@ namespace BveTypes.ClassWrappers
 
         private static FastField HandlesField;
         /// <summary>
-        /// 自列車のハンドルのセットを取得・設定します。
+        /// 自列車のノッチ情報を取得・設定します。
         /// </summary>
         public HandleSet Handles
         {
@@ -177,6 +178,16 @@ namespace BveTypes.ClassWrappers
         {
             get => DoorSet.FromSource(DoorsField.GetValue(Src));
             set => DoorsField.SetValue(Src, value.Src);
+        }
+
+        private static FastField AtsHandlesField;
+        /// <summary>
+        /// ATS による指示を適用した自列車のノッチ情報を取得・設定します。
+        /// </summary>
+        public HandleSet AtsHandles
+        {
+            get => HandleSet.FromSource(AtsHandlesField.GetValue(Src));
+            set => AtsHandlesField.SetValue(Src, value.Src);
         }
 
         private static FastMethod OnSetBeaconDataMethod;

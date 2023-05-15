@@ -512,6 +512,7 @@
 		<Field WrapperProperty="StateStore" Original="i" IsOriginalNonPublic="true"/>
 		<Field WrapperProperty="SectionManager" Original="j" IsOriginalNonPublic="true"/>
 		<Field WrapperProperty="Doors" Original="k" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="AtsHandles" Original="l" IsOriginalNonPublic="true"/>
 
 		<Method Wrapper="OnSetBeaconData" WrapperParams="System.Object; atsex:ObjectPassedEventArgs" Original="a" IsOriginalNonPublic="true"/>
 		<Method Wrapper="OnKeyDown" WrapperParams="System.Object; Mackoy.Bvets.InputEventArgs, Mackoy.IInputDevice" Original="b" IsOriginalNonPublic="true"/>
