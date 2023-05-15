@@ -328,7 +328,7 @@
 			<Getter Original="b"/>
 			<Setter Original="a"/>
 		</Property>
-		<Property Wrapper="ConstantSpeed" IsWrapperNonPublic="true">
+		<Property Wrapper="_ConstantSpeedMode" IsWrapperNonPublic="true">
 			<Getter Original="g"/>
 			<Setter Original="d"/>
 		</Property>

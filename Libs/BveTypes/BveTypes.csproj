@@ -69,6 +69,7 @@
     <Compile Include="ClassWrappers\Extensions\WrappedEnumerator.cs" />
     <Compile Include="ClassWrappers\Extensions\WrappedList.cs" />
     <Compile Include="ClassWrappers\Extensions\WrappedSortedList.cs" />
+    <Compile Include="ClassWrappers\Helpers\ConstantSpeedMode.cs" />
     <Compile Include="ClassWrappers\Helpers\DoorSide.cs" />
     <Compile Include="ClassWrappers\Helpers\ReverserPosition.cs" />
     <Compile Include="ClassWrappers\Helpers\TiltOptions.cs" />

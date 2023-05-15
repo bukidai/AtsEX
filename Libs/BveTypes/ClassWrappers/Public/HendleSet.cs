@@ -32,8 +32,8 @@ namespace BveTypes.ClassWrappers
             ReverserPositionGetMethod = members.GetSourcePropertyGetterOf(nameof(_ReverserPosition));
             ReverserPositionSetMethod = members.GetSourcePropertySetterOf(nameof(_ReverserPosition));
 
-            ConstantSpeedGetMethod = members.GetSourcePropertyGetterOf(nameof(ConstantSpeed));
-            ConstantSpeedSetMethod = members.GetSourcePropertySetterOf(nameof(ConstantSpeed));
+            ConstantSpeedGetMethod = members.GetSourcePropertyGetterOf(nameof(_ConstantSpeedMode));
+            ConstantSpeedSetMethod = members.GetSourcePropertySetterOf(nameof(_ConstantSpeedMode));
         }
 
         /// <summary>
@@ -106,10 +106,21 @@ namespace BveTypes.ClassWrappers
 
         private static FastMethod ConstantSpeedGetMethod;
         private static FastMethod ConstantSpeedSetMethod;
-        private int ConstantSpeed
+#pragma warning disable IDE1006 // 命名スタイル
+        private int _ConstantSpeedMode
+#pragma warning restore IDE1006 // 命名スタイル
         {
             get => ConstantSpeedGetMethod.Invoke(Src, null);
             set => ConstantSpeedSetMethod.Invoke(Src, new object[] { value });
+        }
+
+        /// <summary>
+        /// 定速制御の動作モードを取得・設定します。
+        /// </summary>
+        public ConstantSpeedMode ConstantSpeedMode
+        {
+            get => (ConstantSpeedMode)_ConstantSpeedMode;
+            set => _ConstantSpeedMode = (int)value;
         }
     }
 }
