@@ -102,7 +102,7 @@ namespace AtsEx.PluginHost
 
 
         /// <summary>
-        /// シナリオ読込時のエラーを編集するための機能を提供する <see cref="PluginHost.LoadErrorManager"/> を取得します。
+        /// シナリオ読込時のエラーを編集するための機能を提供する <see cref="ILoadErrorManager"/> を取得します。
         /// </summary>
         ILoadErrorManager LoadErrorManager { get; }
 
