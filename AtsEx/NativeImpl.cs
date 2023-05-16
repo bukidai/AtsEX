@@ -9,6 +9,7 @@ using BveTypes.ClassWrappers;
 using AtsEx.Handles;
 using AtsEx.Input;
 using AtsEx.Panels;
+using AtsEx.Plugins;
 using AtsEx.Sound;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.Input.Native;
@@ -20,7 +21,7 @@ namespace AtsEx
 {
     internal class NativeImpl : INative
     {
-        public NativeImpl(VehicleSpec vehicleSpec)
+        public NativeImpl(VehicleSpec vehicleSpec, VehicleConfig vehicleConfigOptions)
         {
             VehicleSpec = vehicleSpec;
 
@@ -28,6 +29,9 @@ namespace AtsEx
             PowerHandle power = new PowerHandle(VehicleSpec.PowerNotches);
             Reverser reverser = new Reverser();
             Handles = new PluginHost.Handles.HandleSet(brake, power, reverser);
+
+            AtsPanelValues = new AtsPanelValueSet(vehicleConfigOptions.DetectPanelValueIndexConflict);
+            AtsSounds = new AtsSoundSet(vehicleConfigOptions.DetectSoundIndexConflict);
         }
 
         public void InvokeStarted(BrakePosition defaultBrakePosition)
@@ -44,10 +48,10 @@ namespace AtsEx
 
         public PluginHost.Handles.HandleSet Handles { get; }
 
-        public IAtsPanelValueSet AtsPanelValues { get; } = new AtsPanelValueSet();
+        public IAtsPanelValueSet AtsPanelValues { get; }
 
         public INativeKeySet NativeKeys { get; } = new NativeKeySet();
-        public IAtsSoundSet AtsSounds { get; } = new AtsSoundSet();
+        public IAtsSoundSet AtsSounds { get; }
 
         public VehicleSpec VehicleSpec { get; }
 

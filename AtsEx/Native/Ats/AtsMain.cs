@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,11 @@ using BveTypes.ClassWrappers;
 using UnembeddedResources;
 
 using AtsEx.Handles;
+using AtsEx.Plugins;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.Native;
+using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx.Native.Ats
 {
@@ -98,12 +101,20 @@ namespace AtsEx.Native.Ats
 
         public static void SetVehicleSpec(VehicleSpec vehicleSpec)
         {
+            string callerAssemblyLocation = CallerInfo.AtsExCallerAssembly.Location;
+
+            string vehiclePluginUsingPath = Path.Combine(Path.GetDirectoryName(callerAssemblyLocation), Path.GetFileNameWithoutExtension(callerAssemblyLocation) + ".VehiclePluginUsing.xml");
+            PluginSourceSet vehiclePluginUsing = PluginSourceSet.FromPluginUsing(PluginType.VehiclePlugin, false, vehiclePluginUsingPath);
+
+            string vehicleConfigPath = Path.Combine(Path.GetDirectoryName(callerAssemblyLocation), Path.GetFileNameWithoutExtension(callerAssemblyLocation) + ".VehicleConfig.xml");
+            VehicleConfig vehicleConfig = File.Exists(vehicleConfigPath) ? VehicleConfig.LoadFrom(vehicleConfigPath) : VehicleConfig.Default;
+
             if (App.Instance.LaunchMode != LaunchMode.Ats) return;
 
             PluginHost.Native.VehicleSpec exVehicleSpec = new PluginHost.Native.VehicleSpec(
                 vehicleSpec.BrakeNotches, vehicleSpec.PowerNotches, vehicleSpec.AtsNotch, vehicleSpec.B67Notch, vehicleSpec.Cars);
 
-            ScenarioService = new ScenarioService.AsAtsPlugin(AtsEx, CallerInfo.AtsExCallerAssembly, exVehicleSpec, VersionWarningText);
+            ScenarioService = new ScenarioService.AsAtsPlugin(AtsEx, vehiclePluginUsing, vehicleConfig, exVehicleSpec, VersionWarningText);
         }
 
         public static void Initialize(DefaultBrakePosition defaultBrakePosition)

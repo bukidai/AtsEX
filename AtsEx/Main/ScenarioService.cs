@@ -47,12 +47,12 @@ namespace AtsEx
 
         private readonly PluginService _PluginService;
 
-        protected ScenarioService(AtsEx atsEx, PluginSourceSet vehiclePluginUsing, PluginHost.Native.VehicleSpec vehicleSpec)
+        protected ScenarioService(AtsEx atsEx, PluginSourceSet vehiclePluginUsing, VehicleConfig vehicleConfig, VehicleSpec vehicleSpec)
         {
             AtsEx = atsEx;
             BveHacker = AtsEx.BveHacker;
 
-            Native = new NativeImpl(vehicleSpec);
+            Native = new NativeImpl(vehicleSpec, vehicleConfig);
 
             PluginLoader pluginLoader = new PluginLoader(Native, BveHacker, AtsEx.Extensions);
             PluginSet plugins = pluginLoader.Load(vehiclePluginUsing);

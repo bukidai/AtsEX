@@ -38,23 +38,29 @@ namespace AtsEx.Sound
 #endif
         }
 
+        private readonly bool DetectConflict;
+
         private readonly Dictionary<int, AtsSound> RegisteredSounds = new Dictionary<int, AtsSound>();
         private readonly Dictionary<int, int> OldCommandValues = new Dictionary<int, int>();
 
         private bool IsFirstFrame = true;
 
-        public AtsSoundSet()
+        public AtsSoundSet(bool detectConflict)
         {
+            DetectConflict = detectConflict;
         }
 
         public void Tick(IList<int> source)
         {
             foreach (KeyValuePair<int, AtsSound> x in RegisteredSounds)
             {
-                if (source[x.Key] != (int)SoundPlayType.Continue && OldCommandValues.TryGetValue(x.Key, out int oldValue) && source[x.Key] != oldValue)
+                if (DetectConflict)
                 {
-                    string senderName = x.Key.ToString();
-                    throw new ConflictException(string.Format(Resources.Value.ChangeConflicted.Value, senderName), senderName);
+                    if (source[x.Key] != (int)SoundPlayType.Continue && OldCommandValues.TryGetValue(x.Key, out int oldValue) && source[x.Key] != oldValue)
+                    {
+                        string senderName = x.Key.ToString();
+                        throw new ConflictException(string.Format(Resources.Value.ChangeConflicted.Value, senderName), senderName);
+                    }
                 }
 
                 int commandValue = IsFirstFrame ? (int)SoundPlayType.Stop : x.Value.Tick();

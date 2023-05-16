@@ -11,7 +11,6 @@ using BveTypes.ClassWrappers;
 using AtsEx.Plugins;
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.Native;
-using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx
 {
@@ -19,8 +18,8 @@ namespace AtsEx
     {
         internal sealed class AsAtsPlugin : ScenarioService
         {
-            public AsAtsPlugin(AtsEx.AsAtsPlugin atsEx, Assembly callerAssembly, VehicleSpec vehicleSpec, string versionWarningText)
-                : base(atsEx, LoadVehiclePluginUsing(callerAssembly), vehicleSpec)
+            public AsAtsPlugin(AtsEx.AsAtsPlugin atsEx, PluginSourceSet vehiclePluginUsing, VehicleConfig vehicleConfig, VehicleSpec vehicleSpec, string versionWarningText)
+                : base(atsEx, vehiclePluginUsing, vehicleConfig, vehicleSpec)
             {
                 if (BveHacker.BveTypes.ProfileVersion != App.Instance.BveVersion && !_PluginService.UseAtsExExtensions)
                 {
@@ -30,14 +29,6 @@ namespace AtsEx
                         BveHacker.LoadErrorManager.Errors.Remove(removeTargetError);
                     }
                 }
-            }
-
-            private static PluginSourceSet LoadVehiclePluginUsing(Assembly callerAssembly)
-            {
-                string vehiclePluginUsingPath = Path.Combine(Path.GetDirectoryName(callerAssembly.Location), Path.GetFileNameWithoutExtension(callerAssembly.Location) + ".VehiclePluginUsing.xml");
-                PluginSourceSet vehiclePluginUsing = PluginSourceSet.FromPluginUsing(PluginType.VehiclePlugin, false, vehiclePluginUsingPath);
-
-                return vehiclePluginUsing;
             }
         }
     }

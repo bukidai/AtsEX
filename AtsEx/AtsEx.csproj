@@ -148,6 +148,7 @@
     <Compile Include="Native\LauncherCompatibilityVersionAttribute.cs" />
     <Compile Include="Native\Ats\AtsMain.cs" />
     <Compile Include="Plugins\Extensions\ExtensionSet.cs" />
+    <Compile Include="Plugins\VehicleConfig.cs" />
     <Compile Include="Plugins\PluginSourceSet.Concat.cs" />
     <Compile Include="Plugins\PluginSourceSet.cs" />
     <Compile Include="Plugins\PluginSet.cs" />
@@ -255,8 +256,13 @@
     <Content Include="Resources\AtsMain.resx" />
     <Content Include="Resources\BveTypeSetLoader.resx" />
     <Content Include="Resources\BveTypeSetLoader.ja.resx" />
+    <Content Include="Resources\VehicleConfig.ja.resx" />
+    <Content Include="Resources\VehicleConfig.resx" />
     <None Include="app.config" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="Plugins\AtsExVehicleConfigXmlSchema.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
