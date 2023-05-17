@@ -23,9 +23,16 @@
 
 ## プロジェクトの構成
 
-![AtsEX 構成図](SystemOverview.svg)
+### ATS プラグイン版
+
+![AtsEX 構成図](SystemOverview.AtsPlugin.svg)
+
+### 入力デバイスプラグイン版
+
+![AtsEX 構成図](SystemOverview.InputDevice.svg)
 
 ## 使用ライブラリ等（アルファベット順）
+
 #### [.NET Runtime](https://github.com/dotnet/runtime) (MIT)
 
 Copyright (c) .NET Foundation and Contributors
