@@ -38,6 +38,7 @@ obj
 /_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/*.dll.config
 /_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/*.xml
 !/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/*.VehiclePluginUsing.xml
+!/_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/*.VehicleConfig.xml
 /_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/AtsEXPlugins/*.dll
 /_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/AtsEXPlugins/*.pdb
 /_SampleScenarios/AtsEx.Samples/Vehicles/Basic/Ats_*/AtsEXPlugins/*.dll.config
