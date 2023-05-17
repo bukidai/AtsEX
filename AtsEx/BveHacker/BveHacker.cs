@@ -73,6 +73,7 @@ namespace AtsEx
             {
                 case LaunchMode.Ats:
                     _MapHeaders = HeaderSet.FromMap(ScenarioInfo.RouteFiles.SelectedFile.Path);
+                    ScenarioHacker.BeginObserveInitialization();
                     break;
 
                 case LaunchMode.InputDevice:
@@ -84,6 +85,8 @@ namespace AtsEx
                     {
                         ScenarioInfo scenarioInfo = ScenarioInfo.FromSource(e.Args[0]);
                         _MapHeaders = HeaderSet.FromMap(scenarioInfo.RouteFiles.SelectedFile.Path);
+
+                        ScenarioHacker.BeginObserveInitialization();
 
                         return new PatchInvokationResult(SkipModes.Continue);
                     };

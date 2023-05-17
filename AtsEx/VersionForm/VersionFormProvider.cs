@@ -56,6 +56,7 @@ namespace AtsEx
             MenuItem = contextMenuHacker.AddClickableMenuItem(versionInfoMenuItemText, MenuItemClick, ContextMenuItemType.CoreAndExtensions);
 
             Form = new VersionForm();
+            Form.SetPluginDetails(Extensions);
             Form.FormClosing += FormClosing;
         }
 

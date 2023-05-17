@@ -69,6 +69,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.Samples.VehiclePlugin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.Samples.MapPlugins.CooperatingWithVehiclePlugin", "SamplePlugins\MapPlugins\CooperatingWithVehiclePlugin\AtsEx.Samples.MapPlugins.CooperatingWithVehiclePlugin.csproj", "{944AEC7A-6F9A-4D24-B8C4-B95B84220985}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtsEx.Caller.InputDevice", "AtsEx.Caller.InputDevice\AtsEx.Caller.InputDevice.csproj", "{23B1CB7F-B82F-49FA-9F2B-4A78547D71C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -179,6 +181,10 @@ Global
 		{944AEC7A-6F9A-4D24-B8C4-B95B84220985}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{944AEC7A-6F9A-4D24-B8C4-B95B84220985}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{944AEC7A-6F9A-4D24-B8C4-B95B84220985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23B1CB7F-B82F-49FA-9F2B-4A78547D71C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23B1CB7F-B82F-49FA-9F2B-4A78547D71C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23B1CB7F-B82F-49FA-9F2B-4A78547D71C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23B1CB7F-B82F-49FA-9F2B-4A78547D71C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

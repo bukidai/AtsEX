@@ -64,8 +64,11 @@
   <ItemGroup>
     <Compile Include="CoreHost.cs" />
     <Compile Include="Hosting\UpdateChecker.cs" />
+    <Compile Include="CoreHostAsInputDevice.cs" />
+    <Compile Include="InputEventArgs.cs" />
     <Compile Include="LauncherCompatibilityVersionAttribute.cs" />
     <Compile Include="LauncherVersionChecker.cs" />
+    <Compile Include="VersionSelector.AsInputDevice.cs" />
     <Compile Include="VersionSelector.AsAtsPlugin.cs" />
     <Compile Include="VersionSelector.cs" />
     <Compile Include="Hosting\TargetBveFinder.cs" />

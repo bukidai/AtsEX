@@ -24,8 +24,6 @@ namespace AtsEx.BveHackerServices
         private readonly HarmonyPatch InitializeTimeAndLocationMethodPatch;
         private readonly HarmonyPatch InitializeMethodPatch;
 
-        private bool IsScenarioCreatedEventInvoked = false;
-
         public ScenarioHacker(MainFormHacker mainFormHacker, BveTypeSet bveTypes)
         {
             MainForm = mainFormHacker.TargetForm;
@@ -42,23 +40,7 @@ namespace AtsEx.BveHackerServices
             HarmonyPatch CreateAndSetupPatch(string name, MethodBase original)
             {
                 HarmonyPatch patch = HarmonyPatch.Patch(name, original, PatchType.Postfix);
-                patch.Invoked += OnPatchInvoked;
-
                 return patch;
-
-
-                PatchInvokationResult OnPatchInvoked(object sender, PatchInvokedEventArgs e)
-                {
-                    if (IsScenarioCreatedEventInvoked) return PatchInvokationResult.DoNothing(e);
-
-                    IsScenarioCreatedEventInvoked = true;
-
-                    Scenario scenario = Scenario.FromSource(e.Instance);
-                    ScenarioCreatedEventArgs scenarioCreatedEventArgs = new ScenarioCreatedEventArgs(scenario);
-                    ScenarioCreated?.Invoke(scenarioCreatedEventArgs);
-
-                    return PatchInvokationResult.DoNothing(e);
-                }
             }
         }
 
@@ -66,6 +48,25 @@ namespace AtsEx.BveHackerServices
         {
             InitializeTimeAndLocationMethodPatch.Dispose();
             InitializeMethodPatch.Dispose();
+        }
+
+        public void BeginObserveInitialization()
+        {
+            InitializeTimeAndLocationMethodPatch.Invoked += OnPatchInvoked;
+            InitializeMethodPatch.Invoked += OnPatchInvoked;
+
+
+            PatchInvokationResult OnPatchInvoked(object sender, PatchInvokedEventArgs e)
+            {
+                InitializeTimeAndLocationMethodPatch.Invoked -= OnPatchInvoked;
+                InitializeMethodPatch.Invoked -= OnPatchInvoked;
+
+                Scenario scenario = Scenario.FromSource(e.Instance);
+                ScenarioCreatedEventArgs scenarioCreatedEventArgs = new ScenarioCreatedEventArgs(scenario);
+                ScenarioCreated?.Invoke(scenarioCreatedEventArgs);
+
+                return PatchInvokationResult.DoNothing(e);
+            }
         }
 
         public event ScenarioCreatedEventHandler ScenarioCreated;

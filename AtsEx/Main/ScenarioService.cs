@@ -72,7 +72,7 @@ namespace AtsEx
             Native.InvokeStarted(defaultBrakePosition);
         }
 
-        public HandlePositionSet Tick(TimeSpan elapsed, VehicleState vehicleState, IList<int> panel, IList<int> sound)
+        public virtual HandlePositionSet Tick(TimeSpan elapsed, VehicleState vehicleState, IList<int> panel, IList<int> sound)
         {
             Native.VehicleState = vehicleState;
 

@@ -105,14 +105,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExceptionResolver.cs" />
+    <Compile Include="Main\AtsEx.AsInputDevice.cs" />
+    <Compile Include="Main\AtsEx.AsInputDevice.Patches.cs" />
+    <Compile Include="Main\AtsEx.AsInputDevice.PatchEventInitializer.cs" />
     <Compile Include="Native\AppInitializer.cs" />
     <Compile Include="Native\BveTypeSetLoader.cs" />
     <Compile Include="Main\AtsEx.ExtensionLoader.cs" />
     <Compile Include="Main\AtsEx.ExtensionService.cs" />
+    <Compile Include="Main\ScenarioService.AsInputDevice.cs" />
     <Compile Include="MapStatements\MonitorableTrain.cs" />
     <Compile Include="Native\Ats\AtsIoArray.cs" />
     <Compile Include="Native\Export.cs" />
     <Compile Include="Native\CallerInfo.cs" />
+    <Compile Include="Native\InputDevices\InputDeviceMain.cs" />
     <Compile Include="Panels\AtsPanelValue.cs" />
     <Compile Include="Panels\AtsPanelValueSet.cs" />
     <Compile Include="Plugins\PluginLoader.PluginLoadErrorQueue.cs" />

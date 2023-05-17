@@ -121,11 +121,17 @@ namespace AtsEx.PluginHost
         /// <summary>
         /// マップに定義されているヘッダーの一覧を取得します。
         /// </summary>
+        /// <remarks>
+        /// シナリオが読み込まれていない時は <see langword="null"/> になります。
+        /// </remarks>
         IHeaderSet MapHeaders { get; }
 
         /// <summary>
         /// マップに定義されているユーザー独自ステートメントの一覧を取得します。
         /// </summary>
+        /// <remarks>
+        /// シナリオが読み込まれていない時は <see langword="null"/> になります。
+        /// </remarks>
         IStatementSet MapStatements { get; }
 
 

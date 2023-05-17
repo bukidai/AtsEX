@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -44,6 +45,7 @@ namespace AtsEx.Native.Ats
 #endif
         }
 
+        private static bool IsLoadedAsInputDevice = false;
         private static CallerInfo CallerInfo;
 
         private static readonly Stopwatch Stopwatch = new Stopwatch();
@@ -57,10 +59,15 @@ namespace AtsEx.Native.Ats
         private static int Brake;
         private static int Reverser;
 
+        internal static event EventHandler<VehiclePluginUsingLoadedEventArgs> VehiclePluginUsingLoaded;
+
+        internal static void LoadedAsInputDevice()
+        {
+            IsLoadedAsInputDevice = true;
+        }
+
         public static void Load(CallerInfo callerInfo)
         {
-            if (App.IsInitialized && App.Instance.LaunchMode != LaunchMode.Ats) return;
-
             CallerInfo = callerInfo;
 
             Version callerVersion = CallerInfo.AtsExCallerAssembly.GetName().Version;
@@ -70,6 +77,8 @@ namespace AtsEx.Native.Ats
                 MessageBox.Show(errorMessage, "AtsEX Caller バージョンエラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw new NotSupportedException(errorMessage.Replace("\n", ""));
             }
+
+            if (IsLoadedAsInputDevice) return;
 
             AppInitializer.Initialize(CallerInfo, LaunchMode.Ats);
 
@@ -90,7 +99,7 @@ namespace AtsEx.Native.Ats
 
         public static void Dispose()
         {
-            if (App.IsInitialized && App.Instance.LaunchMode != LaunchMode.Ats) return;
+            if (IsLoadedAsInputDevice) return;
 
             ScenarioService?.Dispose();
             ScenarioService = null;
@@ -109,7 +118,9 @@ namespace AtsEx.Native.Ats
             string vehicleConfigPath = Path.Combine(Path.GetDirectoryName(callerAssemblyLocation), Path.GetFileNameWithoutExtension(callerAssemblyLocation) + ".VehicleConfig.xml");
             VehicleConfig vehicleConfig = File.Exists(vehicleConfigPath) ? VehicleConfig.LoadFrom(vehicleConfigPath) : VehicleConfig.Default;
 
-            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+            VehiclePluginUsingLoaded?.Invoke(null, new VehiclePluginUsingLoadedEventArgs(vehiclePluginUsing, vehicleConfig));
+
+            if (IsLoadedAsInputDevice) return;
 
             PluginHost.Native.VehicleSpec exVehicleSpec = new PluginHost.Native.VehicleSpec(
                 vehicleSpec.BrakeNotches, vehicleSpec.PowerNotches, vehicleSpec.AtsNotch, vehicleSpec.B67Notch, vehicleSpec.Cars);
@@ -119,14 +130,14 @@ namespace AtsEx.Native.Ats
 
         public static void Initialize(DefaultBrakePosition defaultBrakePosition)
         {
-            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+            if (IsLoadedAsInputDevice) return;
 
             ScenarioService?.Started((BrakePosition)defaultBrakePosition);
         }
 
         public static AtsHandles Elapse(VehicleState vehicleState, IntPtr panel, IntPtr sound)
         {
-            if (App.Instance.LaunchMode != LaunchMode.Ats)
+            if (IsLoadedAsInputDevice)
             {
                 return new AtsHandles()
                 {
@@ -163,7 +174,7 @@ namespace AtsEx.Native.Ats
         {
             Power = notch;
 
-            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+            if (IsLoadedAsInputDevice) return;
 
             ScenarioService?.SetPower(notch);
         }
@@ -172,6 +183,8 @@ namespace AtsEx.Native.Ats
         {
             Brake = notch;
 
+            if (IsLoadedAsInputDevice) return;
+
             ScenarioService?.SetBrake(notch);
         }
 
@@ -179,32 +192,34 @@ namespace AtsEx.Native.Ats
         {
             Reverser = position;
 
+            if (IsLoadedAsInputDevice) return;
+
             ScenarioService?.SetReverser((ReverserPosition)position);
         }
 
         public static void KeyDown(ATSKeys atsKeyCode)
         {
-            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+            if (IsLoadedAsInputDevice) return;
 
             ScenarioService?.KeyDown((NativeAtsKeyName)atsKeyCode);
         }
 
         public static void KeyUp(ATSKeys atsKeyCode)
         {
-            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+            if (IsLoadedAsInputDevice) return;
 
             ScenarioService?.KeyUp((NativeAtsKeyName)atsKeyCode);
         }
 
         public static void DoorOpen()
         {
-            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+            if (IsLoadedAsInputDevice) return;
 
             ScenarioService?.DoorOpened(new DoorEventArgs());
         }
         public static void DoorClose()
         {
-            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+            if (IsLoadedAsInputDevice) return;
 
             ScenarioService?.DoorClosed(new DoorEventArgs());
         }
@@ -218,10 +233,23 @@ namespace AtsEx.Native.Ats
         }
         public static void SetBeaconData(BeaconData beaconData)
         {
-            if (App.Instance.LaunchMode != LaunchMode.Ats) return;
+            if (IsLoadedAsInputDevice) return;
 
             BeaconPassedEventArgs args = new BeaconPassedEventArgs(beaconData.Num, beaconData.Sig, beaconData.Z, beaconData.Data);
             ScenarioService?.BeaconPassed(args);
+        }
+
+
+        internal class VehiclePluginUsingLoadedEventArgs : EventArgs
+        {
+            public PluginSourceSet VehiclePluginUsing { get; }
+            public VehicleConfig VehicleConfig { get; }
+
+            public VehiclePluginUsingLoadedEventArgs(PluginSourceSet vehiclePluginUsing, VehicleConfig vehicleConfig)
+            {
+                VehiclePluginUsing = vehiclePluginUsing;
+                VehicleConfig = vehicleConfig;
+            }
         }
     }
 }
