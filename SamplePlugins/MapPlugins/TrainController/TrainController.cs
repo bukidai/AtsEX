@@ -20,15 +20,7 @@ namespace AtsEx.Samples.MapPlugins.TrainController
 
         public TrainController(PluginBuilder builder) : base(builder)
         {
-            BveHacker.ScenarioCreated += e =>
-            {
-                if (!e.Scenario.Trains.ContainsKey("test"))
-                {
-                    throw new BveFileLoadException("キーが 'test' の他列車が見つかりませんでした。", "TrainController");
-                }
-
-                Train = e.Scenario.Trains["test"];
-            };
+            BveHacker.ScenarioCreated += OnScenarioCreated;
 
             Native.NativeKeys.AtsKeys[NativeAtsKeyName.D].Pressed += OnDPressed;
             Native.NativeKeys.AtsKeys[NativeAtsKeyName.E].Pressed += OnEPressed;
@@ -39,8 +31,20 @@ namespace AtsEx.Samples.MapPlugins.TrainController
 
         public override void Dispose()
         {
+            BveHacker.ScenarioCreated -= OnScenarioCreated;
+
             Native.NativeKeys.AtsKeys[NativeAtsKeyName.D].Pressed -= OnDPressed;
             Native.NativeKeys.AtsKeys[NativeAtsKeyName.E].Pressed -= OnEPressed;
+        }
+
+        private void OnScenarioCreated(ScenarioCreatedEventArgs e)
+        {
+            if (!e.Scenario.Trains.ContainsKey("test"))
+            {
+                throw new BveFileLoadException("キーが 'test' の他列車が見つかりませんでした。", "TrainController");
+            }
+
+            Train = e.Scenario.Trains["test"];
         }
 
         public override TickResult Tick(TimeSpan elapsed)

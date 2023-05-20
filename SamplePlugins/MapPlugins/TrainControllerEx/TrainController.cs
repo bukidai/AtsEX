@@ -28,28 +28,31 @@ namespace AtsEx.Samples.MapPlugins.TrainControllerEx
 
         public TrainController(PluginBuilder builder) : base(builder)
         {
-            BveHacker.ScenarioCreated += e =>
-            {
-                if (!e.Scenario.Trains.ContainsKey("test_ex"))
-                {
-                    throw new BveFileLoadException("キーが 'test_ex' の他列車が見つかりませんでした。", "TrainControllerEx");
-                }
-
-                Train = e.Scenario.Trains["test_ex"];
-
-                float GetBlockIndexFunc() => (float)e.Scenario.LocationManager.BlockIndex;
-                float GetMaxDrawDistanceFunc() => (float)e.Scenario.ObjectDrawer.DrawDistanceManager.DrawDistance;
-                Vector3 initialLocation = new Vector3(15, 0, 30); // 初期位置はワールド座標系で (15, 0, 30)
-                float initialDirection = (float)(Math.PI * 0.5); // 回転の基点は手前方向、右回りを正とする。初期状態は π/2 = 左向き
-
-                TrainLocator = new TrainLocator(Train, GetBlockIndexFunc, GetMaxDrawDistanceFunc, initialLocation, initialDirection, 0.2f, 0.01f);
-                Patch = Extensions.GetExtension<ITrainDrawPatchFactory>().Patch(nameof(Patch), Train, TrainLocator.CreateDrawDelegate());
-            };
+            BveHacker.ScenarioCreated += OnScenarioCreated;
         }
 
         public override void Dispose()
         {
             Patch.Dispose();
+            BveHacker.ScenarioCreated -= OnScenarioCreated;
+        }
+
+        private void OnScenarioCreated(ScenarioCreatedEventArgs e)
+        {
+            if (!e.Scenario.Trains.ContainsKey("test_ex"))
+            {
+                throw new BveFileLoadException("キーが 'test_ex' の他列車が見つかりませんでした。", "TrainControllerEx");
+            }
+
+            Train = e.Scenario.Trains["test_ex"];
+
+            float GetBlockIndexFunc() => (float)e.Scenario.LocationManager.BlockIndex;
+            float GetMaxDrawDistanceFunc() => (float)e.Scenario.ObjectDrawer.DrawDistanceManager.DrawDistance;
+            Vector3 initialLocation = new Vector3(15, 0, 30); // 初期位置はワールド座標系で (15, 0, 30)
+            float initialDirection = (float)(Math.PI * 0.5); // 回転の基点は手前方向、右回りを正とする。初期状態は π/2 = 左向き
+
+            TrainLocator = new TrainLocator(Train, GetBlockIndexFunc, GetMaxDrawDistanceFunc, initialLocation, initialDirection, 0.2f, 0.01f);
+            Patch = Extensions.GetExtension<ITrainDrawPatchFactory>().Patch(nameof(Patch), Train, TrainLocator.CreateDrawDelegate());
         }
 
         public override TickResult Tick(TimeSpan elapsed)

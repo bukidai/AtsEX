@@ -21,25 +21,28 @@ namespace AtsEx.Samples.MapPlugins.PreTrainController
 
         public PreTrainController(PluginBuilder builder) : base(builder)
         {
-            BveHacker.ScenarioCreated += e =>
-            {
-                if (!e.Scenario.Trains.ContainsKey("test"))
-                {
-                    throw new BveFileLoadException("キーが 'test' の他列車が見つかりませんでした。", "PreTrainController");
-                }
-
-                Train = e.Scenario.Trains["test"];
-                Train.TrainInfo.TrackKey = "0";
-                Train.Location = 35;
-
-                SectionManager sectionManager = e.Scenario.SectionManager;
-                PreTrainPatch = Extensions.GetExtension<IPreTrainPatchFactory>().Patch(nameof(PreTrainPatch), sectionManager, new PreTrainLocationConverter(Train, sectionManager));
-            };
+            BveHacker.ScenarioCreated += OnScenarioCreated;
         }
 
         public override void Dispose()
         {
             PreTrainPatch?.Dispose();
+            BveHacker.ScenarioCreated -= OnScenarioCreated;
+        }
+
+        private void OnScenarioCreated(ScenarioCreatedEventArgs e)
+        {
+            if (!e.Scenario.Trains.ContainsKey("test"))
+            {
+                throw new BveFileLoadException("キーが 'test' の他列車が見つかりませんでした。", "PreTrainController");
+            }
+
+            Train = e.Scenario.Trains["test"];
+            Train.TrainInfo.TrackKey = "0";
+            Train.Location = 35;
+
+            SectionManager sectionManager = e.Scenario.SectionManager;
+            PreTrainPatch = Extensions.GetExtension<IPreTrainPatchFactory>().Patch(nameof(PreTrainPatch), sectionManager, new PreTrainLocationConverter(Train, sectionManager));
         }
 
         public override TickResult Tick(TimeSpan elapsed)
