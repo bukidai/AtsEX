@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="VersionInfoMenuItem" xml:space="preserve">
-    <value>{0} バージョン情報...</value>
+    <value>{0} バージョン情報・読込済プラグイン一覧...</value>
   </data>
 </root>

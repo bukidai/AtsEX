@@ -118,39 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Caption" xml:space="preserve">
-    <value>{0} バージョン情報・プラグイン一覧</value>
+    <value>{0} Version Information and Loaded Plugins</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>{0}　Version {1}</value>
+    <value>{0}  Version {1}</value>
   </data>
   <data name="License" xml:space="preserve">
-    <value>ライセンス</value>
+    <value>License</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="PluginListColumnDescription" xml:space="preserve">
-    <value>説明</value>
+    <value>Description</value>
   </data>
   <data name="PluginListColumnFileName" xml:space="preserve">
-    <value>ファイル名</value>
+    <value>File Name</value>
   </data>
   <data name="PluginListColumnName" xml:space="preserve">
-    <value>名前</value>
+    <value>Name</value>
   </data>
   <data name="PluginListColumnType" xml:space="preserve">
-    <value>種別</value>
+    <value>Type</value>
   </data>
   <data name="PluginListColumnVersion" xml:space="preserve">
-    <value>バージョン</value>
+    <value>Version</value>
   </data>
   <data name="PluginListHeader" xml:space="preserve">
-    <value>読み込まれたプラグインの詳細：</value>
+    <value>Loaded Plugin Details:</value>
   </data>
   <data name="Repository" xml:space="preserve">
-    <value>リポジトリ (GitHub)</value>
+    <value>Repository (GitHub)</value>
   </data>
   <data name="Website" xml:space="preserve">
-    <value>{0} 紹介ページ (岡オカ営業所)</value>
+    <value>{0} Inrtoduction (Oka-Oka Depot)</value>
   </data>
 </root>
