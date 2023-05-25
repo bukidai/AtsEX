@@ -132,6 +132,8 @@ namespace AtsEx
 
         public void Tick(TimeSpan elapsed)
         {
+            if (_MapStatements is null) return;
+
             double vehicleLocation = Scenario.LocationManager.Location;
             double preTrainLocation = Scenario.Route.PreTrainObjects.GetPreTrainLocation(Scenario.TimeManager.TimeMilliseconds);
 
