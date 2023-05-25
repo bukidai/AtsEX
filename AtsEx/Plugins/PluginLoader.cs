@@ -66,46 +66,62 @@ namespace AtsEx.Plugins
             Dictionary<string, PluginBase> plugins = new Dictionary<string, PluginBase>();
             PluginLoadErrorQueue loadErrorQueue = new PluginLoadErrorQueue(BveHacker.LoadErrorManager);
 
-            foreach (KeyValuePair<Identifier, Assembly> item in pluginSources.Assemblies)
+            foreach (IPluginPackage pluginPackage in pluginSources)
             {
-                try
+                switch (pluginPackage)
                 {
-                    List<PluginBase> loadedPlugins = LoadFromAssembly(item.Key, item.Value, pluginSources.PluginType, pluginSources.AllowNonPluginAssembly);
-                    loadedPlugins.ForEach(plugin => plugins[plugin.Identifier] = plugin);
-                }
-                catch (Exception ex)
-                {
-                    loadErrorQueue.OnFailedToLoadAssembly(item.Value, ex);
+                    case AssemblyPluginPackage assemblyPluginPackage:
+                    {
+                        try
+                        {
+                            List<PluginBase> loadedPlugins = LoadFromAssembly(assemblyPluginPackage.Identifier, assemblyPluginPackage.Assembly, pluginSources.PluginType, pluginSources.AllowNonPluginAssembly);
+                            loadedPlugins.ForEach(plugin => plugins[plugin.Identifier] = plugin);
+                        }
+                        catch (Exception ex)
+                        {
+                            loadErrorQueue.OnFailedToLoadAssembly(assemblyPluginPackage.Assembly, ex);
+                        }
+
+                        break;
+                    }
+
+                    case ScriptPluginPackage scriptPluginPackage:
+                    {
+                        try
+                        {
+                            PluginBuilder pluginBuilder = new PluginBuilder(Native, BveHacker, Extensions, Plugins, scriptPluginPackage.Identifier.Text);
+
+                            ScriptPluginBase plugin;
+                            switch (scriptPluginPackage.ScriptLanguage)
+                            {
+                                case ScriptLanguage.CSharpScript:
+                                    plugin = CSharpScriptPlugin.FromPackage(pluginBuilder, pluginSources.PluginType, scriptPluginPackage);
+                                    break;
+
+                                case ScriptLanguage.IronPython2:
+                                    plugin = IronPython2Plugin.FromPackage(pluginBuilder, pluginSources.PluginType, scriptPluginPackage);
+                                    break;
+
+                                default:
+                                    throw new NotImplementedException();
+                            }
+
+                            plugins[scriptPluginPackage.Identifier.Text] = plugin;
+                        }
+                        catch (Exception ex)
+                        {
+                            loadErrorQueue.OnFailedToLoadScriptPlugin(scriptPluginPackage, ex);
+                        }
+
+                        break;
+                    }
+
+                    // TODO: ここで他の種類のプラグイン（ネイティブなど）を読み込む
+
+                    default:
+                        throw new NotImplementedException();
                 }
             }
-
-            foreach (KeyValuePair<Identifier, ScriptPluginPackage> item in pluginSources.CSharpScriptPackages)
-            {
-                try
-                {
-                    PluginBuilder pluginBuilder = new PluginBuilder(Native, BveHacker, Extensions, Plugins, item.Key.Text);
-                    plugins[item.Key.Text] = CSharpScriptPlugin.FromPackage(pluginBuilder, pluginSources.PluginType, item.Value);
-                }
-                catch (Exception ex)
-                {
-                    loadErrorQueue.OnFailedToLoadScriptPlugin(item.Value, ex);
-                }
-            }
-
-            foreach (KeyValuePair<Identifier, ScriptPluginPackage> item in pluginSources.IronPython2Packages)
-            {
-                try
-                {
-                    PluginBuilder pluginBuilder = new PluginBuilder(Native, BveHacker, Extensions, Plugins, item.Key.Text);
-                    plugins[item.Key.Text] = IronPython2Plugin.FromPackage(pluginBuilder, pluginSources.PluginType, item.Value);
-                }
-                catch (Exception ex)
-                {
-                    loadErrorQueue.OnFailedToLoadScriptPlugin(item.Value, ex);
-                }
-            }
-
-            // TODO: ここで他の種類のプラグイン（ネイティブなど）を読み込む
 
             loadErrorQueue.Resolve();
             return plugins;

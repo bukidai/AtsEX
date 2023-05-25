@@ -24,33 +24,36 @@ namespace AtsEx.Plugins
 
             XElement root = doc.Element(TargetNamespace + "AtsExPluginUsing");
 
-            Dictionary<Identifier, Assembly> assemblies = root.Elements(TargetNamespace + "Assembly").
-                ToDictionary(GetIdentifier, element => LoadAssembly(element, listPath));
-
-            Dictionary<Identifier, ScriptPluginPackage> cSharpScriptPackages = root.Elements(TargetNamespace + "CSharpScript").
-                ToDictionary(GetIdentifier, element => LoadScriptPluginPackage(element, Path.GetDirectoryName(listPath)));
-
-            Dictionary<Identifier, ScriptPluginPackage> ironPython2Packages = root.Elements(TargetNamespace + "IronPython2").
-                ToDictionary(GetIdentifier, element => LoadScriptPluginPackage(element, Path.GetDirectoryName(listPath)));
-
-            return new PluginSourceSet(Path.GetFileName(listPath), pluginType, allowNonPluginAssembly, assemblies, cSharpScriptPackages, ironPython2Packages);
-
-
-            Identifier GetIdentifier(XElement element)
+            List<IPluginPackage> pluginPackages = root.Elements().Select<XElement, IPluginPackage>(element =>
             {
-                string identifierText = (string)element.Attribute("Identifier");
-                return identifierText is null ? new RandomIdentifier() : new Identifier(identifierText);
-            }
+                switch (element.Name.LocalName)
+                {
+                    case "Assembly":
+                        return LoadAssemblyPluginPackage(element, listPath);
+
+                    case "CSharpScript":
+                        return LoadScriptPluginPackage(ScriptLanguage.CSharpScript, element, Path.GetDirectoryName(listPath));
+
+                    case "IronPython2":
+                        return LoadScriptPluginPackage(ScriptLanguage.IronPython2, element, Path.GetDirectoryName(listPath));
+
+                    default:
+                        throw new NotImplementedException();
+                }
+            }).ToList();
+
+            return new PluginSourceSet(Path.GetFileName(listPath), pluginType, allowNonPluginAssembly, pluginPackages);
         }
 
-        private static Assembly LoadAssembly(XElement element, string listPath)
+        private static AssemblyPluginPackage LoadAssemblyPluginPackage(XElement element, string listPath)
         {
             IXmlLineInfo lineInfo = element;
 
             string assemblyPath = element.Attribute("Path").Value;
             try
             {
-                return Assembly.LoadFrom(Path.Combine(Path.GetDirectoryName(listPath), assemblyPath));
+                Assembly assembly = Assembly.LoadFrom(Path.Combine(Path.GetDirectoryName(listPath), assemblyPath));
+                return new AssemblyPluginPackage(GetIdentifier(element), assembly);
             }
             catch (BadImageFormatException)
             {
@@ -62,10 +65,16 @@ namespace AtsEx.Plugins
             }
         }
 
-        private static ScriptPluginPackage LoadScriptPluginPackage(XElement element, string baseDirectory)
+        private static ScriptPluginPackage LoadScriptPluginPackage(ScriptLanguage scriptLanguage, XElement element, string baseDirectory)
         {
             string packageManifestPath = element.Attribute("PackageManifestPath").Value;
-            return ScriptPluginPackage.Load(Path.Combine(baseDirectory, packageManifestPath));
+            return ScriptPluginPackage.Load(GetIdentifier(element), scriptLanguage, Path.Combine(baseDirectory, packageManifestPath));
+        }
+
+        private static Identifier GetIdentifier(XElement element)
+        {
+            string identifierText = (string)element.Attribute("Identifier");
+            return identifierText is null ? new RandomIdentifier() : new Identifier(identifierText);
         }
 
         private static void SchemaValidation(object sender, ValidationEventArgs e) => throw new FormatException(Resources.Value.XmlSchemaValidation.Value, e.Exception);

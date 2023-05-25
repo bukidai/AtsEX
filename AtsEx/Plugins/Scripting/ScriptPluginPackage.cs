@@ -12,9 +12,11 @@ using System.Xml.Schema;
 
 using UnembeddedResources;
 
+using AtsEx.PluginHost.Plugins;
+
 namespace AtsEx.Plugins.Scripting
 {
-    internal partial class ScriptPluginPackage
+    internal partial class ScriptPluginPackage : IPluginPackage
     {
         private class ResourceSet
         {
@@ -47,6 +49,9 @@ namespace AtsEx.Plugins.Scripting
             }
         }
 
+        public Identifier Identifier { get; }
+        public ScriptLanguage ScriptLanguage { get; }
+
         public bool UseAtsExExtensions { get; }
 
         public string Location { get; }
@@ -61,8 +66,11 @@ namespace AtsEx.Plugins.Scripting
         public string OnStartedScriptPath { get; }
         public string TickScriptPath { get; }
 
-        protected ScriptPluginPackage(InformationBuilder informationBuilder, ScriptsBuilder scriptsBuilder, bool useAtsExExtensions)
+        protected ScriptPluginPackage(Identifier identifier, ScriptLanguage scriptLanguage, InformationBuilder informationBuilder, ScriptsBuilder scriptsBuilder, bool useAtsExExtensions)
         {
+            Identifier = identifier;
+            ScriptLanguage = scriptLanguage;
+
             UseAtsExExtensions = useAtsExExtensions;
 
             Location = informationBuilder.Location;
@@ -78,7 +86,7 @@ namespace AtsEx.Plugins.Scripting
             TickScriptPath = scriptsBuilder.TickScriptPath;
         }
 
-        public static ScriptPluginPackage Load(string path)
+        public static ScriptPluginPackage Load(Identifier identifier, ScriptLanguage scriptLanguage, string path)
         {
             XDocument doc = XDocument.Load(path, LoadOptions.SetLineInfo);
             doc.Validate(SchemaSet, DocumentValidation);
@@ -92,7 +100,7 @@ namespace AtsEx.Plugins.Scripting
             bool useAtsExExtensions = (bool?)scriptsElement.Attribute("UseAtsExExtensions") ?? true;
             ScriptsBuilder scriptsBuilder = CreateScriptsBuilder(scriptsElement, Path.GetDirectoryName(path));
 
-            return new ScriptPluginPackage(informationBuilder, scriptsBuilder, useAtsExExtensions);
+            return new ScriptPluginPackage(identifier, scriptLanguage, informationBuilder, scriptsBuilder, useAtsExExtensions);
         }
 
         private static InformationBuilder CreateInformationBuilder(XElement infoElement, string path)

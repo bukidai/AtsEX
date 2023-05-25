@@ -15,14 +15,11 @@ namespace AtsEx.Plugins
         {
             if (PluginType != other.PluginType) throw new InvalidOperationException();
 
-            IDictionary<Identifier, Assembly> concatenatedAssemblies = ConcatDictionaries(Assemblies, other.Assemblies);
-            IDictionary<Identifier, ScriptPluginPackage> concatenatedCSharpScriptPackages = ConcatDictionaries(CSharpScriptPackages, other.CSharpScriptPackages);
-            IDictionary<Identifier, ScriptPluginPackage> concatenatedIronPython2Packages = ConcatDictionaries(IronPython2Packages, other.IronPython2Packages);
+            List<IPluginPackage> newSet = new List<IPluginPackage>();
+            newSet.AddRange(this);
+            newSet.AddRange(other);
 
-            return new PluginSourceSet(name, PluginType, AllowNonPluginAssembly, concatenatedAssemblies, concatenatedCSharpScriptPackages, concatenatedIronPython2Packages);
-
-            Dictionary<TKey, TValue> ConcatDictionaries<TKey, TValue>(IDictionary<TKey, TValue> first, IDictionary<TKey, TValue> second)
-                => Enumerable.Concat(first, second).GroupBy(pair => pair.Value).Select(x => x.First()).ToDictionary(pair => pair.Key, pair => pair.Value);
+            return new PluginSourceSet(name, PluginType, AllowNonPluginAssembly, newSet);
         }
     }
 }

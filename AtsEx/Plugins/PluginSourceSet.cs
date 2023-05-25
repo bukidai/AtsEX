@@ -15,7 +15,7 @@ using AtsEx.PluginHost.Plugins;
 
 namespace AtsEx.Plugins
 {
-    internal sealed partial class PluginSourceSet
+    internal sealed partial class PluginSourceSet : ReadOnlyCollection<IPluginPackage>
     {
         private class ResourceSet
         {
@@ -54,23 +54,14 @@ namespace AtsEx.Plugins
         public PluginType PluginType { get; }
         public bool AllowNonPluginAssembly { get; }
 
-        public ReadOnlyDictionary<Identifier, Assembly> Assemblies { get; }
-        public ReadOnlyDictionary<Identifier, ScriptPluginPackage> CSharpScriptPackages { get; }
-        public ReadOnlyDictionary<Identifier, ScriptPluginPackage> IronPython2Packages { get; }
-
-        private PluginSourceSet(string name, PluginType pluginType, bool allowNonPluginAssembly,
-            IDictionary<Identifier, Assembly> assemblies, IDictionary<Identifier, ScriptPluginPackage> csharpScriptPackages, IDictionary<Identifier, ScriptPluginPackage> ironPython2Packages)
+        private PluginSourceSet(string name, PluginType pluginType, bool allowNonPluginAssembly, IList<IPluginPackage> pluginPackages) : base(pluginPackages)
         {
             Name = name;
             PluginType = pluginType;
             AllowNonPluginAssembly = allowNonPluginAssembly;
-
-            Assemblies = new ReadOnlyDictionary<Identifier, Assembly>(assemblies);
-            CSharpScriptPackages = new ReadOnlyDictionary<Identifier, ScriptPluginPackage>(csharpScriptPackages);
-            IronPython2Packages = new ReadOnlyDictionary<Identifier, ScriptPluginPackage>(ironPython2Packages);
         }
 
         public static PluginSourceSet Empty(PluginType pluginType)
-            => new PluginSourceSet(null, pluginType, true, new Dictionary<Identifier, Assembly>(), new Dictionary<Identifier, ScriptPluginPackage>(), new Dictionary<Identifier, ScriptPluginPackage>());
+            => new PluginSourceSet(null, pluginType, true, new List<IPluginPackage>());
     }
 }
