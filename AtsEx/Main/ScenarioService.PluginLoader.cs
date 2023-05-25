@@ -74,18 +74,6 @@ namespace AtsEx
                             }
                         }
                     }
-
-                    {
-                        IEnumerable<LoadError> removeTargetErrors = BveHacker.LoadErrorManager.Errors.Where(error =>
-                        {
-                            bool isTargetError = BveHacker._MapHeaders.Any(header => header.LineIndex == error.LineIndex && header.CharIndex == error.CharIndex);
-                            return isTargetError;
-                        });
-                        foreach (LoadError error in removeTargetErrors)
-                        {
-                            BveHacker.LoadErrorManager.Errors.Remove(error);
-                        }
-                    }
                 }
                 catch (Exception ex)
                 {

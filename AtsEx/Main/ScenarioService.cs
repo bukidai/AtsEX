@@ -58,6 +58,9 @@ namespace AtsEx
             PluginSet plugins = pluginLoader.Load(vehiclePluginUsing);
             _PluginService = new PluginService(plugins, Native.Handles);
 
+            HeaderErrorResolver headerErrorResolver = new HeaderErrorResolver(BveHacker.LoadErrorManager, BveHacker._MapHeaders);
+            headerErrorResolver.Resolve();
+
             AtsEx.VersionFormProvider.SetScenario(plugins.Select(item => item.Value));
         }
 
