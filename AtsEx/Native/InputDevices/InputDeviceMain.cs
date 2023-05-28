@@ -73,6 +73,8 @@ namespace AtsEx.Native.InputDevices
                 LoadedVehicleConfig = e.VehicleConfig;
             };
 
+            GC.Collect();
+
 
             bool CanInitializeAtsEx() => Application.OpenForms.Count > 0;
 
