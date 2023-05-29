@@ -120,6 +120,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnembeddedResources, Version=1.0.30529.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UnembeddedResources.1.0.0\lib\UnembeddedResources.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Beacon.cs" />
@@ -159,11 +162,6 @@
     <ProjectReference Include="..\..\Libs\BveTypes\BveTypes.csproj">
       <Project>{3658ede1-0c3e-4104-a351-64981e4f82df}</Project>
       <Name>BveTypes</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Libs\UnembeddedResources\UnembeddedResources.csproj">
-      <Project>{97512546-8929-4c0b-983d-5347197a3862}</Project>
-      <Name>UnembeddedResources</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

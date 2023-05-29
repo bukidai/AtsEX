@@ -39,6 +39,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnembeddedResources, Version=1.0.30529.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UnembeddedResources.1.0.0\lib\UnembeddedResources.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Loader\MemberParser.cs" />
@@ -80,10 +83,9 @@
       <Project>{b63adef8-3bf9-48e1-8b61-8fa042b19f89}</Project>
       <Name>FastMember</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UnembeddedResources\UnembeddedResources.csproj">
-      <Project>{97512546-8929-4c0b-983d-5347197a3862}</Project>
-      <Name>UnembeddedResources</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

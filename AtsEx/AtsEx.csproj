@@ -102,6 +102,9 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnembeddedResources, Version=1.0.30529.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UnembeddedResources.1.0.0\lib\UnembeddedResources.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExceptionResolver.cs" />
@@ -219,10 +222,6 @@
     <ProjectReference Include="..\Libs\TypeWrapping\TypeWrapping.csproj">
       <Project>{28fc1147-db95-42f0-aeb3-ae8ae93f0179}</Project>
       <Name>TypeWrapping</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libs\UnembeddedResources\UnembeddedResources.csproj">
-      <Project>{97512546-8929-4c0b-983d-5347197a3862}</Project>
-      <Name>UnembeddedResources</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

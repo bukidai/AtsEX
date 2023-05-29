@@ -39,6 +39,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnembeddedResources, Version=1.0.30529.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\UnembeddedResources.1.0.0\lib\UnembeddedResources.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FastConstructor.cs" />
@@ -55,12 +58,10 @@
       <Project>{54a911b0-4b7a-4f49-ac5f-4efc5761f1f7}</Project>
       <Name>FastCaching</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UnembeddedResources\UnembeddedResources.csproj">
-      <Project>{97512546-8929-4c0b-983d-5347197a3862}</Project>
-      <Name>UnembeddedResources</Name>
-    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\FastMethod\Generic.ja.resx" />
   </ItemGroup>
