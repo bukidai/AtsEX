@@ -33,6 +33,12 @@
     <DocumentationFile>bin\Release\AtsEx.CoreExtensions.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony, Version=2.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Lib.Harmony.2.2.2\lib\net48\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="ObjectiveHarmonyPatch, Version=1.0.30529.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ObjectiveHarmonyPatch.1.0.0\lib\ObjectiveHarmonyPatch.dll</HintPath>
+    </Reference>
     <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
       <HintPath>..\..\packages\SlimDX.4.0.13.44\lib\NET40\SlimDX.dll</HintPath>
       <Private>False</Private>
@@ -84,11 +90,6 @@
     <ProjectReference Include="..\..\Libs\FastMember\FastMember.csproj">
       <Project>{b63adef8-3bf9-48e1-8b61-8fa042b19f89}</Project>
       <Name>FastMember</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Libs\ObjectiveHarmonyPatch\ObjectiveHarmonyPatch.csproj">
-      <Project>{9a22c1b4-6edf-46ad-a03e-71847594e6e3}</Project>
-      <Name>ObjectiveHarmonyPatch</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Libs\TypeWrapping\TypeWrapping.csproj">

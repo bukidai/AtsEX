@@ -188,10 +188,6 @@
       <Project>{b63adef8-3bf9-48e1-8b61-8fa042b19f89}</Project>
       <Name>FastMember</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Libs\ObjectiveHarmonyPatch\ObjectiveHarmonyPatch.csproj">
-      <Project>{9a22c1b4-6edf-46ad-a03e-71847594e6e3}</Project>
-      <Name>ObjectiveHarmonyPatch</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Libs\TypeWrapping\TypeWrapping.csproj">
       <Project>{28fc1147-db95-42f0-aeb3-ae8ae93f0179}</Project>
       <Name>TypeWrapping</Name>
