@@ -157,6 +157,7 @@
     <Content Include="Resources\ClassWrappers\MapObjectList.resx" />
     <Content Include="Resources\ClassWrapperBase.ja.resx" />
     <Content Include="Resources\ClassWrapperBase.resx" />
+    <None Include="AtsEx.PluginHost.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

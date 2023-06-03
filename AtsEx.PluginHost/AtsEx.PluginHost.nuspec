@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>AtsEx.PluginHost</id>
+		<version>0.19.0</version>
+		<description>BVE Trainsim 5/6 用 AtsEX プラグインを開発するための基本ライブラリです。</description>
+		<authors>AtsEX Project</authors>
+		
+		<projectUrl>https://github.com/automatic9045/AtsEX</projectUrl>
+		<license type="expression">MIT</license>
+		<copyright>Copyright © 2022 AtsEX Project</copyright>
+		<tags>bve bve5 bve6</tags>
+		<repository type="git" url="https://github.com/automatic9045/AtsEX.git" />
+		<title>AtsEX PluginHost</title>
+
+		<dependencies>
+			<dependency id="Lib.Harmony" version="2.2.2" />
+			<dependency id="SlimDX" version="4.0.13.44" />
+			<dependency id="UnembeddedResources" version="1.0.0" />
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="bin\Release\AtsEx.PluginHost.dll" target="lib" />
+		<file src="bin\Release\AtsEx.PluginHost.xml" target="lib" />
+		<file src="bin\Release\BveTypes.dll" target="lib" />
+		<file src="bin\Release\BveTypes.xml" target="lib" />
+		<file src="bin\Release\FastCaching.dll" target="lib" />
+		<file src="bin\Release\FastMember.dll" target="lib" />
+		<file src="bin\Release\TypeWrapping.dll" target="lib" />
+	</files>
+</package>

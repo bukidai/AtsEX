@@ -99,6 +99,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="AtsEx.CoreExtensions.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
