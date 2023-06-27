@@ -74,6 +74,19 @@
 					</xs:complexType>
 				</xs:element>
 
+				<xs:element name="Event" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="Wrapper" type="DotNetName" use="required" />
+						<xs:attribute name="IsWrapperNonPublic" type="xs:boolean" default="false" />
+						<xs:attribute name="IsWrapperStatic" type="xs:boolean" default="false" />
+						<xs:attribute name="OriginalAddAccessor" type="DotNetName" use="required" />
+						<xs:attribute name="OriginalRemoveAccessor" type="DotNetName" use="required" />
+						<xs:attribute name="OriginalDelegateField" type="DotNetName" use="required" />
+						<xs:attribute name="IsOriginalAccessorNonPublic" type="xs:boolean" default="false" />
+						<xs:attribute name="IsOriginalStatic" type="xs:boolean" default="false" />
+					</xs:complexType>
+				</xs:element>
+
 				<xs:element name="Method" minOccurs="0" maxOccurs="unbounded">
 					<xs:complexType>
 						<xs:attribute name="Wrapper" type="DotNetName" use="required" />

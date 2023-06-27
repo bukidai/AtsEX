@@ -138,6 +138,9 @@
   <data name="Static" xml:space="preserve">
     <value>static</value>
   </data>
+  <data name="WrapperEventNotFound" xml:space="preserve">
+    <value>A {0} event '{1}' does not exist in the wrapper type '{2}.'</value>
+  </data>
   <data name="WrapperMethodNotFound" xml:space="preserve">
     <value>A {1} method named '{2}' with parameter(s) '{0}' does not exist int the wrapper type '{3}.'</value>
   </data>

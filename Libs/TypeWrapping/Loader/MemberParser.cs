@@ -13,6 +13,7 @@ namespace TypeWrapping
 
         private readonly Dictionary<string, FieldInfo> FieldCache = new Dictionary<string, FieldInfo>();
         private readonly Dictionary<string, PropertyInfo> PropertyCache = new Dictionary<string, PropertyInfo>();
+        private readonly Dictionary<string, EventInfo> EventCache = new Dictionary<string, EventInfo>();
         private readonly Dictionary<(string Name, Type[] Types), MethodInfo> MethodCache = new Dictionary<(string Name, Type[] Types), MethodInfo>();
 
         public MemberParser(Type source)
@@ -36,6 +37,15 @@ namespace TypeWrapping
             property = Source.GetProperty(name, CreateBindingAttribute(isNonPublic, isStatic));
             PropertyCache.Add(name, property);
             return property;
+        }
+
+        public EventInfo GetEvent(string name, bool isNonPublic, bool isStatic)
+        {
+            if (EventCache.TryGetValue(name, out EventInfo @event)) return @event;
+
+            @event = Source.GetEvent(name, CreateBindingAttribute(isNonPublic, isStatic));
+            EventCache.Add(name, @event);
+            return @event;
         }
 
         public MethodInfo GetMethod(string name, Type[] types, bool isNonPublic, bool isStatic)

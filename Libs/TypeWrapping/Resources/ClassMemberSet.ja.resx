@@ -120,6 +120,9 @@
   <data name="OriginalConstructorNotFound" xml:space="preserve">
     <value>オリジナルコンストラクタが見つかりませんでした。{0} '{1}' は無効なキーです。</value>
   </data>
+  <data name="OriginalEventNotFound" xml:space="preserve">
+    <value>オリジナルイベントが見つかりませんでした。{0} '{1}' は無効なキーです。</value>
+  </data>
   <data name="OriginalFieldNotFound" xml:space="preserve">
     <value>オリジナルフィールドが見つかりませんでした。{0} '{1}' は無効なキーです。</value>
   </data>

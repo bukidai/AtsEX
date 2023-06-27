@@ -75,6 +75,7 @@ namespace TypeWrapping
                     Dictionary<string, FastMethod> propertyGetters = new Dictionary<string, FastMethod>();
                     Dictionary<string, FastMethod> propertySetters = new Dictionary<string, FastMethod>();
                     Dictionary<string, FastField> fields = new Dictionary<string, FastField>();
+                    Dictionary<string, FastEvent> events = new Dictionary<string, FastEvent>();
                     Dictionary<Type[], FastConstructor> constructors = new Dictionary<Type[], FastConstructor>();
                     Dictionary<(string, Type[]), FastMethod> methods = new Dictionary<(string, Type[]), FastMethod>();
 
@@ -102,6 +103,21 @@ namespace TypeWrapping
                             {
                                 throw new FormatException(string.Format(Resources.Value.PropertyImplementationInvalid.Value, $"{wrapperType.Name}.{wrapperProperty.Name}"));
                             }
+                        }
+                    }
+
+                    {
+                        IEnumerable<XElement> eventElements = classElement.Elements(TargetNamespace + "Event");
+                        foreach (XElement eventElement in eventElements)
+                        {
+                            EventInfo wrapperEvent = elementParser.GetWrapperEvent(eventElement);
+
+                            MethodInfo originalAddAccessor = elementParser.GetEventOriginalAddAccessor(eventElement, Resolver.GetOriginal(wrapperEvent.EventHandlerType));
+                            MethodInfo originalRemoveAccessor = elementParser.GetEventOriginalRemoveAccessor(eventElement, Resolver.GetOriginal(wrapperEvent.EventHandlerType));
+
+                            FieldInfo originalDelegate = elementParser.GetEventOriginalDelegate(eventElement);
+
+                            events.Add(wrapperEvent.Name, new FastEvent(originalAddAccessor, originalRemoveAccessor, originalDelegate));
                         }
                     }
 
@@ -149,7 +165,7 @@ namespace TypeWrapping
                         }
                     }
 
-                    ClassMemberSet members = new ClassMemberSet(wrapperType, originalType, propertyGetters, propertySetters, fields, constructors, methods);
+                    ClassMemberSet members = new ClassMemberSet(wrapperType, originalType, propertyGetters, propertySetters, fields, events, constructors, methods);
                     return members;
                 });
 

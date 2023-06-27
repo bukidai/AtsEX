@@ -23,6 +23,7 @@ namespace TypeWrapping
                     [ResourceStringHolder(nameof(Localizer))] public Resource<string> OriginalFieldNotFound { get; private set; }
                     [ResourceStringHolder(nameof(Localizer))] public Resource<string> WrapperPropertyNotFound { get; private set; }
                     [ResourceStringHolder(nameof(Localizer))] public Resource<string> FieldWrapperPropertyNotFound { get; private set; }
+                    [ResourceStringHolder(nameof(Localizer))] public Resource<string> WrapperEventNotFound { get; private set; }
                     [ResourceStringHolder(nameof(Localizer))] public Resource<string> WrapperMethodNotFound { get; private set; }
                     [ResourceStringHolder(nameof(Localizer))] public Resource<string> OriginalMethodNotFound { get; private set; }
                     [ResourceStringHolder(nameof(Localizer))] public Resource<string> NonPublic { get; private set; }
@@ -88,6 +89,46 @@ namespace TypeWrapping
                     return property ?? throw new KeyNotFoundException(
                         string.Format(Resources.Value.FieldWrapperPropertyNotFound.Value,
                         GetAccessibilityDescription(isNonPublic, isStatic), name, WrapperType.Name));
+                }
+
+                public EventInfo GetWrapperEvent(XElement source)
+                {
+                    (string name, bool isNonPublic, bool isStatic) = GetWrapperInfo(source);
+                    EventInfo @event = WrapperMemberParser.GetEvent(name, isNonPublic, isStatic);
+
+                    return @event ?? throw new KeyNotFoundException(
+                        string.Format(Resources.Value.WrapperEventNotFound.Value,
+                        GetAccessibilityDescription(isNonPublic, isStatic), name, WrapperType.Name));
+                }
+
+                public MethodInfo GetEventOriginalAddAccessor(XElement source, Type type)
+                {
+                    (string name, bool isNonPublic, bool isStatic) = GetInfo(source, "OriginalAddAccessor", "IsOriginalAccessorNonPublic", "IsOriginalStatic");
+                    MethodInfo method = OriginalMemberParser.GetMethod(name, new Type[] { type }, isNonPublic, isStatic);
+
+                    return method ?? throw new KeyNotFoundException(
+                        string.Format(Resources.Value.OriginalMethodNotFound.Value,
+                        type, GetAccessibilityDescription(isNonPublic, isStatic), name, WrapperType.Name, OriginalType.Name));
+                }
+
+                public MethodInfo GetEventOriginalRemoveAccessor(XElement source, Type type)
+                {
+                    (string name, bool isNonPublic, bool isStatic) = GetInfo(source, "OriginalRemoveAccessor", "IsOriginalAccessorNonPublic", "IsOriginalStatic");
+                    MethodInfo method = OriginalMemberParser.GetMethod(name, new Type[] { type }, isNonPublic, isStatic);
+
+                    return method ?? throw new KeyNotFoundException(
+                        string.Format(Resources.Value.OriginalMethodNotFound.Value,
+                        type, GetAccessibilityDescription(isNonPublic, isStatic), name, WrapperType.Name, OriginalType.Name));
+                }
+
+                public FieldInfo GetEventOriginalDelegate(XElement source)
+                {
+                    (string name, _, bool isStatic) = GetInfo(source, "OriginalDelegateField", "_", "IsOriginalStatic");
+                    FieldInfo field = OriginalMemberParser.GetField(name, true, isStatic);
+
+                    return field ?? throw new KeyNotFoundException(
+                        string.Format(Resources.Value.OriginalFieldNotFound.Value,
+                        GetAccessibilityDescription(true, isStatic), name, WrapperType.Name, OriginalType.Name));
                 }
 
                 public MethodInfo GetWrapperMethod(XElement source, Type[] types)

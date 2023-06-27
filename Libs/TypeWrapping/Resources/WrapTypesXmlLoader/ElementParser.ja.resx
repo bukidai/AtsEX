@@ -138,6 +138,9 @@
   <data name="Static" xml:space="preserve">
     <value>静的</value>
   </data>
+  <data name="WrapperEventNotFound" xml:space="preserve">
+    <value>{0}イベント '{1}' はラッパー型 '{2}' に存在しません。</value>
+  </data>
   <data name="WrapperMethodNotFound" xml:space="preserve">
     <value>パラメータ '{0}' をもつ{1}メソッド '{2}' はラッパー型 '{3}' に存在しません。</value>
   </data>
