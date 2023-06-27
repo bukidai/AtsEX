@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FastConstructor.cs" />
+    <Compile Include="FastEvent.cs" />
     <Compile Include="FastField.cs" />
     <Compile Include="FastMethod.NonGeneric.cs" />
     <Compile Include="FastMethod.Generic.cs" />
