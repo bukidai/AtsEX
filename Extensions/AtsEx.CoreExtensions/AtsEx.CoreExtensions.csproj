@@ -55,11 +55,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConductorPatch\ConductorPatch.cs" />
+    <Compile Include="ConductorPatch\ConductorPatchFactory.cs" />
+    <Compile Include="ConductorPatch\ConductorPatchInvoker.cs" />
+    <Compile Include="ConductorPatch\DeclarationPriority.cs" />
+    <Compile Include="ConductorPatch\ConductorBase.cs" />
+    <Compile Include="ConductorPatch\HarmonyPatchSet.cs" />
+    <Compile Include="ConductorPatch\IConductorPatchFactory.cs" />
     <Compile Include="ContextMenuHacker\ContextMenuHacker.cs" />
     <Compile Include="ContextMenuHacker\ContextMenuItemType.cs" />
     <Compile Include="ContextMenuHacker\IContextMenuHacker.cs" />
     <Compile Include="DiagramUpdater\IDiagramUpdater.cs" />
     <Compile Include="DiagramUpdater\DiagramUpdater.cs" />
+    <Compile Include="MethodOverrideMode.cs" />
     <Compile Include="PreTrainPatch\IPreTrainLocationConverter.cs" />
     <Compile Include="PreTrainPatch\IPreTrainPatchFactory.cs" />
     <Compile Include="PreTrainPatch\PreTrainLocation.cs" />
