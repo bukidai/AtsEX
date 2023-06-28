@@ -20,7 +20,7 @@ namespace BveTypes.ClassWrappers
     /// 読み込まれたファイルに関する情報にアクセスするには <see cref="ScenarioInfo"/> を使用してください。
     /// </remarks>
     /// <seealso cref="ScenarioInfo"/>
-    public class Scenario : ClassWrapperBase
+    public class Scenario : ClassWrapperBase, IDisposable
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
@@ -37,6 +37,7 @@ namespace BveTypes.ClassWrappers
 
             ObjectDrawerField = members.GetSourceFieldOf(nameof(ObjectDrawer));
 
+            DisposeMethod = members.GetSourceMethodOf(nameof(Dispose));
             InitializeTimeAndLocationMethod = members.GetSourceMethodOf(nameof(InitializeTimeAndLocation));
             InitializeMethod = members.GetSourceMethodOf(nameof(Initialize));
         }
@@ -112,6 +113,10 @@ namespace BveTypes.ClassWrappers
         /// このシナリオに関連付けられた <see cref="ClassWrappers.ObjectDrawer"/> のインスタンスを取得します。
         /// </summary>
         public ObjectDrawer ObjectDrawer => ClassWrappers.ObjectDrawer.FromSource(ObjectDrawerField.GetValue(Src));
+
+        private static FastMethod DisposeMethod;
+        /// <inheritdoc/>
+        public void Dispose() => DisposeMethod.Invoke(Src, null);
 
         private static FastMethod InitializeTimeAndLocationMethod;
         public void InitializeTimeAndLocation(double location, int timeMilliseconds) => InitializeTimeAndLocationMethod.Invoke(Src, new object[] { location, timeMilliseconds });

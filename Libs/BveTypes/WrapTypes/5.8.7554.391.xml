@@ -631,6 +631,7 @@
 
 		<Field WrapperProperty="ObjectDrawer" Original="j" IsOriginalNonPublic="true"/>
 
+		<Method Wrapper="Dispose" WrapperParams="void" Original="Dispose"/>
 		<Method Wrapper="InitializeTimeAndLocation" WrapperParams="System.Double; System.Int32" Original="a" IsOriginalNonPublic="true"/>
 		<Method Wrapper="Initialize" WrapperParams="System.Int32" Original="a"/>
 	</Class>
