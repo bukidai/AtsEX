@@ -36,7 +36,7 @@ namespace AtsEx
                         return new PatchInvokationResult(SkipModes.Continue);
                     };
 
-                    Target.Patches.UnloadScenarioPatch.Invoked += (sender, e) =>
+                    Target.Patches.DisposeScenarioPatch.Invoked += (sender, e) =>
                     {
                         Target.ScenarioClosed?.Invoke(this, EventArgs.Empty);
                         return new PatchInvokationResult(SkipModes.Continue);

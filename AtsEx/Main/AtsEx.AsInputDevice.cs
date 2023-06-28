@@ -39,9 +39,10 @@ namespace AtsEx
             public AsInputDevice(BveTypeSet bveTypes) : base(bveTypes)
             {
                 ClassMemberSet mainFormMembers = BveHacker.BveTypes.GetClassInfoOf<MainForm>();
+                ClassMemberSet scenarioMembers = BveHacker.BveTypes.GetClassInfoOf<Scenario>();
                 ClassMemberSet pluginLoaderMembers = BveHacker.BveTypes.GetClassInfoOf<PluginLoader>();
 
-                Patches = new PatchSet(mainFormMembers, pluginLoaderMembers);
+                Patches = new PatchSet(mainFormMembers, scenarioMembers, pluginLoaderMembers);
 
                 PatchEventInitializer patchEventInitializer = new PatchEventInitializer(this);
                 patchEventInitializer.InitializeEvents();

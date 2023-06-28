@@ -17,7 +17,7 @@ namespace AtsEx
             private class PatchSet : IDisposable
             {
                 public readonly HarmonyPatch LoadScenarioPatch;
-                public readonly HarmonyPatch UnloadScenarioPatch;
+                public readonly HarmonyPatch DisposeScenarioPatch;
 
                 public readonly HarmonyPatch OnSetBeaconDataPatch;
                 public readonly HarmonyPatch OnKeyDownPatch;
@@ -31,10 +31,10 @@ namespace AtsEx
                 public readonly HarmonyPatch OnInitializePatch;
                 public readonly HarmonyPatch OnElapsePatch;
 
-                public PatchSet(ClassMemberSet mainFormMembers, ClassMemberSet pluginLoaderMembers)
+                public PatchSet(ClassMemberSet mainFormMembers, ClassMemberSet scenarioMembers, ClassMemberSet pluginLoaderMembers)
                 {
                     LoadScenarioPatch = HarmonyPatch.Patch(nameof(AtsEx), mainFormMembers.GetSourceMethodOf(nameof(MainForm.LoadScenario)).Source, PatchType.Prefix);
-                    UnloadScenarioPatch = HarmonyPatch.Patch(nameof(AtsEx), mainFormMembers.GetSourceMethodOf(nameof(MainForm.UnloadScenario)).Source, PatchType.Prefix);
+                    DisposeScenarioPatch = HarmonyPatch.Patch(nameof(AtsEx), scenarioMembers.GetSourceMethodOf(nameof(Scenario.Dispose)).Source, PatchType.Prefix);
 
                     OnSetBeaconDataPatch = HarmonyPatch.Patch(nameof(AtsEx), pluginLoaderMembers.GetSourceMethodOf(nameof(PluginLoader.OnSetBeaconData)).Source, PatchType.Prefix);
                     OnKeyDownPatch = HarmonyPatch.Patch(nameof(AtsEx), pluginLoaderMembers.GetSourceMethodOf(nameof(PluginLoader.OnKeyDown)).Source, PatchType.Prefix);
@@ -52,7 +52,7 @@ namespace AtsEx
                 public void Dispose()
                 {
                     LoadScenarioPatch.Dispose();
-                    UnloadScenarioPatch.Dispose();
+                    DisposeScenarioPatch.Dispose();
 
                     OnSetBeaconDataPatch.Dispose();
                     OnKeyDownPatch.Dispose();
