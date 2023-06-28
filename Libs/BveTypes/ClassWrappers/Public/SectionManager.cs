@@ -21,6 +21,8 @@ namespace BveTypes.ClassWrappers
             ClassMemberSet members = bveTypes.GetClassInfoOf<SectionManager>();
 
             SectionsGetMethod = members.GetSourcePropertyGetterOf(nameof(Sections));
+            CurrentSectionSpeedLimitGetMethod = members.GetSourcePropertyGetterOf(nameof(CurrentSectionSpeedLimit));
+            ForwardSectionSpeedLimitGetMethod = members.GetSourcePropertyGetterOf(nameof(ForwardSectionSpeedLimit));
             LastSectionGetMethod = members.GetSourcePropertyGetterOf(nameof(LastSection));
 
             TimeManagerField = members.GetSourceFieldOf(nameof(TimeManager));
@@ -55,6 +57,18 @@ namespace BveTypes.ClassWrappers
         /// 閉塞の一覧を取得します。
         /// </summary>
         public MapFunctionList Sections => MapFunctionList.FromSource(SectionsGetMethod.Invoke(Src, null));
+
+        private static FastMethod CurrentSectionSpeedLimitGetMethod;
+        /// <summary>
+        /// 現在の閉塞における、信号による制限速度 [m/s] を取得します。
+        /// </summary>
+        public double CurrentSectionSpeedLimit => CurrentSectionSpeedLimitGetMethod.Invoke(Src, null);
+
+        private static FastMethod ForwardSectionSpeedLimitGetMethod;
+        /// <summary>
+        /// 次の閉塞における、信号による制限速度 [m/s] を取得します。
+        /// </summary>
+        public double ForwardSectionSpeedLimit => ForwardSectionSpeedLimitGetMethod.Invoke(Src, null);
 
         private static FastMethod LastSectionGetMethod;
         /// <summary>

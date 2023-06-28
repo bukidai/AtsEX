@@ -98,7 +98,9 @@
     <Compile Include="ClassWrappers\Public\Ecb.cs" />
     <Compile Include="ClassWrappers\Public\GraphCurve.cs" />
     <Compile Include="ClassWrappers\Public\GraphCurvePoint.cs" />
+    <Compile Include="ClassWrappers\Public\Passenger.cs" />
     <Compile Include="ClassWrappers\Public\SideDoorSet.cs" />
+    <Compile Include="ClassWrappers\Public\SoundSet.cs" />
     <Compile Include="ClassWrappers\Public\VehicleElectricity.cs" />
     <Compile Include="ClassWrappers\Public\ElectroPneumaticBlendedBrakingControlBase.cs" />
     <Compile Include="ClassWrappers\Public\Forms\ChartForm.cs" />
@@ -157,6 +159,7 @@
     <Compile Include="ClassWrappers\Public\VehicleStep.cs" />
     <Compile Include="ClassWrappers\Public\VehicleStepSet.cs" />
     <Compile Include="Comparer.cs" />
+    <Compile Include="ClassWrappers\Public\Conductor.cs" />
     <Compile Include="ITwoWayConverter.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="ProfileSelector.cs" />

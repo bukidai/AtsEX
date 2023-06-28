@@ -232,6 +232,23 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="Conductor" Original="ba">
+		<Field WrapperProperty="TimeManager" Original="a" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="LocationManager" Original="b" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="Sounds" Original="o" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="Stations" Original="c" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="SectionManager" Original="e" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="Doors" Original="d" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="Passenger" Original="f" IsOriginalNonPublic="true"/>
+
+		<Event Wrapper="FixStopPositionRequested" OriginalAddAccessor="b" OriginalRemoveAccessor="a" OriginalDelegateField="s"/>
+		<Event Wrapper="DepartureRequested" OriginalAddAccessor="c" OriginalRemoveAccessor="d" OriginalDelegateField="t"/>
+
+		<Method Wrapper="OnJumped" WrapperParams="System.Int32; System.Boolean" Original="a"/>
+		<Method Wrapper="OnDoorStateChanged" WrapperParams="System.Object; System.EventArgs" Original="c" IsOriginalNonPublic="true"/>
+		<Method Wrapper="OnTick" WrapperParams="System.Object; System.EventArgs" Original="a" IsOriginalNonPublic="true"/>
+	</Class>
+
 	<Class Wrapper="Direct3DProvider" Original="d9">
 		<Property Wrapper="Instance" IsWrapperStatic="true">
 			<Getter Original="d" IsOriginalStatic="true"/>
@@ -497,6 +514,9 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="Passenger" Original="a9">
+	</Class>
+
 	<Class Wrapper="PluginLoader" Original="aa">
 		<Property Wrapper="PanelArray">
 			<Getter Original="a"/>
@@ -713,6 +733,12 @@
 		<Property Wrapper="Sections">
 			<Getter Original="i"/>
 		</Property>
+		<Property Wrapper="CurrentSectionSpeedLimit">
+			<Getter Original="j"/>
+		</Property>
+		<Property Wrapper="ForwardSectionSpeedLimit">
+			<Getter Original="e"/>
+		</Property>
 		<Property Wrapper="LastSection">
 			<Getter Original="g"/>
 		</Property>
@@ -757,6 +783,13 @@
 	</Class>
 
 	<Class Wrapper="Sound" Original="ep">
+		<Method Wrapper="Play" WrapperParams="System.Double; System.Double; System.Int32" Original="a"/>
+	</Class>
+
+	<Class Wrapper="SoundSet" Original="g">
+		<Property Wrapper="Items">
+			<Getter Original="a"/>
+		</Property>
 	</Class>
 
 	<Class Wrapper="Station" Original="ef">
@@ -975,6 +1008,9 @@
 		<Property Wrapper="Instruments">
 			<Getter Original="f"/>
 			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Conductor">
+			<Getter Original="e"/>
 		</Property>
 		<Property Wrapper="Doors">
 			<Getter Original="b"/>
