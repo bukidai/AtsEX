@@ -414,6 +414,8 @@
 			<Getter Original="g"/>
 			<Setter Original="d"/>
 		</Property>
+
+		<Method Wrapper="GoTo" WrapperParams="System.Int32" Original="f"/>
 	</Class>
 
 	<Class Wrapper="MaterialInfo" Original="e0">

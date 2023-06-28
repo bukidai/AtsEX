@@ -27,6 +27,8 @@ namespace BveTypes.ClassWrappers
 
             CurrentIndexGetMethod = members.GetSourcePropertyGetterOf(nameof(CurrentIndex));
             CurrentIndexSetMethod = members.GetSourcePropertySetterOf(nameof(CurrentIndex));
+
+            GoToMethod = members.GetSourceMethodOf(nameof(GoTo));
         }
 
         /// <summary>
@@ -58,5 +60,12 @@ namespace BveTypes.ClassWrappers
             get => (int)CurrentIndexGetMethod.Invoke(Src, null);
             set => CurrentIndexSetMethod.Invoke(Src, new object[] { value });
         }
+
+        private static FastMethod GoToMethod;
+        /// <summary>
+        /// 指定したインデックスへ移動します。
+        /// </summary>
+        /// <param name="index"></param>
+        public void GoTo(int index) => GoToMethod.Invoke(Src, new object[] { index });
     }
 }
