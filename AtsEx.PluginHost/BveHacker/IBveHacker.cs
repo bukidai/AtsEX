@@ -136,6 +136,23 @@ namespace AtsEx.PluginHost
 
 
         /// <summary>
+        /// シナリオが選択され、読込を開始したときに発生します。
+        /// </summary>
+        /// <remarks>
+        /// このイベントは入力デバイスプラグイン版でのみ発生します。ATS プラグイン版では発生しません。
+        /// </remarks>
+        event EventHandler ScenarioOpened;
+
+        /// <summary>
+        /// シナリオが閉じられたときに発生します。
+        /// </summary>
+        /// <remarks>
+        /// このイベントは入力デバイスプラグイン版でのみ発生します。ATS プラグイン版では発生しません。
+        /// </remarks>
+        event EventHandler ScenarioClosed;
+
+
+        /// <summary>
         /// <see cref="ScenarioCreated"/> が発生する直前に通知します。特に理由がなければ <see cref="ScenarioCreated"/> を使用してください。
         /// </summary>
         event ScenarioCreatedEventHandler PreviewScenarioCreated;

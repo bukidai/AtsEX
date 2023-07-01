@@ -89,6 +89,8 @@ namespace AtsEx
 
                         ScenarioHacker.BeginObserveInitialization();
 
+                        ScenarioOpened?.Invoke(this, EventArgs.Empty);
+
                         return new PatchInvokationResult(SkipModes.Continue);
                     };
 
@@ -96,6 +98,8 @@ namespace AtsEx
                     {
                         _MapHeaders = null;
                         _MapStatements = null;
+
+                        ScenarioClosed?.Invoke(this, EventArgs.Empty);
 
                         return new PatchInvokationResult(SkipModes.Continue);
                     };
@@ -175,6 +179,10 @@ namespace AtsEx
         public StatementSet _MapStatements { get; private set; } = null;
 #pragma warning restore IDE1006 // 命名スタイル
         public IStatementSet MapStatements => _MapStatements;
+
+
+        public event EventHandler ScenarioOpened;
+        public event EventHandler ScenarioClosed;
 
 
         private readonly ScenarioHacker ScenarioHacker;
