@@ -50,7 +50,7 @@ namespace AtsEx
         }
 
         private readonly HarmonyPatch LoadScenarioPatch;
-        private readonly HarmonyPatch UnloadScenarioPatch;
+        private readonly HarmonyPatch DisposeScenarioPatch;
 
         private readonly StructureSetLifeProlonger StructureSetLifeProlonger;
 
@@ -78,8 +78,9 @@ namespace AtsEx
 
                 case LaunchMode.InputDevice:
                     ClassMemberSet mainFormMembers = BveTypes.GetClassInfoOf<MainForm>();
-                    LoadScenarioPatch = HarmonyPatch.Patch(nameof(BveHacker), mainFormMembers.GetSourceMethodOf(nameof(MainForm.LoadScenario)).Source, PatchType.Prefix);
-                    UnloadScenarioPatch = HarmonyPatch.Patch(nameof(BveHacker), mainFormMembers.GetSourceMethodOf(nameof(MainForm.UnloadScenario)).Source, PatchType.Prefix);
+                    ClassMemberSet scenarioMembers = BveTypes.GetClassInfoOf<Scenario>();
+                    LoadScenarioPatch = HarmonyPatch.Patch(nameof(BveHacker), mainFormMembers.GetSourceMethodOf(nameof(global::BveTypes.ClassWrappers.MainForm.LoadScenario)).Source, PatchType.Prefix);
+                    DisposeScenarioPatch = HarmonyPatch.Patch(nameof(BveHacker), scenarioMembers.GetSourceMethodOf(nameof(global::BveTypes.ClassWrappers.Scenario.Dispose)).Source, PatchType.Prefix);
 
                     LoadScenarioPatch.Invoked += (sender, e) =>
                     {
@@ -91,7 +92,7 @@ namespace AtsEx
                         return new PatchInvokationResult(SkipModes.Continue);
                     };
 
-                    UnloadScenarioPatch.Invoked += (sender, e) =>
+                    DisposeScenarioPatch.Invoked += (sender, e) =>
                     {
                         _MapHeaders = null;
                         _MapStatements = null;
@@ -110,7 +111,7 @@ namespace AtsEx
         public void Dispose()
         {
             LoadScenarioPatch?.Dispose();
-            UnloadScenarioPatch?.Dispose();
+            DisposeScenarioPatch?.Dispose();
 
             StructureSetLifeProlonger.Dispose();
             ScenarioHacker.Dispose();
