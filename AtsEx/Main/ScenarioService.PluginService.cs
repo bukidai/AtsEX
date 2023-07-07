@@ -13,7 +13,7 @@ namespace AtsEx
 {
     internal partial class ScenarioService
     {
-        private partial class PluginService : IDisposable
+        private class PluginService : IDisposable
         {
             private readonly PluginSet Plugins;
             private readonly HandleSet Handles;
@@ -36,9 +36,9 @@ namespace AtsEx
                 }
             }
 
-            public HandlePositionSet Tick(TimeSpan elapsed)
+            public TickCommandBuilder Tick(TimeSpan elapsed)
             {
-                CommandBuilder commandBuilder = new CommandBuilder(Handles);
+                TickCommandBuilder commandBuilder = new TickCommandBuilder(Handles);
 
                 foreach (PluginBase plugin in Plugins[PluginType.VehiclePlugin].Values)
                 {
@@ -64,7 +64,7 @@ namespace AtsEx
                     commandBuilder.Override(mapPluginTickResult);
                 }
 
-                return commandBuilder.Compile();
+                return commandBuilder;
             }
         }
     }

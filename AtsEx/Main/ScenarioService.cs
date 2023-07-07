@@ -75,14 +75,14 @@ namespace AtsEx
             Native.InvokeStarted(defaultBrakePosition);
         }
 
-        public virtual HandlePositionSet Tick(TimeSpan elapsed, VehicleState vehicleState, IList<int> panel, IList<int> sound)
+        public TickCommandBuilder Tick(TimeSpan elapsed, VehicleState vehicleState, IList<int> panel, IList<int> sound)
         {
             Native.VehicleState = vehicleState;
 
             (Native.AtsPanelValues as AtsPanelValueSet).PreTick(panel);
 
             BveHacker.Tick(elapsed);
-            HandlePositionSet tickResult = _PluginService.Tick(elapsed);
+            TickCommandBuilder tickResult = _PluginService.Tick(elapsed);
 
             (Native.AtsPanelValues as AtsPanelValueSet).Tick(panel);
             (Native.AtsSounds as AtsSoundSet).Tick(sound);

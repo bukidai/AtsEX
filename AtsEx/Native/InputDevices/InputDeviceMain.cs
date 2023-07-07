@@ -15,9 +15,9 @@ using AtsEx.Handles;
 using AtsEx.Native.Ats;
 using AtsEx.Plugins;
 using AtsEx.PluginHost;
+using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.Native;
-using AtsEx.PluginHost.Plugins;
 
 using BveTypes;
 
@@ -34,6 +34,8 @@ namespace AtsEx.Native.InputDevices
 
         private PluginSourceSet LoadedVehiclePluginUsing = null;
         private VehicleConfig LoadedVehicleConfig = null;
+
+        private TickCommandBuilder LastTickCommandBuilder = null;
 
         public InputDeviceMain(CallerInfo callerInfo)
         {
@@ -85,7 +87,8 @@ namespace AtsEx.Native.InputDevices
                 AtsEx.ScenarioClosed += OnScenarioClosed;
                 AtsEx.OnSetVehicleSpec += OnSetVehicleSpec;
                 AtsEx.OnInitialize += OnInitialize;
-                AtsEx.OnElapse += OnElapse;
+                AtsEx.PreviewElapse += PreviewElapse;
+                AtsEx.PostElapse += PostElapse;
                 AtsEx.OnSetPower += OnSetPower;
                 AtsEx.OnSetBrake += OnSetBrake;
                 AtsEx.OnSetReverser += OnSetReverser;
@@ -112,7 +115,7 @@ namespace AtsEx.Native.InputDevices
             ScenarioService.Started((BrakePosition)e.Value);
         }
 
-        private void OnElapse(object sender, AtsEx.AsInputDevice.OnElapseEventArgs e)
+        private void PreviewElapse(object sender, AtsEx.AsInputDevice.OnElapseEventArgs e)
         {
             PluginHost.Native.VehicleState exVehicleState = new PluginHost.Native.VehicleState(
                 e.VehicleState.Location, e.VehicleState.Speed, TimeSpan.FromMilliseconds(e.VehicleState.Time),
@@ -120,9 +123,29 @@ namespace AtsEx.Native.InputDevices
 
             TimeSpan elapsed = Stopwatch.IsRunning ? Stopwatch.Elapsed : TimeSpan.Zero;
             AtsEx.Tick(elapsed);
-            _ = ScenarioService?.Tick(elapsed, exVehicleState, e.Panel, e.Sound);
+            LastTickCommandBuilder = ScenarioService?.Tick(elapsed, exVehicleState, e.Panel, e.Sound);
 
             Stopwatch.Restart();
+        }
+
+        private void PostElapse(object sender, EventArgs e)
+        {
+            if (LastTickCommandBuilder is null) return;
+
+            BveTypes.ClassWrappers.HandleSet atsHandles = AtsEx.BveHacker.Scenario.Vehicle.Instruments.PluginLoader.AtsHandles;
+
+            HandlePositionSet atsHandlesOverrideBase = new HandlePositionSet(
+                atsHandles.PowerNotch,
+                atsHandles.BrakeNotch,
+                atsHandles.ReverserPosition,
+                atsHandles.ConstantSpeedMode.ToConstantSpeedCommand());
+
+            HandlePositionSet outHandles = LastTickCommandBuilder.Compile(atsHandlesOverrideBase);
+
+            atsHandles.BrakeNotch = outHandles.Brake;
+            atsHandles.PowerNotch = outHandles.Power;
+            atsHandles.ReverserPosition = outHandles.ReverserPosition;
+            atsHandles.ConstantSpeedMode = outHandles.ConstantSpeed.ToConstantSpeedMode();
         }
 
         private void OnSetPower(object sender, AtsEx.AsInputDevice.ValueEventArgs<int> e)

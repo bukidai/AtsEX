@@ -29,7 +29,8 @@ namespace AtsEx
                 public readonly HarmonyPatch OnSetPowerPatch;
                 public readonly HarmonyPatch OnSetVehicleSpecPatch;
                 public readonly HarmonyPatch OnInitializePatch;
-                public readonly HarmonyPatch OnElapsePatch;
+                public readonly HarmonyPatch PreviewElapsePatch;
+                public readonly HarmonyPatch PostElapsePatch;
 
                 public PatchSet(ClassMemberSet mainFormMembers, ClassMemberSet scenarioMembers, ClassMemberSet pluginLoaderMembers)
                 {
@@ -46,7 +47,8 @@ namespace AtsEx
                     OnSetPowerPatch = HarmonyPatch.Patch(nameof(AtsEx), pluginLoaderMembers.GetSourceMethodOf(nameof(PluginLoader.OnSetPower)).Source, PatchType.Prefix);
                     OnSetVehicleSpecPatch = HarmonyPatch.Patch(nameof(AtsEx), pluginLoaderMembers.GetSourceMethodOf(nameof(PluginLoader.OnSetVehicleSpec)).Source, PatchType.Postfix);
                     OnInitializePatch = HarmonyPatch.Patch(nameof(AtsEx), pluginLoaderMembers.GetSourceMethodOf(nameof(PluginLoader.OnInitialize)).Source, PatchType.Prefix);
-                    OnElapsePatch = HarmonyPatch.Patch(nameof(AtsEx), pluginLoaderMembers.GetSourceMethodOf(nameof(PluginLoader.OnElapse)).Source, PatchType.Prefix);
+                    PreviewElapsePatch = HarmonyPatch.Patch(nameof(AtsEx), pluginLoaderMembers.GetSourceMethodOf(nameof(PluginLoader.OnElapse)).Source, PatchType.Prefix);
+                    PostElapsePatch = HarmonyPatch.Patch(nameof(AtsEx), pluginLoaderMembers.GetSourceMethodOf(nameof(PluginLoader.OnElapse)).Source, PatchType.Postfix);
                 }
 
                 public void Dispose()
@@ -64,7 +66,8 @@ namespace AtsEx
                     OnSetPowerPatch.Dispose();
                     OnSetVehicleSpecPatch.Dispose();
                     OnInitializePatch.Dispose();
-                    OnElapsePatch.Dispose();
+                    PreviewElapsePatch.Dispose();
+                    PostElapsePatch.Dispose();
                 }
             }
         }

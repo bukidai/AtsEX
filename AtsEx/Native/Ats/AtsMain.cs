@@ -157,7 +157,9 @@ namespace AtsEx.Native.Ats
 
             TimeSpan elapsed = Stopwatch.IsRunning ? Stopwatch.Elapsed : TimeSpan.Zero;
             AtsEx.Tick(elapsed);
-            HandlePositionSet handlePositionSet = ScenarioService?.Tick(elapsed, exVehicleState, panelArray, soundArray);
+            TickCommandBuilder tickResult = ScenarioService?.Tick(elapsed, exVehicleState, panelArray, soundArray);
+
+            HandlePositionSet handlePositionSet = tickResult.Compile();
 
             Stopwatch.Restart();
 

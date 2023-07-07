@@ -5,12 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using BveTypes.ClassWrappers;
-
 using AtsEx.Plugins;
 using AtsEx.PluginHost.Native;
 using AtsEx.PluginHost.Plugins;
-using AtsEx.Handles;
 
 namespace AtsEx
 {
@@ -52,19 +49,6 @@ namespace AtsEx
                 {
                     return VehicleConfig.Default;
                 }
-            }
-
-            public override HandlePositionSet Tick(TimeSpan elapsed, VehicleState vehicleState, IList<int> panel, IList<int> sound)
-            {
-                HandlePositionSet handlePositionSet = base.Tick(elapsed, vehicleState, panel, sound);
-
-                HandleSet atsHandles = AtsEx.BveHacker.Scenario.Vehicle.Instruments.PluginLoader.AtsHandles;
-                atsHandles.BrakeNotch = handlePositionSet.Brake;
-                atsHandles.PowerNotch = handlePositionSet.Power;
-                atsHandles.ReverserPosition = handlePositionSet.ReverserPosition;
-                atsHandles.ConstantSpeedMode = (ConstantSpeedMode)handlePositionSet.ConstantSpeed;
-
-                return handlePositionSet;
             }
         }
     }

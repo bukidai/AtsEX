@@ -133,7 +133,7 @@
     <Compile Include="Plugins\AssemblyPluginPackage.cs" />
     <Compile Include="Plugins\IPluginPackage.cs" />
     <Compile Include="Plugins\PluginLoader.PluginLoadErrorQueue.cs" />
-    <Compile Include="Main\ScenarioService.PluginService.CommandBuilder.cs" />
+    <Compile Include="Main\TickCommandBuilder.cs" />
     <Compile Include="BveHacker\Services\MainFormHacker.cs" />
     <Compile Include="BveHacker\Services\ScenarioHacker.cs" />
     <Compile Include="BveHacker\Services\StructureSetLifeProlonger.cs" />
