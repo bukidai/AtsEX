@@ -1,0 +1,10 @@
+BveTs Scenario 2.00 : UTF-8
+
+Title = 普通 一橋→六合【車掌サンプル】
+Route = AtsEx.Samples\Maps\Basic\Samples\Empty\Map.txt
+RouteTitle = ★AtsEX サンプル
+Vehicle = AtsEx.Samples\Vehicles\E217r\Vehicle_Samples.ConductorPatchTest.txt
+VehicleTitle = AtsEX 搭載サンプル車両
+Author = おーとま (automatic9045)
+;Image = 
+Comment = 車掌動作を車両プラグインから上書きするサンプルです。
