@@ -1,0 +1,15 @@
+[Power]
+Params        = p-prmtr.csv
+Force         = p-f.csv
+MaxForce      = p-fmax.csv
+Current       = p-c.csv
+MaxCurrent    = p-cmax.csv
+NoLoadCurrent = p-czero.csv
+
+[Brake]
+Params        = b-prmtr.csv
+Force         = b-f.csv
+MaxForce      = b-fmax.csv
+Current       = b-c.csv
+MaxCurrent    = b-cmax.csv
+NoLoadCurrent = b-czero.csv

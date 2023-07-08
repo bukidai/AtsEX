@@ -1,0 +1,899 @@
+BveTs Instrument Panel 2.01
+
+
+[This]					; 下地
+Resolution 	= 3840
+Left		= 10
+Top		= 690
+Right		= 4086
+Bottom		= 4000
+DaytimeImage	= Main.png	; 昼間のイメージ
+NightTimeImage	= Main_N.png	; 夜間のイメージ
+Center		= 2048, 2500
+Origin		= 2048, 2048
+Perspective = 1.3
+
+[PilotLamp]				; 速度計の中心目隠し
+Subject = true				; 常時表示
+Location = 1262, 3405			; 画像左上の座標
+DayTimeImage = Spd_On.png		;
+NightTimeImage = Spd_On_N.png
+Layer = 10
+
+
+[Needle]				; 速度計の針
+Subject		= kmph			; 表示する状態量
+Location	= 1353, 3499		; パネル画像における回転中心
+DaytimeImage	= needle_speed.png	; 昼間のイメージ
+NighttimeImage	= needle_speed_n.png	; 夜間のイメージ
+Origin		= 8, 256		; 針画像の回転中心
+Layer		= 3			; レイヤー
+Radius		= 180			; 針の半径
+InitialAngle	= -120			; 最小値を指す針の角度
+LastAngle	= 120			; 最大値を指す針の角度
+Minimum		= 0			; 最小値
+Maximum		= 160			; 最大値
+NaturalFreq	= 6.3			; 針の固有角振動数
+DampingRatio	= 0.5			; 針の減衰比
+Tilt		= 47, 0			; 傾斜角 [deg] (傾斜なしが0、上向きを正)
+StopPin		= True
+
+[Needle]				; 速度計の針
+Subject		= kmph			; 表示する状態量
+Location	= 1359, 3502		; パネル画像における回転中心
+DaytimeImage	= needle_speed_shadow.png;昼間のイメージ
+NighttimeImage	= needle_speed_null.png	; 夜間のイメージ
+Origin		= 16, 256		; 針画像の回転中心
+Layer		= 2			; レイヤー
+Radius		= 180			; 針の半径
+InitialAngle	=-120			; 最小値を指す針の角度
+LastAngle	= 120			; 最大値を指す針の角度
+Minimum		= 0			; 最小値
+Maximum		= 160			; 最大値
+NaturalFreq	= 6.3			; 針の固有角振動数
+DampingRatio	= 0.5			; 針の減衰比
+Tilt		= 47, 0			; 傾斜角 [deg] (傾斜なしが0、上向きを正)
+StopPin		= True
+
+;[Needle] ; 調整用画像
+;Subject = true ; 表示する状態量
+;Location = 1357, 3501 ; パネル画像における回転中心
+;DaytimeImage = scale_speed.png ; 昼間のイメージ
+;Origin = 256, 256 ; 針画像の回転中心
+;Layer = 15 ; レイヤー
+;Radius = 184 ; 針の半径
+;InitialAngle = 0 ; 最小値を指す針の角度
+;LastAngle = 0 ; 最大値を指す針の角度
+;Minimum = 0 ; 最小値
+;Maximum = 1 ; 最大値
+;Tilt = 47, 0 ; 傾斜角 [deg] (傾斜なしが0、上向きを正)
+
+[PilotLamp]				; 圧力計中心ピン
+Subject = true				; 常時表示
+Location = 497, 3543			; 画像左上の座標
+DayTimeImage = Prs_On.png		;
+NightTimeImage = Prs_On_N.png
+Layer = 10
+
+[PilotLamp]				; 圧力計ゼロピン
+Subject = true				; 常時表示
+Location = 353, 3646			; 画像左上の座標
+DayTimeImage = Prs_zeropin.png		;
+NightTimeImage = Prs_zeropin_N.png
+Layer = 10
+
+[Needle];
+Subject		= mr
+Location	= 516, 3562
+DaytimeImage	= needle_prs_low.png
+NighttimeImage	= needle_prs_low_n.png
+Origin		= 64, 328
+Layer		= 3			; レイヤー
+Radius		= 170			; 針の半径
+InitialAngle	= -130.8		; 最小値を指す針の角度
+LastAngle	= 136.5			; 最大値を指す針の角度
+Minimum		= 10			; 最小値
+Maximum		= 1000			; 最大値
+NaturalFreq	= 80
+DampingRatio	= 0.1
+Tilt		= 43, 0			; 傾斜角 [deg] (傾斜なしが0、上向きを正)
+StopPin		= True
+
+[Needle];
+Subject		= mr
+Location	= 523, 3569
+DaytimeImage	= needle_prs_low_shadow.png
+NighttimeImage	= needle_prs_null.png
+Origin		= 32, 164
+Layer		= 2			; レイヤー
+Radius		= 170			; 針の半径
+InitialAngle	= -130.8		; 最小値を指す針の角度
+LastAngle	= 136.5			; 最大値を指す針の角度
+Minimum		= 10			; 最小値
+Maximum		= 1000			; 最大値
+NaturalFreq	= 80
+DampingRatio	= 0.1
+Tilt		= 43, 0			; 傾斜角 [deg] (傾斜なしが0、上向きを正)
+StopPin		= True
+
+[Needle];
+Subject		= bc
+Location	= 513, 3559
+DaytimeImage	= needle_prs_up.png
+NighttimeImage	= needle_prs_up_n.png
+TransparentColor= 000000
+Origin		= 32, 164
+Layer		= 4			; レイヤー
+Radius		= 170			; 針の半径
+InitialAngle	= -130.8		; 最小値を指す針の角度
+LastAngle	= 136.5			; 最大値を指す針の角度
+Minimum		= 10			; 最小値
+Maximum		= 1000			; 最大値
+NaturalFreq	= 80
+DampingRatio	= 0.1
+Tilt		= 43, 0			; 傾斜角 [deg] (傾斜なしが0、上向きを正)
+StopPin		= True
+
+[Needle];
+Subject		= bc
+Location	= 527, 3573
+DaytimeImage	= needle_prs_low_shadow.png
+NighttimeImage	= needle_prs_null.png
+TransparentColor= 000000
+Origin		= 32, 164
+Layer		= 2			; レイヤー
+Radius		= 170			; 針の半径
+InitialAngle	= -130.8		; 最小値を指す針の角度
+LastAngle	= 136.5			; 最大値を指す針の角度
+Minimum		= 10			; 最小値
+Maximum		= 1000			; 最大値
+NaturalFreq	= 80
+DampingRatio	= 0.1
+Tilt		= 43, 0			; 傾斜角 [deg] (傾斜なしが0、上向きを正)
+StopPin		= True
+
+;[Needle] ; 調整用画像
+;Subject = true ; 表示する状態量
+;Location = 519, 3565 ; パネル画像における回転中心
+;DaytimeImage = scale_press.png ; 昼間のイメージ
+;Origin = 256, 256 ; 針画像の回転中心
+;Layer = 15 ; レイヤー
+;Radius = 180 ; 針の半径
+;InitialAngle = 0 ; 最小値を指す針の角度
+;LastAngle = 1.5 ; 最大値を指す針の角度
+;Minimum = 0 ; 最小値
+;Maximum = 1 ; 最大値
+;Tilt = 43, 0 ; 傾斜角 [deg] (傾斜なしが0、上向きを正)
+
+[DigitalNumber];ブレーキインジケータ
+Subject		= brake
+Location	= 335, 3170
+DaytimeImage	= Break_indicator.png
+NighttimeImage	= Break_indicator_N.png
+Layer		= 4
+Interval	= 85
+
+
+[PilotLamp]	; 戸閉灯
+Subject		= door
+Location	= 1749, 3283
+DaytimeImage	= Pl_On.png
+NighttimeImage	= Pl_On_N.png
+Layer		= 5
+
+[PilotLamp]	; EB点灯################################################################
+Subject = ats40
+Location = 656, 3796
+DaytimeImage = EB.png
+NighttimeImage = EB_N.png
+Layer = 3
+
+[PilotLamp]	; ATS-P点灯
+Subject = ats6
+Location = 1294, 2764
+DaytimeImage = ATS-P_ON.png
+NighttimeImage = ATS-P_ON_N.png
+Layer = 3
+
+[PilotLamp]	; 定速点灯
+Subject = csc
+Location = 1827, 2764
+DaytimeImage = Keep_Spd.png
+NighttimeImage = Keep_Spd_N.png
+Layer = 3
+
+[PilotLamp]	; ATS-P表示器点灯(P電源)
+Subject = ats2
+Location = 1677, 1471
+DaytimeImage = ATS-P_1.png
+NighttimeImage = ATS-P_1.png
+Layer = 3
+
+[PilotLamp]	; ATS-P表示器点灯(パターン接近)
+Subject = ats3
+Location = 1814, 1471
+DaytimeImage = ATS-P_2.png
+NighttimeImage = ATS-P_2.png
+Layer = 3
+
+[PilotLamp]	; ATS-P表示器点灯(ブレーキ動作(常用))
+Subject = ats5
+Location = 1951, 1471
+DaytimeImage = ATS-P_3.png
+NighttimeImage = ATS-P_3.png
+Layer = 3
+
+[PilotLamp]	; ATS-P表示器点灯(ブレーキ開放)
+Subject = ats4
+Location = 2088, 1471
+DaytimeImage = ATS-P_4.png
+NighttimeImage = ATS-P_4.png
+Layer = 3
+
+[PilotLamp]	; ATS-P表示器点灯(ATS-(P))
+Subject = ats6
+Location = 2225, 1471
+DaytimeImage = ATS-P_5.png
+NighttimeImage = ATS-P_5.png
+Layer = 3
+
+[PilotLamp]	; ATS-P表示器点灯(故障)
+Subject = ats7
+Location = 2361, 1471
+DaytimeImage = ATS-P_6.png
+NighttimeImage = ATS-P_6.png
+Layer = 3
+
+[PilotLamp]	; ATS-P表示器点灯(ATS-P非常)
+Subject = ats8
+Location = 1959, 1734
+DaytimeImage = ATS-P_7.png
+NighttimeImage = ATS-P_7.png
+Layer = 3
+
+
+;---以下MON19モニタ表示---
+;MONモニタ デジタル時計表示
+[DigitalNumber]
+Subject		= ats10			; 時
+Location	= 2765, 3138
+DaytimeImage	= MON\MON_Watch_hour.png
+NighttimeImage	= MON\MON_Watch_hour.png
+Layer		= 8
+Interval	= 19
+
+[DigitalNumber]
+Subject		= ats11			; 分
+Location	= 2798, 3138
+DaytimeImage	= MON\MON_Watch_min.png
+NighttimeImage	= MON\MON_Watch_min.png
+Layer		= 9
+Interval	= 19
+
+[DigitalNumber]
+Subject		= ats12			; 秒
+Location	= 2831, 3138
+DaytimeImage	= MON\MON_Watch_sec.png
+NighttimeImage	= MON\MON_Watch_sec.png
+Layer		= 10
+Interval	= 19
+
+;MONモニタ デジタル速度表示
+[DigitalNumber]
+Subject		= ats230
+Location	= 2786, 3161
+DaytimeImage	= MON\MON_Spd.png
+NighttimeImage	= MON\MON_Spd.png
+Layer		= 8
+Interval	= 20
+
+;MONモニタ キロ程
+[DigitalNumber]
+Subject		= ats207		; km
+Location	= 2768, 3184
+DaytimeImage	= MON\MON_distance.png
+NighttimeImage	= MON\MON_distance.png
+Layer		= 8
+Interval	= 20
+
+[DigitalNumber]
+Subject		= ats208		; 100m
+Location	= 2833, 3184
+DaytimeImage	= MON\MON_distance_0.png
+NighttimeImage	= MON\MON_distance_0.png
+Layer		= 9
+Interval	= 20
+
+[DigitalNumber]
+Subject		= ats198		; AS
+Location	= 3209, 3171
+DaytimeImage	= MON\MON_AS.png
+NighttimeImage	= MON\MON_AS.png
+Layer		= 9
+Interval	= 24
+
+
+;MONモニタ 列番表示
+[DigitalNumber]
+Subject		= ats101		; 列番1000の位
+Location	= 2746, 3232
+DaytimeImage	= MON\MON_T_num1-9.png
+NighttimeImage	= MON\MON_T_num1-9.png
+Layer		= 4
+Interval	= 20
+
+[DigitalNumber]
+Subject		= ats102		; 列番100の位
+Location	= 2791, 3232
+DaytimeImage	= MON\MON_T_num0-9.png
+NighttimeImage	= MON\MON_T_num0-9.png
+Layer		= 5
+Interval	= 20
+
+[DigitalNumber]
+Subject		= ats103		; 列番10の位
+Location	= 2836, 3232
+DaytimeImage	= MON\MON_T_num0-9.png
+NighttimeImage	= MON\MON_T_num0-9.png
+Layer		= 6
+Interval	= 20
+
+[DigitalNumber]
+Subject		= ats104		; 列番1の位
+Location	= 2881, 3232
+DaytimeImage	= MON\MON_T_num0-9.png
+NighttimeImage	= MON\MON_T_num0-9.png
+Layer		= 7
+Interval	= 20
+
+[DigitalNumber]
+Subject		= ats105		; 列番アルファベット
+Location	= 2919, 3231
+DaytimeImage	= MON\MON_T_A-Z.png
+NighttimeImage	= MON\MON_T_A-Z.png
+Layer		= 8
+Interval	= 21
+
+;MONモニタ次駅(黄色)
+[DigitalNumber]
+Subject		= ats110		; 次停車駅名表示 接近時消える表示（透明0 駅名n）
+Location	= 2650, 3500
+DaytimeImage	= MON\MON_NEXTST_Y.png
+NighttimeImage	= MON\MON_NEXTST_Y.png
+Layer		= 5
+Interval	= 32
+
+[DigitalNumber]
+Subject		= ats116		; 次停車駅名表示 反転時に出てくる表示
+Location	= 2650, 3500
+DaytimeImage	= MON\MON_NEXTST_Y_R.png
+NighttimeImage	= MON\MON_NEXTST_Y_R.png
+Layer		= 4
+Interval	= 32
+
+[DigitalNumber]
+Subject		= ats111		; 次停車時刻の「時」
+Location	= 2941, 3505
+DaytimeImage	= MON\MON_Time_0-23Y.png
+NighttimeImage	= MON\MON_Time_0-23Y.png
+Layer		= 5
+Interval	= 23
+
+[DigitalNumber]
+Subject		= ats112		; 次停車時刻の「分」
+Location	= 3053, 3505
+DaytimeImage	= MON\MON_Time_0-59Y.png
+NighttimeImage	= MON\MON_Time_0-59Y.png
+Layer		= 6
+Interval	= 23
+
+[DigitalNumber]
+Subject		= ats113		; 次停車時刻の「秒」
+Location	= 3137, 3503
+DaytimeImage	= MON\MON_Time_secY.png
+NighttimeImage	= MON\MON_Time_secY.png
+Layer		= 7
+Interval	= 13
+
+;時刻表(白色)
+;1行目
+[DigitalNumber]
+Subject		= ats130		; 駅1
+Location	= 2569, 3279
+DaytimeImage	= MON\MON_ST_W.png
+NighttimeImage	= MON\MON_ST_W.png
+Layer		= 4
+Interval	= 24
+
+[DigitalNumber]
+Subject		= ats140		; 着1 時
+Location	= 2751, 3277
+DaytimeImage	= MON\MON_Time_0-23.png
+NighttimeImage	= MON\MON_Time_0-23.png
+Layer		= 5
+Interval	= 26
+
+[DigitalNumber]
+Subject		= ats141		; 着1 分
+Location	= 2882, 3277
+DaytimeImage	= MON\MON_Time_0-59.png
+NighttimeImage	= MON\MON_Time_0-59.png
+Layer		= 6
+Interval	= 26
+
+[DigitalNumber]
+Subject		= ats142		; 着1 秒
+Location	= 2972, 3277
+DaytimeImage	= MON\MON_Time_sec.png
+NighttimeImage	= MON\MON_Time_sec.png
+Layer		= 8
+Interval	= 14
+
+[DigitalNumber]
+Subject		= ats160		; 発1 時
+Location	= 2982, 3277
+DaytimeImage	= MON\MON_Time_0-23.png
+NighttimeImage	= MON\MON_Time_0-23.png
+Layer		= 7
+Interval	= 26
+
+[DigitalNumber]
+Subject		= ats161		; 発1 分
+Location	= 3112, 3277
+DaytimeImage	= MON\MON_Time_0-59.png
+NighttimeImage	= MON\MON_Time_0-59.png
+Layer		= 9
+Interval	= 26
+
+[DigitalNumber]
+Subject		= ats162		; 発1 秒
+Location	= 3204, 3277
+DaytimeImage	= MON\MON_Time_sec.png
+NighttimeImage	= MON\MON_Time_sec.png
+Layer		= 10
+Interval	= 14
+
+
+;2行目
+[DigitalNumber]
+Subject		= ats131		; 駅2
+Location	= 2573, 3328
+DaytimeImage	= MON\MON_ST_W.png
+NighttimeImage	= MON\MON_ST_W.png
+Layer		= 4
+Interval	= 24
+
+[DigitalNumber]
+Subject		= ats143		; 着2 時
+Location	= 2757, 3326
+DaytimeImage	= MON\MON_Time_0-23.png
+NighttimeImage	= MON\MON_Time_0-23.png
+Layer		= 5
+Interval	= 26
+
+[DigitalNumber]
+Subject		= ats144		; 着2 分
+Location	= 2887, 3326
+DaytimeImage	= MON\MON_Time_0-59.png
+NighttimeImage	= MON\MON_Time_0-59.png
+Layer		= 6
+Interval	= 26
+
+[DigitalNumber]
+Subject		= ats145		; 着2 秒
+Location	= 2979,3326
+DaytimeImage	= MON\MON_Time_sec.png
+NighttimeImage	= MON\MON_Time_sec.png
+Layer		= 8
+Interval	= 14
+
+[DigitalNumber]
+Subject		= ats163		; 発2 時
+Location	= 2992, 3326
+DaytimeImage	= MON\MON_Time_0-23.png
+NighttimeImage	= MON\MON_Time_0-23.png
+Layer		= 7
+Interval	= 26
+
+[DigitalNumber]
+Subject		= ats164		; 発2 分
+Location	= 3122, 3326
+DaytimeImage	= MON\MON_Time_0-59.png
+NighttimeImage	= MON\MON_Time_0-59.png
+Layer		= 9
+Interval	= 26
+
+[DigitalNumber]
+Subject		= ats165		; 発2 秒
+Location	= 3212, 3326
+DaytimeImage	= MON\MON_Time_sec.png
+NighttimeImage	= MON\MON_Time_sec.png
+Layer		= 10
+Interval	= 14
+
+;3行目
+[DigitalNumber]
+Subject		= ats132		; 駅3
+Location	= 2577, 3377
+DaytimeImage	= MON\MON_ST_W.png
+NighttimeImage	= MON\MON_ST_W.png
+Layer		= 4
+Interval	= 24
+
+[DigitalNumber]
+Subject		= ats146		; 着3 時
+Location	= 2761, 3375
+DaytimeImage	= MON\MON_Time_0-23.png
+NighttimeImage	= MON\MON_Time_0-23.png
+Layer		= 5
+Interval	= 26
+
+[DigitalNumber]
+Subject		= ats147		; 着3 分
+Location	= 2892, 3375
+DaytimeImage	= MON\MON_Time_0-59.png
+NighttimeImage	= MON\MON_Time_0-59.png
+Layer		= 6
+Interval	= 26
+
+[DigitalNumber]
+Subject		= ats148		; 着3 秒
+Location	= 2983, 3375
+DaytimeImage	= MON\MON_Time_sec.png
+NighttimeImage	= MON\MON_Time_sec.png
+Layer		= 8
+Interval	= 14
+
+[DigitalNumber]
+Subject		= ats166		; 発3 時
+Location	= 3001, 3375
+DaytimeImage	= MON\MON_Time_0-23.png
+NighttimeImage	= MON\MON_Time_0-23.png
+Layer		= 7
+Interval	= 26
+
+[DigitalNumber]
+Subject		= ats167		; 発3 分
+Location	= 3130, 3375
+DaytimeImage	= MON\MON_Time_0-59.png
+NighttimeImage	= MON\MON_Time_0-59.png
+Layer		= 9
+Interval	= 26
+
+[DigitalNumber]
+Subject		= ats168		; 発3 秒
+Location	= 3222, 3375
+DaytimeImage	= MON\MON_Time_sec.png
+NighttimeImage	= MON\MON_Time_sec.png
+Layer		= 10
+Interval	= 14
+
+
+[DigitalNumber]
+Subject		= ats180 ;運転時間(1～2行目の駅間 分)
+Location	= 2491, 3327
+DaytimeImage	= MON\MON_req_min.png
+NighttimeImage	= MON\MON_req_min.png
+Layer		= 2
+Interval	= 22
+
+[DigitalNumber]
+Subject		= ats181 ;運転時間(1～2行目の駅間 秒)
+Location	= 2506, 3327
+DaytimeImage	= MON\MON_req_sec.png
+NighttimeImage	= MON\MON_req_sec.png
+Layer		= 3
+Interval	= 13
+
+
+[DigitalNumber]
+Subject		= ats182 ;運転時間(2～3行目の駅間 分)
+Location	= 2495, 3378
+DaytimeImage	= MON\MON_req_min.png
+NighttimeImage	= MON\MON_req_min.png
+Layer		= 2
+Interval	= 22
+
+[DigitalNumber]
+Subject		= ats183 ;運転時間(2～3行目の駅間 秒)
+Location	= 2510, 3378
+DaytimeImage	= MON\MON_req_sec.png
+NighttimeImage	= MON\MON_req_sec.png
+Layer		= 3
+Interval	= 13
+
+
+;[DigitalNumber]
+;Subject		= ats190 ; T1 番線(1;行目)############################################
+;Location	= 2501, 1203
+;DaytimeImage	= temp_MON\Track_441M.png
+;NighttimeImage	= temp_MON\Track_441M.png
+;Layer		= 11
+;Interval	= 9
+
+;[DigitalNumber]
+;Subject		= ats191 ; T2 番線(2行目)#####################################################
+;Location	= 2501, 1225
+;DaytimeImage	= temp_MON\Track_441M.png
+;NighttimeImage	= temp_MON\Track_441M.png
+;Layer		= 11
+;Interval	= 9
+
+;[DigitalNumber]
+;Subject		= ats192 ; T3 番線(3行目)#####################################################
+;Location	= 2501, 1247
+;DaytimeImage	= temp_MON\Track_441M.png
+;NighttimeImage	= temp_MON\Track_441M.png
+;Layer		= 11
+;Interval	= 9
+
+
+;[DigitalNumber]
+;Subject		= ats200	; Lm1 制限(1行目)#################################################
+;Location	= 2535, 1192
+;DaytimeImage	= temp_MON\Limit_441M.png
+;NighttimeImage	= temp_MON\Limit_441M.png
+;Layer		= 11
+;Interval	= 18
+
+;[DigitalNumber]
+;Subject		= ats201	; Lm2 制限(2行目)#################################################
+;Location	= 2535, 1214
+;DaytimeImage	= temp_MON\Limit_441M.png
+;NighttimeImage	= temp_MON\Limit_441M.png
+;Layer		= 11
+;Interval	= 18
+
+;[DigitalNumber]
+;Subject		= ats202	; Lm3 制限(3行目)#################################################
+;Location	= 2535, 1236
+;DaytimeImage	= temp_MON\Limit_441M.png
+;NighttimeImage	= temp_MON\Limit_441M.png
+;Layer		= 11
+;Interval	= 18
+
+;車両状態
+[DigitalNumber]
+Subject		= ats213	; ユニット1
+Location	= 2730,3599
+DaytimeImage	= MON\UNIT1.png
+NighttimeImage	= MON\UNIT1.png
+Layer		= 8
+Interval	= 50
+
+[DigitalNumber]
+Subject		= ats214	; ユニット2
+Location	= 3014,3599
+DaytimeImage	= MON\UNIT2.png
+NighttimeImage	= MON\UNIT2.png
+Layer		= 8
+Interval	= 50
+
+[DigitalNumber]
+Subject		= ats215	; ユニット3
+Location	= 3203,3599
+DaytimeImage	= MON\UNIT3.png
+NighttimeImage	= MON\UNIT3.png
+Layer		= 8
+Interval	= 50
+
+;###########################################################方向
+;[DigitalNumber]
+;Subject		= ats205
+;Location	= 2596, 3599
+;DaytimeImage	= temp_MON\Direction.png
+;NighttimeImage	= temp_MON\Direction.png
+;Layer		= 5
+;Interval	= 28
+
+;ドア
+
+[PilotLamp]
+Subject		= doorL0
+Location	= 2634,3555
+DaytimeImage	= MON\MON_DOOR_L1.png
+NighttimeImage	= MON\MON_DOOR_L1.png
+Layer		= 12
+
+[PilotLamp]
+Subject		= doorL1
+Location	= 2681,3555
+DaytimeImage	= MON\MON_DOOR_L2.png
+NighttimeImage	= MON\MON_DOOR_L2.png
+Layer		= 12
+
+[PilotLamp]
+Subject		= doorL2
+Location	= 2727,3555
+DaytimeImage	= MON\MON_DOOR_L3.png
+NighttimeImage	= MON\MON_DOOR_L3.png
+Layer		= 12
+
+[PilotLamp]
+Subject		= doorL3
+Location	= 2774, 3555
+DaytimeImage	= MON\MON_DOOR_L4.png
+NighttimeImage	= MON\MON_DOOR_L4.png
+Layer		= 12
+
+[PilotLamp]
+Subject		= doorL4
+Location	= 2821, 3555
+DaytimeImage	= MON\MON_DOOR_L5.png
+NighttimeImage	= MON\MON_DOOR_L5.png
+Layer		= 12
+
+[PilotLamp]
+Subject		= doorL5
+Location	= 2868, 3555
+DaytimeImage	= MON\MON_DOOR_L6.png
+NighttimeImage	= MON\MON_DOOR_L6.png
+Layer		= 12
+
+[PilotLamp]
+Subject		= doorL6
+Location	= 2914, 3555
+DaytimeImage	= MON\MON_DOOR_L7.png
+NighttimeImage	= MON\MON_DOOR_L7.png
+Layer		= 12
+
+[PilotLamp]
+Subject		= doorL7
+Location	= 2961, 3555
+DaytimeImage	= MON\MON_DOOR_L8.png
+NighttimeImage	= MON\MON_DOOR_L8.png
+Layer		= 12
+
+[PilotLamp]
+Subject		= doorL8
+Location	= 3008, 3555
+DaytimeImage	= MON\MON_DOOR_L9.png
+NighttimeImage	= MON\MON_DOOR_L9.png
+Layer		= 12
+
+[PilotLamp]
+Subject		= doorL9
+Location	= 3055, 3555
+DaytimeImage	= MON\MON_DOOR_L10.png
+NighttimeImage	= MON\MON_DOOR_L10.png
+Layer		= 12
+
+[PilotLamp]
+Subject		= doorL10
+Location	= 3101, 3555
+DaytimeImage	= MON\MON_DOOR_L11.png
+NighttimeImage	= MON\MON_DOOR_L11.png
+Layer		= 12
+
+[PilotLamp]
+Subject		= doorL11
+Location	= 3148, 3555
+DaytimeImage	= MON\MON_DOOR_L12.png
+NighttimeImage	= MON\MON_DOOR_L12.png
+Layer		= 12
+
+[PilotLamp]
+Subject		= doorL12
+Location	= 3194, 3555
+DaytimeImage	= MON\MON_DOOR_L13.png
+NighttimeImage	= MON\MON_DOOR_L13.png
+Layer		= 12
+
+[PilotLamp]
+Subject		= doorL13
+Location	= 3241, 3555
+DaytimeImage	= MON\MON_DOOR_L14.png
+NighttimeImage	= MON\MON_DOOR_L14.png
+Layer		= 12
+
+[PilotLamp]
+Subject		= doorL14
+Location	= 3288, 3555
+DaytimeImage	= MON\MON_DOOR_L15.png
+NighttimeImage	= MON\MON_DOOR_L15.png
+Layer		= 12
+
+[PilotLamp]
+Subject		= doorR0
+Location	= 2634,3555
+DaytimeImage	= MON\MON_DOOR_L1.png
+NighttimeImage	= MON\MON_DOOR_L1.png
+Layer		= 11
+
+[PilotLamp]
+Subject		= doorR1
+Location	= 2681,3555
+DaytimeImage	= MON\MON_DOOR_L2.png
+NighttimeImage	= MON\MON_DOOR_L2.png
+Layer		= 11
+
+[PilotLamp]
+Subject		= doorR2
+Location	= 2727,3555
+DaytimeImage	= MON\MON_DOOR_L3.png
+NighttimeImage	= MON\MON_DOOR_L3.png
+Layer		= 11
+
+[PilotLamp]
+Subject		= doorR3
+Location	= 2774, 3555
+DaytimeImage	= MON\MON_DOOR_L4.png
+NighttimeImage	= MON\MON_DOOR_L4.png
+Layer		= 11
+
+[PilotLamp]
+Subject		= doorR4
+Location	= 2821, 3555
+DaytimeImage	= MON\MON_DOOR_L5.png
+NighttimeImage	= MON\MON_DOOR_L5.png
+Layer		= 11
+
+[PilotLamp]
+Subject		= doorR5
+Location	= 2868, 3555
+DaytimeImage	= MON\MON_DOOR_L6.png
+NighttimeImage	= MON\MON_DOOR_L6.png
+Layer		= 11
+
+[PilotLamp]
+Subject		= doorR6
+Location	= 2914, 3555
+DaytimeImage	= MON\MON_DOOR_L7.png
+NighttimeImage	= MON\MON_DOOR_L7.png
+Layer		= 11
+
+[PilotLamp]
+Subject		= doorR7
+Location	= 2961, 3555
+DaytimeImage	= MON\MON_DOOR_L8.png
+NighttimeImage	= MON\MON_DOOR_L8.png
+Layer		= 11
+
+[PilotLamp]
+Subject		= doorR8
+Location	= 3008, 3555
+DaytimeImage	= MON\MON_DOOR_L9.png
+NighttimeImage	= MON\MON_DOOR_L9.png
+Layer		= 11
+
+[PilotLamp]
+Subject		= doorR9
+Location	= 3055, 3555
+DaytimeImage	= MON\MON_DOOR_L10.png
+NighttimeImage	= MON\MON_DOOR_L10.png
+Layer		= 11
+
+[PilotLamp]
+Subject		= doorR10
+Location	= 3101, 3555
+DaytimeImage	= MON\MON_DOOR_L11.png
+NighttimeImage	= MON\MON_DOOR_L11.png
+Layer		= 11
+
+[PilotLamp]
+Subject		= doorR11
+Location	= 3148, 3555
+DaytimeImage	= MON\MON_DOOR_L12.png
+NighttimeImage	= MON\MON_DOOR_L12.png
+Layer		= 11
+
+[PilotLamp]
+Subject		= doorR12
+Location	= 3194, 3555
+DaytimeImage	= MON\MON_DOOR_L13.png
+NighttimeImage	= MON\MON_DOOR_L13.png
+Layer		= 11
+
+[PilotLamp]
+Subject		= doorR13
+Location	= 3241, 3555
+DaytimeImage	= MON\MON_DOOR_L14.png
+NighttimeImage	= MON\MON_DOOR_L14.png
+Layer		= 11
+
+[PilotLamp]
+Subject		= doorR14
+Location	= 3288, 3555
+DaytimeImage	= MON\MON_DOOR_L15.png
+NighttimeImage	= MON\MON_DOOR_L15.png
+Layer		= 11

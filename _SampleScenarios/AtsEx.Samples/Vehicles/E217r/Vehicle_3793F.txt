@@ -1,0 +1,8 @@
+BveTs Vehicle 2.00
+PerformanceCurve = Notch\Notch.txt
+Parameters = Parameters.txt
+Panel = Panel\Panel_3793F.txt
+Sound = Sound.cfg
+Ats32 = Ats\x86\DetailManager.dll
+Ats64 = Ats\x64\DetailManager.dll
+MotorNoise = Sound\Motor.txt
