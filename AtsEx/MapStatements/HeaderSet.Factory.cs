@@ -15,6 +15,9 @@ namespace AtsEx.MapStatements
         private readonly static Identifier NoMapPluginHeader;
         private readonly static string NoMapPluginHeaderFullName;
 
+        private readonly static Identifier ReadDepthHeader;
+        private readonly static string ReadDepthHeaderFullName;
+
         private const string HeaderNameOpenBracket = "<";
         private const string HeaderNameCloseBracket = ">";
 
@@ -22,15 +25,18 @@ namespace AtsEx.MapStatements
         {
             NoMapPluginHeader = new Identifier(Namespace.Root, "nompi");
             NoMapPluginHeaderFullName = $"[[{NoMapPluginHeader.FullName}]]";
+
+            ReadDepthHeader = new Identifier(Namespace.Root, "readdepth");
+            ReadDepthHeaderFullName = $"[[{ReadDepthHeader.FullName}]]";
         }
 
         public static HeaderSet FromMap(string filePath)
         {
-            (IDictionary<Identifier, IReadOnlyList<Header>> headers, IReadOnlyList<Header> noMapPluginHeaders) = Load(filePath);
+            (IDictionary<Identifier, IReadOnlyList<Header>> headers, IReadOnlyList<Header> noMapPluginHeaders) = Load(filePath, 0);
             return new HeaderSet(headers, noMapPluginHeaders);
         }
 
-        private static (IDictionary<Identifier, IReadOnlyList<Header>> Headers, IReadOnlyList<Header> NoMapPluginHeaders) Load(string filePath)
+        private static (IDictionary<Identifier, IReadOnlyList<Header>> Headers, IReadOnlyList<Header> NoMapPluginHeaders) Load(string filePath, int readDepth)
         {
             ConcurrentDictionary<Identifier, IReadOnlyList<Header>> headers = new ConcurrentDictionary<Identifier, IReadOnlyList<Header>>();
             List<Header> noMapPluginHeaders = new List<Header>();
@@ -69,14 +75,19 @@ namespace AtsEx.MapStatements
                         Header header = new Header(NoMapPluginHeader, headerArgument, s.LineIndex, s.CharIndex);
                         noMapPluginHeaders.Add(header);
                     }
-                    else
+                    else if (includePath.StartsWith(ReadDepthHeaderFullName))
+                    {
+                        string headerArgument = includePath.Substring(ReadDepthHeaderFullName.Length);
+                        int.TryParse(headerArgument, out readDepth);
+                    }
+                    else if (0 < readDepth)
                     {
                         string includeRelativePath = includePath;
                         string includeAbsolutePath = Path.Combine(Path.GetDirectoryName(filePath), includeRelativePath);
 
                         if (!File.Exists(includeAbsolutePath)) return;
 
-                        (IDictionary<Identifier, IReadOnlyList<Header>> headersInIncludedMap, IReadOnlyList<Header> noMapPluginHeadersInIncludedMap) = Load(includeAbsolutePath);
+                        (IDictionary<Identifier, IReadOnlyList<Header>> headersInIncludedMap, IReadOnlyList<Header> noMapPluginHeadersInIncludedMap) = Load(includeAbsolutePath, readDepth - 1);
 
                         foreach (KeyValuePair<Identifier, IReadOnlyList<Header>> pair in headersInIncludedMap)
                         {
