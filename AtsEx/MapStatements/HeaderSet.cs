@@ -14,12 +14,12 @@ namespace AtsEx.MapStatements
     {
         private readonly IDictionary<Identifier, IReadOnlyList<Header>> Headers;
 
-        public IReadOnlyList<Header> NoMapPluginHeaders { get; }
+        public IReadOnlyList<Header> PrivateHeaders { get; }
 
-        public HeaderSet(IDictionary<Identifier, IReadOnlyList<Header>> headers, IReadOnlyList<Header> noMapPluginHeaders)
+        public HeaderSet(IDictionary<Identifier, IReadOnlyList<Header>> headers, IReadOnlyList<Header> privateHeaders)
         {
             Headers = headers;
-            NoMapPluginHeaders = noMapPluginHeaders;
+            PrivateHeaders = privateHeaders;
         }
 
         public IReadOnlyList<IHeader> GetAll(Identifier identifier) => Headers.TryGetValue(identifier, out IReadOnlyList<Header> result) ? result : new List<Header>();
@@ -34,9 +34,9 @@ namespace AtsEx.MapStatements
             private bool AreHeadersEnumerated = false;
 
             private readonly IEnumerator<Header> HeadersEnumerator;
-            private readonly IEnumerator<Header> NoMapPluginHeadersEnumerator;
+            private readonly IEnumerator<Header> PrivateHeadersEnumerator;
 
-            private IEnumerator<Header> CurrentEnumerator => AreHeadersEnumerated ? NoMapPluginHeadersEnumerator : HeadersEnumerator;
+            private IEnumerator<Header> CurrentEnumerator => AreHeadersEnumerated ? PrivateHeadersEnumerator : HeadersEnumerator;
 
             public Header Current => CurrentEnumerator.Current;
             object IEnumerator.Current => Current;
@@ -46,7 +46,7 @@ namespace AtsEx.MapStatements
                 Source = source;
 
                 HeadersEnumerator = new EnumerableInDictionaryEnumerator<Identifier, Header>(Source.Headers);
-                NoMapPluginHeadersEnumerator = Source.NoMapPluginHeaders.GetEnumerator();
+                PrivateHeadersEnumerator = Source.PrivateHeaders.GetEnumerator();
 
                 Reset();
             }
@@ -54,14 +54,14 @@ namespace AtsEx.MapStatements
             public void Dispose()
             {
                 HeadersEnumerator.Dispose();
-                NoMapPluginHeadersEnumerator.Dispose();
+                PrivateHeadersEnumerator.Dispose();
             }
 
             public bool MoveNext()
             {
                 if (AreHeadersEnumerated)
                 {
-                    return NoMapPluginHeadersEnumerator.MoveNext();
+                    return PrivateHeadersEnumerator.MoveNext();
                 }
                 else
                 {
@@ -81,7 +81,7 @@ namespace AtsEx.MapStatements
             public void Reset()
             {
                 HeadersEnumerator.Reset();
-                NoMapPluginHeadersEnumerator.Reset();
+                PrivateHeadersEnumerator.Reset();
 
                 AreHeadersEnumerated = false;
             }

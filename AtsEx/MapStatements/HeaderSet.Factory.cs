@@ -38,14 +38,14 @@ namespace AtsEx.MapStatements
 
         public static HeaderSet FromMap(string filePath)
         {
-            (IDictionary<Identifier, IReadOnlyList<Header>> headers, IReadOnlyList<Header> noMapPluginHeaders) = Load(filePath, 0);
-            return new HeaderSet(headers, noMapPluginHeaders);
+            (IDictionary<Identifier, IReadOnlyList<Header>> headers, IReadOnlyList<Header> privateHeaders) = Load(filePath, 0);
+            return new HeaderSet(headers, privateHeaders);
         }
 
-        private static (IDictionary<Identifier, IReadOnlyList<Header>> Headers, IReadOnlyList<Header> NoMapPluginHeaders) Load(string filePath, int readDepth)
+        private static (IDictionary<Identifier, IReadOnlyList<Header>> Headers, IReadOnlyList<Header> PrivateHeaders) Load(string filePath, int readDepth)
         {
             ConcurrentDictionary<Identifier, IReadOnlyList<Header>> headers = new ConcurrentDictionary<Identifier, IReadOnlyList<Header>>();
-            List<Header> noMapPluginHeaders = new List<Header>();
+            List<Header> privateHeaders = new List<Header>();
 
             string text;
             using (StreamReader sr = new StreamReader(filePath))
@@ -77,17 +77,27 @@ namespace AtsEx.MapStatements
                         List<Header> list = headers.GetOrAdd(identifier, new List<Header>()) as List<Header>;
                         list.Add(header);
                     }
+                    else if (includePath.StartsWith(UseAtsExHeaderFullName))
+                    {
+                        string headerArgument = includePath.Substring(UseAtsExHeaderFullName.Length);
+
+                        Header header = new Header(UseAtsExHeader, headerArgument, filePath, s.LineIndex, s.CharIndex);
+                        privateHeaders.Add(header);
+                    }
                     else if (includePath.StartsWith(NoMapPluginHeaderFullName))
                     {
                         string headerArgument = includePath.Substring(NoMapPluginHeaderFullName.Length);
 
                         Header header = new Header(NoMapPluginHeader, headerArgument, filePath, s.LineIndex, s.CharIndex);
-                        noMapPluginHeaders.Add(header);
+                        privateHeaders.Add(header);
                     }
                     else if (includePath.StartsWith(ReadDepthHeaderFullName))
                     {
                         string headerArgument = includePath.Substring(ReadDepthHeaderFullName.Length);
                         int.TryParse(headerArgument, out readDepth);
+
+                        Header header = new Header(ReadDepthHeader, headerArgument, filePath, s.LineIndex, s.CharIndex);
+                        privateHeaders.Add(header);
                     }
                     else if (0 < readDepth)
                     {
@@ -96,7 +106,7 @@ namespace AtsEx.MapStatements
 
                         if (!File.Exists(includeAbsolutePath)) continue;
 
-                        (IDictionary<Identifier, IReadOnlyList<Header>> headersInIncludedMap, IReadOnlyList<Header> noMapPluginHeadersInIncludedMap) = Load(includeAbsolutePath, readDepth - 1);
+                        (IDictionary<Identifier, IReadOnlyList<Header>> headersInIncludedMap, IReadOnlyList<Header> privateHeadersInIncludedMap) = Load(includeAbsolutePath, readDepth - 1);
 
                         foreach (KeyValuePair<Identifier, IReadOnlyList<Header>> pair in headersInIncludedMap)
                         {
@@ -104,12 +114,12 @@ namespace AtsEx.MapStatements
                             list.AddRange(pair.Value);
                         }
 
-                        noMapPluginHeaders.AddRange(noMapPluginHeadersInIncludedMap);
+                        privateHeaders.AddRange(privateHeadersInIncludedMap);
                     }
                 }
             }
 
-            return (headers, noMapPluginHeaders);
+            return (headers, privateHeaders);
         }
     }
 }
