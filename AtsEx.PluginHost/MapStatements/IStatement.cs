@@ -57,6 +57,31 @@ namespace AtsEx.PluginHost.MapStatements
         RepeatedStructure DefinedStructure { get; }
 
         /// <summary>
+        /// <see cref="ObserveTrain(Train)"/> メソッド、あるいは <see cref="ObserveTrains(IEnumerable{Train})"/> メソッドによって登録された、動作を監視している配置済み他列車のコレクションを取得します。
+        /// </summary>
+        IReadOnlyCollection<Train> TrainsObserving { get; }
+
+        /// <summary>
+        /// 指定した配置済み他列車の動作の監視を開始します。
+        /// </summary>
+        /// <remarks>
+        /// <c>Train.Add</c> ステートメント、あるいは <c>Train[trainKey].Load</c> ステートメントによってマップへ配置されている他列車を表す <see cref="Train"/> のみ使用可能です。<br />
+        /// AtsEX プラグインから独自に定義した <see cref="Train"/> を使用することはできません。
+        /// </remarks>
+        /// <param name="train">動作を監視する配置済み他列車。</param>
+        void ObserveTrain(Train train);
+
+        /// <summary>
+        /// 指定した複数の配置済み他列車の動作の監視を開始します。
+        /// </summary>
+        /// <remarks>
+        /// <c>Train.Add</c> ステートメント、あるいは <c>Train[trainKey].Load</c> ステートメントによってマップへ配置されている他列車を表す <see cref="Train"/> のみ使用可能です。<br />
+        /// AtsEX プラグインから独自に定義した <see cref="Train"/> を使用することはできません。
+        /// </remarks>
+        /// <param name="trains">動作を監視する配置済み他列車のコレクション。</param>
+        void ObserveTrains(IEnumerable<Train> trains);
+
+        /// <summary>
         /// このステートメント上へ自列車が進入した瞬間に発生します。
         /// </summary>
         event EventHandler<PassedEventArgs> Entered;

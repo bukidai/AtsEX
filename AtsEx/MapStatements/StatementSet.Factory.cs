@@ -16,7 +16,8 @@ namespace AtsEx.MapStatements
     {
         public static StatementSet Create(IDictionary<string, MapObjectList> repeatedStructures, IDictionary<Model, string> loadedModels, IDictionary<string, Train> targetTrains)
         {
-            List<MonitorableTrain> trains = targetTrains.Select(item => new MonitorableTrain(item.Key, item.Value)).ToList();
+            List<ObservableTrain> trains = targetTrains.Select(item => new ObservableTrain(item.Key, item.Value)).ToList();
+            Dictionary<Train, ObservableTrain> trainsSource = trains.ToDictionary(train => train.Train);
 
             ConcurrentDictionary<Identifier, IReadOnlyList<Statement>> statements = new ConcurrentDictionary<Identifier, IReadOnlyList<Statement>>();
             foreach (KeyValuePair<string, MapObjectList> sameKeyRepeaters in repeatedStructures)
@@ -36,7 +37,7 @@ namespace AtsEx.MapStatements
 
                     double to = sameKeyRepeaters.Value.Count <= i + 1 || sameKeyRepeaters.Value[i + 1] is null ? double.PositiveInfinity : sameKeyRepeaters.Value[i + 1].Location;
 
-                    Statement statement = new Statement(name, additionalDeclaration, argument, repeater, to);
+                    Statement statement = new Statement(name, additionalDeclaration, argument, repeater, to, trainsSource);
 
                     List<Statement> list = statements.GetOrAdd(name, new List<Statement>()) as List<Statement>;
                     list.Add(statement);

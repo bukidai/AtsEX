@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using BveTypes.ClassWrappers;
+
 using AtsEx.PluginHost;
 using AtsEx.PluginHost.MapStatements;
 using AtsEx.PluginHost.Plugins;
@@ -40,8 +42,10 @@ namespace AtsEx.Samples.MapPlugins.MapStatementTest
             BveHacker.ScenarioCreated -= OnScenarioCreated;
         }
 
-        private void OnScenarioCreated(ScenarioCreatedEventArgs _)
+        private void OnScenarioCreated(ScenarioCreatedEventArgs e2)
         {
+            Train train = e2.Scenario.Trains["test"];
+
             IReadOnlyList<IStatement> putStatements = BveHacker.MapStatements.GetAll(Identifiers.Alert.Put);
             foreach (IStatement statement in putStatements)
             {
@@ -55,6 +59,8 @@ namespace AtsEx.Samples.MapPlugins.MapStatementTest
                 {
                     throw new BveFileLoadException($"アラートの種類 {alertType.FullName} は不正です。", AssemblyFileName);
                 }
+
+                statement.ObserveTrain(train);
 
                 statement.Entered += (sender, e) => OnPassed(statement, e.Direction, "0", "自列車", "通過");
                 statement.PreTrainEntered += (sender, e) => OnPassed(statement, e.Direction, "0", "先行列車", "通過");

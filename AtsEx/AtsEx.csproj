@@ -123,7 +123,7 @@
     <Compile Include="Main\AtsEx.ExtensionLoader.cs" />
     <Compile Include="Main\AtsEx.ExtensionService.cs" />
     <Compile Include="Main\ScenarioService.AsInputDevice.cs" />
-    <Compile Include="MapStatements\MonitorableTrain.cs" />
+    <Compile Include="MapStatements\ObservableTrain.cs" />
     <Compile Include="Native\Ats\AtsIoArray.cs" />
     <Compile Include="Native\Export.cs" />
     <Compile Include="Native\CallerInfo.cs" />

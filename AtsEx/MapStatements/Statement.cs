@@ -24,7 +24,13 @@ namespace AtsEx.MapStatements
         public double To { get; }
         public RepeatedStructure DefinedStructure { get; }
 
-        public Statement(Identifier name, Identifier[] additionalDeclaration, string argument, RepeatedStructure definedStructure, double to)
+        private readonly IReadOnlyDictionary<Train, ObservableTrain> TrainsSource;
+
+        private readonly Dictionary<Train, ObservableTrain> TrainsObserving = new Dictionary<Train, ObservableTrain>();
+        IReadOnlyCollection<Train> IStatement.TrainsObserving => TrainsObserving.Keys;
+
+        public Statement(Identifier name, Identifier[] additionalDeclaration, string argument, RepeatedStructure definedStructure, double to,
+            IReadOnlyDictionary<Train, ObservableTrain> trainsSource)
         {
             Name = name;
             AdditionalDeclaration = additionalDeclaration;
@@ -32,9 +38,11 @@ namespace AtsEx.MapStatements
 
             DefinedStructure = definedStructure;
             To = to;
+
+            TrainsSource = trainsSource;
         }
 
-        public void Tick(double vehicleLocation, double preTrainLocation, IEnumerable<MonitorableTrain> trainsToMonitor)
+        public void Tick(double vehicleLocation, double preTrainLocation)
         {
             {
                 if (OldVehicleLocation < From && From <= vehicleLocation)
@@ -81,7 +89,7 @@ namespace AtsEx.MapStatements
                 OldPreTrainLocation = preTrainLocation;
             }
 
-            foreach (MonitorableTrain train in trainsToMonitor)
+            foreach (ObservableTrain train in TrainsObserving.Values)
             {
                 if (train.OldLocation < From && From <= train.Location)
                 {
@@ -100,6 +108,17 @@ namespace AtsEx.MapStatements
                 {
                     TrainExited?.Invoke(this, new TrainPassedEventArgs(train.Name, train.Train, Direction.Backward));
                 }
+            }
+        }
+
+        public void ObserveTrain(Train train)
+            => TrainsObserving[train] = TrainsSource[train];
+
+        public void ObserveTrains(IEnumerable<Train> trains)
+        {
+            foreach (Train train in trains)
+            {
+                ObserveTrain(train);
             }
         }
 
