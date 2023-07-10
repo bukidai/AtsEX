@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,8 @@ namespace AtsEx
             {
                 IEnumerable<LoadError> removeTargetErrors = LoadErrorManager.Errors.Where(error =>
                 {
-                    bool isTargetError = Headers.Any(header => header.LineIndex == error.LineIndex && header.CharIndex == error.CharIndex);
+                    bool isTargetError = Headers.Any(header
+                        => Path.GetFileName(header.DefinedFilePath).ToLowerInvariant() == error.SenderFileName.ToLowerInvariant() && header.LineIndex == error.LineIndex && header.CharIndex == error.CharIndex);
                     return isTargetError;
                 });
                 foreach (LoadError error in removeTargetErrors)

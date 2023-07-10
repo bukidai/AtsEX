@@ -71,7 +71,7 @@ namespace AtsEx.MapStatements
                         string headerArgument = includePath.Substring(headerCloseBracketIndex + HeaderNameCloseBracket.Length);
 
                         Identifier identifier = Identifier.Parse(headerFullName);
-                        Header header = new Header(identifier, headerArgument, s.LineIndex, s.CharIndex);
+                        Header header = new Header(identifier, headerArgument, filePath, s.LineIndex, s.CharIndex);
                         if (header.Name.Namespace is null || !header.Name.Namespace.IsChildOf(Namespace.Root)) continue;
 
                         List<Header> list = headers.GetOrAdd(identifier, new List<Header>()) as List<Header>;
@@ -81,7 +81,7 @@ namespace AtsEx.MapStatements
                     {
                         string headerArgument = includePath.Substring(NoMapPluginHeaderFullName.Length);
 
-                        Header header = new Header(NoMapPluginHeader, headerArgument, s.LineIndex, s.CharIndex);
+                        Header header = new Header(NoMapPluginHeader, headerArgument, filePath, s.LineIndex, s.CharIndex);
                         noMapPluginHeaders.Add(header);
                     }
                     else if (includePath.StartsWith(ReadDepthHeaderFullName))
