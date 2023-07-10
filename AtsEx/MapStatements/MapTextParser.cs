@@ -8,11 +8,9 @@ namespace AtsEx.MapStatements
 {
     internal static class MapTextParser
     {
-        public static List<TextWithPosition> GetStatementsFromText(string text)
+        public static IEnumerable<TextWithPosition> GetStatementsFromText(string text)
         {
             string trimmedLine = text.ToLower();
-
-            List<TextWithPosition> statements = new List<TextWithPosition>();
 
             {
                 bool isInString = false;
@@ -45,7 +43,7 @@ namespace AtsEx.MapStatements
                                 int nextLineBreakIndex = text.IndexOf('\n', i);
                                 if (nextLineBreakIndex == -1)
                                 {
-                                    return statements;
+                                    yield break;
                                 }
                                 else
                                 {
@@ -55,7 +53,7 @@ namespace AtsEx.MapStatements
                             break;
 
                         case '#':
-                            return statements;
+                            yield break;
 
                         case '\'':
                             isInString = !isInString;
@@ -81,7 +79,7 @@ namespace AtsEx.MapStatements
                                     string notTrimmedStatementText = text.Substring(notTrimmedLastStatementEndIndex + 1, n - notTrimmedLastStatementEndIndex);
 
                                     int headSpaceCount = notTrimmedStatementText.Length - notTrimmedStatementText.TrimStart().Length;
-                                    statements.Add(new TextWithPosition(lineIndex, notTrimmedLastStatementEndIndex + headSpaceCount + 1 - notTrimmedLastLineBreakIndex, statementText));
+                                    yield return new TextWithPosition(lineIndex, notTrimmedLastStatementEndIndex + headSpaceCount + 1 - notTrimmedLastLineBreakIndex, statementText);
                                 }
 
                                 lastStatementEndIndex = i;
@@ -94,8 +92,6 @@ namespace AtsEx.MapStatements
                     n++;
                 }
             }
-
-            return statements;
         }
 
         internal class TextWithPosition

@@ -12,6 +12,9 @@ namespace AtsEx.MapStatements
 {
     internal partial class HeaderSet
     {
+        private readonly static Identifier UseAtsExHeader;
+        private readonly static string UseAtsExHeaderFullName;
+
         private readonly static Identifier NoMapPluginHeader;
         private readonly static string NoMapPluginHeaderFullName;
 
@@ -23,6 +26,9 @@ namespace AtsEx.MapStatements
 
         static HeaderSet()
         {
+            UseAtsExHeader = new Identifier(Namespace.Root, "useatsex");
+            UseAtsExHeaderFullName = $"[[{UseAtsExHeader.FullName}]]";
+
             NoMapPluginHeader = new Identifier(Namespace.Root, "nompi");
             NoMapPluginHeaderFullName = $"[[{NoMapPluginHeader.FullName}]]";
 
@@ -41,21 +47,24 @@ namespace AtsEx.MapStatements
             ConcurrentDictionary<Identifier, IReadOnlyList<Header>> headers = new ConcurrentDictionary<Identifier, IReadOnlyList<Header>>();
             List<Header> noMapPluginHeaders = new List<Header>();
 
-            string fileName = Path.GetFileName(filePath);
-
             string text;
             using (StreamReader sr = new StreamReader(filePath))
             {
                 text = sr.ReadToEnd();
             }
 
-            List<MapTextParser.TextWithPosition> statements = MapTextParser.GetStatementsFromText(text);
-            statements.ForEach(s =>
+            bool isFirstStatement = true;
+            IEnumerable<MapTextParser.TextWithPosition> statements = MapTextParser.GetStatementsFromText(text);
+            foreach (MapTextParser.TextWithPosition s in statements)
             {
                 if (s.Text.StartsWith("include'") && s.Text.EndsWith("'") && s.Text.Length - s.Text.Replace("'", "").Length == 2)
                 {
                     string includePath = s.Text.Split('\'')[1];
                     int headerCloseBracketIndex = includePath.IndexOf(HeaderNameCloseBracket);
+
+                    if (isFirstStatement && !includePath.StartsWith(UseAtsExHeaderFullName)) break;
+                    isFirstStatement = false;
+
                     if (includePath.StartsWith(HeaderNameOpenBracket) && headerCloseBracketIndex != -1)
                     {
                         string headerFullName = includePath.Substring(HeaderNameOpenBracket.Length, headerCloseBracketIndex - HeaderNameOpenBracket.Length);
@@ -63,7 +72,7 @@ namespace AtsEx.MapStatements
 
                         Identifier identifier = Identifier.Parse(headerFullName);
                         Header header = new Header(identifier, headerArgument, s.LineIndex, s.CharIndex);
-                        if (header.Name.Namespace is null || !header.Name.Namespace.IsChildOf(Namespace.Root)) return;
+                        if (header.Name.Namespace is null || !header.Name.Namespace.IsChildOf(Namespace.Root)) continue;
 
                         List<Header> list = headers.GetOrAdd(identifier, new List<Header>()) as List<Header>;
                         list.Add(header);
@@ -85,7 +94,7 @@ namespace AtsEx.MapStatements
                         string includeRelativePath = includePath;
                         string includeAbsolutePath = Path.Combine(Path.GetDirectoryName(filePath), includeRelativePath);
 
-                        if (!File.Exists(includeAbsolutePath)) return;
+                        if (!File.Exists(includeAbsolutePath)) continue;
 
                         (IDictionary<Identifier, IReadOnlyList<Header>> headersInIncludedMap, IReadOnlyList<Header> noMapPluginHeadersInIncludedMap) = Load(includeAbsolutePath, readDepth - 1);
 
@@ -98,7 +107,7 @@ namespace AtsEx.MapStatements
                         noMapPluginHeaders.AddRange(noMapPluginHeadersInIncludedMap);
                     }
                 }
-            });
+            }
 
             return (headers, noMapPluginHeaders);
         }
