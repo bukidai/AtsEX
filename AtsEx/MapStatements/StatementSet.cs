@@ -28,7 +28,7 @@ namespace AtsEx.MapStatements
 
         public void Tick(double vehicleLocation, double preTrainLocation)
         {
-            foreach (ObservableTrain train in Trains) train.UpdateLocation();
+            Parallel.ForEach(Trains, train => train.UpdateLocation());
             foreach (Statement statement in this) statement.Tick(vehicleLocation, preTrainLocation);
         }
     }
