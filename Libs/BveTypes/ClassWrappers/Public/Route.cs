@@ -28,6 +28,8 @@ namespace BveTypes.ClassWrappers
             DrawLimitLocationGetMethod = members.GetSourcePropertyGetterOf(nameof(DrawLimitLocation));
             DrawLimitLocationSetMethod = members.GetSourcePropertySetterOf(nameof(DrawLimitLocation));
 
+            MyTrackGetMethod = members.GetSourcePropertyGetterOf(nameof(MyTrack));
+
             StructuresGetMethod = members.GetSourcePropertyGetterOf(nameof(Structures));
             StructuresField = members.GetSourceFieldOf(nameof(Structures));
 
@@ -79,6 +81,12 @@ namespace BveTypes.ClassWrappers
             get => DrawLimitLocationGetMethod.Invoke(Src, null);
             set => DrawLimitLocationSetMethod.Invoke(Src, new object[] { value });
         }
+
+        private static FastMethod MyTrackGetMethod;
+        /// <summary>
+        /// 自軌道に関する情報を取得します。
+        /// </summary>
+        public MyTrack MyTrack => ClassWrappers.MyTrack.FromSource(MyTrackGetMethod.Invoke(Src, null));
 
         private static FastMethod StructuresGetMethod;
         private static FastField StructuresField;

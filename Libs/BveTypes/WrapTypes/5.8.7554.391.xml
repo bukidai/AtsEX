@@ -249,6 +249,20 @@
 		<Method Wrapper="OnTick" WrapperParams="System.Object; System.EventArgs" Original="a" IsOriginalNonPublic="true"/>
 	</Class>
 
+	<Class Wrapper="Curve" Original="s">
+		<Property Wrapper="Curvature">
+			<Getter Original="a"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Direction">
+			<Getter Original="b"/>
+			<Setter Original="b"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="CurveList" Original="c6">
+	</Class>
+
 	<Class Wrapper="Direct3DProvider" Original="d9">
 		<Property Wrapper="Instance" IsWrapperStatic="true">
 			<Getter Original="d" IsOriginalStatic="true"/>
@@ -463,6 +477,18 @@
 		<Method Wrapper="Draw" WrapperParams="atsex:Direct3DProvider; System.Boolean" Original="a"/>
 	</Class>
 
+	<Class Wrapper="MyTrack" Original="b3">
+		<Property Wrapper="Curves">
+			<Getter Original="b"/>
+		</Property>
+		<Property Wrapper="CurvePosts">
+			<Getter Original="c"/>
+		</Property>
+
+		<Method Wrapper="GetDirectionAt" WrapperParams="System.Int32" Original="a"/>
+		<Method Wrapper="GetPosition" WrapperParams="System.Double; System.Double" Original="c"/>
+	</Class>
+
 	<Class Wrapper="NotchInfo" Original="e9">
 		<Property Wrapper="PowerNotchCount">
 			<Getter Original="d"/>
@@ -593,6 +619,9 @@
 		<Property Wrapper="DrawLimitLocation">
 			<Getter Original="e"/>
 			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="MyTrack">
+			<Getter Original="l"/>
 		</Property>
 		<Property Wrapper="Structures">
 			<Getter Original="y"/>
