@@ -104,6 +104,8 @@
     <Compile Include="ClassWrappers\Public\Passenger.cs" />
     <Compile Include="ClassWrappers\Public\SideDoorSet.cs" />
     <Compile Include="ClassWrappers\Public\SoundSet.cs" />
+    <Compile Include="ClassWrappers\Public\Transform.cs" />
+    <Compile Include="ClassWrappers\Public\VehicleBogieWheel.cs" />
     <Compile Include="ClassWrappers\Public\VehicleElectricity.cs" />
     <Compile Include="ClassWrappers\Public\ElectroPneumaticBlendedBrakingControlBase.cs" />
     <Compile Include="ClassWrappers\Public\Forms\ChartForm.cs" />
@@ -158,9 +160,11 @@
     <Compile Include="ClassWrappers\Public\VehicleInstrumentSet.cs" />
     <Compile Include="ClassWrappers\Public\VehiclePerformance.cs" />
     <Compile Include="ClassWrappers\Public\VehiclePerformanceBase.cs" />
+    <Compile Include="ClassWrappers\Public\VehiclePositioner.cs" />
     <Compile Include="ClassWrappers\Public\VehicleStateStore.cs" />
     <Compile Include="ClassWrappers\Public\VehicleStep.cs" />
     <Compile Include="ClassWrappers\Public\VehicleStepSet.cs" />
+    <Compile Include="ClassWrappers\Public\VehicleVibrationManager.cs" />
     <Compile Include="Comparer.cs" />
     <Compile Include="ClassWrappers\Public\Conductor.cs" />
     <Compile Include="ITwoWayConverter.cs" />

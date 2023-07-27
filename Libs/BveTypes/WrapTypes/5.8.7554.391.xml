@@ -1009,6 +1009,10 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="Transform" Original="al">
+		<Field WrapperProperty="Matrix" Original="a"/>
+	</Class>
+
 	<Class Wrapper="UserVehicleLocationManager" Original="fu">
 		<Property Wrapper="Location">
 			<Getter Original="c"/>
@@ -1038,6 +1042,10 @@
 			<Getter Original="f"/>
 			<Setter Original="a"/>
 		</Property>
+		<Property Wrapper="VibrationManager">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
 		<Property Wrapper="Conductor">
 			<Getter Original="e"/>
 		</Property>
@@ -1048,6 +1056,12 @@
 		<Property Wrapper="Dynamics">
 			<Getter Original="g"/>
 			<Setter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="VehicleBogieWheel" Original="b7">
+		<Property Wrapper="PositionInBlock">
+			<Getter Original="d"/>
 		</Property>
 	</Class>
 
@@ -1125,6 +1139,30 @@
 		<Property Wrapper="Brake">
 			<Getter Original="i"/>
 		</Property>
+	</Class>
+
+	<Class Wrapper="VehiclePositioner" Original="cr">
+		<Property Wrapper="FrontBogie">
+			<Getter Original="f"/>
+		</Property>
+		<Property Wrapper="RearBogie">
+			<Getter Original="c"/>
+		</Property>
+		<Property Wrapper="HalfOfCarLength">
+			<Getter Original="g"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="HalfOfBogieDistance">
+			<Getter Original="e"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="BlockToCarCenterTransform">
+			<Getter Original="d"/>
+		</Property>
+
+		<Field WrapperProperty="PositionInBlock" Original="g" IsOriginalNonPublic="true"/>
+
+		<Method Wrapper="OnLocationChanged" WrapperParams="System.Object; atsex:ValueEventArgs`1[System.Double]" Original="a" IsWrapperNonPublic="true" IsOriginalNonPublic="true"/>
 	</Class>
 
 	<Class Wrapper="VehicleStateStore" Original="fb">
@@ -1220,5 +1258,11 @@
 		</Property>
 
 		<Method Wrapper="GetStep" WrapperParams="System.Int32" Original="b"/>
+	</Class>
+
+	<Class Wrapper="VehicleVibrationManager" Original="d3">
+		<Property Wrapper="Positioner">
+			<Getter Original="i"/>
+		</Property>
 	</Class>
 </WrapTypes>
