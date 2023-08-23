@@ -23,6 +23,9 @@ namespace Zbx1425.DXDynamicTexture
 
         internal static Device DXDevice;
 
+        private readonly static List<string> appliedTextureFileNames = new List<string>();
+        public static IReadOnlyList<string> AppliedTextureFileNames => appliedTextureFileNames;
+
         internal static void Initialize()
         {
             if (IsInitialized) throw new InvalidOperationException("DXDynamicTexture has been already initialized.");
@@ -42,12 +45,19 @@ namespace Zbx1425.DXDynamicTexture
         private static void FromFilePostfix(ref Texture __result, Device device, string fileName)
 #pragma warning restore IDE1006 // ñΩñºÉXÉ^ÉCÉã
         {
-            var normalizedName = fileName.Replace('\\', '/').ToLowerInvariant();
+            var normalizedName = Path.GetFullPath(fileName.ToLowerInvariant());
+            appliedTextureFileNames.Add(normalizedName);
             foreach (var item in Handles)
             {
                 if (normalizedName.EndsWith(item.Key))
                 {
                     __result = Handles[item.Key].GetOrCreate(device);
+                    System.Windows.Forms.MessageBox.Show(item.Key);
+                }
+
+                if (item.Key.EndsWith("ktisdx.png"))
+                {
+                    System.Windows.Forms.MessageBox.Show($"normalizedName: {normalizedName}, item.Key: {item.Key}");
                 }
             }
             DXDevice = device;
@@ -59,7 +69,7 @@ namespace Zbx1425.DXDynamicTexture
             if (!IsPowerOfTwo(width)) throw new ArgumentException("Must be a integral power of 2.", nameof(width));
             if (!IsPowerOfTwo(height)) throw new ArgumentException("Must be a integral power of 2.", nameof(height));
 
-            fileNameEnding = fileNameEnding.ToLowerInvariant().Replace('\\', '/');
+            fileNameEnding = Path.GetFullPath(Path.Combine("a:", fileNameEnding.ToLowerInvariant())).Substring(3);
             if (Handles.ContainsKey(fileNameEnding)) return Handles[fileNameEnding];
             var result = new TextureHandle(width, height);
             Handles.Add(fileNameEnding, result);
@@ -109,6 +119,7 @@ namespace Zbx1425.DXDynamicTexture
                 if (item.Value != null && item.Value.IsCreated) item.Value.Dispose();
             }
 
+            appliedTextureFileNames.Clear();
             Harmony.UnpatchAll(Harmony.Id);
         }
 

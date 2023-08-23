@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -166,7 +167,7 @@ namespace Zbx1425.DXDynamicTexture
             if (!TextureManager.IsPowerOfTwo(width)) throw new ArgumentException("Must be a integral power of 2.", nameof(width));
             if (!TextureManager.IsPowerOfTwo(height)) throw new ArgumentException("Must be a integral power of 2.", nameof(height));
 
-            fileNameEnding = fileNameEnding.ToLowerInvariant().Replace('\\', '/');
+            fileNameEnding = Path.GetFullPath(Path.Combine("a:", fileNameEnding.ToLowerInvariant())).Substring(3);
             if (TextureManager.Handles.ContainsKey(fileNameEnding))
                 return (TouchTextureHandle)TextureManager.Handles[fileNameEnding];
             var result = new TouchTextureHandle(width, height);
