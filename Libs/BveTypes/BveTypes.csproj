@@ -76,6 +76,7 @@
     <Compile Include="ClassWrappers\Helpers\DoorSide.cs" />
     <Compile Include="ClassWrappers\Helpers\ReverserPosition.cs" />
     <Compile Include="ClassWrappers\Helpers\TiltOptions.cs" />
+    <Compile Include="ClassWrappers\Public\AirSpring.cs" />
     <Compile Include="ClassWrappers\Public\AirSupplement.cs" />
     <Compile Include="ClassWrappers\Public\AssistantText.cs" />
     <Compile Include="ClassWrappers\Public\AssistantTextBase.cs" />
@@ -103,7 +104,9 @@
     <Compile Include="ClassWrappers\Public\MyTrack.cs" />
     <Compile Include="ClassWrappers\Public\Passenger.cs" />
     <Compile Include="ClassWrappers\Public\SideDoorSet.cs" />
+    <Compile Include="ClassWrappers\Public\SixDof.cs" />
     <Compile Include="ClassWrappers\Public\SoundSet.cs" />
+    <Compile Include="ClassWrappers\Public\Spring.cs" />
     <Compile Include="ClassWrappers\Public\Transform.cs" />
     <Compile Include="ClassWrappers\Public\VehicleBogieWheel.cs" />
     <Compile Include="ClassWrappers\Public\VehicleElectricity.cs" />

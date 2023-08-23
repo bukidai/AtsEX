@@ -46,6 +46,9 @@
 	</Class>
 	<!-- Forms END -->
 
+	<Class Wrapper="AirSpring" Original="cp">
+	</Class>
+
 	<Class Wrapper="AirSupplement" Original="c5">
 		<Property Wrapper="ShoeFriction">
 			<Getter Original="b"/>
@@ -804,6 +807,18 @@
 	<Class Wrapper="SingleStructureList" Original="bg">
 	</Class>
 
+	<Class Wrapper="SixDof" Original="dm">
+		<Field WrapperProperty="X" Original="a"/>
+		<Field WrapperProperty="Y" Original="b"/>
+		<Field WrapperProperty="Z" Original="c"/>
+		<Field WrapperProperty="RotationX" Original="d"/>
+		<Field WrapperProperty="RotationY" Original="e"/>
+		<Field WrapperProperty="RotationZ" Original="f"/>
+
+		<Method Wrapper="Add" WrapperParams="atsex:SixDof; atsex:SixDof" Original="g" IsWrapperNonPublic="true" IsWrapperStatic="true" IsOriginalStatic="true"/>
+		<Method Wrapper="Multiply" WrapperParams="System.Double; atsex:SixDof" Original="g" IsWrapperNonPublic="true" IsWrapperStatic="true" IsOriginalStatic="true"/>
+	</Class>
+
 	<Class Wrapper="Smee" Original="ce">
 		<Property Wrapper="BpInitialPressure">
 			<Getter Original="b"/>
@@ -818,6 +833,17 @@
 	<Class Wrapper="SoundSet" Original="g">
 		<Property Wrapper="Items">
 			<Getter Original="a"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="Spring" Original="l">
+		<Property Wrapper="UpperPosition">
+			<Getter Original="n"/>
+			<Setter Original="j"/>
+		</Property>
+		<Property Wrapper="UpperSpeed">
+			<Getter Original="l"/>
+			<Setter Original="m"/>
 		</Property>
 	</Class>
 
@@ -1261,8 +1287,27 @@
 	</Class>
 
 	<Class Wrapper="VehicleVibrationManager" Original="d3">
+		<Property Wrapper="CarBodyTransform">
+			<Getter Original="aa"/>
+		</Property>
+		<Property Wrapper="CarBodyDisplacement">
+			<Getter Original="r"/>
+		</Property>
 		<Property Wrapper="Positioner">
 			<Getter Original="i"/>
 		</Property>
+		<Property Wrapper="SpringHeight">
+			<Getter Original="ab"/>
+			<Setter Original="l"/>
+		</Property>
+		<Property Wrapper="ViewPoint">
+			<Getter Original="e"/>
+			<Setter Original="a"/>
+		</Property>
+
+		<Field WrapperProperty="VerticalSprings" Original="ad" IsOriginalNonPublic="true"/>
+
+		<Method Wrapper="Tick" WrapperParams="System.Double" Original="c"/>
+		<Method Wrapper="UpdateCarBodyTransform" WrapperParams="void" Original="b" IsOriginalNonPublic="true"/>
 	</Class>
 </WrapTypes>
