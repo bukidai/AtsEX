@@ -50,7 +50,7 @@ namespace AtsEx
 
                 // TODO:
                 // ・マップエラーをもとより表示しないように
-                // ・Caller経由でのAtsEx起動を阻害する
+                // ・シナリオロード済の状態で呼ばれたら再起動するようにする
             }
 
             public override void Dispose()
