@@ -25,6 +25,8 @@ namespace BveTypes.ClassWrappers
 
             CurvePostsGetMethod = members.GetSourcePropertyGetterOf(nameof(CurvePosts));
 
+            CantsGetMethod = members.GetSourcePropertyGetterOf(nameof(Cants));
+
             GetDirectionAtMethod = members.GetSourceMethodOf(nameof(GetDirectionAt));
             GetPositionMethod = members.GetSourceMethodOf(nameof(GetPosition));
         }
@@ -56,6 +58,12 @@ namespace BveTypes.ClassWrappers
         /// 円曲線の開始距離程と半径のペアを表す <see cref="ValueNode{T}"/> (T は <see cref="double"/>) のリストを取得します。
         /// </summary>
         public MapObjectList CurvePosts => MapObjectList.FromSource(CurvePostsGetMethod.Invoke(Src, null));
+
+        private static FastMethod CantsGetMethod;
+        /// <summary>
+        /// カントのリストを取得します。
+        /// </summary>
+        public CantList Cants => CantList.FromSource(CantsGetMethod.Invoke(Src, null));
 
         private static FastMethod GetDirectionAtMethod;
         /// <summary>

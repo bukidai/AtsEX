@@ -176,6 +176,21 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="Cant" Original="c9">
+		<Property Wrapper="RotationZ">
+			<Getter Original="a"/>
+		</Property>
+		<Property Wrapper="CenterX">
+			<Getter Original="b"/>
+		</Property>
+		<Property Wrapper="FunctionId">
+			<Getter Original="c"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="CantList" Original="bn">
+	</Class>
+
 	<Class Wrapper="CarBc" Original="d6">
 		<Property Wrapper="BasicBrake">
 			<Getter Original="b"/>
@@ -486,6 +501,9 @@
 		</Property>
 		<Property Wrapper="CurvePosts">
 			<Getter Original="c"/>
+		</Property>
+		<Property Wrapper="Cants">
+			<Getter Original="a"/>
 		</Property>
 
 		<Method Wrapper="GetDirectionAt" WrapperParams="System.Int32" Original="a"/>

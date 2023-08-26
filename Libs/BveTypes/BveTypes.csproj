@@ -88,6 +88,8 @@
     <Compile Include="ClassWrappers\Public\BrakeSystem.cs" />
     <Compile Include="ClassWrappers\Public\BveFile.cs" />
     <Compile Include="ClassWrappers\Public\CabBase.cs" />
+    <Compile Include="ClassWrappers\Public\Cant.cs" />
+    <Compile Include="ClassWrappers\Public\CantList.cs" />
     <Compile Include="ClassWrappers\Public\CarBc.cs" />
     <Compile Include="ClassWrappers\Public\CarInfo.cs" />
     <Compile Include="ClassWrappers\Public\Cl.cs" />
