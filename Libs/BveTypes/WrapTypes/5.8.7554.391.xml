@@ -846,6 +846,9 @@
 
 	<Class Wrapper="Sound" Original="ep">
 		<Method Wrapper="Play" WrapperParams="System.Double; System.Double; System.Int32" Original="a"/>
+		<Method Wrapper="Play" WrapperParams="System.Double; System.Double; System.Int32; System.Int32" Original="a"/>
+		<Method Wrapper="PlayLooping" WrapperParams="System.Double; System.Double; System.Int32; System.Int32" Original="b"/>
+		<Method Wrapper="Stop" WrapperParams="System.Int32" Original="b"/>
 	</Class>
 
 	<Class Wrapper="SoundSet" Original="g">
