@@ -464,6 +464,7 @@
 			<Setter Original="d"/>
 		</Property>
 
+		<Method Wrapper="GoToAndGetCurrent" WrapperParams="System.Double" Original="c"/>
 		<Method Wrapper="GoTo" WrapperParams="System.Int32" Original="f"/>
 	</Class>
 

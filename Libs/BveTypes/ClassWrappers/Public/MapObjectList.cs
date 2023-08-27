@@ -28,6 +28,7 @@ namespace BveTypes.ClassWrappers
             CurrentIndexGetMethod = members.GetSourcePropertyGetterOf(nameof(CurrentIndex));
             CurrentIndexSetMethod = members.GetSourcePropertySetterOf(nameof(CurrentIndex));
 
+            GoToAndGetCurrentMethod = members.GetSourceMethodOf(nameof(GoToAndGetCurrent));
             GoToMethod = members.GetSourceMethodOf(nameof(GoTo));
         }
 
@@ -61,11 +62,22 @@ namespace BveTypes.ClassWrappers
             set => CurrentIndexSetMethod.Invoke(Src, new object[] { value });
         }
 
+        private static FastMethod GoToAndGetCurrentMethod;
+        /// <summary>
+        /// コレクションの指定した距離程に対応する要素へ移動し、それを取得します。
+        /// </summary>
+        /// <param name="location">移動先の距離程 [m]。</param>
+        public MapObjectBase GoToAndGetCurrent(double location)
+        {
+            object src = GoToAndGetCurrentMethod.Invoke(Src, new object[] { location });
+            return src is null ? null : (MapObjectBase)CreateFromSource(src);
+        }
+
         private static FastMethod GoToMethod;
         /// <summary>
         /// 指定したインデックスへ移動します。
         /// </summary>
-        /// <param name="index"></param>
+        /// <param name="index">移動先のインデックス。</param>
         public void GoTo(int index) => GoToMethod.Invoke(Src, new object[] { index });
     }
 }
