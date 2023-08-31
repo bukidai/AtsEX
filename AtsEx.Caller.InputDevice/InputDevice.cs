@@ -37,7 +37,14 @@ namespace AtsEx.Caller.InputDevice
                 return assemblyName.Name == LauncherName ? Assembly.LoadFrom(launcherLocation) : null;
             };
 
-            Load();
+            try
+            {
+                Load();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "読込エラー - AtsEX Caller 入力デバイスプラグイン版", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             void Load()
             {
