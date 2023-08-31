@@ -6,5 +6,5 @@ RouteTitle = ★AtsEX サンプル
 Vehicle = AtsEx.Samples\Vehicles\Basic\Vehicle_Simple.txt
 VehicleTitle = AtsEX 搭載サンプル車両
 Author = おーとま (automatic9045)
-;Image = 
+Image = AtsEx.Samples\Thumbnails\Basic\Default.png
 Comment = 先行列車を動かすサンプルです。このサンプルでは他列車に連動して先行列車が動きます。

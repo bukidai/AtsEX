@@ -6,5 +6,5 @@ RouteTitle = ★AtsEX サンプル
 Vehicle = AtsEx.Samples\Vehicles\Basic\Vehicle_WithPanel.txt
 VehicleTitle = AtsEX 搭載サンプル車両
 Author = おーとま (automatic9045)
-;Image = 
+Image = AtsEx.Samples\Thumbnails\Basic\Default.png
 Comment = 従来の ATS プラグインでいう「Elapse 関数の panel 引数を編集する」操作を AtsEX プラグインから行うサンプルです。

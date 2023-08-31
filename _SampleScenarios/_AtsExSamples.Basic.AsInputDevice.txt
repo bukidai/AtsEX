@@ -6,5 +6,5 @@ RouteTitle = ★AtsEX サンプル
 Vehicle = AtsEx.Samples\Vehicles\Basic\Vehicle_AsInputDevice.txt
 VehicleTitle = サンプル車両【AtsEX Caller "非" 搭載 / AtsEX 車両 PI 搭載】
 Author = おーとま (automatic9045)
-;Image = 
+Image = AtsEx.Samples\Thumbnails\Basic\Default.png
 Comment = AtsEX 入力デバイス PI 版を活用したサンプル。AtsEX マップ PI 搭載路線を、AtsEX Caller "非" 搭載車両で運転。

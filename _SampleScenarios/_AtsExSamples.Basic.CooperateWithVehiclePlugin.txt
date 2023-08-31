@@ -6,5 +6,5 @@ RouteTitle = ★AtsEX サンプル
 Vehicle = AtsEx.Samples\Vehicles\Basic\Vehicle_CooperatingWithMapPlugin.txt
 VehicleTitle = AtsEX 搭載サンプル車両
 Author = おーとま (automatic9045)
-;Image = 
+Image = AtsEx.Samples\Thumbnails\Basic\Default.png
 Comment = マッププラグインから車両プラグインを参照するサンプルです。

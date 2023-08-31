@@ -6,5 +6,5 @@ RouteTitle = ★AtsEX サンプル
 Vehicle = Uchibo20\E217r\Vehicle.txt
 VehicleTitle = E217 系 15 両【AtsEX Caller・AtsEX 車両 PI "非" 搭載】
 Author = おーとま (automatic9045)
-;Image = 
+Image = AtsEx.Samples\Thumbnails\Basic\Default.png
 Comment = AtsEX 入力デバイス PI 版を活用したサンプル。AtsEX マップ PI 搭載路線を、AtsEX Caller "非" 搭載車両で運転。
