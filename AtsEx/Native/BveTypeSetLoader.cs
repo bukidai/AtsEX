@@ -48,10 +48,9 @@ namespace AtsEx.Native
             try
             {
                 Version bveVersion = App.Instance.BveVersion;
-                BveTypeSet bveTypes = BveTypeSet.LoadAsync(
+                BveTypeSet bveTypes = BveTypeSet.Load(
                     App.Instance.BveAssembly, bveVersion, true,
-                    profileVersion => ProfileForDifferentVersionBveLoaded?.Invoke(this, new ProfileForDifferentVersionBveLoadedEventArgs(bveVersion, profileVersion)))
-                    .Result;
+                    profileVersion => ProfileForDifferentVersionBveLoaded?.Invoke(this, new ProfileForDifferentVersionBveLoadedEventArgs(bveVersion, profileVersion)));
 
                 return bveTypes;
             }
