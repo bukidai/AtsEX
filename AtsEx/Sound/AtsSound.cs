@@ -12,10 +12,7 @@ namespace AtsEx.Sound
 {
     internal sealed class AtsSound : IAtsSound
     {
-        private const int MinVolume = -9999;
-        private const int MaxVolume = 0;
-
-        private Queue<int> CommandQueue = new Queue<int>();
+        private readonly AtsSoundCommandQueue CommandQueue = new AtsSoundCommandQueue();
 
         public PlayState PlayState { get; private set; }
 
@@ -23,42 +20,40 @@ namespace AtsEx.Sound
         {
         }
 
-        public int Tick() => CommandQueue.Count == 0 ? (int)SoundPlayType.Continue : CommandQueue.Dequeue();
+        public int Tick() => CommandQueue.Tick().SerializedValue;
 
         public void Play()
         {
-            CommandQueue.Enqueue((int)SoundPlayType.Once);
+            CommandQueue.SetNextCommand(AtsSoundCommand.Once);
             PlayState = PlayState.Playing;
         }
 
         public void PlayLoop()
         {
-            CommandQueue.Enqueue((int)SoundPlayType.Loop);
+            CommandQueue.SetNextCommand(AtsSoundCommand.PlayLoop(0));
             PlayState = PlayState.PlayingLoop;
         }
 
-        public void PlayLoop(double volume)
+        public void PlayLoopMillibel(int volumeMillibel)
         {
-            int commandValue = (int)(volume * 100);
-            if (commandValue < MinVolume || MaxVolume < commandValue)
-            {
-                throw new ArgumentOutOfRangeException(nameof(volume));
-            }
-
-            CommandQueue.Enqueue(commandValue);
+            CommandQueue.SetNextCommand(AtsSoundCommand.PlayLoop(volumeMillibel));
             PlayState = PlayState.PlayingLoop;
         }
+
+        public void PlayLoop(double volumeDecibel)
+            => PlayLoopMillibel((int)(volumeDecibel / 100));
 
         public void Stop()
         {
-            CommandQueue.Enqueue((int)SoundPlayType.Stop);
+            if (PlayState == PlayState.Stop) return;
+
+            CommandQueue.SetNextCommand(AtsSoundCommand.Stop);
             PlayState = PlayState.Stop;
         }
 
         public void StopAndPlay()
         {
-            CommandQueue.Enqueue((int)SoundPlayType.Stop);
-            CommandQueue.Enqueue((int)SoundPlayType.Once);
+            CommandQueue.SetNextCommand(AtsSoundCommand.Stop, AtsSoundCommand.Once);
             PlayState = PlayState.Playing;
         }
     }

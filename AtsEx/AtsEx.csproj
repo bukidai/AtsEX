@@ -187,6 +187,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NativeImpl.cs" />
     <Compile Include="Sound\AtsSound.cs" />
+    <Compile Include="Sound\AtsSoundCommand.cs" />
+    <Compile Include="Sound\AtsSoundCommandQueue.cs" />
     <Compile Include="Sound\AtsSoundSet.cs" />
     <Compile Include="Utilities\EnumerableInDictionaryEnumerator.cs" />
     <Compile Include="VersionForm\VersionForm.cs">
