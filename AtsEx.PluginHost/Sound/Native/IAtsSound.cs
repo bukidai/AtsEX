@@ -12,9 +12,15 @@ namespace AtsEx.PluginHost.Sound.Native
     public interface IAtsSound : ISound
     {
         /// <summary>
-        /// 音源の本来の音量よりも小さい音量でサウンドをループ再生します。
+        /// 音量を指定してサウンドをループ再生します。
         /// </summary>
-        /// <param name="volume">下げる音量の符号付き大きさ [dB]。0 または負の値で指定してください。</param>
-        void PlayLoop(double volume);
+        /// <param name="volumeDecibel">下げる音量の符号付き大きさ [dB]。0 または負の値で指定してください。</param>
+        void PlayLoop(double volumeDecibel);
+
+        /// <summary>
+        /// 音量を指定してサウンドをループ再生します。
+        /// </summary>
+        /// <param name="volumeRatio">音源の本来の音量に対する、再生する音量の比。0 以上 1 以下の値で指定してください。</param>
+        void PlayLoopRatio(double volumeRatio);
     }
 }

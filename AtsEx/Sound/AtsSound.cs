@@ -43,6 +43,9 @@ namespace AtsEx.Sound
         public void PlayLoop(double volumeDecibel)
             => PlayLoopMillibel((int)(volumeDecibel / 100));
 
+        public void PlayLoopRatio(double volumeRatio)
+            => PlayLoopMillibel((int)(2000 * Math.Log10(volumeRatio)));
+
         public void Stop()
         {
             if (PlayState == PlayState.Stop) return;
