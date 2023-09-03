@@ -1,4 +1,51 @@
-BveTs Train 1.01
+BveTs Train 1.01:UTF-8
 
-[Structure]
-Key = Stop6
+
+[structure]
+Key = h217rTcEnd
+Distance = 143
+Z = 17
+Span = 12
+
+[structure]
+Key = h217rM
+Distance = 123
+Z = 17
+Span = 12
+
+[structure]
+Key = h216rM
+Distance = 103
+Z = 17
+Span = 12
+
+[structure]
+Key = h216rTcTop
+Distance = 83
+Z = 17
+Span = 12
+
+[structure]
+Key = h217rTcEnd
+Distance = 63
+Z = 17
+Span = 12
+
+[structure]
+Key = h217rM
+Distance = 43
+Z = 17
+Span = 12
+
+[structure]
+Key = h216rM
+Distance = 23
+Z = 17
+Span = 12
+
+[structure]
+Key = h216rTcTop
+Distance = 3
+Z = 17
+Span = 12
+

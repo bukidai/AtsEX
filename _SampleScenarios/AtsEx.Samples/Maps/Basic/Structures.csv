@@ -12,7 +12,7 @@ Beacon.Fuga,Structures_Original\Null.x
 ,
 #AtsEX識別子（全般）,
 AtsEx::Null,Structures_Original\Null.x
-
+,
 #AtsEX識別子（独自マップ構文サンプル）,
 AtsEx::User::Automatic9045::Alert::HeaderAlert,Structures_Original\Null.x
 AtsEx::User::Automatic9045::Alert::Alert.Put,Structures_Original\Null.x
@@ -31,6 +31,14 @@ AtsEx::ExtendedBeacon.ObservingTargetTrain.PreTrain,Structures_Original\Null.x
 #AtsEX識別子（スクリプト言語）,
 AtsEx::ScriptLanguage.CSharpScript,Structures_Original\Null.x
 AtsEx::ScriptLanguage.IronPython2,Structures_Original\Null.x
+,
+#H217系,
+h217rTcTop,e217R\e217Tcend.x
+h217rTcEnd,e217R\e217Tcend.x
+h217rM,e217R\e217M.x
+h216rM,e217R\e216M.x
+h216rTcTop,e217R\e216-1000Tctop.x
+h216rTcEnd,e217R\e216-1000Tcend.x
 ,
 #付属,
 Tr_Bal1-1,Structures\Track\Tr_Bal1.x
