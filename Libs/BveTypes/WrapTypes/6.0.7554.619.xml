@@ -660,6 +660,9 @@
 		<Property Wrapper="Sections">
 			<Getter Original="n"/>
 		</Property>
+		<Property Wrapper="IrregularityObjects">
+			<Getter Original="z"/>
+		</Property>
 		<Property Wrapper="Sounds">
 			<Getter Original="t"/>
 		</Property>
