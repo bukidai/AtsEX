@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using SlimDX.DirectSound;
+
 using FastMember;
 using TypeWrapping;
 
@@ -12,12 +14,15 @@ namespace BveTypes.ClassWrappers
     /// <summary>
     /// サウンドを表します。
     /// </summary>
-    public class Sound : ClassWrapperBase
+    public partial class Sound : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<Sound>();
+
+            Constructor1 = members.GetSourceConstructor(new Type[] { typeof(TimeManager), typeof(CameraLocation), typeof(SecondarySoundBuffer), typeof(double), typeof(SoundPosition) });
+            Constructor2 = members.GetSourceConstructor(new Type[] { typeof(TimeManager), typeof(CameraLocation), typeof(SecondarySoundBuffer[]), typeof(double), typeof(SoundPosition) });
 
             PlayMethod1 = members.GetSourceMethodOf(nameof(Play), new Type[] { typeof(double), typeof(double), typeof(int) });
             PlayMethod2 = members.GetSourceMethodOf(nameof(Play), new Type[] { typeof(double), typeof(double), typeof(int), typeof(int) });
@@ -40,6 +45,18 @@ namespace BveTypes.ClassWrappers
         /// <returns>オリジナル オブジェクトをラップした <see cref="Sound"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
         public static Sound FromSource(object src) => src is null ? null : new Sound(src);
+
+        private static FastConstructor Constructor1;
+        public Sound(TimeManager timeManager, CameraLocation cameraLocation, SecondarySoundBuffer buffer, double minRadius, SoundPosition position)
+            : this(Constructor1.Invoke(new object[] { timeManager, cameraLocation, buffer, minRadius, position }))
+        {
+        }
+
+        private static FastConstructor Constructor2;
+        public Sound(TimeManager timeManager, CameraLocation cameraLocation, SecondarySoundBuffer[] buffers, double minRadius, SoundPosition position)
+            : this(Constructor2.Invoke(new object[] { timeManager, cameraLocation, buffers, minRadius, position }))
+        {
+        }
 
         private static FastMethod PlayMethod1;
         /// <summary>

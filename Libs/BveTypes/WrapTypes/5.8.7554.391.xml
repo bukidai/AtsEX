@@ -850,6 +850,10 @@
 	</Class>
 
 	<Class Wrapper="Sound" Original="ep">
+		<Children>
+			<Enum Wrapper="SoundPosition" Original="a"/>
+		</Children>
+
 		<Method Wrapper="Play" WrapperParams="System.Double; System.Double; System.Int32" Original="a"/>
 		<Method Wrapper="Play" WrapperParams="System.Double; System.Double; System.Int32; System.Int32" Original="a"/>
 		<Method Wrapper="PlayLooping" WrapperParams="System.Double; System.Double; System.Int32; System.Int32" Original="b"/>
