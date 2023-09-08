@@ -26,6 +26,7 @@ namespace BveTypes.ClassWrappers
             SectionManagerField = members.GetSourceFieldOf(nameof(SectionManager));
             DoorsField = members.GetSourceFieldOf(nameof(Doors));
             PassengerField = members.GetSourceFieldOf(nameof(Passenger));
+            StoppedToDoorOpeningMillisecondsField = members.GetSourceFieldOf(nameof(StoppedToDoorOpeningMilliseconds));
 
             FixStopPositionRequestedEvent = members.GetSourceEventOf(nameof(FixStopPositionRequested));
             DepartureRequestedEvent = members.GetSourceEventOf(nameof(DepartureRequested));
@@ -130,6 +131,25 @@ namespace BveTypes.ClassWrappers
         {
             get => ClassWrappers.Passenger.FromSource(PassengerField.GetValue(Src));
             set => PassengerField.SetValue(Src, value.Src);
+        }
+
+        private static FastField StoppedToDoorOpeningMillisecondsField;
+        /// <summary>
+        /// 停車場に停車してからドアを開くまでの時間 [ms] を取得・設定します。
+        /// </summary>
+        public int StoppedToDoorOpeningMilliseconds
+        {
+            get => StoppedToDoorOpeningMillisecondsField.GetValue(Src);
+            set => StoppedToDoorOpeningMillisecondsField.SetValue(Src, value);
+        }
+
+        /// <summary>
+        /// 停車場に停車してからドアを開くまでの時間を取得・設定します。
+        /// </summary>
+        public TimeSpan StoppedToDoorOpening
+        {
+            get => TimeSpan.FromMilliseconds(StoppedToDoorOpeningMilliseconds);
+            set => StoppedToDoorOpeningMilliseconds = (int)value.TotalMilliseconds;
         }
 
         private static FastEvent FixStopPositionRequestedEvent;

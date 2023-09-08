@@ -258,6 +258,7 @@
 		<Field WrapperProperty="SectionManager" Original="e" IsOriginalNonPublic="true"/>
 		<Field WrapperProperty="Doors" Original="d" IsOriginalNonPublic="true"/>
 		<Field WrapperProperty="Passenger" Original="f" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="StoppedToDoorOpeningMilliseconds" Original="g" IsOriginalNonPublic="true"/>
 
 		<Event Wrapper="FixStopPositionRequested" OriginalAddAccessor="b" OriginalRemoveAccessor="a" OriginalDelegateField="s"/>
 		<Event Wrapper="DepartureRequested" OriginalAddAccessor="c" OriginalRemoveAccessor="d" OriginalDelegateField="t"/>
