@@ -33,6 +33,8 @@ namespace BveTypes.ClassWrappers
 
             DynamicsGetMethod = members.GetSourcePropertyGetterOf(nameof(Dynamics));
             DynamicsSetMethod = members.GetSourcePropertySetterOf(nameof(Dynamics));
+
+            CameraLocationField = members.GetSourceFieldOf(nameof(CameraLocation));
         }
 
         /// <summary>
@@ -99,6 +101,16 @@ namespace BveTypes.ClassWrappers
         {
             get => VehicleDynamics.FromSource(DynamicsGetMethod.Invoke(Src, null));
             set => DynamicsSetMethod.Invoke(Src, new object[] { value.Src });
+        }
+
+        private static FastField CameraLocationField;
+        /// <summary>
+        /// カメラの位置に関する情報を取得・設定します。
+        /// </summary>
+        public CameraLocation CameraLocation
+        {
+            get => ClassWrappers.CameraLocation.FromSource(CameraLocationField.GetValue(Src));
+            set => CameraLocationField.SetValue(Src, value.Src);
         }
     }
 }

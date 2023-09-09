@@ -177,6 +177,9 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="CameraLocation" Original="bi">
+	</Class>
+
 	<Class Wrapper="Cant" Original="c9">
 		<Property Wrapper="RotationZ">
 			<Getter Original="a"/>
@@ -1114,6 +1117,8 @@
 			<Getter Original="g"/>
 			<Setter Original="a"/>
 		</Property>
+
+		<Field WrapperProperty="CameraLocation" Original="q" IsOriginalNonPublic="true"/>
 	</Class>
 
 	<Class Wrapper="VehicleBogieWheel" Original="b7">
