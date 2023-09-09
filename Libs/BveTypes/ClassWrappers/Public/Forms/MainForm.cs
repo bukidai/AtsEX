@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using SlimDX.DirectSound;
+
 using Mackoy.Bvets;
 
 using FastMember;
@@ -22,6 +24,8 @@ namespace BveTypes.ClassWrappers
         private static void Initialize(BveTypeSet bveTypes)
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<MainForm>();
+
+            DirectSoundField = members.GetSourceFieldOf(nameof(DirectSound));
 
             ContextMenuField = members.GetSourceFieldOf(nameof(ContextMenu));
 
@@ -80,6 +84,16 @@ namespace BveTypes.ClassWrappers
         /// </summary>
         public ChartForm ChartForm => ClassWrappers.ChartForm.FromSource(ChartFormField.GetValue(Src));
 
+
+        private static FastField DirectSoundField;
+        /// <summary>
+        /// BVE が使用する DirectSound デバイスを取得・設定します。
+        /// </summary>
+        public DirectSound DirectSound
+        {
+            get => DirectSoundField.GetValue(Src);
+            set => DirectSoundField.SetValue(Src, value);
+        }
 
         private static FastField ContextMenuField;
         /// <summary>
