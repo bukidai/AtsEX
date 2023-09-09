@@ -106,6 +106,7 @@
     <Compile Include="ClassWrappers\Public\GraphCurvePoint.cs" />
     <Compile Include="ClassWrappers\Public\MyTrack.cs" />
     <Compile Include="ClassWrappers\Public\Passenger.cs" />
+    <Compile Include="ClassWrappers\Public\Passenger.StationProcess.cs" />
     <Compile Include="ClassWrappers\Public\SideDoorSet.cs" />
     <Compile Include="ClassWrappers\Public\SixDof.cs" />
     <Compile Include="ClassWrappers\Public\Sound.SoundPosition.cs" />

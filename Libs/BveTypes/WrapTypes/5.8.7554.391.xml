@@ -568,6 +568,13 @@
 	</Class>
 
 	<Class Wrapper="Passenger" Original="a9">
+		<Children>
+			<Enum Wrapper="StationProcess" Original="a"/>
+		</Children>
+
+		<Property Wrapper="State">
+			<Getter Original="g"/>
+		</Property>
 	</Class>
 
 	<Class Wrapper="PluginLoader" Original="aa">
