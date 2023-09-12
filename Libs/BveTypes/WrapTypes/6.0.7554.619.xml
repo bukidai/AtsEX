@@ -865,6 +865,15 @@
 			<Enum Wrapper="SoundPosition" Original="a"/>
 		</Children>
 
+		<Property Wrapper="PositionInBlock">
+			<Getter Original="a"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="SpeedInBlock">
+			<Getter Original="c"/>
+			<Setter Original="a"/>
+		</Property>
+
 		<Method Wrapper="Play" WrapperParams="System.Double; System.Double; System.Int32" Original="a"/>
 		<Method Wrapper="Play" WrapperParams="System.Double; System.Double; System.Int32; System.Int32" Original="a"/>
 		<Method Wrapper="PlayLooping" WrapperParams="System.Double; System.Double; System.Int32; System.Int32" Original="b"/>
