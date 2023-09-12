@@ -97,7 +97,7 @@ namespace BveTypes.ClassWrappers
         /// <seealso cref="SetState(DoorState)"/>
         /// <seealso cref="Open"/>
         /// <seealso cref="Close(int)"/>
-        public DoorState State => StateField.GetValue(Src);
+        public DoorState State => (DoorState)StateField.GetValue(Src);
 
         private static FastMethod SetStateMethod;
         /// <summary>
