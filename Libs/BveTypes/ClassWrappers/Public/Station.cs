@@ -254,12 +254,49 @@ namespace BveTypes.ClassWrappers
         private static FastMethod DoorSideGetMethod;
         private static FastMethod DoorSideSetMethod;
         /// <summary>
-        /// 開くドアの方向を取得・設定します。
+        /// 開くドアの方向を表す整数を取得・設定します。
         /// </summary>
         public int DoorSide
         {
             get => DoorSideGetMethod.Invoke(Src, null);
             set => DoorSideSetMethod.Invoke(Src, new object[] { value });
+        }
+
+        /// <summary>
+        /// 開くドアの方向を <see cref="ClassWrappers.DoorSide"/>? 型で取得・設定します。
+        /// </summary>
+        /// <remarks>
+        /// どちら側のドアも開かないことを表すには <see langword="null"/> を使用します。
+        /// </remarks>
+        public DoorSide? DoorSideEnum
+        {
+            get
+            {
+                switch (DoorSide)
+                {
+                    case -1:
+                        return ClassWrappers.DoorSide.Left;
+                    case 1:
+                        return ClassWrappers.DoorSide.Right;
+                    default:
+                        return null;
+                }
+            }
+            set
+            {
+                switch (value)
+                {
+                    case ClassWrappers.DoorSide.Left:
+                        DoorSide = -1;
+                        break;
+                    case ClassWrappers.DoorSide.Right:
+                        DoorSide = 1;
+                        break;
+                    default:
+                        DoorSide = 0;
+                        break;
+                }
+            }
         }
 
         private static FastMethod DepertureSoundGetMethod;
