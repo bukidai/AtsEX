@@ -97,6 +97,12 @@
 		</Property>
 	</Class>
 
+	<Class Wrapper="Background" Original="ch">
+		<Field WrapperProperty="BackgroundObjects" Original="a" IsOriginalNonPublic="true"/>
+
+		<Method Wrapper="Draw" WrapperParams="atsex:Direct3DProvider; SlimDX.Matrix, SlimDX" Original="a"/>
+	</Class>
+
 	<Class Wrapper="BasicBrake" Original="bw">
 		<Property Wrapper="PistonArea">
 			<Getter Original="b"/>
