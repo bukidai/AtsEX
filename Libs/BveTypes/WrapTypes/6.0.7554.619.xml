@@ -1001,6 +1001,10 @@
 	</Class>
 
 	<Class Wrapper="StructureBlock" Original="a5">
+		<Property Wrapper="Direction">
+			<Getter Original="a"/>
+			<Setter Original="a"/>
+		</Property>
 		<Property Wrapper="Models">
 			<Getter Original="c"/>
 		</Property>

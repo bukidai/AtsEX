@@ -27,6 +27,9 @@ namespace BveTypes.ClassWrappers
 
             Constructor = members.GetSourceConstructor();
 
+            DirectionGetMethod = members.GetSourcePropertyGetterOf(nameof(Direction));
+            DirectionSetMethod = members.GetSourcePropertySetterOf(nameof(Direction));
+
             ModelsGetMethod = members.GetSourcePropertyGetterOf(nameof(Models));
 
             WorldMatrixGetMethod = members.GetSourcePropertyGetterOf(nameof(WorldMatrix));
@@ -61,6 +64,17 @@ namespace BveTypes.ClassWrappers
         /// <returns>オリジナル オブジェクトをラップした <see cref="StructureBlock"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
         public static StructureBlock FromSource(object src) => src is null ? null : new StructureBlock(src);
+
+        private static FastMethod DirectionGetMethod;
+        private static FastMethod DirectionSetMethod;
+        /// <summary>
+        /// このストラクチャーブロックの原点において、自軌道が向いている方角 [rad] を取得・設定します。
+        /// </summary>
+        public double Direction
+        {
+            get => DirectionGetMethod.Invoke(Src, null);
+            set => DirectionSetMethod.Invoke(Src, new object[] { value });
+        }
 
         private static FastMethod ModelsGetMethod;
         /// <summary>
