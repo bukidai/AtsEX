@@ -20,13 +20,17 @@ namespace BveTypes.ClassWrappers
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<DrawDistanceManager>();
 
-            FrontDrawDistanceGetMethod = members.GetSourcePropertyGetterOf(nameof(FrontDrawDistance));
-
-            BackDrawDistanceGetMethod = members.GetSourcePropertyGetterOf(nameof(BackDrawDistance));
-
             DrawDistanceGetMethod = members.GetSourcePropertyGetterOf(nameof(DrawDistance));
 
             DrawDistanceObjectsGetMethod = members.GetSourcePropertyGetterOf(nameof(DrawDistanceObjects));
+
+            FacingDirectionField = members.GetSourceFieldOf(nameof(FacingDirection));
+            FrontDrawDistanceField = members.GetSourceFieldOf(nameof(FrontDrawDistance));
+            BackDrawDistanceField = members.GetSourceFieldOf(nameof(BackDrawDistance));
+
+            UpdateEachDirectionDrawDistanceMethod = members.GetSourceMethodOf(nameof(UpdateEachDirectionDrawDistance));
+
+            FacingDirectionChangedEvent = members.GetSourceEventOf(nameof(FacingDirectionChanged));
         }
 
         /// <summary>
@@ -45,23 +49,44 @@ namespace BveTypes.ClassWrappers
         [CreateClassWrapperFromSource]
         public static DrawDistanceManager FromSource(object src) => src is null ? null : new DrawDistanceManager(src);
 
-        private static FastMethod FrontDrawDistanceGetMethod;
+        private static FastField FacingDirectionField;
         /// <summary>
-        /// 前方の描画距離 [m] を取得します。
+        /// カメラの向いている方向を取得・設定します。
+        /// </summary>
+        /// <remarks>
+        /// 前方を向いている場合は 0、後方を向いている場合は 2、その中間付近を向いている場合は 1 となります。
+        /// </remarks>
+        public int FacingDirection
+        {
+            get => FacingDirectionField.GetValue(Src);
+            set => FacingDirectionField.SetValue(Src, value);
+        }
+
+        private static FastField FrontDrawDistanceField;
+        /// <summary>
+        /// 前方の描画距離 [m] を取得・設定します。
         /// </summary>
         /// <remarks>
         /// 前方を向いている場合は <see cref="DrawDistance"/> プロパティの値、後方を向いている場合は必要最低限の距離となります。
         /// </remarks>
-        public double FrontDrawDistance => FrontDrawDistanceGetMethod.Invoke(Src, null);
+        public double FrontDrawDistance
+        {
+            get => FrontDrawDistanceField.GetValue(Src);
+            set => FrontDrawDistanceField.SetValue(Src, value);
+        }
 
-        private static FastMethod BackDrawDistanceGetMethod;
+        private static FastField BackDrawDistanceField;
         /// <summary>
-        /// 後方の描画距離 [m] を取得します。
+        /// 後方の描画距離 [m] を取得・設定します。
         /// </summary>
         /// <remarks>
         /// 前方を向いている場合は必要最低限の距離、後方を向いている場合は <see cref="DrawDistance"/> プロパティの値となります。
         /// </remarks>
-        public double BackDrawDistance => BackDrawDistanceGetMethod.Invoke(Src, null);
+        public double BackDrawDistance
+        {
+            get => BackDrawDistanceField.GetValue(Src);
+            set => BackDrawDistanceField.SetValue(Src, value);
+        }
 
         private static FastMethod DrawDistanceGetMethod;
         /// <summary>
@@ -74,5 +99,26 @@ namespace BveTypes.ClassWrappers
         /// マップファイルで DrawDistance.Change ステートメントにより設置された、最長描画距離を指定するためのオブジェクトを取得します。
         /// </summary>
         public MapFunctionList DrawDistanceObjects => MapFunctionList.FromSource(DrawDistanceObjectsGetMethod.Invoke(Src, null));
+
+        private static FastEvent FacingDirectionChangedEvent;
+        /// <summary>
+        /// カメラの向いている方向が変わり、<see cref="FacingDirection"/> の値が変更されたときに発生します。
+        /// </summary>
+        public event EventHandler FacingDirectionChanged
+        {
+            add => FacingDirectionChangedEvent.Add(Src, value);
+            remove => FacingDirectionChangedEvent.Remove(Src, value);
+        }
+        /// <summary>
+        /// <see cref="FacingDirectionChanged"/> イベントを実行します。
+        /// </summary>
+        public void FacingDirectionChanged_Invoke() => FacingDirectionChangedEvent.Invoke(Src, new object[] { (object)Src, EventArgs.Empty });
+
+        private static FastMethod UpdateEachDirectionDrawDistanceMethod;
+        /// <summary>
+        /// 前後各方向の描画ブロック数を、現在カメラが向いている方向に合わせて設定します。
+        /// </summary>
+        public void UpdateEachDirectionDrawDistance()
+            => UpdateEachDirectionDrawDistanceMethod.Invoke(Src, null);
     }
 }

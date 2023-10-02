@@ -322,18 +322,20 @@
 	</Class>
 
 	<Class Wrapper="DrawDistanceManager" Original="et">
-		<Property Wrapper="FrontDrawDistance">
-			<Getter Original="d"/>
-		</Property>
-		<Property Wrapper="BackDrawDistance">
-			<Getter Original="f"/>
-		</Property>
 		<Property Wrapper="DrawDistance">
 			<Getter Original="c"/>
 		</Property>
 		<Property Wrapper="DrawDistanceObjects">
 			<Getter Original="e"/>
 		</Property>
+
+		<Field WrapperProperty="FacingDirection" Original="e" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="FrontDrawDistance" Original="f" IsOriginalNonPublic="true"/>
+		<Field WrapperProperty="BackDrawDistance" Original="g" IsOriginalNonPublic="true"/>
+
+		<Event Wrapper="FacingDirectionChanged" OriginalAddAccessor="b" OriginalRemoveAccessor="a" OriginalDelegateField="j"/>
+
+		<Method Wrapper="UpdateEachDirectionDrawDistance" WrapperParams="void" Original="b" IsOriginalNonPublic="true"/>
 	</Class>
 
 	<Class Wrapper="Ecb" Original="ew">
