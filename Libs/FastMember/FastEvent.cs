@@ -29,7 +29,7 @@ namespace FastMember
         {
             // TODO: 高速化
             Delegate @delegate = (Delegate)DelegateField.GetValue(instance);
-            return @delegate.Method.Invoke(@delegate.Target, parameters);
+            return @delegate?.Method.Invoke(@delegate.Target, parameters);
         }
     }
 }
