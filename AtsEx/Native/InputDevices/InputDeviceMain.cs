@@ -27,14 +27,13 @@ namespace AtsEx.Native.InputDevices
     {
         private readonly CallerInfo CallerInfo;
 
-        private readonly Stopwatch Stopwatch = new Stopwatch();
-
         private AtsEx.AsInputDevice AtsEx = null;
         private ScenarioService.AsInputDevice ScenarioService = null;
 
         private PluginSourceSet LoadedVehiclePluginUsing = null;
         private VehicleConfig LoadedVehicleConfig = null;
 
+        private TimeSpan Time = TimeSpan.Zero;
         private TickCommandBuilder LastTickCommandBuilder = null;
 
         public InputDeviceMain(CallerInfo callerInfo)
@@ -115,15 +114,16 @@ namespace AtsEx.Native.InputDevices
 
         private void PreviewElapse(object sender, AtsEx.AsInputDevice.OnElapseEventArgs e)
         {
+            TimeSpan now = TimeSpan.FromMilliseconds(e.VehicleState.Time);
+            TimeSpan elapsed = now - Time;
+            Time = now;
+
             PluginHost.Native.VehicleState exVehicleState = new PluginHost.Native.VehicleState(
                 e.VehicleState.Location, e.VehicleState.Speed, TimeSpan.FromMilliseconds(e.VehicleState.Time),
                 e.VehicleState.BcPressure, e.VehicleState.MrPressure, e.VehicleState.ErPressure, e.VehicleState.BpPressure, e.VehicleState.SapPressure, e.VehicleState.Current);
 
-            TimeSpan elapsed = Stopwatch.IsRunning ? Stopwatch.Elapsed : TimeSpan.Zero;
             AtsEx.Tick(elapsed);
             LastTickCommandBuilder = ScenarioService?.Tick(elapsed, exVehicleState, e.Panel, e.Sound);
-
-            Stopwatch.Restart();
         }
 
         private void PostElapse(object sender, EventArgs e)

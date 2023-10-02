@@ -48,13 +48,12 @@ namespace AtsEx.Native.Ats
         private static bool IsLoadedAsInputDevice = false;
         private static CallerInfo CallerInfo;
 
-        private static readonly Stopwatch Stopwatch = new Stopwatch();
-
         private static string VersionWarningText;
 
         private static AtsEx.AsAtsPlugin AtsEx;
         private static ScenarioService.AsAtsPlugin ScenarioService;
 
+        private static TimeSpan Time = TimeSpan.Zero;
         private static int Power;
         private static int Brake;
         private static int Reverser;
@@ -151,17 +150,18 @@ namespace AtsEx.Native.Ats
             AtsIoArray panelArray = new AtsIoArray(panel);
             AtsIoArray soundArray = new AtsIoArray(sound);
 
+            TimeSpan now = TimeSpan.FromMilliseconds(vehicleState.Time);
+            TimeSpan elapsed = now - Time;
+            Time = now;
+
             PluginHost.Native.VehicleState exVehicleState = new PluginHost.Native.VehicleState(
-                vehicleState.Location, vehicleState.Speed, TimeSpan.FromMilliseconds(vehicleState.Time),
+                vehicleState.Location, vehicleState.Speed, now,
                 vehicleState.BcPressure, vehicleState.MrPressure, vehicleState.ErPressure, vehicleState.BpPressure, vehicleState.SapPressure, vehicleState.Current);
 
-            TimeSpan elapsed = Stopwatch.IsRunning ? Stopwatch.Elapsed : TimeSpan.Zero;
             AtsEx.Tick(elapsed);
             TickCommandBuilder tickResult = ScenarioService?.Tick(elapsed, exVehicleState, panelArray, soundArray);
 
             HandlePositionSet handlePositionSet = tickResult.Compile();
-
-            Stopwatch.Restart();
 
             return new AtsHandles()
             {
