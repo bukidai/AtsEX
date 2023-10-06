@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using FastMember;
+using TypeWrapping;
+
+namespace BveTypes.ClassWrappers
+{
+    public class InstructionText : AssistantText
+    {
+        [InitializeClassWrapper]
+        private static void Initialize(BveTypeSet bveTypes)
+        {
+            ClassMemberSet members = bveTypes.GetClassInfoOf<InstructionText>();
+        }
+
+        /// <summary>
+        /// オリジナル オブジェクトから <see cref="InstructionText"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        protected InstructionText(object src) : base(src)
+        {
+        }
+
+        /// <summary>
+        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
+        /// </summary>
+        /// <param name="src">ラップするオリジナル オブジェクト。</param>
+        /// <returns>オリジナル オブジェクトをラップした <see cref="InstructionText"/> クラスのインスタンス。</returns>
+        [CreateClassWrapperFromSource]
+        public static new InstructionText FromSource(object src) => src is null ? null : new InstructionText(src);
+    }
+}

@@ -21,6 +21,8 @@ namespace BveTypes.ClassWrappers
             ClassMemberSet members = bveTypes.GetClassInfoOf<CabBase>();
 
             HandlesGetMethod = members.GetSourcePropertyGetterOf(nameof(Handles));
+
+            GetDescriptionTextMethod = members.GetSourceMethodOf(nameof(GetDescriptionText));
         }
 
         /// <summary>
@@ -44,5 +46,11 @@ namespace BveTypes.ClassWrappers
         /// 操作可能なハンドルのセットを表す <see cref="HandleSet"/> を取得します。
         /// </summary>
         public HandleSet Handles => HandleSet.FromSource(HandlesGetMethod.Invoke(Src, null));
+
+        private static FastMethod GetDescriptionTextMethod;
+        /// <summary>
+        /// 現在の状態を説明するテキストを取得します。
+        /// </summary>
+        public string GetDescriptionText() => GetDescriptionTextMethod.Invoke(Src, null);
     }
 }

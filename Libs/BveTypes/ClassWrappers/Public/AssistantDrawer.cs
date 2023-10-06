@@ -16,21 +16,21 @@ namespace BveTypes.ClassWrappers
     /// <summary>
     /// 補助表示を描画するための機能を提供します。
     /// </summary>
-    public class AssistantTextDrawer : ClassWrapperBase
+    public class AssistantDrawer : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = bveTypes.GetClassInfoOf<AssistantTextDrawer>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<AssistantDrawer>();
 
-            AssistantTextsGetMethod = members.GetSourcePropertyGetterOf(nameof(AssistantTexts));
+            ItemsGetMethod = members.GetSourcePropertyGetterOf(nameof(Items));
         }
 
         /// <summary>
-        /// オリジナル オブジェクトから <see cref="AssistantTextDrawer"/> クラスの新しいインスタンスを初期化します。
+        /// オリジナル オブジェクトから <see cref="AssistantDrawer"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
-        protected AssistantTextDrawer(object src) : base(src)
+        protected AssistantDrawer(object src) : base(src)
         {
         }
 
@@ -40,12 +40,12 @@ namespace BveTypes.ClassWrappers
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         /// <returns>オリジナル オブジェクトをラップした <see cref="AssistantText"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
-        public static AssistantTextDrawer FromSource(object src) => src is null ? null : new AssistantTextDrawer(src);
+        public static AssistantDrawer FromSource(object src) => src is null ? null : new AssistantDrawer(src);
 
-        private static FastMethod AssistantTextsGetMethod;
+        private static FastMethod ItemsGetMethod;
         /// <summary>
         /// 補助表示の一覧を取得します。
         /// </summary>
-        public WrappedList<AssistantTextBase> AssistantTexts => WrappedList<AssistantTextBase>.FromSource(AssistantTextsGetMethod.Invoke(Src, null));
+        public WrappedList<AssistantBase> Items => WrappedList<AssistantBase>.FromSource(ItemsGetMethod.Invoke(Src, null));
     }
 }

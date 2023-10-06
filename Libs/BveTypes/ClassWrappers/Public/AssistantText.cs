@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using Mackoy.Bvets;
+
 using FastMember;
 using TypeWrapping;
 
@@ -14,12 +16,14 @@ namespace BveTypes.ClassWrappers
     /// <summary>
     /// 補助表示を表します。
     /// </summary>
-    public class AssistantText : AssistantTextBase
+    public class AssistantText : AssistantBase
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<AssistantText>();
+
+            Constructor = members.GetSourceConstructor();
 
             ColorGetMethod = members.GetSourcePropertyGetterOf(nameof(Color));
             ColorSetMethod = members.GetSourcePropertySetterOf(nameof(Color));
@@ -33,6 +37,16 @@ namespace BveTypes.ClassWrappers
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected AssistantText(object src) : base(src)
+        {
+        }
+
+        private static FastConstructor Constructor;
+        /// <summary>
+        /// スタイルを指定して、<see cref="AssistantText"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="config">スタイルを指定する <see cref="AssistantSettings"/>。</param>
+        public AssistantText(AssistantSettings config)
+            : base(Constructor.Invoke(new object[] { config }))
         {
         }
 

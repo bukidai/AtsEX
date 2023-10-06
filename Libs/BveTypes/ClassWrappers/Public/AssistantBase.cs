@@ -16,12 +16,12 @@ namespace BveTypes.ClassWrappers
     /// <summary>
     /// すべての補助表示の基本クラスを表します。
     /// </summary>
-    public class AssistantTextBase : ClassWrapperBase
+    public class AssistantBase : ClassWrapperBase
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
         {
-            ClassMemberSet members = bveTypes.GetClassInfoOf<AssistantTextBase>();
+            ClassMemberSet members = bveTypes.GetClassInfoOf<AssistantBase>();
 
             AssistantSettingsGetMethod = members.GetSourcePropertyGetterOf(nameof(AssistantSettings));
 
@@ -34,20 +34,12 @@ namespace BveTypes.ClassWrappers
         }
 
         /// <summary>
-        /// オリジナル オブジェクトから <see cref="AssistantTextBase"/> クラスの新しいインスタンスを初期化します。
+        /// オリジナル オブジェクトから <see cref="AssistantBase"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
-        protected AssistantTextBase(object src) : base(src)
+        protected AssistantBase(object src) : base(src)
         {
         }
-
-        /// <summary>
-        /// オリジナル オブジェクトからラッパーのインスタンスを生成します。
-        /// </summary>
-        /// <param name="src">ラップするオリジナル オブジェクト。</param>
-        /// <returns>オリジナル オブジェクトをラップした <see cref="AssistantTextBase"/> クラスのインスタンス。</returns>
-        [CreateClassWrapperFromSource]
-        public static AssistantTextBase FromSource(object src) => src is null ? null : new AssistantTextBase(src);
 
         private static FastMethod AssistantSettingsGetMethod;
         /// <summary>
