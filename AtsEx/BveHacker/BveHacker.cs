@@ -54,6 +54,8 @@ namespace AtsEx
 
         private readonly StructureSetLifeProlonger StructureSetLifeProlonger;
 
+        private ScenarioInfo TargetScenarioInfo = null;
+
         public BveHacker(BveTypeSet bveTypes)
         {
             BveTypes = bveTypes;
@@ -85,8 +87,9 @@ namespace AtsEx
                     LoadScenarioPatch.Invoked += (sender, e) =>
                     {
                         ScenarioInfo scenarioInfo = ScenarioInfo.FromSource(e.Args[0]);
-                        _MapHeaders = HeaderSet.FromMap(scenarioInfo.RouteFiles.SelectedFile.Path);
+                        TargetScenarioInfo = scenarioInfo;
 
+                        _MapHeaders = HeaderSet.FromMap(scenarioInfo.RouteFiles.SelectedFile.Path);
                         ScenarioHacker.BeginObserveInitialization();
 
                         ScenarioOpened?.Invoke(this, EventArgs.Empty);
@@ -96,8 +99,13 @@ namespace AtsEx
 
                     DisposeScenarioPatch.Invoked += (sender, e) =>
                     {
-                        _MapHeaders = null;
-                        _MapStatements = null;
+                        if (ScenarioInfo == TargetScenarioInfo)
+                        {
+                            _MapHeaders = null;
+                            _MapStatements = null;
+
+                            TargetScenarioInfo = null;
+                        }
 
                         ScenarioClosed?.Invoke(this, EventArgs.Empty);
 
