@@ -71,6 +71,7 @@
     <Compile Include="Binding\BindingMode.cs" />
     <Compile Include="Binding\IBinding.cs" />
     <Compile Include="DictionaryExtensions.cs" />
+    <Compile Include="EventArgs\ScenarioOpenedEventArgs.cs" />
     <Compile Include="Exceptions\ConflictException.cs" />
     <Compile Include="Exceptions\MemberNotInitializedException.cs" />
     <Compile Include="ITwoWayConverter.cs" />

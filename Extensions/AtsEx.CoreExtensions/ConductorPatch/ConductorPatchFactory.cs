@@ -37,7 +37,7 @@ namespace AtsEx.Extensions.ConductorPatch
             HarmonyPatches.Dispose();
         }
 
-        private void OnScenarioClosed(object sender, EventArgs e)
+        private void OnScenarioClosed(EventArgs e)
         {
             PatchInvoker.ActivePatch = null;
         }

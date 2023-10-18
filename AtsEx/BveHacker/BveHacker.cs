@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,8 +9,6 @@ using Mackoy.Bvets;
 
 using BveTypes;
 using BveTypes.ClassWrappers;
-using ObjectiveHarmonyPatch;
-using TypeWrapping;
 using UnembeddedResources;
 
 using AtsEx.BveHackerServices;
@@ -49,12 +44,7 @@ namespace AtsEx
 #endif
         }
 
-        private readonly HarmonyPatch LoadScenarioPatch;
-        private readonly HarmonyPatch DisposeScenarioPatch;
-
         private readonly StructureSetLifeProlonger StructureSetLifeProlonger;
-
-        private ScenarioInfo TargetScenarioInfo = null;
 
         public BveHacker(BveTypeSet bveTypes)
         {
@@ -79,37 +69,20 @@ namespace AtsEx
                     break;
 
                 case LaunchMode.InputDevice:
-                    ClassMemberSet mainFormMembers = BveTypes.GetClassInfoOf<MainForm>();
-                    ClassMemberSet scenarioMembers = BveTypes.GetClassInfoOf<Scenario>();
-                    LoadScenarioPatch = HarmonyPatch.Patch(nameof(BveHacker), mainFormMembers.GetSourceMethodOf(nameof(global::BveTypes.ClassWrappers.MainForm.LoadScenario)).Source, PatchType.Prefix);
-                    DisposeScenarioPatch = HarmonyPatch.Patch(nameof(BveHacker), scenarioMembers.GetSourceMethodOf(nameof(global::BveTypes.ClassWrappers.Scenario.Dispose)).Source, PatchType.Prefix);
-
-                    LoadScenarioPatch.Invoked += (sender, e) =>
+                    ScenarioHacker.ScenarioOpened += e =>
                     {
-                        ScenarioInfo scenarioInfo = ScenarioInfo.FromSource(e.Args[0]);
-                        TargetScenarioInfo = scenarioInfo;
-
-                        MapHeaders = HeaderSet.FromMap(scenarioInfo.RouteFiles.SelectedFile.Path);
+                        MapHeaders = HeaderSet.FromMap(e.ScenarioInfo.RouteFiles.SelectedFile.Path);
                         ScenarioHacker.BeginObserveInitialization();
 
-                        ScenarioOpened?.Invoke(this, EventArgs.Empty);
-
-                        return new PatchInvokationResult(SkipModes.Continue);
+                        ScenarioOpened?.Invoke(new ScenarioOpenedEventArgs(e.ScenarioInfo));
                     };
 
-                    DisposeScenarioPatch.Invoked += (sender, e) =>
+                    ScenarioHacker.ScenarioClosed += e =>
                     {
-                        if (ScenarioInfo == TargetScenarioInfo)
-                        {
-                            MapHeaders = null;
-                            MapStatements = null;
+                        MapHeaders = null;
+                        MapStatements = null;
 
-                            TargetScenarioInfo = null;
-                        }
-
-                        ScenarioClosed?.Invoke(this, EventArgs.Empty);
-
-                        return new PatchInvokationResult(SkipModes.Continue);
+                        ScenarioClosed?.Invoke(EventArgs.Empty);
                     };
 
                     break;
@@ -122,9 +95,6 @@ namespace AtsEx
         /// <inheritdoc/>
         public void Dispose()
         {
-            LoadScenarioPatch?.Dispose();
-            DisposeScenarioPatch?.Dispose();
-
             StructureSetLifeProlonger.Dispose();
             ScenarioHacker.Dispose();
         }
@@ -185,12 +155,12 @@ namespace AtsEx
         IStatementSet IBveHacker.MapStatements => MapStatements;
 
 
-        public event EventHandler ScenarioOpened;
-        public event EventHandler ScenarioClosed;
 
 
         private readonly ScenarioHacker ScenarioHacker;
 
+        public event ScenarioOpenedEventHandler ScenarioOpened;
+        public event ScenarioClosedEventHandler ScenarioClosed;
         public event ScenarioCreatedEventHandler PreviewScenarioCreated;
         public event ScenarioCreatedEventHandler ScenarioCreated;
 

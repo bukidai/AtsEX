@@ -17,6 +17,18 @@ using AtsEx.PluginHost.MapStatements;
 namespace AtsEx.PluginHost
 {
     /// <summary>
+    /// <see cref="IBveHacker.ScenarioOpened"/> イベントを処理するメソッドを表します。
+    /// </summary>
+    /// <param name="e">イベント データを格納している <see cref="ScenarioOpenedEventArgs"/>。</param>
+    public delegate void ScenarioOpenedEventHandler(ScenarioOpenedEventArgs e);
+
+    /// <summary>
+    /// <see cref="IBveHacker.ScenarioClosed"/> イベントを処理するメソッドを表します。
+    /// </summary>
+    /// <param name="e">イベント データを格納している <see cref="EventArgs"/>。</param>
+    public delegate void ScenarioClosedEventHandler(EventArgs e);
+
+    /// <summary>
     /// <see cref="IBveHacker.ScenarioCreated"/> または <see cref="IBveHacker.PreviewScenarioCreated"/> イベントを処理するメソッドを表します。
     /// </summary>
     /// <param name="e">イベント データを格納している <see cref="ScenarioCreatedEventArgs"/>。</param>
@@ -139,9 +151,10 @@ namespace AtsEx.PluginHost
         /// シナリオが選択され、読込を開始したときに発生します。
         /// </summary>
         /// <remarks>
-        /// このイベントは入力デバイスプラグイン版でのみ発生します。ATS プラグイン版では発生しません。
+        /// このイベントは入力デバイスプラグイン版でのみ発生します。ATS プラグイン版では発生しません。<br/>
+        /// 読み込まれたシナリオを表す <see cref="BveTypes.ClassWrappers.Scenario"/> を取得するには、<see cref="ScenarioCreated"/> または <see cref="PreviewScenarioCreated"/> イベントを使用してください。
         /// </remarks>
-        event EventHandler ScenarioOpened;
+        event ScenarioOpenedEventHandler ScenarioOpened;
 
         /// <summary>
         /// シナリオが閉じられたときに発生します。
@@ -149,7 +162,7 @@ namespace AtsEx.PluginHost
         /// <remarks>
         /// このイベントは入力デバイスプラグイン版でのみ発生します。ATS プラグイン版では発生しません。
         /// </remarks>
-        event EventHandler ScenarioClosed;
+        event ScenarioClosedEventHandler ScenarioClosed;
 
 
         /// <summary>

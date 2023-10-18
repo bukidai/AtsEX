@@ -21,31 +21,83 @@ namespace AtsEx.BveHackerServices
     {
         private readonly MainForm MainForm;
 
+        private readonly HarmonyPatch LoadPatch;
+        private readonly HarmonyPatch DisposePatch;
         private readonly HarmonyPatch InitializeTimeAndLocationMethodPatch;
         private readonly HarmonyPatch InitializeMethodPatch;
+
+        private ScenarioInfo TargetScenarioInfo = null;
+
+        public ScenarioInfo CurrentScenarioInfo
+        {
+            get => MainForm.CurrentScenarioInfo;
+            set => MainForm.CurrentScenarioInfo = value;
+        }
+
+        public Scenario CurrentScenario
+        {
+            get => MainForm.CurrentScenario;
+            set => MainForm.CurrentScenario = value;
+        }
+
+        public event ScenarioOpenedEventHandler ScenarioOpened;
+        public event ScenarioClosedEventHandler ScenarioClosed;
+        public event ScenarioCreatedEventHandler ScenarioCreated;
 
         public ScenarioHacker(MainFormHacker mainFormHacker, BveTypeSet bveTypes)
         {
             MainForm = mainFormHacker.TargetForm;
 
+            ClassMemberSet mainFormMembers = bveTypes.GetClassInfoOf<MainForm>();
             ClassMemberSet scenarioMembers = bveTypes.GetClassInfoOf<Scenario>();
 
+            FastMethod loadMethod = mainFormMembers.GetSourceMethodOf(nameof(BveTypes.ClassWrappers.MainForm.LoadScenario));
+            FastMethod disposeMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.Dispose));
             FastMethod initializeTimeAndLocationMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.InitializeTimeAndLocation));
             FastMethod initializeMethod = scenarioMembers.GetSourceMethodOf(nameof(Scenario.Initialize));
 
-            InitializeTimeAndLocationMethodPatch = CreateAndSetupPatch(nameof(ScenarioHacker), initializeTimeAndLocationMethod.Source);
-            InitializeMethodPatch = CreateAndSetupPatch(nameof(ScenarioHacker), initializeMethod.Source);
+            LoadPatch = CreateAndSetupPatch(loadMethod.Source);
+            DisposePatch = CreateAndSetupPatch(disposeMethod.Source);
+            InitializeTimeAndLocationMethodPatch = CreateAndSetupPatch(initializeTimeAndLocationMethod.Source, PatchType.Postfix);
+            InitializeMethodPatch = CreateAndSetupPatch(initializeMethod.Source, PatchType.Postfix);
+
+            LoadPatch.Invoked += OnLoaded;
+            DisposePatch.Invoked += OnDisposed;
 
 
-            HarmonyPatch CreateAndSetupPatch(string name, MethodBase original)
+            HarmonyPatch CreateAndSetupPatch(MethodBase original, PatchType patchType = PatchType.Prefix)
             {
-                HarmonyPatch patch = HarmonyPatch.Patch(name, original, PatchType.Postfix);
+                HarmonyPatch patch = HarmonyPatch.Patch(nameof(ScenarioHacker), original, patchType);
                 return patch;
             }
         }
 
+        private PatchInvokationResult OnLoaded(object sender, PatchInvokedEventArgs e)
+        {
+            ScenarioInfo scenarioInfo = ScenarioInfo.FromSource(e.Args[0]);
+            if (!(scenarioInfo is null) && scenarioInfo != TargetScenarioInfo) ScenarioClosed?.Invoke(EventArgs.Empty);
+            TargetScenarioInfo = scenarioInfo;
+
+            ScenarioOpened?.Invoke(new ScenarioOpenedEventArgs(scenarioInfo));
+
+            return PatchInvokationResult.DoNothing(e);
+        }
+
+        private PatchInvokationResult OnDisposed(object sender, PatchInvokedEventArgs e)
+        {
+            if (CurrentScenarioInfo == TargetScenarioInfo)
+            {
+                TargetScenarioInfo = null;
+                ScenarioClosed?.Invoke(EventArgs.Empty);
+            }
+
+            return PatchInvokationResult.DoNothing(e);
+        }
+
         public void Dispose()
         {
+            LoadPatch.Dispose();
+            DisposePatch.Dispose();
             InitializeTimeAndLocationMethodPatch.Dispose();
             InitializeMethodPatch.Dispose();
         }
@@ -67,20 +119,6 @@ namespace AtsEx.BveHackerServices
 
                 return PatchInvokationResult.DoNothing(e);
             }
-        }
-
-        public event ScenarioCreatedEventHandler ScenarioCreated;
-
-        public ScenarioInfo CurrentScenarioInfo
-        {
-            get => MainForm.CurrentScenarioInfo;
-            set => MainForm.CurrentScenarioInfo = value;
-        }
-
-        public Scenario CurrentScenario
-        {
-            get => MainForm.CurrentScenario;
-            set => MainForm.CurrentScenario = value;
         }
     }
 }
