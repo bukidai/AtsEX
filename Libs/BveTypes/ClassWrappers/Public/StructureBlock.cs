@@ -35,8 +35,8 @@ namespace BveTypes.ClassWrappers
             WorldMatrixGetMethod = members.GetSourcePropertyGetterOf(nameof(WorldMatrix));
             WorldMatrixSetMethod = members.GetSourcePropertySetterOf(nameof(WorldMatrix));
 
-            MatrixFromLastBlockGetMethod = members.GetSourcePropertyGetterOf(nameof(MatrixFromLastBlock));
-            MatrixFromLastBlockSetMethod = members.GetSourcePropertySetterOf(nameof(MatrixFromLastBlock));
+            TransformFromLastBlockGetMethod = members.GetSourcePropertyGetterOf(nameof(TransformFromLastBlock));
+            TransformFromLastBlockSetMethod = members.GetSourcePropertySetterOf(nameof(TransformFromLastBlock));
 
             DrawMethod = members.GetSourceMethodOf(nameof(Draw));
         }
@@ -103,16 +103,16 @@ namespace BveTypes.ClassWrappers
             set => WorldMatrixSetMethod.Invoke(Src, new object[] { value });
         }
 
-        private static FastMethod MatrixFromLastBlockGetMethod;
-        private static FastMethod MatrixFromLastBlockSetMethod;
+        private static FastMethod TransformFromLastBlockGetMethod;
+        private static FastMethod TransformFromLastBlockSetMethod;
         /// <summary>
         /// 1 つ前のストラクチャーブロックから見たときの、このストラクチャーブロックの相対位置を表すワールド変換行列を取得・設定します。<br/>
         /// 1 つ前のストラクチャーブロック、このストラクチャーブロックの <see cref="WorldMatrix"/> をそれぞれ M1、M2 とすると、プロパティの値は M2 = M1 * ΔM を満たす ΔM に当たります。
         /// </summary>
-        public Matrix MatrixFromLastBlock
+        public Matrix TransformFromLastBlock
         {
-            get => MatrixFromLastBlockGetMethod.Invoke(Src, null);
-            set => MatrixFromLastBlockSetMethod.Invoke(Src, new object[] { value });
+            get => TransformFromLastBlockGetMethod.Invoke(Src, null);
+            set => TransformFromLastBlockSetMethod.Invoke(Src, new object[] { value });
         }
 
         private static FastMethod DrawMethod;

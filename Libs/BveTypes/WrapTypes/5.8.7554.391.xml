@@ -1041,7 +1041,7 @@
 			<Getter Original="g"/>
 			<Setter Original="b"/>
 		</Property>
-		<Property Wrapper="MatrixFromLastBlock">
+		<Property Wrapper="TransformFromLastBlock">
 			<Getter Original="f"/>
 			<Setter Original="a"/>
 		</Property>
