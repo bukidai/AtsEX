@@ -47,7 +47,13 @@ namespace BveTypes
         private BveTypeSet(IEnumerable<TypeMemberSetBase> types, Version profileVersion)
         {
 #if DEBUG
-            TypeMemberSetBase illegalType = types.FirstOrDefault(type => !(type.WrapperType.IsClass && type.WrapperType.IsSubclassOf(typeof(ClassWrapperBase))) && !type.WrapperType.IsEnum);
+            TypeMemberSetBase illegalType = types.FirstOrDefault(type =>
+            {
+                if (type.WrapperType.IsInterface || type.WrapperType.IsEnum) return false;
+
+                bool isClassWrapperBaseSubclass = type.WrapperType.IsClass && type.WrapperType.IsSubclassOf(typeof(ClassWrapperBase));
+                return !isClassWrapperBaseSubclass;
+            });
             if (!(illegalType is null))
             {
                 throw new ArgumentException(
