@@ -74,7 +74,7 @@ namespace AtsEx
             switch (App.Instance.LaunchMode)
             {
                 case LaunchMode.Ats:
-                    _MapHeaders = HeaderSet.FromMap(ScenarioInfo.RouteFiles.SelectedFile.Path);
+                    MapHeaders = HeaderSet.FromMap(ScenarioInfo.RouteFiles.SelectedFile.Path);
                     ScenarioHacker.BeginObserveInitialization();
                     break;
 
@@ -89,7 +89,7 @@ namespace AtsEx
                         ScenarioInfo scenarioInfo = ScenarioInfo.FromSource(e.Args[0]);
                         TargetScenarioInfo = scenarioInfo;
 
-                        _MapHeaders = HeaderSet.FromMap(scenarioInfo.RouteFiles.SelectedFile.Path);
+                        MapHeaders = HeaderSet.FromMap(scenarioInfo.RouteFiles.SelectedFile.Path);
                         ScenarioHacker.BeginObserveInitialization();
 
                         ScenarioOpened?.Invoke(this, EventArgs.Empty);
@@ -101,8 +101,8 @@ namespace AtsEx
                     {
                         if (ScenarioInfo == TargetScenarioInfo)
                         {
-                            _MapHeaders = null;
-                            _MapStatements = null;
+                            MapHeaders = null;
+                            MapStatements = null;
 
                             TargetScenarioInfo = null;
                         }
@@ -131,7 +131,7 @@ namespace AtsEx
 
         private void OnScenarioCreated(ScenarioCreatedEventArgs e)
         {
-            _MapStatements = StatementSet.Create(e.Scenario.Route.Structures.Repeated, e.Scenario.Route.StructureModels, e.Scenario.Trains);
+            MapStatements = StatementSet.Create(e.Scenario.Route.Structures.Repeated, e.Scenario.Route.StructureModels, e.Scenario.Trains);
 
             NotchInfo notchInfo = e.Scenario.Vehicle.Instruments.Cab.Handles.NotchInfo;
 
@@ -145,12 +145,12 @@ namespace AtsEx
 
         public void Tick(TimeSpan elapsed)
         {
-            if (_MapStatements is null) return;
+            if (MapStatements is null) return;
 
             double vehicleLocation = Scenario.LocationManager.Location;
             double preTrainLocation = Scenario.Route.PreTrainObjects.GetPreTrainLocation(Scenario.TimeManager.TimeMilliseconds);
 
-            _MapStatements.Tick(vehicleLocation, preTrainLocation);
+            MapStatements.Tick(vehicleLocation, preTrainLocation);
         }
 
 
@@ -178,15 +178,11 @@ namespace AtsEx
 
         public PluginHost.Handles.HandleSet Handles { get; private set; }
 
-#pragma warning disable IDE1006 // 命名スタイル
-        public HeaderSet _MapHeaders { get; private set; } = null;
-#pragma warning restore IDE1006 // 命名スタイル
-        public IHeaderSet MapHeaders => _MapHeaders;
+        public HeaderSet MapHeaders { get; private set; } = null;
+        IHeaderSet IBveHacker.MapHeaders => MapHeaders;
 
-#pragma warning disable IDE1006 // 命名スタイル
-        public StatementSet _MapStatements { get; private set; } = null;
-#pragma warning restore IDE1006 // 命名スタイル
-        public IStatementSet MapStatements => _MapStatements;
+        public StatementSet MapStatements { get; private set; } = null;
+        IStatementSet IBveHacker.MapStatements => MapStatements;
 
 
         public event EventHandler ScenarioOpened;
