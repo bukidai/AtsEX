@@ -196,7 +196,7 @@ namespace BveTypes.ClassWrappers
         /// </summary>
         /// <param name="sender">イベントのソース。</param>
         /// <param name="e">イベント データを格納しているオブジェクト。</param>
-        public void OnSetBeaconData(object sender, ObjectPassedEventArgs e) => OnSetBeaconDataMethod.Invoke(this, new object[] { sender, e.Src });
+        public void OnSetBeaconData(object sender, ObjectPassedEventArgs e) => OnSetBeaconDataMethod.Invoke(Src, new object[] { sender, e.Src });
 
         private static FastMethod OnKeyDownMethod;
         /// <summary>
@@ -204,7 +204,7 @@ namespace BveTypes.ClassWrappers
         /// </summary>
         /// <param name="sender">イベントのソース。</param>
         /// <param name="e">イベント データを格納しているオブジェクト。</param>
-        public void OnKeyDown(object sender, InputEventArgs e) => OnKeyDownMethod.Invoke(this, new object[] { sender, e });
+        public void OnKeyDown(object sender, InputEventArgs e) => OnKeyDownMethod.Invoke(Src, new object[] { sender, e });
 
         private static FastMethod OnKeyUpMethod;
         /// <summary>
@@ -212,7 +212,7 @@ namespace BveTypes.ClassWrappers
         /// </summary>
         /// <param name="sender">イベントのソース。</param>
         /// <param name="e">イベント データを格納しているオブジェクト。</param>
-        public void OnKeyUp(object sender, InputEventArgs e) => OnKeyUpMethod.Invoke(this, new object[] { sender, e });
+        public void OnKeyUp(object sender, InputEventArgs e) => OnKeyUpMethod.Invoke(Src, new object[] { sender, e });
 
         private static FastMethod OnDoorStateChangedMethod;
         /// <summary>
@@ -220,7 +220,7 @@ namespace BveTypes.ClassWrappers
         /// </summary>
         /// <param name="sender">イベントのソース。</param>
         /// <param name="e">イベント データを格納しているオブジェクト。</param>
-        public void OnDoorStateChanged(object sender, EventArgs e) => OnDoorStateChangedMethod.Invoke(this, new object[] { sender, e });
+        public void OnDoorStateChanged(object sender, EventArgs e) => OnDoorStateChangedMethod.Invoke(Src, new object[] { sender, e });
 
         private static FastMethod OnSetSignalMethod;
         /// <summary>
@@ -228,7 +228,7 @@ namespace BveTypes.ClassWrappers
         /// </summary>
         /// <param name="sender">イベントのソース。</param>
         /// <param name="e">イベント データを格納しているオブジェクト。</param>
-        public void OnSetSignal(object sender, EventArgs e) => OnSetSignalMethod.Invoke(this, new object[] { sender, e });
+        public void OnSetSignal(object sender, EventArgs e) => OnSetSignalMethod.Invoke(Src, new object[] { sender, e });
 
         private static FastMethod OnSetReverserMethod;
         /// <summary>
@@ -236,7 +236,7 @@ namespace BveTypes.ClassWrappers
         /// </summary>
         /// <param name="sender">イベントのソース。</param>
         /// <param name="e">イベント データを格納しているオブジェクト。</param>
-        public void OnSetReverser(object sender, EventArgs e) => OnSetReverserMethod.Invoke(this, new object[] { sender, e });
+        public void OnSetReverser(object sender, EventArgs e) => OnSetReverserMethod.Invoke(Src, new object[] { sender, e });
 
         private static FastMethod OnSetBrakeMethod;
         /// <summary>
@@ -244,7 +244,7 @@ namespace BveTypes.ClassWrappers
         /// </summary>
         /// <param name="sender">イベントのソース。</param>
         /// <param name="e">イベント データを格納しているオブジェクト。</param>
-        public void OnSetBrake(object sender, ValueEventArgs<int> e) => OnSetBrakeMethod.Invoke(this, new object[] { sender, e.Src });
+        public void OnSetBrake(object sender, ValueEventArgs<int> e) => OnSetBrakeMethod.Invoke(Src, new object[] { sender, e.Src });
 
         private static FastMethod OnSetPowerMethod;
         /// <summary>
@@ -252,7 +252,7 @@ namespace BveTypes.ClassWrappers
         /// </summary>
         /// <param name="sender">イベントのソース。</param>
         /// <param name="e">イベント データを格納しているオブジェクト。</param>
-        public void OnSetPower(object sender, ValueEventArgs<int> e) => OnSetPowerMethod.Invoke(this, new object[] { sender, e.Src });
+        public void OnSetPower(object sender, ValueEventArgs<int> e) => OnSetPowerMethod.Invoke(Src, new object[] { sender, e.Src });
 
         private static FastMethod OnSetVehicleSpecMethod;
         /// <summary>
@@ -260,20 +260,20 @@ namespace BveTypes.ClassWrappers
         /// </summary>
         /// <param name="notchInfo">ノッチの情報。</param>
         /// <param name="carCount">編成両数。</param>
-        public void OnSetVehicleSpec(NotchInfo notchInfo, int carCount) => OnSetVehicleSpecMethod.Invoke(this, new object[] { notchInfo.Src, carCount });
+        public void OnSetVehicleSpec(NotchInfo notchInfo, int carCount) => OnSetVehicleSpecMethod.Invoke(Src, new object[] { notchInfo.Src, carCount });
 
         private static FastMethod OnInitializeMethod;
         /// <summary>
         /// プラグインにゲームが開始されたことを通知します。
         /// </summary>
         /// <param name="brakePosition">ゲーム開始時のブレーキ弁の状態。</param>
-        public void OnInitialize(BrakePosition brakePosition) => OnInitializeMethod.Invoke(this, new object[] { brakePosition });
+        public void OnInitialize(BrakePosition brakePosition) => OnInitializeMethod.Invoke(Src, new object[] { brakePosition });
 
         private static FastMethod OnElapseMethod;
         /// <summary>
         /// プラグインに 1 フレームが経過したことを通知します。
         /// </summary>
         /// <param name="time">現在時刻。</param>
-        public void OnElapse(int time) => OnElapseMethod.Invoke(this, new object[] { time });
+        public void OnElapse(int time) => OnElapseMethod.Invoke(Src, new object[] { time });
     }
 }
