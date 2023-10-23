@@ -16,7 +16,7 @@ namespace BveTypes.ClassWrappers
     /// <summary>
     /// すべての補助表示の基本クラスを表します。
     /// </summary>
-    public class AssistantBase : ClassWrapperBase
+    public class AssistantBase : ClassWrapperBase, IDrawable
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
@@ -31,6 +31,8 @@ namespace BveTypes.ClassWrappers
             DisplayAreaGetMethod = members.GetSourcePropertyGetterOf(nameof(DisplayArea));
 
             DrawMethod = members.GetSourceMethodOf(nameof(Draw));
+            OnDeviceLostMethod = members.GetSourceMethodOf(nameof(OnDeviceLost));
+            OnDeviceResetMethod = members.GetSourceMethodOf(nameof(OnDeviceReset));
         }
 
         /// <summary>
@@ -68,9 +70,14 @@ namespace BveTypes.ClassWrappers
         /// <summary>
         /// 補助表示を描画します。
         /// </summary>
-        public void Draw()
-        {
-            DrawMethod.Invoke(Src, null);
-        }
+        public void Draw() => DrawMethod.Invoke(Src, null);
+
+        private static FastMethod OnDeviceLostMethod;
+        /// <inheritdoc/>
+        public void OnDeviceLost() => OnDeviceLostMethod.Invoke(Src, null);
+
+        private static FastMethod OnDeviceResetMethod;
+        /// <inheritdoc/>
+        public void OnDeviceReset() => OnDeviceResetMethod.Invoke(Src, null);
     }
 }

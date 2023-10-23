@@ -24,6 +24,10 @@ namespace BveTypes.ClassWrappers
             ClassMemberSet members = bveTypes.GetClassInfoOf<AssistantDrawer>();
 
             ItemsGetMethod = members.GetSourcePropertyGetterOf(nameof(Items));
+
+            DrawMethod = members.GetSourceMethodOf(nameof(Draw));
+            OnDeviceLostMethod = members.GetSourceMethodOf(nameof(OnDeviceLost));
+            OnDeviceResetMethod = members.GetSourceMethodOf(nameof(OnDeviceReset));
         }
 
         /// <summary>
@@ -47,5 +51,19 @@ namespace BveTypes.ClassWrappers
         /// 補助表示の一覧を取得します。
         /// </summary>
         public WrappedList<AssistantBase> Items => WrappedList<AssistantBase>.FromSource(ItemsGetMethod.Invoke(Src, null));
+
+        private static FastMethod DrawMethod;
+        /// <summary>
+        /// 全ての補助表示を描画します。
+        /// </summary>
+        public void Draw() => DrawMethod.Invoke(Src, null);
+
+        private static FastMethod OnDeviceLostMethod;
+        /// <inheritdoc/>
+        public void OnDeviceLost() => OnDeviceLostMethod.Invoke(Src, null);
+
+        private static FastMethod OnDeviceResetMethod;
+        /// <inheritdoc/>
+        public void OnDeviceReset() => OnDeviceResetMethod.Invoke(Src, null);
     }
 }

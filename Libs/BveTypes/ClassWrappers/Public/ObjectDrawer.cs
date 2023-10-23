@@ -25,6 +25,7 @@ namespace BveTypes.ClassWrappers
             DrawDistanceManagerField = members.GetSourceFieldOf(nameof(DrawDistanceManager));
 
             SetRouteMethod = members.GetSourceMethodOf(nameof(SetRoute));
+            DrawMethod = members.GetSourceMethodOf(nameof(Draw));
         }
 
         /// <summary>
@@ -57,5 +58,8 @@ namespace BveTypes.ClassWrappers
 
         private static FastMethod SetRouteMethod;
         public void SetRoute(Route route) => SetRouteMethod.Invoke(Src, new object[] { route.Src });
+
+        private static FastMethod DrawMethod;
+        public void Draw() => DrawMethod.Invoke(Src, null);
     }
 }

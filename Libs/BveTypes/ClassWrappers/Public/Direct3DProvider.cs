@@ -27,6 +27,8 @@ namespace BveTypes.ClassWrappers
             DeviceGetMethod = members.GetSourcePropertyGetterOf(nameof(Device));
             PresentParametersGetMethod = members.GetSourcePropertyGetterOf(nameof(PresentParameters));
             Direct3DGetMethod = members.GetSourcePropertyGetterOf(nameof(Direct3D));
+
+            RenderMethod = members.GetSourceMethodOf(nameof(Render));
         }
 
         /// <summary>
@@ -68,5 +70,12 @@ namespace BveTypes.ClassWrappers
         /// <see cref="SlimDX.Direct3D9.Direct3D"/> を取得します。
         /// </summary>
         public Direct3D Direct3D => (Direct3D)Direct3DGetMethod.Invoke(Src, null);
+
+        private static FastMethod RenderMethod;
+        /// <summary>
+        /// 指定したオブジェクトへ描画します。
+        /// </summary>
+        /// <param name="target">描画のターゲット。</param>
+        public void Render(IDrawable target) => RenderMethod.Invoke(Src, new object[] { ((ClassWrapperBase)target).Src });
     }
 }

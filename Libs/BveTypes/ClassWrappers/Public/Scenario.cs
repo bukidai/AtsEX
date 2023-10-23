@@ -40,6 +40,7 @@ namespace BveTypes.ClassWrappers
             DisposeMethod = members.GetSourceMethodOf(nameof(Dispose));
             InitializeTimeAndLocationMethod = members.GetSourceMethodOf(nameof(InitializeTimeAndLocation));
             InitializeMethod = members.GetSourceMethodOf(nameof(Initialize));
+            DrawMethod = members.GetSourceMethodOf(nameof(Draw));
         }
 
         /// <summary>
@@ -123,5 +124,12 @@ namespace BveTypes.ClassWrappers
 
         private static FastMethod InitializeMethod;
         public void Initialize(int stationIndex) => InitializeMethod.Invoke(Src, new object[] { stationIndex });
+
+        private static FastMethod DrawMethod;
+        /// <summary>
+        /// ストラクチャーと運転台パネルを描画します。
+        /// </summary>
+        /// <param name="direct3DProvider">描画に使用する <see cref="Direct3DProvider"/>。</param>
+        public void Draw(Direct3DProvider direct3DProvider) => DrawMethod.Invoke(Src, new object[] { direct3DProvider.Src });
     }
 }

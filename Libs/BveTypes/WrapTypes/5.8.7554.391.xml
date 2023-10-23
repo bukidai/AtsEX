@@ -37,6 +37,9 @@
 		<Method Wrapper="CreateDirectXDevices" WrapperParams="void" Original="e"/>
 		<Method Wrapper="LoadScenario" WrapperParams="atsex:ScenarioInfo; System.Boolean" Original="a" IsOriginalNonPublic="true"/>
 		<Method Wrapper="UnloadScenario" WrapperParams="void" Original="b" IsOriginalNonPublic="true"/>
+		<Method Wrapper="Draw" WrapperParams="void" Original="o"/>
+		<Method Wrapper="OnDeviceLost" WrapperParams="void" Original="s"/>
+		<Method Wrapper="OnDeviceReset" WrapperParams="void" Original="t"/>
 	</Class>
 
 	<Class Wrapper="ScenarioSelectionForm" Original="da">
@@ -90,12 +93,18 @@
 		</Property>
 
 		<Method Wrapper="Draw" WrapperParams="void" Original="o"/>
+		<Method Wrapper="OnDeviceLost" WrapperParams="void" Original="s"/>
+		<Method Wrapper="OnDeviceReset" WrapperParams="void" Original="t"/>
 	</Class>
 
 	<Class Wrapper="AssistantDrawer" Original="ar">
 		<Property Wrapper="Items">
 			<Getter Original="a"/>
 		</Property>
+
+		<Method Wrapper="Draw" WrapperParams="void" Original="o"/>
+		<Method Wrapper="OnDeviceLost" WrapperParams="void" Original="s"/>
+		<Method Wrapper="OnDeviceReset" WrapperParams="void" Original="t"/>
 	</Class>
 
 	<Class Wrapper="Background" Original="ch">
@@ -187,6 +196,22 @@
 	</Class>
 
 	<Class Wrapper="CameraLocation" Original="bi">
+		<Property Wrapper="TransformFromBlock">
+			<Getter Original="b"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="TransformFromCameraHomePosition">
+			<Getter Original="c"/>
+			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="Plane">
+			<Getter Original="d"/>
+			<Setter Original="a"/>
+		</Property>
+		<Property Wrapper="Speed">
+			<Getter Original="a"/>
+			<Setter Original="a"/>
+		</Property>
 	</Class>
 
 	<Class Wrapper="Cant" Original="c9">
@@ -311,6 +336,8 @@
 		<Property Wrapper="Direct3D">
 			<Getter Original="f"/>
 		</Property>
+
+		<Method Wrapper="Render" WrapperParams="atsex:IDrawable" Original="a"/>
 	</Class>
 
 	<Class Wrapper="DetailText" Original="de">
@@ -406,6 +433,9 @@
 			<Getter Original="g"/>
 			<Setter Original="d"/>
 		</Property>
+	</Class>
+
+	<Class Wrapper="IDrawable" Original="c0">
 	</Class>
 
 	<Class Wrapper="InstructionText" Original="fy">
@@ -589,6 +619,7 @@
 		<Field WrapperProperty="DrawDistanceManager" Original="g" IsOriginalNonPublic="true"/>
 
 		<Method Wrapper="SetRoute" WrapperParams="atsex:Route" Original="a"/>
+		<Method Wrapper="Draw" WrapperParams="void" Original="o"/>
 	</Class>
 
 	<Class Wrapper="ObjectPassedEventArgs" Original="e5">
@@ -755,6 +786,7 @@
 		<Method Wrapper="Dispose" WrapperParams="void" Original="Dispose"/>
 		<Method Wrapper="InitializeTimeAndLocation" WrapperParams="System.Double; System.Int32" Original="a" IsOriginalNonPublic="true"/>
 		<Method Wrapper="Initialize" WrapperParams="System.Int32" Original="a"/>
+		<Method Wrapper="Draw" WrapperParams="atsex:Direct3DProvider" Original="a"/>
 	</Class>
 
 	<Class Wrapper="ScenarioInfo" Original="ek">

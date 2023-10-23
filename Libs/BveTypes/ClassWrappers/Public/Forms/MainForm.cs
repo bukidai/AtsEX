@@ -18,7 +18,7 @@ namespace BveTypes.ClassWrappers
     /// <summary>
     /// メインのフォームを表します。
     /// </summary>
-    public class MainForm : ClassWrapperBase
+    public class MainForm : ClassWrapperBase, IDrawable
     {
         [InitializeClassWrapper]
         private static void Initialize(BveTypeSet bveTypes)
@@ -40,6 +40,9 @@ namespace BveTypes.ClassWrappers
             CreateDirectXDevicesMethod = members.GetSourceMethodOf(nameof(CreateDirectXDevices));
             LoadScenarioMethod = members.GetSourceMethodOf(nameof(LoadScenario));
             UnloadScenarioMethod = members.GetSourceMethodOf(nameof(UnloadScenario));
+            DrawMethod = members.GetSourceMethodOf(nameof(Draw));
+            OnDeviceLostMethod = members.GetSourceMethodOf(nameof(OnDeviceLost));
+            OnDeviceResetMethod = members.GetSourceMethodOf(nameof(OnDeviceReset));
         }
 
         /// <summary>
@@ -172,5 +175,17 @@ namespace BveTypes.ClassWrappers
         /// シナリオを閉じます。
         /// </summary>
         public void UnloadScenario() => UnloadScenarioMethod.Invoke(Src, null);
+
+        private static FastMethod DrawMethod;
+        /// <inheritdoc/>
+        public void Draw() => DrawMethod.Invoke(Src, null);
+
+        private static FastMethod OnDeviceLostMethod;
+        /// <inheritdoc/>
+        public void OnDeviceLost() => OnDeviceLostMethod.Invoke(Src, null);
+
+        private static FastMethod OnDeviceResetMethod;
+        /// <inheritdoc/>
+        public void OnDeviceReset() => OnDeviceResetMethod.Invoke(Src, null);
     }
 }
