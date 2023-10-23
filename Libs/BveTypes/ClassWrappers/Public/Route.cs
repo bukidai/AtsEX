@@ -33,6 +33,8 @@ namespace BveTypes.ClassWrappers
             StructuresGetMethod = members.GetSourcePropertyGetterOf(nameof(Structures));
             StructuresField = members.GetSourceFieldOf(nameof(Structures));
 
+            CabIlluminanceObjectsGetMethod = members.GetSourcePropertyGetterOf(nameof(CabIlluminanceObjects));
+
             StationsGetMethod = members.GetSourcePropertyGetterOf(nameof(Stations));
 
             BeaconsGetMethod = members.GetSourcePropertyGetterOf(nameof(Beacons));
@@ -106,6 +108,12 @@ namespace BveTypes.ClassWrappers
             get => StructureSet.FromSource(StructuresGetMethod.Invoke(Src, null));
             set => StructuresField.SetValue(Src, value.Src);
         }
+
+        private static FastMethod CabIlluminanceObjectsGetMethod;
+        /// <summary>
+        /// 設定した運転台の明るさのリストを取得します。
+        /// </summary>
+        public InterpolatableMapObjectList CabIlluminanceObjects => InterpolatableMapObjectList.FromSource(CabIlluminanceObjectsGetMethod.Invoke(Src, null));
 
         private static FastMethod StationsGetMethod;
         /// <summary>

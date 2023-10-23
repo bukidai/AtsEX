@@ -411,6 +411,10 @@
 	<Class Wrapper="InstructionText" Original="fy">
 	</Class>
 
+	<Class Wrapper="InterpolatableMapObjectList" Original="j">
+		<Method Wrapper="GetValueAt" WrapperParams="System.Double" Original="b"/>
+	</Class>
+
 	<Class Wrapper="KeyProvider" Original="ag">
 		<Property Wrapper="InputDevices">
 			<Getter Original="c"/>
@@ -685,6 +689,9 @@
 		</Property>
 		<Property Wrapper="Structures">
 			<Getter Original="y"/>
+		</Property>
+		<Property Wrapper="CabIlluminanceObjects">
+			<Getter Original="d"/>
 		</Property>
 		<Property Wrapper="Stations">
 			<Getter Original="f"/>
