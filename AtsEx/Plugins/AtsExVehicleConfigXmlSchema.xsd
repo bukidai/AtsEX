@@ -7,10 +7,10 @@
 >
 	<xs:element name="AtsExVehicleConfig">
 		<xs:complexType>
-			<xs:sequence>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
 				<xs:element name="DetectSoundIndexConflict" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
 				<xs:element name="DetectPanelValueIndexConflict" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
-			</xs:sequence>
+			</xs:choice>
 		</xs:complexType>
 	</xs:element>
 </xs:schema>
