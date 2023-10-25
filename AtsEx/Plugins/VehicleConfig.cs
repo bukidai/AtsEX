@@ -49,6 +49,7 @@ namespace AtsEx.Plugins
 
         public bool DetectSoundIndexConflict { get; private set; } = false;
         public bool DetectPanelValueIndexConflict { get; private set; } = false;
+        public string PluginUsingPath { get; private set; } = null;
 
         private VehicleConfig()
         {
@@ -89,6 +90,7 @@ namespace AtsEx.Plugins
             {
                 DetectSoundIndexConflict = (bool?)root.Element(TargetNamespace + "DetectSoundIndexConflict") ?? false,
                 DetectPanelValueIndexConflict = (bool?)root.Element(TargetNamespace + "DetectPanelValueIndexConflict") ?? false,
+                PluginUsingPath = (string)root.Element(TargetNamespace + "PluginUsingPath"),
             };
 
             return result;

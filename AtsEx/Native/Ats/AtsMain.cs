@@ -111,13 +111,16 @@ namespace AtsEx.Native.Ats
         {
             string callerAssemblyLocation = CallerInfo.AtsExCallerAssembly.Location;
 
-            string vehiclePluginUsingPath = Path.Combine(Path.GetDirectoryName(callerAssemblyLocation), Path.GetFileNameWithoutExtension(callerAssemblyLocation) + ".VehiclePluginUsing.xml");
-            PluginSourceSet vehiclePluginUsing = PluginSourceSet.FromPluginUsing(PluginType.VehiclePlugin, false, vehiclePluginUsingPath);
-
             string vehicleConfigPath = Path.Combine(Path.GetDirectoryName(callerAssemblyLocation), Path.GetFileNameWithoutExtension(callerAssemblyLocation) + ".VehicleConfig.xml");
             VehicleConfig vehicleConfig = File.Exists(vehicleConfigPath) ? VehicleConfig.LoadFrom(vehicleConfigPath)
                 : IsLoadedAsInputDevice ? VehicleConfig.Default
                 : VehicleConfig.Resolve(AtsEx.BveHacker.ScenarioInfo.VehicleFiles.SelectedFile.Path);
+
+            string vehiclePluginUsingPath = Path.Combine(Path.GetDirectoryName(callerAssemblyLocation), Path.GetFileNameWithoutExtension(callerAssemblyLocation) + ".VehiclePluginUsing.xml");
+            PluginSourceSet vehiclePluginUsing = File.Exists(vehiclePluginUsingPath) ? PluginSourceSet.FromPluginUsing(PluginType.VehiclePlugin, false, vehiclePluginUsingPath)
+                : !(vehicleConfig.PluginUsingPath is null) ? PluginSourceSet.FromPluginUsing(PluginType.VehiclePlugin, true, vehicleConfig.PluginUsingPath)
+                : IsLoadedAsInputDevice ? PluginSourceSet.Empty(PluginType.VehiclePlugin)
+                : PluginSourceSet.ResolvePluginUsingToLoad(PluginType.VehiclePlugin, true, AtsEx.BveHacker.ScenarioInfo.VehicleFiles.SelectedFile.Path);
 
             VehiclePluginUsingLoaded?.Invoke(null, new VehiclePluginUsingLoadedEventArgs(vehiclePluginUsing, vehicleConfig));
 

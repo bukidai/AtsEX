@@ -17,6 +17,30 @@ namespace AtsEx.Plugins
 {
     internal sealed partial class PluginSourceSet
     {
+        public static PluginSourceSet ResolvePluginUsingToLoad(PluginType pluginType, bool allowNonPluginAssembly, string vehiclePath)
+        {
+            string directory = Path.GetDirectoryName(vehiclePath);
+            PluginSourceSet plugins = TryLoad(
+                Path.Combine(directory, Path.GetFileNameWithoutExtension(vehiclePath) + ".VehiclePluginUsing.xml"),
+                Path.Combine(directory, "VehiclePluginUsing.xml"));
+
+            return plugins;
+
+
+            PluginSourceSet TryLoad(params string[] pathArray)
+            {
+                foreach (string filePath in pathArray)
+                {
+                    if (File.Exists(filePath))
+                    {
+                        return FromPluginUsing(pluginType, allowNonPluginAssembly, filePath);
+                    }
+                }
+
+                return Empty(pluginType);
+            }
+        }
+
         public static PluginSourceSet FromPluginUsing(PluginType pluginType, bool allowNonPluginAssembly, string listPath)
         {
             XDocument doc = XDocument.Load(listPath, LoadOptions.SetLineInfo);

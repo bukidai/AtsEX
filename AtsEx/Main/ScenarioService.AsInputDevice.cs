@@ -15,26 +15,9 @@ namespace AtsEx
     {
         internal sealed class AsInputDevice : ScenarioService
         {
-            public AsInputDevice(AtsEx.AsInputDevice atsEx, PluginSourceSet loadedVehiclePluginUsing, VehicleConfig loadedVehicleConfig, VehicleSpec vehicleSpec)
-                : base(atsEx,
-                      loadedVehiclePluginUsing ?? LoadVehiclePluginUsing(atsEx.BveHacker.ScenarioInfo.VehicleFiles.SelectedFile.Path),
-                      loadedVehicleConfig ?? VehicleConfig.Resolve(atsEx.BveHacker.ScenarioInfo.VehicleFiles.SelectedFile.Path),
-                      vehicleSpec)
+            public AsInputDevice(AtsEx.AsInputDevice atsEx, PluginSourceSet vehiclePluginUsing, VehicleConfig vehicleConfig, VehicleSpec vehicleSpec)
+                : base(atsEx, vehiclePluginUsing, vehicleConfig, vehicleSpec)
             {
-            }
-
-            private static PluginSourceSet LoadVehiclePluginUsing(string vehiclePath)
-            {
-                string path = Path.Combine(Path.GetDirectoryName(vehiclePath), Path.GetFileNameWithoutExtension(vehiclePath) + ".VehiclePluginUsing.xml");
-                if (File.Exists(path))
-                {
-                    PluginSourceSet vehiclePluginUsing = PluginSourceSet.FromPluginUsing(PluginType.VehiclePlugin, true, path);
-                    return vehiclePluginUsing;
-                }
-                else
-                {
-                    return PluginSourceSet.Empty(PluginType.VehiclePlugin);
-                }
             }
         }
     }

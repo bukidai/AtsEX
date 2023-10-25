@@ -18,6 +18,7 @@ using AtsEx.PluginHost;
 using AtsEx.PluginHost.Handles;
 using AtsEx.PluginHost.Input.Native;
 using AtsEx.PluginHost.Native;
+using AtsEx.PluginHost.Plugins;
 
 using BveTypes;
 
@@ -104,7 +105,13 @@ namespace AtsEx.Native.InputDevices
             PluginHost.Native.VehicleSpec exVehicleSpec = new PluginHost.Native.VehicleSpec(
                 e.Value.BrakeNotches, e.Value.PowerNotches, e.Value.AtsNotch, e.Value.B67Notch, e.Value.Cars);
 
-            ScenarioService = new ScenarioService.AsInputDevice(AtsEx, LoadedVehiclePluginUsing, LoadedVehicleConfig, exVehicleSpec);
+            string vehiclePath = AtsEx.BveHacker.ScenarioInfo.VehicleFiles.SelectedFile.Path;
+            VehicleConfig vehicleConfig = LoadedVehicleConfig ?? VehicleConfig.Resolve(vehiclePath);
+            PluginSourceSet pluginUsing = !(LoadedVehiclePluginUsing is null) ? LoadedVehiclePluginUsing
+                : vehicleConfig.PluginUsingPath is null ? PluginSourceSet.ResolvePluginUsingToLoad(PluginType.VehiclePlugin, true, vehiclePath)
+                : PluginSourceSet.FromPluginUsing(PluginType.VehiclePlugin, true, vehicleConfig.PluginUsingPath);
+
+            ScenarioService = new ScenarioService.AsInputDevice(AtsEx, pluginUsing, vehicleConfig, exVehicleSpec);
         }
 
         private void OnInitialize(object sender, AtsEx.AsInputDevice.ValueEventArgs<DefaultBrakePosition> e)
