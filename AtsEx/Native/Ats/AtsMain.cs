@@ -115,7 +115,9 @@ namespace AtsEx.Native.Ats
             PluginSourceSet vehiclePluginUsing = PluginSourceSet.FromPluginUsing(PluginType.VehiclePlugin, false, vehiclePluginUsingPath);
 
             string vehicleConfigPath = Path.Combine(Path.GetDirectoryName(callerAssemblyLocation), Path.GetFileNameWithoutExtension(callerAssemblyLocation) + ".VehicleConfig.xml");
-            VehicleConfig vehicleConfig = File.Exists(vehicleConfigPath) ? VehicleConfig.LoadFrom(vehicleConfigPath) : VehicleConfig.Default;
+            VehicleConfig vehicleConfig = File.Exists(vehicleConfigPath) ? VehicleConfig.LoadFrom(vehicleConfigPath)
+                : IsLoadedAsInputDevice ? VehicleConfig.Default
+                : VehicleConfig.Resolve(AtsEx.BveHacker.ScenarioInfo.VehicleFiles.SelectedFile.Path);
 
             VehiclePluginUsingLoaded?.Invoke(null, new VehiclePluginUsingLoadedEventArgs(vehiclePluginUsing, vehicleConfig));
 

@@ -54,6 +54,30 @@ namespace AtsEx.Plugins
         {
         }
 
+        public static VehicleConfig Resolve(string vehiclePath)
+        {
+            string directory = Path.GetDirectoryName(vehiclePath);
+            VehicleConfig vehicleConfig = TryLoad(
+                Path.Combine(directory, Path.GetFileNameWithoutExtension(vehiclePath) + ".VehicleConfig.xml"),
+                Path.Combine(directory, "VehicleConfig.xml"));
+
+            return vehicleConfig;
+
+
+            VehicleConfig TryLoad(params string[] pathArray)
+            {
+                foreach (string filePath in pathArray)
+                {
+                    if (File.Exists(filePath))
+                    {
+                        return LoadFrom(filePath);
+                    }
+                }
+
+                return Default;
+            }
+        }
+
         public static VehicleConfig LoadFrom(string path)
         {
             XDocument doc = XDocument.Load(path, LoadOptions.SetLineInfo);
