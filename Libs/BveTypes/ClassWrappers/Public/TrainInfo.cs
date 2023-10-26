@@ -22,6 +22,8 @@ namespace BveTypes.ClassWrappers
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<TrainInfo>();
 
+            Constructor = members.GetSourceConstructor();
+
             StructuresGetMethod = members.GetSourcePropertyGetterOf(nameof(Structures));
 
             TrackKeyGetMethod = members.GetSourcePropertyGetterOf(nameof(TrackKey));
@@ -43,6 +45,15 @@ namespace BveTypes.ClassWrappers
         /// <returns>オリジナル オブジェクトをラップした <see cref="TrainInfo"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
         public static TrainInfo FromSource(object src) => src is null ? null : new TrainInfo(src);
+
+        private static FastConstructor Constructor;
+        /// <summary>
+        /// <see cref="TrainInfo"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        public TrainInfo()
+            : this(Constructor.Invoke(null))
+        {
+        }
 
         private static FastMethod StructuresGetMethod;
         /// <summary>

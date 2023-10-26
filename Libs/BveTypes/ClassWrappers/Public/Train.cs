@@ -22,6 +22,8 @@ namespace BveTypes.ClassWrappers
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<Train>();
 
+            Constructor = members.GetSourceConstructor(new Type[] { typeof(TimeManager), typeof(UserVehicleLocationManager), typeof(Route), typeof(TrainInfo), typeof(DrawDistanceManager) });
+
             UserVehicleLocationManagerField = members.GetSourceFieldOf(nameof(UserVehicleLocationManager));
             RouteField = members.GetSourceFieldOf(nameof(Route));
             TrainInfoField = members.GetSourceFieldOf(nameof(TrainInfo));
@@ -47,6 +49,20 @@ namespace BveTypes.ClassWrappers
         /// <returns>オリジナル オブジェクトをラップした <see cref="Train"/> クラスのインスタンス。</returns>
         [CreateClassWrapperFromSource]
         public static Train FromSource(object src) => src is null ? null : new Train(src);
+
+        private static FastConstructor Constructor;
+        /// <summary>
+        /// <see cref="Train"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="timeManager">使用する <see cref="TimeManager"/>。</param>
+        /// <param name="locationManager">自列車の位置情報を提供する <see cref="ClassWrappers.UserVehicleLocationManager"/>。</param>
+        /// <param name="route">現在読み込まれているマップを表す <see cref="ClassWrappers.Route"/>。</param>
+        /// <param name="trainInfo">この他列車の追加情報を格納している <see cref="ClassWrappers.TrainInfo"/>。</param>
+        /// <param name="drawDistanceManager">使用する <see cref="ClassWrappers.DrawDistanceManager"/>。</param>
+        public Train(TimeManager timeManager, UserVehicleLocationManager locationManager, Route route, TrainInfo trainInfo, DrawDistanceManager drawDistanceManager)
+            : this(Constructor.Invoke(new object[] { timeManager.Src, locationManager.Src, route.Src, trainInfo.Src, drawDistanceManager.Src }))
+        {
+        }
 
         private static FastField UserVehicleLocationManagerField;
         public UserVehicleLocationManager UserVehicleLocationManager => ClassWrappers.UserVehicleLocationManager.FromSource(UserVehicleLocationManagerField.GetValue(Src));
