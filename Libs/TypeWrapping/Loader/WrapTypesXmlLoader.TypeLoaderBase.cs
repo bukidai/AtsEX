@@ -29,17 +29,19 @@ namespace TypeWrapping
 
                 void Load(XElement parent, IEnumerable<XElement> parentClassElements)
                 {
+                    IEnumerable<XElement> delegateElements = parent.Elements(TargetNamespace + "Delegate");
                     IEnumerable<XElement> enumElements = parent.Elements(TargetNamespace + "Enum");
                     IEnumerable<XElement> classElements = parent.Elements(TargetNamespace + "Class");
 
 #if DEBUG
                     IEnumerable<XElement> allElements = parent.Elements();
-                    if (allElements.Any(element => !enumElements.Contains(element) && !classElements.Contains(element)))
+                    if (allElements.Any(element => !delegateElements.Contains(element) && !enumElements.Contains(element) && !classElements.Contains(element)))
                     {
                         throw new NotImplementedException();
                     }
 #endif
 
+                    LoadDelegates(delegateElements, parentClassElements);
                     LoadEnums(enumElements, parentClassElements);
                     LoadClasses(classElements, parentClassElements);
 
@@ -50,6 +52,8 @@ namespace TypeWrapping
                     }
                 }
             }
+
+            protected abstract void LoadDelegates(IEnumerable<XElement> enumElements, IEnumerable<XElement> parentClassElements);
 
             protected abstract void LoadEnums(IEnumerable<XElement> enumElements, IEnumerable<XElement> parentClassElements);
 

@@ -8,6 +8,7 @@
 	<xs:element name="WrapTypes">
 		<xs:complexType>
 			<xs:sequence>
+				<xs:element ref="Delegate" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element ref="Enum" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element ref="Class" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
@@ -19,6 +20,13 @@
 			<xs:pattern value="[0-9a-zA-Z_`]+" />
 		</xs:restriction>
 	</xs:simpleType>
+
+	<xs:element name="Delegate">
+		<xs:complexType>
+			<xs:attribute name="Wrapper" type="DotNetName" use="required" />
+			<xs:attribute name="Original" type="DotNetName" use="required" />
+		</xs:complexType>
+	</xs:element>
 
 	<xs:element name="Enum">
 		<xs:complexType>
@@ -33,6 +41,7 @@
 				<xs:element name="Children" minOccurs="0" maxOccurs="1">
 					<xs:complexType>
 						<xs:sequence>
+							<xs:element ref="Delegate" minOccurs="0" maxOccurs="unbounded"/>
 							<xs:element ref="Enum" minOccurs="0" maxOccurs="unbounded"/>
 							<xs:element ref="Class" minOccurs="0" maxOccurs="unbounded"/>
 						</xs:sequence>

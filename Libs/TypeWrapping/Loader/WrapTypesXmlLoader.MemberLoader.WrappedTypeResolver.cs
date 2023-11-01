@@ -53,6 +53,8 @@ namespace TypeWrapping
                     WrapperToOriginal = new Dictionary<Type, Type>(additionalWrapperToOriginal);
                 }
 
+                protected override void LoadDelegates(IEnumerable<XElement> delegateElements, IEnumerable<XElement> parentClassElements) => Load(delegateElements, parentClassElements);
+
                 protected override void LoadEnums(IEnumerable<XElement> enumElements, IEnumerable<XElement> parentClassElements) => Load(enumElements, parentClassElements);
 
                 protected override void LoadClasses(IEnumerable<XElement> classElements, IEnumerable<XElement> parentClassElements) => Load(classElements, parentClassElements);

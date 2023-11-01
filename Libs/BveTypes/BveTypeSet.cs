@@ -49,7 +49,7 @@ namespace BveTypes
 #if DEBUG
             TypeMemberSetBase illegalType = types.FirstOrDefault(type =>
             {
-                if (type.WrapperType.IsInterface || type.WrapperType.IsEnum) return false;
+                if (type.WrapperType.IsInterface || type.WrapperType.IsSubclassOf(typeof(Delegate)) || type.WrapperType.IsEnum) return false;
 
                 bool isClassWrapperBaseSubclass = type.WrapperType.IsClass && type.WrapperType.IsSubclassOf(typeof(ClassWrapperBase));
                 return !isClassWrapperBaseSubclass;

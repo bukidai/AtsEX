@@ -52,6 +52,19 @@ namespace TypeWrapping
                 Types = new List<TypeMemberSetBase>(Resolver.WrappedTypeCount);
             }
 
+            protected override void LoadDelegates(IEnumerable<XElement> delegateElements, IEnumerable<XElement> parentClassElements)
+            {
+                IEnumerable<TypeMemberSetBase> types = delegateElements.AsParallel().Select(element =>
+                {
+                    (Type wrapperType, Type originalType) = Resolver.Resolve(element, parentClassElements);
+                    DelegateMemberSet members = new DelegateMemberSet(wrapperType, originalType);
+
+                    return members;
+                });
+
+                Types.AddRange(types);
+            }
+
             protected override void LoadEnums(IEnumerable<XElement> enumElements, IEnumerable<XElement> parentClassElements)
             {
                 IEnumerable<TypeMemberSetBase> types = enumElements.AsParallel().Select(element =>
