@@ -28,6 +28,8 @@ namespace BveTypes.ClassWrappers
             CurrentIndexGetMethod = members.GetSourcePropertyGetterOf(nameof(CurrentIndex));
             CurrentIndexSetMethod = members.GetSourcePropertySetterOf(nameof(CurrentIndex));
 
+            ObjectPassedEvent = members.GetSourceEventOf(nameof(ObjectPassed));
+
             GoToAndGetCurrentMethod = members.GetSourceMethodOf(nameof(GoToAndGetCurrent));
             GoToMethod = members.GetSourceMethodOf(nameof(GoTo));
         }
@@ -62,6 +64,21 @@ namespace BveTypes.ClassWrappers
             set => CurrentIndexSetMethod.Invoke(Src, new object[] { value });
         }
 
+        private static FastEvent ObjectPassedEvent;
+        /// <summary>
+        /// <see cref="CurrentIndex"/> の値が変更されたときに発生します。
+        /// </summary>
+        public event ObjectPassedEventHandler ObjectPassed
+        {
+            add => ObjectPassedEvent.Add(Src, value);
+            remove => ObjectPassedEvent.Remove(Src, value);
+        }
+        /// <summary>
+        /// <see cref="ObjectPassed"/> イベントを実行します。
+        /// </summary>
+        /// <param name="args">自列車が通過したマップ オブジェクト。</param>
+        public void ObjectPassed_Invoke(ObjectPassedEventArgs args) => ObjectPassedEvent.Invoke(Src, new object[] { Src, args.Src });
+
         private static FastMethod GoToAndGetCurrentMethod;
         /// <summary>
         /// コレクションの指定した距離程に対応する要素へ移動し、それを取得します。
@@ -79,5 +96,8 @@ namespace BveTypes.ClassWrappers
         /// </summary>
         /// <param name="index">移動先のインデックス。</param>
         public void GoTo(int index) => GoToMethod.Invoke(Src, new object[] { index });
+
+
+        public delegate void ObjectPassedEventHandler(object sender, ObjectPassedEventArgs e);
     }
 }

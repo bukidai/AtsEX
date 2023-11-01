@@ -524,10 +524,16 @@
 	</Class>
 
 	<Class Wrapper="MapObjectList" Original="b6">
+		<Children>
+			<Delegate Wrapper="ObjectPassedEventHandler" Original="a"/>
+		</Children>
+
 		<Property Wrapper="CurrentIndex">
 			<Getter Original="g"/>
 			<Setter Original="d"/>
 		</Property>
+
+		<Event Wrapper="ObjectPassed" OriginalAddAccessor="b" OriginalRemoveAccessor="a" OriginalDelegateField="b"/>
 
 		<Method Wrapper="GoToAndGetCurrent" WrapperParams="System.Double" Original="c"/>
 		<Method Wrapper="GoTo" WrapperParams="System.Int32" Original="f"/>
