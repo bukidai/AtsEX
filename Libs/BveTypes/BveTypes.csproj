@@ -107,6 +107,8 @@
     <Compile Include="ClassWrappers\Public\DrawDistanceManager.cs" />
     <Compile Include="ClassWrappers\Public\Ecb.cs" />
     <Compile Include="ClassWrappers\Public\IDrawable.cs" />
+    <Compile Include="ClassWrappers\Public\ReAdhesionControl.cs" />
+    <Compile Include="ClassWrappers\Public\ReAdhesionControlMode.cs" />
     <Compile Include="ClassWrappers\Public\StationText.cs" />
     <Compile Include="ClassWrappers\Public\SpeedLimitText.cs" />
     <Compile Include="ClassWrappers\Public\GraphCurve.cs" />

@@ -20,6 +20,7 @@ namespace BveTypes.ClassWrappers
             ClassMemberSet members = bveTypes.GetClassInfoOf<CarBc>();
 
             BasicBrakeGetMethod = members.GetSourcePropertyGetterOf(nameof(BasicBrake));
+            BrakeReAdhesionGetMethod = members.GetSourcePropertyGetterOf(nameof(BrakeReAdhesion));
         }
 
         /// <summary>
@@ -43,5 +44,11 @@ namespace BveTypes.ClassWrappers
         /// 基礎ブレーキ装置を表す <see cref="ClassWrappers.BasicBrake"/> を取得します。
         /// </summary>
         public BasicBrake BasicBrake => ClassWrappers.BasicBrake.FromSource(BasicBrakeGetMethod.Invoke(Src, null));
+
+        private static FastMethod BrakeReAdhesionGetMethod;
+        /// <summary>
+        /// 基礎ブレーキ装置の滑走再粘着制御機構を取得します。
+        /// </summary>
+        public ReAdhesionControl BrakeReAdhesion => ReAdhesionControl.FromSource(BrakeReAdhesionGetMethod.Invoke(Src, null));
     }
 }

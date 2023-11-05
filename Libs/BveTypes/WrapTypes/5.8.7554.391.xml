@@ -2,6 +2,7 @@
 <WrapTypes xmlns="http://automatic9045.github.io/ns/xmlschemas/WrapTypesXmlSchema.xsd">
 	<Enum Wrapper="BrakePosition" Original="ds"/>
 	<Enum Wrapper="DoorState" Original="dy"/>
+	<Enum Wrapper="ReAdhesionControlMode" Original="cw"/>
 
 	<!-- Unidentified classes -->
 	<!-- Unidentified classes END -->
@@ -232,6 +233,9 @@
 	<Class Wrapper="CarBc" Original="d6">
 		<Property Wrapper="BasicBrake">
 			<Getter Original="b"/>
+		</Property>
+		<Property Wrapper="BrakeReAdhesion">
+			<Getter Original="c"/>
 		</Property>
 	</Class>
 
@@ -702,6 +706,16 @@
 		<Property Wrapper="SelectedFile">
 			<Getter Original="a"/>
 			<Setter Original="a" IsOriginalNonPublic="true"/>
+		</Property>
+	</Class>
+
+	<Class Wrapper="ReAdhesionControl" Original="d8">
+		<Property Wrapper="Mode">
+			<Getter Original="b"/>
+		</Property>
+		<Property Wrapper="IsEnabled">
+			<Getter Original="l"/>
+			<Setter Original="a"/>
 		</Property>
 	</Class>
 
@@ -1270,6 +1284,9 @@
 		<Property Wrapper="RegenerationLimit">
 			<Getter Original="e"/>
 			<Setter Original="b"/>
+		</Property>
+		<Property Wrapper="PowerReAdhesion">
+			<Getter Original="l"/>
 		</Property>
 		<Property Wrapper="SlipVelocityCoefficient">
 			<Getter Original="b"/>

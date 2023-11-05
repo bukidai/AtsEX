@@ -26,6 +26,8 @@ namespace BveTypes.ClassWrappers
 
             SlipVelocityCoefficientGetMethod = members.GetSourcePropertyGetterOf(nameof(SlipVelocityCoefficient));
             SlipVelocityCoefficientSetMethod = members.GetSourcePropertySetterOf(nameof(SlipVelocityCoefficient));
+
+            PowerReAdhesionGetMethod = members.GetSourcePropertyGetterOf(nameof(PowerReAdhesion));
         }
 
         /// <summary>
@@ -60,6 +62,12 @@ namespace BveTypes.ClassWrappers
             get => RegenerationLimitGetMethod.Invoke(Src, null);
             set => RegenerationLimitSetMethod.Invoke(Src, new object[] { value });
         }
+
+        private static FastMethod PowerReAdhesionGetMethod;
+        /// <summary>
+        /// 自列車の主制御装置の空転・滑走再粘着制御機構を取得します。
+        /// </summary>
+        public ReAdhesionControl PowerReAdhesion => ReAdhesionControl.FromSource(PowerReAdhesionGetMethod.Invoke(Src, null));
 
         private static FastMethod SlipVelocityCoefficientGetMethod;
         private static FastMethod SlipVelocityCoefficientSetMethod;
