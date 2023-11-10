@@ -1,0 +1,83 @@
+﻿div.eyecatch {
+    position: relative;
+    height: 480px;
+    max-height: 480px;
+    background-image: url('../eyecatch.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+    div.eyecatch::after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #00000020;
+    }
+
+    div.eyecatch > * {
+        position: absolute;
+        filter: drop-shadow(0 0 5px black);
+        z-index: 1;
+    }
+
+    div.eyecatch > img {
+        bottom: 24px;
+        left: 48px;
+        width: 30%;
+        min-width: 280px;
+    }
+
+    div.eyecatch > span {
+        top: 24px;
+        right: 64px;
+        line-height: 1.1;
+        text-align: left;
+        font-weight: 700;
+        font-size: 4vw;
+        color: white;
+    }
+
+        div.eyecatch > span > strong {
+            font-size: 1.5em;
+            color: red;
+        }
+
+@media screen and (max-width: 1279px) {
+    div.eyecatch > img {
+        bottom: 12px;
+        left: 24px;
+    }
+
+    div.eyecatch > span {
+        top: 12px;
+        right: 32px;
+    }
+}
+
+@media screen and (max-width: 959px) {
+    div.eyecatch > span {
+        font-size: 2.5em;
+    }
+}
+
+@media screen and (max-width: 719px) {
+    div.eyecatch > img {
+        filter: drop-shadow(0 0 3px black);
+    }
+
+    div.eyecatch > span {
+        filter: drop-shadow(0 0 3px black);
+    }
+}
+
+@media screen and (max-width: 499px) {
+    div.eyecatch > span > strong {
+        line-height: 1.2;
+    }
+
+    div.eyecatch > span > span.wbr {
+        display: inline;
+    }
+}
