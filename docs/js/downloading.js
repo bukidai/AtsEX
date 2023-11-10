@@ -119,7 +119,7 @@ function setAsInputDeviceInstallerPackageInfoTo(elementClassName) {
 }
 
 function setSdkInfoTo(elementClassName) {
-	setPackageInfoTo(elementClassName, "SDK");
+	setPackageInfoTo(elementClassName, "SDK", "7z");
 }
 
 function setPackageLinkTo(elementClassName, typeString, extensionString) {
