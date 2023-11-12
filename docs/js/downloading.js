@@ -159,7 +159,7 @@ function setAsInputDeviceInstallerPackageLinkTo(elementClassName) {
 }
 
 function setSdkLinkTo(elementClassName) {
-	setPackageLinkTo(elementClassName, "SDK");
+	setPackageLinkTo(elementClassName, "SDK", "7z");
 }
 
 function hideIfFailedToGetRelease(elementClassName) {
