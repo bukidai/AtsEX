@@ -41,7 +41,18 @@
 
         div.eyecatch > span > strong {
             font-size: 1.5em;
+        }
+
+        div.eyecatch > span > .red {
             color: red;
+        }
+
+        div.eyecatch > span > span.wbr {
+            display: none;
+        }
+
+        div.eyecatch > span > span.except-wbr {
+            display: inline;
         }
 
 @media screen and (max-width: 1279px) {
@@ -52,7 +63,7 @@
 
     div.eyecatch > span {
         top: 12px;
-        right: 32px;
+        right: 24px;
     }
 }
 
@@ -72,12 +83,16 @@
     }
 }
 
-@media screen and (max-width: 499px) {
+@media screen and (max-width: 599px) {
     div.eyecatch > span > strong {
         line-height: 1.2;
     }
 
     div.eyecatch > span > span.wbr {
         display: inline;
+    }
+
+    div.eyecatch > span > span.except-wbr {
+        display: none;
     }
 }
