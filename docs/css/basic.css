@@ -588,4 +588,8 @@ img.icon-download {
     span.wbr {
         display: inline;
     }
+
+    span.except-wbr {
+        display: none;
+    }
 }
