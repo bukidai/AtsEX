@@ -19,6 +19,8 @@ namespace BveTypes.ClassWrappers
         {
             ClassMemberSet members = bveTypes.GetClassInfoOf<ObjectPassedEventArgs>();
 
+            Constructor = members.GetSourceConstructor(new Type[] { typeof(int), typeof(MapObjectBase) });
+
             MapObjectGetMethod = members.GetSourcePropertyGetterOf(nameof(MapObject));
         }
 
@@ -27,6 +29,17 @@ namespace BveTypes.ClassWrappers
         /// </summary>
         /// <param name="src">ラップするオリジナル オブジェクト。</param>
         protected ObjectPassedEventArgs(object src) : base(src)
+        {
+        }
+
+        private static FastConstructor Constructor;
+        /// <summary>
+        /// <see cref="ObjectPassedEventArgs"/> クラスの新しいインスタンスを初期化します。
+        /// </summary>
+        /// <param name="direction">通過方向。前方向の場合は 1、後方向の場合は -1 を指定してください。</param>
+        /// <param name="mapObject">通過したマップオブジェクト。</param>
+        public ObjectPassedEventArgs(int direction, MapObjectBase mapObject)
+            : this(Constructor.Invoke(new object[] { direction, mapObject.Src }))
         {
         }
 
