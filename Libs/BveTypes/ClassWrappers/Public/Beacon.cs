@@ -58,7 +58,7 @@ namespace BveTypes.ClassWrappers
         /// <param name="type">保安装置に送る地上子種別。</param>
         /// <param name="targetSectionIndex">関連づける閉塞の絶対インデックス。</param>
         /// <param name="sendData">保安装置に送る値。</param>
-        private Beacon(double location, int type, int targetSectionIndex, int sendData)
+        public Beacon(double location, int type, int targetSectionIndex, int sendData)
             : this(Constructor.Invoke(new object[] { location, type, targetSectionIndex, sendData }))
         {
         }
