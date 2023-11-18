@@ -52,12 +52,6 @@ namespace Zbx1425.DXDynamicTexture
                 if (normalizedName.EndsWith(item.Key))
                 {
                     __result = Handles[item.Key].GetOrCreate(device);
-                    System.Windows.Forms.MessageBox.Show(item.Key);
-                }
-
-                if (item.Key.EndsWith("ktisdx.png"))
-                {
-                    System.Windows.Forms.MessageBox.Show($"normalizedName: {normalizedName}, item.Key: {item.Key}");
                 }
             }
             DXDevice = device;
