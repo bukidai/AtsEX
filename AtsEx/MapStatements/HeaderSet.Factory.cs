@@ -14,31 +14,38 @@ namespace AtsEx.MapStatements
     {
         private readonly static Identifier UseAtsExHeader;
         private readonly static string UseAtsExHeaderFullName;
+        private readonly static string UseAtsExHeaderFullNameObsolete;
 
         private readonly static Identifier NoMapPluginHeader;
         private readonly static string NoMapPluginHeaderFullName;
 
         private readonly static Identifier ReadDepthHeader;
         private readonly static string ReadDepthHeaderFullName;
+        private readonly static string ReadDepthHeaderFullNameObsolete;
 
         private const string HeaderNameOpenBracket = "<";
         private const string HeaderNameCloseBracket = ">";
 
+        private const string VisibleHeaderNameOpenBracket = "[[";
+        private const string VisibleHeaderNameCloseBracket = "]]";
+
         static HeaderSet()
         {
-            UseAtsExHeader = new Identifier(Namespace.Root, "useatsex");
-            UseAtsExHeaderFullName = $"[[{UseAtsExHeader.FullName}]]";
-
             NoMapPluginHeader = new Identifier(Namespace.Root, "nompi");
-            NoMapPluginHeaderFullName = $"[[{NoMapPluginHeader.FullName}]]";
+            NoMapPluginHeaderFullName = VisibleHeaderNameOpenBracket + NoMapPluginHeader.FullName + VisibleHeaderNameCloseBracket;
+
+            UseAtsExHeader = new Identifier(Namespace.Root, "useatsex");
+            UseAtsExHeaderFullName = HeaderNameOpenBracket + UseAtsExHeader.FullName + HeaderNameCloseBracket;
+            UseAtsExHeaderFullNameObsolete = VisibleHeaderNameOpenBracket + UseAtsExHeader.FullName + VisibleHeaderNameCloseBracket;
 
             ReadDepthHeader = new Identifier(Namespace.Root, "readdepth");
-            ReadDepthHeaderFullName = $"[[{ReadDepthHeader.FullName}]]";
+            ReadDepthHeaderFullName = HeaderNameOpenBracket + ReadDepthHeader.FullName + HeaderNameCloseBracket;
+            ReadDepthHeaderFullNameObsolete = VisibleHeaderNameOpenBracket + ReadDepthHeader.FullName + VisibleHeaderNameCloseBracket;
         }
 
         public static HeaderSet FromMap(string filePath)
         {
-            (IDictionary<Identifier, IReadOnlyList<Header>> headers, IReadOnlyList<Header> privateHeaders) = Load(filePath, 0);
+            (IDictionary<Identifier, IReadOnlyList<Header>> headers, IReadOnlyList<Header> privateHeaders) = Load(filePath, 1);
             return new HeaderSet(headers, privateHeaders);
         }
 
@@ -53,20 +60,36 @@ namespace AtsEx.MapStatements
                 text = sr.ReadToEnd();
             }
 
-            bool isFirstStatement = true;
+            int includeStatementCount = 0;
+            bool useAtsEx = false;
             IEnumerable<MapTextParser.TextWithPosition> statements = MapTextParser.GetStatementsFromText(text);
             foreach (MapTextParser.TextWithPosition s in statements)
             {
                 if (s.Text.StartsWith("include'") && s.Text.EndsWith("'") && s.Text.Length - s.Text.Replace("'", "").Length == 2)
                 {
                     string includePath = s.Text.Split('\'')[1];
+
                     int headerCloseBracketIndex = includePath.IndexOf(HeaderNameCloseBracket);
 
-                    if (isFirstStatement && !includePath.StartsWith(UseAtsExHeaderFullName)) break;
-                    isFirstStatement = false;
-
-                    if (includePath.StartsWith(HeaderNameOpenBracket) && headerCloseBracketIndex != -1)
+                    if (TryCreateHeader(UseAtsExHeaderFullName, UseAtsExHeaderFullNameObsolete) is Header useAtsExHeader)
                     {
+                        privateHeaders.Add(useAtsExHeader);
+                        useAtsEx = true;
+                    }
+                    else if (TryCreateHeader(NoMapPluginHeaderFullName) is Header noMapPluginHeader)
+                    {
+                        privateHeaders.Add(noMapPluginHeader);
+                        useAtsEx = true;
+                    }
+                    else if (TryCreateHeader(ReadDepthHeaderFullName, ReadDepthHeaderFullNameObsolete) is Header readDepthHeader)
+                    {
+                        privateHeaders.Add(readDepthHeader);
+                        int.TryParse(readDepthHeader.Argument, out readDepth);
+                    }
+                    else if (includePath.StartsWith(HeaderNameOpenBracket) && headerCloseBracketIndex != -1)
+                    {
+                        if (1 <= includeStatementCount && !useAtsEx) break;
+
                         string headerFullName = includePath.Substring(HeaderNameOpenBracket.Length, headerCloseBracketIndex - HeaderNameOpenBracket.Length);
                         string headerArgument = includePath.Substring(headerCloseBracketIndex + HeaderNameCloseBracket.Length);
 
@@ -77,30 +100,10 @@ namespace AtsEx.MapStatements
                         List<Header> list = headers.GetOrAdd(identifier, new List<Header>()) as List<Header>;
                         list.Add(header);
                     }
-                    else if (includePath.StartsWith(UseAtsExHeaderFullName))
-                    {
-                        string headerArgument = includePath.Substring(UseAtsExHeaderFullName.Length);
-
-                        Header header = new Header(UseAtsExHeader, headerArgument, filePath, s.LineIndex, s.CharIndex);
-                        privateHeaders.Add(header);
-                    }
-                    else if (includePath.StartsWith(NoMapPluginHeaderFullName))
-                    {
-                        string headerArgument = includePath.Substring(NoMapPluginHeaderFullName.Length);
-
-                        Header header = new Header(NoMapPluginHeader, headerArgument, filePath, s.LineIndex, s.CharIndex);
-                        privateHeaders.Add(header);
-                    }
-                    else if (includePath.StartsWith(ReadDepthHeaderFullName))
-                    {
-                        string headerArgument = includePath.Substring(ReadDepthHeaderFullName.Length);
-                        int.TryParse(headerArgument, out readDepth);
-
-                        Header header = new Header(ReadDepthHeader, headerArgument, filePath, s.LineIndex, s.CharIndex);
-                        privateHeaders.Add(header);
-                    }
                     else if (0 < readDepth)
                     {
+                        if (1 <= includeStatementCount && !useAtsEx) break;
+
                         string includeRelativePath = includePath;
                         string includeAbsolutePath = Path.Combine(Path.GetDirectoryName(filePath), includeRelativePath);
 
@@ -115,6 +118,23 @@ namespace AtsEx.MapStatements
                         }
 
                         privateHeaders.AddRange(privateHeadersInIncludedMap);
+                    }
+
+                    includeStatementCount++;
+
+
+                    Header TryCreateHeader(params string[] fullNames)
+                    {
+                        foreach (string fullName in fullNames)
+                        {
+                            if (!includePath.StartsWith(fullName)) continue;
+
+                            string headerArgument = includePath.Substring(fullName.Length);
+                            Header header = new Header(UseAtsExHeader, headerArgument, filePath, s.LineIndex, s.CharIndex);
+                            return header;
+                        }
+
+                        return null;
                     }
                 }
             }
