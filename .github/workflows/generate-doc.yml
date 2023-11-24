@@ -1,0 +1,22 @@
+name: Generate-doc
+
+on:
+    release:
+        types: [published]
+
+jobs:
+    generate:
+        runs-on: windows-latest
+        steps:
+            - name: doenload-bve
+              run: |
+                Invoke-WebRequest http://bvets.net/archives/bvets6-msi.zip
+                Expand-Archive bvets6-msi.zip -DestinationPath bvets6-msi
+            - name: install-bve
+              run: |
+                Start-Process msiexec.exe -ArgumentList '/i bvets6-msi\BveTs6Setup.msi /quiet' -Wait
+            - name: clone-repo
+              uses: actions/checkout@v2
+            - name: test
+              run: |
+                Get-Item *
