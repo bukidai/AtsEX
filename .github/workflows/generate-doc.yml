@@ -10,7 +10,7 @@ jobs:
         steps:
             - name: printworkdir
               run: |
-                echo $GITHUB_WORKSPACE
+                echo $env:GITHUB_WORKSPACE
             - name: doenload-bve
               run: |
                 Invoke-WebRequest http://bvets.net/archives/bvets6-msi.zip
