@@ -34,6 +34,7 @@ jobs:
                 dotnet tool update -g docfx
                 docfx metadata .\docfx\docfx.json
                 docfx build .\docfx/docfx.json
-            - name: Test
+            - name: Copy
               run: |
-                Get-Item $env:GITHUB_WORKSPACE\docfx\*
+                mkdir $env:GITHUB_WORKSPACE\docs\docfx
+                Copy-Item -Recurse -Force $env:GITHUB_WORKSPACE\docfx\_site\* $env:GITHUB_WORKSPACE\docs\docfx\
