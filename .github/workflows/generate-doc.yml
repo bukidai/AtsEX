@@ -31,7 +31,7 @@ jobs:
                     msbuild
             - name: DocFX
               run: |
-                choco install docfx -y
+                dotnet tool update -g docfx
                 docfx metadata .\docfx\docfx.json
                 docfx build .\docfx/docfx.json
             - name: Test
