@@ -35,4 +35,4 @@ jobs:
                 docfx docfx/docfx.json
             - name: Test
               run: |
-                Get-Item $env:GITHUB_WORKSPACE\docfx
+                Get-Item $env:GITHUB_WORKSPACE\docfx\*
