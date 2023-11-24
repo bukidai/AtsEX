@@ -28,3 +28,9 @@ jobs:
                 mkdir $env:GITHUB_WORKSPACE\AtsEx.PluginHost\LocalReferences\BveTs
                 Copy-Item "C:\Program Files\mackoy\BveTs6\Mackoy.*.dll" $env:GITHUB_WORKSPACE\AtsEx.PluginHost\LocalReferences\BveTs\
                 Get-Item $env:GITHUB_WORKSPACE\AtsEx.PluginHost\LocalReferences\BveTs\*
+            - name: Add msbuild to PATH
+              uses: microsoft/setup-msbuild@v1.1
+            - name: Build
+              run : |
+                    msbuild /t:restore /p:RestorePackagesConfig=true $env:GITHUB_WORKSPACE\AtsEx.sln
+                    msbuild
