@@ -11,7 +11,7 @@ jobs:
             - name: printworkdir
               run: |
                 echo $env:GITHUB_WORKSPACE
-            - name: doenload-bve
+            - name: download-bve
               run: |
                 Invoke-WebRequest http://bvets.net/archives/bvets6-msi.zip -o bvets6-msi.zip
                 Expand-Archive bvets6-msi.zip -DestinationPath bvets6-msi
@@ -23,3 +23,8 @@ jobs:
             - name: test
               run: |
                 Get-Item *
+            - name: copy-bvedll
+              run: |
+                mkdir $env:GITHUB_WORKSPACE\AtsEx.PluginHost\LocalReferences\BveTs
+                Copy-Item "C:\Program Files\mackoy\BveTs6\Mackoy.*.dll" $env:GITHUB_WORKSPACE\AtsEx.PluginHost\LocalReferences\BveTs\
+                Get-Item $env:GITHUB_WORKSPACE\AtsEx.PluginHost\LocalReferences\BveTs\*
