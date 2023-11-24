@@ -32,7 +32,8 @@ jobs:
             - name: DocFX
               run: |
                 choco install docfx -y
-                docfx docfx/docfx.json
+                docfx metadata .\docfx\docfx.json
+                docfx build .\docfx/docfx.json
             - name: Test
               run: |
                 Get-Item $env:GITHUB_WORKSPACE\docfx\*
