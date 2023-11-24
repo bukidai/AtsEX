@@ -13,7 +13,7 @@ jobs:
                 echo $env:GITHUB_WORKSPACE
             - name: doenload-bve
               run: |
-                Invoke-WebRequest http://bvets.net/archives/bvets6-msi.zip
+                Invoke-WebRequest http://bvets.net/archives/bvets6-msi.zip -o bvets6-msi.zip
                 Expand-Archive bvets6-msi.zip -DestinationPath bvets6-msi
             - name: install-bve
               run: |
