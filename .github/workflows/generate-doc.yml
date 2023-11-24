@@ -8,9 +8,6 @@ jobs:
     generate:
         runs-on: windows-latest
         steps:
-            - name: printworkdir
-              run: |
-                echo $env:GITHUB_WORKSPACE
             - name: download-bve
               run: |
                 Invoke-WebRequest http://bvets.net/archives/bvets6-msi.zip -o bvets6-msi.zip
@@ -20,9 +17,6 @@ jobs:
                 Start-Process msiexec.exe -ArgumentList '/i bvets6-msi\BveTs6Setup.msi /quiet' -Wait
             - name: clone-repo
               uses: actions/checkout@v2
-            - name: test
-              run: |
-                Get-Item *
             - name: copy-bvedll
               run: |
                 mkdir $env:GITHUB_WORKSPACE\AtsEx.PluginHost\LocalReferences\BveTs
@@ -31,6 +25,14 @@ jobs:
             - name: Add msbuild to PATH
               uses: microsoft/setup-msbuild@v1.1
             - name: Build
+              continue-on-error: true
               run : |
                     msbuild /t:restore /p:RestorePackagesConfig=true $env:GITHUB_WORKSPACE\AtsEx.sln
                     msbuild
+            - name: DocFX
+              run: |
+                choco install docfx -y
+                docfx docfx.json
+            - name: Test
+              run: |
+                Get-Item $env:GITHUB_WORKSPACE\docfx
